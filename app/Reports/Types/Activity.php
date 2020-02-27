@@ -67,48 +67,37 @@ class Activity extends Type
     /**
      * Generate ranges using collection of locations
      *
-     * @param $collection
+     * @param $locations
      * @return array
      */
-    public function generateRanges($collection)
+    public function generateRanges($locations)
     {
         $ranges = [];
-
-        // Checkpoints
         $moving = false;
         $start_position = null;
         $end_position = null;
 
-        // Running through data
-        foreach ($collection as $key => $location) {
-            // Currently isn't moving but the currently location is moving
+        foreach ($locations as $key => $location) {
             if ($moving == false && $location->is_moving) {
-                // Set moving flag to true
                 $moving = true;
-                // Set the current location as the start position
 
                 $start_position = [
                     "key" => $key,
                 ];
             }
             if ($moving == true && !$location->is_moving) {
-                // Set moving flag to false
                 $moving = false;
 
-                // Set the current location as the end position
                 $end_position = [
                     "key" => $key,
                 ];
             }
 
-            // Check the start and end position to group locations
             if ($end_position != null && $start_position != null) {
-                // Slice positions using keys
-                $ranges[] = $collection->collection
+                $ranges[] = $locations->collection
                     ->slice($start_position["key"], $end_position["key"] - $start_position["key"] + 1)
                     ->values();
 
-                // Clean checkpoints
                 $end_position = null;
                 $start_position = null;
             }
