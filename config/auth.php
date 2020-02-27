@@ -46,6 +46,18 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'devices' => [
+            'driver' => 'token',
+            'provider' => 'devices',
+            'hash' => false,
+        ],
+
+        'pets' => [
+            'driver' => 'token',
+            'provider' => 'pets',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -69,6 +81,16 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'devices' => [
+            'driver' => 'eloquent',
+            'model' => App\Device::class,
+        ],
+
+        'pets' => [
+            'driver' => 'eloquent',
+            'model' => App\Pet::class,
         ],
 
         // 'users' => [

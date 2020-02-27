@@ -15,12 +15,25 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('uuid')->unique()->index();
+            $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('photo_id')->nullable();
+            $table->bigInteger('stripe_id')->nullable();
+            $table->string('api_token')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('free')->default(true);
+            $table->text('photo_url')->nullable();
+            $table->point('location')->nullable(); // Latitude, Longitude
+            $table->boolean('is_public')->default(true);
             $table->rememberToken();
             $table->timestamps();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->index(['api_token']);
         });
     }
 
