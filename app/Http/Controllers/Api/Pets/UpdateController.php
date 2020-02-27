@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Pets;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Pets\UpdateRequest;
+use App\Http\Requests\Api\Models\UpdateRequest;
 use App\Pet;
 use App\Repositories\FillRepository;
 use App\Repositories\PhotoRepository;
