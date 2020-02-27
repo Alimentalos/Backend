@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Groups;
+namespace App\Http\Requests\Api\Models;
 
 use App\Rules\Coordinate;
 use Illuminate\Foundation\Http\FormRequest;
@@ -15,7 +15,8 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('update', $this->route('group'));
+        $parameters = array_keys($this->route()->parameters());
+        return $this->user('api')->can('update', $this->route($parameters[0]));
     }
 
     /**
