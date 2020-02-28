@@ -6,6 +6,7 @@ use App\Device;
 use App\Http\Resources\Location;
 use App\Repositories\DevicesRepository;
 use App\Repositories\LocationRepository;
+use App\Repositories\ModelLocationsRepository;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 
@@ -94,7 +95,7 @@ class Type
      */
     public function getFilterableQuery()
     {
-        return LocationRepository::filterLocations( // Search locations
+        return ModelLocationsRepository::filterLocations( // Search locations
             $this->devices, // of those devices
             [
                 'type' => 'devices',

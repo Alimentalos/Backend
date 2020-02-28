@@ -17,39 +17,6 @@ use Illuminate\Support\Collection;
 
 class LocationRepository
 {
-    public static function updateModelLocation(Request $request, Model $model)
-    {
-        $exploded = explode(',', $request->input('coordinates'));
-        $model->update([
-            'location' => (new Point(
-                floatval($exploded[0]),
-                floatval($exploded[1])
-            )),
-        ]);
-        return $model;
-    }
-
-    /**
-     * Resolve current model for location insert.
-     *
-     * @param Request $request
-     * @return mixed
-     */
-    public static function resolveLocationModel(Request $request)
-    {
-        switch ($request->route()->getName()) {
-            case 'device.locations':
-                return Device::find(auth('devices')->user()->id);
-                break;
-            case 'pet.locations':
-                return Pet::find(auth('pets')->user()->id);
-                break;
-            default:
-                return User::find(auth('api')->user()->id);
-                break;
-        }
-    }
-
     /**
      * Search last devices locations.
      *
@@ -142,64 +109,6 @@ class LocationRepository
                 $accuracy
             )
         )->first();
-    }
-
-    /**
-     * Make filterable locations query
-     *
-     * @param $models
-     * @param $parameters
-     * @return Builder
-     * @codeCoverageIgnore
-     */
-    public static function filterLocations($models, $parameters)
-    {
-        switch ($parameters['type']) {
-            case 'users':
-                return self::groupLocationsByUuid(
-                    self::orderLocationsByGeneratedAtDate(
-                        self::filterLocationsUsingRangeOfDates(
-                            self::filterLocationsByAccuracy(
-                                self::getUsersLocationsQuery(
-                                    $models
-                                ),
-                                $parameters['accuracy']
-                            ),
-                            $parameters['start_date'],
-                            $parameters['end_date']
-                        )
-                    )
-                );
-                break;
-            case 'pets':
-                return self::orderLocationsByCreatedAtDate(
-                    self::filterLocationsUsingCreatedAtRangeOfDates(
-                        self::filterLocationsByAccuracy(
-                            self::getPetsLocationsQuery(
-                                $models
-                            ),
-                            $parameters['accuracy']
-                        ),
-                        $parameters['start_date'],
-                        $parameters['end_date']
-                    )
-                );
-                break;
-            default:
-                return static::groupLocationsByUuid(
-                    static::orderLocationsByGeneratedAtDate(
-                        static::filterLocationsUsingRangeOfDates(
-                            static::filterLocationsByAccuracy(
-                                static::getDevicesLocationsQuery($models),
-                                $parameters['accuracy']
-                            ),
-                            $parameters['start_date'],
-                            $parameters['end_date']
-                        )
-                    )
-                );
-                break;
-        }
     }
 
     /**
@@ -330,43 +239,7 @@ class LocationRepository
      */
     public static function searchLocations($devices, $parameters)
     {
-        return self::filterLocations($devices, $parameters)->get();
-    }
-
-    /**
-     * Create a device location
-     *
-     * @param Model $model
-     * @param $data
-     * @return Model
-     */
-    public static function createLocation(Model $model, $data)
-    {
-        if ($model instanceof User || $model instanceof Device) {
-            return $model->locations()->create([
-                "device" => $data["device"],
-                "uuid" => $data["location"]["uuid"],
-                "location" => self::parsePoint($data),
-                "accuracy" => $data["location"]["coords"]["accuracy"],
-                "altitude" => $data["location"]["coords"]["altitude"],
-                "speed" => $data["location"]["coords"]["speed"],
-                "heading" => $data["location"]["coords"]["heading"],
-                "odometer" => $data["location"]["odometer"],
-                "event" => self::parseEvent($data),
-                "activity_type" => $data["location"]["activity"]["type"],
-                "activity_confidence" => $data["location"]["activity"]["confidence"],
-                "battery_level" => $data["location"]["battery"]["level"],
-                "battery_is_charging" => $data["location"]["battery"]["is_charging"],
-                "is_moving" => $data["location"]["is_moving"],
-                "generated_at" => self::parseTimestamp($data),
-            ]);
-        } else {
-            return $model->locations()->create([
-                "uuid" => $data["location"]["uuid"],
-                "location" => self::parsePoint($data),
-                "accuracy" => $data["location"]["coords"]["accuracy"],
-            ]);
-        }
+        return ModelLocationsRepository::filterLocations($devices, $parameters)->get();
     }
 
     /**
