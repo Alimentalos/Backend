@@ -6,6 +6,7 @@ use App\Device;
 use App\Group;
 use App\Pet;
 use App\Photo;
+use App\Repositories\HandleBindingRepository;
 use App\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Request;
@@ -44,25 +45,9 @@ class RouteServiceProvider extends ServiceProvider
             if (in_array($value, ['users', 'devices', 'pets', 'geofences']))
                 return $value;
 
+            $class = HandleBindingRepository::detectResourceType();
 
-            switch (Request::route()->getName()) {
-                case 'photos.comments.store':
-                    return Photo::where('uuid', $value)->first() ?? abort(404);
-                    break;
-                case 'groups.comments.store':
-                    return Group::where('uuid', $value)->first() ?? abort(404);
-                    break;
-                case 'users.geofences.accesses.index':
-                case 'users.comments.store':
-                    return User::where('uuid', $value)->first() ?? abort(404);
-                    break;
-                case 'devices.geofences.accesses.index':
-                    return Device::where('uuid', $value)->first() ?? abort(404);
-                case 'pets.comments.store':
-                default:
-                    return Pet::where('uuid', $value)->first() ?? abort(404);
-                    break;
-            }
+            return HandleBindingRepository::bindResourceInstance($class, $value);
         });
     }
 

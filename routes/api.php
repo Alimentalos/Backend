@@ -64,7 +64,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     Route::get('/groups/{group}/comments', 'Api\Groups\Comments\IndexController');
     Route::post('/groups/{resource}/comments', 'Api\Resource\Comments\StoreController')
-        ->name('groups.comments.store');;
+        ->name('groups.comments.store');
 
     // Groups Photos
 
@@ -157,7 +157,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     Route::get('/pets/{pet}/comments', 'Api\Pets\Comments\IndexController');
     Route::post('/pets/{resource}/comments', 'Api\Resource\Comments\StoreController')
-        ->name('pets.comments.store');;
+        ->name('pets.comments.store');
 
     // Pet Reactions
 

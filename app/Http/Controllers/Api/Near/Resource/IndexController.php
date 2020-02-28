@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Api\Near\Resource;
 
-use App\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Near\Resource\IndexRequest;
-use App\Pet;
-use App\User;
+use App\Repositories\HandleBindingRepository;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\JsonResponse;
 
@@ -21,38 +19,10 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        $exploded = explode(',', $request->input('coordinates'));
-        switch ($resource) {
-            case 'geofences':
-                return response()->json(
-                    Geofence::with('photo', 'user')->orderByDistance(
-                        'shape',
-                        (new Point(floatval($exploded[0]), floatval($exploded[1]))),
-                        'asc'
-                    )->paginate(20),
-                    200
-                );
-                break;
-            case 'users':
-                return response()->json(
-                    User::with('photo', 'user')->orderByDistance(
-                        'location',
-                        (new Point(floatval($exploded[0]), floatval($exploded[1]))),
-                        'asc'
-                    )->paginate(20),
-                    200
-                );
-                break;
-            default:
-                return response()->json(
-                    Pet::with('photo', 'user')->orderByDistance(
-                        'location',
-                        (new Point(floatval($exploded[0]), floatval($exploded[1]))),
-                        'asc'
-                    )->paginate(20),
-                    200
-                );
-                break;
-        }
+        $coordinates = explode(',', $request->input('coordinates'));
+        return response()->json(
+            HandleBindingRepository::bindNearModel($resource, $coordinates)->paginate(20),
+            200
+        );
     }
 }

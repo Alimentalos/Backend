@@ -17,6 +17,11 @@ use Illuminate\Support\Collection;
 
 class LocationRepository
 {
+    public const LATITUDE = 0;
+
+
+    public const LONGITUDE = 1;
+
     /**
      * Search last devices locations.
      *
