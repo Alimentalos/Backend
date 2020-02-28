@@ -9,15 +9,29 @@ use Carbon\Carbon;
 
 class Activity extends Type
 {
-
+    /**
+     * Current location and index.
+     *
+     * @var mixed
+     */
     protected $current;
 
+    /**
+     * Current loop parameters.
+     *
+     * @var mixed
+     */
     protected $currentParameters;
 
+    /**
+     * Detected ranges.
+     *
+     * @var mixed
+     */
     protected $ranges;
 
     /**
-     * Get Activity report as Array
+     * Get Activity report as Array.
      *
      * @return array
      */
@@ -35,7 +49,7 @@ class Activity extends Type
     }
 
     /**
-     * Per device report
+     * Per device report.
      *
      * @param $device
      * @param $locations
@@ -54,7 +68,7 @@ class Activity extends Type
     }
 
     /**
-     * Generate composed report
+     * Generate composed report.
      *
      * @param $device
      * @param $device_locations
@@ -88,7 +102,7 @@ class Activity extends Type
     }
 
     /**
-     * Generate simple report
+     * Generate simple report.
      *
      * @param $device
      * @param $device_locations
@@ -105,7 +119,7 @@ class Activity extends Type
     }
 
     /**
-     * Generate ranges using collection of locations
+     * Generate ranges using collection of locations.
      *
      * @param $locations
      * @return array
@@ -132,7 +146,7 @@ class Activity extends Type
     }
 
     /**
-     * Per location report
+     * Per location loop callback.
      *
      * @param $locations
      */
@@ -143,6 +157,11 @@ class Activity extends Type
         $this->checkAndCreateRange($locations);
     }
 
+    /**
+     * Check if a range was founded and create a range.
+     *
+     * @param $locations
+     */
     public function checkAndCreateRange($locations)
     {
         if (RangesHelper::rangeFounded($this->currentParameters['start_position'], $this->currentParameters['end_position'])) {
@@ -157,6 +176,9 @@ class Activity extends Type
         }
     }
 
+    /**
+     * Check if movement status is now stopped.
+     */
     public function checkMovingIsNowStopped()
     {
         if (RangesHelper::movingIsNowStopped($this->currentParameters['moving'], $this->current['location'])) {
@@ -166,6 +188,9 @@ class Activity extends Type
         }
     }
 
+    /**
+     * Check if movement status is now in moving.
+     */
     public function checkStoppedIsNowMoving()
     {
         if (RangesHelper::stoppedIsNowMoving($this->currentParameters['moving'], $this->current['location'])) {
@@ -176,7 +201,7 @@ class Activity extends Type
     }
 
     /**
-     * Calculate values by a range per day
+     * Calculate values by a range per day.
      *
      * @param $ranges
      * @param $day
