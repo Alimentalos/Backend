@@ -276,6 +276,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Comment Comments routes ...
 
     Route::get('/comments/{comment}/comments', 'Api\Comments\Comments\IndexController');
+    Route::post('/comments/{resource}/comments', 'Api\Resource\Comments\StoreController')
+        ->name('comments.comments.store');
 
     // Comment Reactions routes ...
 
