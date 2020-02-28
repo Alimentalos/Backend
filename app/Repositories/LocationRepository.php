@@ -17,6 +17,18 @@ use Illuminate\Support\Collection;
 
 class LocationRepository
 {
+    public static function updateModelLocation(Request $request, Model $model)
+    {
+        $exploded = explode(',', $request->input('coordinates'));
+        $model->update([
+            'location' => (new Point(
+                floatval($exploded[0]),
+                floatval($exploded[1])
+            )),
+        ]);
+        return $model;
+    }
+
     /**
      * Resolve current model for location insert.
      *

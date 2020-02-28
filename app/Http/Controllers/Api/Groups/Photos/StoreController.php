@@ -19,20 +19,9 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, Group $group)
     {
-        // TODO - Remove unnecessary complexity
-        $photo = PhotoRepository::createPhoto(
-            $request->user('api'),
-            $request->file('photo'),
-            $request->input('title'),
-            $request->input('body'),
-            $request->input('is_public'),
-            $request->input('coordinates')
-        );
-
+        $photo = PhotoRepository::createPhotoViaRequest($request);
         $photo->groups()->attach($group->id);
-
         $photo->load('user', 'comment');
-
         return response()->json(
             $photo,
             200
