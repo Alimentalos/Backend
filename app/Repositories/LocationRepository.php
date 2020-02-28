@@ -147,17 +147,14 @@ class LocationRepository
     /**
      * Make filterable locations query
      *
-     * @param $type
      * @param $models
-     * @param $start_date
-     * @param $end_date
-     * @param $accuracy
+     * @param $parameters
      * @return Builder
      * @codeCoverageIgnore
      */
-    public static function filterLocations($type, $models, $start_date, $end_date, $accuracy)
+    public static function filterLocations($models, $parameters)
     {
-        switch ($type) {
+        switch ($parameters['type']) {
             case 'users':
                 return self::groupLocationsByUuid(
                     self::orderLocationsByGeneratedAtDate(
@@ -166,10 +163,10 @@ class LocationRepository
                                 self::getUsersLocationsQuery(
                                     $models
                                 ),
-                                $accuracy
+                                $parameters['accuracy']
                             ),
-                            $start_date,
-                            $end_date
+                            $parameters['start_date'],
+                            $parameters['end_date']
                         )
                     )
                 );
@@ -181,10 +178,10 @@ class LocationRepository
                             self::getPetsLocationsQuery(
                                 $models
                             ),
-                            $accuracy
+                            $parameters['accuracy']
                         ),
-                        $start_date,
-                        $end_date
+                        $parameters['start_date'],
+                        $parameters['end_date']
                     )
                 );
                 break;
@@ -194,10 +191,10 @@ class LocationRepository
                         static::filterLocationsUsingRangeOfDates(
                             static::filterLocationsByAccuracy(
                                 static::getDevicesLocationsQuery($models),
-                                $accuracy
+                                $parameters['accuracy']
                             ),
-                            $start_date,
-                            $end_date
+                            $parameters['start_date'],
+                            $parameters['end_date']
                         )
                     )
                 );
@@ -327,16 +324,13 @@ class LocationRepository
     /**
      * Search devices locations between two dates
      *
-     * @param $type
      * @param $devices
-     * @param $start_date
-     * @param $end_date
-     * @param $accuracy
+     * @param $parameters
      * @return Collection
      */
-    public static function searchLocations($type, $devices, $start_date, $end_date, $accuracy)
+    public static function searchLocations($devices, $parameters)
     {
-        return self::filterLocations($type, $devices, $start_date, $end_date, $accuracy)->get();
+        return self::filterLocations($devices, $parameters)->get();
     }
 
     /**

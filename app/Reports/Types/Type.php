@@ -95,11 +95,13 @@ class Type
     public function getFilterableQuery()
     {
         return LocationRepository::filterLocations( // Search locations
-            'devices',
             $this->devices, // of those devices
-            $this->start_date, // between an start date
-            $this->end_date, // and end date
-            $this->parameters['accuracy'] // filtering by accuracy
+            [
+                'type' => 'devices',
+                'start_date' => $this->start_date,
+                'end_date' => $this->end_date,
+                'accuracy' => $this->parameters['accuracy']
+            ]
         );
     }
 
