@@ -1,25 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Api\Users\Geofences\Accesses;
+namespace App\Http\Controllers\Api\Resource\Geofences\Accesses;
 
 use App\Geofence;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Users\Geofences\Accesses\IndexRequest;
-use App\User;
+use App\Http\Requests\Api\Resource\Geofences\Accesses\IndexRequest;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
 {
     /**
+     * Fetch all Geofences of Resource.
+     *
      * @param IndexRequest $request
-     * @param User $user
+     * @param $resource
      * @param Geofence $geofence
      * @return JsonResponse
      */
-    public function __invoke(IndexRequest $request, User $user, Geofence $geofence)
+    public function __invoke(IndexRequest $request, $resource, Geofence $geofence)
     {
         return response()->json(
-            $user->accesses()->latest()->with([
+            $resource->accesses()->with([
                 'accessible', 'geofence', 'first_location', 'last_location'
             ])->where([
                 ['geofence_id', $geofence->id]

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Photos\Comments;
+namespace App\Http\Requests\Api\Resource\Geofences\Accesses;
 
-use App\Comment;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class IndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,8 +13,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('photo')) &&
-            $this->user('api')->can('create', Comment::class);
+        return $this->user('api')->can('view', $this->route('resource'));
     }
 
     /**
@@ -26,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required',
+            //
         ];
     }
 }

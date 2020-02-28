@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Groups\Comments;
+namespace App\Http\Requests\Api\Resource\Comments;
 
 use App\Comment;
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('group')) &&
+        return $this->user('api')->can('view', $this->route('resource')) &&
             $this->user('api')->can('create', Comment::class);
     }
 
@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required',
+            //
         ];
     }
 }
