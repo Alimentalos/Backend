@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Device;
+namespace App\Http\Requests\Api\Resource;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,8 +24,7 @@ class LocationsRequest extends FormRequest
     public function rules()
     {
         return [
-            'device' => 'required',
-            'location' => 'required',
+            //
         ];
     }
 }

@@ -12,10 +12,32 @@ use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class LocationRepository
 {
+    /**
+     * Resolve current model for location insert.
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public static function resolveLocationModel(Request $request)
+    {
+        switch ($request->route()->getName()) {
+            case 'device.locations':
+                return Device::find(auth('devices')->user()->id);
+                break;
+            case 'pet.locations':
+                return Pet::find(auth('pets')->user()->id);
+                break;
+            default:
+                return User::find(auth('api')->user()->id);
+                break;
+        }
+    }
+
     /**
      * Search last devices locations.
      *
