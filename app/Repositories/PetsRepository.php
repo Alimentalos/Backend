@@ -44,6 +44,7 @@ class PetsRepository
      */
     public static function updatePetViaRequest(Request $request, Pet $pet)
     {
+        UploadRepository::checkPhotoForUpload($request, $pet);
         $pet->update([
             'name' => FillRepository::fillMethod($request, 'name', $pet->name),
             'description' => FillRepository::fillMethod($request, 'description', $pet->description),
@@ -54,6 +55,7 @@ class PetsRepository
             'size' => FillRepository::fillMethod($request, 'size', $pet->size),
             'is_public' => FillRepository::fillMethod($request, 'is_public', $pet->is_public),
         ]);
+        $pet->load('photo', 'user');
         return $pet;
     }
 

@@ -19,14 +19,7 @@ class UploadRepository
     public static function checkPhotoForUpload(Request $request, Model $model)
     {
         if ($request->has('photo')) {
-            $photo = PhotoRepository::createPhoto(
-                $request->user('api'),
-                $request->file('photo'),
-                null,
-                null,
-                FillRepository::fillMethod($request, 'is_public', $model->is_public),
-                $request->input('coordinates')
-            );
+            $photo = PhotoRepository::createPhotoViaRequest($request);
 
             $exploded = explode(',', $request->input('coordinates'));
 

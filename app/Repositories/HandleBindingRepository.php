@@ -46,10 +46,12 @@ class HandleBindingRepository {
     {
         LoggerRepository::createReferencedAction(
             $request->user('api'),
-            'success',
-            Route::currentRouteAction(),
-            $request->route($parameters[0])->id,
-            $request->route($parameters[1])->id
+            [
+                'type' => 'success',
+                'resource' => Route::currentRouteAction(),
+                'parameters' => $request->route($parameters[0])->id,
+                'referenced' => $request->route($parameters[1])->id
+            ]
         );
     }
 
@@ -63,10 +65,12 @@ class HandleBindingRepository {
     {
         LoggerRepository::createReferencedAction(
             $request->user('api'),
-            'success',
-            Route::currentRouteAction(),
-            $request->except('photo', 'password', 'password_confirmation', 'shape'),
-            $request->route($parameters[0])->id ?? $parameters[0]
+            [
+                'type' => 'success',
+                'resource' => Route::currentRouteAction(),
+                'parameters' => $request->except('photo', 'password', 'password_confirmation', 'shape'),
+                'referenced' => $request->route($parameters[0])->id ?? $parameters[0]
+            ]
         );
     }
 
