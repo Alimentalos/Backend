@@ -2,14 +2,8 @@
 
 namespace App\Providers;
 
-use App\Device;
-use App\Group;
-use App\Pet;
-use App\Photo;
 use App\Repositories\HandleBindingRepository;
-use App\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider

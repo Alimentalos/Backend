@@ -11,8 +11,6 @@ use App\UserLocation;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class LocationRepository

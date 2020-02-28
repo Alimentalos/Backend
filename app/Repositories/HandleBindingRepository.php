@@ -12,8 +12,8 @@ use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request as RequestFacade;
+use Illuminate\Support\Facades\Route;
 
 class HandleBindingRepository {
 
