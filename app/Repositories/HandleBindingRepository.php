@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class HandleBindingRepository {
 
@@ -26,31 +27,62 @@ class HandleBindingRepository {
         $parameters = array_reverse(array_keys($request->route()->parameters()), false);
         if (count($parameters) > 0) {
             if (count($parameters) === 2) {
-                LoggerRepository::createReferencedAction(
-                    $request->user('api'),
-                    'success',
-                    Route::currentRouteAction(),
-                    $request->route($parameters[0])->id,
-                    $request->route($parameters[1])->id
-                );
+                static::createReferencedActionViaRequest($request, $parameters);
             } else {
-                LoggerRepository::createReferencedAction(
-                    $request->user('api'),
-                    'success',
-                    Route::currentRouteAction(),
-                    $request->except('photo', 'password', 'password_confirmation', 'shape'),
-                    $request->route($parameters[0])->id ?? $parameters[0]
-                );
+                static::createSimpleReferencedActionViaRequest($request, $parameters);
             }
-
         } else {
-            LoggerRepository::createAction(
-                $request->user('api'),
-                'success',
-                Route::currentRouteAction(),
-                $request->except('photo', 'password', 'password_confirmation', 'shape')
-            );
+            static::createSimpleActionViaRequest($request);
         }
+    }
+
+    /**
+     * Create referenced action via request.
+     *
+     * @param Request $request
+     * @param $parameters
+     */
+    public static function createReferencedActionViaRequest(Request $request, $parameters)
+    {
+        LoggerRepository::createReferencedAction(
+            $request->user('api'),
+            'success',
+            Route::currentRouteAction(),
+            $request->route($parameters[0])->id,
+            $request->route($parameters[1])->id
+        );
+    }
+
+    /**
+     * Create simple referenced action via request.
+     *
+     * @param Request $request
+     * @param $parameters
+     */
+    public static function createSimpleReferencedActionViaRequest(Request $request, $parameters)
+    {
+        LoggerRepository::createReferencedAction(
+            $request->user('api'),
+            'success',
+            Route::currentRouteAction(),
+            $request->except('photo', 'password', 'password_confirmation', 'shape'),
+            $request->route($parameters[0])->id ?? $parameters[0]
+        );
+    }
+
+    /**
+     * Create simple action via request.
+     *
+     * @param Request $request
+     */
+    public static function createSimpleActionViaRequest(Request $request)
+    {
+        LoggerRepository::createAction(
+            $request->user('api'),
+            'success',
+            Route::currentRouteAction(),
+            $request->except('photo', 'password', 'password_confirmation', 'shape')
+        );
     }
 
     /**
@@ -82,23 +114,7 @@ class HandleBindingRepository {
      * @return Builder
      */
     public static function bindResourceModel($class) {
-        switch ($class) {
-            case 'photos':
-                return Photo::query();
-                break;
-            case 'groups':
-                return Group::query();
-                break;
-            case 'users':
-                return User::query();
-                break;
-            case 'devices':
-                return Device::query();
-                break;
-            default:
-                return Pet::query();
-                break;
-        }
+        return resolve('App\\' . Str::camel(Str::singular($class)))->query();
     }
 
     /**
@@ -111,34 +127,21 @@ class HandleBindingRepository {
     public static function bindNearModel($resource, $coordinates) {
         switch ($resource) {
             case 'geofences':
-                return Geofence::orderByDistance(
-                    'shape',
-                    (new Point(
-                        floatval($coordinates[LocationRepository::LATITUDE]),
-                        floatval($coordinates[LocationRepository::LONGITUDE])
-                    )),
-                    'asc'
-                );
+                return Geofence::orderByDistance('shape', static::makePoint($coordinates),'asc');
                 break;
             case 'users':
-                return User::orderByDistance(
-                    'location',
-                    (new Point(
-                        floatval($coordinates[LocationRepository::LATITUDE]),
-                        floatval($coordinates[LocationRepository::LONGITUDE])
-                    )),
-                    'asc'
-                );
+                return User::orderByDistance('location', static::makePoint($coordinates),'asc');
                 break;
             default:
-                return Pet::orderByDistance(
-                    'location',
-                    (new Point(
-                        floatval($coordinates[LocationRepository::LATITUDE]),
-                        floatval($coordinates[LocationRepository::LONGITUDE])
-                    )),
-                    'asc'
-                );
+                return Pet::orderByDistance('location', static::makePoint($coordinates),'asc');
         }
+    }
+
+    public static function makePoint($coordinates)
+    {
+        return new Point(
+            floatval($coordinates[LocationRepository::LATITUDE]),
+            floatval($coordinates[LocationRepository::LONGITUDE])
+        );
     }
 }

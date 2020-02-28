@@ -8,6 +8,7 @@ use App\Group;
 use App\Pet;
 use App\Photo;
 use App\User;
+use Illuminate\Support\Str;
 
 class SubscriptionsRepository
 {
@@ -35,26 +36,7 @@ class SubscriptionsRepository
      */
     public static function getUserResourcesQuota($resource, $user)
     {
-        switch ($resource) {
-            case 'devices':
-                return Device::where('user_id', $user->id)->count();
-                break;
-            case 'groups':
-                return Group::where('user_id', $user->id)->count();
-                break;
-            case 'users':
-                return User::where('user_id', $user->id)->count();
-                break;
-            case 'photos':
-                return Photo::where('user_id', $user->id)->count();
-                break;
-            case 'comments':
-                return Comment::where('user_id', $user->id)->count();
-                break;
-            case 'pets':
-                return Pet::where('user_id', $user->id)->count();
-                break;
-        }
+        return resolve('App\\' . Str::camel(Str::singular($resource)))->where('user_id', $user->id)->count();
     }
 
     /**
