@@ -7,6 +7,7 @@ use App\Http\Requests\Api\Models\UpdateRequest;
 use App\Pet;
 use App\Repositories\FillRepository;
 use App\Repositories\PhotoRepository;
+use App\Repositories\UploadRepository;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\JsonResponse;
 
@@ -21,30 +22,7 @@ class UpdateController extends Controller
      */
     public function __invoke(UpdateRequest $request, Pet $pet)
     {
-        // TODO - Remove unnecessary complexity
-        if ($request->has('photo')) {
-            $photo = PhotoRepository::createPhoto(
-                $request->user('api'),
-                $request->file('photo'),
-                null,
-                null,
-                FillRepository::fillMethod($request, 'is_public', $pet->is_public),
-                $request->input('coordinates')
-            );
-
-            $exploded = explode(',', $request->input('coordinates'));
-
-            $pet->update([
-                'photo_id' => $photo->id,
-                'photo_url' => 'https://storage.googleapis.com/photos.zendev.cl/photos/' . $photo->photo_url,
-                'location' => (new Point(
-                    floatval($exploded[0]),
-                    floatval($exploded[1])
-                )),
-            ]);
-
-            $pet->photos()->attach($photo->id);
-        }
+        UploadRepository::checkPhotoForUpload($request, $pet);
 
         $pet->update([
             'name' => FillRepository::fillMethod($request, 'name', $pet->name),
