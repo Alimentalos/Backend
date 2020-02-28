@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Api\Pets\Photos;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Pets\Photos\StoreRequest;
 use App\Pet;
-use App\Repositories\LocationRepository;
+use App\Repositories\ModelLocationsRepository;
 use App\Repositories\PhotoRepository;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller
@@ -22,7 +21,7 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request, Pet $pet)
     {
         $photo = PhotoRepository::createPhotoViaRequest($request);
-        $pet = LocationRepository::updateModelLocation($request, $pet);
+        $pet = ModelLocationsRepository::updateModelLocation($request, $pet);
         $pet->update([
             'photo_id' => $photo->id,
         ]);

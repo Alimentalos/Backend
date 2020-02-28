@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\Photos\Comments;
+namespace App\Http\Requests\Api\Near\Resource;
 
-use App\Comment;
+use App\Rules\Coordinate;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class IndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,8 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('photo')) &&
-            $this->user('api')->can('create', Comment::class);
+        return true;
     }
 
     /**
@@ -26,7 +25,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required',
+            'coordinates' => ['required', new Coordinate()],
         ];
     }
 }

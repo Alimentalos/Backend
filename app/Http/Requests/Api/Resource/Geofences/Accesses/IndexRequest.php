@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Requests\Api\Near\Users;
+namespace App\Http\Requests\Api\Resource\Geofences\Accesses;
 
-use App\Rules\Coordinate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class IndexRequest extends FormRequest
@@ -14,7 +13,7 @@ class IndexRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user('api')->can('view', $this->route('resource'));
     }
 
     /**
@@ -25,7 +24,7 @@ class IndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'coordinates' => ['required', new Coordinate()],
+            //
         ];
     }
 }

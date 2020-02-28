@@ -8,6 +8,7 @@ use App\Http\Requests\Api\Resource\LocationsRequest;
 use App\Http\Resources\Location as LocationResource;
 use App\Repositories\GeofenceRepository;
 use App\Repositories\LocationRepository;
+use App\Repositories\ModelLocationsRepository;
 use Illuminate\Http\JsonResponse;
 
 class LocationsController extends Controller
@@ -20,8 +21,8 @@ class LocationsController extends Controller
      */
     public function __invoke(LocationsRequest $request)
     {
-        $model = LocationRepository::resolveLocationModel($request);
-        $location = LocationRepository::createLocation($model, $request->all());
+        $model = ModelLocationsRepository::resolveLocationModel($request);
+        $location = ModelLocationsRepository::createLocation($model, $request->all());
         $model->update([
             "location" => LocationRepository::parsePoint($request->all())
         ]);

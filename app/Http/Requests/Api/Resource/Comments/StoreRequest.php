@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\Near\Pets;
+namespace App\Http\Requests\Api\Resource\Comments;
 
+use App\Comment;
 use Illuminate\Foundation\Http\FormRequest;
 
-class IndexRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,8 @@ class IndexRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user('api')->can('view', $this->route('resource')) &&
+            $this->user('api')->can('create', Comment::class);
     }
 
     /**

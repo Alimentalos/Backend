@@ -19,7 +19,25 @@ class GeofenceRepository
     public const OUT_STATUS = 3;
 
     /**
-     * Testing Geofence
+     * Create sample polygon.
+     *
+     * @return array
+     * @codeCoverageIgnore
+     */
+    public static function createPolygon()
+    {
+        return [new LineString([
+            new Point(0, 0),
+            new Point(0, 5),
+            new Point(5, 5),
+            new Point(5, 0),
+            new Point(0, 0)
+        ])];
+    }
+
+    /**
+     * Testing Geofence.
+     *
      * @return mixed
      * @codeCoverageIgnore
      */
@@ -29,13 +47,7 @@ class GeofenceRepository
         $place1 = new Geofence();
         $place1->name = "blablabla";
         $place1->user_id = 1;
-        $place1->shape = new Polygon([new LineString([
-            new Point(0, 0),
-            new Point(0, 5),
-            new Point(5, 5),
-            new Point(5, 0),
-            new Point(0, 0)
-        ])]);
+        $place1->shape = new Polygon(static::createPolygon());
 
         $point = new Point(10, 10);
         return Geofence::disjoint('shape', $point)->get();

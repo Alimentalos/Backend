@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Route;
 class HandleBindingRepository {
 
     public static function resolve($request) {
-        $parameters = array_keys($request->route()->parameters());
+        $parameters = array_reverse(array_keys($request->route()->parameters()), false);
         if (count($parameters) > 0) {
             if (count($parameters) === 2) {
                 LoggerRepository::createReferencedAction(
                     $request->user('api'),
                     'success',
                     Route::currentRouteAction(),
-                    $request->route($parameters[1])->id,
-                    $request->route($parameters[0])->id
+                    $request->route($parameters[0])->id,
+                    $request->route($parameters[1])->id
                 );
             } else {
                 LoggerRepository::createReferencedAction(
@@ -23,7 +23,7 @@ class HandleBindingRepository {
                     'success',
                     Route::currentRouteAction(),
                     $request->except('photo', 'password', 'password_confirmation', 'shape'),
-                    $request->route($parameters[0])->id
+                    $request->route($parameters[0])->id ?? $parameters[0]
                 );
             }
 
@@ -32,7 +32,7 @@ class HandleBindingRepository {
                 $request->user('api'),
                 'success',
                 Route::currentRouteAction(),
-                $request->except('photo', 'password', 'password_confirmation', 'shape'),
+                $request->except('photo', 'password', 'password_confirmation', 'shape')
             );
         }
     }

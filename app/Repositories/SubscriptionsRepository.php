@@ -81,32 +81,7 @@ class SubscriptionsRepository
      */
     public static function getPremiumLimits($resource, $method)
     {
-        return static::calcLimits([
-            'devices' => [
-                'create' => 50
-            ],
-            'groups' => [
-                'create' => 5
-            ],
-            'photos' => [
-                'create' => 2000
-            ],
-            'comments' => [
-                'create' => 10000
-            ],
-            'users' => [
-                'create' => 20
-            ],
-            'pets' => [
-                'create' => 100
-            ],
-            'geofences' => [
-                'create' => 100
-            ],
-            'user_group' => [
-                'join' => 20
-            ]
-        ], $resource, $method);
+        return static::calcLimits(config('limits.premium'), $resource, $method);
     }
 
     /**
@@ -118,32 +93,7 @@ class SubscriptionsRepository
      */
     public static function getFreeLimits($resource, $method)
     {
-        return static::calcLimits([
-            'devices' => [
-                'create' => 5
-            ],
-            'groups' => [
-                'create' => 3
-            ],
-            'photos' => [
-                'create' => 500
-            ],
-            'comments' => [
-                'create' => 2000
-            ],
-            'users' => [
-                'create' => 10
-            ],
-            'pets' => [
-                'create' => 25
-            ],
-            'geofences' => [
-                'create' => 10
-            ],
-            'user_group' => [
-                'join' => 10
-            ]
-        ], $resource, $method);
+        return static::calcLimits(config('limits.free'), $resource, $method);
     }
 
     /**

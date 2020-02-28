@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\Photos\Comments;
+namespace App\Http\Controllers\Api\Resource\Comments;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Photos\Comments\StoreRequest;
-use App\Photo;
+use App\Http\Requests\Api\Resource\Comments\StoreRequest;
 use App\Repositories\UniqueNameRepository;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
@@ -14,12 +14,12 @@ class StoreController extends Controller
      * Handle the incoming request.
      *
      * @param StoreRequest $request
-     * @param Photo $photo
+     * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(StoreRequest $request, Photo $photo)
+    public function __invoke(StoreRequest $request, $resource)
     {
-        $comment = $photo->comments()->create([
+        $comment = $resource->comments()->create([
             'uuid' => UniqueNameRepository::createIdentifier(),
             'body' => $request->input('body'),
             'user_id' => $request->user('api')->id,
