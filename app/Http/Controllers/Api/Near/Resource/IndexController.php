@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Near\Resource;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Near\Resource\IndexRequest;
 use App\Repositories\HandleBindingRepository;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
