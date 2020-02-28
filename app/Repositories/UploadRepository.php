@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class UploadRepository
 {
+    /**
+     * Check if request has a model photo pending to upload.
+     *
+     * @param Request $request
+     * @param Model $model
+     */
     public static function checkPhotoForUpload(Request $request, Model $model)
     {
         if ($request->has('photo')) {
