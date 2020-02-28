@@ -4,10 +4,17 @@ namespace App\Reports\Types;
 
 use App\Http\Resources\Location;
 use App\Http\Resources\LocationCollection;
+use App\Reports\Helpers\RangesHelper;
 use Carbon\Carbon;
 
 class Activity extends Type
 {
+
+    protected $current;
+
+    protected $currentParameters;
+
+    protected $ranges;
 
     /**
      * Get Activity report as Array
@@ -22,46 +29,79 @@ class Activity extends Type
 
         // For every device
         foreach ($this->devices as $device) {
-            // Filter the specified device locations
-            $device_locations = $locations->where('trackable_id', $device->id)
-                ->where('trackable_type', 'App\\Device')->reverse()->values();
-
-            if ($this->start_day == $this->end_day) {
-                $data = [];
-
-                // Push the per day report into data array
-                $data[] = $this->generateReportPerDay($device_locations, Carbon::parse($this->start_date));
-
-                // Push the required report into reports array
-                $this->reports[] = $this->generateReport($device, $data);
-            } else {
-                $data = [];
-
-                // Define start date
-                $start_date = Carbon::parse("$this->start_day 00:00:00");
-                $end_date = Carbon::parse("$this->end_day 00:00:00");
-
-                // For every day required
-                for ($offset = 0; $offset <= $start_date->diffInDays($end_date); $offset++) {
-                    // Define current day
-                    $current_day = Carbon::parse("$this->start_day 00:00:00")->addDays($offset);
-
-                    // Filter per day locations from device locations
-                    $per_day_locations = $device_locations->whereBetween("generated_at", [
-                        $current_day->format("Y-m-d 00:00:00"),
-                        $current_day->format("Y-m-d 23:59:59"),
-
-                    ]);
-
-                    // Push the per day report into data array
-                    $data[] = $this->generateReportPerDay($per_day_locations, $current_day);
-                }
-
-                // Push the required report into reports array
-                $this->reports[] = $this->generateReport($device, $data);
-            }
+            $this->perDevice($device, $locations);
         }
         return $this->reports;
+    }
+
+    /**
+     * Per device report
+     *
+     * @param $device
+     * @param $locations
+     */
+    public function perDevice($device, $locations)
+    {
+        // Filter the specified device locations
+        $device_locations = $locations->where('trackable_id', $device->id)
+            ->where('trackable_type', 'App\\Device')->reverse()->values();
+
+        if ($this->start_day == $this->end_day) {
+            $this->simpleReport($device, $device_locations);
+        } else {
+            $this->composedReport($device, $device_locations);
+        }
+    }
+
+    /**
+     * Generate composed report
+     *
+     * @param $device
+     * @param $device_locations
+     */
+    public function composedReport($device, $device_locations)
+    {
+        $data = [];
+
+        // Define start date
+        $start_date = Carbon::parse("$this->start_day 00:00:00");
+        $end_date = Carbon::parse("$this->end_day 00:00:00");
+
+        // For every day required
+        for ($offset = 0; $offset <= $start_date->diffInDays($end_date); $offset++) {
+            // Define current day
+            $current_day = Carbon::parse("$this->start_day 00:00:00")->addDays($offset);
+
+            // Filter per day locations from device locations
+            $per_day_locations = $device_locations->whereBetween("generated_at", [
+                $current_day->format("Y-m-d 00:00:00"),
+                $current_day->format("Y-m-d 23:59:59"),
+
+            ]);
+
+            // Push the per day report into data array
+            $data[] = $this->generateReportPerDay($per_day_locations, $current_day);
+        }
+
+        // Push the required report into reports array
+        $this->reports[] = $this->generateReport($device, $data);
+    }
+
+    /**
+     * Generate simple report
+     *
+     * @param $device
+     * @param $device_locations
+     */
+    public function simpleReport($device, $device_locations)
+    {
+        $data = [];
+
+        // Push the per day report into data array
+        $data[] = $this->generateReportPerDay($device_locations, Carbon::parse($this->start_date));
+
+        // Push the required report into reports array
+        $this->reports[] = $this->generateReport($device, $data);
     }
 
     /**
@@ -72,38 +112,67 @@ class Activity extends Type
      */
     public function generateRanges($locations)
     {
-        $ranges = [];
-        $moving = false;
-        $start_position = null;
-        $end_position = null;
+        $this->ranges = [];
+        $this->currentParameters = [
+            'moving' => false,
+            'start_position' => null,
+            'end_position' => null,
+        ];
 
-        foreach ($locations as $key => $location) {
-            if ($moving == false && $location->is_moving) {
-                $moving = true;
+        foreach ($locations as $index => $location) {
+            $this->current = [
+                'location' => $location,
+                'index' => $index,
+            ];
 
-                $start_position = [
-                    "key" => $key,
-                ];
-            }
-            if ($moving == true && !$location->is_moving) {
-                $moving = false;
-
-                $end_position = [
-                    "key" => $key,
-                ];
-            }
-
-            if ($end_position != null && $start_position != null) {
-                $ranges[] = $locations->collection
-                    ->slice($start_position["key"], $end_position["key"] - $start_position["key"] + 1)
-                    ->values();
-
-                $end_position = null;
-                $start_position = null;
-            }
+            $this->perLocation($locations);
         }
 
-        return $ranges;
+        return $this->ranges;
+    }
+
+    /**
+     * Per location report
+     *
+     * @param $locations
+     */
+    public function perLocation($locations)
+    {
+        $this->checkStoppedIsNowMoving();
+        $this->checkMovingIsNowStopped();
+        $this->checkAndCreateRange($locations);
+    }
+
+    public function checkAndCreateRange($locations)
+    {
+        if (RangesHelper::rangeFounded($this->currentParameters['start_position'], $this->currentParameters['end_position'])) {
+            $this->ranges[] = $locations->collection
+                ->slice(
+                    $this->currentParameters['start_position'], $this->currentParameters['end_position'] - $this->currentParameters['start_position'] + 1
+                )
+                ->values();
+
+            $this->currentParameters['end_position'] = null;
+            $this->currentParameters['start_position'] = null;
+        }
+    }
+
+    public function checkMovingIsNowStopped()
+    {
+        if (RangesHelper::movingIsNowStopped($this->currentParameters['moving'], $this->current['location'])) {
+            $this->currentParameters['moving'] = false;
+
+            $this->currentParameters['end_position'] = $this->current['index'];
+        }
+    }
+
+    public function checkStoppedIsNowMoving()
+    {
+        if (RangesHelper::stoppedIsNowMoving($this->currentParameters['moving'], $this->current['location'])) {
+            $this->currentParameters['moving'] = true;
+
+            $this->currentParameters['start_position'] = $this->current['index'];
+        }
     }
 
     /**
