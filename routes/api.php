@@ -284,7 +284,5 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /**
      * Near route ...
      */
-    Route::get('/near/geofences', 'Api\Near\Geofences\IndexController');
-    Route::get('/near/pets', 'Api\Near\Pets\IndexController');
-    Route::get('/near/users', 'Api\Near\Users\IndexController');
+    Route::get('/near/{resource}', 'Api\Near\Resource\IndexController');
 });

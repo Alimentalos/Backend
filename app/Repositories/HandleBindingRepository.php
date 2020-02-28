@@ -23,7 +23,7 @@ class HandleBindingRepository {
                     'success',
                     Route::currentRouteAction(),
                     $request->except('photo', 'password', 'password_confirmation', 'shape'),
-                    $request->route($parameters[0])->id
+                    $request->route($parameters[0])->id ?? $parameters[0]
                 );
             }
 
@@ -32,7 +32,7 @@ class HandleBindingRepository {
                 $request->user('api'),
                 'success',
                 Route::currentRouteAction(),
-                $request->except('photo', 'password', 'password_confirmation', 'shape'),
+                $request->except('photo', 'password', 'password_confirmation', 'shape')
             );
         }
     }

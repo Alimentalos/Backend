@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Near\Users;
+namespace App\Http\Requests\Api\Near\Resource;
 
 use App\Rules\Coordinate;
 use Illuminate\Foundation\Http\FormRequest;
