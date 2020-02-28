@@ -35,11 +35,8 @@ class IndexController extends Controller
         }
 
         $locations = LocationRepository::searchLocations( // Search locations
-            $request->input('type'),
             $models, // of those devices
-            $request->input('start_date'), // between an start date
-            $request->input('end_date'), // and end date
-            $request->input('accuracy') // filtering by accuracy
+            $request->only('type', 'start_date', 'end_date', 'accuracy')
         );
 
         return response()->json(
