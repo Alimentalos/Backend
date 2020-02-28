@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\Users;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Users\DestroyRequest;
 use App\User;
-use Illuminate\Http\JsonResponse;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 class DestroyController extends Controller
 {
