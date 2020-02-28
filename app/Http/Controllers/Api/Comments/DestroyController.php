@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\Comments;
 use App\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Comments\DestroyRequest;
-use Illuminate\Http\JsonResponse;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 class DestroyController extends Controller
 {

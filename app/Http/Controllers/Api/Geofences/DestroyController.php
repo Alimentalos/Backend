@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\Geofences;
 use App\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Geofences\DestroyRequest;
-use Illuminate\Http\JsonResponse;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 class DestroyController extends Controller
 {

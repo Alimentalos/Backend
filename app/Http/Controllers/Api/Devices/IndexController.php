@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\Devices;
 
-use App\Device;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Devices\IndexRequest;
 use App\Http\Resources\DeviceCollection;

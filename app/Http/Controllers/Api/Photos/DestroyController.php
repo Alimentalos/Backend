@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api\Photos;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Photos\DestroyRequest;
 use App\Photo;
-use Illuminate\Http\JsonResponse;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 class DestroyController extends Controller
 {
