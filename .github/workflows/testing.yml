@@ -24,7 +24,7 @@ jobs:
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       uses: paambaati/codeclimate-action@v2.5.3
       env:
-        CC_TEST_REPORTER_ID: 526c7862a54c6042af103f61085519649cc9158dbe9ac37c051e93aa2d607a3e
+        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
       with:
         coverageCommand: vendor/bin/phpunit --coverage-clover=coverage.xml
         coverageLocations:
