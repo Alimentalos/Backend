@@ -5,10 +5,12 @@ namespace App\Repositories;
 use App\Events\GeofenceIn;
 use App\Events\GeofenceOut;
 use App\Geofence;
+use App\Photo;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class GeofenceRepository
 {
@@ -40,11 +42,55 @@ class GeofenceRepository
     }
 
     /**
+     * Update geofence via request.
+     *
+     * @param Request $request
+     * @param Geofence $geofence
+     */
+    public static function updateGeofenceViaRequest(Request $request, Geofence $geofence)
+    {
+        $geofence->name = FillRepository::fillMethod($request, 'name', $geofence->name);
+        $shape = array_map(function ($element) {
+            return new Point($element['latitude'], $element['longitude']);
+        }, $request->input('shape'));
+        $geofence->shape = new Polygon([new LineString($shape)]);
+        $geofence->is_public = FillRepository::fillMethod($request, 'is_public', $geofence->is_public);
+        $geofence->save();
+    }
+
+    /**
+     * Create geofence via request.
+     *
+     * @param Request $request
+     * @param Photo $photo
+     * @return Geofence
+     */
+    public static function createGeofenceViaRequest(Request $request, Photo $photo)
+    {
+        $geofence = new Geofence();
+        $geofence->uuid = UniqueNameRepository::createIdentifier();
+        $geofence->photo_id = $photo->id;
+        $geofence->name = $request->input('name');
+        $geofence->user_id = $request->user('api')->id;
+        $geofence->photo_url = 'https://storage.googleapis.com/photos.zendev.cl/photos/' . $photo->photo_url;
+
+        $shape = array_map(function ($element) {
+            return new Point($element['latitude'], $element['longitude']);
+        }, $request->input('shape'));
+        $geofence->shape = new Polygon([new LineString($shape)]);
+        $geofence->is_public = $request->input('is_public');
+        $geofence->save();
+        return $geofence;
+    }
+
+    /**
+     * Check if location is using model geofence.
+     *
      * @param Model $model
      * @param Model $location
      * @return mixed
      */
-    public static function checkLocationUsingUserGeofences(Model $model, Model $location)
+    public static function checkLocationUsingModelGeofences(Model $model, Model $location)
     {
         $intersected_geofences = $model->geofences()->intersects('shape', $location->location)->get();
 
@@ -59,6 +105,13 @@ class GeofenceRepository
         }
     }
 
+    /**
+     * Create model accesses.
+     *
+     * @param Model $model
+     * @param Geofence $geofence
+     * @param Model $location
+     */
     public static function createAccess(Model $model, Geofence $geofence, Model $location)
     {
         $model->accesses()->create([
@@ -71,6 +124,13 @@ class GeofenceRepository
         event(new GeofenceIn($location, $geofence, $model));
     }
 
+    /**
+     * Get in and still in accesses query.
+     *
+     * @param Model $model
+     * @param Geofence $geofence
+     * @return mixed
+     */
     public static function inAndStillQuery(Model $model, Geofence $geofence)
     {
         return $model->accesses()->where([
@@ -86,6 +146,13 @@ class GeofenceRepository
         ]);
     }
 
+    /**
+     * Update access to still in status.
+     *
+     * @param Model $model
+     * @param Geofence $geofence
+     * @param Model $location
+     */
     public static function updateStillLog(Model $model, Geofence $geofence, Model $location)
     {
         static::inAndStillQuery($model, $geofence)->update([
@@ -94,6 +161,13 @@ class GeofenceRepository
         ]);
     }
 
+    /**
+     * Update access to out status.
+     *
+     * @param Model $model
+     * @param Geofence $geofence
+     * @param Model $location
+     */
     public static function updateOutLog(Model $model, Geofence $geofence, Model $location)
     {
         static::inAndStillQuery($model, $geofence)->update([
@@ -103,6 +177,13 @@ class GeofenceRepository
         event(new GeofenceOut($location, $geofence, $model));
     }
 
+    /**
+     * Check intersected geofences of model location.
+     *
+     * @param Model $model
+     * @param Geofence $geofence
+     * @param Model $location
+     */
     public static function checkIntersectedGeofence(Model $model, Geofence $geofence, Model $location)
     {
         if (static::inAndStillQuery($model, $geofence)->exists()) {
@@ -112,6 +193,13 @@ class GeofenceRepository
         }
     }
 
+    /**
+     * Check disjointed geofences of model location.
+     *
+     * @param Model $model
+     * @param Geofence $geofence
+     * @param Model $location
+     */
     public static function checkDisjointedGeofence(Model $model, Geofence $geofence, Model $location)
     {
         if (static::inAndStillQuery($model, $geofence)->exists()) {

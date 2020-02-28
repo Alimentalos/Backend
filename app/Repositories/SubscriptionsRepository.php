@@ -11,6 +11,11 @@ use App\User;
 
 class SubscriptionsRepository
 {
+    /**
+     * Basic resource quota limits.
+     *
+     * @var array
+     */
     public static $options = [
         'free' => [
             'devices' => [
@@ -118,6 +123,12 @@ class SubscriptionsRepository
         ]
     ];
 
+    /**
+     * Determine user tier.
+     *
+     * @param User $user
+     * @return string
+     */
     public static function determineTier(User $user)
     {
         if ($user->free) {
@@ -127,33 +138,52 @@ class SubscriptionsRepository
         }
     }
 
+    /**
+     * Find current user resource used quota.
+     *
+     * @param $resource
+     * @param $user
+     * @return mixed
+     */
+    public static function findResources($resource, $user)
+    {
+        switch ($resource) {
+            case 'devices':
+                return Device::where('user_id', $user->id)->count();
+                break;
+            case 'groups':
+                return Group::where('user_id', $user->id)->count();
+                break;
+            case 'users':
+                return User::where('user_id', $user->id)->count();
+                break;
+            case 'photos':
+                return Photo::where('user_id', $user->id)->count();
+                break;
+            case 'comments':
+                return Comment::where('user_id', $user->id)->count();
+                break;
+            case 'pets':
+                return Pet::where('user_id', $user->id)->count();
+                break;
+        }
+    }
+
+    /**
+     * Check if user can apply method on resources.
+     *
+     * @param $method
+     * @param $resource
+     * @param User $user
+     * @return bool
+     */
     public static function can($method, $resource, User $user)
     {
         if ($user->is_child) {
             return false;
         }
         $tier = static::determineTier($user);
-        $quantity = 0;
-        switch ($resource) {
-            case 'devices':
-                $quantity = Device::where('user_id', $user->id)->count();
-                break;
-            case 'groups':
-                $quantity = Group::where('user_id', $user->id)->count();
-                break;
-            case 'users':
-                $quantity = User::where('user_id', $user->id)->count();
-                break;
-            case 'photos':
-                $quantity = Photo::where('user_id', $user->id)->count();
-                break;
-            case 'comments':
-                $quantity = Comment::where('user_id', $user->id)->count();
-                break;
-            case 'pets':
-                $quantity = Pet::where('user_id', $user->id)->count();
-                break;
-        }
+        $quantity = static::findResources($resource, $user);
         return ($quantity + 1) <= self::$options[$tier][$resource][$method];
     }
 }

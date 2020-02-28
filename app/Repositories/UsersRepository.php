@@ -2,11 +2,36 @@
 
 namespace App\Repositories;
 
+use App\Photo;
 use App\User;
+use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class UsersRepository
 {
+    public static function createUserViaRequest(Request $request, Photo $photo)
+    {
+        $exploded = explode(',', $request->input('coordinates'));
+        $user = User::create([
+            'user_id' => $request->user('api')->id,
+            'photo_id' => $photo->id,
+            'photo_url' => 'https://storage.googleapis.com/photos.zendev.cl/photos/' . $photo->photo_url,
+            'email' => $request->input('email'),
+            'name' => $request->input('name'),
+            'password' => bcrypt($request->input('password')),
+            'is_public' => $request->input('is_public'),
+            'location' => (new Point(
+                floatval($exploded[0]),
+                floatval($exploded[1])
+            )),
+        ]);
+        $user->photos()->attach($photo->id);
+        event(new Registered($user));
+        return $user;
+    }
+
     /**
      * Check if userA is same of userB
      *

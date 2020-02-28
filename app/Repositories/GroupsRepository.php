@@ -3,11 +3,43 @@
 namespace App\Repositories;
 
 use App\Group;
+use App\Photo;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class GroupsRepository
 {
+    public static function updateGroupViaRequest(Request $request, Group $group)
+    {
+        $group->update([
+            'name' => FillRepository::fillMethod($request, 'name', $group->name),
+            'is_public' => FillRepository::fillMethod($request, 'is_public', $group->is_public)
+        ]);
+        return $group;
+    }
+
+    public static function createGroupViaRequest(Request $request, Photo $photo)
+    {
+        $group = Group::create([
+            'name' => $request->input('name'),
+            'user_id' => $request->user('api')->id,
+            'photo_id' => $photo->id,
+            'photo_url' => 'https://storage.googleapis.com/photos.zendev.cl/photos/' . $photo->photo_url,
+        ]);
+        $request->user('api')
+            ->groups()
+            ->attach(
+                $group->id,
+                [
+                    'is_admin' => true,
+                    'status' => Group::ACCEPTED_STATUS,
+                    'sender_id' => $request->user('api')->id,
+                ]
+            );
+        $group->photos()->attach($photo->id);
+        return $group;
+    }
 
     /**
      * Check if user has model.
