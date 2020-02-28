@@ -2,11 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Comment;
-use App\Device;
-use App\Group;
-use App\Pet;
-use App\Photo;
 use App\User;
 use Illuminate\Support\Str;
 

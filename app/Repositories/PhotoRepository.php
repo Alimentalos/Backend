@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Photo;
-use App\User;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Support\Facades\Storage;
 
