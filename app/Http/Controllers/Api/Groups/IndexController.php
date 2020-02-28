@@ -17,10 +17,11 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        // TODO - Remove unnecessary complexity
-        $groups = $request->user('api')->is_admin ?
-            Group::all() :
-            Group::where('user_id', $request->user('api')->id)->latest()->get();
+        $groups = (
+            $request->user('api')->is_admin ?
+                Group::with('user', 'photo') :
+                Group::with('user', 'photo')->where('user_id', $request->user('api')->id)
+        )->latest()->paginate(25);
 
         return new GroupCollection($groups);
     }
