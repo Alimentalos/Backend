@@ -38,15 +38,36 @@ class GenerateIcons extends Command
     public function handle()
     {
         foreach (['navigation', 'circle', 'origin'] as $icon) {
-            foreach (['000000', '137547', 'F2C037', 'd63e33'] as $color) {
-                for ($i = 0; $i <= 360; $i++) {
-                    $path = public_path() . '/icons/' . $icon . '-' . $color . '-' . $i . '.svg';
-                    file_put_contents($path, view('svg.' . $icon, [
-                        'rotation' => $i,
-                        'color' => $color,
-                    ])->toHtml());
-                }
-            }
+            $this->createIconColors($icon);
+        }
+    }
+
+    /**
+     * Create icon colors loop.
+     *
+     * @param $icon
+     */
+    public function createIconColors($icon)
+    {
+        foreach (['000000', '137547', 'F2C037', 'd63e33'] as $color) {
+            $this->createIconColorUsingHeading($icon, $color);
+        }
+    }
+
+    /**
+     * Create icon color loop using heading.
+     *
+     * @param $icon
+     * @param $color
+     */
+    public function createIconColorUsingHeading($icon, $color)
+    {
+        for ($i = 0; $i <= 360; $i++) {
+            $path = public_path() . '/icons/' . $icon . '-' . $color . '-' . $i . '.svg';
+            file_put_contents($path, view('svg.' . $icon, [
+                'rotation' => $i,
+                'color' => $color,
+            ])->toHtml());
         }
     }
 }
