@@ -14,14 +14,14 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware(['auth:devices'])->group(function () {
-    Route::post('/device/locations', 'Api\Device\LocationsController');
+    Route::post('/device/locations', 'Api\Resource\LocationsController')->name('device.locations');
 });
 
 /**
  * Pet authenticated routes ...
  */
 Route::middleware(['auth:pets'])->group(function () {
-    Route::post('/pet/locations', 'Api\Pet\LocationsController');
+    Route::post('/pet/locations', 'Api\Resource\LocationsController')->name('pet.locations');
 });
 
 /**
@@ -192,7 +192,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      */
 
     Route::get('/user', 'Api\UserController');
-    Route::post('/user/locations', 'Api\User\LocationsController');
+    Route::post('/user/locations', 'Api\Resource\LocationsController')->name('user.locations');
 
     Route::get('/users', 'Api\Users\IndexController');
     Route::post('/users', 'Api\Users\StoreController');
