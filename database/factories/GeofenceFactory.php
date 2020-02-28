@@ -28,12 +28,6 @@ $factory->define(Geofence::class, function (Faker $faker) {
         'photo_id' => factory(Photo::class)->create()->id,
         'name' => $faker->name,
         'is_public' => true,
-        'shape' => (new Polygon([new LineString([
-            new Point(0, 0),
-            new Point(0, 5),
-            new Point(5, 5),
-            new Point(5, 0),
-            new Point(0, 0)
-        ])])),
+        'shape' => (new Polygon(\App\Repositories\GeofenceRepository::createPolygon())),
     ];
 });

@@ -63,7 +63,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Groups Comments
 
     Route::get('/groups/{group}/comments', 'Api\Groups\Comments\IndexController');
-    Route::post('/groups/{group}/comments', 'Api\Groups\Comments\StoreController');
+    Route::post('/groups/{resource}/comments', 'Api\Resource\Comments\StoreController')
+        ->name('groups.comments.store');;
 
     // Groups Photos
 
@@ -138,7 +139,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Pet Geofences Accesses
 
     Route::get('/pets/{pet}/geofences/accesses', 'Api\Pets\Geofences\AccessesController');
-    Route::get('/pets/{pet}/geofences/{geofence}/accesses', 'Api\Pets\Geofences\Accesses\IndexController');
+    Route::get('/pets/{resource}/geofences/{geofence}/accesses', 'Api\Resource\Geofences\Accesses\IndexController')
+        ->name('pets.geofences.accesses.index');
 
     // Pet Photos
 
@@ -154,7 +156,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Pet Comments
 
     Route::get('/pets/{pet}/comments', 'Api\Pets\Comments\IndexController');
-    Route::post('/pets/{pet}/comments', 'Api\Pets\Comments\StoreController');
+    Route::post('/pets/{resource}/comments', 'Api\Resource\Comments\StoreController')
+        ->name('pets.comments.store');;
 
     // Pet Reactions
 
@@ -179,7 +182,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Device Geofences Accesses
 
     Route::get('/devices/{device}/geofences/accesses', 'Api\Devices\Geofences\AccessesController');
-    Route::get('/devices/{device}/geofences/{geofence}/accesses', 'Api\Devices\Geofences\Accesses\IndexController');
+    Route::get('/devices/{resource}/geofences/{geofence}/accesses', 'Api\Resource\Geofences\Accesses\IndexController')
+        ->name('devices.geofences.accesses.index');
 
     // Device Groups
 
@@ -224,7 +228,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // User Geofences Accesses
 
-    Route::get('/users/{user}/geofences/{geofence}/accesses', 'Api\Users\Geofences\Accesses\IndexController');
+    Route::get('/users/{resource}/geofences/{geofence}/accesses', 'Api\Resource\Geofences\Accesses\IndexController')
+        ->name('users.geofences.accesses.index');
     Route::get('/users/{user}/geofences/accesses', 'Api\Users\Geofences\AccessesController');
 
     // User Photos
@@ -253,7 +258,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Photo Comments routes ...
 
     Route::get('/photos/{photo}/comments', 'Api\Photos\Comments\IndexController');
-    Route::post('/photos/{photo}/comments', 'Api\Photos\Comments\StoreController');
+    Route::post('/photos/{resource}/comments', 'Api\Resource\Comments\StoreController')
+        ->name('photos.comments.store');
 
     // Photo Reactions routes ...
 
