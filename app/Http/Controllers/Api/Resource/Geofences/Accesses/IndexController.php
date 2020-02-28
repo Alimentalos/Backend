@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Resource\Geofences\Accesses;
 use App\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Geofences\Accesses\IndexRequest;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller

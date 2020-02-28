@@ -11,12 +11,15 @@ use App\UserLocation;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class LocationRepository
 {
+    public const LATITUDE = 0;
+
+
+    public const LONGITUDE = 1;
+
     /**
      * Search last devices locations.
      *

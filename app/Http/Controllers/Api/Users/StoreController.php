@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Users\StoreRequest;
 use App\Repositories\PhotoRepository;
 use App\Repositories\UsersRepository;
-use App\User;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller

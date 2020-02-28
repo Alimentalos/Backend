@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Pets;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Models\UpdateRequest;
 use App\Pet;
-use App\Repositories\FillRepository;
 use App\Repositories\PetsRepository;
 use App\Repositories\UploadRepository;
 use Illuminate\Http\JsonResponse;

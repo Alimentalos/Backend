@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Comments\StoreRequest;
 use App\Repositories\UniqueNameRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
