@@ -116,20 +116,25 @@ class GroupTest extends TestCase
     }
 
     /**
-     * @test testChildUserCannotStoreGroup
+     * @test testChildUserCanStoreGroup
      */
-    public function testChildUserCannotStoreGroup()
+    public function testChildUserCanStoreGroup()
     {
+        Storage::fake('gcs');
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
         $userB->user_id = $user->id;
         $userB->save();
         $group = factory(Group::class)->make();
         $response = $this->actingAs($userB, 'api')->json('POST', '/api/groups', [
+            'photo' => UploadedFile::fake()->image('photo2.jpg'),
             'name' => $group->name,
             'is_public' => 'false',
+            'coordinates' => '10.1,50.5'
         ]);
-        $response->assertStatus(403);
+        $response->assertOk();
+        $content = $response->getContent();
+        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
 
     /**

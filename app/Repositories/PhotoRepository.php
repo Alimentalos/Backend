@@ -48,6 +48,39 @@ class PhotoRepository
         return $photo;
     }
 
+    /**
+     * @param $request
+     * @return Photo
+     */
+    public static function createPhotoViaRequest($request)
+    {
+        $photoUniqueName = UniqueNameRepository::createIdentifier();
+        $commentUniqueName = UniqueNameRepository::createIdentifier();
+        $exploded = explode(',', $request->input('coordinates'));
+        $photo = Photo::create([
+            'user_id' => $request->user('api')->id,
+            'uuid' => $photoUniqueName,
+            'photo_url' => $photoUniqueName . $request->file('photo')->extension(),
+            'ext' => $request->file('photo')->extension(),
+            'is_public' => $request->has('is_public'),
+            'location' => (new Point(
+                floatval($exploded[0]),
+                floatval($exploded[1])
+            ))
+        ]);
+        $comment = $photo->comments()->create([
+            'uuid' => $commentUniqueName,
+            'user_id' => $request->user('api')->id,
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
+            'is_public' => $request->has('is_public'),
+        ]);
+        $photo->comment()->associate($comment);
+        static::storePhoto($photoUniqueName, $request->file('photo'));
+        return $photo;
+    }
+
+
     public static function storePhoto($uniqueName, $fileContent)
     {
         Storage::disk(static::DEFAULT_DISK)

@@ -11,86 +11,77 @@ use App\User;
 
 class SubscriptionsRepository
 {
-    public static $options = [
-        'free' => [
-            'devices' => [
-                'create' => 3
-            ],
-            'groups' => [
-                'create' => 2
-            ],
-            'photos' => [
-                'create' => 100
-            ],
-            'comments' => [
-                'create' => 1000
-            ],
-            'users' => [
-                'create' => 3
-            ],
-            'pets' => [
-                'create' => 10
-            ],
-            'geofences' => [
-                'create' => 1
-            ],
-            'user_group' => [
-                'join' => 3
-            ]
-        ],
-        'tier-1' => [
-            'devices' => [
-                'create' => 5
-            ],
-            'groups' => [
-                'create' => 3
-            ],
-            'photos' => [
-                'create' => 500
-            ],
-            'comments' => [
-                'create' => 2000
-            ],
-            'users' => [
-                'create' => 10
-            ],
-            'pets' => [
-                'create' => 25
-            ],
-            'geofences' => [
-                'create' => 10
-            ],
-            'user_group' => [
-                'join' => 10
-            ]
-        ],
-        'tier-2' => [
-            'devices' => [
-                'create' => 10
-            ],
-            'groups' => [
-                'create' => 5
-            ],
-            'photos' => [
-                'create' => 1000
-            ],
-            'comments' => [
-                'create' => 5000
-            ],
-            'users' => [
-                'create' => 20
-            ],
-            'pets' => [
-                'create' => 50
-            ],
-            'geofences' => [
-                'create' => 20
-            ],
-            'user_group' => [
-                'join' => 20
-            ]
-        ],
-        'tier-3' => [
+    /**
+     * Determine user tier.
+     *
+     * @param User $user
+     * @return string
+     */
+    public static function determineTier(User $user)
+    {
+        if ($user->free) {
+            return 'free';
+        } else {
+            return 'premium';
+        }
+    }
+
+    /**
+     * Find current user resource used quota.
+     *
+     * @param $resource
+     * @param $user
+     * @return mixed
+     */
+    public static function getUserResourcesQuota($resource, $user)
+    {
+        switch ($resource) {
+            case 'devices':
+                return Device::where('user_id', $user->id)->count();
+                break;
+            case 'groups':
+                return Group::where('user_id', $user->id)->count();
+                break;
+            case 'users':
+                return User::where('user_id', $user->id)->count();
+                break;
+            case 'photos':
+                return Photo::where('user_id', $user->id)->count();
+                break;
+            case 'comments':
+                return Comment::where('user_id', $user->id)->count();
+                break;
+            case 'pets':
+                return Pet::where('user_id', $user->id)->count();
+                break;
+        }
+    }
+
+    /**
+     * Check if user can apply method on resources.
+     *
+     * @param $method
+     * @param $resource
+     * @param User $user
+     * @return bool
+     */
+    public static function can($method, $resource, User $user)
+    {
+        $tier = static::determineTier($user);
+        $quantity = static::getUserResourcesQuota($resource, $user);
+        return ($quantity + 1) <= self::getOptions($tier, $resource, $method);
+    }
+
+    /**
+     * Get premium quota limits.
+     *
+     * @param $resource
+     * @param $method
+     * @return mixed
+     */
+    public static function getPremiumLimits($resource, $method)
+    {
+        return static::calcLimits([
             'devices' => [
                 'create' => 50
             ],
@@ -115,45 +106,72 @@ class SubscriptionsRepository
             'user_group' => [
                 'join' => 20
             ]
-        ]
-    ];
-
-    public static function determineTier(User $user)
-    {
-        if ($user->free) {
-            return 'free';
-        } else {
-            return 'tier-1';
-        }
+        ], $resource, $method);
     }
 
-    public static function can($method, $resource, User $user)
+    /**
+     * Get free quota limits.
+     *
+     * @param $resource
+     * @param $method
+     * @return mixed
+     */
+    public static function getFreeLimits($resource, $method)
     {
-        if ($user->is_child) {
-            return false;
+        return static::calcLimits([
+            'devices' => [
+                'create' => 5
+            ],
+            'groups' => [
+                'create' => 3
+            ],
+            'photos' => [
+                'create' => 500
+            ],
+            'comments' => [
+                'create' => 2000
+            ],
+            'users' => [
+                'create' => 10
+            ],
+            'pets' => [
+                'create' => 25
+            ],
+            'geofences' => [
+                'create' => 10
+            ],
+            'user_group' => [
+                'join' => 10
+            ]
+        ], $resource, $method);
+    }
+
+    /**
+     * Calculate specific resource tier limits.
+     *
+     * @param $limits
+     * @param $resource
+     * @param $method
+     * @return mixed
+     */
+    public static function calcLimits($limits, $resource, $method)
+    {
+        return $limits[$resource][$method];
+    }
+
+    /**
+     * Get current user tier limits options.
+     *
+     * @param $tier
+     * @param $resource
+     * @param $method
+     * @return mixed
+     */
+    public static function getOptions($tier, $resource, $method)
+    {
+        if ($tier === 'free') {
+            return static::getFreeLimits($resource, $method);
         }
-        $tier = static::determineTier($user);
-        $quantity = 0;
-        switch ($resource) {
-            case 'devices':
-                $quantity = Device::where('user_id', $user->id)->count();
-                break;
-            case 'groups':
-                $quantity = Group::where('user_id', $user->id)->count();
-                break;
-            case 'users':
-                $quantity = User::where('user_id', $user->id)->count();
-                break;
-            case 'photos':
-                $quantity = Photo::where('user_id', $user->id)->count();
-                break;
-            case 'comments':
-                $quantity = Comment::where('user_id', $user->id)->count();
-                break;
-            case 'pets':
-                $quantity = Pet::where('user_id', $user->id)->count();
-                break;
-        }
-        return ($quantity + 1) <= self::$options[$tier][$resource][$method];
+        return static::getPremiumLimits($resource, $method);
     }
 }

@@ -19,7 +19,6 @@ class ShowController extends Controller
     public function __invoke(ShowRequest $request, User $user)
     {
         $user->load('photo', 'user');
-
         return response()->json($user, 200);
     }
 }

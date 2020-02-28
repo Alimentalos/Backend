@@ -21,9 +21,7 @@ class UpdateController extends Controller
     public function __invoke(UpdateRequest $request, User $user)
     {
         UploadRepository::checkPhotoForUpload($request, $user);
-
         $user->load('user', 'photo');
-
         $user->update([
             'email' => FillRepository::fillMethod($request, 'email', $user->email),
             'name' => FillRepository::fillMethod($request, 'name', $user->name),

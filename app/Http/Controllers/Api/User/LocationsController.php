@@ -34,7 +34,7 @@ class LocationsController extends Controller
             "location" => LocationRepository::parsePoint($request->all())
         ]);
 
-        GeofenceRepository::checkLocationUsingUserGeofences(
+        GeofenceRepository::checkLocationUsingModelGeofences(
             $user,
             $location
         );
