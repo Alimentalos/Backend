@@ -53,7 +53,7 @@ class AuthTest extends TestCase
             'password_confirmation' => $user->password,
             'is_public' => true,
         ]);
-        $response->assertOk();
+        $response->assertCreated();
     }
 
     public function test_password_recovery_api()

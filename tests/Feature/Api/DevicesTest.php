@@ -193,7 +193,7 @@ class DevicesTest extends TestCase
                 'timestamp' => time(),
             ],
         ]);
-        $response->assertOk();
+        $response->assertCreated();
         $response->assertJsonFragment([
             'latitude' => $location->location->getLat(),
             'longitude' => $location->location->getLng(),
