@@ -22,6 +22,7 @@ class CreateAlertsTable extends Migration
             $table->point('location'); // Latitude, Longitude
             $table->string('title');
             $table->longText('body');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
