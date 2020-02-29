@@ -57,6 +57,9 @@ class PetTest extends TestCase
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/comments');
 
+        $response->assertOk();
+
+
         $response->assertJsonStructure([
             'data' => [
                 [

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\Geofences\Photos;
+namespace App\Http\Requests\Api\Resource\Photos;
 
+use App\Rules\Coordinate;
 use Illuminate\Foundation\Http\FormRequest;
 
-class IndexRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class IndexRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('geofence'));
+        return $this->user('api')->can('createPhoto', $this->route('resource'));
     }
 
     /**
@@ -24,7 +25,9 @@ class IndexRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'photo' => 'required',
+            'is_public' => 'required|boolean',
+            'coordinates' => ['required', new Coordinate()],
         ];
     }
 }

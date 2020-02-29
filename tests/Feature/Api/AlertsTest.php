@@ -208,6 +208,7 @@ class AlertsTest extends TestCase
         ]);
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/alerts/' . $alert->uuid . '/comments');
+        $response->assertOk();
 
         $response->assertJsonStructure([
             'data' => [

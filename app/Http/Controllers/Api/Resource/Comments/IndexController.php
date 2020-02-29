@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Api\Comments\Comments;
+namespace App\Http\Controllers\Api\Resource\Comments;
 
-use App\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Models\Comments\IndexRequest;
 
 class IndexController extends Controller
 {
-    public function __invoke(IndexRequest $request, Comment $comment)
+    public function __invoke(IndexRequest $request, $resource)
     {
         return response()->json(
-            $comment->comments()->with('user')->latest()->paginate(20),
+            $resource->comments()->with('user')->latest()->paginate(20),
             200
         );
     }
