@@ -196,16 +196,16 @@ class GeofenceTest extends TestCase
         ];
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $firstPayload);
+        $response->assertCreated();
 
-        $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $firstPayload);
-        $response->assertOk();
-        $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $firstPayload);
+        $response->assertCreated();
 
-        $response->assertOk();
+        $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $firstPayload);
+        $response->assertCreated();
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $secondPayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($device, $response) {
             return $e->model->id === $device->id &&
                 $e->location->trackable_type === 'App\\Device' &&
@@ -219,7 +219,7 @@ class GeofenceTest extends TestCase
         $response->assertOk();
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $secondPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($user, $response) {
             return $e->model->id === $user->id &&
@@ -229,7 +229,7 @@ class GeofenceTest extends TestCase
         });
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $secondPayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($pet, $response) {
             return $e->model->id === $pet->id &&
                 $e->location->trackable_type === 'App\\Pet' &&
@@ -238,7 +238,7 @@ class GeofenceTest extends TestCase
         });
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $thirdPayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($device, $response) {
             return $e->model->id === $device->id &&
                 $e->location->trackable_type === 'App\\Device' &&
@@ -247,7 +247,7 @@ class GeofenceTest extends TestCase
         });
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $thirdPayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($user, $response) {
             return $e->model->id === $user->id &&
                 $e->location->trackable_type === 'App\\User' &&
@@ -256,7 +256,7 @@ class GeofenceTest extends TestCase
         });
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $thirdPayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($pet, $response) {
             return $e->model->id === $pet->id &&
                 $e->location->trackable_type === 'App\\Pet' &&
@@ -265,7 +265,7 @@ class GeofenceTest extends TestCase
         });
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $fourPayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($device, $response) {
             return $e->model->id === $device->id &&
                 $e->location->trackable_type === 'App\\Device' &&
@@ -274,7 +274,7 @@ class GeofenceTest extends TestCase
         });
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $fourPayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($user, $response) {
             return $e->model->id === $user->id &&
                 $e->location->trackable_type === 'App\\User' &&
@@ -283,7 +283,7 @@ class GeofenceTest extends TestCase
         });
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $fourPayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($pet, $response) {
             return $e->model->id === $pet->id &&
                 $e->location->trackable_type === 'App\\Pet' &&
@@ -292,7 +292,7 @@ class GeofenceTest extends TestCase
         });
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $fivePayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($device, $response) {
             return $e->model->id === $device->id &&
                 $e->location->trackable_type === 'App\\Device' &&
@@ -301,7 +301,7 @@ class GeofenceTest extends TestCase
         });
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $fivePayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($user, $response) {
             return $e->model->id === $user->id &&
                 $e->location->trackable_type === 'App\\User' &&
@@ -310,7 +310,7 @@ class GeofenceTest extends TestCase
         });
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $fivePayload);
-        $response->assertOk();
+        $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($pet, $response) {
             return $e->model->id === $pet->id &&
                 $e->location->trackable_type === 'App\\Pet' &&
@@ -665,47 +665,47 @@ class GeofenceTest extends TestCase
         ];
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $firstPayload);
-        $response->assertOk();
+        $response->assertCreated();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $firstPayload);
-        $response->assertOk();
+        $response->assertCreated();
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $firstPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $secondPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $secondPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $secondPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $thirdPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $thirdPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $thirdPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $fourPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $fourPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $fourPayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $fivePayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $fivePayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $fivePayload);
-        $response->assertOk();
+        $response->assertCreated();
 
         // Users tests
         $response = $this->actingAs($user, 'api')

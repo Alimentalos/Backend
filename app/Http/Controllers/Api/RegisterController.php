@@ -35,6 +35,6 @@ class RegisterController extends Controller
             $request->only('name', 'email', 'is_public')
         );
 
-        return response()->json($user, 200);
+        return response()->json($user, 201);
     }
 }
