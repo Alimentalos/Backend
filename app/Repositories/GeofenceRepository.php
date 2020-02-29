@@ -84,7 +84,7 @@ class GeofenceRepository
         $geofence->photo_id = $photo->id;
         $geofence->name = $request->input('name');
         $geofence->user_id = $request->user('api')->id;
-        $geofence->photo_url = 'https://storage.googleapis.com/photos.zendev.cl/photos/' . $photo->photo_url;
+        $geofence->photo_url = config('storage.path') . $photo->photo_url;
 
         $shape = array_map(function ($element) {
             return new Point($element['latitude'], $element['longitude']);

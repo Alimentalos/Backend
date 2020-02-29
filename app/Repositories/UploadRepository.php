@@ -25,7 +25,7 @@ class UploadRepository
 
             $model->update([
                 'photo_id' => $photo->id,
-                'photo_url' => 'https://storage.googleapis.com/photos.zendev.cl/photos/' . $photo->photo_url,
+                'photo_url' => config('storage.path') . $photo->photo_url,
                 'location' => (new Point(
                     floatval($exploded[0]),
                     floatval($exploded[1])

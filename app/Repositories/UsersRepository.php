@@ -17,7 +17,7 @@ class UsersRepository
         $user = User::create([
             'user_id' => $request->user('api')->id,
             'photo_id' => $photo->id,
-            'photo_url' => 'https://storage.googleapis.com/photos.zendev.cl/photos/' . $photo->photo_url,
+            'photo_url' => config('storage.path') . $photo->photo_url,
             'email' => $request->input('email'),
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),

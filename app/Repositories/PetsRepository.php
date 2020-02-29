@@ -64,7 +64,7 @@ class PetsRepository
         $exploded = explode(',', $request->input('coordinates'));
         $pet = Pet::create([
             'name' => $request->input('name'),
-            'photo_url' => 'https://storage.googleapis.com/photos.zendev.cl/photos/' . $photo->photo_url,
+            'photo_url' => config('storage.path') . $photo->photo_url,
             'user_id' => $request->user('api')->id,
             'description' => $request->input('description'),
             'hair_color' => $request->input('hair_color'),
