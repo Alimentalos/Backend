@@ -11,7 +11,8 @@ use Grimzy\LaravelMysqlSpatial\Types\Point;
 $factory->define(Photo::class, function (Faker $faker) {
     return [
         'uuid' => (string) $faker->uuid,
-        'ext' => '.jpg',
+        'ext' => '.png',
+        'photo_url' => config('storage.path') . (string) $faker->uuid . '.png',
         'location' => (new Point($faker->latitude(), $faker->longitude())),
         'user_id' => factory(User::class)->create()->id,
         'comment_id' => factory(Comment::class)->create()->id,

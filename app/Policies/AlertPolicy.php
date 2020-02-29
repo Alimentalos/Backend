@@ -18,7 +18,7 @@ class AlertPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasVerifiedEmail();
+        return $user->is_admin || $user->hasVerifiedEmail();
     }
 
     /**
@@ -30,7 +30,7 @@ class AlertPolicy
      */
     public function view(User $user, Alert $alert)
     {
-        return $user->hasVerifiedEmail();
+        return $user->is_admin || $user->hasVerifiedEmail();
     }
 
     /**
@@ -41,7 +41,7 @@ class AlertPolicy
      */
     public function create(User $user)
     {
-        return $user->hasVerifiedEmail();
+        return $user->is_admin || $user->hasVerifiedEmail();
     }
 
     /**
@@ -53,7 +53,7 @@ class AlertPolicy
      */
     public function update(User $user, Alert $alert)
     {
-        return $user->hasVerifiedEmail() && $alert->user_id === $user->id;
+        return $user->is_admin || $user->hasVerifiedEmail() && $alert->user_id === $user->id;
     }
 
     /**
@@ -65,6 +65,6 @@ class AlertPolicy
      */
     public function delete(User $user, Alert $alert)
     {
-        return $user->hasVerifiedEmail() && $alert->user_id === $user->id;
+        return $user->is_admin || $user->hasVerifiedEmail() && $alert->user_id === $user->id;
     }
 }

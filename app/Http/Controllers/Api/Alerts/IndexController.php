@@ -19,6 +19,7 @@ class IndexController extends Controller
     public function __invoke(IndexRequest $request)
     {
         $alerts = Alert::query()
+            ->with('user', 'photo', 'alert')
             ->whereIn(
                 'status',
                 $request->has('whereInStatus') ?

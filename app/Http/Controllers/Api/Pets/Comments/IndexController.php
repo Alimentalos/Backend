@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Pets\Comments;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Pets\Comments\IndexRequest;
+use App\Http\Requests\Api\Models\Comments\IndexRequest;
 use App\Pet;
 use Illuminate\Http\JsonResponse;
 

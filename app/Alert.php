@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Alert extends Model
 {
+    use SpatialTrait;
+
     /**
      * The table name of alert.
      *
@@ -36,12 +39,12 @@ class Alert extends Model
     ];
 
     /**
-     * The hidden fields of alert.
+     * The attributes that should be cast to spatial types.
      *
      * @var array
      */
-    protected $hidden = [
-        'id'
+    protected $spatialFields = [
+        'location',
     ];
 
     /**

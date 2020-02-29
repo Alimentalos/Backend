@@ -18,6 +18,7 @@ class ShowController extends Controller
      */
     public function __invoke(ShowRequest $request, Alert $alert)
     {
+        $alert->load('user', 'photo', 'alert');
         return response()->json(
             $alert,
             200

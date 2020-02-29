@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Photos\Comments;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Photos\Comments\IndexRequest;
+use App\Http\Requests\Api\Models\Comments\IndexRequest;
 use App\Photo;
 use Illuminate\Http\JsonResponse;
 

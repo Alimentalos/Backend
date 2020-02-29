@@ -3,7 +3,10 @@
 namespace App\Http\Requests\Api\Alerts;
 
 use App\Alert;
+use App\Repositories\HandleBindingRepository;
+use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
+use App\Repositories\TypeRepository;
 use App\Rules\Coordinate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -30,15 +33,20 @@ class StoreRequest extends FormRequest
         return [
             'title' => 'required',
             'body' => 'required',
+            'alert_type' => [
+                'required',
+                Rule::in(ResourceRepository::availableResource())
+            ],
+            'alert_id' => [
+                'required',
+            ],
             'type' => [
                 'required',
-                Rule::in([
-                    StatusRepository::CREATED,
-                    StatusRepository::PUBLISHED,
-                    StatusRepository::FOUNDED,
-                    StatusRepository::RESOLVED,
-                    StatusRepository::CLOSED
-                ])
+                Rule::in(TypeRepository::availableAlertTypes())
+            ],
+            'status' => [
+                'required',
+                Rule::in(StatusRepository::availableAlertStatuses())
             ],
             'photo' => 'required',
             'coordinates' => ['required', new Coordinate()],

@@ -54,6 +54,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::put('/groups/{group}', 'Api\Groups\UpdateController');
     Route::delete('/groups/{group}', 'Api\Groups\DestroyController');
 
+
     // Groups Resources
 
     Route::get('/groups/{group}/users', 'Api\Groups\Users\IndexController');
@@ -302,4 +303,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('/alerts/{alert}', 'Api\Alerts\ShowController');
     Route::put('/alerts/{alert}', 'Api\Alerts\UpdateController');
     Route::delete('/alerts/{alert}', 'Api\Alerts\DestroyController');
+
+    Route::get('/alerts/{alert}/comments', 'Api\Alerts\Comments\IndexController');
+    Route::post('/alerts/{resource}/comments', 'Api\Resource\Comments\StoreController')
+        ->name('alerts.comments.store');
 });
