@@ -31,7 +31,7 @@ class LocationsController extends Controller
         event(new LocationEvent($payload, $model));
         return response()->json(
             $payload,
-            200
+            201
         );
     }
 }

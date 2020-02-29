@@ -279,6 +279,6 @@ class LocationRepository
      */
     public static function parseEvent($data)
     {
-        return array_key_exists("event", $data["location"]) ? $data["location"]["event"] : null;
+        return array_key_exists("event", $data["location"]) ? $data["location"]["event"] : 'default';
     }
 }
