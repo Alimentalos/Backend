@@ -22,9 +22,11 @@ class Alert extends Model
      */
     protected $fillable = [
         'uuid',
+        'user_id',
         'alert_id',
         'alert_type',
-        'user_id',
+        'type',
+        'location',
         'title',
         'body',
         'status',
