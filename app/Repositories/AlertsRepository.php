@@ -4,7 +4,6 @@
 namespace App\Repositories;
 
 use App\Alert;
-use App\Pet;
 use App\Photo;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\Request;
@@ -12,11 +11,11 @@ use Illuminate\Http\Request;
 class AlertsRepository
 {
     /**
-     * Create alert via request
+     * Create alert via request.
      *
      * @param Request $request
      * @param Photo $photo
-     * @return mixed
+     * @return Alert
      */
     public static function createAlertViaRequest(Request $request, Photo $photo)
     {
