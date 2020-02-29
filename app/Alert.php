@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Alert extends Model
@@ -25,6 +26,8 @@ class Alert extends Model
         'user_id',
         'alert_id',
         'alert_type',
+        'photo_id',
+        'photo_url',
         'type',
         'location',
         'title',
@@ -77,5 +80,25 @@ class Alert extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * The related Photo.
+     *
+     * @return BelongsTo
+     */
+    public function photo()
+    {
+        return $this->belongsTo(Photo::class);
+    }
+
+    /**
+     * The related Photos.
+     *
+     * @return BelongsToMany
+     */
+    public function photos()
+    {
+        return $this->morphToMany(Photo::class, 'photoable');
     }
 }
