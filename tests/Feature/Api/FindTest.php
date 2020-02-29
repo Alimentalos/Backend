@@ -21,9 +21,11 @@ class FindTest extends TestCase
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
+        $device->is_public = true;
+        $device->save();
         $group = factory(Group::class)->create();
         $device->locations()->saveMany(
-            factory(Location::class, 10)->make()
+            factory(Location::class, 10)->create()
         );
         $group->devices()->attach($device->id);
         $group->users()->attach($user->id);
@@ -33,6 +35,7 @@ class FindTest extends TestCase
             'identifiers' => [$device->uuid],
             'accuracy' => 100,
         ]);
+        $responseDevices->assertOk();
         $responseDevices->assertJsonStructure([
             [
                 'trackable_id',
@@ -47,7 +50,6 @@ class FindTest extends TestCase
                 'created_at'
             ]
         ]);
-        $responseDevices->assertOk();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Photo;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Date;
@@ -24,7 +25,8 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'uuid' => (string) $faker->uuid,
-//        'photo_id' => factory(Photo::class)->create()->id, Check why this line broke the pipe!!!
+        'photo_url' => config('storage.path') . (string) $faker->uuid . '.png',
+//        'photo_id' => factory(Photo::class)->create()->id,
         'email' => $faker->unique()->safeEmail,
         'location' => (new Point($faker->latitude(), $faker->longitude())),
         'email_verified_at' => $now,

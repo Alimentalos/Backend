@@ -21,7 +21,13 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
     - name: Generate key
       run: php artisan key:generate
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
+    - name: Execute tests for Codecov
+      run: vendor/bin/phpunit --coverage-clover=coverage.xml
+    - name: Upload coverage report
+      run: bash <(curl -s https://codecov.io/bash)
+      env:
+        CODECOV_TOKEN: eae6dab0-81e4-4af1-a6ea-052a4051958e
+    - name: Execute tests for Codeclimate
       uses: paambaati/codeclimate-action@v2.5.3
       env:
         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}

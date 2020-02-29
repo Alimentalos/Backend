@@ -54,6 +54,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::put('/groups/{group}', 'Api\Groups\UpdateController');
     Route::delete('/groups/{group}', 'Api\Groups\DestroyController');
 
+
     // Groups Resources
 
     Route::get('/groups/{group}/users', 'Api\Groups\Users\IndexController');
@@ -62,14 +63,17 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Groups Comments
 
-    Route::get('/groups/{group}/comments', 'Api\Groups\Comments\IndexController');
+    Route::get('/groups/{resource}/comments', 'Api\Resource\Comments\IndexController')
+        ->name('groups.comments.index');
     Route::post('/groups/{resource}/comments', 'Api\Resource\Comments\StoreController')
         ->name('groups.comments.store');
 
     // Groups Photos
 
-    Route::get('/groups/{group}/photos', 'Api\Groups\Photos\IndexController');
-    Route::post('/groups/{group}/photos', 'Api\Groups\Photos\StoreController');
+    Route::get('/groups/{resource}/photos', 'Api\Resource\Photos\IndexController')
+        ->name('groups.photos.index');
+    Route::post('/groups/{resource}/photos', 'Api\Resource\Photos\StoreController')
+        ->name('groups.photos.store');
 
     // Groups Geofences
 
@@ -101,8 +105,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Geofence Photos
 
-    Route::get('/geofences/{geofence}/photos', 'Api\Geofences\Photos\IndexController');
-    Route::post('/geofences/{geofence}/photos', 'Api\Geofences\Photos\StoreController');
+    Route::get('/geofences/{resource}/photos', 'Api\Resource\Photos\IndexController')
+        ->name('geofences.photos.index');
+    Route::post('/geofences/{resource}/photos', 'Api\Resource\Photos\StoreController')
+        ->name('geofences.photos.store');
 
     // Geofences Users
 
@@ -144,8 +150,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Pet Photos
 
-    Route::get('/pets/{pet}/photos', 'Api\Pets\Photos\IndexController');
-    Route::post('/pets/{pet}/photos', 'Api\Pets\Photos\StoreController');
+    Route::get('/pets/{resource}/photos', 'Api\Resource\Photos\IndexController')
+        ->name('pets.photos.index');
+    Route::post('/pets/{resource}/photos', 'Api\Resource\Photos\StoreController')
+        ->name('pets.photos.store');
 
     // Pet Groups
 
@@ -155,7 +163,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Pet Comments
 
-    Route::get('/pets/{pet}/comments', 'Api\Pets\Comments\IndexController');
+    Route::get('/pets/{resource}/comments', 'Api\Resource\Comments\IndexController')
+        ->name('pets.comments.index');
     Route::post('/pets/{resource}/comments', 'Api\Resource\Comments\StoreController')
         ->name('pets.comments.store');
 
@@ -234,8 +243,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // User Photos
 
-    Route::get('/users/{user}/photos', 'Api\Users\Photos\IndexController');
-    Route::post('/users/{user}/photos', 'Api\Users\Photos\StoreController');
+    Route::get('/users/{resource}/photos', 'Api\Resource\Photos\IndexController')
+        ->name('users.photos.index');
+    Route::post('/users/{resource}/photos', 'Api\Resource\Photos\StoreController')
+        ->name('users.photos.store');
 
     // User Reactions
 
@@ -257,7 +268,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Photo Comments routes ...
 
-    Route::get('/photos/{photo}/comments', 'Api\Photos\Comments\IndexController');
+    Route::get('/photos/{resource}/comments', 'Api\Resource\Comments\IndexController')
+        ->name('photos.comments.index');
     Route::post('/photos/{resource}/comments', 'Api\Resource\Comments\StoreController')
         ->name('photos.comments.store');
 
@@ -275,7 +287,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Comment Comments routes ...
 
-    Route::get('/comments/{comment}/comments', 'Api\Comments\Comments\IndexController');
+    Route::get('/comments/{resource}/comments', 'Api\Resource\Comments\IndexController')
+        ->name('comments.comments.index');
     Route::post('/comments/{resource}/comments', 'Api\Resource\Comments\StoreController')
         ->name('comments.comments.store');
 
@@ -293,4 +306,18 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Near route ...
      */
     Route::get('/near/{resource}', 'Api\Near\Resource\IndexController');
+
+    /**
+     * Alerts routes ...
+     */
+    Route::get('/alerts', 'Api\Alerts\IndexController');
+    Route::post('/alerts', 'Api\Alerts\StoreController');
+    Route::get('/alerts/{alert}', 'Api\Alerts\ShowController');
+    Route::put('/alerts/{alert}', 'Api\Alerts\UpdateController');
+    Route::delete('/alerts/{alert}', 'Api\Alerts\DestroyController');
+
+    Route::get('/alerts/{resource}/comments', 'Api\Resource\Comments\IndexController')
+        ->name('alerts.comments.index');
+    Route::post('/alerts/{resource}/comments', 'Api\Resource\Comments\StoreController')
+        ->name('alerts.comments.store');
 });

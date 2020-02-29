@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Alert;
 use App\Comment;
 use App\Device;
 use App\Group;
+use App\Observers\AlertObserver;
 use App\Observers\CommentObserver;
 use App\Observers\DeviceObserver;
 use App\Observers\GroupObserver;
@@ -38,5 +40,6 @@ class AppServiceProvider extends ServiceProvider
         Device::observe(DeviceObserver::class);
         Group::observe(GroupObserver::class);
         Pet::observe(PetObserver::class);
+        Alert::observe(AlertObserver::class);
     }
 }

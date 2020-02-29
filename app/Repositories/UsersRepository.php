@@ -11,13 +11,20 @@ use Illuminate\Http\Request;
 
 class UsersRepository
 {
+    /**
+     * Create user via request.
+     *
+     * @param Request $request
+     * @param Photo $photo
+     * @return mixed
+     */
     public static function createUserViaRequest(Request $request, Photo $photo)
     {
         $exploded = explode(',', $request->input('coordinates'));
         $user = User::create([
             'user_id' => $request->user('api')->id,
             'photo_id' => $photo->id,
-            'photo_url' => 'https://storage.googleapis.com/photos.zendev.cl/photos/' . $photo->photo_url,
+            'photo_url' => config('storage.path') . $photo->photo_url,
             'email' => $request->input('email'),
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),

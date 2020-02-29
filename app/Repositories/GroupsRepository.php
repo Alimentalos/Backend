@@ -27,7 +27,7 @@ class GroupsRepository
             'name' => $request->input('name'),
             'user_id' => $request->user('api')->id,
             'photo_id' => $photo->id,
-            'photo_url' => 'https://storage.googleapis.com/photos.zendev.cl/photos/' . $photo->photo_url,
+            'photo_url' => config('storage.path') . $photo->photo_url,
         ]);
         $request->user('api')
             ->groups()
