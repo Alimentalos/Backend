@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 use App\Alert;
+use App\Pet;
 use App\Photo;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\Request;
@@ -34,6 +35,25 @@ class AlertsRepository
             )),
         ]);
         $photo->alerts()->attach($alert->id);
+        return $alert;
+    }
+
+    /**
+     * Update alert via request.
+     *
+     * @param Request $request
+     * @param Alert $alert
+     * @return Alert
+     */
+    public static function updateAlertViaRequest(Request $request, Alert $alert)
+    {
+        UploadRepository::checkPhotoForUpload($request, $alert);
+        $alert->update([
+            'type' => FillRepository::fillMethod($request, 'type', $alert->type),
+            'title' => FillRepository::fillMethod($request, 'title', $alert->title),
+            'body' => FillRepository::fillMethod($request, 'body', $alert->body),
+        ]);
+        $alert->load('photo', 'user');
         return $alert;
     }
 }

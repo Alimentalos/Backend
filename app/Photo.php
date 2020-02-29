@@ -116,6 +116,17 @@ class Photo extends Model implements ReactableContract
     }
 
     /**
+     * The alerts that belong to the photo.
+     *
+     * @return BelongsToMany
+     */
+    public function alerts()
+    {
+        return $this->morphedByMany(Alert::class, 'photoable');
+    }
+
+
+    /**
      * The geofences that belong to the photo.
      *
      * @return BelongsToMany

@@ -293,4 +293,13 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Near route ...
      */
     Route::get('/near/{resource}', 'Api\Near\Resource\IndexController');
+
+    /**
+     * Alerts routes ...
+     */
+    Route::get('/alerts', 'Api\Alerts\IndexController');
+    Route::post('/alerts', 'Api\Alerts\StoreController');
+    Route::get('/alerts/{alert}', 'Api\Alerts\ShowController');
+    Route::put('/alerts/{alert}', 'Api\Alerts\UpdateController');
+    Route::delete('/alerts/{alert}', 'Api\Alerts\DestroyController');
 });

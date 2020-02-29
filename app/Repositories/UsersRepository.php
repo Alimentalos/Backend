@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 
 class UsersRepository
 {
+    /**
+     * Create user via request.
+     *
+     * @param Request $request
+     * @param Photo $photo
+     * @return mixed
+     */
     public static function createUserViaRequest(Request $request, Photo $photo)
     {
         $exploded = explode(',', $request->input('coordinates'));

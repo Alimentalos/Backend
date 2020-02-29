@@ -59,6 +59,13 @@ class PetsRepository
         return $pet;
     }
 
+    /**
+     * Create pet via request.
+     *
+     * @param Request $request
+     * @param Photo $photo
+     * @return mixed
+     */
     public static function createPetViaRequest(Request $request, Photo $photo)
     {
         $exploded = explode(',', $request->input('coordinates'));
