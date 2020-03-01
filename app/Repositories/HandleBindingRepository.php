@@ -115,7 +115,29 @@ class HandleBindingRepository {
      * @return Builder
      */
     public static function bindResourceModel($class) {
-        return resolve('App\\' . Str::camel(Str::singular($class)))->query();
+        return static::bindResourceQuery('App\\' . Str::camel(Str::singular($class)));
+    }
+
+    /**
+     * Bind resource.
+     *
+     * @param $resource
+     * @return mixed
+     */
+    public static function bindResource($resource)
+    {
+        return resolve($resource);
+    }
+
+    /**
+     * Bind resource query.
+     *
+     * @param $resource
+     * @return mixed
+     */
+    public static function bindResourceQuery($resource)
+    {
+        return static::bindResource($resource)->query();
     }
 
     /**

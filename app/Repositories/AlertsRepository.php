@@ -23,13 +23,8 @@ class AlertsRepository
     public static function createAlertViaRequest(Request $request, Photo $photo)
     {
         $alert_type = $request->input('alert_type');
-        $alert = $alert_type === 'App\\User' ?
-            User::where('uuid', $request->input('alert_id'))->firstOrFail() :
-            (
-                $alert_type === 'App\\Pet' ?
-                    Pet::where('uuid', $request->input('alert_id'))->firstOrFail() :
-                    Device::where('uuid', $request->input('alert_id'))->firstOrFail()
-            );
+        $alert = HandleBindingRepository::bindResourceQuery($alert_type)
+            ->where('uuid', $request->input('alert_id'))->firstOrFail();
         $exploded = explode(',', $request->input('coordinates'));
         $alert = Alert::create([
             'name' => $request->input('name'),
