@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
 
             $class = HandleBindingRepository::detectResourceType();
 
-            return HandleBindingRepository::bindResourceInstance($class, $value);
+            return HandleBindingRepository::bindResourceModelInstance($class, $value);
         });
     }
 

@@ -4,10 +4,7 @@
 namespace App\Repositories;
 
 use App\Alert;
-use App\Device;
-use App\Pet;
 use App\Photo;
-use App\User;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\Request;
 
@@ -23,8 +20,7 @@ class AlertsRepository
     public static function createAlertViaRequest(Request $request, Photo $photo)
     {
         $alert_type = $request->input('alert_type');
-        $alert = HandleBindingRepository::bindResourceQuery($alert_type)
-            ->where('uuid', $request->input('alert_id'))->firstOrFail();
+        $alert = HandleBindingRepository::bindResourceInstance($alert_type, $request->input('alert_id'));
         $exploded = explode(',', $request->input('coordinates'));
         $alert = Alert::create([
             'name' => $request->input('name'),

@@ -87,15 +87,29 @@ class HandleBindingRepository {
     }
 
     /**
-     * Bind resource instance.
+     * Bind resource model instance.
+     * (Uses prefix 'App')
      *
      * @param $class
      * @param $uuid
      * @return Builder|Model
      */
-    public static function bindResourceInstance($class, $uuid)
+    public static function bindResourceModelInstance($class, $uuid)
     {
         return static::bindResourceModel($class)->where('uuid', $uuid)->firstOrFail();
+    }
+
+    /**
+     * Bind resource instance.
+     * (Doesn't uses 'App' prefix)
+     *
+     * @param $resource
+     * @param $uuid
+     * @return mixed
+     */
+    public static function bindResourceInstance($resource, $uuid)
+    {
+        return static::bindResourceQuery($resource)->where('uuid', $uuid)->firstOrFail();
     }
 
     /**
@@ -160,6 +174,12 @@ class HandleBindingRepository {
         }
     }
 
+    /**
+     * Transform coordinates into Point object.
+     *
+     * @param $coordinates
+     * @return Point
+     */
     public static function makePoint($coordinates)
     {
         return new Point(
