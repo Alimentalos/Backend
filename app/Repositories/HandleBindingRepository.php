@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Exception;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,7 @@ class HandleBindingRepository {
      * Resolve binding parameters to create activity logs.
      *
      * @param Request $request
+     * @throws Exception
      */
     public static function resolve(Request $request) {
         $parameters = array_reverse(array_keys($request->route()->parameters()), false);
@@ -35,6 +37,7 @@ class HandleBindingRepository {
      *
      * @param Request $request
      * @param $parameters
+     * @throws Exception
      */
     public static function createReferencedActionViaRequest(Request $request, $parameters)
     {
@@ -54,6 +57,7 @@ class HandleBindingRepository {
      *
      * @param Request $request
      * @param $parameters
+     * @throws Exception
      */
     public static function createSimpleReferencedActionViaRequest(Request $request, $parameters)
     {
@@ -72,6 +76,7 @@ class HandleBindingRepository {
      * Create simple action via request.
      *
      * @param Request $request
+     * @throws Exception
      */
     public static function createSimpleActionViaRequest(Request $request)
     {
