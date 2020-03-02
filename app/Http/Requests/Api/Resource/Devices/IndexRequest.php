@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Groups\Devices;
+namespace App\Http\Requests\Api\Resource\Devices;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class IndexRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('group'));
+        return $this->user('api')->can('view', $this->route('resource'));
     }
 
     /**

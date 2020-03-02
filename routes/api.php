@@ -59,15 +59,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Groups Resources
 
     Route::get('/groups/{group}/users', 'Api\Groups\Users\IndexController');
-    Route::get('/groups/{group}/devices', 'Api\Groups\Devices\IndexController');
+    Route::get('/groups/{resource}/devices', 'Api\Resource\Devices\IndexController');
     Route::get('/groups/{group}/pets', 'Api\Groups\Pets\IndexController');
-
-    // Groups Comments
-
-    Route::get('/groups/{resource}/comments', 'Api\Resource\Comments\IndexController')
-        ->name('groups.comments.index');
-    Route::post('/groups/{resource}/comments', 'Api\Resource\Comments\StoreController')
-        ->name('groups.comments.store');
 
     // Groups Photos
 
@@ -75,15 +68,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
         ->name('groups.photos.index');
     Route::post('/groups/{resource}/photos', 'Api\Resource\Photos\StoreController')
         ->name('groups.photos.store');
-
-    // Groups Geofences
-
-    Route::get('/groups/{resource}/geofences', 'Api\Resource\Geofences\IndexController')
-        ->name('groups.geofences.index');
-    Route::post('/groups/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
-        ->name('groups.geofences.attach');
-    Route::post('/groups/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
-        ->name('groups.geofences.detach');
 
     /**
      * Locations routes ...
@@ -143,15 +127,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::delete('/pets/{resource}', 'Api\Resource\DestroyController')
         ->name('pets.destroy');
 
-    // Pet Geofences
-
-    Route::get('/pets/{resource}/geofences', 'Api\Resource\Geofences\IndexController')
-        ->name('pets.geofences.index');
-    Route::post('/pets/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
-        ->name('pets.geofences.attach');
-    Route::post('/pets/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
-        ->name('pets.geofences.detach');
-
     // Pet Geofences Accesses
 
     Route::get('/pets/{pet}/geofences/accesses', 'Api\Pets\Geofences\AccessesController');
@@ -171,13 +146,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('/pets/{pet}/groups/{group}/attach', 'Api\Pets\Groups\AttachController');
     Route::post('/pets/{pet}/groups/{group}/detach', 'Api\Pets\Groups\DetachController');
 
-    // Pet Comments
-
-    Route::get('/pets/{resource}/comments', 'Api\Resource\Comments\IndexController')
-        ->name('pets.comments.index');
-    Route::post('/pets/{resource}/comments', 'Api\Resource\Comments\StoreController')
-        ->name('pets.comments.store');
-
     // Pet Reactions
 
     Route::get('/pets/{pet}/reactions', 'Api\Pets\Reactions\IndexController');
@@ -193,14 +161,25 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::delete('/devices/{resource}', 'Api\Resource\DestroyController')
         ->name('devices.destroy');
 
-    // Device Geofences
+    // Resource Geofences
 
-    Route::get('/devices/{resource}/geofences', 'Api\Resource\Geofences\IndexController')
-        ->name('devices.geofences.index');
-    Route::post('/devices/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
-        ->name('devices.geofences.attach');
-    Route::post('/devices/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
-        ->name('devices.geofences.detach');
+    foreach (['devices', 'users', 'groups', 'pets'] as $resource) {
+        Route::get("/{$resource}/{resource}/geofences", 'Api\Resource\Geofences\IndexController')
+            ->name("{$resource}.geofences.index");
+        Route::post("/{$resource}/{resource}/geofences/{geofence}/attach", 'Api\Resource\Geofences\AttachController')
+            ->name("{$resource}.geofences.attach");
+        Route::post("/{$resource}/{resource}/geofences/{geofence}/detach", 'Api\Resource\Geofences\DetachController')
+            ->name("{$resource}.geofences.detach");
+    }
+
+    // Resource Comments
+
+    foreach(['pets', 'photos', 'comments', 'alerts', 'groups'] as $resource) {
+        Route::get("/{$resource}/{resource}/comments", 'Api\Resource\Comments\IndexController')
+            ->name("{$resource}.comments.index");
+        Route::post("/{$resource}/{resource}/comments", 'Api\Resource\Comments\StoreController')
+            ->name("{$resource}.comments.store");
+    }
 
     // Device Geofences Accesses
 
@@ -239,18 +218,9 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // User Resources
 
-    Route::get('/users/{user}/devices', 'Api\Users\Devices\IndexController');
+    Route::get('/users/{resource}/devices', 'Api\Resource\Devices\IndexController');
     Route::get('/users/{user}/groups', 'Api\Users\Groups\IndexController');
     Route::get('/users/{user}/pets', 'Api\Users\Pets\IndexController');
-
-    // User Geofences
-
-    Route::get('/users/{resource}/geofences', 'Api\Resource\Geofences\IndexController')
-        ->name('users.geofences.index');
-    Route::post('/users/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
-        ->name('users.geofences.attach');
-    Route::post('/users/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
-        ->name('users.geofences.detach');
 
 
     // User Geofences Accesses
@@ -285,13 +255,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::delete('/photos/{resource}', 'Api\Resource\DestroyController')
         ->name('photos.destroy');
 
-    // Photo Comments routes ...
-
-    Route::get('/photos/{resource}/comments', 'Api\Resource\Comments\IndexController')
-        ->name('photos.comments.index');
-    Route::post('/photos/{resource}/comments', 'Api\Resource\Comments\StoreController')
-        ->name('photos.comments.store');
-
     // Photo Reactions routes ...
 
     Route::get('/photos/{photo}/reactions', 'Api\Photos\Reactions\IndexController');
@@ -304,13 +267,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::put('/comments/{comment}', 'Api\Comments\UpdateController');
     Route::delete('/comments/{resource}', 'Api\Resource\DestroyController')
         ->name('comments.destroy');
-
-    // Comment Comments routes ...
-
-    Route::get('/comments/{resource}/comments', 'Api\Resource\Comments\IndexController')
-        ->name('comments.comments.index');
-    Route::post('/comments/{resource}/comments', 'Api\Resource\Comments\StoreController')
-        ->name('comments.comments.store');
 
     // Comment Reactions routes ...
 
@@ -336,9 +292,4 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::put('/alerts/{alert}', 'Api\Alerts\UpdateController');
     Route::delete('/alerts/{resource}', 'Api\Resource\DestroyController')
         ->name('alerts.destroy');
-
-    Route::get('/alerts/{resource}/comments', 'Api\Resource\Comments\IndexController')
-        ->name('alerts.comments.index');
-    Route::post('/alerts/{resource}/comments', 'Api\Resource\Comments\StoreController')
-        ->name('alerts.comments.store');
 });
