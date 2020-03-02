@@ -52,32 +52,28 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("{$resource}.show");
     }
 
-    Route::get('/users', 'Api\Resource\IndexController')
-        ->name('users.index');
-
-    Route::get('/groups', 'Api\Resource\IndexController')
-        ->name('groups.index');
-
-    Route::get('/geofences', 'Api\Resource\IndexController')
-        ->name('geofences.index');
-
-    Route::get('/pets', 'Api\Resource\IndexController')
-        ->name('pets.index');
-
-    Route::get('/devices', 'Api\Resource\IndexController')
-        ->name('devices.index');
-
-    Route::get('/photos', 'Api\Resource\IndexController')
-        ->name('photos.index');
-
-    Route::get('/actions', 'Api\Resource\IndexController')
-        ->name('actions.index');
-
-    Route::get('/alerts', 'Api\Resource\IndexController')
-        ->name('alerts.index');
+    foreach([
+        'users', 'groups', 'geofences', 'pets', 'devices', 'photos', 'actions', 'alerts'
+            ] as $resource) {
+        Route::get("/{$resource}", 'Api\Resource\IndexController')
+            ->name("{$resource}.index");
+    }
 
     Route::get('/locations', 'Api\Locations\IndexController')
         ->name('locations.index');
+
+
+    // Groups Resources
+
+    foreach (['geofences', 'groups'] as $resource) {
+        Route::get("/{$resource}/{resource}/users", 'Api\Resource\Users\IndexController')
+            ->name("{$resource}.users.index");
+    }
+
+    foreach(['groups', 'users'] as $resource) {
+        Route::get("/{$resource}/{resource}/pets", 'Api\Resource\Pets\IndexController')
+            ->name("{$resource}.pets.index");
+    }
 
     /**
      * Groups routes ...
@@ -85,24 +81,12 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('/groups', 'Api\Groups\StoreController');
     Route::put('/groups/{group}', 'Api\Groups\UpdateController');
 
-
-    // Groups Resources
-
-    Route::get('/groups/{resource}/users', 'Api\Resource\Users\IndexController')
-        ->name('groups.users.index');
-    Route::get('/groups/{group}/pets', 'Api\Groups\Pets\IndexController');
-
     /**
      * Geofences routes ...
      */
     Route::post('/geofences', 'Api\Geofences\StoreController');
     Route::put('/geofences/{geofence}', 'Api\Geofences\UpdateController');
 
-
-    // Geofences Users
-
-    Route::get('/geofences/{resource}/users', 'Api\Resource\Users\IndexController')
-        ->name('geofences.users.index');
 
     // Geofences Groups
     // TODO - Add tests for geofence group attaching and implements routes as resource geofences
@@ -209,9 +193,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('/users/{user}/groups/{group}/block', 'Api\Users\Groups\BlockController');
 
     // User Resources
-
-
-    Route::get('/users/{user}/pets', 'Api\Users\Pets\IndexController');
 
 
     // User Reactions
