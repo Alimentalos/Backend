@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Repositories\LocationRepository;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -36,6 +38,24 @@ class Pet extends Authenticatable implements ReactableContract
         'is_public',
         'location',
     ];
+
+    /**
+     * The default location field of pet.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_FIELD = 'location';
+
+    /**
+     * Search locations.
+     *
+     * @param $accuracy
+     * @return Builder
+     */
+    public function searchLocations($accuracy)
+    {
+        return LocationRepository::searchPetsLocations($this, $accuracy);
+    }
 
     /**
      * The attributes that should be cast to spatial types.

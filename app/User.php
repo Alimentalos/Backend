@@ -3,10 +3,12 @@
 namespace App;
 
 use App\Repositories\AdminRepository;
+use App\Repositories\LocationRepository;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
+use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -52,6 +54,24 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
         'password',
         'remember_token',
     ];
+
+    /**
+     * The default location field of user.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_FIELD = 'location';
+
+    /**
+     * Search locations.
+     *
+     * @param $accuracy
+     * @return Builder
+     */
+    public function searchLocations($accuracy)
+    {
+        return LocationRepository::searchUserLocations($this, $accuracy);
+    }
 
     /**
      * The attributes that should be cast to spatial types.

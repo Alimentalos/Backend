@@ -30,22 +30,9 @@ class LocationRepository
      */
     public static function searchLastLocations($type, $identifiers, $accuracy)
     {
-        switch ($type) {
-            default:
-                return Device::whereIn('uuid', $identifiers)->get()->map(function ($device) use ($accuracy) {
-                    return static::searchDeviceLocations($device, $accuracy);
-                });
-            case 'pets':
-                return Pet::whereIn('uuid', $identifiers)->get()->map(function ($pet) use ($accuracy) {
-                    return static::searchPetsLocations($pet, $accuracy);
-                });
-                break;
-            case 'users':
-                return User::whereIn('uuid', $identifiers)->get()->map(function ($user) use ($accuracy) {
-                    return static::searchUserLocations($user, $accuracy);
-                });
-                break;
-        }
+        return HandleBindingRepository::bindResourceModel($type)->whereIn('uuid', $identifiers)->get()->map(function ($model) use ($accuracy) {
+            return $model->searchLocations($accuracy);
+        });
     }
 
     /**

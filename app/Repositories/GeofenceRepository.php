@@ -14,17 +14,27 @@ use Illuminate\Http\Request;
 
 class GeofenceRepository
 {
+    /**
+     * In status.
+     */
     public const IN_STATUS = 1;
+
+    /**
+     * Still status
+     */
     public const STILL_STATUS = 2;
+
+    /**
+     * Out status
+     */
     public const OUT_STATUS = 3;
 
     /**
      * Create sample polygon.
      *
      * @return array
-     * @codeCoverageIgnore
      */
-    public static function createPolygon()
+    public static function createSamplePolygon()
     {
         return [new LineString([
             new Point(0, 0),
@@ -33,24 +43,6 @@ class GeofenceRepository
             new Point(5, 0),
             new Point(0, 0)
         ])];
-    }
-
-    /**
-     * Testing Geofence.
-     *
-     * @return mixed
-     * @codeCoverageIgnore
-     */
-    public static function checkLocationInGeofence()
-    {
-        //
-        $place1 = new Geofence();
-        $place1->name = "blablabla";
-        $place1->user_id = 1;
-        $place1->shape = new Polygon(static::createPolygon());
-
-        $point = new Point(10, 10);
-        return Geofence::disjoint('shape', $point)->get();
     }
 
     /**

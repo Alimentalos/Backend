@@ -87,15 +87,29 @@ class HandleBindingRepository {
     }
 
     /**
-     * Bind resource instance.
+     * Bind resource model instance.
+     * (Uses prefix 'App')
      *
      * @param $class
      * @param $uuid
      * @return Builder|Model
      */
-    public static function bindResourceInstance($class, $uuid)
+    public static function bindResourceModelInstance($class, $uuid)
     {
         return static::bindResourceModel($class)->where('uuid', $uuid)->firstOrFail();
+    }
+
+    /**
+     * Bind resource instance.
+     * (Doesn't uses 'App' prefix)
+     *
+     * @param $resource
+     * @param $uuid
+     * @return mixed
+     */
+    public static function bindResourceInstance($resource, $uuid)
+    {
+        return static::bindResourceQuery($resource)->where('uuid', $uuid)->firstOrFail();
     }
 
     /**
@@ -115,7 +129,39 @@ class HandleBindingRepository {
      * @return Builder
      */
     public static function bindResourceModel($class) {
-        return resolve('App\\' . Str::camel(Str::singular($class)))->query();
+        return static::bindResourceQuery('App\\' . Str::camel(Str::singular($class)));
+    }
+
+    /**
+     * Bind resource model class.
+     *
+     * @param $class
+     * @return mixed
+     */
+    public static function bindResourceModelClass($class) {
+        return static::bindResource('App\\' . Str::camel(Str::singular($class)));
+    }
+
+    /**
+     * Bind resource.
+     *
+     * @param $resource
+     * @return mixed
+     */
+    public static function bindResource($resource)
+    {
+        return resolve($resource);
+    }
+
+    /**
+     * Bind resource query.
+     *
+     * @param $resource
+     * @return mixed
+     */
+    public static function bindResourceQuery($resource)
+    {
+        return static::bindResource($resource)->query();
     }
 
     /**
@@ -126,18 +172,20 @@ class HandleBindingRepository {
      * @return mixed
      */
     public static function bindNearModel($resource, $coordinates) {
-        switch ($resource) {
-            case 'geofences':
-                return Geofence::orderByDistance('shape', static::makePoint($coordinates),'asc');
-                break;
-            case 'users':
-                return User::orderByDistance('location', static::makePoint($coordinates),'asc');
-                break;
-            default:
-                return Pet::orderByDistance('location', static::makePoint($coordinates),'asc');
-        }
+        $model = static::bindResourceModel($resource);
+        return $model->orderByDistance(
+            static::bindResourceModelClass($resource)::DEFAULT_LOCATION_FIELD,
+            static::makePoint($coordinates),
+            'asc'
+        );
     }
 
+    /**
+     * Transform coordinates into Point object.
+     *
+     * @param $coordinates
+     * @return Point
+     */
     public static function makePoint($coordinates)
     {
         return new Point(

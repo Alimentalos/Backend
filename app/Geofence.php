@@ -29,6 +29,13 @@ class Geofence extends Model implements ReactableContract
     ];
 
     /**
+     * The default location field of geofence.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_FIELD = 'shape';
+
+    /**
      * The spatial fields of the geofence.
      *
      * @var array
