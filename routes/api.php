@@ -85,6 +85,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('/geofences/{geofence}/users', 'Api\Geofences\Users\IndexController');
 
     // Geofences Groups
+    // TODO - Add tests for geofence group attaching and implements routes as resource geofences
     Route::get('/geofences/{resource}/groups', 'Api\Resource\Groups\IndexController')
         ->name('geofences.groups.index');
 
