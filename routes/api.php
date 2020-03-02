@@ -130,7 +130,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Pet Geofences Accesses
 
-    Route::get('/pets/{pet}/geofences/accesses', 'Api\Pets\Geofences\AccessesController');
+    Route::get('/pets/{resource}/geofences/accesses', 'Api\Resource\Geofences\AccessesController')
+        ->name('pets.geofences.accesses');
     Route::get('/pets/{resource}/geofences/{geofence}/accesses', 'Api\Resource\Geofences\Accesses\IndexController')
         ->name('pets.geofences.accesses.index');
 
@@ -184,7 +185,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Device Geofences Accesses
 
-    Route::get('/devices/{device}/geofences/accesses', 'Api\Devices\Geofences\AccessesController');
+    Route::get('/devices/{resource}/geofences/accesses', 'Api\Resource\Geofences\AccessesController')
+        ->name('devices.geofences.accesses');
     Route::get('/devices/{resource}/geofences/{geofence}/accesses', 'Api\Resource\Geofences\Accesses\IndexController')
         ->name('devices.geofences.accesses.index');
 
@@ -229,7 +231,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     Route::get('/users/{resource}/geofences/{geofence}/accesses', 'Api\Resource\Geofences\Accesses\IndexController')
         ->name('users.geofences.accesses.index');
-    Route::get('/users/{user}/geofences/accesses', 'Api\Users\Geofences\AccessesController');
+    Route::get('/users/{resource}/geofences/accesses', 'Api\Resource\Geofences\AccessesController')
+        ->name('users.geofences.accesses');
 
     // User Photos
 

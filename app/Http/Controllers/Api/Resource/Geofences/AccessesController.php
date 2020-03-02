@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Api\Pets\Geofences;
+namespace App\Http\Controllers\Api\Resource\Geofences;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Pets\Geofences\AccessesRequest;
-use App\Pet;
+use App\Http\Requests\Api\Resource\Geofences\AccessesRequest;
 use Illuminate\Http\JsonResponse;
 
 class AccessesController extends Controller
 {
     /**
-     * Fetch all Accesses of a Pet.
+     * Fetch all Accesses of a Device.
      *
      * @param AccessesRequest $request
-     * @param Pet $pet
+     * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(AccessesRequest $request, Pet $pet)
+    public function __invoke(AccessesRequest $request, $resource)
     {
         return response()->json(
-            $pet->accesses()->with([
+            $resource->accesses()->with([
                 'accessible', 'geofence', 'first_location', 'last_location'
             ])->latest()->paginate(20),
             200

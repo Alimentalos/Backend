@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Devices\Geofences;
+namespace App\Http\Requests\Api\Resource\Geofences;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class AccessesRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('device'));
+        return $this->user('api')->can('view', $this->route('resource'));
     }
 
     /**
