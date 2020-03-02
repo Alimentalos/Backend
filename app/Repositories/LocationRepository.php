@@ -2,11 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Device;
 use App\Location;
-use App\Pet;
 use App\PetLocation;
-use App\User;
 use App\UserLocation;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;

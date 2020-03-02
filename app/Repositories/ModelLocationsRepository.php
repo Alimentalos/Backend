@@ -8,7 +8,6 @@ use App\Device;
 use App\Pet;
 use App\User;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 

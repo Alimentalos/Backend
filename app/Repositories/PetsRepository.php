@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Pet;
 use App\Photo;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\Request;
 
 class PetsRepository

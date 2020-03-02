@@ -6,7 +6,6 @@ namespace App\Repositories;
 use App\Alert;
 use App\Photo;
 use Exception;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\Request;
 
 class AlertsRepository
