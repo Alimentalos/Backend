@@ -43,62 +43,9 @@ class LocationRepository
     public static function searchModelLocations($model, $accuracy)
     {
         $class = get_class($model);
-        switch ($class) {
-            case 'App\\User':
-                return static::searchUserLocations($model, $accuracy);
-                break;
-            case 'App\\Device':
-                return static::searchDeviceLocations($model, $accuracy);
-                break;
-            case 'App\\Pet':
-            default:
-                return static::searchPetsLocations($model, $accuracy);
-                break;
-        }
-    }
-
-    /**
-     * Search in user locations
-     *
-     * @param $user
-     * @param $accuracy
-     * @return Builder
-     */
-    public static function searchUserLocations($user, $accuracy)
-    {
         return static::orderByColumn(
-            static::maxAccuracy(static::trackableQuery(collect([$user]), 'App\\User'), $accuracy),
-            'generated_at'
-        )->first();
-    }
-
-    /**
-     * Search in pet locations
-     *
-     * @param $pet
-     * @param $accuracy
-     * @return Builder
-     */
-    public static function searchPetsLocations($pet, $accuracy)
-    {
-        return static::orderByColumn(
-            static::maxAccuracy(static::trackableQuery(collect([$pet]), 'App\\Pet'), $accuracy),
-            'created_at'
-        )->first();
-    }
-
-    /**
-     * Search in device locations
-     *
-     * @param $device
-     * @param $accuracy
-     * @return Builder
-     */
-    public static function searchDeviceLocations($device, $accuracy)
-    {
-        return static::orderByColumn(
-            static::maxAccuracy(static::trackableQuery(collect([$device]), 'App\\Device'), $accuracy),
-            'generated_at'
+            static::maxAccuracy(static::trackableQuery(collect([$model]), $class), $accuracy),
+            $class::DEFAULT_LOCATION_DATE_COLUMN
         )->first();
     }
 
