@@ -78,7 +78,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Groups Geofences
 
-    Route::get('/groups/{group}/geofences', 'Api\Groups\Geofences\IndexController');
+    Route::get('/groups/{resource}/geofences', 'Api\Resource\Geofences\IndexController')
+        ->name('groups.geofences.index');
     Route::post('/groups/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
         ->name('groups.geofences.attach');
     Route::post('/groups/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
@@ -144,7 +145,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Pet Geofences
 
-    Route::get('/pets/{pet}/geofences', 'Api\Pets\Geofences\IndexController');
+    Route::get('/pets/{resource}/geofences', 'Api\Resource\Geofences\IndexController')
+        ->name('pets.geofences.index');
     Route::post('/pets/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
         ->name('pets.geofences.attach');
     Route::post('/pets/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
@@ -193,7 +195,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Device Geofences
 
-    Route::get('/devices/{device}/geofences', 'Api\Devices\Geofences\IndexController');
+    Route::get('/devices/{resource}/geofences', 'Api\Resource\Geofences\IndexController')
+        ->name('devices.geofences.index');
     Route::post('/devices/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
         ->name('devices.geofences.attach');
     Route::post('/devices/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
@@ -242,7 +245,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // User Geofences
 
-    Route::get('/users/{user}/geofences', 'Api\Users\Geofences\IndexController');
+    Route::get('/users/{resource}/geofences', 'Api\Resource\Geofences\IndexController')
+        ->name('users.geofences.index');
     Route::post('/users/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
         ->name('users.geofences.attach');
     Route::post('/users/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
