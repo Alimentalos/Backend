@@ -2,8 +2,10 @@
 
 namespace App;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Request;
 
 class Access extends Model
 {
@@ -79,5 +81,15 @@ class Access extends Model
     public function geofence()
     {
         return $this->belongsTo(Geofence::class);
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     * @codeCoverageIgnore
+     */
+    public static function resolveModels(Request $request)
+    {
+        return self::with('accessible')->latest()->paginate(20);
     }
 }

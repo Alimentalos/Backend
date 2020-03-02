@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
-class Location extends Model
+class Location extends Model implements Resource
 {
     use SpatialTrait;
 
@@ -62,16 +65,6 @@ class Location extends Model
     ];
 
     /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'uuid';
-    }
-
-    /**
      * Get all of the owning trackable models.
      */
     public function trackable()
@@ -88,5 +81,25 @@ class Location extends Model
     public function getEmitterDeviceAttribute()
     {
         return $this->belongsTo(Device::class, 'device_id', 'id');
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['trackable'];
+    }
+
+    /**
+     * @param Request $request
+     * @return Collection
+     * @codeCoverageIgnore
+     */
+    public static function resolveModels(Request $request)
+    {
+        return self::query()->get();
     }
 }

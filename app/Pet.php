@@ -2,18 +2,49 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 
-class Pet extends Authenticatable implements ReactableContract
+class Pet extends Authenticatable implements ReactableContract, Resource
 {
     use SpatialTrait;
     use Reactable;
+
+    /**
+     * The default location field of pet.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_FIELD = 'location';
+
+    /**
+     * The default location date column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_DATE_COLUMN = 'created_at';
+
+    /**
+     * The default location group by column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'id';
+
+    /**
+     * Comma-separated accepted values.
+     *
+     * @var string
+     */
+    public const AVAILABLE_REACTIONS = 'Love,Pray,Like,Dislike,Sad,Hate';
 
     /**
      * Mass-assignable properties.
@@ -36,27 +67,6 @@ class Pet extends Authenticatable implements ReactableContract
         'is_public',
         'location',
     ];
-
-    /**
-     * The default location field of pet.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_FIELD = 'location';
-
-    /**
-     * The default location date column.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_DATE_COLUMN = 'created_at';
-
-    /**
-     * The default location group by column.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'id';
 
     /**
      * The attributes that should be cast to spatial types.
@@ -166,5 +176,24 @@ class Pet extends Authenticatable implements ReactableContract
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['photo', 'user'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public static function resolveModels(Request $request)
+    {
+        return self::with('user', 'photo')->latest()->paginate(20);
     }
 }

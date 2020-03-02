@@ -129,16 +129,14 @@ class DevicesTest extends TestCase
         $group->users()->attach($user->id);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);
         $response->assertJsonStructure([
-            'data' => [
-                'id',
-                'user_id',
-                'uuid',
-                'api_token',
-                'name',
-                'description',
-                'created_at',
-                'updated_at'
-            ]
+            'id',
+            'user_id',
+            'uuid',
+            'api_token',
+            'name',
+            'description',
+            'created_at',
+            'updated_at'
         ]);
         $response->assertOk();
     }

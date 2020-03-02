@@ -2,13 +2,17 @@
 
 namespace App;
 
+use App\Contracts\Resource;
+use App\Repositories\StatusRepository;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Http\Request;
 
-class Alert extends Model
+class Alert extends Model implements Resource
 {
     use SpatialTrait;
 
@@ -103,5 +107,30 @@ class Alert extends Model
     public function photos()
     {
         return $this->morphToMany(Photo::class, 'photoable');
+    }
+
+    /**
+     * Get lazy loaded relationships of Alert.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user', 'photo', 'alert'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public static function resolveModels(Request $request)
+    {
+        return Alert::query()
+            ->with('user', 'photo', 'alert')
+            ->whereIn(
+                'status',
+                $request->has('whereInStatus') ?
+                    explode(',', $request->input('whereInStatus')) : StatusRepository::availableAlertStatuses() // Filter by statuses
+            )->latest('created_at')->paginate(25); // Order by latest
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use App\Repositories\AdminRepository;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
@@ -9,19 +10,49 @@ use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract
+class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource
 {
     use SpatialTrait;
     use Notifiable;
     use Reacterable;
     use Reactable;
+
+    /**
+     * The default location field of user.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_FIELD = 'location';
+
+    /**
+     * The default location date column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_DATE_COLUMN = 'generated_at';
+
+    /**
+     * The default location group by column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
+
+    /**
+     * Comma-separated accepted values.
+     *
+     * @var string
+     */
+    public const AVAILABLE_REACTIONS = 'Follow';
 
     /**
      * The attributes that are mass assignable.
@@ -52,27 +83,6 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
         'password',
         'remember_token',
     ];
-
-    /**
-     * The default location field of user.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_FIELD = 'location';
-
-    /**
-     * The default location date column.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_DATE_COLUMN = 'generated_at';
-
-    /**
-     * The default location group by column.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
 
     /**
      * The attributes that should be cast to spatial types.
@@ -244,5 +254,38 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public function accesses()
     {
         return $this->morphMany(Access::class, 'accessible');
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['photo', 'user'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public static function resolveModels(Request $request)
+    {
+        if (!is_null($request->user('api')->user_id)) {
+            return self::with('photo', 'user')->latest()->where([
+                ['user_id', $request->user('api')->user_id]
+            ])->orWhere([
+                ['id', $request->user('api')->user_id]
+            ])->paginate(20);
+        } elseif ($request->user('api')->is_admin) {
+            return self::with('photo', 'user')->latest()->paginate(20);
+        } else {
+            return self::with('photo', 'user')->latest()->where([
+                ['user_id', $request->user()->id]
+            ])->orWhere([
+                ['id', $request->user('api')->id]
+            ])->paginate(20);
+        }
     }
 }

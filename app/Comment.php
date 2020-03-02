@@ -2,15 +2,26 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Http\Request;
 
-class Comment extends Model implements ReactableContract
+class Comment extends Model implements ReactableContract, Resource
 {
     use Reactable;
+
+
+    /**
+     * Comma-separated accepted values.
+     *
+     * @var string
+     */
+    public const AVAILABLE_REACTIONS = 'Love,Pray,Like,Dislike,Sad,Hate';
 
     /**
      * The mass assignment fields of the comment
@@ -60,5 +71,25 @@ class Comment extends Model implements ReactableContract
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['commentable'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     * @codeCoverageIgnore
+     */
+    public static function resolveModels(Request $request)
+    {
+        return self::with('user')->latest()->paginate(20);
     }
 }

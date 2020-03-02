@@ -2,9 +2,14 @@
 
 namespace App;
 
+use App\Contracts\Resource;
+use App\Repositories\StatusRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Request;
 
-class Action extends Model
+class Action extends Model implements Resource
 {
     /**
      * The attributes that should be cast to native types.
@@ -16,7 +21,7 @@ class Action extends Model
     ];
 
     /**
-     * The mass assignment fields of the comment
+     * The mass assignment fields of the action.
      *
      * @var array
      */
@@ -30,12 +35,40 @@ class Action extends Model
     ];
 
     /**
-     * Get the route key for the model.
+     * Get the related user of action.
      *
-     * @return string
+     * @return BelongsTo
      */
-    public function getRouteKeyName()
+    public function user()
     {
-        return 'uuid';
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get lazy loaded relationships of Action.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public static function resolveModels(Request $request)
+    {
+        if (!$request->user('api')->is_child) {
+            return self::whereIn('user_id', $request->user('api')
+                ->users
+                ->pluck('id')
+                ->push(
+                    $request->user('api')->id
+                )->toArray())->paginate(25);
+        } else {
+            return self::where('user_id', $request->user('api')->id)->paginate(25);
+        }
     }
 }

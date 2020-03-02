@@ -2,18 +2,28 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Http\Request;
 
-class Photo extends Model implements ReactableContract
+class Photo extends Model implements ReactableContract, Resource
 {
     use SpatialTrait;
     use Reactable;
+
+    /**
+     * Comma-separated accepted values.
+     *
+     * @var string
+     */
+    public const AVAILABLE_REACTIONS = 'Love,Pray,Like,Dislike,Sad,Hate';
 
     /**
      * The mass assignment fields of the photo
@@ -144,5 +154,24 @@ class Photo extends Model implements ReactableContract
     public function pets()
     {
         return $this->morphedByMany(Pet::class, 'photoable');
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public static function resolveModels(Request $request)
+    {
+        return self::with('user', 'photoable')->latest()->paginate(20);
     }
 }

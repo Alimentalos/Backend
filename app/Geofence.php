@@ -2,18 +2,35 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\Request;
 
-class Geofence extends Model implements ReactableContract
+class Geofence extends Model implements ReactableContract, Resource
 {
     use SpatialTrait;
     use Reactable;
+
+    /**
+     * The default location field of geofence.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_FIELD = 'shape';
+
+    /**
+     * Comma-separated accepted values.
+     *
+     * @var string
+     */
+    public const AVAILABLE_REACTIONS = 'Follow';
 
     /**
      * The mass assignment fields of the geofence.
@@ -27,13 +44,6 @@ class Geofence extends Model implements ReactableContract
         'photo_url',
         'is_public',
     ];
-
-    /**
-     * The default location field of geofence.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_FIELD = 'shape';
 
     /**
      * The spatial fields of the geofence.
@@ -152,5 +162,30 @@ class Geofence extends Model implements ReactableContract
             'status',
             'sender_id',
         ])->withTimestamps();
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user', 'photo'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public static function resolveModels(Request $request)
+    {
+        return $request->user('api')->is_child ? Geofence::with('user', 'photo')->where(
+            'user_id',
+            $request->user('api')->user_id
+        )->orWhere('is_public', true)->latest()->paginate(20) : Geofence::with('user', 'photo')->where(
+            'user_id',
+            $request->user('api')->id
+        )->orWhere('is_public', true)->latest()->paginate(20);
     }
 }
