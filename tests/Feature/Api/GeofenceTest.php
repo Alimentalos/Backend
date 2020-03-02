@@ -1165,12 +1165,12 @@ class GeofenceTest extends TestCase
             '/api/users/' . $user->uuid . '/geofences/' . $geofence->uuid . '/detach',
             []
         );
+        $response->assertOk();
         $this->assertDeleted('geofenceables', [
             'geofence_id' => $geofence->id,
             'geofenceable_type' => 'App\\User',
             'geofenceable_id' => $user->id,
         ]);
-        $response->assertOk();
     }
 
     /**
@@ -1307,7 +1307,7 @@ class GeofenceTest extends TestCase
         );
 
         $this->assertDatabaseHas('actions', [
-            'resource' => 'App\\Http\\Controllers\\Api\\Groups\\Geofences\\AttachController',
+            'resource' => 'App\\Http\\Controllers\\Api\\Resource\\Geofences\\AttachController',
             'referenced_id' => $group->id,
         ]);
 

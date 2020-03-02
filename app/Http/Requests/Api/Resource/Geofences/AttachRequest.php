@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Groups\Geofences;
+namespace App\Http\Requests\Api\Resource\Geofences;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DetachRequest extends FormRequest
+class AttachRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,8 +13,8 @@ class DetachRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('detachGeofence', [
-            $this->route('group'), $this->route('geofence')
+        return $this->user('api')->can('attachGeofence', [
+            $this->route('resource'), $this->route('geofence')
         ]);
     }
 

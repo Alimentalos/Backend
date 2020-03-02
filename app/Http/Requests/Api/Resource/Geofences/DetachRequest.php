@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Pets\Geofences;
+namespace App\Http\Requests\Api\Resource\Geofences;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,7 +14,7 @@ class DetachRequest extends FormRequest
     public function authorize()
     {
         return $this->user('api')->can('detachGeofence', [
-            $this->route('pet'), $this->route('geofence')
+            $this->route('resource'), $this->route('geofence')
         ]);
     }
 

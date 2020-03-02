@@ -20,6 +20,6 @@ class UniqueNameRepository
         } catch (Exception $exception) {
             // TODO - Uuid exception unhandled
         }
-        // @codeCoverageIgnoreEnd
     }
+    // @codeCoverageIgnoreEnd
 }

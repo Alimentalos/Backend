@@ -79,8 +79,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Groups Geofences
 
     Route::get('/groups/{group}/geofences', 'Api\Groups\Geofences\IndexController');
-    Route::post('/groups/{group}/geofences/{geofence}/attach', 'Api\Groups\Geofences\AttachController');
-    Route::post('/groups/{group}/geofences/{geofence}/detach', 'Api\Groups\Geofences\DetachController');
+    Route::post('/groups/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
+        ->name('groups.geofences.attach');
+    Route::post('/groups/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
+        ->name('groups.geofences.detach');
 
     /**
      * Locations routes ...
@@ -143,8 +145,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Pet Geofences
 
     Route::get('/pets/{pet}/geofences', 'Api\Pets\Geofences\IndexController');
-    Route::post('/pets/{pet}/geofences/{geofence}/attach', 'Api\Pets\Geofences\AttachController');
-    Route::post('/pets/{pet}/geofences/{geofence}/detach', 'Api\Pets\Geofences\DetachController');
+    Route::post('/pets/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
+        ->name('pets.geofences.attach');
+    Route::post('/pets/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
+        ->name('pets.geofences.detach');
 
     // Pet Geofences Accesses
 
@@ -190,8 +194,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Device Geofences
 
     Route::get('/devices/{device}/geofences', 'Api\Devices\Geofences\IndexController');
-    Route::post('/devices/{device}/geofences/{geofence}/attach', 'Api\Devices\Geofences\AttachController');
-    Route::post('/devices/{device}/geofences/{geofence}/detach', 'Api\Devices\Geofences\DetachController');
+    Route::post('/devices/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
+        ->name('devices.geofences.attach');
+    Route::post('/devices/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
+        ->name('devices.geofences.detach');
 
     // Device Geofences Accesses
 
@@ -237,8 +243,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // User Geofences
 
     Route::get('/users/{user}/geofences', 'Api\Users\Geofences\IndexController');
-    Route::post('/users/{user}/geofences/{geofence}/attach', 'Api\Users\Geofences\AttachController');
-    Route::post('/users/{user}/geofences/{geofence}/detach', 'Api\Users\Geofences\DetachController');
+    Route::post('/users/{resource}/geofences/{geofence}/attach', 'Api\Resource\Geofences\AttachController')
+        ->name('users.geofences.attach');
+    Route::post('/users/{resource}/geofences/{geofence}/detach', 'Api\Resource\Geofences\DetachController')
+        ->name('users.geofences.detach');
 
 
     // User Geofences Accesses
