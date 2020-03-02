@@ -6,6 +6,7 @@ use App\Events\GeofenceIn;
 use App\Events\GeofenceOut;
 use App\Geofence;
 use App\Photo;
+use Exception;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
@@ -115,6 +116,7 @@ class GeofenceRepository
      * @param Model $model
      * @param Geofence $geofence
      * @param Model $location
+     * @throws Exception
      */
     public static function createAccess(Model $model, Geofence $geofence, Model $location)
     {
@@ -187,6 +189,7 @@ class GeofenceRepository
      * @param Model $model
      * @param Geofence $geofence
      * @param Model $location
+     * @throws Exception
      */
     public static function checkIntersectedGeofence(Model $model, Geofence $geofence, Model $location)
     {

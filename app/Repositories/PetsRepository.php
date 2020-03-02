@@ -68,7 +68,6 @@ class PetsRepository
      */
     public static function createPetViaRequest(Request $request, Photo $photo)
     {
-        $exploded = explode(',', $request->input('coordinates'));
         $pet = Pet::create([
             'name' => $request->input('name'),
             'photo_url' => config('storage.path') . $photo->photo_url,
@@ -80,10 +79,7 @@ class PetsRepository
             'left_eye_color' => $request->input('left_eye_color'),
             'right_eye_color' => $request->input('right_eye_color'),
             'size' => $request->input('size'),
-            'location' => (new Point(
-                floatval($exploded[0]),
-                floatval($exploded[1])
-            )),
+            'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
             'is_public' => $request->input('is_public')
         ]);
         $photo->pets()->attach($pet->id);

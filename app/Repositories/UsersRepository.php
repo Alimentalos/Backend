@@ -20,7 +20,6 @@ class UsersRepository
      */
     public static function createUserViaRequest(Request $request, Photo $photo)
     {
-        $exploded = explode(',', $request->input('coordinates'));
         $user = User::create([
             'user_id' => $request->user('api')->id,
             'photo_id' => $photo->id,
@@ -29,10 +28,7 @@ class UsersRepository
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),
             'is_public' => $request->input('is_public'),
-            'location' => (new Point(
-                floatval($exploded[0]),
-                floatval($exploded[1])
-            )),
+            'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
         ]);
         $user->photos()->attach($photo->id);
         event(new Registered($user));

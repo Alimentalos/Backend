@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 use App\Alert;
 use App\Photo;
+use Exception;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,6 @@ class AlertsRepository
     {
         $alert_type = $request->input('alert_type');
         $alert = HandleBindingRepository::bindResourceInstance($alert_type, $request->input('alert_id'));
-        $exploded = explode(',', $request->input('coordinates'));
         $alert = Alert::create([
             'name' => $request->input('name'),
             'photo_id' => $photo->id,
@@ -33,10 +33,7 @@ class AlertsRepository
             'body' => $request->input('body'),
             'type' => $request->input('type'),
             'status' => $request->input('status'),
-            'location' => (new Point(
-                floatval($exploded[0]),
-                floatval($exploded[1])
-            )),
+            'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
         ]);
         $photo->alerts()->attach($alert->id);
         return $alert;
@@ -48,6 +45,7 @@ class AlertsRepository
      * @param Request $request
      * @param Alert $alert
      * @return Alert
+     * @throws Exception
      */
     public static function updateAlertViaRequest(Request $request, Alert $alert)
     {

@@ -55,6 +55,7 @@ class AlertsTest extends TestCase
             'body' => $alert->body,
             'type' => $alert->type,
             'status' => $alert->status,
+            'is_public' => true,
             'coordinates' => '5,5',
         ]);
         $response->assertCreated();
@@ -88,6 +89,7 @@ class AlertsTest extends TestCase
             'body' => $alert->body,
             'type' => $alert->type,
             'status' => $alert->status,
+            'is_public' => true,
             'coordinates' => '5,5',
         ]);
         $response->assertCreated();
@@ -121,6 +123,7 @@ class AlertsTest extends TestCase
             'body' => $alert->body,
             'type' => $alert->type,
             'status' => $alert->status,
+            'is_public' => true,
             'coordinates' => '5,5',
         ]);
         $response->assertCreated();
@@ -165,6 +168,7 @@ class AlertsTest extends TestCase
             'body' => $modified->body,
             'type' => $modified->type,
             'status' => $modified->status,
+            'is_public' => true,
             'coordinates' => '5,5',
         ]);
         $response->assertOk();

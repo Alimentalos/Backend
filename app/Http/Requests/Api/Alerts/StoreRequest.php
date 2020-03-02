@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Api\Alerts;
 
 use App\Alert;
-use App\Repositories\HandleBindingRepository;
 use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
 use App\Repositories\TypeRepository;

@@ -41,19 +41,11 @@ class LocationRepository
      * @param $user
      * @param $accuracy
      * @return Builder
-     * @codeCoverageIgnore
      */
     public static function searchUserLocations($user, $accuracy)
     {
         return static::orderLocationsByGeneratedAtDate(
-            static::filterLocationsByAccuracy(
-                static::getUsersLocationsQuery(
-                    collect(
-                        [ $user ]
-                    )
-                ),
-                $accuracy
-            )
+            static::filterLocationsByAccuracy(static::getUsersLocationsQuery(collect([$user])), $accuracy)
         )->first();
     }
 
@@ -63,19 +55,11 @@ class LocationRepository
      * @param $pet
      * @param $accuracy
      * @return Builder
-     * @codeCoverageIgnore
      */
     public static function searchPetsLocations($pet, $accuracy)
     {
         return static::orderLocationsByCreatedAtDate(
-            static::filterLocationsByAccuracy(
-                static::getPetsLocationsQuery(
-                    collect(
-                        [ $pet ]
-                    )
-                ),
-                $accuracy
-            )
+            static::filterLocationsByAccuracy(static::getPetsLocationsQuery(collect([$pet])), $accuracy)
         )->first();
     }
 
@@ -85,19 +69,11 @@ class LocationRepository
      * @param $device
      * @param $accuracy
      * @return Builder
-     * @codeCoverageIgnore
      */
     public static function searchDeviceLocations($device, $accuracy)
     {
         return static::orderLocationsByGeneratedAtDate(
-            static::filterLocationsByAccuracy(
-                static::getDevicesLocationsQuery(
-                    collect(
-                        [ $device ]
-                    )
-                ),
-                $accuracy
-            )
+            static::filterLocationsByAccuracy(static::getDevicesLocationsQuery(collect([$device])), $accuracy)
         )->first();
     }
 
@@ -244,6 +220,21 @@ class LocationRepository
             $data["location"]["coords"]["latitude"],
             $data["location"]["coords"]["longitude"]
         );
+    }
+
+    /**
+     * Parse coordinates comma-separated latitude and longitude to Spatial Point type.
+     *
+     * @param $coordinates
+     * @return Point
+     */
+    public static function parsePointFromCoordinates($coordinates)
+    {
+        $exploded = explode(',', $coordinates);
+        return (new Point(
+            floatval($exploded[0]),
+            floatval($exploded[1])
+        ));
     }
 
     /**
