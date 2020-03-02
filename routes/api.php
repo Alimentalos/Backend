@@ -106,7 +106,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('/geofences/{geofence}/users', 'Api\Geofences\Users\IndexController');
 
     // Geofences Groups
-    Route::get('/geofences/{geofence}/groups', 'Api\Geofences\Groups\IndexController');
+    Route::get('/geofences/{resource}/groups', 'Api\Resource\Groups\IndexController')
+        ->name('geofences.groups.index');
 
     // Geofences Reactions
 
@@ -144,9 +145,12 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Pet Groups
 
-    Route::get('/pets/{pet}/groups', 'Api\Pets\Groups\IndexController');
-    Route::post('/pets/{pet}/groups/{group}/attach', 'Api\Pets\Groups\AttachController');
-    Route::post('/pets/{pet}/groups/{group}/detach', 'Api\Pets\Groups\DetachController');
+    Route::get('/pets/{resource}/groups', 'Api\Resource\Groups\IndexController')
+        ->name('pets.groups.index');
+    Route::post('/pets/{resource}/groups/{group}/attach', 'Api\Resource\Groups\AttachController')
+        ->name('pets.groups.attach');
+    Route::post('/pets/{resource}/groups/{group}/detach', 'Api\Resource\Groups\DetachController')
+        ->name('pets.groups.detach');
 
     // Pet Reactions
 
@@ -192,9 +196,12 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Device Groups
 
-    Route::get('/devices/{device}/groups', 'Api\Devices\Groups\IndexController');
-    Route::post('/devices/{device}/groups/{group}/attach', 'Api\Devices\Groups\AttachController');
-    Route::post('/devices/{device}/groups/{group}/detach', 'Api\Devices\Groups\DetachController');
+    Route::get('/devices/{resource}/groups', 'Api\Resource\Groups\IndexController')
+        ->name('devices.groups.index');
+    Route::post('/devices/{resource}/groups/{group}/attach', 'Api\Resource\Groups\AttachController')
+        ->name('devices.groups.attach');
+    Route::post('/devices/{resource}/groups/{group}/detach', 'Api\Resource\Groups\DetachController')
+        ->name('devices.groups.detach');
 
     /**
      * Users routes ...
@@ -212,8 +219,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // User Groups
 
-    Route::post('/users/{user}/groups/{group}/attach', 'Api\Users\Groups\AttachController');
-    Route::post('/users/{user}/groups/{group}/detach', 'Api\Users\Groups\DetachController');
+    Route::post('/users/{resource}/groups/{group}/attach', 'Api\Resource\Groups\AttachController')
+        ->name('users.groups.attach');
+    Route::post('/users/{resource}/groups/{group}/detach', 'Api\Resource\Groups\DetachController')
+        ->name('users.groups.detach');
     Route::post('/users/{user}/groups/{group}/invite', 'Api\Users\Groups\InviteController');
     Route::post('/users/{user}/groups/{group}/accept', 'Api\Users\Groups\AcceptController');
     Route::post('/users/{user}/groups/{group}/reject', 'Api\Users\Groups\RejectController');
@@ -223,7 +232,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     Route::get('/users/{resource}/devices', 'Api\Resource\Devices\IndexController')
         ->name('users.devices.index');
-    Route::get('/users/{user}/groups', 'Api\Users\Groups\IndexController');
+    Route::get('/users/{resource}/groups', 'Api\Resource\Groups\IndexController')
+        ->name('users.groups.index');
     Route::get('/users/{user}/pets', 'Api\Users\Pets\IndexController');
 
 

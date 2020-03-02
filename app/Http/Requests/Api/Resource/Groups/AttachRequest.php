@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Users\Groups;
+namespace App\Http\Requests\Api\Resource\Groups;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IndexRequest extends FormRequest
+class AttachRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,9 @@ class IndexRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('user'));
+        return $this->user('api')->can('attachGroup', [
+            $this->route('resource'), $this->route('group')
+        ]);
     }
 
     /**

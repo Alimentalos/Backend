@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Devices\Groups;
+namespace App\Http\Requests\Api\Resource\Groups;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,7 +14,7 @@ class DetachRequest extends FormRequest
     public function authorize()
     {
         return $this->user('api')->can('detachGroup', [
-            $this->route('device'), $this->route('group')
+            $this->route('resource'), $this->route('group')
         ]);
     }
 

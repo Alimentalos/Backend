@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Api\Users\Groups;
+namespace App\Http\Controllers\Api\Resource\Groups;
 
 use App\Group;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Users\Groups\AttachRequest;
-use App\User;
+use App\Http\Requests\Api\Resource\Groups\AttachRequest;
 use Illuminate\Http\JsonResponse;
 
 class AttachController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Attach resource in Group.
      *
      * @param AttachRequest $request
-     * @param User $user
+     * @param $resource
      * @param Group $group
      * @return JsonResponse
      */
-    public function __invoke(AttachRequest $request, User $user, Group $group)
+    public function __invoke(AttachRequest $request, $resource, Group $group)
     {
-        $user->groups()->attach($group->id, [
+        $resource->groups()->attach($group->id, [
             'status' => Group::ATTACHED_STATUS,
             'is_admin' => $request->has('is_admin') ? $request->input('is_admin') : false,
         ]);

@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Api\Pets\Groups;
+namespace App\Http\Controllers\Api\Resource\Groups;
 
 use App\Group;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Pets\Groups\DetachRequest;
-use App\Pet;
+use App\Http\Requests\Api\Resource\Groups\DetachRequest;
 use Illuminate\Http\JsonResponse;
 
 class DetachController extends Controller
 {
     /**
-     * Detach Pet of Group.
+     * Detach resource of Group.
      *
      * @param DetachRequest $request
-     * @param Pet $pet
+     * @param $resource
      * @param Group $group
      * @return JsonResponse
      */
-    public function __invoke(DetachRequest $request, Pet $pet, Group $group)
+    public function __invoke(DetachRequest $request, $resource, Group $group)
     {
-        $pet->groups()->detach($group->id);
+        $resource->groups()->detach($group->id);
         return response()->json([], 200);
     }
 }
