@@ -16,8 +16,10 @@ class UniqueNameRepository
     {
         try {
             return (string) Uuid::uuid4();
+            // @codeCoverageIgnoreStart
         } catch (Exception $exception) {
-            // Uuid exception unhandled
+            // TODO - Uuid exception unhandled
         }
+        // @codeCoverageIgnoreEnd
     }
 }

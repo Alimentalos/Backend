@@ -52,7 +52,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('/groups', 'Api\Groups\StoreController');
     Route::get('/groups/{group}', 'Api\Groups\ShowController');
     Route::put('/groups/{group}', 'Api\Groups\UpdateController');
-    Route::delete('/groups/{group}', 'Api\Groups\DestroyController');
+    Route::delete('/groups/{resource}', 'Api\Resource\DestroyController')
+        ->name('groups.destroy');
 
 
     // Groups Resources
@@ -92,7 +93,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      */
     Route::get('/actions', 'Api\Actions\IndexController');
     Route::get('/actions/{action}', 'Api\Actions\ShowController');
-    Route::delete('/actions/{action}', 'Api\Actions\DestroyController');
+    Route::delete('/actions/{resource}', 'Api\Resource\DestroyController')
+        ->name('actions.destroy');
 
     /**
      * Geofences routes ...
@@ -101,7 +103,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('/geofences', 'Api\Geofences\StoreController');
     Route::get('/geofences/{geofence}', 'Api\Geofences\ShowController');
     Route::put('/geofences/{geofence}', 'Api\Geofences\UpdateController');
-    Route::delete('/geofences/{geofence}', 'Api\Geofences\DestroyController');
+    Route::delete('/geofences/{resource}', 'Api\Resource\DestroyController')
+        ->name('geofences.destroy');
 
     // Geofence Photos
 
@@ -134,7 +137,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('/pets', 'Api\Pets\StoreController');
     Route::get('/pets/{pet}', 'Api\Pets\ShowController');
     Route::put('/pets/{pet}', 'Api\Pets\UpdateController');
-    Route::delete('/pets/{pet}', 'Api\Pets\DestroyController');
+    Route::delete('/pets/{resource}', 'Api\Resource\DestroyController')
+        ->name('pets.destroy');
 
     // Pet Geofences
 
@@ -180,7 +184,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('/devices', 'Api\Devices\StoreController');
     Route::get('/devices/{device}', 'Api\Devices\ShowController');
     Route::put('/devices/{device}', 'Api\Devices\UpdateController');
-    Route::delete('/devices/{device}', 'Api\Devices\DestroyController');
+    Route::delete('/devices/{resource}', 'Api\Resource\DestroyController')
+        ->name('devices.destroy');
 
     // Device Geofences
 
@@ -211,7 +216,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('/users', 'Api\Users\StoreController');
     Route::get('/users/{user}', 'Api\Users\ShowController');
     Route::put('/users/{user}', 'Api\Users\UpdateController');
-    Route::delete('/users/{user}', 'Api\Users\DestroyController');
+    Route::delete('/users/{resource}', 'Api\Resource\DestroyController')
+        ->name('users.destroy');
 
     // User Groups
 
@@ -264,7 +270,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('/photos', 'Api\Photos\IndexController');
     Route::get('/photos/{photo}', 'Api\Photos\ShowController');
     Route::put('/photos/{photo}', 'Api\Photos\UpdateController');
-    Route::delete('/photos/{photo}', 'Api\Photos\DestroyController');
+    Route::delete('/photos/{resource}', 'Api\Resource\DestroyController')
+        ->name('photos.destroy');
 
     // Photo Comments routes ...
 
@@ -283,7 +290,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      */
     Route::get('/comments/{comment}', 'Api\Comments\ShowController');
     Route::put('/comments/{comment}', 'Api\Comments\UpdateController');
-    Route::delete('/comments/{comment}', 'Api\Comments\DestroyController');
+    Route::delete('/comments/{resource}', 'Api\Resource\DestroyController')
+        ->name('comments.destroy');
 
     // Comment Comments routes ...
 
@@ -314,7 +322,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('/alerts', 'Api\Alerts\StoreController');
     Route::get('/alerts/{alert}', 'Api\Alerts\ShowController');
     Route::put('/alerts/{alert}', 'Api\Alerts\UpdateController');
-    Route::delete('/alerts/{alert}', 'Api\Alerts\DestroyController');
+    Route::delete('/alerts/{resource}', 'Api\Resource\DestroyController')
+        ->name('alerts.destroy');
 
     Route::get('/alerts/{resource}/comments', 'Api\Resource\Comments\IndexController')
         ->name('alerts.comments.index');
