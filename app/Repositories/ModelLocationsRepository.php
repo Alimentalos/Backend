@@ -96,53 +96,8 @@ class ModelLocationsRepository
      */
     public static function filterLocations($models, $parameters)
     {
-        switch ($parameters['type']) {
-            case 'users':
-                return static::resolveUserLocations($models, $parameters);
-                break;
-            case 'pets':
-                return static::resolvePetLocations($models, $parameters);
-                break;
-            default:
-                return static::resolveDeviceLocations($models, $parameters);
-                break;
-        }
-    }
-
-    /**
-     * Resolve device locations.
-     *
-     * @param $models
-     * @param $parameters
-     * @return Builder
-     */
-    public static function resolveDeviceLocations($models, $parameters)
-    {
-        return static::resolveLocations($models, $parameters, 'App\\Device', 'generated_at', 'uuid');
-    }
-
-    /**
-     * Resolve pet locations.
-     *
-     * @param $models
-     * @param $parameters
-     * @return Builder
-     */
-    public static function resolvePetLocations($models, $parameters)
-    {
-        return static::resolveLocations($models, $parameters, 'App\\Pet', 'created_at', 'id');
-    }
-
-    /**
-     * Resolve user locations.
-     *
-     * @param $models
-     * @param $parameters
-     * @return Builder
-     */
-    public static function resolveUserLocations($models, $parameters)
-    {
-        return static::resolveLocations($models, $parameters, 'App\\User', 'generated_at', 'uuid');
+        $class = HandleBindingRepository::bindResourceModelClass($parameters['type']);
+        return static::resolveLocations($models, $parameters, get_class($class), $class::DEFAULT_LOCATION_DATE_COLUMN, $class::DEFAULT_LOCATION_GROUP_BY_COLUMN);
     }
 
     /**

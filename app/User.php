@@ -63,6 +63,20 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public const DEFAULT_LOCATION_FIELD = 'location';
 
     /**
+     * The default location date column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_DATE_COLUMN = 'generated_at';
+
+    /**
+     * The default location group by column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
+
+    /**
      * The attributes that should be cast to spatial types.
      *
      * @var array

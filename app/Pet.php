@@ -47,6 +47,20 @@ class Pet extends Authenticatable implements ReactableContract
     public const DEFAULT_LOCATION_FIELD = 'location';
 
     /**
+     * The default location date column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_DATE_COLUMN = 'created_at';
+
+    /**
+     * The default location group by column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'id';
+
+    /**
      * The attributes that should be cast to spatial types.
      *
      * @var array
