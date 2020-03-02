@@ -69,6 +69,7 @@ class GeofenceRepository
      * @param Request $request
      * @param Photo $photo
      * @return Geofence
+     * @throws Exception
      */
     public static function createGeofenceViaRequest(Request $request, Photo $photo)
     {
@@ -94,6 +95,7 @@ class GeofenceRepository
      * @param Model $model
      * @param Model $location
      * @return mixed
+     * @throws Exception
      */
     public static function checkLocationUsingModelGeofences(Model $model, Model $location)
     {
