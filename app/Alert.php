@@ -2,13 +2,14 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class Alert extends Model
+class Alert extends Model implements Resource
 {
     use SpatialTrait;
 
@@ -103,5 +104,15 @@ class Alert extends Model
     public function photos()
     {
         return $this->morphToMany(Photo::class, 'photoable');
+    }
+
+    /**
+     * Get lazy loaded relationships of Alert.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user', 'photo', 'alert'];
     }
 }

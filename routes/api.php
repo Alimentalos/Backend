@@ -45,12 +45,18 @@ Route::middleware(['api'])->group(function () {
  */
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
+    foreach([
+        'groups', 'locations', 'actions', 'geofences', 'pets', 'devices', 'users', 'photos', 'comments', 'alerts'
+            ] as $resource) {
+        Route::get("/{$resource}/{resource}", 'Api\Resource\ShowController')
+            ->name("{$resource}.show");
+    }
+
     /**
      * Groups routes ...
      */
     Route::get('/groups', 'Api\Groups\IndexController');
     Route::post('/groups', 'Api\Groups\StoreController');
-    Route::get('/groups/{group}', 'Api\Groups\ShowController');
     Route::put('/groups/{group}', 'Api\Groups\UpdateController');
 
 
@@ -63,20 +69,17 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Locations routes ...
      */
     Route::get('/locations', 'Api\Locations\IndexController');
-    Route::get('/locations/{location}', 'Api\Locations\ShowController');
 
     /**
      * Actions routes ...
      */
     Route::get('/actions', 'Api\Actions\IndexController');
-    Route::get('/actions/{action}', 'Api\Actions\ShowController');
 
     /**
      * Geofences routes ...
      */
     Route::get('/geofences', 'Api\Geofences\IndexController');
     Route::post('/geofences', 'Api\Geofences\StoreController');
-    Route::get('/geofences/{geofence}', 'Api\Geofences\ShowController');
     Route::put('/geofences/{geofence}', 'Api\Geofences\UpdateController');
 
 
@@ -104,7 +107,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      */
     Route::get('/pets', 'Api\Pets\IndexController');
     Route::post('/pets', 'Api\Pets\StoreController');
-    Route::get('/pets/{pet}', 'Api\Pets\ShowController');
     Route::put('/pets/{pet}', 'Api\Pets\UpdateController');
 
     // Pet Reactions
@@ -117,7 +119,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      */
     Route::get('/devices', 'Api\Devices\IndexController');
     Route::post('/devices', 'Api\Devices\StoreController');
-    Route::get('/devices/{device}', 'Api\Devices\ShowController');
     Route::put('/devices/{device}', 'Api\Devices\UpdateController');
 
     // Resource Devices
@@ -185,7 +186,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     Route::get('/users', 'Api\Users\IndexController');
     Route::post('/users', 'Api\Users\StoreController');
-    Route::get('/users/{user}', 'Api\Users\ShowController');
     Route::put('/users/{user}', 'Api\Users\UpdateController');
 
     // User Groups
@@ -215,7 +215,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Photos routes
      */
     Route::get('/photos', 'Api\Photos\IndexController');
-    Route::get('/photos/{photo}', 'Api\Photos\ShowController');
     Route::put('/photos/{photo}', 'Api\Photos\UpdateController');
 
     // Resource delete routes ...
@@ -232,7 +231,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /**
      * Comments routes
      */
-    Route::get('/comments/{comment}', 'Api\Comments\ShowController');
     Route::put('/comments/{comment}', 'Api\Comments\UpdateController');
 
     // Comment Reactions routes ...
@@ -255,6 +253,5 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      */
     Route::get('/alerts', 'Api\Alerts\IndexController');
     Route::post('/alerts', 'Api\Alerts\StoreController');
-    Route::get('/alerts/{alert}', 'Api\Alerts\ShowController');
     Route::put('/alerts/{alert}', 'Api\Alerts\UpdateController');
 });

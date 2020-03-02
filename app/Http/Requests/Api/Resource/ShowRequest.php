@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Users;
+namespace App\Http\Requests\Api\Resource;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class ShowRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('user'));
+        return $this->user('api')->can('view', $this->route('resource'));
     }
 
     /**

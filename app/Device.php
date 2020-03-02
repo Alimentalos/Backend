@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -15,7 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @author Ian Torres
  * @license MIT
  */
-class Device extends Authenticatable
+class Device extends Authenticatable implements Resource
 {
     use SpatialTrait;
 
@@ -133,5 +134,15 @@ class Device extends Authenticatable
     public function accesses()
     {
         return $this->morphMany(Access::class, 'accessible');
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user'];
     }
 }

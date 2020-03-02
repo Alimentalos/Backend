@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Group extends Model
+class Group extends Model implements Resource
 {
     /**
      * Pending status
@@ -180,5 +181,15 @@ class Group extends Model
             'status',
             'sender_id'
         ]);
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['photo', 'user'];
     }
 }

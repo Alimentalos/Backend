@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Geofence extends Model implements ReactableContract
+class Geofence extends Model implements ReactableContract, Resource
 {
     use SpatialTrait;
     use Reactable;
@@ -152,5 +153,15 @@ class Geofence extends Model implements ReactableContract
             'status',
             'sender_id',
         ])->withTimestamps();
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user', 'photo'];
     }
 }

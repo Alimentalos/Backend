@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use App\Repositories\AdminRepository;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract
+class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource
 {
     use SpatialTrait;
     use Notifiable;
@@ -244,5 +245,15 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public function accesses()
     {
         return $this->morphMany(Access::class, 'accessible');
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['photo', 'user'];
     }
 }

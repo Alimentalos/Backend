@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Action extends Model
+class Action extends Model implements Resource
 {
     /**
      * The attributes that should be cast to native types.
@@ -16,7 +18,7 @@ class Action extends Model
     ];
 
     /**
-     * The mass assignment fields of the comment
+     * The mass assignment fields of the action.
      *
      * @var array
      */
@@ -30,12 +32,22 @@ class Action extends Model
     ];
 
     /**
-     * Get the route key for the model.
+     * Get the related user of action.
      *
-     * @return string
+     * @return BelongsTo
      */
-    public function getRouteKeyName()
+    public function user()
     {
-        return 'uuid';
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get lazy loaded relationships of Action.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user'];
     }
 }

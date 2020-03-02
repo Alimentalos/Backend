@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\Locations;
+namespace App\Http\Controllers\Api\Resource;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Locations\ShowRequest;
-use App\Location;
+use App\Http\Requests\Api\Resource\ShowRequest;
 use Illuminate\Http\JsonResponse;
 
 class ShowController extends Controller
@@ -13,14 +12,14 @@ class ShowController extends Controller
      * Handle the incoming request.
      *
      * @param ShowRequest $request
-     * @param Location $location
+     * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(ShowRequest $request, Location $location)
+    public function __invoke(ShowRequest $request, $resource)
     {
-        $location->load('trackable');
+        $resource->load($resource->lazy_relationships);
         return response()->json(
-            $location,
+            $resource,
             200
         );
     }

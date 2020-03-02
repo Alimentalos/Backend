@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Contracts\Resource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class Photo extends Model implements ReactableContract
+class Photo extends Model implements ReactableContract, Resource
 {
     use SpatialTrait;
     use Reactable;
@@ -144,5 +145,15 @@ class Photo extends Model implements ReactableContract
     public function pets()
     {
         return $this->morphedByMany(Pet::class, 'photoable');
+    }
+
+    /**
+     * Get lazy loaded relationships of Geofence.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user'];
     }
 }
