@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Repositories\DevicesRepository;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -15,6 +14,14 @@ use Illuminate\Http\Request;
 class Comment extends Model implements ReactableContract, Resource
 {
     use Reactable;
+
+
+    /**
+     * Comma-separated accepted values.
+     *
+     * @var string
+     */
+    public const AVAILABLE_REACTIONS = 'Love,Pray,Like,Dislike,Sad,Hate';
 
     /**
      * The mass assignment fields of the comment

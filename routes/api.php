@@ -93,11 +93,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('/geofences/{resource}/groups', 'Api\Resource\Groups\IndexController')
         ->name('geofences.groups.index');
 
-    // Geofences Reactions
-
-    Route::get('/geofences/{geofence}/reactions', 'Api\Geofences\Reactions\IndexController');
-    Route::post('/geofences/{geofence}/reactions', 'Api\Geofences\Reactions\StoreController');
-
     // Geofences Accesses
     Route::get('/geofences/{geofence}/devices/accesses', 'Api\Geofences\Devices\AccessesController');
     Route::get('/geofences/{geofence}/users/accesses', 'Api\Geofences\Users\AccessesController');
@@ -108,11 +103,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      */
     Route::post('/pets', 'Api\Pets\StoreController');
     Route::put('/pets/{pet}', 'Api\Pets\UpdateController');
-
-    // Pet Reactions
-
-    Route::get('/pets/{pet}/reactions', 'Api\Pets\Reactions\IndexController');
-    Route::post('/pets/{pet}/reactions', 'Api\Pets\Reactions\StoreController');
 
     /**
      * Devices routes ...
@@ -192,13 +182,14 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::post('/users/{user}/groups/{group}/reject', 'Api\Users\Groups\RejectController');
     Route::post('/users/{user}/groups/{group}/block', 'Api\Users\Groups\BlockController');
 
-    // User Resources
+    // Resource Reactions
 
-
-    // User Reactions
-
-    Route::get('/users/{user}/reactions', 'Api\Users\Reactions\IndexController');
-    Route::post('/users/{user}/reactions', 'Api\Users\Reactions\StoreController');
+    foreach (['geofences', 'pets', 'users', 'photos', 'comments'] as $resource) {
+        Route::get("/{$resource}/{resource}/reactions", 'Api\Resource\Reactions\IndexController')
+            ->name("{$resource}.reactions.index");
+        Route::post("/{$resource}/{resource}/reactions", 'Api\Resource\Reactions\StoreController')
+            ->name("{$resource}.reactions.store");
+    }
 
     /**
      * Reports routes ...
@@ -216,20 +207,11 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("{$resource}.destroy");
     }
 
-    // Photo Reactions routes ...
-
-    Route::get('/photos/{photo}/reactions', 'Api\Photos\Reactions\IndexController');
-    Route::post('/photos/{photo}/reactions', 'Api\Photos\Reactions\StoreController');
 
     /**
      * Comments routes
      */
     Route::put('/comments/{comment}', 'Api\Comments\UpdateController');
-
-    // Comment Reactions routes ...
-
-    Route::get('/comments/{comment}/reactions', 'Api\Comments\Reactions\IndexController');
-    Route::post('/comments/{comment}/reactions', 'Api\Comments\Reactions\StoreController');
 
     /**
      * Find route ...

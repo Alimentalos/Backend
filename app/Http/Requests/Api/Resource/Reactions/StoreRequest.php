@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Api\Users\Reactions;
+namespace App\Http\Requests\Api\Resource\Reactions;
 
+use App\Repositories\HandleBindingRepository;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('user'));
+        return $this->user('api')->can('view', $this->route('resource'));
     }
 
     /**
@@ -23,8 +24,9 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
+        $options = HandleBindingRepository::bindResource(get_class($this->route('resource')))::AVAILABLE_REACTIONS;
         return [
-            'type' => 'required|in:Follow'
+            'type' => 'required|in:' . $options
         ];
     }
 }

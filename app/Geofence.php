@@ -19,6 +19,20 @@ class Geofence extends Model implements ReactableContract, Resource
     use Reactable;
 
     /**
+     * The default location field of geofence.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_FIELD = 'shape';
+
+    /**
+     * Comma-separated accepted values.
+     *
+     * @var string
+     */
+    public const AVAILABLE_REACTIONS = 'Follow';
+
+    /**
      * The mass assignment fields of the geofence.
      *
      * @var array
@@ -30,13 +44,6 @@ class Geofence extends Model implements ReactableContract, Resource
         'photo_url',
         'is_public',
     ];
-
-    /**
-     * The default location field of geofence.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_FIELD = 'shape';
 
     /**
      * The spatial fields of the geofence.

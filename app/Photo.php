@@ -19,6 +19,13 @@ class Photo extends Model implements ReactableContract, Resource
     use Reactable;
 
     /**
+     * Comma-separated accepted values.
+     *
+     * @var string
+     */
+    public const AVAILABLE_REACTIONS = 'Love,Pray,Like,Dislike,Sad,Hate';
+
+    /**
      * The mass assignment fields of the photo
      *
      * @var array
