@@ -17,7 +17,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        // TODO - Remove unnecessary complexity
         if (!$request->user('api')->is_child) {
             return response()->json(
                 Action::whereIn('user_id', $request->user('api')

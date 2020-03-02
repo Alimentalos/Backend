@@ -3,8 +3,7 @@
 namespace App\Observers;
 
 use App\Comment;
-use Exception;
-use Webpatser\Uuid\Uuid;
+use App\Repositories\UniqueNameRepository;
 
 class CommentObserver
 {
@@ -13,10 +12,9 @@ class CommentObserver
      *
      * @param Comment $comment
      * @return void
-     * @throws Exception
      */
     public function creating(Comment $comment)
     {
-        $comment->uuid = Uuid::generate()->string;
+        $comment->uuid = UniqueNameRepository::createIdentifier();
     }
 }

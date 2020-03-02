@@ -2,19 +2,24 @@
 
 namespace App\Repositories;
 
-use App\Location;
-use App\PetLocation;
-use App\UserLocation;
-use Carbon\Carbon;
+use App\Parsers\LocationParser;
+use App\Queries\LocationQuery;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Support\Collection;
 
 class LocationRepository
 {
+    use LocationQuery;
+    use LocationParser;
+
+    /**
+     * Longitude position.
+     */
     public const LATITUDE = 0;
 
-
+    /**
+     * Latitude position.
+     */
     public const LONGITUDE = 1;
 
     /**
@@ -28,169 +33,24 @@ class LocationRepository
     public static function searchLastLocations($type, $identifiers, $accuracy)
     {
         return HandleBindingRepository::bindResourceModel($type)->whereIn('uuid', $identifiers)->get()->map(function ($model) use ($accuracy) {
-            return $model->searchLocations($accuracy);
+            return static::searchModelLocations($model, $accuracy);
         });
     }
 
     /**
-     * Search in user locations
+     * Search model locations.
      *
-     * @param $user
+     * @param $model
      * @param $accuracy
      * @return Builder
      */
-    public static function searchUserLocations($user, $accuracy)
+    public static function searchModelLocations($model, $accuracy)
     {
-        return static::orderLocationsByGeneratedAtDate(
-            static::filterLocationsByAccuracy(static::getUsersLocationsQuery(collect([$user])), $accuracy)
+        $class = get_class($model);
+        return static::orderByColumn(
+            static::maxAccuracy(static::trackableQuery(collect([$model]), $class), $accuracy),
+            $class::DEFAULT_LOCATION_DATE_COLUMN
         )->first();
-    }
-
-    /**
-     * Search in pet locations
-     *
-     * @param $pet
-     * @param $accuracy
-     * @return Builder
-     */
-    public static function searchPetsLocations($pet, $accuracy)
-    {
-        return static::orderLocationsByCreatedAtDate(
-            static::filterLocationsByAccuracy(static::getPetsLocationsQuery(collect([$pet])), $accuracy)
-        )->first();
-    }
-
-    /**
-     * Search in device locations
-     *
-     * @param $device
-     * @param $accuracy
-     * @return Builder
-     */
-    public static function searchDeviceLocations($device, $accuracy)
-    {
-        return static::orderLocationsByGeneratedAtDate(
-            static::filterLocationsByAccuracy(static::getDevicesLocationsQuery(collect([$device])), $accuracy)
-        )->first();
-    }
-
-    /**
-     * Group locations query by uuid
-     *
-     * @param $locations
-     * @return Builder
-     */
-    public static function groupLocationsByUuid(Builder $locations)
-    {
-        return $locations->groupBy('uuid');
-    }
-
-    /**
-     * Order locations query by generated at using descendant direction
-     *
-     * @param $locations
-     * @return Builder
-     */
-    public static function orderLocationsByGeneratedAtDate(Builder $locations)
-    {
-        return $locations->orderBy('generated_at', 'desc');
-    }
-
-    /**
-     * Order locations query by created at using descendant direction
-     *
-     * @param $locations
-     * @return Builder
-     */
-    public static function orderLocationsByCreatedAtDate(Builder $locations)
-    {
-        return $locations->orderBy('created_at', 'desc');
-    }
-
-    /**
-     * Get devices locations query
-     *
-     * @param $devices
-     * @return Builder
-     */
-    public static function getDevicesLocationsQuery(Collection $devices)
-    {
-        return Location::whereIn(
-            'trackable_id',
-            array_column($devices->toArray(), 'id')
-        )->where('trackable_type', 'App\\Device');
-    }
-
-    /**
-     * Get users locations query
-     *
-     * @param Collection $users
-     * @return Builder
-     */
-    public static function getUsersLocationsQuery(Collection $users)
-    {
-        return Location::whereIn(
-            'trackable_id',
-            array_column($users->toArray(), 'id')
-        )->where('trackable_type', 'App\\User');
-    }
-
-    /**
-     * Get pets locations query
-     *
-     * @param Collection $pets
-     * @return Builder
-     */
-    public static function getPetsLocationsQuery(Collection $pets)
-    {
-        return Location::whereIn(
-            'trackable_id',
-            array_column($pets->toArray(), 'id')
-        )->where('trackable_type', 'App\\Pet');
-    }
-
-    /**
-     * Filter location query using a range of dates
-     *
-     * @param $locations
-     * @param $start_date
-     * @param $end_date
-     * @return Builder
-     */
-    public static function filterLocationsUsingRangeOfDates(Builder $locations, $start_date, $end_date)
-    {
-        return $locations->whereBetween('generated_at', [
-            Carbon::parse($start_date),
-            Carbon::parse($end_date)
-        ])->orderBy('generated_at', 'desc');
-    }
-
-    /**
-     * Filter location query using a range of dates
-     *
-     * @param $locations
-     * @param $start_date
-     * @param $end_date
-     * @return Builder
-     */
-    public static function filterLocationsUsingCreatedAtRangeOfDates(Builder $locations, $start_date, $end_date)
-    {
-        return $locations->whereBetween('created_at', [
-            Carbon::parse($start_date),
-            Carbon::parse($end_date)
-        ])->orderBy('created_at', 'desc');
-    }
-
-    /**
-     * Filter location query using accuracy parameter
-     *
-     * @param $locations
-     * @param $accuracy
-     * @return Builder
-     */
-    public static function filterLocationsByAccuracy(Builder $locations, $accuracy)
-    {
-        return $locations->where('accuracy', '<=', $accuracy);
     }
 
     /**
@@ -203,57 +63,5 @@ class LocationRepository
     public static function searchLocations($devices, $parameters)
     {
         return ModelLocationsRepository::filterLocations($devices, $parameters)->get();
-    }
-
-    /**
-     * Parse data latitude and longitude to Spatial Point type
-     *
-     * @param $data
-     * @return Point
-     */
-    public static function parsePoint($data)
-    {
-        return new Point(
-            $data["location"]["coords"]["latitude"],
-            $data["location"]["coords"]["longitude"]
-        );
-    }
-
-    /**
-     * Parse coordinates comma-separated latitude and longitude to Spatial Point type.
-     *
-     * @param $coordinates
-     * @return Point
-     */
-    public static function parsePointFromCoordinates($coordinates)
-    {
-        $exploded = explode(',', $coordinates);
-        return (new Point(
-            floatval($exploded[0]),
-            floatval($exploded[1])
-        ));
-    }
-
-    /**
-     * Parse data timestamp adding the timezone offset
-     *
-     * @param $data
-     * @return Carbon
-     */
-    public static function parseTimestamp($data)
-    {
-        return Carbon::parse($data["location"]["timestamp"])
-            ->subHours(3);
-    }
-
-    /**
-     * Parse data event type
-     *
-     * @param $data
-     * @return string|null
-     */
-    public static function parseEvent($data)
-    {
-        return array_key_exists("event", $data["location"]) ? $data["location"]["event"] : 'default';
     }
 }

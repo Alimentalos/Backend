@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Device;
 use App\Pet;
+use App\Queries\LocationQuery;
 use App\User;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,8 @@ use Illuminate\Http\Request;
 
 class ModelLocationsRepository
 {
+    use LocationQuery;
+
     /**
      * Update current model location.
      *
@@ -96,87 +99,33 @@ class ModelLocationsRepository
      */
     public static function filterLocations($models, $parameters)
     {
-        switch ($parameters['type']) {
-            case 'users':
-                return static::resolveUserLocations($models, $parameters);
-                break;
-            case 'pets':
-                return static::resolvePetLocations($models, $parameters);
-                break;
-            default:
-                return static::resolveDeviceLocations($models, $parameters);
-                break;
-        }
+        $class = HandleBindingRepository::bindResourceModelClass($parameters['type']);
+        return static::resolveLocations($models, $parameters, get_class($class), $class::DEFAULT_LOCATION_DATE_COLUMN, $class::DEFAULT_LOCATION_GROUP_BY_COLUMN);
     }
 
     /**
-     * Resolve device locations.
+     * Resolve model locations.
      *
      * @param $models
      * @param $parameters
+     * @param $type
+     * @param $dateColumn
+     * @param $groupedBy
      * @return Builder
      */
-    public static function resolveDeviceLocations($models, $parameters)
+    public static function resolveLocations($models, $parameters, $type, $dateColumn, $groupedBy)
     {
-        return LocationRepository::groupLocationsByUuid(
-            LocationRepository::orderLocationsByGeneratedAtDate(
-                LocationRepository::filterLocationsUsingRangeOfDates(
-                    LocationRepository::filterLocationsByAccuracy(
-                        LocationRepository::getDevicesLocationsQuery($models),
-                        $parameters['accuracy']
-                    ),
+        return static::groupByColumn(
+            static::orderByColumn(
+                static::queryRangeOfDates(
+                    static::maxAccuracy(static::trackableQuery($models, $type), $parameters['accuracy']),
                     $parameters['start_date'],
-                    $parameters['end_date']
-                )
-            )
-        );
-    }
-
-    /**
-     * Resolve pet locations.
-     *
-     * @param $models
-     * @param $parameters
-     * @return Builder
-     */
-    public static function resolvePetLocations($models, $parameters)
-    {
-        return LocationRepository::orderLocationsByCreatedAtDate(
-            LocationRepository::filterLocationsUsingCreatedAtRangeOfDates(
-                LocationRepository::filterLocationsByAccuracy(
-                    LocationRepository::getPetsLocationsQuery(
-                        $models
-                    ),
-                    $parameters['accuracy']
+                    $parameters['end_date'],
+                    $dateColumn
                 ),
-                $parameters['start_date'],
-                $parameters['end_date']
-            )
-        );
-    }
-
-    /**
-     * Resolve user locations.
-     *
-     * @param $models
-     * @param $parameters
-     * @return Builder
-     */
-    public static function resolveUserLocations($models, $parameters)
-    {
-        return LocationRepository::groupLocationsByUuid(
-            LocationRepository::orderLocationsByGeneratedAtDate(
-                LocationRepository::filterLocationsUsingRangeOfDates(
-                    LocationRepository::filterLocationsByAccuracy(
-                        LocationRepository::getUsersLocationsQuery(
-                            $models
-                        ),
-                        $parameters['accuracy']
-                    ),
-                    $parameters['start_date'],
-                    $parameters['end_date']
-                )
-            )
+                $dateColumn
+            ),
+            $groupedBy
         );
     }
 }

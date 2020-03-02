@@ -6,6 +6,7 @@
       <w>geofences</w>
       <w>groupable</w>
       <w>photoable</w>
+      <w>trackable</w>
     </words>
   </dictionary>
 </component>

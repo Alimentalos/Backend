@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Repositories\LocationRepository;
-use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -62,15 +60,18 @@ class Device extends Authenticatable
     public const DEFAULT_LOCATION_FIELD = 'location';
 
     /**
-     * Search locations.
+     * The default location date column.
      *
-     * @param $accuracy
-     * @return Builder
+     * @var string
      */
-    public function searchLocations($accuracy)
-    {
-        return LocationRepository::searchDeviceLocations($this, $accuracy);
-    }
+    public const DEFAULT_LOCATION_DATE_COLUMN = 'generated_at';
+
+    /**
+     * The default location group by column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
 
     /**
      * The related Groups.

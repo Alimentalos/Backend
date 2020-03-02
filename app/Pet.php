@@ -2,10 +2,8 @@
 
 namespace App;
 
-use App\Repositories\LocationRepository;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
-use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -47,15 +45,18 @@ class Pet extends Authenticatable implements ReactableContract
     public const DEFAULT_LOCATION_FIELD = 'location';
 
     /**
-     * Search locations.
+     * The default location date column.
      *
-     * @param $accuracy
-     * @return Builder
+     * @var string
      */
-    public function searchLocations($accuracy)
-    {
-        return LocationRepository::searchPetsLocations($this, $accuracy);
-    }
+    public const DEFAULT_LOCATION_DATE_COLUMN = 'created_at';
+
+    /**
+     * The default location group by column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'id';
 
     /**
      * The attributes that should be cast to spatial types.
