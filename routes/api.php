@@ -59,7 +59,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Groups Resources
 
     Route::get('/groups/{group}/users', 'Api\Groups\Users\IndexController');
-    Route::get('/groups/{resource}/devices', 'Api\Resource\Devices\IndexController');
+    Route::get('/groups/{resource}/devices', 'Api\Resource\Devices\IndexController')
+        ->name('groups.devices.index');
     Route::get('/groups/{group}/pets', 'Api\Groups\Pets\IndexController');
 
     // Groups Photos
@@ -218,7 +219,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // User Resources
 
-    Route::get('/users/{resource}/devices', 'Api\Resource\Devices\IndexController');
+    Route::get('/users/{resource}/devices', 'Api\Resource\Devices\IndexController')
+        ->name('users.devices.index');
     Route::get('/users/{user}/groups', 'Api\Users\Groups\IndexController');
     Route::get('/users/{user}/pets', 'Api\Users\Pets\IndexController');
 
