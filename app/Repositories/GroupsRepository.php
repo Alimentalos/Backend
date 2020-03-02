@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class GroupsRepository
 {
+    /**
+     * Update group via request.
+     *
+     * @param Request $request
+     * @param Group $group
+     * @return Group
+     */
     public static function updateGroupViaRequest(Request $request, Group $group)
     {
         UploadRepository::checkPhotoForUpload($request, $group);
@@ -21,6 +28,13 @@ class GroupsRepository
         return $group;
     }
 
+    /**
+     * Create group via request.
+     *
+     * @param Request $request
+     * @param Photo $photo
+     * @return mixed
+     */
     public static function createGroupViaRequest(Request $request, Photo $photo)
     {
         $group = Group::create([

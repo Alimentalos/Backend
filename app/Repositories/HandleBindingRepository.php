@@ -133,6 +133,16 @@ class HandleBindingRepository {
     }
 
     /**
+     * Bind resource model class.
+     *
+     * @param $class
+     * @return mixed
+     */
+    public static function bindResourceModelClass($class) {
+        return static::bindResource('App\\' . Str::camel(Str::singular($class)));
+    }
+
+    /**
      * Bind resource.
      *
      * @param $resource
@@ -162,16 +172,12 @@ class HandleBindingRepository {
      * @return mixed
      */
     public static function bindNearModel($resource, $coordinates) {
-        switch ($resource) {
-            case 'geofences':
-                return Geofence::orderByDistance('shape', static::makePoint($coordinates),'asc');
-                break;
-            case 'users':
-                return User::orderByDistance('location', static::makePoint($coordinates),'asc');
-                break;
-            default:
-                return Pet::orderByDistance('location', static::makePoint($coordinates),'asc');
-        }
+        $model = static::bindResourceModel($resource);
+        return $model->orderByDistance(
+            static::bindResourceModelClass($resource)::DEFAULT_LOCATION_FIELD,
+            static::makePoint($coordinates),
+            'asc'
+        );
     }
 
     /**

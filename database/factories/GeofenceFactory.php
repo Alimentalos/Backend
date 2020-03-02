@@ -28,6 +28,6 @@ $factory->define(Geofence::class, function (Faker $faker) {
         'photo_id' => factory(Photo::class)->create()->id,
         'name' => $faker->name,
         'is_public' => true,
-        'shape' => (new Polygon(\App\Repositories\GeofenceRepository::createPolygon())),
+        'shape' => (new Polygon(\App\Repositories\GeofenceRepository::createSamplePolygon())),
     ];
 });
