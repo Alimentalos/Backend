@@ -63,17 +63,6 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public const DEFAULT_LOCATION_FIELD = 'location';
 
     /**
-     * Search locations.
-     *
-     * @param $accuracy
-     * @return Builder
-     */
-    public function searchLocations($accuracy)
-    {
-        return LocationRepository::searchUserLocations($this, $accuracy);
-    }
-
-    /**
      * The attributes that should be cast to spatial types.
      *
      * @var array

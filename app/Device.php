@@ -62,17 +62,6 @@ class Device extends Authenticatable
     public const DEFAULT_LOCATION_FIELD = 'location';
 
     /**
-     * Search locations.
-     *
-     * @param $accuracy
-     * @return Builder
-     */
-    public function searchLocations($accuracy)
-    {
-        return LocationRepository::searchDeviceLocations($this, $accuracy);
-    }
-
-    /**
      * The related Groups.
      *
      * @return BelongsToMany

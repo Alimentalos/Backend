@@ -29,8 +29,32 @@ class LocationRepository
     public static function searchLastLocations($type, $identifiers, $accuracy)
     {
         return HandleBindingRepository::bindResourceModel($type)->whereIn('uuid', $identifiers)->get()->map(function ($model) use ($accuracy) {
-            return $model->searchLocations($accuracy);
+            return static::searchModelLocations($model, $accuracy);
         });
+    }
+
+    /**
+     * Search model locations.
+     *
+     * @param $model
+     * @param $accuracy
+     * @return Builder
+     */
+    public static function searchModelLocations($model, $accuracy)
+    {
+        $class = get_class($model);
+        switch ($class) {
+            case 'App\\User':
+                return static::searchUserLocations($model, $accuracy);
+                break;
+            case 'App\\Device':
+                return static::searchDeviceLocations($model, $accuracy);
+                break;
+            case 'App\\Pet':
+            default:
+                return static::searchPetsLocations($model, $accuracy);
+                break;
+        }
     }
 
     /**
