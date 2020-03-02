@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Api\Groups;
+namespace App\Http\Requests\Api\Resource;
 
+use App\Repositories\HandleBindingRepository;
 use Illuminate\Foundation\Http\FormRequest;
 
 class IndexRequest extends FormRequest
@@ -13,7 +14,7 @@ class IndexRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user('api')->can('viewAny', HandleBindingRepository::bindResourceModelClass(HandleBindingRepository::detectResourceType()));
     }
 
     /**

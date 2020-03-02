@@ -6,10 +6,12 @@ use App\Contracts\Resource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\Request;
 
 class Geofence extends Model implements ReactableContract, Resource
 {
@@ -163,5 +165,20 @@ class Geofence extends Model implements ReactableContract, Resource
     public function getLazyRelationshipsAttribute()
     {
         return ['user', 'photo'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public static function resolveModels(Request $request)
+    {
+        return $request->user('api')->is_child ? Geofence::with('user', 'photo')->where(
+            'user_id',
+            $request->user('api')->user_id
+        )->orWhere('is_public', true)->latest()->paginate(20) : Geofence::with('user', 'photo')->where(
+            'user_id',
+            $request->user('api')->id
+        )->orWhere('is_public', true)->latest()->paginate(20);
     }
 }

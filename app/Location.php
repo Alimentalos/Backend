@@ -6,6 +6,8 @@ use App\Contracts\Resource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class Location extends Model implements Resource
 {
@@ -89,5 +91,15 @@ class Location extends Model implements Resource
     public function getLazyRelationshipsAttribute()
     {
         return ['trackable'];
+    }
+
+    /**
+     * @param Request $request
+     * @return Collection
+     * @codeCoverageIgnore
+     */
+    public static function resolveModels(Request $request)
+    {
+        return self::query()->get();
     }
 }

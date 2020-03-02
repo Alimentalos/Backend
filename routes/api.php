@@ -52,10 +52,36 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("{$resource}.show");
     }
 
+    Route::get('/users', 'Api\Resource\IndexController')
+        ->name('users.index');
+
+    Route::get('/groups', 'Api\Resource\IndexController')
+        ->name('groups.index');
+
+    Route::get('/geofences', 'Api\Resource\IndexController')
+        ->name('geofences.index');
+
+    Route::get('/pets', 'Api\Resource\IndexController')
+        ->name('pets.index');
+
+    Route::get('/devices', 'Api\Resource\IndexController')
+        ->name('devices.index');
+
+    Route::get('/photos', 'Api\Resource\IndexController')
+        ->name('photos.index');
+
+    Route::get('/locations', 'Api\Locations\IndexController')
+        ->name('locations.index');
+
+    Route::get('/actions', 'Api\Resource\IndexController')
+        ->name('actions.index');
+
+    Route::get('/alerts', 'Api\Resource\IndexController')
+        ->name('alerts.index');
+
     /**
      * Groups routes ...
      */
-    Route::get('/groups', 'Api\Groups\IndexController');
     Route::post('/groups', 'Api\Groups\StoreController');
     Route::put('/groups/{group}', 'Api\Groups\UpdateController');
 
@@ -66,19 +92,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('/groups/{group}/pets', 'Api\Groups\Pets\IndexController');
 
     /**
-     * Locations routes ...
-     */
-    Route::get('/locations', 'Api\Locations\IndexController');
-
-    /**
-     * Actions routes ...
-     */
-    Route::get('/actions', 'Api\Actions\IndexController');
-
-    /**
      * Geofences routes ...
      */
-    Route::get('/geofences', 'Api\Geofences\IndexController');
     Route::post('/geofences', 'Api\Geofences\StoreController');
     Route::put('/geofences/{geofence}', 'Api\Geofences\UpdateController');
 
@@ -105,7 +120,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /**
      * Pets routes ...
      */
-    Route::get('/pets', 'Api\Pets\IndexController');
     Route::post('/pets', 'Api\Pets\StoreController');
     Route::put('/pets/{pet}', 'Api\Pets\UpdateController');
 
@@ -117,7 +131,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /**
      * Devices routes ...
      */
-    Route::get('/devices', 'Api\Devices\IndexController');
     Route::post('/devices', 'Api\Devices\StoreController');
     Route::put('/devices/{device}', 'Api\Devices\UpdateController');
 
@@ -183,8 +196,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     Route::get('/user', 'Api\UserController');
     Route::post('/user/locations', 'Api\Resource\LocationsController')->name('user.locations');
-
-    Route::get('/users', 'Api\Users\IndexController');
     Route::post('/users', 'Api\Users\StoreController');
     Route::put('/users/{user}', 'Api\Users\UpdateController');
 
@@ -214,7 +225,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /**
      * Photos routes
      */
-    Route::get('/photos', 'Api\Photos\IndexController');
     Route::put('/photos/{photo}', 'Api\Photos\UpdateController');
 
     // Resource delete routes ...
@@ -251,7 +261,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /**
      * Alerts routes ...
      */
-    Route::get('/alerts', 'Api\Alerts\IndexController');
     Route::post('/alerts', 'Api\Alerts\StoreController');
     Route::put('/alerts/{alert}', 'Api\Alerts\UpdateController');
 });

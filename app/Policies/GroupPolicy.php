@@ -15,6 +15,17 @@ class GroupPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can view any alerts.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function viewAny(User $user)
+    {
+        return $user->is_admin || $user->hasVerifiedEmail();
+    }
+
+    /**
      * Determine whether the user can view the group.
      *
      * @param  \App\User  $user

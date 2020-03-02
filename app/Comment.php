@@ -3,11 +3,14 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Repositories\DevicesRepository;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Http\Request;
 
 class Comment extends Model implements ReactableContract, Resource
 {
@@ -71,5 +74,15 @@ class Comment extends Model implements ReactableContract, Resource
     public function getLazyRelationshipsAttribute()
     {
         return ['commentable'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     * @codeCoverageIgnore
+     */
+    public static function resolveModels(Request $request)
+    {
+        return self::with('user')->latest()->paginate(20);
     }
 }

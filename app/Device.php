@@ -3,11 +3,15 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Http\Resources\DeviceCollection;
+use App\Repositories\DevicesRepository;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 
 /**
  * Class Device
@@ -144,5 +148,16 @@ class Device extends Authenticatable implements Resource
     public function getLazyRelationshipsAttribute()
     {
         return ['user'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public static function resolveModels(Request $request)
+    {
+        $devices = DevicesRepository::fetchInDatabaseDevicesQuery();
+
+        return $devices->latest()->paginate(10);
     }
 }

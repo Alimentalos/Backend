@@ -10,11 +10,13 @@ use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource
@@ -255,5 +257,28 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public function getLazyRelationshipsAttribute()
     {
         return ['photo', 'user'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public static function resolveModels(Request $request)
+    {
+        if (!is_null($request->user('api')->user_id)) {
+            return self::with('photo', 'user')->latest()->where([
+                ['user_id', $request->user('api')->user_id]
+            ])->orWhere([
+                ['id', $request->user('api')->user_id]
+            ])->paginate(20);
+        } elseif ($request->user('api')->is_admin) {
+            return self::with('photo', 'user')->latest()->paginate(20);
+        } else {
+            return self::with('photo', 'user')->latest()->where([
+                ['user_id', $request->user()->id]
+            ])->orWhere([
+                ['id', $request->user('api')->id]
+            ])->paginate(20);
+        }
     }
 }

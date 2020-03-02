@@ -3,10 +3,12 @@
 namespace App;
 
 use App\Contracts\Resource;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Http\Request;
 
 class Group extends Model implements Resource
 {
@@ -191,5 +193,18 @@ class Group extends Model implements Resource
     public function getLazyRelationshipsAttribute()
     {
         return ['photo', 'user'];
+    }
+
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public static function resolveModels(Request $request)
+    {
+        return (
+        $request->user('api')->is_admin ?
+            self::with('user', 'photo') :
+            self::with('user', 'photo')->where('user_id', $request->user('api')->id)
+        )->latest()->paginate(25);
     }
 }
