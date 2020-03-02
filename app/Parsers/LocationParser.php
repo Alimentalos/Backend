@@ -2,6 +2,7 @@
 
 namespace App\Parsers;
 
+use App\Repositories\LocationRepository;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 
@@ -29,10 +30,10 @@ trait LocationParser
      */
     public static function parsePointFromCoordinates($coordinates)
     {
-        $exploded = explode(',', $coordinates);
+        $array = explode(',', $coordinates);
         return (new Point(
-            floatval($exploded[0]),
-            floatval($exploded[1])
+            floatval($array[LocationRepository::LATITUDE]),
+            floatval($array[LocationRepository::LONGITUDE])
         ));
     }
 

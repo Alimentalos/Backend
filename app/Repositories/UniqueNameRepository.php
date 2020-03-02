@@ -11,10 +11,13 @@ class UniqueNameRepository
      * Create unique identifier.
      *
      * @return string
-     * @throws Exception
      */
     public static function createIdentifier()
     {
-        return (string) Uuid::uuid4();
+        try {
+            return (string) Uuid::uuid4();
+        } catch (Exception $exception) {
+            // Uuid exception unhandled
+        }
     }
 }

@@ -14,14 +14,21 @@ class DestroyController extends Controller
      * @param DestroyRequest $request
      * @param Geofence $geofence
      * @return JsonResponse
-     * @throws Exception
      */
     public function __invoke(DestroyRequest $request, Geofence $geofence)
     {
-        $geofence->delete();
-        return response()->json(
-            [],
-            200
-        );
+        try {
+            $geofence->delete();
+
+            return response()->json(
+                ['message' => 'Deleted successfully.'],
+                200
+            );
+        } catch (Exception $exception) {
+            return response()->json(
+                ['message' => 'Resource cannot be deleted.'],
+                500
+            );
+        }
     }
 }

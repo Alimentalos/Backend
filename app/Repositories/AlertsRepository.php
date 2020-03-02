@@ -5,7 +5,6 @@ namespace App\Repositories;
 
 use App\Alert;
 use App\Photo;
-use Exception;
 use Illuminate\Http\Request;
 
 class AlertsRepository
@@ -44,7 +43,6 @@ class AlertsRepository
      * @param Request $request
      * @param Alert $alert
      * @return Alert
-     * @throws Exception
      */
     public static function updateAlertViaRequest(Request $request, Alert $alert)
     {

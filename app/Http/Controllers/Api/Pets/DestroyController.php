@@ -16,15 +16,21 @@ class DestroyController extends Controller
      * @param DestroyRequest $request
      * @param Pet $pet
      * @return JsonResponse
-     * @throws Exception
      */
     public function __invoke(DestroyRequest $request, Pet $pet)
     {
-        $pet->delete();
-        // TODO - Refactor using constant
-        return response()->json(
-            ['message' => 'Deleted successfully.'],
-            200
-        );
+        try {
+            $pet->delete();
+
+            return response()->json(
+                ['message' => 'Deleted successfully.'],
+                200
+            );
+        } catch (Exception $exception) {
+            return response()->json(
+                ['message' => 'Resource cannot be deleted.'],
+                500
+            );
+        }
     }
 }

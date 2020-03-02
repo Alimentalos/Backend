@@ -4,7 +4,6 @@
 namespace App\Repositories;
 
 
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -15,7 +14,6 @@ class UploadRepository
      *
      * @param Request $request
      * @param Model $model
-     * @throws Exception
      */
     public static function checkPhotoForUpload(Request $request, Model $model)
     {

@@ -3,8 +3,8 @@
 namespace App\Observers;
 
 use App\Pet;
+use App\Repositories\UniqueNameRepository;
 use Exception;
-use Webpatser\Uuid\Uuid;
 
 class PetObserver
 {
@@ -13,11 +13,16 @@ class PetObserver
      *
      * @param Pet $pet
      * @return void
-     * @throws Exception
      */
     public function creating(Pet $pet)
     {
-        $pet->uuid = Uuid::generate()->string;
-        $pet->api_token = bin2hex(random_bytes(16));
+        try {
+            $pet->api_token = bin2hex(random_bytes(16));
+            $pet->uuid = UniqueNameRepository::createIdentifier();
+            // @codeCoverageIgnoreStart
+        } catch (Exception $exception) {
+            // TODO - Handle random bytes exception.
+        }
+        // @codeCoverageIgnoreEnd
     }
 }

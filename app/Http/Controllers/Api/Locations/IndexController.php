@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\Api\Locations;
 
-use App\Device;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Locations\IndexRequest;
 use App\Http\Resources\LocationCollection;
-use App\Pet;
 use App\Repositories\HandleBindingRepository;
 use App\Repositories\LocationRepository;
-use App\Repositories\ModelLocationsRepository;
-use App\User;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller

@@ -16,16 +16,23 @@ class DestroyController extends Controller
      * @param DestroyRequest $request
      * @param Comment $comment
      * @return JsonResponse
-     * @throws Exception
      */
     public function __invoke(DestroyRequest $request, Comment $comment)
     {
-        $comment->delete();
+        try {
+            $comment->delete();
 
-        // TODO - Refactor using constant
-        return response()->json(
-            ['message' => 'Deleted successfully.'],
-            200
-        );
+            return response()->json(
+                ['message' => 'Deleted successfully.'],
+                200
+            );
+            // @codeCoverageIgnoreStart
+        } catch (Exception $exception) {
+            return response()->json(
+                ['message' => 'Resource cannot be deleted.'],
+                500
+            );
+        }
+        // @codeCoverageIgnoreEnd
     }
 }

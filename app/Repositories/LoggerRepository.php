@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Action;
-use Exception;
 
 class LoggerRepository
 {
@@ -15,7 +14,6 @@ class LoggerRepository
      * @param $resource
      * @param $parameters
      * @return mixed
-     * @throws Exception
      */
     public static function createAction($user, $type, $resource, $parameters)
     {
@@ -35,7 +33,6 @@ class LoggerRepository
      * @param $user
      * @param $parameters
      * @return mixed
-     * @throws Exception
      */
     public static function createReferencedAction($user, $parameters)
     {

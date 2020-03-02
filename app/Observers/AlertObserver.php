@@ -3,8 +3,7 @@
 namespace App\Observers;
 
 use App\Alert;
-use Exception;
-use Webpatser\Uuid\Uuid;
+use App\Repositories\UniqueNameRepository;
 
 class AlertObserver
 {
@@ -13,10 +12,9 @@ class AlertObserver
      *
      * @param Alert $alert
      * @return void
-     * @throws Exception
      */
     public function creating(Alert $alert)
     {
-        $alert->uuid = Uuid::generate()->string;
+        $alert->uuid = UniqueNameRepository::createIdentifier();
     }
 }

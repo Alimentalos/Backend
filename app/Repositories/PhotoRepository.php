@@ -24,7 +24,6 @@ class PhotoRepository
      *
      * @param $request
      * @return Photo
-     * @throws Exception
      */
     public static function createPhotoViaRequest(Request $request)
     {
@@ -39,7 +38,6 @@ class PhotoRepository
      *
      * @param $request
      * @return mixed
-     * @throws Exception
      */
     public static function createPhotoUsingRequest($request)
     {
@@ -59,7 +57,6 @@ class PhotoRepository
      *
      * @param Photo $photo
      * @param Request $request
-     * @throws Exception
      */
     public static function createDefaultPhotoCommentUsingRequest(Photo $photo, Request $request)
     {
@@ -82,11 +79,15 @@ class PhotoRepository
      */
     public static function storePhoto($uniqueName, $fileContent)
     {
-        Storage::disk(static::DEFAULT_DISK)
-            ->putFileAs(
-                static::DEFAULT_PHOTOS_DISK_PATH,
-                $fileContent,
-                ($uniqueName . $fileContent->extension())
-            );
+        try {
+            Storage::disk(static::DEFAULT_DISK)
+                ->putFileAs(
+                    static::DEFAULT_PHOTOS_DISK_PATH,
+                    $fileContent,
+                    ($uniqueName . $fileContent->extension())
+                );
+        } catch (Exception $exception) {
+            // Nice, this exception will be unhandled.
+        }
     }
 }

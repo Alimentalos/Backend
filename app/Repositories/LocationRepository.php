@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Location;
 use App\Parsers\LocationParser;
 use App\Queries\LocationQuery;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
@@ -13,9 +12,14 @@ class LocationRepository
     use LocationQuery;
     use LocationParser;
 
+    /**
+     * Longitude position.
+     */
     public const LATITUDE = 0;
 
-
+    /**
+     * Latitude position.
+     */
     public const LONGITUDE = 1;
 
     /**

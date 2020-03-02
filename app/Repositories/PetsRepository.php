@@ -63,7 +63,7 @@ class PetsRepository
      *
      * @param Request $request
      * @param Photo $photo
-     * @return mixed
+     * @return Pet
      */
     public static function createPetViaRequest(Request $request, Photo $photo)
     {

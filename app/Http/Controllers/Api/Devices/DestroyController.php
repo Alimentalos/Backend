@@ -16,16 +16,21 @@ class DestroyController extends Controller
      * @param DestroyRequest $request
      * @param Device $device
      * @return JsonResponse
-     * @throws Exception
      */
     public function __invoke(DestroyRequest $request, Device $device)
     {
-        $device->delete();
+        try {
+            $device->delete();
 
-        // TODO - Refactor using constant
-        return response()->json(
-            ['message' => 'Deleted successfully.'],
-            200
-        );
+            return response()->json(
+                ['message' => 'Deleted successfully.'],
+                200
+            );
+        } catch (Exception $exception) {
+            return response()->json(
+                ['message' => 'Resource cannot be deleted.'],
+                500
+            );
+        }
     }
 }

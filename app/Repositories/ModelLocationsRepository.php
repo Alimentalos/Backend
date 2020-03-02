@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Device;
 use App\Pet;
+use App\Queries\LocationQuery;
 use App\User;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,8 @@ use Illuminate\Http\Request;
 
 class ModelLocationsRepository
 {
+    use LocationQuery;
+
     /**
      * Update current model location.
      *
@@ -112,16 +115,10 @@ class ModelLocationsRepository
      */
     public static function resolveLocations($models, $parameters, $type, $dateColumn, $groupedBy)
     {
-        return LocationRepository::groupByColumn(
-            LocationRepository::orderByColumn(
-                LocationRepository::queryRangeOfDates(
-                    LocationRepository::maxAccuracy(
-                        LocationRepository::trackableQuery(
-                            $models,
-                            $type
-                        ),
-                        $parameters['accuracy']
-                    ),
+        return static::groupByColumn(
+            static::orderByColumn(
+                static::queryRangeOfDates(
+                    static::maxAccuracy(static::trackableQuery($models, $type), $parameters['accuracy']),
                     $parameters['start_date'],
                     $parameters['end_date'],
                     $dateColumn
