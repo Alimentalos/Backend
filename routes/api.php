@@ -70,14 +70,14 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('/photos', 'Api\Resource\IndexController')
         ->name('photos.index');
 
-    Route::get('/locations', 'Api\Locations\IndexController')
-        ->name('locations.index');
-
     Route::get('/actions', 'Api\Resource\IndexController')
         ->name('actions.index');
 
     Route::get('/alerts', 'Api\Resource\IndexController')
         ->name('alerts.index');
+
+    Route::get('/locations', 'Api\Locations\IndexController')
+        ->name('locations.index');
 
     /**
      * Groups routes ...
@@ -88,7 +88,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Groups Resources
 
-    Route::get('/groups/{group}/users', 'Api\Groups\Users\IndexController');
+    Route::get('/groups/{resource}/users', 'Api\Resource\Users\IndexController')
+        ->name('groups.users.index');
     Route::get('/groups/{group}/pets', 'Api\Groups\Pets\IndexController');
 
     /**
@@ -100,7 +101,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Geofences Users
 
-    Route::get('/geofences/{geofence}/users', 'Api\Geofences\Users\IndexController');
+    Route::get('/geofences/{resource}/users', 'Api\Resource\Users\IndexController')
+        ->name('geofences.users.index');
 
     // Geofences Groups
     // TODO - Add tests for geofence group attaching and implements routes as resource geofences

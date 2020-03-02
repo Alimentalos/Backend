@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\Groups\Users;
+namespace App\Http\Controllers\Api\Resource\Users;
 
-use App\Group;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Groups\Users\IndexRequest;
+use App\Http\Requests\Api\Resource\Users\IndexRequest;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -13,13 +12,13 @@ class IndexController extends Controller
      * Display a list with users of a group
      *
      * @param IndexRequest $request
-     * @param Group $group
+     * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(IndexRequest $request, Group $group)
+    public function __invoke(IndexRequest $request, $resource)
     {
         return response()->json(
-            $group->users()->latest()->with('photo', 'user')->paginate(20),
+            $resource->users()->latest()->with('photo', 'user')->paginate(20),
             200
         );
     }
