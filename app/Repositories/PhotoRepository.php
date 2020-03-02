@@ -79,15 +79,11 @@ class PhotoRepository
      */
     public static function storePhoto($uniqueName, $fileContent)
     {
-        try {
-            Storage::disk(static::DEFAULT_DISK)
-                ->putFileAs(
-                    static::DEFAULT_PHOTOS_DISK_PATH,
-                    $fileContent,
-                    ($uniqueName . $fileContent->extension())
-                );
-        } catch (Exception $exception) {
-            // Nice, this exception will be unhandled.
-        }
+        Storage::disk(static::DEFAULT_DISK)
+            ->putFileAs(
+                static::DEFAULT_PHOTOS_DISK_PATH,
+                $fileContent,
+                ($uniqueName . $fileContent->extension())
+            );
     }
 }
