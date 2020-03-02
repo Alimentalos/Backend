@@ -118,18 +118,7 @@ class ModelLocationsRepository
      */
     public static function resolveDeviceLocations($models, $parameters)
     {
-        return LocationRepository::groupLocationsByUuid(
-            LocationRepository::orderLocationsByGeneratedAtDate(
-                LocationRepository::filterLocationsUsingRangeOfDates(
-                    LocationRepository::filterLocationsByAccuracy(
-                        LocationRepository::getDevicesLocationsQuery($models),
-                        $parameters['accuracy']
-                    ),
-                    $parameters['start_date'],
-                    $parameters['end_date']
-                )
-            )
-        );
+        return static::resolveLocations($models, $parameters, 'App\\Device', 'generated_at', 'uuid');
     }
 
     /**
@@ -141,18 +130,7 @@ class ModelLocationsRepository
      */
     public static function resolvePetLocations($models, $parameters)
     {
-        return LocationRepository::orderLocationsByCreatedAtDate(
-            LocationRepository::filterLocationsUsingCreatedAtRangeOfDates(
-                LocationRepository::filterLocationsByAccuracy(
-                    LocationRepository::getPetsLocationsQuery(
-                        $models
-                    ),
-                    $parameters['accuracy']
-                ),
-                $parameters['start_date'],
-                $parameters['end_date']
-            )
-        );
+        return static::resolveLocations($models, $parameters, 'App\\Pet', 'created_at', 'id');
     }
 
     /**
@@ -164,19 +142,38 @@ class ModelLocationsRepository
      */
     public static function resolveUserLocations($models, $parameters)
     {
-        return LocationRepository::groupLocationsByUuid(
-            LocationRepository::orderLocationsByGeneratedAtDate(
-                LocationRepository::filterLocationsUsingRangeOfDates(
-                    LocationRepository::filterLocationsByAccuracy(
-                        LocationRepository::getUsersLocationsQuery(
-                            $models
+        return static::resolveLocations($models, $parameters, 'App\\User', 'generated_at', 'uuid');
+    }
+
+    /**
+     * Resolve model locations.
+     *
+     * @param $models
+     * @param $parameters
+     * @param $type
+     * @param $dateColumn
+     * @param $groupedBy
+     * @return Builder
+     */
+    public static function resolveLocations($models, $parameters, $type, $dateColumn, $groupedBy)
+    {
+        return LocationRepository::groupByColumn(
+            LocationRepository::orderByColumn(
+                LocationRepository::queryRangeOfDates(
+                    LocationRepository::maxAccuracy(
+                        LocationRepository::trackableQuery(
+                            $models,
+                            $type
                         ),
                         $parameters['accuracy']
                     ),
                     $parameters['start_date'],
-                    $parameters['end_date']
-                )
-            )
+                    $parameters['end_date'],
+                    $dateColumn
+                ),
+                $dateColumn
+            ),
+            $groupedBy
         );
     }
 }
