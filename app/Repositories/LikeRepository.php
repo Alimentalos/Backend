@@ -6,6 +6,13 @@ use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 
 class LikeRepository
 {
+    /**
+     * Generate stats.
+     *
+     * @param $reactant
+     * @param $reacterable
+     * @return array
+     */
     public static function generateStats($reactant, $reacterable)
     {
         return [
@@ -21,6 +28,13 @@ class LikeRepository
         ];
     }
 
+    /**
+     * Generate follow stats.
+     *
+     * @param $reactant
+     * @param $reacterable
+     * @return array
+     */
     public static function generateFollowStats($reactant, $reacterable)
     {
         return [
@@ -31,6 +45,13 @@ class LikeRepository
         ];
     }
 
+    /**
+     * Update likes stat.
+     *
+     * @param $reactant
+     * @param $reacterable
+     * @param $type
+     */
     public static function updateLike($reactant, $reacterable, $type)
     {
         if (
@@ -49,6 +70,7 @@ class LikeRepository
 
     /**
      * Check if reactant was reacted by reacterable (comment liked by user)
+     *
      * @param $reacterable
      * @param $reactant
      * @param $name

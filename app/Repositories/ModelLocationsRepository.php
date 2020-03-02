@@ -8,7 +8,6 @@ use App\Device;
 use App\Pet;
 use App\User;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -23,12 +22,8 @@ class ModelLocationsRepository
      */
     public static function updateModelLocation(Request $request, Model $model)
     {
-        $exploded = explode(',', $request->input('coordinates'));
         $model->update([
-            'location' => (new Point(
-                floatval($exploded[0]),
-                floatval($exploded[1])
-            )),
+            'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
         ]);
         return $model;
     }
@@ -41,11 +36,12 @@ class ModelLocationsRepository
      */
     public static function resolveLocationModel(Request $request)
     {
-        switch ($request->route()->getName()) {
-            case 'device.locations':
+        $resource = explode('.', $request->route()->getName())[0];
+        switch ($resource) {
+            case 'device':
                 return Device::find(auth('devices')->user()->id);
                 break;
-            case 'pet.locations':
+            case 'pet':
                 return Pet::find(auth('pets')->user()->id);
                 break;
             default:

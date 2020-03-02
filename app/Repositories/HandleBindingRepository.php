@@ -2,9 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Geofence;
-use App\Pet;
-use App\User;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

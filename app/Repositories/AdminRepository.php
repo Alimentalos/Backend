@@ -6,7 +6,6 @@ use App\User;
 
 class AdminRepository
 {
-
     /**
      * List of administrators
      *
