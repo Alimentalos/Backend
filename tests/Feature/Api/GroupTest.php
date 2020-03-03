@@ -181,7 +181,7 @@ class GroupTest extends TestCase
             'name' => 'New name'
         ]);
         $this->assertDatabaseHas('actions', [
-            'resource' => 'App\\Http\\Controllers\\Api\\Groups\\UpdateController',
+            'resource' => 'App\\Http\\Controllers\\Api\\Resource\\UpdateController',
             'referenced_uuid' => $group->uuid,
         ]);
 

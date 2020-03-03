@@ -2,12 +2,33 @@
 
 namespace App\Repositories;
 
+use App\Comment;
 use App\Device;
+use App\Http\Resources\Device as DeviceResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class DevicesRepository
 {
+    /**
+     * Update device via request.
+     *
+     * @param Request $request
+     * @param Device $device
+     * @return DeviceResource
+     */
+    public static function updateDeviceViaRequest(Request $request, Device $device)
+    {
+        $device->update([
+            'name' => FillRepository::fillMethod($request, 'name', $device->name),
+            'description' => FillRepository::fillMethod($request, 'description', $device->description),
+            'is_public' => FillRepository::fillMethod($request, 'is_public', $device->is_public)
+        ]);
+
+        return new DeviceResource($device);
+    }
+
     /**
      * @return Builder
      */

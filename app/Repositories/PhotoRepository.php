@@ -20,6 +20,25 @@ class PhotoRepository
     public const DEFAULT_DISK = 'gcs';
 
     /**
+     * Update photo via request.
+     *
+     * @param Request $request
+     * @param Photo $photo
+     * @return Photo
+     */
+    public static function updatePhotoViaRequest(Request $request, Photo $photo)
+    {
+        $photo->update([
+            'title' => FillRepository::fillMethod($request, 'title', $photo->title),
+            'description' => FillRepository::fillMethod($request, 'description', $photo->description),
+            'is_public' => FillRepository::fillMethod($request, 'is_public', $photo->is_public),
+        ]);
+
+        $photo->load('user');
+        return $photo;
+    }
+
+    /**
      * Create photo via request.
      *
      * @param $request

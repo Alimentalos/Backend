@@ -50,9 +50,11 @@ class GeofenceRepository
      *
      * @param Request $request
      * @param Geofence $geofence
+     * @return Geofence
      */
     public static function updateGeofenceViaRequest(Request $request, Geofence $geofence)
     {
+        UploadRepository::checkPhotoForUpload($request, $geofence);
         $geofence->name = FillRepository::fillMethod($request, 'name', $geofence->name);
         $shape = array_map(function ($element) {
             return new Point($element['latitude'], $element['longitude']);
@@ -60,6 +62,8 @@ class GeofenceRepository
         $geofence->shape = new Polygon([new LineString($shape)]);
         $geofence->is_public = FillRepository::fillMethod($request, 'is_public', $geofence->is_public);
         $geofence->save();
+        $geofence->load('photo', 'user');
+        return $geofence;
     }
 
     /**

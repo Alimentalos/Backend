@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Repositories\StatusRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

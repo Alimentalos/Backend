@@ -4,6 +4,7 @@ namespace App;
 
 use App\Contracts\Resource;
 use App\Http\Resources\DeviceCollection;
+use App\Repositories\AlertsRepository;
 use App\Repositories\DevicesRepository;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -86,6 +87,28 @@ class Device extends Authenticatable implements Resource
     public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
 
     /**
+     * Update model via request.
+     *
+     * @param Request $request
+     * @return Http\Resources\Device
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return DevicesRepository::updateDeviceViaRequest($request, $this);
+    }
+
+    /**
+     * Update device validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function updateRules(Request $request)
+    {
+        return [];
+    }
+
+    /**
      * The related Groups.
      *
      * @return BelongsToMany
@@ -132,16 +155,6 @@ class Device extends Authenticatable implements Resource
     {
         return $this->morphMany(Location::class, 'trackable', 'trackable_type',
             'trackable_id', 'uuid');
-    }
-
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'uuid';
     }
 
     /**

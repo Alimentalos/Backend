@@ -10,6 +10,18 @@ use Illuminate\Http\Request;
 
 class UsersRepository
 {
+    public static function updateUserViaRequest(Request $request, User $user)
+    {
+        UploadRepository::checkPhotoForUpload($request, $user);
+        $user->load('user', 'photo');
+        $user->update([
+            'email' => FillRepository::fillMethod($request, 'email', $user->email),
+            'name' => FillRepository::fillMethod($request, 'name', $user->name),
+            'is_public' => FillRepository::fillMethod($request, 'is_public', $user->is_public),
+        ]);
+        return $user;
+    }
+
     /**
      * Create user via request.
      *

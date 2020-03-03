@@ -3,6 +3,9 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Repositories\GeofenceRepository;
+use App\Repositories\GroupsRepository;
+use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class Group extends Model implements Resource
 {
@@ -76,6 +80,34 @@ class Group extends Model implements Resource
     protected $with = [
         'user'
     ];
+
+    /**
+     * Update model via request.
+     *
+     * @param Request $request
+     * @return Group
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return GroupsRepository::updateGroupViaRequest($request, $this);
+    }
+
+    /**
+     * Update geofence validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function updateRules(Request $request)
+    {
+        return [
+            'coordinates' => [
+                Rule::requiredIf(function () use ($request) {
+                    return $request->has('photo');
+                }), new Coordinate()
+            ],
+        ];
+    }
 
     /**
      * Get the route key for the model.

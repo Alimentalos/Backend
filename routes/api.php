@@ -79,13 +79,11 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Groups routes ...
      */
     Route::post('/groups', 'Api\Groups\StoreController');
-    Route::put('/groups/{group}', 'Api\Groups\UpdateController');
 
     /**
      * Geofences routes ...
      */
     Route::post('/geofences', 'Api\Geofences\StoreController');
-    Route::put('/geofences/{geofence}', 'Api\Geofences\UpdateController');
 
 
     // Geofences Groups
@@ -102,13 +100,11 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Pets routes ...
      */
     Route::post('/pets', 'Api\Pets\StoreController');
-    Route::put('/pets/{pet}', 'Api\Pets\UpdateController');
 
     /**
      * Devices routes ...
      */
     Route::post('/devices', 'Api\Devices\StoreController');
-    Route::put('/devices/{device}', 'Api\Devices\UpdateController');
 
     // Resource Devices
 
@@ -173,7 +169,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('/user', 'Api\UserController');
     Route::post('/user/locations', 'Api\Resource\LocationsController')->name('user.locations');
     Route::post('/users', 'Api\Users\StoreController');
-    Route::put('/users/{user}', 'Api\Users\UpdateController');
 
     // User Groups
 
@@ -199,7 +194,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /**
      * Photos routes
      */
-    Route::put('/photos/{photo}', 'Api\Photos\UpdateController');
 
     // Resource delete routes ...
     foreach(['photos', 'users', 'comments', 'actions', 'devices', 'pets', 'geofences', 'groups', 'alerts'] as $resource) {
@@ -211,7 +205,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /**
      * Comments routes
      */
-    Route::put('/comments/{comment}', 'Api\Comments\UpdateController');
 
     /**
      * Find route ...
@@ -222,10 +215,13 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Near route ...
      */
     Route::get('/near/{resource}', 'Api\Near\Resource\IndexController');
+    Route::post('/alerts', 'Api\Alerts\StoreController');
 
     /**
      * Alerts routes ...
      */
-    Route::post('/alerts', 'Api\Alerts\StoreController');
-    Route::put('/alerts/{alert}', 'Api\Alerts\UpdateController');
+    foreach(['alerts', 'comments', 'photos', 'users', 'devices', 'pets', 'groups', 'geofences'] as $resource) {
+        Route::put("/{$resource}/{resource}", 'Api\Resource\UpdateController')
+            ->name("{$resource}.update");
+    }
 });

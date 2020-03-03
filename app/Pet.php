@@ -3,6 +3,9 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Repositories\CommentsRepository;
+use App\Repositories\PetsRepository;
+use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
@@ -12,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class Pet extends Authenticatable implements ReactableContract, Resource
 {
@@ -95,13 +99,31 @@ class Pet extends Authenticatable implements ReactableContract, Resource
     protected $hidden = ['id'];
 
     /**
-     * Get the route key for the model.
+     * Update model via request.
      *
-     * @return string
+     * @param Request $request
+     * @return Pet
      */
-    public function getRouteKeyName()
+    public function updateViaRequest(Request $request)
     {
-        return 'uuid';
+        return PetsRepository::updatePetViaRequest($request, $this);
+    }
+
+    /**
+     * Update pet validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function updateRules(Request $request)
+    {
+        return [
+            'coordinates' => [
+                Rule::requiredIf(function () use ($request) {
+                    return $request->has('photo');
+                }), new Coordinate()
+            ],
+        ];
     }
 
     /**

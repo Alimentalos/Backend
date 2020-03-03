@@ -4,6 +4,9 @@ namespace App;
 
 use App\Contracts\Resource;
 use App\Repositories\AdminRepository;
+use App\Repositories\PetsRepository;
+use App\Repositories\UsersRepository;
+use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
@@ -18,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Validation\Rule;
 
 class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource
 {
@@ -153,6 +157,34 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public function getRouteKeyName()
     {
         return 'uuid';
+    }
+
+    /**
+     * Update model via request.
+     *
+     * @param Request $request
+     * @return User
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return UsersRepository::updateUserViaRequest($request, $this);
+    }
+
+    /**
+     * Update user validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function updateRules(Request $request)
+    {
+        return [
+            'coordinates' => [
+                Rule::requiredIf(function () use ($request) {
+                    return $request->has('photo');
+                }), new Coordinate()
+            ],
+        ];
     }
 
     /**

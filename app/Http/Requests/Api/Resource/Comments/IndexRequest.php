@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Models;
+namespace App\Http\Requests\Api\Resource\Comments;
 
-use App\Rules\Coordinate;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateRequest extends FormRequest
+class IndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +14,7 @@ class UpdateRequest extends FormRequest
     public function authorize()
     {
         $parameters = array_keys($this->route()->parameters());
-        return $this->user('api')->can('update', $this->route($parameters[0]));
+        return $this->user('api')->can('view', $this->route($parameters[0]));
     }
 
     /**
@@ -27,11 +25,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'coordinates' => [
-                Rule::requiredIf(function () {
-                    return $this->has('photo');
-                }), new Coordinate()
-            ],
+            //
         ];
     }
 }

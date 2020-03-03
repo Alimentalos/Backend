@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Repositories\AlertsRepository;
 use App\Repositories\StatusRepository;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -58,14 +59,27 @@ class Alert extends Model implements Resource
         'location',
     ];
 
+
     /**
-     * Get the route key for the alert.
+     * Update model via request.
      *
-     * @return string
+     * @param Request $request
+     * @return Alert
      */
-    public function getRouteKeyName()
+    public function updateViaRequest(Request $request)
     {
-        return 'uuid';
+        return AlertsRepository::updateAlertViaRequest($request, $this);
+    }
+
+    /**
+     * Update alert validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function updateRules(Request $request)
+    {
+        return [];
     }
 
     /**
