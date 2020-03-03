@@ -160,7 +160,7 @@ class Geofence extends Model implements ReactableContract, Resource
     }
 
     /**
-     * The related Photos
+     * The related Photos.
      *
      * @return BelongsToMany
      */
@@ -168,8 +168,8 @@ class Geofence extends Model implements ReactableContract, Resource
     {
         return $this->morphToMany(Photo::class, 'photoable',
             'photoables',
-            'photo_uuid',
             'photoable_id',
+            'photo_uuid',
             'uuid',
             'uuid'
         );

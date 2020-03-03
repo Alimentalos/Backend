@@ -150,8 +150,7 @@ class Photo extends Model implements ReactableContract, Resource
      */
     public function alerts()
     {
-        return $this->morphedByMany(
-            Alert::class,
+        return $this->morphedByMany(Alert::class,
             'photoable',
             'photoables',
             'photo_uuid',

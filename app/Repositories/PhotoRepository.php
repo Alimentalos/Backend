@@ -39,10 +39,10 @@ class PhotoRepository
      * @param $request
      * @return mixed
      */
-    public static function createPhotoUsingRequest($request)
+    public static function createPhotoUsingRequest(Request $request)
     {
         $photoUniqueName = UniqueNameRepository::createIdentifier();
-        return Photo::create([
+        $photo = Photo::create([
             'user_uuid' => $request->user('api')->uuid,
             'uuid' => $photoUniqueName,
             'photo_url' => $photoUniqueName . $request->file('photo')->extension(),
@@ -50,6 +50,8 @@ class PhotoRepository
             'is_public' => $request->has('is_public'),
             'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates'))
         ]);
+        $photo->load('user');
+        return $photo;
     }
 
     /**

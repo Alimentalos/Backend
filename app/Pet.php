@@ -108,8 +108,8 @@ class Pet extends Authenticatable implements ReactableContract, Resource
             Group::class,
             'groupable',
             'groupables',
-            'group_uuid',
             'groupable_id',
+            'group_uuid',
             'uuid',
             'uuid'
         )->withPivot([
@@ -163,8 +163,8 @@ class Pet extends Authenticatable implements ReactableContract, Resource
     {
         return $this->morphToMany(Photo::class, 'photoable',
             'photoables',
-            'photo_uuid',
             'photoable_id',
+            'photo_uuid',
             'uuid',
             'uuid'
         );

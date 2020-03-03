@@ -74,7 +74,7 @@ class PetsRepository
             'description' => $request->input('description'),
             'hair_color' => $request->input('hair_color'),
             'born_at' => $request->input('born_at'),
-            'photo_id' => $photo->id,
+            'photo_uuid' => $photo->uuid,
             'left_eye_color' => $request->input('left_eye_color'),
             'right_eye_color' => $request->input('right_eye_color'),
             'size' => $request->input('size'),

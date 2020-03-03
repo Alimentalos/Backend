@@ -262,8 +262,8 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     {
         return $this->morphToMany(Photo::class, 'photoable',
             'photoables',
-            'photo_uuid',
             'photoable_id',
+            'photo_uuid',
             'uuid',
             'uuid'
         );

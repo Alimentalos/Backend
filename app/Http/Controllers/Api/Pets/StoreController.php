@@ -20,7 +20,7 @@ class StoreController extends Controller
     {
         $photo = PhotoRepository::createPhotoViaRequest($request);
         $pet = PetsRepository::createPetViaRequest($request, $photo);
-        $pet->load('photo', 'user');
+        $pet->load('user', 'photo');
         return response()->json($pet, 200);
     }
 }

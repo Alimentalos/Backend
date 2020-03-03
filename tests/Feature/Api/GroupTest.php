@@ -19,6 +19,34 @@ class GroupTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * @test testIndexGeofencesPhotosApi
+     */
+    final public function testIndexGeofencesPhotosApi()
+    {
+        $user = factory(User::class)->create();
+        $geofence = factory(Geofence::class)->create();
+        $photo = factory(Photo::class)->create();
+        $photo->geofences()->attach($geofence->uuid);
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/geofences/' . $geofence->uuid . '/photos');
+        $response->assertJsonStructure([
+            'data' => [
+                [
+                    'id',
+                    'user_uuid',
+                    'uuid',
+                    'ext',
+                    'user',
+                    'comment',
+                    'is_public',
+                    'created_at',
+                    'updated_at'
+                ]
+            ]
+        ]);
+        $response->assertOk();
+    }
+
+    /**
      * @test testUserCanCreateGroups
      */
     public function testUserCanCreateGroups()
@@ -87,10 +115,10 @@ class GroupTest extends TestCase
         $content = $response->getContent();
 
         $this->assertDatabaseHas('comments', [
-            'id' => (json_decode($content))->id,
-            'user_id' => $user->id,
+            'uuid' => (json_decode($content))->uuid,
+            'user_uuid' => $user->uuid,
             'commentable_type' => 'App\\Group',
-            'commentable_id' => $group->id,
+            'commentable_id' => $group->uuid,
             'body' => $comment->body,
         ]);
     }
@@ -123,7 +151,7 @@ class GroupTest extends TestCase
         Storage::fake('gcs');
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
-        $userB->user_id = $user->id;
+        $userB->user_uuid = $user->uuid;
         $userB->save();
         $group = factory(Group::class)->make();
         $response = $this->actingAs($userB, 'api')->json('POST', '/api/groups', [
@@ -154,7 +182,7 @@ class GroupTest extends TestCase
         ]);
         $this->assertDatabaseHas('actions', [
             'resource' => 'App\\Http\\Controllers\\Api\\Groups\\UpdateController',
-            'referenced_id' => $group->id,
+            'referenced_uuid' => $group->uuid,
         ]);
 
 
@@ -192,7 +220,7 @@ class GroupTest extends TestCase
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $user->groups()->attach($group, [
             'is_admin' => true,
@@ -200,7 +228,7 @@ class GroupTest extends TestCase
         ]);
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/groups/' . $group->uuid);
         $this->assertDeleted('groups', [
-            'id' => $group->id,
+            'uuid' => $group->uuid,
         ]);
         $response->assertOk();
     }
@@ -238,47 +266,19 @@ class GroupTest extends TestCase
     }
 
     /**
-     * @test testIndexGeofencesPhotosApi
-     */
-    final public function testIndexGeofencesPhotosApi()
-    {
-        $user = factory(User::class)->create();
-        $geofence = factory(Geofence::class)->create();
-        $photo = factory(Photo::class)->create();
-        $photo->geofences()->attach($geofence->id);
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/geofences/' . $geofence->uuid . '/photos');
-        $response->assertJsonStructure([
-            'data' => [
-                [
-                    'id',
-                    'user_id',
-                    'uuid',
-                    'ext',
-                    'user',
-                    'comment',
-                    'is_public',
-                    'created_at',
-                    'updated_at'
-                ]
-            ]
-        ]);
-        $response->assertOk();
-    }
-
-    /**
      * @test testIndexUsersPhotosApi
      */
     final public function testIndexUsersPhotosApi()
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->users()->attach($user->id);
+        $photo->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/photos');
         $response->assertJsonStructure([
             'data' => [
                 [
                     'id',
-                    'user_id',
+                    'user_uuid',
                     'uuid',
                     'ext',
                     'user',
@@ -300,13 +300,13 @@ class GroupTest extends TestCase
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->pets()->attach($pet->id);
+        $photo->pets()->attach($pet->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/photos');
         $response->assertJsonStructure([
             'data' => [
                 [
                     'id',
-                    'user_id',
+                    'user_uuid',
                     'uuid',
                     'ext',
                     'user',
@@ -328,14 +328,14 @@ class GroupTest extends TestCase
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->groups()->attach($group->id);
+        $photo->groups()->attach($group->uuid);
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/photos');
         $response->assertJsonStructure([
             'data' => [
                 [
                     'id',
-                    'user_id',
+                    'user_uuid',
                     'uuid',
                     'ext',
                     'user',

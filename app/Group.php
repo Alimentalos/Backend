@@ -6,6 +6,7 @@ use App\Contracts\Resource;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
@@ -157,14 +158,14 @@ class Group extends Model implements Resource
     /**
      * The related Photos.
      *
-     * @return MorphToMany
+     * @return BelongsToMany
      */
     public function photos()
     {
         return $this->morphToMany(Photo::class, 'photoable',
             'photoables',
-            'photo_uuid',
             'photoable_id',
+            'photo_uuid',
             'uuid',
             'uuid'
         );

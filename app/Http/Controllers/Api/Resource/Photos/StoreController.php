@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Photos\StoreRequest;
 use App\Repositories\ModelLocationsRepository;
 use App\Repositories\PhotoRepository;
+use App\User;
 
 class StoreController extends Controller
 {
@@ -14,7 +15,7 @@ class StoreController extends Controller
         $photo = PhotoRepository::createPhotoViaRequest($request);
         $resource = ModelLocationsRepository::updateModelLocation($request, $resource);
         $resource->photos()->attach($photo->uuid);
-        $photo->load('user', 'comment');
+        $photo = $photo->load('comment');
         return response()->json(
             $photo,
             200
