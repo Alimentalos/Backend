@@ -27,8 +27,8 @@ class FindTest extends TestCase
         $device->locations()->saveMany(
             factory(Location::class, 10)->create()
         );
-        $group->devices()->attach($device->id);
-        $group->users()->attach($user->id);
+        $group->devices()->attach($device->uuid);
+        $group->users()->attach($user->uuid);
         $responseDevices = $this->actingAs($user, 'api')->json('GET', '/api/find', [
             'api_token' => $user->api_token,
             'type' => 'devices',

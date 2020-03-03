@@ -23,7 +23,7 @@ class LoggerRepository
             'parameters' => $parameters,
             'resource' => $resource,
             'user_uuid' => $user->uuid,
-            'referenced_id' => null,
+            'referenced_uuid' => null,
         ]);
     }
 
@@ -42,7 +42,7 @@ class LoggerRepository
             'parameters' => $parameters['parameters'],
             'resource' => $parameters['resource'],
             'user_uuid' => $user->uuid,
-            'referenced_id' => $parameters['referenced']
+            'referenced_uuid' => $parameters['referenced']
         ]);
     }
 }

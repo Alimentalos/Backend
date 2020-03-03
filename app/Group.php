@@ -89,7 +89,7 @@ class Group extends Model implements Resource
         return $this->morphTo(
             'groupable',
             'groupable_type',
-            'groupable_uuid',
+            'groupable_id',
             'group_uuid'
         );
     }
@@ -213,8 +213,8 @@ class Group extends Model implements Resource
     {
         return $this->morphedByMany(Geofence::class, 'groupable',
             'groupables',
-            'groupable_id',
             'group_uuid',
+            'groupable_id',
             'uuid',
             'uuid'
         )->withPivot([

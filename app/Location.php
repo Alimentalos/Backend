@@ -26,7 +26,7 @@ class Location extends Model implements Resource
      * @var array
      */
     protected $fillable = [
-        "trackable_uuid",
+        "trackable_id",
         "trackable_type",
         "device",
         "uuid",
@@ -69,7 +69,12 @@ class Location extends Model implements Resource
      */
     public function trackable()
     {
-        return $this->morphTo();
+        return $this->morphTo(
+            'trackable',
+            'trackable_type',
+            'trackable_id',
+            'uuid'
+        );
     }
 
     /**

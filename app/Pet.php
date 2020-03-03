@@ -126,7 +126,13 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function geofences()
     {
-        return $this->morphToMany(Geofence::class, 'geofenceable');
+        return $this->morphToMany(Geofence::class, 'geofenceable',
+            'geofenceables',
+            'geofenceable_id',
+            'geofence_uuid',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -134,7 +140,8 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function accesses()
     {
-        return $this->morphMany(Access::class, 'accessible');
+        return $this->morphMany(Access::class, 'accessible', 'accessible_type',
+            'accessible_id', 'uuid');
     }
 
     /**
@@ -170,7 +177,8 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function locations()
     {
-        return $this->morphMany(Location::class, 'trackable');
+        return $this->morphMany(Location::class, 'trackable', 'trackable_type',
+            'trackable_id', 'uuid');
     }
 
     /**
@@ -180,7 +188,7 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     /**

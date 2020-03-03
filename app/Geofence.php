@@ -79,7 +79,12 @@ class Geofence extends Model implements ReactableContract, Resource
      */
     public function geofenceable()
     {
-        return $this->morphTo();
+        return $this->morphTo(
+            'geofenceable',
+            'geofenceable_type',
+            'geofenceable_id',
+            'geofence_uuid'
+        );
     }
 
 
@@ -90,7 +95,14 @@ class Geofence extends Model implements ReactableContract, Resource
      */
     public function devices()
     {
-        return $this->morphedByMany(Device::class, 'geofenceable');
+        return $this->morphedByMany(Device::class,
+            'geofenceable',
+            'geofenceables',
+            'geofence_uuid',
+            'geofenceable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -100,7 +112,14 @@ class Geofence extends Model implements ReactableContract, Resource
      */
     public function pets()
     {
-        return $this->morphedByMany(Pet::class, 'geofenceable');
+        return $this->morphedByMany(Pet::class,
+            'geofenceable',
+            'geofenceables',
+            'geofence_uuid',
+            'geofenceable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -110,7 +129,14 @@ class Geofence extends Model implements ReactableContract, Resource
      */
     public function users()
     {
-        return $this->morphedByMany(User::class, 'geofenceable');
+        return $this->morphedByMany(User::class,
+            'geofenceable',
+            'geofenceables',
+            'geofence_uuid',
+            'geofenceable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -120,7 +146,7 @@ class Geofence extends Model implements ReactableContract, Resource
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'photo_uuid', 'uuid');
     }
 
     /**
@@ -130,7 +156,7 @@ class Geofence extends Model implements ReactableContract, Resource
      */
     public function photo()
     {
-        return $this->belongsTo(Photo::class);
+        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
     }
 
     /**
@@ -168,8 +194,8 @@ class Geofence extends Model implements ReactableContract, Resource
             Group::class,
             'groupable',
             'groupables',
-            'group_uuid',
             'groupable_id',
+            'group_uuid',
             'uuid',
             'uuid'
         )->withPivot([

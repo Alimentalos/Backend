@@ -109,8 +109,8 @@ class Device extends Authenticatable implements Resource
     {
         return $this->morphToMany(Geofence::class, 'geofenceable',
             'geofenceables',
-            'geofence_uuid',
             'geofenceable_id',
+            'geofence_uuid',
             'uuid',
             'uuid'
         );
@@ -123,7 +123,8 @@ class Device extends Authenticatable implements Resource
      */
     public function locations()
     {
-        return $this->morphMany(Location::class, 'trackable');
+        return $this->morphMany(Location::class, 'trackable', 'trackable_type',
+            'trackable_id', 'uuid');
     }
 
     /**
@@ -143,7 +144,7 @@ class Device extends Authenticatable implements Resource
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -151,7 +152,8 @@ class Device extends Authenticatable implements Resource
      */
     public function accesses()
     {
-        return $this->morphMany(Access::class, 'accessible');
+        return $this->morphMany(Access::class, 'accessible', 'accessible_type',
+            'accessible_id', 'uuid');
     }
 
     /**

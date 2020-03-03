@@ -185,8 +185,8 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     {
         return $this->morphToMany(Geofence::class, 'geofenceable',
             'geofenceables',
-            'geofence_uuid',
             'geofenceable_id',
+            'geofence_uuid',
             'uuid',
             'uuid'
         );
@@ -229,7 +229,8 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function locations()
     {
-        return $this->morphMany(Location::class, 'trackable');
+        return $this->morphMany(Location::class, 'trackable', 'trackable_type',
+            'trackable_id', 'uuid');
     }
 
     /**
@@ -273,7 +274,8 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function accesses()
     {
-        return $this->morphMany(Access::class, 'accessible');
+        return $this->morphMany(Access::class, 'accessible', 'accessible_type',
+            'accessible_id', 'uuid');
     }
 
     /**

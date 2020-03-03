@@ -80,7 +80,7 @@ class Access extends Model
      */
     public function geofence()
     {
-        return $this->belongsTo(Geofence::class);
+        return $this->belongsTo(Geofence::class, 'geofence_uuid', 'uuid');
     }
 
     /**
