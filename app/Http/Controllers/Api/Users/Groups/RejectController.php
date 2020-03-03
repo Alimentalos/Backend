@@ -20,7 +20,7 @@ class RejectController extends Controller
      */
     public function __invoke(RejectRequest $request, User $user, Group $group)
     {
-        $user->groups()->updateExistingPivot($group->id, [
+        $user->groups()->updateExistingPivot($group->uuid, [
             'status' => Group::REJECTED_STATUS,
         ]);
         return response()->json([], 200);

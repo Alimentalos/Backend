@@ -13,7 +13,7 @@ class StoreController extends Controller
     {
         $photo = PhotoRepository::createPhotoViaRequest($request);
         $resource = ModelLocationsRepository::updateModelLocation($request, $resource);
-        $resource->photos()->attach($photo->id);
+        $resource->photos()->attach($photo->uuid);
         $photo->load('user', 'comment');
         return response()->json(
             $photo,

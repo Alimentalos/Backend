@@ -19,7 +19,7 @@ class DetachController extends Controller
      */
     public function __invoke(DetachRequest $request, $resource, Geofence $geofence)
     {
-        $resource->geofences()->detach($geofence->id);
+        $resource->geofences()->detach($geofence->uuid);
         return response()->json([], 200);
     }
 }

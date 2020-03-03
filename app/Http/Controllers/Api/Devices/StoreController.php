@@ -21,7 +21,7 @@ class StoreController extends Controller
         $device = Device::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'user_id' => $request->user('api')->id,
+            'user_uuid' => $request->user('api')->uuid,
             'is_public' => $request->input('is_public'),
         ]);
 

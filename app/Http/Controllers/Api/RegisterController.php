@@ -28,13 +28,6 @@ class RegisterController extends Controller
 
         event(new Registered($user));
 
-        LoggerRepository::createAction(
-            $user,
-            'success',
-            'register',
-            $request->only('name', 'email', 'is_public')
-        );
-
         return response()->json($user, 201);
     }
 }

@@ -19,7 +19,7 @@ class AttachController extends Controller
      */
     public function __invoke(AttachRequest $request, $resource, Group $group)
     {
-        $resource->groups()->attach($group->id, [
+        $resource->groups()->attach($group->uuid, [
             'status' => Group::ATTACHED_STATUS,
             'is_admin' => $request->has('is_admin') ? $request->input('is_admin') : false,
         ]);

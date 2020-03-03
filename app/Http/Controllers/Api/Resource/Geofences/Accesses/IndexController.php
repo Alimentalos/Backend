@@ -23,7 +23,7 @@ class IndexController extends Controller
             $resource->accesses()->with([
                 'accessible', 'geofence', 'first_location', 'last_location'
             ])->where([
-                ['geofence_id', $geofence->id]
+                ['geofence_uuid', $geofence->uuid]
             ])->latest()->paginate(20),
             200
         );
