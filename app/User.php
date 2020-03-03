@@ -63,7 +63,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
         'uuid',
         'email_verified_at',
         'api_token',
-        'photo_id',
+        'photo_uuid',
         'photo_url',
         'user_uuid',
         'name',
@@ -250,7 +250,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function photo()
     {
-        return $this->belongsTo(Photo::class, 'uuid', 'user_uuid');
+        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
     }
 
     /**
