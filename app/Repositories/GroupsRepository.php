@@ -68,7 +68,7 @@ class GroupsRepository
     {
         return $model->user_uuid === $user->uuid || $user->groups()
                 ->whereIn(
-                    'group_uuid',
+                    'uuid',
                     $model->groups->pluck('uuid')->toArray()
                 )->exists();
     }
