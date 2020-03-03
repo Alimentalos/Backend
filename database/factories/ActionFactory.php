@@ -10,7 +10,7 @@ $factory->define(Action::class, function (Faker $faker) {
     return [
         'uuid' => (string) $faker->uuid,
         'user_uuid' => factory(User::class)->create()->uuid,
-        'referenced_id' => factory(User::class)->create()->id,
+        'referenced_uuid' => factory(User::class)->create()->uuid,
         'resource' => 'Sample',
         'type' => $faker->randomElement(['success', 'failed', 'rejected']),
         'parameters' => [

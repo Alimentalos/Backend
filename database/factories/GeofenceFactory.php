@@ -24,8 +24,8 @@ use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 $factory->define(Geofence::class, function (Faker $faker) {
     return [
         'uuid' => (string) $faker->uuid,
-        'user_id' => factory(User::class)->create()->id,
-        'photo_id' => factory(Photo::class)->create()->id,
+        'user_uuid' => factory(User::class)->create()->uuid,
+        'photo_uuid' => factory(Photo::class)->create()->uuid,
         'name' => $faker->name,
         'is_public' => true,
         'shape' => (new Polygon(\App\Repositories\GeofenceRepository::createSamplePolygon())),

@@ -18,15 +18,15 @@ $factory->define(Alert::class, function (Faker $faker) {
     $class = $faker->randomElement(AlertsRepository::availableAlertTypes());
     $alert_id = (
         $class === 'App\\User' ?
-            factory(User::class)->create()->id :
+            factory(User::class)->create()->uuid :
             (
-                $class === 'App\\Pet' ? factory(Pet::class)->create()->id : factory(Device::class)->create()->id
+                $class === 'App\\Pet' ? factory(Pet::class)->create()->uuid : factory(Device::class)->create()->uuid
             )
     );
     return [
         'uuid' => (string) $faker->uuid,
-        'user_id' => factory(User::class)->create()->id,
-        'photo_id' => factory(Photo::class)->create()->id,
+        'user_uuid' => factory(User::class)->create()->uuid,
+        'photo_uuid' => factory(Photo::class)->create()->uuid,
         'photo_url' => config('storage.path') . 'example.png',
         'location' => (new Point($faker->latitude(), $faker->longitude())),
         'alert_type' => $class,
