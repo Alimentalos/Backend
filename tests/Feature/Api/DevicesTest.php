@@ -22,7 +22,7 @@ class DevicesTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $device->is_public = true;
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
@@ -30,7 +30,7 @@ class DevicesTest extends TestCase
             'data' => [
                 [
                     'id',
-                    'user_id',
+                    'user_uuid',
                     'uuid',
                     'api_token',
                     'name',
@@ -51,7 +51,7 @@ class DevicesTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $device->is_public = false;
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
@@ -59,7 +59,7 @@ class DevicesTest extends TestCase
             'data' => [
                 [
                     'id',
-                    'user_id',
+                    'user_uuid',
                     'uuid',
                     'api_token',
                     'name',
@@ -80,8 +80,8 @@ class DevicesTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $group = factory(Group::class)->create();
-        $group->devices()->attach($device->id);
-        $group->users()->attach($user->id);
+        $group->devices()->attach($device->uuid);
+        $group->users()->attach($user->uuid);
         $user->email_verified_at = null;
         $user->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
@@ -96,15 +96,15 @@ class DevicesTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $group = factory(Group::class)->create();
-        $group->devices()->attach($device->id);
-        $group->users()->attach($user->id);
+        $group->devices()->attach($device->uuid);
+        $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
                     'id',
-                    'user_id',
+                    'user_uuid',
                     'uuid',
                     'api_token',
                     'name',
@@ -125,12 +125,12 @@ class DevicesTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $group = factory(Group::class)->create();
-        $group->devices()->attach($device->id);
-        $group->users()->attach($user->id);
+        $group->devices()->attach($device->uuid);
+        $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);
         $response->assertJsonStructure([
             'id',
-            'user_id',
+            'user_uuid',
             'uuid',
             'api_token',
             'name',
@@ -151,8 +151,8 @@ class DevicesTest extends TestCase
         $group = factory(Group::class)->create();
         $device->is_public = false;
         $device->save();
-        $group->devices()->attach($device->id);
-        $group->users()->attach($user->id);
+        $group->devices()->attach($device->uuid);
+        $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);
         $response->assertOk();
     }
@@ -230,7 +230,7 @@ class DevicesTest extends TestCase
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/devices/' . $device->uuid, [
             'name' => 'New name',
@@ -246,7 +246,7 @@ class DevicesTest extends TestCase
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/devices/' . $device->uuid);
         $response->assertOk();
@@ -260,13 +260,13 @@ class DevicesTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $group = factory(Group::class)->create();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS
         ]);
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $response = $this->actingAs($user, 'api')->json(
             'POST',
@@ -276,8 +276,8 @@ class DevicesTest extends TestCase
         $response->assertOk();
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\Device',
-            'groupable_id' => $device->id,
-            'group_id' => $group->id,
+            'groupable_id' => $device->uuid,
+            'group_uuid' => $group->uuid,
         ]);
     }
 
@@ -289,13 +289,13 @@ class DevicesTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $group = factory(Group::class)->create();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS
         ]);
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $device->groups()->attach($group, [
             'status' => Group::ACCEPTED_STATUS
@@ -308,8 +308,8 @@ class DevicesTest extends TestCase
         $response->assertExactJson([]);
         $this->assertDeleted('groupables', [
             'groupable_type' => 'App\\Device',
-            'groupable_id' => $device->id,
-            'group_id' => $group->id,
+            'groupable_id' => $device->uuid,
+            'group_uuid' => $group->uuid,
         ]);
         $response->assertOk();
     }
@@ -322,21 +322,21 @@ class DevicesTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $group = factory(Group::class)->create();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS
         ]);
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $device->groups()->attach($group, [
             'status' => Group::ACCEPTED_STATUS
         ]);
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\Device',
-            'groupable_id' => $device->id,
-            'group_id' => $group->id,
+            'groupable_id' => $device->uuid,
+            'group_uuid' => $group->uuid,
         ]);
         $response = $this->actingAs($user, 'api')->json(
             'GET',
