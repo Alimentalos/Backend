@@ -9,7 +9,7 @@ use Faker\Generator as Faker;
 $factory->define(Action::class, function (Faker $faker) {
     return [
         'uuid' => (string) $faker->uuid,
-        'user_id' => factory(User::class)->create()->id,
+        'user_uuid' => factory(User::class)->create()->uuid,
         'referenced_id' => factory(User::class)->create()->id,
         'resource' => 'Sample',
         'type' => $faker->randomElement(['success', 'failed', 'rejected']),

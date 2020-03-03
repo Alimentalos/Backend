@@ -15,7 +15,7 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->index();
+            $table->bigInteger('user_uuid')->index();
             $table->point('location')->nullable(); // Latitude, Longitude
             $table->string('uuid')->unique()->index();
             $table->string('name');
