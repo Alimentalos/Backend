@@ -138,7 +138,7 @@ class GroupTest extends TestCase
             'is_public' => 'true',
             'coordinates' => '10.1,50.5'
         ]);
-        $response->assertOk();
+        $response->assertCreated();
         $content = $response->getContent();
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
@@ -160,7 +160,7 @@ class GroupTest extends TestCase
             'is_public' => 'false',
             'coordinates' => '10.1,50.5'
         ]);
-        $response->assertOk();
+        $response->assertCreated();
         $content = $response->getContent();
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
@@ -181,7 +181,7 @@ class GroupTest extends TestCase
             'name' => 'New name'
         ]);
         $this->assertDatabaseHas('actions', [
-            'resource' => 'App\\Http\\Controllers\\Api\\Groups\\UpdateController',
+            'resource' => 'App\\Http\\Controllers\\Api\\Resource\\UpdateController',
             'referenced_uuid' => $group->uuid,
         ]);
 

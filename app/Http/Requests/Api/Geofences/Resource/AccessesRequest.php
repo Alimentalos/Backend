@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Photos;
+namespace App\Http\Requests\Api\Geofences\Resource;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class AccessesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('update', $this->route('photo'));
+        return $this->user('api')->can('view', $this->route('geofence'));
     }
 
     /**

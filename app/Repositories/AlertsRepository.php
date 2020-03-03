@@ -13,11 +13,11 @@ class AlertsRepository
      * Create alert via request.
      *
      * @param Request $request
-     * @param Photo $photo
      * @return Alert
      */
-    public static function createAlertViaRequest(Request $request, Photo $photo)
+    public static function createAlertViaRequest(Request $request)
     {
+        $photo = PhotoRepository::createPhotoViaRequest($request);
         $alert_type = $request->input('alert_type');
         $alert = HandleBindingRepository::bindResourceInstance($alert_type, $request->input('alert_id'));
         $alert = Alert::create([
@@ -34,6 +34,7 @@ class AlertsRepository
             'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
         ]);
         $photo->alerts()->attach($alert->uuid);
+        $alert->load('photo', 'user');
         return $alert;
     }
 

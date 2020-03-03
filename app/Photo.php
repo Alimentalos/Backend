@@ -3,6 +3,9 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Repositories\GroupsRepository;
+use App\Repositories\PhotoRepository;
+use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
@@ -66,13 +69,25 @@ class Photo extends Model implements ReactableContract, Resource
     protected $hidden = ['id'];
 
     /**
-     * Get the route key for the model.
+     * Update model via request.
      *
-     * @return string
+     * @param Request $request
+     * @return Photo
      */
-    public function getRouteKeyName()
+    public function updateViaRequest(Request $request)
     {
-        return 'uuid';
+        return PhotoRepository::updatePhotoViaRequest($request, $this);
+    }
+
+    /**
+     * Update geofence validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function updateRules(Request $request)
+    {
+        return [];
     }
 
     /**

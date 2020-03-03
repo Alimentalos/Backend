@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\Models\Comments;
+namespace App\Http\Requests\Api\Resource;
 
+use App\Repositories\HandleBindingRepository;
 use Illuminate\Foundation\Http\FormRequest;
 
-class IndexRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,8 +14,7 @@ class IndexRequest extends FormRequest
      */
     public function authorize()
     {
-        $parameters = array_keys($this->route()->parameters());
-        return $this->user('api')->can('view', $this->route($parameters[0]));
+        return $this->user('api')->can('update', $this->route('resource'));
     }
 
     /**
@@ -24,8 +24,6 @@ class IndexRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return HandleBindingRepository::bindResource(get_class($this->route('resource')))::updateRules($this);
     }
 }

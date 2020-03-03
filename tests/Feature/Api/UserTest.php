@@ -34,7 +34,7 @@ class UserTest extends TestCase
             'is_public' => true,
             'coordinates' => '5.5,6.5',
         ]);
-        $response->assertOk();
+        $response->assertCreated();
         $content = $response->getContent();
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }

@@ -3,6 +3,10 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Repositories\DevicesRepository;
+use App\Repositories\GeofenceRepository;
+use App\Repositories\GroupsRepository;
+use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
@@ -12,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class Geofence extends Model implements ReactableContract, Resource
 {
@@ -69,6 +74,62 @@ class Geofence extends Model implements ReactableContract, Resource
     protected $casts = [
         'is_public' => 'boolean',
     ];
+
+    /**
+     * Update model via request.
+     *
+     * @param Request $request
+     * @return Geofence
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return GeofenceRepository::updateGeofenceViaRequest($request, $this);
+    }
+
+    /**
+     * Update geofence validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function updateRules(Request $request)
+    {
+        return [
+            'coordinates' => [
+                Rule::requiredIf(function () use ($request) {
+                    return $request->has('photo');
+                }), new Coordinate()
+            ],
+        ];
+    }
+
+    /**
+     * Create model via request.
+     *
+     * @param Request $request
+     * @return Geofence
+     */
+    public static function createViaRequest(Request $request)
+    {
+        return GeofenceRepository::createGeofenceViaRequest($request);
+    }
+
+    /**
+     * Store geofence validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function storeRules(Request $request)
+    {
+        return [
+            'name' => 'required',
+            'photo' => 'required',
+            'shape.*.latitude' => 'required_with:shape.*.longitude',
+            'is_public' => 'required|boolean',
+            'coordinates' => ['required', new Coordinate()],
+        ];
+    }
 
     /**
      * Get the route key for the model.

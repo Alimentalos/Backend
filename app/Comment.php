@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Repositories\AlertsRepository;
+use App\Repositories\CommentsRepository;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -43,13 +45,25 @@ class Comment extends Model implements ReactableContract, Resource
     protected $hidden = ['id'];
 
     /**
-     * Get the route key for the model.
+     * Update model via request.
      *
-     * @return string
+     * @param Request $request
+     * @return Comment
      */
-    public function getRouteKeyName()
+    public function updateViaRequest(Request $request)
     {
-        return 'uuid';
+        return CommentsRepository::updateCommentViaRequest($request, $this);
+    }
+
+    /**
+     * Update comment validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function updateRules(Request $request)
+    {
+        return [];
     }
 
     /**

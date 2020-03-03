@@ -3,6 +3,10 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Repositories\GeofenceRepository;
+use App\Repositories\GroupsRepository;
+use App\Repositories\UsersRepository;
+use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class Group extends Model implements Resource
 {
@@ -76,6 +81,61 @@ class Group extends Model implements Resource
     protected $with = [
         'user'
     ];
+
+    /**
+     * Update model via request.
+     *
+     * @param Request $request
+     * @return Group
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return GroupsRepository::updateGroupViaRequest($request, $this);
+    }
+
+    /**
+     * Update geofence validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function updateRules(Request $request)
+    {
+        return [
+            'coordinates' => [
+                Rule::requiredIf(function () use ($request) {
+                    return $request->has('photo');
+                }), new Coordinate()
+            ],
+        ];
+    }
+
+    /**
+     * Create model via request.
+     *
+     * @param Request $request
+     * @return Group
+     */
+    public static function createViaRequest(Request $request)
+    {
+        return GroupsRepository::createGroupViaRequest($request);
+    }
+
+    /**
+     * Store geofence validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function storeRules(Request $request)
+    {
+        return [
+            'name' => 'required',
+            'photo' => 'required',
+            'is_public' => 'required|boolean',
+            'coordinates' => ['required', new Coordinate()],
+        ];
+    }
 
     /**
      * Get the route key for the model.
