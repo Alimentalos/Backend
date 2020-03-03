@@ -19,9 +19,10 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        $models = HandleBindingRepository::bindResourceModelClass($request->input('type'))::whereIn(
-            'uuid',
-            explode(',', $request->input('identifiers'))
+        $models = HandleBindingRepository::bindResourceModelClass(
+            $request->input('type'))::whereIn(
+                'uuid', explode(',', $request->input('identifiers')
+            )
         )->get();
 
         $locations = LocationRepository::searchLocations( // Search locations
