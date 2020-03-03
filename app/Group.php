@@ -5,6 +5,7 @@ namespace App;
 use App\Contracts\Resource;
 use App\Repositories\GeofenceRepository;
 use App\Repositories\GroupsRepository;
+use App\Repositories\UsersRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
@@ -106,6 +107,33 @@ class Group extends Model implements Resource
                     return $request->has('photo');
                 }), new Coordinate()
             ],
+        ];
+    }
+
+    /**
+     * Create model via request.
+     *
+     * @param Request $request
+     * @return Group
+     */
+    public static function createViaRequest(Request $request)
+    {
+        return GroupsRepository::createGroupViaRequest($request);
+    }
+
+    /**
+     * Store geofence validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function storeRules(Request $request)
+    {
+        return [
+            'name' => 'required',
+            'photo' => 'required',
+            'is_public' => 'required|boolean',
+            'coordinates' => ['required', new Coordinate()],
         ];
     }
 

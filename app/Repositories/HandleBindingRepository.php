@@ -43,8 +43,8 @@ class HandleBindingRepository {
             [
                 'type' => 'success',
                 'resource' => Route::currentRouteAction(),
-                'parameters' => $request->route($parameters[0])->uuid,
-                'referenced' => $request->route($parameters[1])->uuid
+                'parameters' => $request->route($parameters[0])->uuid ?? $parameters[0],
+                'referenced' => $request->route($parameters[1])->uuid ?? $parameters[1]
             ]
         );
     }

@@ -138,7 +138,7 @@ class GroupTest extends TestCase
             'is_public' => 'true',
             'coordinates' => '10.1,50.5'
         ]);
-        $response->assertOk();
+        $response->assertCreated();
         $content = $response->getContent();
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
@@ -160,7 +160,7 @@ class GroupTest extends TestCase
             'is_public' => 'false',
             'coordinates' => '10.1,50.5'
         ]);
-        $response->assertOk();
+        $response->assertCreated();
         $content = $response->getContent();
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }

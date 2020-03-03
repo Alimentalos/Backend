@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Geofences\Pets;
+namespace App\Http\Requests\Api\Geofences\Resource;
 
 use Illuminate\Foundation\Http\FormRequest;
 

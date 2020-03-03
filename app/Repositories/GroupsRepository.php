@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Group;
-use App\Photo;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -32,11 +31,11 @@ class GroupsRepository
      * Create group via request.
      *
      * @param Request $request
-     * @param Photo $photo
-     * @return mixed
+     * @return Group
      */
-    public static function createGroupViaRequest(Request $request, Photo $photo)
+    public static function createGroupViaRequest(Request $request)
     {
+        $photo = PhotoRepository::createPhotoViaRequest($request);
         $group = Group::create([
             'name' => $request->input('name'),
             'user_uuid' => $request->user('api')->uuid,
@@ -54,6 +53,7 @@ class GroupsRepository
                 ]
             );
         $group->photos()->attach($photo->uuid);
+        $group->load('photo', 'user');
         return $group;
     }
 

@@ -5,6 +5,7 @@ namespace App;
 use App\Contracts\Resource;
 use App\Repositories\CommentsRepository;
 use App\Repositories\PetsRepository;
+use App\Repositories\UsersRepository;
 use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
@@ -123,6 +124,46 @@ class Pet extends Authenticatable implements ReactableContract, Resource
                     return $request->has('photo');
                 }), new Coordinate()
             ],
+        ];
+    }
+
+    /**
+     * Create model via request.
+     *
+     * @param Request $request
+     * @return Pet
+     */
+    public static function createViaRequest(Request $request)
+    {
+        return PetsRepository::createPetViaRequest($request);
+    }
+
+    /**
+     * Store pet validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function storeRules(Request $request)
+    {
+        return [
+            'name' => 'required',
+            'photo' => 'required',
+            'is_public' => 'required|boolean',
+            'hair_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'left_eye_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'right_eye_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'size' => [
+                Rule::in([
+                    PetsRepository::SIZE_EXTRA_SMALL,
+                    PetsRepository::SIZE_SMALL,
+                    PetsRepository::SIZE_MEDIUM,
+                    PetsRepository::SIZE_LARGE,
+                    PetsRepository::SIZE_EXTRA_LARGE
+                ])
+            ],
+            'born_at' => 'required',
+            'coordinates' => ['required', new Coordinate()],
         ];
     }
 

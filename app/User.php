@@ -188,6 +188,35 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     }
 
     /**
+     * Create model via request.
+     *
+     * @param Request $request
+     * @return User
+     */
+    public static function createViaRequest(Request $request)
+    {
+        return UsersRepository::createUserViaRequest($request);
+    }
+
+    /**
+     * Store user validation rules.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public static function storeRules(Request $request)
+    {
+        return [
+            'name' => 'required',
+            'photo' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|confirmed|min:8',
+            'is_public' => 'required|boolean',
+            'coordinates' => ['required', new Coordinate()],
+        ];
+    }
+
+    /**
      * The related Groups.
      *
      * @return BelongsToMany

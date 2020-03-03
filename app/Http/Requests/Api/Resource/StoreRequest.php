@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Api\Devices;
+namespace App\Http\Requests\Api\Resource;
 
-use App\Device;
+use App\Repositories\HandleBindingRepository;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('create', Device::class);
+        return $this->user('api')->can('create', HandleBindingRepository::bindResourceModelClass($this->route('resource')));
     }
 
     /**
@@ -24,9 +24,6 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required',
-            'is_public' => 'required|boolean',
-        ];
+        return HandleBindingRepository::bindResourceModelClass($this->route('resource'))::storeRules($this);
     }
 }

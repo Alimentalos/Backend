@@ -65,8 +65,9 @@ class PetsRepository
      * @param Photo $photo
      * @return Pet
      */
-    public static function createPetViaRequest(Request $request, Photo $photo)
+    public static function createPetViaRequest(Request $request)
     {
+        $photo = PhotoRepository::createPhotoViaRequest($request);
         $pet = Pet::create([
             'name' => $request->input('name'),
             'photo_url' => config('storage.path') . $photo->photo_url,
@@ -82,6 +83,7 @@ class PetsRepository
             'is_public' => $request->input('is_public')
         ]);
         $photo->pets()->attach($pet->uuid);
+        $pet->load('user', 'photo');
         return $pet;
     }
 }

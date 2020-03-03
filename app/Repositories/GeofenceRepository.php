@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Events\GeofenceIn;
 use App\Events\GeofenceOut;
 use App\Geofence;
-use App\Photo;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
@@ -70,11 +69,11 @@ class GeofenceRepository
      * Create geofence via request.
      *
      * @param Request $request
-     * @param Photo $photo
      * @return Geofence
      */
-    public static function createGeofenceViaRequest(Request $request, Photo $photo)
+    public static function createGeofenceViaRequest(Request $request)
     {
+        $photo = PhotoRepository::createPhotoViaRequest($request);
         $geofence = new Geofence();
         $geofence->uuid = UniqueNameRepository::createIdentifier();
         $geofence->photo_uuid = $photo->uuid;
@@ -88,6 +87,8 @@ class GeofenceRepository
         $geofence->shape = new Polygon([new LineString($shape)]);
         $geofence->is_public = $request->input('is_public');
         $geofence->save();
+        $geofence->load('photo', 'user');
+        $photo->geofences()->attach($geofence->uuid);
         return $geofence;
     }
 

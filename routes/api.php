@@ -78,12 +78,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     /**
      * Groups routes ...
      */
-    Route::post('/groups', 'Api\Groups\StoreController');
 
     /**
      * Geofences routes ...
      */
-    Route::post('/geofences', 'Api\Geofences\StoreController');
 
 
     // Geofences Groups
@@ -92,19 +90,18 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
         ->name('geofences.groups.index');
 
     // Geofences Accesses
-    Route::get('/geofences/{geofence}/devices/accesses', 'Api\Geofences\Devices\AccessesController');
-    Route::get('/geofences/{geofence}/users/accesses', 'Api\Geofences\Users\AccessesController');
-    Route::get('/geofences/{geofence}/pets/accesses', 'Api\Geofences\Pets\AccessesController');
+    foreach(['devices', 'users', 'pets'] as $resource) {
+        Route::get('/geofences/{geofence}/{resource}/accesses', 'Api\Geofences\Resource\AccessesController')
+            ->name("geofences.{$resource}.accesses");
+    }
 
     /**
      * Pets routes ...
      */
-    Route::post('/pets', 'Api\Pets\StoreController');
 
     /**
      * Devices routes ...
      */
-    Route::post('/devices', 'Api\Devices\StoreController');
 
     // Resource Devices
 
@@ -168,7 +165,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     Route::get('/user', 'Api\UserController');
     Route::post('/user/locations', 'Api\Resource\LocationsController')->name('user.locations');
-    Route::post('/users', 'Api\Users\StoreController');
 
     // User Groups
 
@@ -195,6 +191,11 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Photos routes
      */
 
+    foreach(['users', 'pets', 'groups', 'geofences', 'devices', 'alerts'] as $resource) {
+        Route::post("/{resource}", 'Api\Resource\StoreController')
+            ->name("{$resource}.store");
+    }
+
     // Resource delete routes ...
     foreach(['photos', 'users', 'comments', 'actions', 'devices', 'pets', 'geofences', 'groups', 'alerts'] as $resource) {
         Route::delete("/{$resource}/{resource}", 'Api\Resource\DestroyController')
@@ -215,7 +216,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
      * Near route ...
      */
     Route::get('/near/{resource}', 'Api\Near\Resource\IndexController');
-    Route::post('/alerts', 'Api\Alerts\StoreController');
 
     /**
      * Alerts routes ...

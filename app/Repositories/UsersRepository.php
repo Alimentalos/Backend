@@ -29,8 +29,9 @@ class UsersRepository
      * @param Photo $photo
      * @return mixed
      */
-    public static function createUserViaRequest(Request $request, Photo $photo)
+    public static function createUserViaRequest(Request $request)
     {
+        $photo = PhotoRepository::createPhotoViaRequest($request);
         $user = User::create([
             'user_uuid' => $request->user('api')->uuid,
             'photo_uuid' => $photo->uuid,
@@ -43,6 +44,7 @@ class UsersRepository
         ]);
         $user->photos()->attach($photo->uuid);
         event(new Registered($user));
+        $user->load('photo', 'user');
         return $user;
     }
 

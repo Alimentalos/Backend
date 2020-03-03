@@ -1059,7 +1059,7 @@ class GeofenceTest extends TestCase
             'created_at',
             'updated_at',
         ]);
-        $response->assertOk();
+        $response->assertCreated();
         $content = $response->getContent();
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
