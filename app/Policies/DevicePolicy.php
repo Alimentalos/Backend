@@ -98,7 +98,7 @@ class DevicePolicy
         return $user->is_admin ||
             (
                 UsersRepository::isProperty($device, $user) &&
-                !in_array($device->id, $geofence->devices->pluck('id')->toArray())
+                !in_array($device->uuid, $geofence->devices->pluck('uuid')->toArray())
             );
     }
 
@@ -115,7 +115,7 @@ class DevicePolicy
         return $user->is_admin ||
             (
                 UsersRepository::isProperty($device, $user) &&
-                in_array($device->id, $geofence->devices->pluck('id')->toArray())
+                in_array($device->uuid, $geofence->devices->pluck('uuid')->toArray())
             );
     }
 

@@ -32,7 +32,7 @@ class GeofencePolicy
      */
     public function view(User $user, Geofence $geofence)
     {
-        return $user->is_admin || $geofence->is_public || $geofence->user_id === $user->id || $geofence->user_id === $user->user_id;
+        return $user->is_admin || $geofence->is_public || $geofence->user_uuid === $user->uuid || $geofence->user_uuid === $user->user_uuid;
     }
 
     /**
@@ -55,7 +55,7 @@ class GeofencePolicy
      */
     public function update(User $user, Geofence $geofence)
     {
-        return $user->is_admin || $geofence->user_id === $user->id;
+        return $user->is_admin || $geofence->user_uuid === $user->uuid;
     }
 
     /**
@@ -68,7 +68,7 @@ class GeofencePolicy
     public function createPhoto(User $user, Geofence $geofence)
     {
         return $user->can('create', Photo::class) &&
-            ($user->is_admin || $geofence->user_id === $user->id || $geofence->is_public);
+            ($user->is_admin || $geofence->user_uuid === $user->uuid || $geofence->is_public);
     }
 
     /**
@@ -80,6 +80,6 @@ class GeofencePolicy
      */
     public function delete(User $user, Geofence $geofence)
     {
-        return $user->is_admin || $geofence->user_id === $user->id;
+        return $user->is_admin || $geofence->user_uuid === $user->uuid;
     }
 }

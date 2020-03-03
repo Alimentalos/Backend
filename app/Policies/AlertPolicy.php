@@ -53,7 +53,7 @@ class AlertPolicy
      */
     public function update(User $user, Alert $alert)
     {
-        return $user->is_admin || $user->hasVerifiedEmail() && $alert->user_id === $user->id;
+        return $user->is_admin || $user->hasVerifiedEmail() && $alert->user_uuid === $user->uuid;
     }
 
     /**
@@ -65,6 +65,6 @@ class AlertPolicy
      */
     public function delete(User $user, Alert $alert)
     {
-        return $user->is_admin || $user->hasVerifiedEmail() && $alert->user_id === $user->id;
+        return $user->is_admin || $user->hasVerifiedEmail() && $alert->user_uuid === $user->uuid;
     }
 }
