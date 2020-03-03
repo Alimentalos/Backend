@@ -31,7 +31,7 @@ class Device extends Authenticatable implements Resource
      */
     protected $fillable = [
         'uuid',
-        'user_id',
+        'user_uuid',
         'name',
         'description',
         'api_token',
@@ -85,10 +85,18 @@ class Device extends Authenticatable implements Resource
      */
     public function groups()
     {
-        return $this->morphToMany(Group::class, 'groupable')->withPivot([
+        return $this->morphToMany(
+            Group::class,
+            'groupable',
+            'groupables',
+            'groupable_id',
+            'group_uuid',
+            'uuid',
+            'uuid'
+        )->withPivot([
             'is_admin',
             'status',
-            'sender_id',
+            'sender_uuid',
         ])->withTimestamps();
     }
 
@@ -99,7 +107,13 @@ class Device extends Authenticatable implements Resource
      */
     public function geofences()
     {
-        return $this->morphToMany(Geofence::class, 'geofenceable');
+        return $this->morphToMany(Geofence::class, 'geofenceable',
+            'geofenceables',
+            'geofence_uuid',
+            'geofenceable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**

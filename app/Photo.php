@@ -31,8 +31,8 @@ class Photo extends Model implements ReactableContract, Resource
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'comment_id',
+        'user_uuid',
+        'comment_uuid',
         'photo_url',
         'ext',
         'uuid',
@@ -83,7 +83,7 @@ class Photo extends Model implements ReactableContract, Resource
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -92,7 +92,7 @@ class Photo extends Model implements ReactableContract, Resource
      */
     public function comment()
     {
-        return $this->belongsTo(Comment::class);
+        return $this->belongsTo(Comment::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -102,7 +102,11 @@ class Photo extends Model implements ReactableContract, Resource
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable',
+            'commentable_type',
+            'commentable_id',
+            'uuid'
+        );
     }
 
     /**
@@ -112,7 +116,14 @@ class Photo extends Model implements ReactableContract, Resource
      */
     public function groups()
     {
-        return $this->morphedByMany(Group::class, 'photoable');
+        return $this->morphedByMany(Group::class,
+            'photoable',
+            'photoables',
+            'photo_uuid',
+            'photoable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -122,7 +133,14 @@ class Photo extends Model implements ReactableContract, Resource
      */
     public function users()
     {
-        return $this->morphedByMany(User::class, 'photoable');
+        return $this->morphedByMany(User::class,
+            'photoable',
+            'photoables',
+            'photo_uuid',
+            'photoable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -132,7 +150,15 @@ class Photo extends Model implements ReactableContract, Resource
      */
     public function alerts()
     {
-        return $this->morphedByMany(Alert::class, 'photoable');
+        return $this->morphedByMany(
+            Alert::class,
+            'photoable',
+            'photoables',
+            'photo_uuid',
+            'photoable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
 
@@ -143,7 +169,14 @@ class Photo extends Model implements ReactableContract, Resource
      */
     public function geofences()
     {
-        return $this->morphedByMany(Geofence::class, 'photoable');
+        return $this->morphedByMany(Geofence::class,
+            'photoable',
+            'photoables',
+            'photo_uuid',
+            'photoable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -153,7 +186,14 @@ class Photo extends Model implements ReactableContract, Resource
      */
     public function pets()
     {
-        return $this->morphedByMany(Pet::class, 'photoable');
+        return $this->morphedByMany(Pet::class,
+            'photoable',
+            'photoables',
+            'photo_uuid',
+            'photoable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**

@@ -37,7 +37,7 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      *
      * @var string
      */
-    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'id';
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
 
     /**
      * Comma-separated accepted values.
@@ -52,8 +52,8 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'photo_id',
+        'user_uuid',
+        'photo_uuid',
         'api_token',
         'photo_url',
         'uuid',
@@ -104,9 +104,18 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function groups()
     {
-        return $this->morphToMany(Group::class, 'groupable')->withPivot([
+        return $this->morphToMany(
+            Group::class,
+            'groupable',
+            'groupables',
+            'group_uuid',
+            'groupable_id',
+            'uuid',
+            'uuid'
+        )->withPivot([
+            'is_admin',
             'status',
-            'sender_id',
+            'sender_uuid',
         ])->withTimestamps();
     }
 
@@ -135,7 +144,7 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function photo()
     {
-        return $this->belongsTo(Photo::class);
+        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
     }
 
     /**
@@ -145,7 +154,13 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function photos()
     {
-        return $this->morphToMany(Photo::class, 'photoable');
+        return $this->morphToMany(Photo::class, 'photoable',
+            'photoables',
+            'photo_uuid',
+            'photoable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -175,7 +190,11 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable',
+            'commentable_type',
+            'commentable_id',
+            'uuid'
+        );
     }
 
     /**

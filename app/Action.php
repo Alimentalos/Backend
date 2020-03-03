@@ -27,11 +27,11 @@ class Action extends Model implements Resource
      */
     protected $fillable = [
         'uuid',
-        'user_id',
+        'user_uuid',
         'type',
         'resource',
         'parameters',
-        'referenced_id'
+        'referenced_uuid'
     ];
 
     /**
@@ -41,7 +41,7 @@ class Action extends Model implements Resource
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -61,14 +61,14 @@ class Action extends Model implements Resource
     public static function resolveModels(Request $request)
     {
         if (!$request->user('api')->is_child) {
-            return self::whereIn('user_id', $request->user('api')
+            return self::with('user')->whereIn('user_uuid', $request->user('api')
                 ->users
-                ->pluck('id')
+                ->pluck('uuid')
                 ->push(
-                    $request->user('api')->id
+                    $request->user('api')->uuid
                 )->toArray())->paginate(25);
         } else {
-            return self::where('user_id', $request->user('api')->id)->paginate(25);
+            return self::with('user')->where('user_uuid', $request->user('api')->uuid)->paginate(25);
         }
     }
 }

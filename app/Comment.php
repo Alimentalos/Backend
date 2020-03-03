@@ -30,7 +30,7 @@ class Comment extends Model implements ReactableContract, Resource
      */
     protected $fillable = [
         'uuid',
-        'user_id',
+        'user_uuid',
         'title',
         'body',
     ];
@@ -70,7 +70,11 @@ class Comment extends Model implements ReactableContract, Resource
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable',
+            'commentable_type',
+            'commentable_id',
+            'uuid'
+        );
     }
 
     /**

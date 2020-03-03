@@ -26,7 +26,7 @@ class Location extends Model implements Resource
      * @var array
      */
     protected $fillable = [
-        "trackable_id",
+        "trackable_uuid",
         "trackable_type",
         "device",
         "uuid",
@@ -80,7 +80,7 @@ class Location extends Model implements Resource
      */
     public function getEmitterDeviceAttribute()
     {
-        return $this->belongsTo(Device::class, 'device_id', 'id');
+        return $this->belongsTo(Device::class, 'device_uuid', 'uuid');
     }
 
     /**

@@ -30,10 +30,10 @@ class Alert extends Model implements Resource
      */
     protected $fillable = [
         'uuid',
-        'user_id',
+        'photo_uuid',
+        'user_uuid',
         'alert_id',
         'alert_type',
-        'photo_id',
         'photo_url',
         'type',
         'location',
@@ -76,7 +76,7 @@ class Alert extends Model implements Resource
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -86,7 +86,11 @@ class Alert extends Model implements Resource
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable',
+            'commentable_type',
+            'commentable_id',
+            'uuid'
+        );
     }
 
     /**
@@ -96,7 +100,7 @@ class Alert extends Model implements Resource
      */
     public function photo()
     {
-        return $this->belongsTo(Photo::class);
+        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
     }
 
     /**
@@ -106,7 +110,13 @@ class Alert extends Model implements Resource
      */
     public function photos()
     {
-        return $this->morphToMany(Photo::class, 'photoable');
+        return $this->morphToMany(Photo::class, 'photoable',
+            'photoables',
+            'photo_uuid',
+            'photoable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**

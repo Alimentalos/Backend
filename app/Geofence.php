@@ -38,8 +38,8 @@ class Geofence extends Model implements ReactableContract, Resource
      * @var array
      */
     protected $fillable = [
-        'photo_id',
-        'user_id',
+        'photo_uuid',
+        'user_uuid',
         'uuid',
         'photo_url',
         'is_public',
@@ -140,7 +140,13 @@ class Geofence extends Model implements ReactableContract, Resource
      */
     public function photos()
     {
-        return $this->morphToMany(Photo::class, 'photoable');
+        return $this->morphToMany(Photo::class, 'photoable',
+            'photoables',
+            'photo_uuid',
+            'photoable_id',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -148,7 +154,7 @@ class Geofence extends Model implements ReactableContract, Resource
      */
     public function accesses()
     {
-        return $this->hasMany(Access::class, 'geofence_id', 'id');
+        return $this->hasMany(Access::class, 'geofence_uuid', 'uuid');
     }
 
     /**
@@ -158,9 +164,18 @@ class Geofence extends Model implements ReactableContract, Resource
      */
     public function groups()
     {
-        return $this->morphToMany(Group::class, 'groupable')->withPivot([
+        return $this->morphToMany(
+            Group::class,
+            'groupable',
+            'groupables',
+            'group_uuid',
+            'groupable_id',
+            'uuid',
+            'uuid'
+        )->withPivot([
+            'is_admin',
             'status',
-            'sender_id',
+            'sender_uuid',
         ])->withTimestamps();
     }
 
@@ -181,11 +196,11 @@ class Geofence extends Model implements ReactableContract, Resource
     public static function resolveModels(Request $request)
     {
         return $request->user('api')->is_child ? Geofence::with('user', 'photo')->where(
-            'user_id',
-            $request->user('api')->user_id
+            'user_uuid',
+            $request->user('api')->user_uuid
         )->orWhere('is_public', true)->latest()->paginate(20) : Geofence::with('user', 'photo')->where(
-            'user_id',
-            $request->user('api')->id
+            'user_uuid',
+            $request->user('api')->uuid
         )->orWhere('is_public', true)->latest()->paginate(20);
     }
 }

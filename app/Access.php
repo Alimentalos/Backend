@@ -25,9 +25,9 @@ class Access extends Model
         'uuid',
         'accessible_id',
         'accessible_type',
-        'geofence_id',
-        'first_location_id',
-        'last_location_id',
+        'geofence_uuid',
+        'first_location_uuid',
+        'last_location_uuid',
         'status',
     ];
 
@@ -60,7 +60,7 @@ class Access extends Model
      */
     public function last_location()
     {
-        return $this->belongsTo(Location::class, 'last_location_id', 'id');
+        return $this->belongsTo(Location::class, 'last_location_uuid', 'uuid');
     }
 
     /**
@@ -70,7 +70,7 @@ class Access extends Model
      */
     public function first_location()
     {
-        return $this->belongsTo(Location::class, 'first_location_id', 'id');
+        return $this->belongsTo(Location::class, 'first_location_uuid', 'uuid');
     }
 
     /**
