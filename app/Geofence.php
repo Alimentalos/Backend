@@ -46,6 +46,13 @@ class Geofence extends Model implements ReactableContract, Resource
     ];
 
     /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
+
+    /**
      * The spatial fields of the geofence.
      *
      * @var array

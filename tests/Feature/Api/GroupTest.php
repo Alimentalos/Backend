@@ -31,7 +31,7 @@ class GroupTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'uuid',
                     'ext',
@@ -277,7 +277,7 @@ class GroupTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'uuid',
                     'ext',
@@ -305,7 +305,7 @@ class GroupTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'uuid',
                     'ext',
@@ -334,7 +334,7 @@ class GroupTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'uuid',
                     'ext',

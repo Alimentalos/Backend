@@ -472,7 +472,7 @@ class GeofenceTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user',
                     'photo',
                     'name',
@@ -885,7 +885,7 @@ class GeofenceTest extends TestCase
             'created_at' => $geofence->created_at->format('Y-m-d H:i:s')
         ]);
         $response->assertJsonStructure([
-            'id',
+            'uuid',
             'user',
             'photo'
         ]);
@@ -967,7 +967,7 @@ class GeofenceTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user',
                     'photo',
                     'name',

@@ -65,6 +65,13 @@ class Location extends Model implements Resource
     ];
 
     /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
+
+    /**
      * Get all of the owning trackable models.
      */
     public function trackable()

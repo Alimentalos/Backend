@@ -58,6 +58,13 @@ class Device extends Authenticatable implements Resource
     ];
 
     /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
+
+    /**
      * The default location field of device.
      *
      * @var string

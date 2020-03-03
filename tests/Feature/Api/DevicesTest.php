@@ -29,7 +29,7 @@ class DevicesTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'uuid',
                     'api_token',
@@ -58,7 +58,7 @@ class DevicesTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'uuid',
                     'api_token',
@@ -103,7 +103,7 @@ class DevicesTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'uuid',
                     'api_token',
@@ -129,7 +129,7 @@ class DevicesTest extends TestCase
         $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);
         $response->assertJsonStructure([
-            'id',
+            'uuid',
             'user_uuid',
             'uuid',
             'api_token',
@@ -346,7 +346,7 @@ class DevicesTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user',
                     'photo',
                     'description',

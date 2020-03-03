@@ -217,7 +217,7 @@ class AlertsTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'user',
                     'title',

@@ -35,6 +35,13 @@ class Action extends Model implements Resource
     ];
 
     /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
+
+    /**
      * Get the related user of action.
      *
      * @return BelongsTo

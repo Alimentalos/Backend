@@ -63,7 +63,7 @@ class PetTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'user',
                     'title',
@@ -295,7 +295,7 @@ class PetTest extends TestCase
         $response->assertOk();
 
         $this->assertDatabaseHas('pets', [
-            'id' => $pet->id,
+            'uuid' => $pet->uuid,
             'name' => 'New name'
         ]);
     }
@@ -453,7 +453,7 @@ class PetTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user',
                     'photo',
                     'description',

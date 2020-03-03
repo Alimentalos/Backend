@@ -43,6 +43,13 @@ class Alert extends Model implements Resource
     ];
 
     /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
+
+    /**
      * The attributes that should be cast to spatial types.
      *
      * @var array

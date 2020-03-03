@@ -6,6 +6,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Array_;
 
 class Access extends Model
 {
@@ -43,7 +44,12 @@ class Access extends Model
         'last_location',
     ];
 
-
+    /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
 
     /**
      * Get all of the owning commentable models.

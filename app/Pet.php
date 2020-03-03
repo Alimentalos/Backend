@@ -88,6 +88,13 @@ class Pet extends Authenticatable implements ReactableContract, Resource
     ];
 
     /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
+
+    /**
      * Get the route key for the model.
      *
      * @return string

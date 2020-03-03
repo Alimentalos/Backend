@@ -53,6 +53,13 @@ class Group extends Model implements Resource
     ];
 
     /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array

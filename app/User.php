@@ -80,6 +80,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      * @var array
      */
     protected $hidden = [
+        'id',
         'password',
         'remember_token',
     ];

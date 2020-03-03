@@ -31,7 +31,7 @@ class ActionsTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'referenced_uuid',
                     'type',

@@ -49,7 +49,7 @@ class CommentTest extends TestCase
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . (json_decode($content))->uuid);
         $response->assertOk();
         $response->assertJsonStructure([
-            'id',
+            'uuid',
             'commentable_type',
             'commentable_id',
             'uuid',
@@ -98,7 +98,7 @@ class CommentTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user_uuid',
                     'body',
                     'created_at',
@@ -133,7 +133,7 @@ class CommentTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'uuid',
                     'user_uuid',
                     'body',
@@ -219,7 +219,7 @@ class CommentTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'uuid',
                     'user_uuid',
                     'body',
