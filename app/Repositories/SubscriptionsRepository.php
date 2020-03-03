@@ -31,7 +31,7 @@ class SubscriptionsRepository
      */
     public static function getUserResourcesQuota($resource, $user)
     {
-        return resolve('App\\' . Str::camel(Str::singular($resource)))->where('user_id', $user->id)->count();
+        return resolve('App\\' . Str::camel(Str::singular($resource)))->where('user_uuid', $user->uuid)->count();
     }
 
     /**

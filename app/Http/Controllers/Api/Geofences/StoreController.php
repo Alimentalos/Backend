@@ -19,7 +19,7 @@ class StoreController extends Controller
         $photo = PhotoRepository::createPhotoViaRequest($request);
         $geofence = GeofenceRepository::createGeofenceViaRequest($request, $photo);
         $geofence->load('photo', 'user');
-        $photo->geofences()->attach($geofence->id);
+        $photo->geofences()->attach($geofence->uuid);
         return response()->json(
             $geofence,
             200

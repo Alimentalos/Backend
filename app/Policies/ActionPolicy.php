@@ -30,7 +30,7 @@ class ActionPolicy
      */
     public function view(User $user, Action $action)
     {
-        return $user->id_admin || $action->user_id === $user->id || $action->user_id === $user->user_id;
+        return $user->id_admin || $action->user_uuid === $user->uuid || $action->user_uuid === $user->user_uuid;
     }
 
     /**

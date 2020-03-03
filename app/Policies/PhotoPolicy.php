@@ -31,7 +31,7 @@ class PhotoPolicy
      */
     public function view(User $user, Photo $photo)
     {
-        return $user->is_admin || $photo->is_public || $photo->user_id === $user->id;
+        return $user->is_admin || $photo->is_public || $photo->user_uuid === $user->uuid;
     }
 
     /**
@@ -54,7 +54,7 @@ class PhotoPolicy
      */
     public function update(User $user, Photo $photo)
     {
-        return $user->is_admin || $photo->user_id === $user->id;
+        return $user->is_admin || $photo->user_uuid === $user->uuid;
     }
 
     /**
@@ -66,6 +66,6 @@ class PhotoPolicy
      */
     public function delete(User $user, Photo $photo)
     {
-        return $user->is_admin || $photo->user_id === $user->id;
+        return $user->is_admin || $photo->user_uuid === $user->uuid;
     }
 }

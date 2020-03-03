@@ -42,13 +42,13 @@ class ModelLocationsRepository
         $resource = explode('.', $request->route()->getName())[0];
         switch ($resource) {
             case 'device':
-                return Device::find(auth('devices')->user()->id);
+                return Device::where('uuid', auth('devices')->user()->uuid)->firstOrFail();
                 break;
             case 'pet':
-                return Pet::find(auth('pets')->user()->id);
+                return Pet::where('uuid', auth('pets')->user()->uuid)->firstOrFail();
                 break;
             default:
-                return User::find(auth('api')->user()->id);
+                return User::where('uuid', auth('api')->user()->uuid)->firstOrFail();
                 break;
         }
     }

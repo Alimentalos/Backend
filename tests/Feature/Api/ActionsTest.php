@@ -18,20 +18,22 @@ class ActionsTest extends TestCase
     {
         $user = factory(User::class)->create();
         $child = factory(User::class)->create();
-        $user->user_id = null;
-        $child->user_id = $user->id;
+        $user->user_uuid = null;
+        $child->user_uuid = $user->uuid;
         $child->save();
         $user->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
-        $this->actingAs($child, 'api')->json('GET', '/api/devices')->assertOk();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/actions')->assertOk();
+        $response = $this->actingAs($child, 'api')->json('GET', '/api/devices');
+        $response->assertOk();
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/actions');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
-                    'user_id',
-                    'referenced_id',
+                    'uuid',
+                    'user_uuid',
+                    'referenced_uuid',
                     'type',
                     'resource',
                     'parameters',
@@ -52,7 +54,7 @@ class ActionsTest extends TestCase
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
         $this->actingAs($user, 'api')->json('GET', '/api/devices');
-        $userB->user_id = $user->id;
+        $userB->user_uuid = $user->uuid;
         $userB->save();
         $response = $this->actingAs($userB, 'api')->json('GET', '/api/actions');
         $response->assertJsonCount(1, 'data');
@@ -66,7 +68,7 @@ class ActionsTest extends TestCase
     {
         $user = factory(User::class)->create();
         $action = factory(Action::class)->create();
-        $action->user_id = $user->id;
+        $action->user_uuid = $user->uuid;
         $action->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/actions/' . $action->uuid);
         $response->assertOk();
@@ -81,7 +83,7 @@ class ActionsTest extends TestCase
         $user->email = 'iantorres@outlook.com';
         $user->save();
         $action = factory(Action::class)->create();
-        $action->user_id = $user->id;
+        $action->user_uuid = $user->uuid;
         $action->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/actions/' . $action->uuid);
         $response->assertOk();

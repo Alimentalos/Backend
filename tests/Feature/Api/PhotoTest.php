@@ -35,7 +35,7 @@ class PhotoTest extends TestCase
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->user_id = $user->id;
+        $photo->user_uuid = $user->uuid;
         $photo->save();
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/photos/' . $photo->uuid, [
@@ -49,16 +49,16 @@ class PhotoTest extends TestCase
         Storage::fake('gcs');
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
         $group = factory(Group::class)->create();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $photo = factory(Photo::class)->create();
-        $photo->user_id = $user->id;
+        $photo->user_uuid = $user->uuid;
         $photo->save();
 
         // User
@@ -71,7 +71,7 @@ class PhotoTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'user_id',
+            'user_uuid',
             'uuid',
             'photo_url',
             'ext',
@@ -99,7 +99,7 @@ class PhotoTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'user_id',
+            'user_uuid',
             'uuid',
             'photo_url',
             'ext',
@@ -127,7 +127,7 @@ class PhotoTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'user_id',
+            'user_uuid',
             'uuid',
             'photo_url',
             'ext',
@@ -154,7 +154,7 @@ class PhotoTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'user_id',
+            'user_uuid',
             'uuid',
             'photo_url',
             'ext',
@@ -179,11 +179,11 @@ class PhotoTest extends TestCase
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->user_id = $user->id;
+        $photo->user_uuid = $user->uuid;
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/photos/' . $photo->uuid);
         $this->assertDeleted('photos', [
-            'id' => $photo->id,
+            'uuid' => $photo->uuid,
         ]);
         $response->assertOk();
     }
@@ -206,10 +206,10 @@ class PhotoTest extends TestCase
         $content = $response->getContent();
 
         $this->assertDatabaseHas('comments', [
-            'id' => (json_decode($content))->id,
-            'user_id' => $user->id,
+            'uuid' => (json_decode($content))->uuid,
+            'user_uuid' => $user->uuid,
             'commentable_type' => 'App\\Photo',
-            'commentable_id' => $photo->id,
+            'commentable_id' => $photo->uuid,
             'body' => $comment->body,
         ]);
 
@@ -238,15 +238,15 @@ class PhotoTest extends TestCase
         $photo->save();
         $comment = factory(Comment::class)->make();
         $photo->comments()->create([
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'body' => $comment->body,
         ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid . '/comments');
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
-                    'user_id',
+                    'uuid',
+                    'user_uuid',
                     'body',
                     'created_at',
                     'updated_at'

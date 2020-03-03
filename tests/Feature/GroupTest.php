@@ -20,8 +20,8 @@ class GroupTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\User',
-            'groupable_id' => $user->id,
-            'group_id' => $group->id,
+            'groupable_id' => $user->uuid,
+            'group_uuid' => $group->uuid,
         ]);
     }
 
@@ -34,8 +34,8 @@ class GroupTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\User',
-            'groupable_id' => $user->id,
-            'group_id' => $group->id,
+            'groupable_id' => $user->uuid,
+            'group_uuid' => $group->uuid,
         ]);
     }
 }

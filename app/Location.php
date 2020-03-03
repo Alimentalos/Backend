@@ -65,11 +65,23 @@ class Location extends Model implements Resource
     ];
 
     /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
+
+    /**
      * Get all of the owning trackable models.
      */
     public function trackable()
     {
-        return $this->morphTo();
+        return $this->morphTo(
+            'trackable',
+            'trackable_type',
+            'trackable_id',
+            'uuid'
+        );
     }
 
     /**
@@ -80,7 +92,7 @@ class Location extends Model implements Resource
      */
     public function getEmitterDeviceAttribute()
     {
-        return $this->belongsTo(Device::class, 'device_id', 'id');
+        return $this->belongsTo(Device::class, 'device_uuid', 'uuid');
     }
 
     /**

@@ -16,10 +16,10 @@ class CreateAlertsTable extends Migration
         Schema::create('alerts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->index()->nullable();
-            $table->bigInteger('user_id')->unsigned()->index();
-            $table->bigInteger('photo_id')->unsigned()->index();
+            $table->string('user_uuid')->index();
+            $table->string('photo_uuid')->index();
             $table->text('photo_url')->nullable();
-            $table->morphs('alert');
+            $table->uuidMorphs('alert');
             $table->tinyInteger('type');
             $table->point('location'); // Latitude, Longitude
             $table->string('title');

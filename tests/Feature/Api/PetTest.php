@@ -22,7 +22,7 @@ class PetTest extends TestCase
         Storage::fake('gcs');
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
-        $comment = factory(Comment::class)->create();
+        $comment = factory(Comment::class)->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets/' . $pet->uuid . '/comments', [
             'body' => $comment->body
         ]);
@@ -31,10 +31,10 @@ class PetTest extends TestCase
         $content = $response->getContent();
 
         $this->assertDatabaseHas('comments', [
-            'id' => (json_decode($content))->id,
-            'user_id' => $user->id,
+            'uuid' => (json_decode($content))->uuid,
+            'user_uuid' => $user->uuid,
             'commentable_type' => 'App\\Pet',
-            'commentable_id' => $pet->id,
+            'commentable_id' => $pet->uuid,
             'body' => $comment->body
         ]);
     }
@@ -47,7 +47,7 @@ class PetTest extends TestCase
         $comment = factory(Comment::class)->make();
 
         $pet->comments()->create([
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'title' => $comment->title,
             'body' => $comment->body,
         ]);
@@ -63,8 +63,8 @@ class PetTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
-                    'user_id',
+                    'uuid',
+                    'user_uuid',
                     'user',
                     'title',
                     'body',
@@ -75,14 +75,14 @@ class PetTest extends TestCase
         ]);
         // Forma de comprobar
         $response->assertJsonFragment([
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'body' => $comment->body,
             'title' => $comment->title,
         ]);
         $this->assertDatabaseHas('comments', [
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'commentable_type' => 'App\\Pet',
-            'commentable_id' => $pet->id,
+            'commentable_id' => $pet->uuid,
             'body' => $comment->body,
         ]);
         $response->assertJsonCount(1, 'data');
@@ -121,14 +121,14 @@ class PetTest extends TestCase
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo_url);
 
         $this->assertDatabaseHas('photos', [
-            'id' => (json_decode($content))->id,
+            'uuid' => (json_decode($content))->uuid,
             'is_public' => true
         ]);
 
         $this->assertDatabaseHas('photoables', [
-            'photo_id' => (json_decode($content))->id,
+            'photo_uuid' => (json_decode($content))->uuid,
             'photoable_type' => 'App\\Pet',
-            'photoable_id' => $pet->id
+            'photoable_id' => $pet->uuid
         ]);
     }
 
@@ -143,8 +143,8 @@ class PetTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
-                    'user_id',
+                    'uuid',
+                    'user_uuid',
                     'uuid',
                     'ext',
                     'user',
@@ -177,10 +177,9 @@ class PetTest extends TestCase
             'total',
             'data' => [
                 [
-                    'id',
                     'uuid',
-                    'user_id',
-                    'photo_id',
+                    'user_uuid',
+                    'photo_uuid',
                     'name',
                     'description',
                     'hair_color',
@@ -206,10 +205,9 @@ class PetTest extends TestCase
         $response->assertOk();
 
         $response->assertJsonStructure([
-            'id',
             'uuid',
-            'user_id',
-            'photo_id',
+            'user_uuid',
+            'photo_uuid',
             'name',
             'description',
             'hair_color',
@@ -252,7 +250,7 @@ class PetTest extends TestCase
         $response->assertOk();
 
         $this->assertDatabaseHas('pets', [
-            'id' => (json_decode($content))->id,
+            'uuid' => (json_decode($content))->uuid,
             'name' => $pet->name,
             'description' => $pet->description,
             'hair_color' => $pet->hair_color,
@@ -285,7 +283,7 @@ class PetTest extends TestCase
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/pets/' . $pet->uuid, [
             'name' => 'New name',
@@ -297,7 +295,7 @@ class PetTest extends TestCase
         $response->assertOk();
 
         $this->assertDatabaseHas('pets', [
-            'id' => $pet->id,
+            'uuid' => $pet->uuid,
             'name' => 'New name'
         ]);
     }
@@ -307,7 +305,7 @@ class PetTest extends TestCase
         Storage::fake('gcs');
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/pets/' . $pet->uuid, [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
@@ -320,7 +318,7 @@ class PetTest extends TestCase
         $response->assertOk();
 
         $this->assertDatabaseHas('pets', [
-            'id' => $pet->id,
+            'uuid' => $pet->uuid,
             'name' => 'New name'
         ]);
         $content = $response->getContent();
@@ -332,7 +330,7 @@ class PetTest extends TestCase
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/pets/' . $pet->uuid, [
             'name' => 'New name',
@@ -346,7 +344,7 @@ class PetTest extends TestCase
         $response->assertOk();
 
         $this->assertDatabaseHas('pets', [
-            'id' => $pet->id,
+            'uuid' => $pet->uuid,
             'name' => 'New name',
             'description' => 'New description',
         ]);
@@ -356,13 +354,13 @@ class PetTest extends TestCase
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/pets/' . $pet->uuid);
         $response->assertOk();
 
         $this->assertDeleted('pets', [
-            'id' => $pet->id,
+            'uuid' => $pet->uuid,
         ]);
     }
 
@@ -371,9 +369,9 @@ class PetTest extends TestCase
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
         $pet = factory(Pet::class)->create();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,
@@ -388,8 +386,8 @@ class PetTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\Pet',
-            'groupable_id' => $pet->id,
-            'group_id' => $group->id,
+            'groupable_id' => $pet->uuid,
+            'group_uuid' => $group->uuid,
         ]);
     }
 
@@ -398,9 +396,9 @@ class PetTest extends TestCase
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
         $pet = factory(Pet::class)->create();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,
@@ -418,8 +416,8 @@ class PetTest extends TestCase
 
         $this->assertDeleted('groupables', [
             'groupable_type' => 'App\\Pet',
-            'groupable_id' => $pet->id,
-            'group_id' => $group->id,
+            'groupable_id' => $pet->uuid,
+            'group_uuid' => $group->uuid,
         ]);
     }
 
@@ -431,21 +429,21 @@ class PetTest extends TestCase
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $group = factory(Group::class)->create();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS
         ]);
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
         $pet->groups()->attach($group, [
             'status' => Group::ACCEPTED_STATUS
         ]);
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\Pet',
-            'groupable_id' => $pet->id,
-            'group_id' => $group->id,
+            'groupable_id' => $pet->uuid,
+            'group_uuid' => $group->uuid,
         ]);
         $response = $this->actingAs($user, 'api')->json(
             'GET',
@@ -455,7 +453,7 @@ class PetTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user',
                     'photo',
                     'description',

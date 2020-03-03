@@ -23,16 +23,16 @@ class InviteController extends Controller
         // TODO - Remove unnecessary complexity
         if (
             $user->groups()
-                ->where('group_id', $group->id)
+                ->where('group_uuid', $group->uuid)
                 ->where('status', Group::REJECTED_STATUS)
                 ->exists()
         ) {
-            $user->groups()->updateExistingPivot($group->id, [
+            $user->groups()->updateExistingPivot($group->uuid, [
                 'status' => Group::PENDING_STATUS,
                 'is_admin' => $request->has('is_admin') ? $request->input('is_admin') : false,
             ]);
         } else {
-            $user->groups()->attach($group->id, [
+            $user->groups()->attach($group->uuid, [
                 'status' => Group::PENDING_STATUS,
                 'is_admin' => $request->has('is_admin') ? $request->input('is_admin') : false,
             ]);

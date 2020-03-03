@@ -6,6 +6,7 @@ use App\Contracts\Resource;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Http\Request;
@@ -44,12 +45,19 @@ class Group extends Model implements Resource
      */
     protected $fillable = [
         'uuid',
-        'user_id',
-        'photo_id',
+        'user_uuid',
+        'photo_uuid',
         'name',
         'photo_url',
         'is_public',
     ];
+
+    /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
 
     /**
      * The attributes that should be cast to native types.
@@ -86,7 +94,12 @@ class Group extends Model implements Resource
      */
     public function groupable()
     {
-        return $this->morphTo();
+        return $this->morphTo(
+            'groupable',
+            'groupable_type',
+            'groupable_id',
+            'group_uuid'
+        );
     }
 
     /**
@@ -96,10 +109,16 @@ class Group extends Model implements Resource
      */
     public function users()
     {
-        return $this->morphedByMany(User::class, 'groupable')->withPivot([
+        return $this->morphedByMany(User::class, 'groupable',
+            'groupables',
+            'group_uuid',
+            'groupable_id',
+            'uuid',
+            'uuid'
+        )->withPivot([
             'is_admin',
             'status',
-            'sender_id'
+            'sender_uuid'
         ])->withTimestamps();
     }
 
@@ -110,10 +129,16 @@ class Group extends Model implements Resource
      */
     public function devices()
     {
-        return $this->morphedByMany(Device::class, 'groupable')->withPivot([
+        return $this->morphedByMany(Device::class, 'groupable',
+            'groupables',
+            'group_uuid',
+            'groupable_id',
+            'uuid',
+            'uuid'
+        )->withPivot([
             'is_admin',
             'status',
-            'sender_id'
+            'sender_uuid'
         ]);
     }
 
@@ -124,21 +149,33 @@ class Group extends Model implements Resource
      */
     public function pets()
     {
-        return $this->morphedByMany(Pet::class, 'groupable')->withPivot([
+        return $this->morphedByMany(Pet::class, 'groupable',
+            'groupables',
+            'group_uuid',
+            'groupable_id',
+            'uuid',
+            'uuid'
+        )->withPivot([
             'is_admin',
             'status',
-            'sender_id'
+            'sender_uuid'
         ]);
     }
 
     /**
      * The related Photos.
      *
-     * @return MorphToMany
+     * @return BelongsToMany
      */
     public function photos()
     {
-        return $this->morphToMany(Photo::class, 'photoable');
+        return $this->morphToMany(Photo::class, 'photoable',
+            'photoables',
+            'photoable_id',
+            'photo_uuid',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -148,7 +185,7 @@ class Group extends Model implements Resource
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -158,7 +195,7 @@ class Group extends Model implements Resource
      */
     public function photo()
     {
-        return $this->belongsTo(Photo::class);
+        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
     }
 
     /**
@@ -168,7 +205,11 @@ class Group extends Model implements Resource
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable',
+            'commentable_type',
+            'commentable_id',
+            'uuid'
+        );
     }
 
     /**
@@ -178,10 +219,16 @@ class Group extends Model implements Resource
      */
     public function geofences()
     {
-        return $this->morphedByMany(Geofence::class, 'groupable')->withPivot([
+        return $this->morphedByMany(Geofence::class, 'groupable',
+            'groupables',
+            'group_uuid',
+            'groupable_id',
+            'uuid',
+            'uuid'
+        )->withPivot([
             'is_admin',
             'status',
-            'sender_id'
+            'sender_uuid'
         ]);
     }
 
@@ -204,7 +251,7 @@ class Group extends Model implements Resource
         return (
         $request->user('api')->is_admin ?
             self::with('user', 'photo') :
-            self::with('user', 'photo')->where('user_id', $request->user('api')->id)
+            self::with('user', 'photo')->where('user_uuid', $request->user('api')->uuid)
         )->latest()->paginate(25);
     }
 }

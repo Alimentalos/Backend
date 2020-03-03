@@ -57,7 +57,7 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                $user->id !== $invited->id &&
+                $user->uuid !== $invited->uuid &&
                 GroupsRepository::userIsGroupAdmin($user, $group) &&
                 !GroupsRepository::modelIsGroupModel($invited, $group) &&
                 !GroupsRepository::modelIsBlocked($invited, $group)
@@ -76,7 +76,7 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                $user->id === $invited->id &&
+                $user->uuid === $invited->uuid &&
                 !GroupsRepository::modelIsGroupModel($invited, $group) &&
                 !GroupsRepository::modelIsBlocked($invited, $group)
             );
@@ -94,7 +94,7 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                $user->id === $invited->id &&
+                $user->uuid === $invited->uuid &&
                 !GroupsRepository::modelIsGroupModel($invited, $group) &&
                 !GroupsRepository::modelIsBlocked($invited, $group)
             );
@@ -112,7 +112,7 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                $user->id === $invited->id &&
+                $user->uuid === $invited->uuid &&
                 !GroupsRepository::modelIsGroupModel($invited, $group) &&
                 !GroupsRepository::modelIsBlocked($invited, $group)
             );
@@ -146,7 +146,7 @@ class UserPolicy
      */
     public function attachGeofence(User $user, User $attached, Geofence $geofence)
     {
-        return $user->is_admin || !in_array($attached->id, $geofence->users->pluck('id')->toArray());
+        return $user->is_admin || !in_array($attached->uuid, $geofence->users->pluck('uuid')->toArray());
     }
 
     /**
@@ -159,7 +159,7 @@ class UserPolicy
      */
     public function detachGeofence(User $user, User $detached, Geofence $geofence)
     {
-        return $user->is_admin || in_array($detached->id, $geofence->users->pluck('id')->toArray());
+        return $user->is_admin || in_array($detached->uuid, $geofence->users->pluck('uuid')->toArray());
     }
 
     /**
@@ -187,7 +187,7 @@ class UserPolicy
     public function createPhoto(User $user, User $model)
     {
         return $user->can('create', Photo::class) &&
-            ($user->is_admin || $user->id === $model->id);
+            ($user->is_admin || $user->uuid === $model->uuid);
     }
 
     /**

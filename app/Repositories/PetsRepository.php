@@ -70,18 +70,18 @@ class PetsRepository
         $pet = Pet::create([
             'name' => $request->input('name'),
             'photo_url' => config('storage.path') . $photo->photo_url,
-            'user_id' => $request->user('api')->id,
+            'user_uuid' => $request->user('api')->uuid,
             'description' => $request->input('description'),
             'hair_color' => $request->input('hair_color'),
             'born_at' => $request->input('born_at'),
-            'photo_id' => $photo->id,
+            'photo_uuid' => $photo->uuid,
             'left_eye_color' => $request->input('left_eye_color'),
             'right_eye_color' => $request->input('right_eye_color'),
             'size' => $request->input('size'),
             'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
             'is_public' => $request->input('is_public')
         ]);
-        $photo->pets()->attach($pet->id);
+        $photo->pets()->attach($pet->uuid);
         return $pet;
     }
 }

@@ -37,7 +37,7 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      *
      * @var string
      */
-    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'id';
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
 
     /**
      * Comma-separated accepted values.
@@ -52,8 +52,8 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'photo_id',
+        'user_uuid',
+        'photo_uuid',
         'api_token',
         'photo_url',
         'uuid',
@@ -88,6 +88,13 @@ class Pet extends Authenticatable implements ReactableContract, Resource
     ];
 
     /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
+
+    /**
      * Get the route key for the model.
      *
      * @return string
@@ -104,9 +111,18 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function groups()
     {
-        return $this->morphToMany(Group::class, 'groupable')->withPivot([
+        return $this->morphToMany(
+            Group::class,
+            'groupable',
+            'groupables',
+            'groupable_id',
+            'group_uuid',
+            'uuid',
+            'uuid'
+        )->withPivot([
+            'is_admin',
             'status',
-            'sender_id',
+            'sender_uuid',
         ])->withTimestamps();
     }
 
@@ -117,7 +133,13 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function geofences()
     {
-        return $this->morphToMany(Geofence::class, 'geofenceable');
+        return $this->morphToMany(Geofence::class, 'geofenceable',
+            'geofenceables',
+            'geofenceable_id',
+            'geofence_uuid',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -125,7 +147,8 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function accesses()
     {
-        return $this->morphMany(Access::class, 'accessible');
+        return $this->morphMany(Access::class, 'accessible', 'accessible_type',
+            'accessible_id', 'uuid');
     }
 
     /**
@@ -135,7 +158,7 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function photo()
     {
-        return $this->belongsTo(Photo::class);
+        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
     }
 
     /**
@@ -145,7 +168,13 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function photos()
     {
-        return $this->morphToMany(Photo::class, 'photoable');
+        return $this->morphToMany(Photo::class, 'photoable',
+            'photoables',
+            'photoable_id',
+            'photo_uuid',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -155,7 +184,8 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function locations()
     {
-        return $this->morphMany(Location::class, 'trackable');
+        return $this->morphMany(Location::class, 'trackable', 'trackable_type',
+            'trackable_id', 'uuid');
     }
 
     /**
@@ -165,7 +195,7 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -175,7 +205,11 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable',
+            'commentable_type',
+            'commentable_id',
+            'uuid'
+        );
     }
 
     /**

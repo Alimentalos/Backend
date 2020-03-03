@@ -21,7 +21,7 @@ class StoreController extends Controller
         $comment = $resource->comments()->create([
             'uuid' => UniqueNameRepository::createIdentifier(),
             'body' => $request->input('body'),
-            'user_id' => $request->user('api')->id,
+            'user_uuid' => $request->user('api')->uuid,
         ]);
 
         return response()->json(

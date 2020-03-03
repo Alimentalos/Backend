@@ -75,7 +75,7 @@ trait LocationQuery
     {
         return Location::whereIn(
             'trackable_id',
-            array_column($devices->toArray(), 'id')
+            array_column($devices->toArray(), 'uuid')
         )->where('trackable_type', $type);
     }
 }

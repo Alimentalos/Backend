@@ -57,7 +57,7 @@ class Activity extends Type
     public function perDevice($device, $locations)
     {
         // Filter the specified device locations
-        $device_locations = $locations->where('trackable_id', $device->id)
+        $device_locations = $locations->where('trackable_id', $device->uuid)
             ->where('trackable_type', 'App\\Device')->reverse()->values();
 
         if ($this->start_day == $this->end_day) {

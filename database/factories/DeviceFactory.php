@@ -20,8 +20,8 @@ use Grimzy\LaravelMysqlSpatial\Types\Point;
 
 $factory->define(Device::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'user_id' => factory(User::class)->create()->id,
+        'name' => 'Device: #' . $faker->randomNumber(5),
+        'user_uuid' => factory(User::class)->create()->uuid,
         'location' => (new Point($faker->latitude(), $faker->longitude())),
         'description' => $faker->text(200),
         'uuid' => (string) $faker->uuid,

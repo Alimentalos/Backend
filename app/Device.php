@@ -31,7 +31,7 @@ class Device extends Authenticatable implements Resource
      */
     protected $fillable = [
         'uuid',
-        'user_id',
+        'user_uuid',
         'name',
         'description',
         'api_token',
@@ -56,6 +56,13 @@ class Device extends Authenticatable implements Resource
     protected $casts = [
         'is_public' => 'boolean',
     ];
+
+    /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
 
     /**
      * The default location field of device.
@@ -85,10 +92,18 @@ class Device extends Authenticatable implements Resource
      */
     public function groups()
     {
-        return $this->morphToMany(Group::class, 'groupable')->withPivot([
+        return $this->morphToMany(
+            Group::class,
+            'groupable',
+            'groupables',
+            'groupable_id',
+            'group_uuid',
+            'uuid',
+            'uuid'
+        )->withPivot([
             'is_admin',
             'status',
-            'sender_id',
+            'sender_uuid',
         ])->withTimestamps();
     }
 
@@ -99,7 +114,13 @@ class Device extends Authenticatable implements Resource
      */
     public function geofences()
     {
-        return $this->morphToMany(Geofence::class, 'geofenceable');
+        return $this->morphToMany(Geofence::class, 'geofenceable',
+            'geofenceables',
+            'geofenceable_id',
+            'geofence_uuid',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -109,7 +130,8 @@ class Device extends Authenticatable implements Resource
      */
     public function locations()
     {
-        return $this->morphMany(Location::class, 'trackable');
+        return $this->morphMany(Location::class, 'trackable', 'trackable_type',
+            'trackable_id', 'uuid');
     }
 
     /**
@@ -129,7 +151,7 @@ class Device extends Authenticatable implements Resource
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -137,7 +159,8 @@ class Device extends Authenticatable implements Resource
      */
     public function accesses()
     {
-        return $this->morphMany(Access::class, 'accessible');
+        return $this->morphMany(Access::class, 'accessible', 'accessible_type',
+            'accessible_id', 'uuid');
     }
 
     /**

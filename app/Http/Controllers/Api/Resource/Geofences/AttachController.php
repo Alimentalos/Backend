@@ -19,7 +19,7 @@ class AttachController extends Controller
      */
     public function __invoke(AttachRequest $request, $resource, Geofence $geofence)
     {
-        $resource->geofences()->attach($geofence->id);
+        $resource->geofences()->attach($geofence->uuid);
         return response()->json([], 200);
     }
 }

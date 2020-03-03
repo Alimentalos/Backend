@@ -16,11 +16,11 @@ class CreateAccessesTable extends Migration
         Schema::create('accesses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->unique()->index();
-            $table->bigInteger('geofence_id')->unsigned()->index();
-            $table->morphs('accessible');
+            $table->string('geofence_uuid')->index();
+            $table->uuidMorphs('accessible');
             $table->tinyInteger('status');
-            $table->bigInteger('first_location_id')->unsigned()->index();
-            $table->bigInteger('last_location_id')->unsigned()->index();
+            $table->string('first_location_uuid')->index();
+            $table->string('last_location_uuid')->index();
             $table->timestamps();
         });
     }

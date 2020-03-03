@@ -36,10 +36,10 @@ class CommentTest extends TestCase
         $response->assertOk();
         $content = $response->getContent();
         $this->assertDatabaseHas('comments', [
-            'id' => (json_decode($content))->id,
-            'user_id' => $user->id,
+            'uuid' => (json_decode($content))->uuid,
+            'user_uuid' => $user->uuid,
             'commentable_type' => 'App\\Photo',
-            'commentable_id' => $photo->id,
+            'commentable_id' => $photo->uuid,
             'body' => $comment->body,
         ]);
 
@@ -49,12 +49,12 @@ class CommentTest extends TestCase
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . (json_decode($content))->uuid);
         $response->assertOk();
         $response->assertJsonStructure([
-            'id',
+            'uuid',
             'commentable_type',
             'commentable_id',
             'uuid',
             'body',
-            'user_id',
+            'user_uuid',
             'love_reactant_id',
             'created_at',
             'updated_at',
@@ -66,14 +66,14 @@ class CommentTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJsonFragment([
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'body' => $commentBody,
         ]);
 
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/comments/' . (json_decode($content))->uuid);
         $response->assertOk();
         $this->assertDeleted('comments', [
-            'id' => (json_decode($content))->id,
+            'uuid' => (json_decode($content))->uuid,
         ]);
     }
 
@@ -89,7 +89,7 @@ class CommentTest extends TestCase
         $photo->save();
         $comment = factory(Comment::class)->make();
         $photo->comments()->create([
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'body' => $comment->body,
         ]);
 
@@ -98,8 +98,8 @@ class CommentTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
-                    'user_id',
+                    'uuid',
+                    'user_uuid',
                     'body',
                     'created_at',
                     'updated_at'
@@ -107,7 +107,7 @@ class CommentTest extends TestCase
             ]
         ]);
         $response->assertJsonFragment([
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'body' => $comment->body,
         ]);
     }
@@ -120,12 +120,12 @@ class CommentTest extends TestCase
         $sampleCommentBody = 'Sample comment';
         $user = factory(User::class)->create();
         $comment = factory(Comment::class)->create();
-        $comment->user_id = $user->id;
+        $comment->user_uuid = $user->uuid;
         $comment->save();
         $comment->comments()->create([
             'uuid' => UniqueNameRepository::createIdentifier(),
             'body' => $sampleCommentBody,
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
         ]);
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . $comment->uuid . '/comments');
@@ -133,9 +133,9 @@ class CommentTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
                     'uuid',
-                    'user_id',
+                    'uuid',
+                    'user_uuid',
                     'body',
                     'created_at',
                     'updated_at'
@@ -144,7 +144,7 @@ class CommentTest extends TestCase
         ]);
         $response->assertJsonFragment([
             'body' => $sampleCommentBody,
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
         ]);
     }
 
@@ -163,26 +163,26 @@ class CommentTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'id',
+            'uuid',
             'commentable_type',
             'commentable_id',
             'uuid',
             'body',
-            'user_id',
+            'user_uuid',
             'love_reactant_id',
             'created_at',
             'updated_at',
         ]);
         $response->assertJsonFragment([
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'body' => $parentComment->body,
         ]);
         $parentContent = $response->getContent();
         $this->assertDatabaseHas('comments', [
-            'id' => (json_decode($parentContent))->id,
-            'user_id' => $user->id,
+            'uuid' => (json_decode($parentContent))->uuid,
+            'user_uuid' => $user->uuid,
             'commentable_type' => 'App\\Photo',
-            'commentable_id' => $photo->id,
+            'commentable_id' => $photo->uuid,
             'body' => $parentComment->body,
         ]);
 
@@ -192,26 +192,26 @@ class CommentTest extends TestCase
         $response->assertOk();
         $childContent = $response->getContent();
         $this->assertDatabaseHas('comments', [
-            'id' => (json_decode($childContent))->id,
-            'user_id' => $user->id,
+            'uuid' => (json_decode($childContent))->uuid,
+            'user_uuid' => $user->uuid,
             'commentable_type' => 'App\\Comment',
-            'commentable_id' => (json_decode($parentContent))->id,
+            'commentable_id' => (json_decode($parentContent))->uuid,
             'body' => $childComment->body,
         ]);
         $response->assertJsonStructure([
-            'id',
+            'uuid',
             'commentable_type',
             'commentable_id',
             'uuid',
             'body',
-            'user_id',
+            'user_uuid',
             'love_reactant_id',
             'created_at',
             'updated_at',
         ]);
         $response->assertJsonFragment([
             'body' => $childComment->body,
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
         ]);
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . (json_decode($parentContent))->uuid . '/comments');
@@ -219,9 +219,9 @@ class CommentTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
                     'uuid',
-                    'user_id',
+                    'uuid',
+                    'user_uuid',
                     'body',
                     'created_at',
                     'updated_at'
@@ -230,7 +230,7 @@ class CommentTest extends TestCase
         ]);
         $response->assertJsonFragment([
             'body' => $childComment->body,
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
         ]);
     }
 

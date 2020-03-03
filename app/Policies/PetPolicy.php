@@ -26,7 +26,7 @@ class PetPolicy
     {
         return $user->is_admin || $user->hasVerifiedEmail();
     }
-    
+
     /**
      * Determine whether the user can view the pet.
      *
@@ -36,7 +36,7 @@ class PetPolicy
      */
     public function view(User $user, Pet $pet)
     {
-        return $user->is_admin || $pet->is_public || $pet->user_id === $user->id;
+        return $user->is_admin || $pet->is_public || $pet->user_uuid === $user->uuid;
     }
 
     /**
@@ -59,7 +59,7 @@ class PetPolicy
      */
     public function update(User $user, Pet $pet)
     {
-        return $user->is_admin || $pet->user_id === $user->id;
+        return $user->is_admin || $pet->user_uuid === $user->uuid;
     }
 
     /**
@@ -72,7 +72,7 @@ class PetPolicy
     public function createPhoto(User $user, Pet $pet)
     {
         return $user->can('create', Photo::class) &&
-            ($user->is_admin || $pet->is_public || $pet->user_id === $user->id);
+            ($user->is_admin || $pet->is_public || $pet->user_uuid === $user->uuid);
     }
 
     /**
@@ -84,7 +84,7 @@ class PetPolicy
      */
     public function delete(User $user, Pet $pet)
     {
-        return $user->is_admin || $pet->user_id === $user->id;
+        return $user->is_admin || $pet->user_uuid === $user->uuid;
     }
 
     /**
@@ -136,7 +136,7 @@ class PetPolicy
         return $user->is_admin ||
             (
                 UsersRepository::isProperty($pet, $user) &&
-                !in_array($pet->id, $geofence->pets->pluck('id')->toArray())
+                !in_array($pet->uuid, $geofence->pets->pluck('uuid')->toArray())
             );
     }
 
@@ -153,7 +153,7 @@ class PetPolicy
         return $user->is_admin ||
             (
                 UsersRepository::isProperty($pet, $user) &&
-                in_array($pet->id, $geofence->pets->pluck('id')->toArray())
+                in_array($pet->uuid, $geofence->pets->pluck('uuid')->toArray())
             );
     }
 }

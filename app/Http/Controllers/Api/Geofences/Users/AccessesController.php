@@ -21,7 +21,7 @@ class AccessesController extends Controller
         return response()->json(
             $geofence->accesses()->with('accessible', 'first_location', 'last_location', 'geofence')
                 ->where('accessible_type', 'App\\User')
-                ->where('geofence_id', $geofence->id)
+                ->where('geofence_uuid', $geofence->uuid)
                 ->latest()
                 ->paginate(20),
             200

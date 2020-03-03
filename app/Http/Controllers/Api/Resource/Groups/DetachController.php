@@ -19,7 +19,7 @@ class DetachController extends Controller
      */
     public function __invoke(DetachRequest $request, $resource, Group $group)
     {
-        $resource->groups()->detach($group->id);
+        $resource->groups()->detach($group->uuid);
         return response()->json([], 200);
     }
 }

@@ -17,6 +17,29 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * @test testUserCanStoreUser
+     */
+    public function testUserCanStoreUser()
+    {
+        // TODO - Add response structure asserts
+        Storage::fake('gcs');
+        $user = factory(User::class)->create();
+        $userB = factory(User::class)->make();
+        $response = $this->actingAs($user, 'api')->json('POST', '/api/users', [
+            'photo' => UploadedFile::fake()->image('photo50.jpg'),
+            'name' => $userB->name,
+            'email' => $userB->email,
+            'password' => $userB->password,
+            'password_confirmation' => $userB->password,
+            'is_public' => true,
+            'coordinates' => '5.5,6.5',
+        ]);
+        $response->assertOk();
+        $content = $response->getContent();
+        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+    }
+
+    /**
      * @test testUserCanInvitePublicUserToOwnedGroups
      */
     public function testUserCanInvitePublicUserToOwnedGroups()
@@ -26,7 +49,7 @@ class UserTest extends TestCase
         $rejectedUser = factory(User::class)->create();
         $blockedUser = factory(User::class)->create();
         $group = factory(Group::class)->create();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, ['is_admin' => true, 'status' => Group::ACCEPTED_STATUS]);
         $acceptedUser->is_public = true;
@@ -47,8 +70,8 @@ class UserTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
-            'groupable_id' => $acceptedUser->id,
-            'group_id' => $group->id,
+            'groupable_id' => $acceptedUser->uuid,
+            'group_uuid' => $group->uuid,
             'status' => Group::PENDING_STATUS
         ]);
 
@@ -61,8 +84,8 @@ class UserTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
-            'groupable_id' => $acceptedUser->id,
-            'group_id' => $group->id,
+            'groupable_id' => $acceptedUser->uuid,
+            'group_uuid' => $group->uuid,
             'status' => Group::ACCEPTED_STATUS
         ]);
 
@@ -77,8 +100,8 @@ class UserTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
-            'groupable_id' => $rejectedUser->id,
-            'group_id' => $group->id,
+            'groupable_id' => $rejectedUser->uuid,
+            'group_uuid' => $group->uuid,
             'status' => Group::PENDING_STATUS
         ]);
 
@@ -91,8 +114,8 @@ class UserTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
-            'groupable_id' => $rejectedUser->id,
-            'group_id' => $group->id,
+            'groupable_id' => $rejectedUser->uuid,
+            'group_uuid' => $group->uuid,
             'status' => Group::REJECTED_STATUS
         ]);
 
@@ -112,8 +135,8 @@ class UserTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
-            'groupable_id' => $rejectedUser->id,
-            'group_id' => $group->id,
+            'groupable_id' => $rejectedUser->uuid,
+            'group_uuid' => $group->uuid,
             'status' => Group::ACCEPTED_STATUS
         ]);
 
@@ -128,8 +151,8 @@ class UserTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
-            'groupable_id' => $blockedUser->id,
-            'group_id' => $group->id,
+            'groupable_id' => $blockedUser->uuid,
+            'group_uuid' => $group->uuid,
             'status' => Group::PENDING_STATUS
         ]);
 
@@ -142,8 +165,8 @@ class UserTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
-            'groupable_id' => $blockedUser->id,
-            'group_id' => $group->id,
+            'groupable_id' => $blockedUser->uuid,
+            'group_uuid' => $group->uuid,
             'status' => Group::BLOCKED_STATUS
         ]);
 
@@ -198,7 +221,7 @@ class UserTest extends TestCase
         // TODO - Add response structure and data asserts
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
-        $user->user_id = $userB->id;
+        $user->user_uuid = $userB->uuid;
         $user->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
         $response->assertOk();
@@ -223,10 +246,10 @@ class UserTest extends TestCase
         // TODO - Add response structure and data asserts
         $userA = factory(User::class)->create();
         $userB = factory(User::class)->create();
-        $userB->user_id = $userA->id;
+        $userB->user_uuid = $userA->uuid;
         $userB->save();
         $userC = factory(User::class)->create();
-        $userC->user_id = $userA->id;
+        $userC->user_uuid = $userA->uuid;
         $userC->is_public = false;
         $userC->save();
         $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
@@ -241,7 +264,7 @@ class UserTest extends TestCase
         // TODO - Add response structure and data asserts
         $userA = factory(User::class)->create();
         $userB = factory(User::class)->create();
-        $userB->user_id = $userA->id;
+        $userB->user_uuid = $userA->uuid;
         $userB->is_public = false;
         $userB->save();
         $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userA->uuid);
@@ -258,7 +281,7 @@ class UserTest extends TestCase
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
         $userB->is_public = false;
-        $userB->user_id = $user->id;
+        $userB->user_uuid = $user->uuid;
         $userB->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $userB->uuid);
         $response->assertOk();
@@ -274,36 +297,14 @@ class UserTest extends TestCase
         $userC = factory(User::class)->create();
         $userB = factory(User::class)->create();
         $userC->is_public = false;
-        $userB->user_id = $user->id;
-        $userC->user_id = $user->id;
+        $userB->user_uuid = $user->uuid;
+        $userC->user_uuid = $user->uuid;
         $userB->save();
         $userC->save();
         $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
         $response->assertOk();
     }
 
-    /**
-     * @test testUserCanStoreUser
-     */
-    public function testUserCanStoreUser()
-    {
-        // TODO - Add response structure asserts
-        Storage::fake('gcs');
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->make();
-        $response = $this->actingAs($user, 'api')->json('POST', '/api/users', [
-            'photo' => UploadedFile::fake()->image('photo50.jpg'),
-            'name' => $userB->name,
-            'email' => $userB->email,
-            'password' => $userB->password,
-            'password_confirmation' => $userB->password,
-            'is_public' => true,
-            'coordinates' => '5.5,6.5',
-        ]);
-        $response->assertOk();
-        $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
-    }
 
     /**
      * @test testUserCanUpdateUser
@@ -335,10 +336,9 @@ class UserTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'id',
             'uuid',
             'location',
-            'photo_id',
+            'photo_uuid',
             'api_token',
             'name',
             'email',
@@ -363,7 +363,7 @@ class UserTest extends TestCase
         // TODO - Add response structure asserts
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
-        $userB->user_id = $user->id;
+        $userB->user_uuid = $user->uuid;
         $userB->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/users/' . $userB->uuid);
         $response->assertOk();
@@ -399,10 +399,10 @@ class UserTest extends TestCase
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
         $group = factory(Group::class)->create();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, ['is_admin' => true]);
-        $userB->user_id = $user->id;
+        $userB->user_uuid = $user->uuid;
         $userB->save();
 
         $response = $this->actingAs($user, 'api')
@@ -413,8 +413,8 @@ class UserTest extends TestCase
 
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
-            'groupable_id' => $userB->id,
-            'group_id' => $group->id,
+            'groupable_id' => $userB->uuid,
+            'group_uuid' => $group->uuid,
             'status' => Group::ATTACHED_STATUS,
             'is_admin' => false
         ]);
@@ -430,10 +430,10 @@ class UserTest extends TestCase
         $userB = factory(User::class)->create();
         $group = factory(Group::class)->create();
 
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
 
-        $userB->user_id = $user->id;
+        $userB->user_uuid = $user->uuid;
         $userB->save();
 
         $group->users()->attach($user, [
@@ -453,8 +453,8 @@ class UserTest extends TestCase
 
         $this->assertDeleted('groupables', [
             'groupable_type' => 'App\\User',
-            'groupable_id' => $userB->id,
-            'group_id' => $group->id,
+            'groupable_id' => $userB->uuid,
+            'group_uuid' => $group->uuid,
             'status' => Group::ATTACHED_STATUS
         ]);
 

@@ -34,14 +34,14 @@ class GeofenceTest extends TestCase
         $device = factory(Device::class)->create();
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $geofence = new Geofence();
         $geofence->uuid = UniqueNameRepository::createIdentifier();
         $geofence->name = "Geofence";
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->shape = new Polygon([new LineString([
             new Point(0, 0),
             new Point(0, 5),
@@ -50,9 +50,9 @@ class GeofenceTest extends TestCase
             new Point(0, 0)
         ])]);
         $geofence->save();
-        $device->geofences()->attach($geofence->id);
-        $pet->geofences()->attach($geofence->id);
-        $user->geofences()->attach($geofence->id);
+        $device->geofences()->attach($geofence->uuid);
+        $pet->geofences()->attach($geofence->uuid);
+        $user->geofences()->attach($geofence->uuid);
         $location = factory(Location::class)->make();
         $location2 = factory(Location::class)->make();
         $location3 = factory(Location::class)->make();
@@ -207,9 +207,9 @@ class GeofenceTest extends TestCase
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $secondPayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($device, $response) {
-            return $e->model->id === $device->id &&
+            return $e->model->uuid === $device->uuid &&
                 $e->location->trackable_type === 'App\\Device' &&
-                $e->location->trackable_id === $device->id &&
+                $e->location->trackable_id === $device->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
@@ -222,99 +222,99 @@ class GeofenceTest extends TestCase
         $response->assertCreated();
 
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($user, $response) {
-            return $e->model->id === $user->id &&
+            return $e->model->uuid === $user->uuid &&
                 $e->location->trackable_type === 'App\\User' &&
-                $e->location->trackable_id === $user->id &&
+                $e->location->trackable_id === $user->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $secondPayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($pet, $response) {
-            return $e->model->id === $pet->id &&
+            return $e->model->uuid === $pet->uuid &&
                 $e->location->trackable_type === 'App\\Pet' &&
-                $e->location->trackable_id === $pet->id &&
+                $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $thirdPayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($device, $response) {
-            return $e->model->id === $device->id &&
+            return $e->model->uuid === $device->uuid &&
                 $e->location->trackable_type === 'App\\Device' &&
-                $e->location->trackable_id === $device->id &&
+                $e->location->trackable_id === $device->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $thirdPayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($user, $response) {
-            return $e->model->id === $user->id &&
+            return $e->model->uuid === $user->uuid &&
                 $e->location->trackable_type === 'App\\User' &&
-                $e->location->trackable_id === $user->id &&
+                $e->location->trackable_id === $user->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $thirdPayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($pet, $response) {
-            return $e->model->id === $pet->id &&
+            return $e->model->uuid === $pet->uuid &&
                 $e->location->trackable_type === 'App\\Pet' &&
-                $e->location->trackable_id === $pet->id &&
+                $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $fourPayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($device, $response) {
-            return $e->model->id === $device->id &&
+            return $e->model->uuid === $device->uuid &&
                 $e->location->trackable_type === 'App\\Device' &&
-                $e->location->trackable_id === $device->id &&
+                $e->location->trackable_id === $device->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $fourPayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($user, $response) {
-            return $e->model->id === $user->id &&
+            return $e->model->uuid === $user->uuid &&
                 $e->location->trackable_type === 'App\\User' &&
-                $e->location->trackable_id === $user->id &&
+                $e->location->trackable_id === $user->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $fourPayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($pet, $response) {
-            return $e->model->id === $pet->id &&
+            return $e->model->uuid === $pet->uuid &&
                 $e->location->trackable_type === 'App\\Pet' &&
-                $e->location->trackable_id === $pet->id &&
+                $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $fivePayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($device, $response) {
-            return $e->model->id === $device->id &&
+            return $e->model->uuid === $device->uuid &&
                 $e->location->trackable_type === 'App\\Device' &&
-                $e->location->trackable_id === $device->id &&
+                $e->location->trackable_id === $device->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $fivePayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($user, $response) {
-            return $e->model->id === $user->id &&
+            return $e->model->uuid === $user->uuid &&
                 $e->location->trackable_type === 'App\\User' &&
-                $e->location->trackable_id === $user->id &&
+                $e->location->trackable_id === $user->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $fivePayload);
         $response->assertCreated();
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($pet, $response) {
-            return $e->model->id === $pet->id &&
+            return $e->model->uuid === $pet->uuid &&
                 $e->location->trackable_type === 'App\\Pet' &&
-                $e->location->trackable_id === $pet->id &&
+                $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
 
@@ -463,16 +463,16 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $device->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid . '/geofences');
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user',
                     'photo',
                     'name',
@@ -487,7 +487,7 @@ class GeofenceTest extends TestCase
                     'pivot' => [
                         'geofenceable_id',
                         'geofenceable_type',
-                        'geofence_id',
+                        'geofence_uuid',
                     ],
                 ]
             ]
@@ -503,13 +503,13 @@ class GeofenceTest extends TestCase
         $device = factory(Device::class)->create();
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $geofence = new Geofence();
         $geofence->name = "Geofence";
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->uuid = UniqueNameRepository::createIdentifier();
         $geofence->shape = new Polygon([new LineString([
             new Point(0, 0),
@@ -519,9 +519,9 @@ class GeofenceTest extends TestCase
             new Point(0, 0)
         ])]);
         $geofence->save();
-        $device->geofences()->attach($geofence->id);
-        $pet->geofences()->attach($geofence->id);
-        $user->geofences()->attach($geofence->id);
+        $device->geofences()->attach($geofence->uuid);
+        $pet->geofences()->attach($geofence->uuid);
+        $user->geofences()->attach($geofence->uuid);
         $location = factory(Location::class)->make();
         $location2 = factory(Location::class)->make();
         $location3 = factory(Location::class)->make();
@@ -851,7 +851,7 @@ class GeofenceTest extends TestCase
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $response = $this->actingAs($user, 'api')->put('/api/geofences/' . $geofence->uuid, [
             'name' => 'Nicely!',
@@ -864,11 +864,11 @@ class GeofenceTest extends TestCase
             ]
         ]);
         $response->assertJsonFragment([
-            'id' => $geofence->id,
-            'user_id' => $user->id,
+            'uuid' => $geofence->uuid,
+            'user_uuid' => $user->uuid,
             'name' => 'Nicely!',
             'description' => null,
-            'photo_id' => $geofence->photo_id,
+            'photo_uuid' => $geofence->photo_uuid,
             'shape' => [
                 'type' => 'Polygon',
                 'coordinates' => [
@@ -885,7 +885,7 @@ class GeofenceTest extends TestCase
             'created_at' => $geofence->created_at->format('Y-m-d H:i:s')
         ]);
         $response->assertJsonStructure([
-            'id',
+            'uuid',
             'user',
             'photo'
         ]);
@@ -900,7 +900,7 @@ class GeofenceTest extends TestCase
         Storage::fake('gcs');
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $old_uuid = $geofence->photo->uuid;
         $geofence->save();
         $response = $this->actingAs($user, 'api')->put('/api/geofences/' . $geofence->uuid, [
@@ -919,11 +919,11 @@ class GeofenceTest extends TestCase
         $response->assertOk();
         $content = json_decode($response->getContent());
         $response->assertJsonFragment([
-            'id' => $geofence->id,
-            'user_id' => $user->id,
+            'uuid' => $geofence->uuid,
+            'user_uuid' => $user->uuid,
             'name' => 'Nicely!',
             'description' => null,
-            'photo_id' => $content->photo_id,
+            'photo_uuid' => $content->photo_uuid,
             'shape' => [
                 'type' => 'Polygon',
                 'coordinates' => [
@@ -952,7 +952,7 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $geofence = new Geofence();
         $geofence->name = "Geofence";
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->uuid = UniqueNameRepository::createIdentifier();
         $geofence->shape = new Polygon([new LineString([
             new Point(0, 0),
@@ -967,7 +967,7 @@ class GeofenceTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
+                    'uuid',
                     'user',
                     'photo',
                     'name',
@@ -988,7 +988,7 @@ class GeofenceTest extends TestCase
         $owner = factory(User::class)->create();
         $geofence = new Geofence();
         $geofence->name = "Geofence";
-        $geofence->user_id = $owner->id;
+        $geofence->user_uuid = $owner->uuid;
         $geofence->uuid = UniqueNameRepository::createIdentifier();
         $geofence->shape = new Polygon([new LineString([
             new Point(0, 0),
@@ -998,15 +998,15 @@ class GeofenceTest extends TestCase
             new Point(0, 0)
         ])]);
         $geofence->save();
-        $user->user_id = $owner->id;
+        $user->user_uuid = $owner->uuid;
         $user->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/geofences');
         $response->assertJsonStructure([
             'data' => [
                 [
                     'uuid',
-                    'user_id',
-                    'photo_id',
+                    'user_uuid',
+                    'photo_uuid',
                     'name',
                     'description',
                     'shape' => [
@@ -1045,8 +1045,8 @@ class GeofenceTest extends TestCase
         ]);
         $response->assertJsonStructure([
             'uuid',
-            'user_id',
-            'photo_id',
+            'user_uuid',
+            'photo_uuid',
             'name',
             'shape' => [
                 'type',
@@ -1071,7 +1071,7 @@ class GeofenceTest extends TestCase
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $response = $this->actingAs($user, 'api')->delete('/api/geofences/' . $geofence->uuid);
         $response->assertOk();
@@ -1085,9 +1085,9 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $response = $this->actingAs($user, 'api')->json(
             'POST',
@@ -1097,8 +1097,8 @@ class GeofenceTest extends TestCase
         $response->assertOk();
         $this->assertDatabaseHas('geofenceables', [
             'geofenceable_type' => 'App\\Device',
-            'geofenceable_id' => $device->id,
-            'geofence_id' => $geofence->id,
+            'geofenceable_id' => $device->uuid,
+            'geofence_uuid' => $geofence->uuid,
         ]);
     }
 
@@ -1110,9 +1110,9 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $device->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json(
@@ -1122,8 +1122,8 @@ class GeofenceTest extends TestCase
         );
         $this->assertDeleted('geofenceables', [
             'geofenceable_type' => 'App\\Device',
-            'geofenceable_id' => $device->id,
-            'geofence_id' => $geofence->id,
+            'geofenceable_id' => $device->uuid,
+            'geofence_uuid' => $geofence->uuid,
         ]);
         $response->assertOk();
     }
@@ -1135,7 +1135,7 @@ class GeofenceTest extends TestCase
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $response = $this->actingAs($user, 'api')->json(
             'POST',
@@ -1144,9 +1144,9 @@ class GeofenceTest extends TestCase
         );
         $response->assertOk();
         $this->assertDatabaseHas('geofenceables', [
-            'geofence_id' => $geofence->id,
+            'geofence_uuid' => $geofence->uuid,
             'geofenceable_type' => 'App\\User',
-            'geofenceable_id' => $user->id,
+            'geofenceable_id' => $user->uuid,
         ]);
     }
 
@@ -1157,7 +1157,7 @@ class GeofenceTest extends TestCase
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $user->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json(
@@ -1167,9 +1167,9 @@ class GeofenceTest extends TestCase
         );
         $response->assertOk();
         $this->assertDeleted('geofenceables', [
-            'geofence_id' => $geofence->id,
+            'geofence_uuid' => $geofence->uuid,
             'geofenceable_type' => 'App\\User',
-            'geofenceable_id' => $user->id,
+            'geofenceable_id' => $user->uuid,
         ]);
     }
 
@@ -1180,14 +1180,14 @@ class GeofenceTest extends TestCase
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $geofence->users()->attach($user->id);
+        $geofence->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->get('/api/geofences/' . $geofence->uuid);
         $response->assertJsonStructure([
             'uuid',
-            'user_id',
-            'photo_id',
+            'user_uuid',
+            'photo_uuid',
             'name',
             'description',
             'shape' => [
@@ -1204,8 +1204,8 @@ class GeofenceTest extends TestCase
             'data' => [
                 [
                     'uuid',
-                    'user_id',
-                    'photo_id',
+                    'user_uuid',
+                    'photo_uuid',
                     'name',
                     'email',
                     'is_admin',
@@ -1214,7 +1214,7 @@ class GeofenceTest extends TestCase
                     'free',
                     'user',
                     'pivot' => [
-                        'geofence_id',
+                        'geofence_uuid',
                         'geofenceable_id',
                         'geofenceable_type',
                     ],
@@ -1232,9 +1232,9 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
         $response = $this->actingAs($user, 'api')->json(
             'POST',
@@ -1242,9 +1242,9 @@ class GeofenceTest extends TestCase
             []
         );
         $this->assertDatabaseHas('geofenceables', [
-            'geofenceable_id' => $pet->id,
+            'geofenceable_id' => $pet->uuid,
             'geofenceable_type' => 'App\\Pet',
-            'geofence_id' => $geofence->id,
+            'geofence_uuid' => $geofence->uuid,
         ]);
         $response->assertOk();
     }
@@ -1257,9 +1257,9 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
         $pet->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json(
@@ -1268,9 +1268,9 @@ class GeofenceTest extends TestCase
             []
         );
         $this->assertDeleted('geofenceables', [
-            'geofenceable_id' => $pet->id,
+            'geofenceable_id' => $pet->uuid,
             'geofenceable_type' => 'App\\Pet',
-            'geofence_id' => $geofence->id,
+            'geofence_uuid' => $geofence->uuid,
         ]);
         $response->assertOk();
     }
@@ -1284,9 +1284,9 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $response = $this->actingAs($user, 'api')->json(
             'POST',
@@ -1294,9 +1294,9 @@ class GeofenceTest extends TestCase
             []
         );
         $this->assertDatabaseHas('groupables', [
-            'groupable_id' => $geofence->id,
+            'groupable_id' => $geofence->uuid,
             'groupable_type' => 'App\\Geofence',
-            'group_id' => $group->id,
+            'group_uuid' => $group->uuid,
         ]);
         $response->assertOk();
 
@@ -1308,7 +1308,7 @@ class GeofenceTest extends TestCase
 
         $this->assertDatabaseHas('actions', [
             'resource' => 'App\\Http\\Controllers\\Api\\Resource\\Geofences\\AttachController',
-            'referenced_id' => $group->id,
+            'referenced_uuid' => $group->uuid,
         ]);
 
         $response->assertOk();
@@ -1322,11 +1322,11 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
-        $group->geofences()->attach($geofence->id, [
+        $group->geofences()->attach($geofence->uuid, [
             'status' => Group::ATTACHED_STATUS,
         ]);
         $response = $this->actingAs($user, 'api')->json(
@@ -1338,8 +1338,8 @@ class GeofenceTest extends TestCase
             'data' => [
                 [
                     'uuid',
-                    'user_id',
-                    'photo_id',
+                    'user_uuid',
+                    'photo_uuid',
                     'name',
                     'description',
                     'is_public',
@@ -1348,7 +1348,7 @@ class GeofenceTest extends TestCase
                     'pivot' => [
                         'groupable_id',
                         'groupable_type',
-                        'group_id',
+                        'group_uuid',
                     ]
                 ]
             ]
@@ -1364,9 +1364,9 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
         $group->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json(
@@ -1375,9 +1375,9 @@ class GeofenceTest extends TestCase
             []
         );
         $this->assertDeleted('groupables', [
-            'groupable_id' => $geofence->id,
+            'groupable_id' => $geofence->uuid,
             'groupable_type' => 'App\\Geofence',
-            'group_id' => $group->id,
+            'group_uuid' => $group->uuid,
         ]);
         $response->assertOk();
     }
@@ -1390,9 +1390,9 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $pet->user_id = $user->id;
+        $pet->user_uuid = $user->uuid;
         $pet->save();
         $pet->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/geofences');
@@ -1400,8 +1400,8 @@ class GeofenceTest extends TestCase
             'data' => [
                 [
                     'uuid',
-                    'user_id',
-                    'photo_id',
+                    'user_uuid',
+                    'photo_uuid',
                     'name',
                     'description',
                     'shape' => [
@@ -1414,7 +1414,7 @@ class GeofenceTest extends TestCase
                     'pivot' => [
                         'geofenceable_id',
                         'geofenceable_type',
-                        'geofence_id',
+                        'geofence_uuid',
                     ]
                 ]
             ]
@@ -1429,7 +1429,7 @@ class GeofenceTest extends TestCase
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $user->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/geofences');
@@ -1437,8 +1437,8 @@ class GeofenceTest extends TestCase
             'data' => [
                 [
                     'uuid',
-                    'user_id',
-                    'photo_id',
+                    'user_uuid',
+                    'photo_uuid',
                     'name',
                     'description',
                     'shape' => [
@@ -1451,7 +1451,7 @@ class GeofenceTest extends TestCase
                     'pivot' => [
                         'geofenceable_id',
                         'geofenceable_type',
-                        'geofence_id',
+                        'geofence_uuid',
                     ]
                 ]
             ]
@@ -1467,9 +1467,9 @@ class GeofenceTest extends TestCase
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
         $geofence = factory(Geofence::class)->create();
-        $group->user_id = $user->id;
+        $group->user_uuid = $user->uuid;
         $group->save();
-        $geofence->user_id = $user->id;
+        $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $group->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/geofences');
@@ -1477,8 +1477,8 @@ class GeofenceTest extends TestCase
             'data' => [
                 [
                     'uuid',
-                    'user_id',
-                    'photo_id',
+                    'user_uuid',
+                    'photo_uuid',
                     'name',
                     'description',
                     'shape' => [
@@ -1491,7 +1491,7 @@ class GeofenceTest extends TestCase
                     'pivot' => [
                         'groupable_id',
                         'groupable_type',
-                        'group_id',
+                        'group_uuid',
                     ]
                 ]
             ]

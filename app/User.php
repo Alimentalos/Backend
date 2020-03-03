@@ -63,9 +63,9 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
         'uuid',
         'email_verified_at',
         'api_token',
-        'photo_id',
+        'photo_uuid',
         'photo_url',
-        'user_id',
+        'user_uuid',
         'name',
         'email',
         'password',
@@ -80,6 +80,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      * @var array
      */
     protected $hidden = [
+        'id',
         'password',
         'remember_token',
     ];
@@ -141,7 +142,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function getIsChildAttribute()
     {
-        return !is_null($this->user_id);
+        return !is_null($this->user_uuid);
     }
 
     /**
@@ -161,21 +162,35 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function groups()
     {
-        return $this->morphToMany(Group::class, 'groupable')->withPivot([
+        return $this->morphToMany(
+            Group::class,
+            'groupable',
+            'groupables',
+            'groupable_id',
+            'group_uuid',
+            'uuid',
+            'uuid'
+        )->withPivot([
             'is_admin',
             'status',
-            'sender_id',
+            'sender_uuid',
         ])->withTimestamps();
     }
 
     /**
-     * The related Geofences.
+     * The geofences that belongs to the user
      *
      * @return BelongsToMany
      */
     public function geofences()
     {
-        return $this->morphToMany(Geofence::class, 'geofenceable');
+        return $this->morphToMany(Geofence::class, 'geofenceable',
+            'geofenceables',
+            'geofenceable_id',
+            'geofence_uuid',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -185,7 +200,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function devices()
     {
-        return $this->hasMany(Device::class);
+        return $this->hasMany(Device::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -195,7 +210,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function pets()
     {
-        return $this->hasMany(Pet::class);
+        return $this->hasMany(Pet::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -205,7 +220,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -215,7 +230,8 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function locations()
     {
-        return $this->morphMany(Location::class, 'trackable');
+        return $this->morphMany(Location::class, 'trackable', 'trackable_type',
+            'trackable_id', 'uuid');
     }
 
     /**
@@ -225,7 +241,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -235,7 +251,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function photo()
     {
-        return $this->belongsTo(Photo::class);
+        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
     }
 
     /**
@@ -245,7 +261,13 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function photos()
     {
-        return $this->morphToMany(Photo::class, 'photoable');
+        return $this->morphToMany(Photo::class, 'photoable',
+            'photoables',
+            'photoable_id',
+            'photo_uuid',
+            'uuid',
+            'uuid'
+        );
     }
 
     /**
@@ -253,7 +275,8 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public function accesses()
     {
-        return $this->morphMany(Access::class, 'accessible');
+        return $this->morphMany(Access::class, 'accessible', 'accessible_type',
+            'accessible_id', 'uuid');
     }
 
     /**
@@ -272,19 +295,19 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public static function resolveModels(Request $request)
     {
-        if (!is_null($request->user('api')->user_id)) {
+        if (!is_null($request->user('api')->user_uuid)) {
             return self::with('photo', 'user')->latest()->where([
-                ['user_id', $request->user('api')->user_id]
+                ['user_uuid', $request->user('api')->user_uuid]
             ])->orWhere([
-                ['id', $request->user('api')->user_id]
+                ['uuid', $request->user('api')->user_uuid]
             ])->paginate(20);
         } elseif ($request->user('api')->is_admin) {
             return self::with('photo', 'user')->latest()->paginate(20);
         } else {
             return self::with('photo', 'user')->latest()->where([
-                ['user_id', $request->user()->id]
+                ['user_uuid', $request->user()->uuid]
             ])->orWhere([
-                ['id', $request->user('api')->id]
+                ['uuid', $request->user('api')->uuid]
             ])->paginate(20);
         }
     }

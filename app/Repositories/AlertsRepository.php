@@ -22,18 +22,18 @@ class AlertsRepository
         $alert = HandleBindingRepository::bindResourceInstance($alert_type, $request->input('alert_id'));
         $alert = Alert::create([
             'name' => $request->input('name'),
-            'photo_id' => $photo->id,
-            'photo_url' => config('storage.path') . $photo->photo_url,
-            'user_id' => $request->user('api')->id,
+            'user_uuid' => $request->user('api')->uuid,
+            'photo_uuid' => $photo->uuid,
+            'alert_id' => $alert->uuid,
             'alert_type' => $alert_type,
-            'alert_id' => $alert->id,
+            'photo_url' => config('storage.path') . $photo->photo_url,
             'title' => $request->input('title'),
             'body' => $request->input('body'),
             'type' => $request->input('type'),
             'status' => $request->input('status'),
             'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
         ]);
-        $photo->alerts()->attach($alert->id);
+        $photo->alerts()->attach($alert->uuid);
         return $alert;
     }
 

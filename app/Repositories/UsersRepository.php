@@ -20,8 +20,8 @@ class UsersRepository
     public static function createUserViaRequest(Request $request, Photo $photo)
     {
         $user = User::create([
-            'user_id' => $request->user('api')->id,
-            'photo_id' => $photo->id,
+            'user_uuid' => $request->user('api')->uuid,
+            'photo_uuid' => $photo->uuid,
             'photo_url' => config('storage.path') . $photo->photo_url,
             'email' => $request->input('email'),
             'name' => $request->input('name'),
@@ -29,7 +29,7 @@ class UsersRepository
             'is_public' => $request->input('is_public'),
             'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
         ]);
-        $user->photos()->attach($photo->id);
+        $user->photos()->attach($photo->uuid);
         event(new Registered($user));
         return $user;
     }
@@ -43,7 +43,7 @@ class UsersRepository
      */
     public static function sameUser(User $userA, User $userB)
     {
-        return $userA->id === $userB->id;
+        return $userA->uuid === $userB->uuid;
     }
 
     /**
@@ -55,7 +55,7 @@ class UsersRepository
      */
     public static function sameOwner(User $userA, User $userB)
     {
-        return $userA->user_id === $userB->user_id;
+        return $userA->user_uuid === $userB->user_uuid;
     }
 
     /**
@@ -67,7 +67,7 @@ class UsersRepository
      */
     public static function isOwner(User $userA, User $userB)
     {
-        return $userA->id === $userB->user_id;
+        return $userA->uuid === $userB->user_uuid;
     }
 
     /**
@@ -79,7 +79,7 @@ class UsersRepository
      */
     public static function isWorker(User $userA, User $userB)
     {
-        return $userA->user_id === $userB->id;
+        return $userA->user_uuid === $userB->uuid;
     }
 
     /**
@@ -91,6 +91,6 @@ class UsersRepository
      */
     public static function isProperty(Model $model, User $user)
     {
-        return $model->user_id === $user->id;
+        return $model->user_uuid === $user->uuid;
     }
 }

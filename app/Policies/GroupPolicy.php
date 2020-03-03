@@ -34,7 +34,7 @@ class GroupPolicy
      */
     public function view(User $user, Group $group)
     {
-        return $user->is_admin || $group->is_public || GroupsRepository::userHasGroup($user, $group->id);
+        return $user->is_admin || $group->is_public || GroupsRepository::userHasGroup($user, $group->uuid);
     }
 
     /**
@@ -70,7 +70,7 @@ class GroupPolicy
     public function createPhoto(User $user, Group $group)
     {
         return $user->can('create', Photo::class) &&
-            ($user->is_admin || GroupsRepository::userIsGroupAdmin($user, $group) || GroupsRepository::userHasGroup($user, $group->id));
+            ($user->is_admin || GroupsRepository::userIsGroupAdmin($user, $group) || GroupsRepository::userHasGroup($user, $group->uuid));
     }
 
     /**
@@ -82,7 +82,7 @@ class GroupPolicy
      */
     public function delete(User $user, Group $group)
     {
-        return $user->is_admin || $group->user_id === $user->id;
+        return $user->is_admin || $group->user_uuid === $user->uuid;
     }
 
     /**
@@ -98,7 +98,7 @@ class GroupPolicy
         return true || $user->is_admin ||
             (
                 GroupsRepository::userIsGroupAdmin($user, $group) &&
-                !in_array($group->id, $geofence->groups->pluck('id')->toArray())
+                !in_array($group->uuid, $geofence->groups->pluck('uuid')->toArray())
             );
     }
 
@@ -115,7 +115,7 @@ class GroupPolicy
         return true || $user->is_admin ||
             (
                 GroupsRepository::userIsGroupAdmin($user, $group) &&
-                in_array($group->id, $geofence->groups->pluck('id')->toArray())
+                in_array($group->uuid, $geofence->groups->pluck('uuid')->toArray())
             );
     }
 }

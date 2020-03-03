@@ -18,7 +18,7 @@ class ReportTest extends TestCase
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/reports', [
             'api_token' => $user->api_token,
@@ -41,13 +41,13 @@ class ReportTest extends TestCase
             factory(Location::class)->make()->toArray()
         );
         $group = factory(Group::class)->create();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $user->groups()->save($group);
         $group->devices()->save($device);
         $location1->update([
             'generated_at' => Carbon::now()->format('Y-m-d 11:00:00'),
-            'device_id' => $device->id,
+            'device_uuid' => $device->uuid,
             'is_moving' => 1
         ]);
         $location2 = $device->locations()->create(
@@ -55,7 +55,7 @@ class ReportTest extends TestCase
         );
         $location2->update([
             'generated_at' => Carbon::now()->format('Y-m-d 13:00:00'),
-            'device_id' => $device->id,
+            'device_uuid' => $device->uuid,
             'is_moving' => 0
         ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/reports', [
@@ -73,7 +73,7 @@ class ReportTest extends TestCase
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $location1 = $device->locations()->create(
             factory(Location::class)->make()->toArray()
@@ -107,7 +107,7 @@ class ReportTest extends TestCase
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
-        $device->user_id = $user->id;
+        $device->user_uuid = $user->uuid;
         $device->save();
         $location1 = $device->locations()->create(
             factory(Location::class)->make()->toArray()
@@ -117,7 +117,7 @@ class ReportTest extends TestCase
         $group->devices()->save($device);
         $location1->update([
             'generated_at' => Carbon::now()->format('Y-m-d 11:00:00'),
-            'device_id' => $device->id,
+            'device_uuid' => $device->uuid,
             'is_moving' => 1
         ]);
         $location2 = $device->locations()->create(
@@ -125,7 +125,7 @@ class ReportTest extends TestCase
         );
         $location2->update([
             'generated_at' => Carbon::now()->format('Y-m-d 13:00:00'),
-            'device_id' => $device->id,
+            'device_uuid' => $device->uuid,
             'is_moving' => 0
         ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/reports', [

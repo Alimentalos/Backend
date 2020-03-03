@@ -30,10 +30,17 @@ class Comment extends Model implements ReactableContract, Resource
      */
     protected $fillable = [
         'uuid',
-        'user_id',
+        'user_uuid',
         'title',
         'body',
     ];
+
+    /**
+     * The properties which are hidden.
+     *
+     * @var array
+     */
+    protected $hidden = ['id'];
 
     /**
      * Get the route key for the model.
@@ -60,7 +67,7 @@ class Comment extends Model implements ReactableContract, Resource
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
     }
 
     /**
@@ -70,7 +77,11 @@ class Comment extends Model implements ReactableContract, Resource
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable',
+            'commentable_type',
+            'commentable_id',
+            'uuid'
+        );
     }
 
     /**

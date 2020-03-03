@@ -64,7 +64,7 @@ class AlertsTest extends TestCase
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $this->assertDatabaseHas('alerts', [
-            'id' => (json_decode($content))->id,
+            'uuid' => (json_decode($content))->uuid,
             'title' => $alert->title,
             'body' => $alert->body,
             'type' => $alert->type,
@@ -98,7 +98,7 @@ class AlertsTest extends TestCase
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $this->assertDatabaseHas('alerts', [
-            'id' => (json_decode($content))->id,
+            'uuid' => (json_decode($content))->uuid,
             'title' => $alert->title,
             'body' => $alert->body,
             'type' => $alert->type,
@@ -132,7 +132,7 @@ class AlertsTest extends TestCase
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $this->assertDatabaseHas('alerts', [
-            'id' => (json_decode($content))->id,
+            'uuid' => (json_decode($content))->uuid,
             'title' => $alert->title,
             'body' => $alert->body,
             'type' => $alert->type,
@@ -159,7 +159,7 @@ class AlertsTest extends TestCase
         Storage::fake('gcs');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->create();
-        $alert->user_id = $user->id;
+        $alert->user_uuid = $user->uuid;
         $alert->save();
         $modified = factory(Alert::class)->make();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/alerts/' . $alert->uuid, [
@@ -177,7 +177,7 @@ class AlertsTest extends TestCase
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $this->assertDatabaseHas('alerts', [
-            'id' => (json_decode($content))->id,
+            'uuid' => (json_decode($content))->uuid,
             'title' => $modified->title,
             'body' => $modified->body,
             'type' => $modified->type,
@@ -190,12 +190,12 @@ class AlertsTest extends TestCase
         Storage::fake('gcs');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->create();
-        $alert->user_id = $user->id;
+        $alert->user_uuid = $user->uuid;
         $alert->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/alerts/' . $alert->uuid);
         $response->assertOk();
         $this->assertDeleted('alerts', [
-            'id' => $alert->id,
+            'uuid' => $alert->uuid,
         ]);
     }
 
@@ -206,7 +206,7 @@ class AlertsTest extends TestCase
         $comment = factory(Comment::class)->make();
 
         $alert->comments()->create([
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'title' => $comment->title,
             'body' => $comment->body,
         ]);
@@ -217,8 +217,8 @@ class AlertsTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 [
-                    'id',
-                    'user_id',
+                    'uuid',
+                    'user_uuid',
                     'user',
                     'title',
                     'body',
@@ -229,14 +229,14 @@ class AlertsTest extends TestCase
         ]);
 
         $response->assertJsonFragment([
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'body' => $comment->body,
             'title' => $comment->title,
         ]);
         $this->assertDatabaseHas('comments', [
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'commentable_type' => 'App\\Alert',
-            'commentable_id' => $alert->id,
+            'commentable_id' => $alert->uuid,
             'body' => $comment->body,
         ]);
         $response->assertJsonCount(1, 'data');

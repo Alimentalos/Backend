@@ -20,11 +20,11 @@ class UploadRepository
         if ($request->has('photo')) {
             $photo = PhotoRepository::createPhotoViaRequest($request);
             $model->update([
-                'photo_id' => $photo->id,
+                'photo_uuid' => $photo->uuid,
                 'photo_url' => config('storage.path') . $photo->photo_url,
                 'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
             ]);
-            $model->photos()->attach($photo->id);
+            $model->photos()->attach($photo->uuid);
         }
 
     }
