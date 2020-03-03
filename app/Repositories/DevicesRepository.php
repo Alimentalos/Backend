@@ -13,11 +13,11 @@ class DevicesRepository
      */
     public static function fetchInDatabaseDevicesQuery()
     {
-        $userGroups = auth('api')->user()->groups->pluck('id')->toArray();
-        return Device::where('user_id', auth('api')->user()->id)
+        $userGroups = auth('api')->user()->groups->pluck('uuid')->toArray();
+        return Device::where('user_uuid', auth('api')->user()->uuid)
             ->orWhere('is_public', true)
             ->OrWhereHas('groups', function (Builder $query) use ($userGroups) {
-                $query->whereIn('id', $userGroups);
+                $query->whereIn('uuid', $userGroups);
             });
     }
 
@@ -42,7 +42,7 @@ class DevicesRepository
             return static::fetchInDatabaseDevices();
         }
         return Device::whereIn('uuid', explode(',', $devices))
-            ->where('user_id', auth('api')->user()->id)
+            ->where('user_uuid', auth('api')->user()->uuid)
             ->get();
     }
 }

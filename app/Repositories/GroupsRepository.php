@@ -39,21 +39,21 @@ class GroupsRepository
     {
         $group = Group::create([
             'name' => $request->input('name'),
-            'user_id' => $request->user('api')->id,
-            'photo_id' => $photo->id,
+            'user_uuid' => $request->user('api')->uuid,
+            'photo_uuid' => $photo->uuid,
             'photo_url' => config('storage.path') . $photo->photo_url,
         ]);
         $request->user('api')
             ->groups()
             ->attach(
-                $group->id,
+                $group->uuid,
                 [
                     'is_admin' => true,
                     'status' => Group::ACCEPTED_STATUS,
-                    'sender_id' => $request->user('api')->id,
+                    'sender_uuid' => $request->user('api')->uuid,
                 ]
             );
-        $group->photos()->attach($photo->id);
+        $group->photos()->attach($photo->uuid);
         return $group;
     }
 
@@ -66,10 +66,10 @@ class GroupsRepository
      */
     public static function userHasModel(User $user, Model $model)
     {
-        return $model->user_id === $user->id || $user->groups()
+        return $model->user_uuid === $user->uuid || $user->groups()
                 ->whereIn(
-                    'group_id',
-                    $model->groups->pluck('id')->toArray()
+                    'group_uuid',
+                    $model->groups->pluck('uuid')->toArray()
                 )->exists();
     }
 
@@ -82,7 +82,7 @@ class GroupsRepository
      */
     public static function userIsGroupAdmin(User $user, Group $group)
     {
-        return $user->id === $group->user_id || $user->groups()->whereIn('status', [
+        return $user->uuid === $group->user_uuid || $user->groups()->whereIn('status', [
             Group::ACCEPTED_STATUS, Group::ATTACHED_STATUS
         ])->where('is_admin', true)->exists();
     }
@@ -96,7 +96,7 @@ class GroupsRepository
      */
     public static function modelIsGroupModel(Model $model, Group $group)
     {
-        return $model->groups()->where('group_id', $group->id)
+        return $model->groups()->where('group_uuid', $group->uuid)
             ->whereIn('status', [
                 Group::ACCEPTED_STATUS, Group::ATTACHED_STATUS
             ])->exists();
@@ -111,7 +111,7 @@ class GroupsRepository
      */
     public static function modelIsBlocked(Model $model, Group $group)
     {
-        return $model->groups()->where('group_id', $group->id)
+        return $model->groups()->where('group_uuid', $group->uuid)
             ->whereIn('status', [
                 Group::BLOCKED_STATUS
             ])->exists();
@@ -126,6 +126,6 @@ class GroupsRepository
      */
     public static function userHasGroup(User $user, $groupId)
     {
-        return in_array($groupId, $user->groups->pluck('id')->toArray());
+        return in_array($groupId, $user->groups->pluck('uuid')->toArray());
     }
 }

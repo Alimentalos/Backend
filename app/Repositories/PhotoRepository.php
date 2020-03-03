@@ -43,7 +43,7 @@ class PhotoRepository
     {
         $photoUniqueName = UniqueNameRepository::createIdentifier();
         return Photo::create([
-            'user_id' => $request->user('api')->id,
+            'user_uuid' => $request->user('api')->uuid,
             'uuid' => $photoUniqueName,
             'photo_url' => $photoUniqueName . $request->file('photo')->extension(),
             'ext' => $request->file('photo')->extension(),
@@ -62,7 +62,7 @@ class PhotoRepository
     {
         $comment = $photo->comments()->create([
             'uuid' => UniqueNameRepository::createIdentifier(),
-            'user_id' => $request->user('api')->id,
+            'user_uuid' => $request->user('api')->uuid,
             'title' => $request->input('title'),
             'body' => $request->input('body'),
             'is_public' => $request->has('is_public'),

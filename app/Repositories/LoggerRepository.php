@@ -22,7 +22,7 @@ class LoggerRepository
             'type' => $type,
             'parameters' => $parameters,
             'resource' => $resource,
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'referenced_id' => null,
         ]);
     }
@@ -41,7 +41,7 @@ class LoggerRepository
             'type' => $parameters['type'],
             'parameters' => $parameters['parameters'],
             'resource' => $parameters['resource'],
-            'user_id' => $user->id,
+            'user_uuid' => $user->uuid,
             'referenced_id' => $parameters['referenced']
         ]);
     }

@@ -43,8 +43,8 @@ class HandleBindingRepository {
             [
                 'type' => 'success',
                 'resource' => Route::currentRouteAction(),
-                'parameters' => $request->route($parameters[0])->id,
-                'referenced' => $request->route($parameters[1])->id
+                'parameters' => $request->route($parameters[0])->uuid,
+                'referenced' => $request->route($parameters[1])->uuid
             ]
         );
     }
@@ -63,7 +63,7 @@ class HandleBindingRepository {
                 'type' => 'success',
                 'resource' => Route::currentRouteAction(),
                 'parameters' => $request->except('photo', 'password', 'password_confirmation', 'shape'),
-                'referenced' => $request->route($parameters[0])->id ?? $parameters[0]
+                'referenced' => $request->route($parameters[0])->uuid ?? $parameters[0]
             ]
         );
     }

@@ -73,9 +73,9 @@ class GeofenceRepository
     {
         $geofence = new Geofence();
         $geofence->uuid = UniqueNameRepository::createIdentifier();
-        $geofence->photo_id = $photo->id;
+        $geofence->photo_uuid = $photo->uuid;
         $geofence->name = $request->input('name');
-        $geofence->user_id = $request->user('api')->id;
+        $geofence->user_uuid = $request->user('api')->uuid;
         $geofence->photo_url = config('storage.path') . $photo->photo_url;
 
         $shape = array_map(function ($element) {
@@ -120,9 +120,9 @@ class GeofenceRepository
     {
         $model->accesses()->create([
             'uuid' => UniqueNameRepository::createIdentifier(),
-            'geofence_id' => $geofence->id,
-            'first_location_id' => $location->id,
-            'last_location_id' => $location->id,
+            'geofence_uuid' => $geofence->uuid,
+            'first_location_uuid' => $location->uuid,
+            'last_location_uuid' => $location->uuid,
             'status' => static::IN_STATUS,
         ]);
         event(new GeofenceIn($location, $geofence, $model));
@@ -138,14 +138,14 @@ class GeofenceRepository
     public static function inAndStillQuery(Model $model, Geofence $geofence)
     {
         return $model->accesses()->where([
-            ['accessible_id', $model->id],
+            ['accessible_id', $model->uuid],
             ['accessible_type', get_class($model)],
-            ['geofence_id', $geofence->id],
+            ['geofence_uuid', $geofence->uuid],
             ['status', static::STILL_STATUS],
         ])->orWhere([
-            ['accessible_id', $model->id],
+            ['accessible_id', $model->uuid],
             ['accessible_type', get_class($model)],
-            ['geofence_id', $geofence->id],
+            ['geofence_uuid', $geofence->uuid],
             ['status', static::IN_STATUS],
         ]);
     }
@@ -160,7 +160,7 @@ class GeofenceRepository
     public static function updateStillLog(Model $model, Geofence $geofence, Model $location)
     {
         static::inAndStillQuery($model, $geofence)->update([
-            'last_location_id' => $location->id,
+            'last_location_uuid' => $location->uuid,
             'status' => static::STILL_STATUS,
         ]);
     }
@@ -175,7 +175,7 @@ class GeofenceRepository
     public static function updateOutLog(Model $model, Geofence $geofence, Model $location)
     {
         static::inAndStillQuery($model, $geofence)->update([
-            'last_location_id' => $location->id,
+            'last_location_uuid' => $location->uuid,
             'status' => static::OUT_STATUS,
         ]);
         event(new GeofenceOut($location, $geofence, $model));
