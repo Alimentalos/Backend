@@ -16,8 +16,8 @@ class CreateGeofencesTable extends Migration
         Schema::create('geofences', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->unique()->index();
-            $table->bigInteger('user_uuid')->unsigned()->index();
-            $table->bigInteger('photo_uuid')->unsigned()->index()->nullable();
+            $table->string('user_uuid')->index();
+            $table->string('photo_uuid')->index()->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->polygon('shape')->nullable();
@@ -27,7 +27,7 @@ class CreateGeofencesTable extends Migration
         });
 
         Schema::create('geofenceables', function (Blueprint $table) {
-            $table->bigInteger('geofence_uuid')->index()->unsigned();
+            $table->string('geofence_uuid')->index();
             $table->uuidMorphs('geofenceable');
         });
     }

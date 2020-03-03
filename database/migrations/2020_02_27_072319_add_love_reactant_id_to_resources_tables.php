@@ -12,11 +12,11 @@ final class AddLoveReactantIdToResourcesTables extends Migration
     {
         foreach(['comments', 'users', 'pets', 'photos', 'geofences'] as $tableName) {
             Schema::table($tableName, function (Blueprint $table) {
-                $table->string('love_reactant_uuid')->nullable();
+                $table->unsignedBigInteger('love_reactant_id')->nullable();
 
                 $table
-                    ->foreign('love_reactant_uuid')
-                    ->references('uuid')
+                    ->foreign('love_reactant_id')
+                    ->references('id')
                     ->on('love_reactants');
             });
         }
@@ -26,8 +26,8 @@ final class AddLoveReactantIdToResourcesTables extends Migration
     {
         foreach(['comments', 'users', 'pets', 'photos', 'geofences'] as $tableName) {
             Schema::table($tableName, function (Blueprint $table) {
-                $table->dropForeign(['love_reactant_uuid']);
-                $table->dropColumn('love_reactant_uuid');
+                $table->dropForeign(['love_reactant_id']);
+                $table->dropColumn('love_reactant_id');
             });
         }
     }

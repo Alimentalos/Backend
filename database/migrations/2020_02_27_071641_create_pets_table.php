@@ -17,8 +17,8 @@ class CreatePetsTable extends Migration
             $table->bigIncrements('id');
             $table->string('uuid')->unique()->index();
             $table->point('location')->nullable(); // Latitude, Longitude
-            $table->bigInteger('user_uuid')->unsigned()->index();
-            $table->bigInteger('photo_uuid')->unsigned()->index();
+            $table->string('user_uuid')->index();
+            $table->string('photo_uuid')->index();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->string('hair_color')->nullable();

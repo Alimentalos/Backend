@@ -16,8 +16,8 @@ class CreateGroupsTable extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->unique()->index();
-            $table->bigInteger('user_uuid')->unsigned()->index();
-            $table->bigInteger('photo_uuid')->unsigned()->index();
+            $table->string('user_uuid')->index();
+            $table->string('photo_uuid')->index();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->boolean('is_public')->default(true);
@@ -26,8 +26,8 @@ class CreateGroupsTable extends Migration
         });
 
         Schema::create('groupables', function (Blueprint $table) {
-            $table->bigInteger('group_uuid')->index()->unsigned();
-            $table->bigInteger('sender_uuid')->unsigned()->index()->nullable();
+            $table->string('group_uuid')->index();
+            $table->string('sender_uuid')->index()->nullable();
             $table->string('status')->default(\App\Group::PENDING_STATUS)->index();
             $table->boolean('is_admin')->default(false)->index();
             $table->uuidMorphs('groupable');

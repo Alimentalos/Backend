@@ -17,8 +17,8 @@ class CreatePhotosTable extends Migration
             $table->bigIncrements('id');
             $table->point('location'); // Latitude, Longitude
             $table->string('uuid')->index()->unique();
-            $table->bigInteger('user_uuid')->index()->unsigned();
-            $table->bigInteger('comment_uuid')->index()->unsigned()->nullable();
+            $table->string('user_uuid')->index();
+            $table->string('comment_uuid')->index()->nullable();
             $table->string('ext');
             $table->string('photo_url')->nullable();
             $table->boolean('is_public')->default(true);
@@ -26,7 +26,7 @@ class CreatePhotosTable extends Migration
         });
 
         Schema::create('photoables', function (Blueprint $table) {
-            $table->bigInteger('photo_uuid')->index()->unsigned();
+            $table->string('photo_uuid')->index();
             $table->uuidMorphs('photoable');
         });
     }
