@@ -86,6 +86,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
         'id',
         'password',
         'remember_token',
+        'api_token',
     ];
 
     /**
