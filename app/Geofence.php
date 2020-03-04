@@ -3,25 +3,29 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Repositories\DevicesRepository;
+use App\Relationships\Commons\BelongsToUser;
+use App\Relationships\Commons\Groupable;
+use App\Relationships\Commons\HasPhoto;
+use App\Relationships\Commons\Photoable;
+use App\Relationships\GeofenceRelationships;
 use App\Repositories\GeofenceRepository;
-use App\Repositories\GroupsRepository;
-use App\Rules\Coordinate;
+use App\Resources\GeofenceResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class Geofence extends Model implements ReactableContract, Resource
 {
     use SpatialTrait;
     use Reactable;
+    use GeofenceResource;
+    use GeofenceRelationships;
+    use BelongsToUser;
+    use Photoable;
+    use Groupable;
+    use HasPhoto;
 
     /**
      * The default location field of geofence.
@@ -29,13 +33,6 @@ class Geofence extends Model implements ReactableContract, Resource
      * @var string
      */
     public const DEFAULT_LOCATION_FIELD = 'shape';
-
-    /**
-     * Comma-separated accepted values.
-     *
-     * @var string
-     */
-    public const AVAILABLE_REACTIONS = 'Follow';
 
     /**
      * The mass assignment fields of the geofence.
@@ -87,48 +84,14 @@ class Geofence extends Model implements ReactableContract, Resource
     }
 
     /**
-     * Update geofence validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function updateRules(Request $request)
-    {
-        return [
-            'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
-                }), new Coordinate()
-            ],
-        ];
-    }
-
-    /**
      * Create model via request.
      *
      * @param Request $request
      * @return Geofence
      */
-    public static function createViaRequest(Request $request)
+    public function createViaRequest(Request $request)
     {
         return GeofenceRepository::createGeofenceViaRequest($request);
-    }
-
-    /**
-     * Store geofence validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function storeRules(Request $request)
-    {
-        return [
-            'name' => 'required',
-            'photo' => 'required',
-            'shape.*.latitude' => 'required_with:shape.*.longitude',
-            'is_public' => 'required|boolean',
-            'coordinates' => ['required', new Coordinate()],
-        ];
     }
 
     /**
@@ -139,162 +102,5 @@ class Geofence extends Model implements ReactableContract, Resource
     public function getRouteKeyName()
     {
         return 'uuid';
-    }
-
-    /**
-     * The related Geofenceable.
-     * @codeCoverageIgnore
-     */
-    public function geofenceable()
-    {
-        return $this->morphTo(
-            'geofenceable',
-            'geofenceable_type',
-            'geofenceable_id',
-            'geofence_uuid'
-        );
-    }
-
-
-    /**
-     * The related Devices.
-     *
-     * @return BelongsToMany
-     */
-    public function devices()
-    {
-        return $this->morphedByMany(Device::class,
-            'geofenceable',
-            'geofenceables',
-            'geofence_uuid',
-            'geofenceable_id',
-            'uuid',
-            'uuid'
-        );
-    }
-
-    /**
-     * The related Pets.
-     *
-     * @return BelongsToMany
-     */
-    public function pets()
-    {
-        return $this->morphedByMany(Pet::class,
-            'geofenceable',
-            'geofenceables',
-            'geofence_uuid',
-            'geofenceable_id',
-            'uuid',
-            'uuid'
-        );
-    }
-
-    /**
-     * The related Users.
-     *
-     * @return BelongsToMany
-     */
-    public function users()
-    {
-        return $this->morphedByMany(User::class,
-            'geofenceable',
-            'geofenceables',
-            'geofence_uuid',
-            'geofenceable_id',
-            'uuid',
-            'uuid'
-        );
-    }
-
-    /**
-     * The related User.
-     *
-     * @return BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'photo_uuid', 'uuid');
-    }
-
-    /**
-     * The related Photo
-     *
-     * @return BelongsTo
-     */
-    public function photo()
-    {
-        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
-    }
-
-    /**
-     * The related Photos.
-     *
-     * @return BelongsToMany
-     */
-    public function photos()
-    {
-        return $this->morphToMany(Photo::class, 'photoable',
-            'photoables',
-            'photoable_id',
-            'photo_uuid',
-            'uuid',
-            'uuid'
-        );
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function accesses()
-    {
-        return $this->hasMany(Access::class, 'geofence_uuid', 'uuid');
-    }
-
-    /**
-     * The related Groups.
-     *
-     * @return BelongsToMany
-     */
-    public function groups()
-    {
-        return $this->morphToMany(
-            Group::class,
-            'groupable',
-            'groupables',
-            'groupable_id',
-            'group_uuid',
-            'uuid',
-            'uuid'
-        )->withPivot([
-            'is_admin',
-            'status',
-            'sender_uuid',
-        ])->withTimestamps();
-    }
-
-    /**
-     * Get lazy loaded relationships of Geofence.
-     *
-     * @return array
-     */
-    public function getLazyRelationshipsAttribute()
-    {
-        return ['user', 'photo'];
-    }
-
-    /**
-     * @param Request $request
-     * @return LengthAwarePaginator
-     */
-    public static function resolveModels(Request $request)
-    {
-        return $request->user('api')->is_child ? Geofence::with('user', 'photo')->where(
-            'user_uuid',
-            $request->user('api')->user_uuid
-        )->orWhere('is_public', true)->latest()->paginate(20) : Geofence::with('user', 'photo')->where(
-            'user_uuid',
-            $request->user('api')->uuid
-        )->orWhere('is_public', true)->latest()->paginate(20);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\Resource\Photos;
 
+use App\Photo;
 use App\Rules\Coordinate;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,10 +25,6 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'photo' => 'required',
-            'is_public' => 'required|boolean',
-            'coordinates' => ['required', new Coordinate()],
-        ];
+        return (new Photo())->storeRules($this);
     }
 }

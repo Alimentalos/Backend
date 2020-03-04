@@ -24,6 +24,6 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return binder()::bindResource(get_class($this->route('resource')))::updateRules($this);
+        return $this->route('resource')->getModel()->updateRules($this);
     }
 }

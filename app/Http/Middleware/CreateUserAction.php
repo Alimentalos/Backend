@@ -17,7 +17,7 @@ class CreateUserAction
     public function handle($request, Closure $next)
     {
         if (auth('api')->check()) {
-            binder()::resolve($request);
+            actions()->create($request);
         }
 
         $response = $next($request);

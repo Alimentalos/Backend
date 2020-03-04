@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers\Api\Resource;
 
-use App\Events\Location as LocationEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorizedRequest;
-use App\Http\Resources\Location as LocationResource;
-use App\Repositories\GeofenceRepository;
-use App\Repositories\LocationRepository;
-use App\Repositories\ModelLocationsRepository;
+use App\Repositories\ResourceLocationsRepository;
 use Illuminate\Http\JsonResponse;
 
 class LocationsController extends Controller
@@ -21,19 +17,6 @@ class LocationsController extends Controller
      */
     public function __invoke(AuthorizedRequest $request)
     {
-        // TODO - Reduce number of lines of LocationsController
-        // @body move into repository method as createViaRequest.
-        $model = ModelLocationsRepository::resolveLocationModel($request);
-        $location = ModelLocationsRepository::createLocation($model, $request->all());
-        $model->update([
-            "location" => LocationRepository::parsePoint($request->all())
-        ]);
-        GeofenceRepository::checkLocationUsingModelGeofences($model, $location);
-        $payload = new LocationResource($location);
-        event(new LocationEvent($payload, $model));
-        return response()->json(
-            $payload,
-            201
-        );
+        return response()->json(ResourceLocationsRepository::createViaRequest($request),201);
     }
 }

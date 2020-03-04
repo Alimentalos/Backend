@@ -22,7 +22,7 @@ class UploadRepository
             $model->update([
                 'photo_uuid' => $photo->uuid,
                 'photo_url' => config('storage.path') . $photo->photo_url,
-                'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
+                'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates')),
             ]);
             $model->photos()->attach($photo->uuid);
         }

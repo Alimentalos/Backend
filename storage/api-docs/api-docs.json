@@ -1,0 +1,168 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Alimentalos API",
+        "description": "Official Alimentalos API Documentation",
+        "contact": {
+            "email": "iantorres@outlook.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "v.0.6-beta"
+    },
+    "servers": [
+        {
+            "url": "https://api.alimentalos.cl",
+            "description": "Backend production server"
+        }
+    ],
+    "paths": {
+        "/{resource}/": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource paginated instance list",
+                "description": "Returns the resource list paginated by a default quantity, payload includes pagination links and stats",
+                "operationId": "getResourceList",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource list fetched successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Create resource instance",
+                "description": "Returns the recently created instance as JSON Object",
+                "operationId": "createResourceInstance",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource instance created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/{resource}/{uuid}": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get specific resource instance",
+                "description": "Returns the specified resource instance as JSON Object",
+                "operationId": "getResourceInstance",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of specific Resource class instance",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource instance fetched successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "oauth2_security_example": [
+                            "write:projects",
+                            "read:projects"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/token": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Get authentication token based on user credentials",
+                "description": "Returns the user personal access token",
+                "operationId": "getUserToken",
+                "responses": {
+                    "200": {
+                        "description": "Token fetched successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "Specifications related User authentication",
+            "externalDocs": {
+                "description": "Read more",
+                "url": "https://docs.alimentalos.cl/about/authentication"
+            }
+        },
+        {
+            "name": "Resources",
+            "description": "Resource related specifications",
+            "externalDocs": {
+                "description": "Read more",
+                "url": "https://docs.alimentalos.cl/about/resources"
+            }
+        }
+    ],
+    "externalDocs": {
+        "description": "Source code",
+        "url": "https://github.com/demency/alimentalos-backend"
+    }
+}

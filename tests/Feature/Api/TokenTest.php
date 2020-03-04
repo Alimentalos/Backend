@@ -34,6 +34,6 @@ class TokenTest extends TestCase
             'email' => $user->email,
             'password' => 'password-1'
         ]);
-        $response->assertOk();
+        $response->assertUnauthorized();
     }
 }

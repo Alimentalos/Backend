@@ -4,6 +4,8 @@
 namespace App\Repositories;
 
 
+use App\Contracts\Resource;
+
 class ResourceRepository
 {
     /**
@@ -28,10 +30,14 @@ class ResourceRepository
      */
     public static function availableResource()
     {
-        return [
-            self::USER,
-            self::DEVICE,
-            self::PET,
-        ];
+        return [ self::USER, self::DEVICE, self::PET ];
+    }
+
+    /**
+     * @return Resource
+     */
+    public function currentResource()
+    {
+        return finder()->findClass(finder()->currentResource());
     }
 }

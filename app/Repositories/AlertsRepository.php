@@ -15,27 +15,35 @@ class AlertsRepository
      * @param Request $request
      * @return Alert
      */
-    public static function createAlertViaRequest(Request $request)
+    public static function createViaRequest(Request $request)
     {
         $photo = PhotoRepository::createPhotoViaRequest($request);
-        $alert_type = $request->input('alert_type');
-        $alert = binder()::bindResourceInstance($alert_type, $request->input('alert_id'));
-        $alert = Alert::create([
-            'name' => $request->input('name'),
+        $related = finder()->findInstance($request->input('alert_type'), $request->input('alert_id'));
+        $obj = Alert::create(static::buildCreateParameters($request, $photo, $related, $request->input('alert_type')));
+        $photo->alerts()->attach($obj->uuid);
+        $obj->load('photo', 'user');
+        return $obj;
+    }
+
+    /**
+     * Build create parameters.
+     *
+     * @param Request $request
+     * @param Photo $photo
+     * @param $alert
+     * @param $alert_type
+     * @return array
+     */
+    public static function buildCreateParameters(Request $request, Photo $photo, $alert, $alert_type)
+    {
+        return array_merge([
             'user_uuid' => $request->user('api')->uuid,
             'photo_uuid' => $photo->uuid,
             'alert_id' => $alert->uuid,
             'alert_type' => $alert_type,
             'photo_url' => config('storage.path') . $photo->photo_url,
-            'title' => $request->input('title'),
-            'body' => $request->input('body'),
-            'type' => $request->input('type'),
-            'status' => $request->input('status'),
-            'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
-        ]);
-        $photo->alerts()->attach($alert->uuid);
-        $alert->load('photo', 'user');
-        return $alert;
+            'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates')),
+        ], $request->only('name', 'title', 'body', 'type', 'status'));
     }
 
     /**
@@ -48,12 +56,7 @@ class AlertsRepository
     public static function updateAlertViaRequest(Request $request, Alert $alert)
     {
         UploadRepository::checkPhotoForUpload($request, $alert);
-        $alert->update([
-            'type' => FillRepository::fillMethod($request, 'type', $alert->type),
-            'status' => FillRepository::fillMethod($request, 'status', $alert->status),
-            'title' => FillRepository::fillMethod($request, 'title', $alert->title),
-            'body' => FillRepository::fillMethod($request, 'body', $alert->body),
-        ]);
+        $alert->update(ParametersRepository::fillPropertiesWithRelated($request, ['type', 'status', 'title', 'body'], $alert));
         $alert->load('photo', 'user', 'alert');
         return $alert;
     }

@@ -3,25 +3,24 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Relationships\Commons\BelongsToUser;
+use App\Relationships\Commons\Geofenceable;
+use App\Relationships\Commons\Groupable;
+use App\Relationships\Commons\Photoable;
+use App\Relationships\Commons\Trackable;
+use App\Relationships\UserRelationships;
 use App\Repositories\AdminRepository;
-use App\Repositories\PetsRepository;
 use App\Repositories\UsersRepository;
-use App\Rules\Coordinate;
+use App\Resources\UserResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Validation\Rule;
 
 class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource
 {
@@ -29,6 +28,13 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     use Notifiable;
     use Reacterable;
     use Reactable;
+    use UserResource;
+    use UserRelationships;
+    use BelongsToUser;
+    use Groupable;
+    use Geofenceable;
+    use Trackable;
+    use Photoable;
 
     /**
      * The default location field of user.
@@ -50,13 +56,6 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      * @var string
      */
     public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
-
-    /**
-     * Comma-separated accepted values.
-     *
-     * @var string
-     */
-    public const AVAILABLE_REACTIONS = 'Follow';
 
     /**
      * The attributes that are mass assignable.
@@ -87,6 +86,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
         'id',
         'password',
         'remember_token',
+        'api_token',
     ];
 
     /**
@@ -171,205 +171,13 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     }
 
     /**
-     * Update user validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function updateRules(Request $request)
-    {
-        return [
-            'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
-                }), new Coordinate()
-            ],
-        ];
-    }
-
-    /**
      * Create model via request.
      *
      * @param Request $request
      * @return User
      */
-    public static function createViaRequest(Request $request)
+    public function createViaRequest(Request $request)
     {
         return UsersRepository::createUserViaRequest($request);
-    }
-
-    /**
-     * Store user validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function storeRules(Request $request)
-    {
-        return [
-            'name' => 'required',
-            'photo' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|confirmed|min:8',
-            'is_public' => 'required|boolean',
-            'coordinates' => ['required', new Coordinate()],
-        ];
-    }
-
-    /**
-     * The related Groups.
-     *
-     * @return BelongsToMany
-     */
-    public function groups()
-    {
-        return $this->morphToMany(
-            Group::class,
-            'groupable',
-            'groupables',
-            'groupable_id',
-            'group_uuid',
-            'uuid',
-            'uuid'
-        )->withPivot([
-            'is_admin',
-            'status',
-            'sender_uuid',
-        ])->withTimestamps();
-    }
-
-    /**
-     * The geofences that belongs to the user
-     *
-     * @return BelongsToMany
-     */
-    public function geofences()
-    {
-        return $this->morphToMany(Geofence::class, 'geofenceable',
-            'geofenceables',
-            'geofenceable_id',
-            'geofence_uuid',
-            'uuid',
-            'uuid'
-        );
-    }
-
-    /**
-     * The related Devices.
-     *
-     * @return HasMany
-     */
-    public function devices()
-    {
-        return $this->hasMany(Device::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * The related Pets.
-     *
-     * @return HasMany
-     */
-    public function pets()
-    {
-        return $this->hasMany(Pet::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * The related Users.
-     *
-     * @return HasMany
-     */
-    public function users()
-    {
-        return $this->hasMany(User::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * The related Locations.
-     *
-     * @return MorphMany
-     */
-    public function locations()
-    {
-        return $this->morphMany(Location::class, 'trackable', 'trackable_type',
-            'trackable_id', 'uuid');
-    }
-
-    /**
-     * The User creator.
-     *
-     * @return BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * The related Photo.
-     *
-     * @return BelongsTo
-     */
-    public function photo()
-    {
-        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
-    }
-
-    /**
-     * The related Photos.
-     *
-     * @return BelongsToMany
-     */
-    public function photos()
-    {
-        return $this->morphToMany(Photo::class, 'photoable',
-            'photoables',
-            'photoable_id',
-            'photo_uuid',
-            'uuid',
-            'uuid'
-        );
-    }
-
-    /**
-     * @return MorphMany
-     */
-    public function accesses()
-    {
-        return $this->morphMany(Access::class, 'accessible', 'accessible_type',
-            'accessible_id', 'uuid');
-    }
-
-    /**
-     * Get lazy loaded relationships of Geofence.
-     *
-     * @return array
-     */
-    public function getLazyRelationshipsAttribute()
-    {
-        return ['photo', 'user'];
-    }
-
-    /**
-     * @param Request $request
-     * @return LengthAwarePaginator
-     */
-    public static function resolveModels(Request $request)
-    {
-        if (!is_null($request->user('api')->user_uuid)) {
-            return self::with('photo', 'user')->latest()->where([
-                ['user_uuid', $request->user('api')->user_uuid]
-            ])->orWhere([
-                ['uuid', $request->user('api')->user_uuid]
-            ])->paginate(20);
-        } elseif ($request->user('api')->is_admin) {
-            return self::with('photo', 'user')->latest()->paginate(20);
-        } else {
-            return self::with('photo', 'user')->latest()->where([
-                ['user_uuid', $request->user()->uuid]
-            ])->orWhere([
-                ['uuid', $request->user('api')->uuid]
-            ])->paginate(20);
-        }
     }
 }
