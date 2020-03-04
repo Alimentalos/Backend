@@ -4,11 +4,34 @@ namespace App\Repositories;
 
 use App\Group;
 use App\User;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class GroupsRepository
 {
+    public function getUserGroups()
+    {
+        return Group::with('user', 'photo')
+            ->where('user_uuid', authenticated()->uuid)
+            ->orWhere('is_public', true)
+            ->orWhereIn('uuid', authenticated()->groups->map(function($group) { return $group->uuid; }))
+            ->latest()
+            ->paginate(25);
+    }
+
+    /**
+     * Get administrator groups.
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getAdministratorGroups()
+    {
+        return Group::with('user', 'photo')
+            ->latest()
+            ->paginate(25);
+    }
+
     /**
      * Update group via request.
      *

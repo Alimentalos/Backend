@@ -5,10 +5,26 @@ namespace App\Repositories;
 
 use App\Alert;
 use App\Photo;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 class AlertsRepository
 {
+    /**
+     * Get alerts.
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getAlerts()
+    {
+        return Alert::with('user', 'photo', 'alert')
+            ->whereIn(
+                'status',
+                request()->has('whereInStatus') ?
+                    explode(',', request()->input('whereInStatus')) : StatusRepository::availableAlertStatuses() // Filter by statuses
+            )->latest('created_at')->paginate(25);
+    }
+
     /**
      * Create alert via request.
      *
@@ -61,7 +77,13 @@ class AlertsRepository
         return $alert;
     }
 
-    public static function availableAlertTypes()
+
+    /**
+     * Get available alert types.
+     *
+     * @return array
+     */
+    public function getAvailableAlertTypes()
     {
         return [
             'App\\User',

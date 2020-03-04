@@ -5,11 +5,54 @@ namespace App\Repositories;
 use App\Photo;
 use App\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class UsersRepository
 {
+    /**
+     * Get users.
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getUsers()
+    {
+        return User::with('photo', 'user')->latest()->paginate(20);
+    }
+
+    /**
+     * Get child users.
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getChildUsers()
+    {
+        return User::with('photo', 'user')->latest()->where([
+            ['user_uuid', authenticated()->uuid]
+        ])->orWhere([
+            ['uuid', authenticated()->uuid]
+        ])->orWhere([
+            ['is_public', true]
+        ])->paginate(20);
+    }
+
+    /**
+     * Get owner users.
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getOwnerUsers()
+    {
+        return User::with('photo', 'user')->latest()->where([
+            ['user_uuid', authenticated()->user_uuid]
+        ])->orWhere([
+            ['uuid', authenticated()->user_uuid]
+        ])->orWhere([
+            ['is_public', true]
+        ])->paginate(20);
+    }
+
     /**
      * Register user via request.
      *
@@ -18,12 +61,9 @@ class UsersRepository
      */
     public static function registerViaRequest(Request $request)
     {
-        $user = User::create([
-            'email' => $request->input('email'),
-            'name' => $request->input('name'),
+        $user = User::create(array_merge([
             'password' => bcrypt($request->input('password')),
-            'is_public' => $request->has('is_public')
-        ]);
+        ], $request->only('email', 'name', 'is_public')));
         event(new Registered($user));
         return $user;
     }

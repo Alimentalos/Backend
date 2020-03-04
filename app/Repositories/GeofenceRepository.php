@@ -8,6 +8,7 @@ use App\Geofence;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -19,14 +20,42 @@ class GeofenceRepository
     public const IN_STATUS = 1;
 
     /**
-     * Still status
+     * Still status.
      */
     public const STILL_STATUS = 2;
 
     /**
-     * Out status
+     * Out status.
      */
     public const OUT_STATUS = 3;
+
+    /**
+     * Get owner geofences.
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getOwnerGeofences()
+    {
+        return Geofence::with('user', 'photo')
+            ->where('user_uuid', authenticated()->uuid)
+            ->orWhere('is_public', true)
+            ->latest()
+            ->paginate(20);
+    }
+
+    /**
+     * Get child geofences.
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getChildGeofences()
+    {
+        return Geofence::with('user', 'photo')
+            ->where('user_uuid', authenticated()->user_uuid)
+            ->orWhere('is_public', true)
+            ->latest()
+            ->paginate(20);
+    }
 
     /**
      * Create sample polygon.

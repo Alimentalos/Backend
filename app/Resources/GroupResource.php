@@ -96,12 +96,6 @@ trait GroupResource
      */
     public function getInstances(Request $request)
     {
-        return (
-        $request->user('api')->is_admin ?
-            self::with('user', 'photo') :
-            self::with('user', 'photo')->where('user_uuid', $request->user('api')->uuid)
-                ->orWhere('is_public', true)
-                ->orWhereIn('uuid', $request->user('api')->groups->map(function($group) { return $group->uuid; }))
-        )->latest()->paginate(25);
+        return authenticated()->is_admin ? groups()->getAdministratorGroups() : groups()->getUserGroups();
     }
 }

@@ -107,6 +107,6 @@ trait PetResource
      */
     public function getInstances(Request $request)
     {
-        return self::with('user', 'photo')->latest()->paginate(20);
+        return Pet::with('user', 'photo')->latest()->paginate(20);
     }
 }

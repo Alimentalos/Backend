@@ -2,6 +2,7 @@
 
 namespace App\Resources;
 
+use App\Action;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
@@ -63,15 +64,6 @@ trait ActionResource
      */
     public function getInstances(Request $request)
     {
-        if (!$request->user('api')->is_child) {
-            return self::with('user')->whereIn('user_uuid', $request->user('api')
-                ->users
-                ->pluck('uuid')
-                ->push(
-                    $request->user('api')->uuid
-                )->toArray())->paginate(25);
-        } else {
-            return self::with('user')->where('user_uuid', $request->user('api')->uuid)->paginate(25);
-        }
+        return authenticated()->is_child ? actions()->getChildActions() : actions()->getOwnerActions();
     }
 }

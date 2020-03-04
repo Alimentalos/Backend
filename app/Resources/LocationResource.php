@@ -2,8 +2,9 @@
 
 namespace App\Resources;
 
+use App\Location;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 trait LocationResource
 {
@@ -59,12 +60,12 @@ trait LocationResource
      * Get location instances.
      *
      * @param Request $request
-     * @return Collection
+     * @return LengthAwarePaginator
      * @codeCoverageIgnore
      * @reason Locations uses custom LocationRepository query.
      */
     public function getInstances(Request $request)
     {
-        return self::query()->get();
+        return Location::query()->paginate(25);
     }
 }

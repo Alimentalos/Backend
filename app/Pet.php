@@ -10,13 +10,11 @@ use App\Relationships\Commons\Groupable;
 use App\Relationships\Commons\HasPhoto;
 use App\Relationships\Commons\Photoable;
 use App\Relationships\Commons\Trackable;
-use App\Repositories\PetsRepository;
 use App\Resources\PetResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Http\Request;
 
 class Pet extends Authenticatable implements ReactableContract, Resource
 {

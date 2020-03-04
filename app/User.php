@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Contracts\CreateFromRequest;
 use App\Contracts\Resource;
+use App\Contracts\UpdateFromRequest;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Geofenceable;
 use App\Relationships\Commons\Groupable;
@@ -10,7 +12,6 @@ use App\Relationships\Commons\Photoable;
 use App\Relationships\Commons\Trackable;
 use App\Relationships\UserRelationships;
 use App\Repositories\AdminRepository;
-use App\Repositories\UsersRepository;
 use App\Resources\UserResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
@@ -19,10 +20,9 @@ use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource
+class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource, CreateFromRequest, UpdateFromRequest
 {
     use SpatialTrait;
     use Notifiable;
@@ -128,26 +128,6 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
         'is_admin',
         'is_child'
     ];
-
-    /**
-     * Get is_admin custom attribute
-     *
-     * @return bool
-     */
-    public function getIsAdminAttribute()
-    {
-        return AdminRepository::isAdmin($this);
-    }
-
-    /**
-     * Get is_child custom attribute.
-     *
-     * @return bool
-     */
-    public function getIsChildAttribute()
-    {
-        return !is_null($this->user_uuid);
-    }
 
     /**
      * Get the route key for the model.

@@ -109,11 +109,6 @@ trait AlertResource
      */
     public function getInstances(Request $request)
     {
-        return self::with('user', 'photo', 'alert')
-            ->whereIn(
-                'status',
-                $request->has('whereInStatus') ?
-                    explode(',', $request->input('whereInStatus')) : StatusRepository::availableAlertStatuses() // Filter by statuses
-            )->latest('created_at')->paginate(25); // Order by latest
+        return alerts()->getAlerts();
     }
 }

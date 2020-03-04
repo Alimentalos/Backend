@@ -96,12 +96,6 @@ trait GeofenceResource
      */
     public function getInstances(Request $request)
     {
-        return $request->user('api')->is_child ? self::with('user', 'photo')->where(
-            'user_uuid',
-            $request->user('api')->user_uuid
-        )->orWhere('is_public', true)->latest()->paginate(20) : self::with('user', 'photo')->where(
-            'user_uuid',
-            $request->user('api')->uuid
-        )->orWhere('is_public', true)->latest()->paginate(20);
+        return authenticated()->is_child ? geofences()->getChildGeofences() : geofences()->getOwnerGeofences();
     }
 }
