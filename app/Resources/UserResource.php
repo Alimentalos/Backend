@@ -3,6 +3,7 @@
 namespace App\Resources;
 
 use App\Rules\Coordinate;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -51,5 +52,40 @@ trait UserResource
             'is_public' => 'required|boolean',
             'coordinates' => ['required', new Coordinate()],
         ];
+    }
+
+    /**
+     * Get user relationships using lazy loading.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['photo', 'user'];
+    }
+
+    /**
+     * Get user instances.
+     *
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function getInstances(Request $request)
+    {
+        if (!is_null($request->user('api')->user_uuid)) {
+            return self::with('photo', 'user')->latest()->where([
+                ['user_uuid', $request->user('api')->user_uuid]
+            ])->orWhere([
+                ['uuid', $request->user('api')->user_uuid]
+            ])->paginate(20);
+        } elseif ($request->user('api')->is_admin) {
+            return self::with('photo', 'user')->latest()->paginate(20);
+        } else {
+            return self::with('photo', 'user')->latest()->where([
+                ['user_uuid', $request->user()->uuid]
+            ])->orWhere([
+                ['uuid', $request->user('api')->uuid]
+            ])->paginate(20);
+        }
     }
 }

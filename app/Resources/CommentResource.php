@@ -3,6 +3,7 @@
 
 namespace App\Resources;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 trait CommentResource
@@ -39,5 +40,27 @@ trait CommentResource
     public function storeRules(Request $request)
     {
         return [];
+    }
+
+    /**
+     * Get geofence relationships using lazy loading.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['commentable'];
+    }
+
+    /**
+     * Get comment instances.
+     *
+     * @param Request $request
+     * @return LengthAwarePaginator
+     * @codeCoverageIgnore
+     */
+    public function getInstances(Request $request)
+    {
+        return self::with('user')->latest()->paginate(20);
     }
 }

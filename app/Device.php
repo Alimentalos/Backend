@@ -10,7 +10,6 @@ use App\Relationships\Commons\Trackable;
 use App\Repositories\DevicesRepository;
 use App\Resources\DeviceResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 
@@ -109,26 +108,5 @@ class Device extends Authenticatable implements Resource
     public static function createViaRequest(Request $request)
     {
         return DevicesRepository::createDeviceViaRequest($request);
-    }
-
-    /**
-     * Get lazy loaded relationships of Geofence.
-     *
-     * @return array
-     */
-    public function getLazyRelationshipsAttribute()
-    {
-        return ['user'];
-    }
-
-    /**
-     * @param Request $request
-     * @return LengthAwarePaginator
-     */
-    public static function resolveModels(Request $request)
-    {
-        $devices = DevicesRepository::fetchInDatabaseDevicesQuery();
-
-        return $devices->latest()->paginate(10);
     }
 }

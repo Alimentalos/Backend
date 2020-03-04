@@ -7,6 +7,7 @@ use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
 use App\Repositories\TypeRepository;
 use App\Rules\Coordinate;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -64,5 +65,31 @@ trait AlertResource
             'photo' => 'required',
             'coordinates' => ['required', new Coordinate()],
         ];
+    }
+
+    /**
+     * Get alert relationships using lazy loading.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user', 'photo', 'alert'];
+    }
+
+    /**
+     * Get alert instances.
+     *
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function getInstances(Request $request)
+    {
+        return self::with('user', 'photo', 'alert')
+            ->whereIn(
+                'status',
+                $request->has('whereInStatus') ?
+                    explode(',', $request->input('whereInStatus')) : StatusRepository::availableAlertStatuses() // Filter by statuses
+            )->latest('created_at')->paginate(25); // Order by latest
     }
 }

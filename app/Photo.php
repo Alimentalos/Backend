@@ -11,7 +11,6 @@ use App\Resources\PhotoResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -74,24 +73,5 @@ class Photo extends Model implements ReactableContract, Resource
     public function updateViaRequest(Request $request)
     {
         return PhotoRepository::updatePhotoViaRequest($request, $this);
-    }
-
-    /**
-     * Get lazy loaded relationships of Geofence.
-     *
-     * @return array
-     */
-    public function getLazyRelationshipsAttribute()
-    {
-        return ['user'];
-    }
-
-    /**
-     * @param Request $request
-     * @return LengthAwarePaginator
-     */
-    public static function resolveModels(Request $request)
-    {
-        return self::with('user', 'photoable')->latest()->paginate(20);
     }
 }

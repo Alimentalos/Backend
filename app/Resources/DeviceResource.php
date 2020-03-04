@@ -2,6 +2,8 @@
 
 namespace App\Resources;
 
+use App\Repositories\DevicesRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 trait DeviceResource
@@ -41,5 +43,28 @@ trait DeviceResource
             'name' => 'required',
             'is_public' => 'required|boolean',
         ];
+    }
+
+    /**
+     * Get device relationships using lazy loading.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user'];
+    }
+
+    /**
+     * Get device instances.
+     *
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function getInstances(Request $request)
+    {
+        $devices = DevicesRepository::fetchInDatabaseDevicesQuery();
+
+        return $devices->latest()->paginate(10);
     }
 }

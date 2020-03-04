@@ -7,8 +7,6 @@ use App\Relationships\LocationRelationships;
 use App\Resources\LocationResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 class Location extends Model implements Resource
 {
@@ -73,24 +71,4 @@ class Location extends Model implements Resource
      * @var array
      */
     protected $hidden = ['id'];
-
-    /**
-     * Get lazy loaded relationships of Geofence.
-     *
-     * @return array
-     */
-    public function getLazyRelationshipsAttribute()
-    {
-        return ['trackable'];
-    }
-
-    /**
-     * @param Request $request
-     * @return Collection
-     * @codeCoverageIgnore
-     */
-    public static function resolveModels(Request $request)
-    {
-        return self::query()->get();
-    }
 }

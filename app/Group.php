@@ -10,7 +10,6 @@ use App\Relationships\Commons\Photoable;
 use App\Relationships\GroupRelationships;
 use App\Repositories\GroupsRepository;
 use App\Resources\GroupResource;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -117,28 +116,5 @@ class Group extends Model implements Resource
     public function getRouteKeyName()
     {
         return 'uuid';
-    }
-
-    /**
-     * Get lazy loaded relationships of Geofence.
-     *
-     * @return array
-     */
-    public function getLazyRelationshipsAttribute()
-    {
-        return ['photo', 'user'];
-    }
-
-    /**
-     * @param Request $request
-     * @return LengthAwarePaginator
-     */
-    public static function resolveModels(Request $request)
-    {
-        return (
-        $request->user('api')->is_admin ?
-            self::with('user', 'photo') :
-            self::with('user', 'photo')->where('user_uuid', $request->user('api')->uuid)
-        )->latest()->paginate(25);
     }
 }

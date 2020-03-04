@@ -6,7 +6,7 @@ use App\Geofence;
 use App\Location;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-trait AccessesRelationships
+trait AccessRelationships
 {
     /**
      * Get all of the owning commentable models.

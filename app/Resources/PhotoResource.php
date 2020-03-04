@@ -3,6 +3,7 @@
 namespace App\Resources;
 
 use App\Rules\Coordinate;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 trait PhotoResource
@@ -41,5 +42,26 @@ trait PhotoResource
             'is_public' => 'required|boolean',
             'coordinates' => ['required', new Coordinate()],
         ];
+    }
+
+    /**
+     * Get photo relationships using lazy loading.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['user'];
+    }
+
+    /**
+     * Get photo instances.
+     *
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function getInstances(Request $request)
+    {
+        return self::with('user', 'photoable')->latest()->paginate(20);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Resources;
 
 use App\Repositories\PetsRepository;
 use App\Rules\Coordinate;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -63,5 +64,26 @@ trait PetResource
             'born_at' => 'required',
             'coordinates' => ['required', new Coordinate()],
         ];
+    }
+
+    /**
+     * Get pet relationships using lazy loading.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['photo', 'user'];
+    }
+
+    /**
+     * Get pet instances.
+     *
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function getInstances(Request $request)
+    {
+        return self::with('user', 'photo')->latest()->paginate(20);
     }
 }

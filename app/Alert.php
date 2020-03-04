@@ -9,10 +9,8 @@ use App\Relationships\Commons\Commentable;
 use App\Relationships\Commons\HasPhoto;
 use App\Relationships\Commons\Photoable;
 use App\Repositories\AlertsRepository;
-use App\Repositories\StatusRepository;
 use App\Resources\AlertResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -88,30 +86,5 @@ class Alert extends Model implements Resource
     public static function createViaRequest(Request $request)
     {
         return AlertsRepository::createViaRequest($request);
-    }
-
-    /**
-     * Get lazy loaded relationships of Alert.
-     *
-     * @return array
-     */
-    public function getLazyRelationshipsAttribute()
-    {
-        return ['user', 'photo', 'alert'];
-    }
-
-    /**
-     * @param Request $request
-     * @return LengthAwarePaginator
-     */
-    public static function resolveModels(Request $request)
-    {
-        return Alert::query()
-            ->with('user', 'photo', 'alert')
-            ->whereIn(
-                'status',
-                $request->has('whereInStatus') ?
-                    explode(',', $request->input('whereInStatus')) : StatusRepository::availableAlertStatuses() // Filter by statuses
-            )->latest('created_at')->paginate(25); // Order by latest
     }
 }

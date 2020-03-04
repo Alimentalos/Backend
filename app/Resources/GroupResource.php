@@ -3,6 +3,7 @@
 namespace App\Resources;
 
 use App\Rules\Coordinate;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -51,5 +52,30 @@ trait GroupResource
             'is_public' => 'required|boolean',
             'coordinates' => ['required', new Coordinate()],
         ];
+    }
+
+    /**
+     * Get group relationships using lady loading.
+     *
+     * @return array
+     */
+    public function getLazyRelationshipsAttribute()
+    {
+        return ['photo', 'user'];
+    }
+
+    /**
+     * Get group instances.
+     *
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function getInstances(Request $request)
+    {
+        return (
+        $request->user('api')->is_admin ?
+            self::with('user', 'photo') :
+            self::with('user', 'photo')->where('user_uuid', $request->user('api')->uuid)
+        )->latest()->paginate(25);
     }
 }

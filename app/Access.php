@@ -2,14 +2,15 @@
 
 namespace App;
 
-use App\Relationships\AccessesRelationships;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Contracts\Resource;
+use App\Relationships\AccessRelationships;
+use App\Resources\AccessResource;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
-class Access extends Model
+class Access extends Model implements Resource
 {
-    use AccessesRelationships;
+    use AccessRelationships;
+    use AccessResource;
 
     /**
      * The table name.
@@ -51,14 +52,4 @@ class Access extends Model
      * @var array
      */
     protected $hidden = ['id'];
-
-    /**
-     * @param Request $request
-     * @return LengthAwarePaginator
-     * @codeCoverageIgnore
-     */
-    public static function resolveModels(Request $request)
-    {
-        return self::with('accessible')->latest()->paginate(20);
-    }
 }
