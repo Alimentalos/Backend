@@ -19,9 +19,8 @@ class UserTest extends TestCase
     /**
      * @test testUserWatchingOwner
      */
-    public function testUserWatchingOwner()
+    final public function testUserWatchingOwner()
     {
-        // TODO - Add response structure and data asserts
         $userA = factory(User::class)->create();
         $userB = factory(User::class)->create();
         $userB->user_uuid = $userA->uuid;
@@ -29,8 +28,29 @@ class UserTest extends TestCase
         $userB->save();
         $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userA->uuid);
         $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => $userA->name,
+            'email' => $userA->email,
+        ]);
     }
-    
+
     /**
      * @test testUserWatchingOtherUserWithSameOwner
      */
