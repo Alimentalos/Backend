@@ -40,7 +40,7 @@ class UsersRepository
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),
             'is_public' => $request->input('is_public'),
-            'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
+            'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates')),
         ]);
         $user->photos()->attach($photo->uuid);
         event(new Registered($user));

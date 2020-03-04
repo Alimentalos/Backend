@@ -79,7 +79,7 @@ class PetsRepository
             'left_eye_color' => $request->input('left_eye_color'),
             'right_eye_color' => $request->input('right_eye_color'),
             'size' => $request->input('size'),
-            'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
+            'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates')),
             'is_public' => $request->input('is_public')
         ]);
         $photo->pets()->attach($pet->uuid);

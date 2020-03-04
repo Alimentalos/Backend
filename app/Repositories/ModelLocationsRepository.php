@@ -26,7 +26,7 @@ class ModelLocationsRepository
     public static function updateModelLocation(Request $request, Model $model)
     {
         $model->update([
-            'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
+            'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates')),
         ]);
         return $model;
     }
@@ -66,24 +66,24 @@ class ModelLocationsRepository
             return $model->locations()->create([
                 "device" => $data["device"],
                 "uuid" => $data["location"]["uuid"],
-                "location" => LocationRepository::parsePoint($data),
+                "location" => LocationsRepository::parsePoint($data),
                 "accuracy" => $data["location"]["coords"]["accuracy"],
                 "altitude" => $data["location"]["coords"]["altitude"],
                 "speed" => $data["location"]["coords"]["speed"],
                 "heading" => $data["location"]["coords"]["heading"],
                 "odometer" => $data["location"]["odometer"],
-                "event" => LocationRepository::parseEvent($data),
+                "event" => LocationsRepository::parseEvent($data),
                 "activity_type" => $data["location"]["activity"]["type"],
                 "activity_confidence" => $data["location"]["activity"]["confidence"],
                 "battery_level" => $data["location"]["battery"]["level"],
                 "battery_is_charging" => $data["location"]["battery"]["is_charging"],
                 "is_moving" => $data["location"]["is_moving"],
-                "generated_at" => LocationRepository::parseTimestamp($data),
+                "generated_at" => LocationsRepository::parseTimestamp($data),
             ]);
         } else {
             return $model->locations()->create([
                 "uuid" => $data["location"]["uuid"],
-                "location" => LocationRepository::parsePoint($data),
+                "location" => LocationsRepository::parsePoint($data),
                 "accuracy" => $data["location"]["coords"]["accuracy"],
             ]);
         }

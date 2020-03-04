@@ -31,7 +31,7 @@ class AlertsRepository
             'body' => $request->input('body'),
             'type' => $request->input('type'),
             'status' => $request->input('status'),
-            'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates')),
+            'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates')),
         ]);
         $photo->alerts()->attach($alert->uuid);
         $alert->load('photo', 'user');

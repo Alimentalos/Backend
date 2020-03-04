@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Find\IndexRequest;
 use App\Http\Resources\LocationCollection;
-use App\Repositories\LocationRepository;
+use App\Repositories\LocationsRepository;
 use Illuminate\Http\JsonResponse;
 
 class FindController extends Controller
@@ -20,7 +20,7 @@ class FindController extends Controller
     {
         // TODO - Reduce number of lines of FindController
         // @body move into repository method as searchLastsLocationsViaRequest.
-        $locations = LocationRepository::searchLastLocations(
+        $locations = LocationsRepository::searchLastLocations(
             $request->input('type'),
             $request->input('identifiers'),
             $request->input('accuracy')

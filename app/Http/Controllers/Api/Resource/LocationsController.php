@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorizedRequest;
 use App\Http\Resources\Location as LocationResource;
 use App\Repositories\GeofenceRepository;
-use App\Repositories\LocationRepository;
+use App\Repositories\LocationsRepository;
 use App\Repositories\ModelLocationsRepository;
 use Illuminate\Http\JsonResponse;
 
@@ -26,7 +26,7 @@ class LocationsController extends Controller
         $model = ModelLocationsRepository::resolveLocationModel($request);
         $location = ModelLocationsRepository::createLocation($model, $request->all());
         $model->update([
-            "location" => LocationRepository::parsePoint($request->all())
+            "location" => LocationsRepository::parsePoint($request->all())
         ]);
         GeofenceRepository::checkLocationUsingModelGeofences($model, $location);
         $payload = new LocationResource($location);

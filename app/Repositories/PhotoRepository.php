@@ -67,7 +67,7 @@ class PhotoRepository
             'photo_url' => $photoUniqueName . $request->file('photo')->extension(),
             'ext' => $request->file('photo')->extension(),
             'is_public' => $request->has('is_public'),
-            'location' => LocationRepository::parsePointFromCoordinates($request->input('coordinates'))
+            'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates'))
         ]);
         $photo->load('user');
         return $photo;

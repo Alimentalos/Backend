@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Locations\IndexRequest;
 use App\Http\Resources\LocationCollection;
 
-use App\Repositories\LocationRepository;
+use App\Repositories\LocationsRepository;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -27,7 +27,7 @@ class IndexController extends Controller
             )
         )->get();
 
-        $locations = LocationRepository::searchLocations( // Search locations
+        $locations = LocationsRepository::searchLocations( // Search locations
             $models, // of those devices
             $request->only('type', 'start_date', 'end_date', 'accuracy')
         );

@@ -172,7 +172,7 @@ class HandleBindingRepository {
         $model = static::bindResourceModel($resource);
         return $model->orderByDistance(
             static::bindResourceModelClass($resource)::DEFAULT_LOCATION_FIELD,
-            LocationRepository::parsePointFromCoordinates($coordinates),
+            LocationsRepository::parsePointFromCoordinates($coordinates),
             'asc'
         );
     }

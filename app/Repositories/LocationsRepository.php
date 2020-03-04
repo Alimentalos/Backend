@@ -7,7 +7,7 @@ use App\Queries\LocationQuery;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
-class LocationRepository
+class LocationsRepository
 {
     use LocationQuery;
     use LocationParser;
