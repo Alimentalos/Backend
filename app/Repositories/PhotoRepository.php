@@ -27,7 +27,7 @@ class PhotoRepository
      */
     public static function updatePhotoViaRequest(Request $request, Photo $photo)
     {
-        $photo->update(ParametersRepository::fillPropertiesWithRelated($request, ['title', 'description', 'is_public'], $photo));
+        $photo->update(parameters()->fillPropertiesUsingResource(['title', 'description', 'is_public'], $photo));
 
         $photo->load('user');
         return $photo;
@@ -57,11 +57,11 @@ class PhotoRepository
     {
         $photoUniqueName = UniqueNameRepository::createIdentifier();
         $photo = Photo::create([
-            'user_uuid' => $request->user('api')->uuid,
+            'user_uuid' => authenticated()->uuid,
             'uuid' => $photoUniqueName,
             'photo_url' => $photoUniqueName . $request->file('photo')->extension(),
             'ext' => $request->file('photo')->extension(),
-            'is_public' => $request->has('is_public'),
+            'is_public' => FillRepository::fillAttribute('is_public', true),
             'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates'))
         ]);
         $photo->load('user');
@@ -78,7 +78,7 @@ class PhotoRepository
     {
         $comment = $photo->comments()->create(array_merge([
             'uuid' => UniqueNameRepository::createIdentifier(),
-            'user_uuid' => $request->user('api')->uuid,
+            'user_uuid' => authenticated()->uuid,
         ], $request->only('title', 'body', 'is_public')));
         $photo->comment()->associate($comment);
     }

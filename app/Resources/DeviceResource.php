@@ -2,12 +2,35 @@
 
 namespace App\Resources;
 
+use App\Http\Resources\Device;
 use App\Repositories\DevicesRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 trait DeviceResource
 {
+    /**
+     * Update device via request.
+     *
+     * @param Request $request
+     * @return Device
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return DevicesRepository::updateDeviceViaRequest($request, $this);
+    }
+
+    /**
+     * Create device via request.
+     *
+     * @param Request $request
+     * @return Device
+     */
+    public function createViaRequest(Request $request)
+    {
+        return DevicesRepository::createDeviceViaRequest($request);
+    }
+
     /**
      * Get available device reactions.
      *

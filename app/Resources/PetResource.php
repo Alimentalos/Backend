@@ -2,6 +2,7 @@
 
 namespace App\Resources;
 
+use App\Pet;
 use App\Repositories\PetsRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -10,6 +11,28 @@ use Illuminate\Validation\Rule;
 
 trait PetResource
 {
+    /**
+     * Update pet via request.
+     *
+     * @param Request $request
+     * @return Pet
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return PetsRepository::updatePetViaRequest($request, $this);
+    }
+
+    /**
+     * Create pet via request.
+     *
+     * @param Request $request
+     * @return Pet
+     */
+    public static function createViaRequest(Request $request)
+    {
+        return PetsRepository::createPetViaRequest($request);
+    }
+
     /**
      * Get available pet reactions.
      *
@@ -84,6 +107,6 @@ trait PetResource
      */
     public function getInstances(Request $request)
     {
-        return self::with('user', 'photo')->latest()->paginate(20);
+        return Pet::with('user', 'photo')->latest()->paginate(20);
     }
 }

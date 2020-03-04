@@ -2,18 +2,18 @@
 
 namespace App;
 
+use App\Contracts\CreateFromRequest;
 use App\Contracts\Resource;
+use App\Contracts\UpdateFromRequest;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Commentable;
 use App\Relationships\Commons\HasPhoto;
 use App\Relationships\Commons\Photoable;
 use App\Relationships\GroupRelationships;
-use App\Repositories\GroupsRepository;
 use App\Resources\GroupResource;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
-class Group extends Model implements Resource
+class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequest
 {
     use GroupResource;
     use GroupRelationships;
@@ -85,28 +85,6 @@ class Group extends Model implements Resource
     protected $with = [
         'user'
     ];
-
-    /**
-     * Update model via request.
-     *
-     * @param Request $request
-     * @return Group
-     */
-    public function updateViaRequest(Request $request)
-    {
-        return GroupsRepository::updateGroupViaRequest($request, $this);
-    }
-
-    /**
-     * Create model via request.
-     *
-     * @param Request $request
-     * @return Group
-     */
-    public function createViaRequest(Request $request)
-    {
-        return GroupsRepository::createGroupViaRequest($request);
-    }
 
     /**
      * Get the route key for the model.

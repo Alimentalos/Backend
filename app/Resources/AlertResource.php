@@ -3,6 +3,7 @@
 
 namespace App\Resources;
 
+use App\Alert;
 use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
 use App\Repositories\TypeRepository;
@@ -13,6 +14,28 @@ use Illuminate\Validation\Rule;
 
 trait AlertResource
 {
+    /**
+     * Update model via request.
+     *
+     * @param Request $request
+     * @return Alert
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return alerts()->updateAlertViaRequest($request, $this);
+    }
+
+    /**
+     * Create alert via request.
+     *
+     * @param Request $request
+     * @return Alert
+     */
+    public function createViaRequest(Request $request)
+    {
+        return alerts()->createViaRequest($request);
+    }
+
     /**
      * Get available alert reactions.
      *
@@ -85,11 +108,6 @@ trait AlertResource
      */
     public function getInstances(Request $request)
     {
-        return self::with('user', 'photo', 'alert')
-            ->whereIn(
-                'status',
-                $request->has('whereInStatus') ?
-                    explode(',', $request->input('whereInStatus')) : StatusRepository::availableAlertStatuses() // Filter by statuses
-            )->latest('created_at')->paginate(25); // Order by latest
+        return alerts()->getAlerts();
     }
 }

@@ -2,13 +2,38 @@
 
 namespace App\Resources;
 
+use App\Repositories\AdminRepository;
+use App\Repositories\UsersRepository;
 use App\Rules\Coordinate;
+use App\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait UserResource
 {
+    /**
+     * Update user via request.
+     *
+     * @param Request $request
+     * @return User
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return UsersRepository::updateUserViaRequest($request, $this);
+    }
+
+    /**
+     * Create user via request.
+     *
+     * @param Request $request
+     * @return User
+     */
+    public function createViaRequest(Request $request)
+    {
+        return UsersRepository::createUserViaRequest($request);
+    }
+
     /**
      * Get available user reactions.
      *
@@ -72,20 +97,29 @@ trait UserResource
      */
     public function getInstances(Request $request)
     {
-        if (!is_null($request->user('api')->user_uuid)) {
-            return self::with('photo', 'user')->latest()->where([
-                ['user_uuid', $request->user('api')->user_uuid]
-            ])->orWhere([
-                ['uuid', $request->user('api')->user_uuid]
-            ])->paginate(20);
-        } elseif ($request->user('api')->is_admin) {
-            return self::with('photo', 'user')->latest()->paginate(20);
-        } else {
-            return self::with('photo', 'user')->latest()->where([
-                ['user_uuid', $request->user()->uuid]
-            ])->orWhere([
-                ['uuid', $request->user('api')->uuid]
-            ])->paginate(20);
-        }
+        if (authenticated()->is_admin)
+            return users()->getUsers();
+
+        return authenticated()->is_child ? users()->getChildUsers() : users()->getOwnerUsers();
+    }
+
+    /**
+     * Get is_admin custom attribute
+     *
+     * @return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return AdminRepository::isAdmin($this);
+    }
+
+    /**
+     * Get is_child custom attribute.
+     *
+     * @return bool
+     */
+    public function getIsChildAttribute()
+    {
+        return !is_null($this->user_uuid);
     }
 }

@@ -2,12 +2,25 @@
 
 namespace App\Resources;
 
+use App\Photo;
+use App\Repositories\PhotoRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 trait PhotoResource
 {
+    /**
+     * Update photo via request.
+     *
+     * @param Request $request
+     * @return Photo
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return PhotoRepository::updatePhotoViaRequest($request, $this);
+    }
+
     /**
      * Get available photo reactions.
      *
@@ -62,6 +75,6 @@ trait PhotoResource
      */
     public function getInstances(Request $request)
     {
-        return self::with('user', 'photoable')->latest()->paginate(20);
+        return Photo::with('user', 'photoable')->latest()->paginate(20);
     }
 }

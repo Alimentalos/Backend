@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Api\Resource\Photos;
 
 use App\Photo;
-use App\Rules\Coordinate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest

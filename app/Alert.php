@@ -2,19 +2,19 @@
 
 namespace App;
 
+use App\Contracts\CreateFromRequest;
 use App\Contracts\Resource;
+use App\Contracts\UpdateFromRequest;
 use App\Relationships\AlertRelationships;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Commentable;
 use App\Relationships\Commons\HasPhoto;
 use App\Relationships\Commons\Photoable;
-use App\Repositories\AlertsRepository;
 use App\Resources\AlertResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
-class Alert extends Model implements Resource
+class Alert extends Model implements Resource, CreateFromRequest, UpdateFromRequest
 {
     use SpatialTrait;
     use AlertResource;
@@ -65,26 +65,4 @@ class Alert extends Model implements Resource
     protected $spatialFields = [
         'location',
     ];
-
-    /**
-     * Update model via request.
-     *
-     * @param Request $request
-     * @return Alert
-     */
-    public function updateViaRequest(Request $request)
-    {
-        return AlertsRepository::updateAlertViaRequest($request, $this);
-    }
-
-    /**
-     * Create model via request.
-     *
-     * @param Request $request
-     * @return Alert
-     */
-    public function createViaRequest(Request $request)
-    {
-        return AlertsRepository::createViaRequest($request);
-    }
 }

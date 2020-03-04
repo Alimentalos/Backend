@@ -3,11 +3,24 @@
 
 namespace App\Resources;
 
+use App\Comment;
+use App\Repositories\CommentsRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 trait CommentResource
 {
+    /**
+     * Update model via request.
+     *
+     * @param Request $request
+     * @return Comment
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return CommentsRepository::updateCommentViaRequest($request, $this);
+    }
+
     /**
      * Get available comment reactions.
      *
@@ -61,6 +74,6 @@ trait CommentResource
      */
     public function getInstances(Request $request)
     {
-        return self::with('user')->latest()->paginate(20);
+        return Comment::with('user')->latest()->paginate(20);
     }
 }

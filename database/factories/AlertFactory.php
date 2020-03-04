@@ -15,7 +15,7 @@ use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Alert::class, function (Faker $faker) {
-    $class = $faker->randomElement(AlertsRepository::availableAlertTypes());
+    $class = $faker->randomElement(alerts()->getAvailableAlertTypes());
     $alert_id = (
         $class === 'App\\User' ?
             factory(User::class)->create()->uuid :
