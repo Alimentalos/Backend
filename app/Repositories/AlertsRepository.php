@@ -18,7 +18,7 @@ class AlertsRepository
     public static function createViaRequest(Request $request)
     {
         $photo = PhotoRepository::createPhotoViaRequest($request);
-        $related = finder('resourceInstance', $request->input('alert_type'), $request->input('alert_id'));
+        $related = finder()->findInstance($request->input('alert_type'), $request->input('alert_id'));
         $obj = Alert::create(static::buildCreateParameters($request, $photo, $related, $request->input('alert_type')));
         $photo->alerts()->attach($obj->uuid);
         $obj->load('photo', 'user');

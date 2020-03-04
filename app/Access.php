@@ -2,13 +2,16 @@
 
 namespace App;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Contracts\Resource;
+use App\Relationships\AccessRelationships;
+use App\Resources\AccessResource;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Http\Request;
 
-class Access extends Model
+class Access extends Model implements Resource
 {
+    use AccessRelationships;
+    use AccessResource;
+
     /**
      * The table name.
      *
@@ -49,52 +52,4 @@ class Access extends Model
      * @var array
      */
     protected $hidden = ['id'];
-
-    /**
-     * Get all of the owning commentable models.
-     */
-    public function accessible()
-    {
-        return $this->morphTo();
-    }
-
-    /**
-     * The related last Location
-     *
-     * @return BelongsTo
-     */
-    public function last_location()
-    {
-        return $this->belongsTo(Location::class, 'last_location_uuid', 'uuid');
-    }
-
-    /**
-     * The related first Location.
-     *
-     * @return BelongsTo
-     */
-    public function first_location()
-    {
-        return $this->belongsTo(Location::class, 'first_location_uuid', 'uuid');
-    }
-
-    /**
-     * The related Geofence.
-     *
-     * @return BelongsTo
-     */
-    public function geofence()
-    {
-        return $this->belongsTo(Geofence::class, 'geofence_uuid', 'uuid');
-    }
-
-    /**
-     * @param Request $request
-     * @return LengthAwarePaginator
-     * @codeCoverageIgnore
-     */
-    public static function resolveModels(Request $request)
-    {
-        return self::with('accessible')->latest()->paginate(20);
-    }
 }

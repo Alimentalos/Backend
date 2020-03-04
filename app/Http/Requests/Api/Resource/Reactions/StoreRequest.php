@@ -24,6 +24,6 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        return ['type' => 'required|in:' . finder('resource', get_class($this->route('resource')))::AVAILABLE_REACTIONS];
+        return ['type' => 'required|in:' . $this->route('resource')->getAvailableReactions()];
     }
 }

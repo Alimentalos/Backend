@@ -21,6 +21,6 @@ class TokenRepository
             LoggerRepository::createAction(Auth::user(), 'success', 'token', $request->only('email'));
             return response()->json(['api_token' => Auth::user()->api_token]);
         }
-        return response()->json(['message' => 'Unauthenticated.']);
+        return response()->json(['message' => 'Unauthenticated.'], 401);
     }
 }

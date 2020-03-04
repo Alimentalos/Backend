@@ -28,6 +28,7 @@ class GroupTest extends TestCase
         $photo = factory(Photo::class)->create();
         $photo->geofences()->attach($geofence->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/geofences/' . $geofence->uuid . '/photos');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [

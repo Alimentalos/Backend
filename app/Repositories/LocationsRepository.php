@@ -45,7 +45,7 @@ class LocationsRepository
      */
     public static function fetchViaRequest(Request $request)
     {
-        $models = finder('resourceModelClass', $request->input('type'))::whereIn('uuid', explode(',', $request->input('identifiers')))->get();
+        $models = finder()->findClass($request->input('type'))::whereIn('uuid', explode(',', $request->input('identifiers')))->get();
 
         return static::searchLocations($models, $request->only('type', 'start_date', 'end_date', 'accuracy'));
     }
@@ -60,7 +60,7 @@ class LocationsRepository
      */
     public static function searchLastLocations($type, $identifiers, $accuracy)
     {
-        return finder('resourceModel', $type)->whereIn('uuid', $identifiers)->get()->map(function ($model) use ($accuracy) { return static::searchModelLocations($model, $accuracy); });
+        return finder()->findModel($type)->whereIn('uuid', $identifiers)->get()->map(function ($model) use ($accuracy) { return static::searchModelLocations($model, $accuracy); });
     }
 
     /**

@@ -9,7 +9,42 @@ use Illuminate\Http\JsonResponse;
 class ShowController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * @OA\Get(
+     *      path="/{resource}/{uuid}",
+     *      operationId="getResourceInstance",
+     *      tags={"Resources"},
+     *      summary="Get specific resource instance",
+     *      description="Returns the specified resource instance as JSON Object",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of specific Resource class instance",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource instance fetched successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={
+     *         {
+     *             "oauth2_security_example": {"write:projects", "read:projects"}
+     *         }
+     *     },
+     * )
      *
      * @param ShowRequest $request
      * @param $resource

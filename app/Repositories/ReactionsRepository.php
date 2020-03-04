@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Contracts\Resource;
 use Illuminate\Http\Request;
 
 class ReactionsRepository
@@ -10,12 +11,12 @@ class ReactionsRepository
      * Fetch reactions via request.
      *
      * @param Request $request
-     * @param $resource
+     * @param Resource $resource
      * @return array
      */
-    public static function fetchViaRequest(Request $request, $resource)
+    public static function fetchViaRequest(Request $request, Resource $resource)
     {
-        return finder('resource', get_class($resource))::AVAILABLE_REACTIONS == 'Follow' ?
+        return $resource->getAvailableReactions() == 'Follow' ?
             LikeRepository::generateFollowStats($resource->getLoveReactant(), $request->user('api')->getLoveReacter()) :
             LikeRepository::generateStats($resource->getLoveReactant(), $request->user('api')->getLoveReacter());
     }
