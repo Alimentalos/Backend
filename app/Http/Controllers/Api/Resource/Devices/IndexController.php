@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Resource\Devices;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Devices\IndexRequest;
+use App\Http\Requests\Api\Resource\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller

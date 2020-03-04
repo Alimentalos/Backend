@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Resource\Comments;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Comments\IndexRequest;
+use App\Http\Requests\Api\Resource\Resource\IndexRequest;
 
 class IndexController extends Controller
 {

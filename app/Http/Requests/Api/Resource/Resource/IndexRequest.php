@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Resource\Groups;
+namespace App\Http\Requests\Api\Resource\Resource;
 
 use App\Http\Requests\AuthorizedRequest;
 
-class DetachRequest extends AuthorizedRequest
+class IndexRequest extends AuthorizedRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,6 +13,6 @@ class DetachRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('detachGroup', [$this->route('resource'), $this->route('group')]);
+        return $this->user('api')->can('view', $this->route('resource'));
     }
 }

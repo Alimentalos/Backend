@@ -24,9 +24,6 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        $options = HandleBindingRepository::bindResource(get_class($this->route('resource')))::AVAILABLE_REACTIONS;
-        return [
-            'type' => 'required|in:' . $options
-        ];
+        return ['type' => 'required|in:' . HandleBindingRepository::bindResource(get_class($this->route('resource')))::AVAILABLE_REACTIONS];
     }
 }

@@ -2,22 +2,12 @@
 
 namespace App\Http\Requests\Api\Locations;
 
+use App\Http\Requests\RuledRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class IndexRequest extends FormRequest
+class IndexRequest extends RuledRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

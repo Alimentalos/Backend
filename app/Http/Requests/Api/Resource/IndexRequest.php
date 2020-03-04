@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api\Resource;
 
+use App\Http\Requests\AuthorizedRequest;
 use App\Repositories\HandleBindingRepository;
-use Illuminate\Foundation\Http\FormRequest;
 
-class IndexRequest extends FormRequest
+class IndexRequest extends AuthorizedRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,17 +15,5 @@ class IndexRequest extends FormRequest
     public function authorize()
     {
         return $this->user('api')->can('viewAny', HandleBindingRepository::bindResourceModelClass(HandleBindingRepository::detectResourceType()));
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            //
-        ];
     }
 }

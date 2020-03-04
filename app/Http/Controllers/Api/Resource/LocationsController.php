@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Resource;
 
 use App\Events\Location as LocationEvent;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\LocationsRequest;
+use App\Http\Requests\AuthorizedRequest;
 use App\Http\Resources\Location as LocationResource;
 use App\Repositories\GeofenceRepository;
 use App\Repositories\LocationRepository;
@@ -16,10 +16,10 @@ class LocationsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param LocationsRequest $request
+     * @param AuthorizedRequest $request
      * @return JsonResponse
      */
-    public function __invoke(LocationsRequest $request)
+    public function __invoke(AuthorizedRequest $request)
     {
         $model = ModelLocationsRepository::resolveLocationModel($request);
         $location = ModelLocationsRepository::createLocation($model, $request->all());

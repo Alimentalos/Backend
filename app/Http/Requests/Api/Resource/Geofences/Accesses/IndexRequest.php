@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Api\Resource\Geofences\Accesses;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\AuthorizedRequest;
 
-class IndexRequest extends FormRequest
+class IndexRequest extends AuthorizedRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,17 +14,5 @@ class IndexRequest extends FormRequest
     public function authorize()
     {
         return $this->user('api')->can('view', $this->route('resource'));
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            //
-        ];
     }
 }
