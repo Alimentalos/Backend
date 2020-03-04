@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Contracts\Trackable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request as RequestFacade;
@@ -95,9 +96,8 @@ class FinderRepository {
      * @return mixed
      */
     public function findNearResources($resource, $coordinates) {
-        $model = $this->findModel($resource);
-        return $model->orderByDistance(
-            $this->findClass($resource)::DEFAULT_LOCATION_FIELD,
+        return $resource->orderByDistance(
+            $resource::DEFAULT_LOCATION_FIELD,
             LocationsRepository::parsePointFromCoordinates($coordinates),
             'asc'
         );

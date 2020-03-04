@@ -103,7 +103,7 @@ class Group extends Model implements Resource
      * @param Request $request
      * @return Group
      */
-    public static function createViaRequest(Request $request)
+    public function createViaRequest(Request $request)
     {
         return GroupsRepository::createGroupViaRequest($request);
     }

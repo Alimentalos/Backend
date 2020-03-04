@@ -35,8 +35,8 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('resource', function ($value) {
-            if (in_array($value, ['users', 'devices', 'pets', 'geofences', 'comments', 'groups', 'alerts']))
-                return $value;
+            if (in_array($value, ['users', 'devices', 'pets', 'geofences', 'comments', 'groups', 'alerts', 'actions', 'photos', 'accesses', 'locations']))
+                return finder()->findClass($value);
 
             return finder()->findModelInstance(finder()->currentResource(), $value);
         });

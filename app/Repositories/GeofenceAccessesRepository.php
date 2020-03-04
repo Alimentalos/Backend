@@ -20,7 +20,7 @@ class GeofenceAccessesRepository
     public static function fetchResourceViaRequest(Request $request, Geofence $geofence, $resource)
     {
         return $geofence->accesses()->with('accessible', 'first_location', 'last_location', 'geofence')
-            ->where('accessible_type', get_class(finder()->findClass($resource)))
+            ->where('accessible_type', get_class($resource))
             ->where('geofence_uuid', $geofence->uuid)
             ->latest()
             ->paginate(20);

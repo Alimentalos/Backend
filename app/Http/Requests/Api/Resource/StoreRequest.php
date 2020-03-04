@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('create', finder()->findClass($this->route('resource')));
+        return $this->user('api')->can('create', $this->route('resource'));
     }
 
     /**
@@ -24,6 +24,6 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        return finder()->findClass($this->route('resource'))->storeRules($this);
+        return $this->route('resource')->storeRules($this);
     }
 }

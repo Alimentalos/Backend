@@ -89,7 +89,7 @@ class Geofence extends Model implements ReactableContract, Resource
      * @param Request $request
      * @return Geofence
      */
-    public static function createViaRequest(Request $request)
+    public function createViaRequest(Request $request)
     {
         return GeofenceRepository::createGeofenceViaRequest($request);
     }

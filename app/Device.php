@@ -105,7 +105,7 @@ class Device extends Authenticatable implements Resource
      * @param Request $request
      * @return Http\Resources\Device
      */
-    public static function createViaRequest(Request $request)
+    public function createViaRequest(Request $request)
     {
         return DevicesRepository::createDeviceViaRequest($request);
     }

@@ -176,7 +176,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      * @param Request $request
      * @return User
      */
-    public static function createViaRequest(Request $request)
+    public function createViaRequest(Request $request)
     {
         return UsersRepository::createUserViaRequest($request);
     }
