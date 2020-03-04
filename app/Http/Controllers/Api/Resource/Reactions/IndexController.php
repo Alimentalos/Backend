@@ -17,6 +17,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json(ReactionsRepository::fetchViaRequest($request, $request),200);
+        return response()->json(ReactionsRepository::fetchViaRequest($request, $resource),200);
     }
 }
