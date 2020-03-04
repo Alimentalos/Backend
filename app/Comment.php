@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Repositories\AlertsRepository;
 use App\Repositories\CommentsRepository;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;

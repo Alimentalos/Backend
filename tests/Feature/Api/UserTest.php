@@ -34,7 +34,6 @@ class UserTest extends TestCase
             'uuid',
             'location',
             'photo_uuid',
-            'api_token',
             'name',
             'email',
             'email_verified_at',

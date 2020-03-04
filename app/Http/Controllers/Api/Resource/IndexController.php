@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\Resource;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\IndexRequest;
-
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -17,6 +16,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        return response()->json(binder()::bindResourceModelClass(binder()::detectResourceType())::resolveModels($request), 200);
+        return response()->json(finder('resourceModelClass', finder('detectType'))::resolveModels($request), 200);
     }
 }

@@ -3,9 +3,7 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Repositories\GroupsRepository;
 use App\Repositories\PhotoRepository;
-use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;

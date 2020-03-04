@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\Resource;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\StoreRequest;
-
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller
@@ -18,6 +17,6 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        return response()->json(binder()::bindResourceModelClass($request->route('resource'))::createViaRequest($request),201);
+        return response()->json(finder('resourceModelClass', $request->route('resource'))::createViaRequest($request),201);
     }
 }

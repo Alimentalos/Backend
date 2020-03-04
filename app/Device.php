@@ -3,8 +3,6 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Http\Resources\DeviceCollection;
-use App\Repositories\AlertsRepository;
 use App\Repositories\DevicesRepository;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;

@@ -2,9 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\LocationCollection;
 use App\Parsers\LocationParser;
 use App\Queries\LocationQuery;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class LocationsRepository
@@ -23,6 +25,32 @@ class LocationsRepository
     public const LONGITUDE = 1;
 
     /**
+     * Fetch last locations via request.
+     *
+     * @param Request $request
+     * @return LocationCollection
+     */
+    public static function fetchLastLocationsViaRequest(Request $request)
+    {
+        $locations = static::searchLastLocations($request->input('type'),$request->input('identifiers'),$request->input('accuracy'));
+
+        return new LocationCollection($locations->filter(function ($location) { return !is_null($location); }));
+    }
+
+    /**
+     * Fetch locations via request.
+     *
+     * @param Request $request
+     * @return Collection
+     */
+    public static function fetchViaRequest(Request $request)
+    {
+        $models = finder('resourceModelClass', $request->input('type'))::whereIn('uuid', explode(',', $request->input('identifiers')))->get();
+
+        return static::searchLocations($models, $request->only('type', 'start_date', 'end_date', 'accuracy'));
+    }
+
+    /**
      * Search last devices locations.
      *
      * @param $type
@@ -32,9 +60,7 @@ class LocationsRepository
      */
     public static function searchLastLocations($type, $identifiers, $accuracy)
     {
-        return binder()::bindResourceModel($type)->whereIn('uuid', $identifiers)->get()->map(function ($model) use ($accuracy) {
-            return static::searchModelLocations($model, $accuracy);
-        });
+        return finder('resourceModel', $type)->whereIn('uuid', $identifiers)->get()->map(function ($model) use ($accuracy) { return static::searchModelLocations($model, $accuracy); });
     }
 
     /**
@@ -47,10 +73,7 @@ class LocationsRepository
     public static function searchModelLocations($model, $accuracy)
     {
         $class = get_class($model);
-        return static::orderByColumn(
-            static::maxAccuracy(static::trackableQuery(collect([$model]), $class), $accuracy),
-            $class::DEFAULT_LOCATION_DATE_COLUMN
-        )->first();
+        return static::orderByColumn(static::maxAccuracy(static::trackableQuery(collect([$model]), $class), $accuracy), $class::DEFAULT_LOCATION_DATE_COLUMN)->first();
     }
 
     /**

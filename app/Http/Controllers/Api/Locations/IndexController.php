@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Locations;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Locations\IndexRequest;
 use App\Http\Resources\LocationCollection;
-
 use App\Repositories\LocationsRepository;
 use Illuminate\Http\JsonResponse;
 
@@ -19,19 +18,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        // TODO - Reduce number of lines of Locations IndexController
-        // @body move into repository method as fetchViaRequest.
-        $models = binder()::bindResourceModelClass(
-            $request->input('type'))::whereIn(
-                'uuid', explode(',', $request->input('identifiers')
-            )
-        )->get();
-
-        $locations = LocationsRepository::searchLocations( // Search locations
-            $models, // of those devices
-            $request->only('type', 'start_date', 'end_date', 'accuracy')
-        );
-
-        return response()->json(new LocationCollection($locations),200);
+        return response()->json(new LocationCollection(LocationsRepository::fetchViaRequest($request)),200);
     }
 }
