@@ -17,13 +17,7 @@ class PasswordRecoveryController extends Controller
      */
     public function __invoke(PasswordRecoveryRequest $request)
     {
-        Password::broker()->sendResetLink(
-            $request->only('email')
-        );
-
-        return response()->json(
-            [],
-            200
-        );
+        Password::broker()->sendResetLink($request->only('email'));
+        return response()->json([],200);
     }
 }

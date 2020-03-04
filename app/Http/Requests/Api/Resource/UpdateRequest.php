@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\Resource;
 
-use App\Repositories\HandleBindingRepository;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -24,6 +24,6 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return HandleBindingRepository::bindResource(get_class($this->route('resource')))::updateRules($this);
+        return binder()::bindResource(get_class($this->route('resource')))::updateRules($this);
     }
 }

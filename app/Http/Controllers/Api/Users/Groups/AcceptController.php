@@ -20,9 +20,7 @@ class AcceptController extends Controller
      */
     public function __invoke(AcceptRequest $request, User $user, Group $group)
     {
-        $user->groups()->updateExistingPivot($group->uuid, [
-            'status' => Group::ACCEPTED_STATUS,
-        ]);
+        $user->groups()->updateExistingPivot($group->uuid, ['status' => Group::ACCEPTED_STATUS]);
         return response()->json([], 200);
     }
 }

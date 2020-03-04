@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Resource\Groups;
 use App\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Groups\AttachRequest;
+use App\Repositories\FillRepository;
 use Illuminate\Http\JsonResponse;
 
 class AttachController extends Controller
@@ -19,10 +20,7 @@ class AttachController extends Controller
      */
     public function __invoke(AttachRequest $request, $resource, Group $group)
     {
-        $resource->groups()->attach($group->uuid, [
-            'status' => Group::ATTACHED_STATUS,
-            'is_admin' => $request->has('is_admin') ? $request->input('is_admin') : false,
-        ]);
+        $resource->groups()->attach($group->uuid, ['status' => Group::ATTACHED_STATUS, 'is_admin' => FillRepository::fillMethod($request, 'is_admin', false)]);
         return response()->json([], 200);
     }
 }

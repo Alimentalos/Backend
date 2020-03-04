@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\Resource;
 
 use App\Http\Requests\AuthorizedRequest;
-use App\Repositories\HandleBindingRepository;
+
 
 class IndexRequest extends AuthorizedRequest
 {
@@ -14,6 +14,6 @@ class IndexRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('viewAny', HandleBindingRepository::bindResourceModelClass(HandleBindingRepository::detectResourceType()));
+        return $this->user('api')->can('viewAny', binder()::bindResourceModelClass(binder()::detectResourceType()));
     }
 }

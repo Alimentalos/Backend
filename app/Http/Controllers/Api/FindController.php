@@ -18,6 +18,8 @@ class FindController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
+        // TODO - Reduce number of lines of FindController
+        // @body move into repository method as searchLastsLocationsViaRequest.
         $locations = LocationRepository::searchLastLocations(
             $request->input('type'),
             $request->input('identifiers'),

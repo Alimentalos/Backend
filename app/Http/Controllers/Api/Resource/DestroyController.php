@@ -21,10 +21,7 @@ class DestroyController extends Controller
         try {
             $resource->delete();
 
-            return response()->json(
-                ['message' => 'Deleted successfully.'],
-                200
-            );
+            return response()->json(['message' => 'Deleted successfully.'],200);
             // @codeCoverageIgnoreStart
         } catch (Exception $exception) {
             return response()->json(

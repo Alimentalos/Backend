@@ -17,9 +17,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json(
-            $resource->groups()->latest()->with('user', 'photo')->paginate(20),
-            200
-        );
+        return response()->json($resource->groups()->latest()->with('user', 'photo')->paginate(20),200);
     }
 }

@@ -21,6 +21,8 @@ class LocationsController extends Controller
      */
     public function __invoke(AuthorizedRequest $request)
     {
+        // TODO - Reduce number of lines of LocationsController
+        // @body move into repository method as createViaRequest.
         $model = ModelLocationsRepository::resolveLocationModel($request);
         $location = ModelLocationsRepository::createLocation($model, $request->all());
         $model->update([

@@ -19,7 +19,7 @@ class AlertsRepository
     {
         $photo = PhotoRepository::createPhotoViaRequest($request);
         $alert_type = $request->input('alert_type');
-        $alert = HandleBindingRepository::bindResourceInstance($alert_type, $request->input('alert_id'));
+        $alert = binder()::bindResourceInstance($alert_type, $request->input('alert_id'));
         $alert = Alert::create([
             'name' => $request->input('name'),
             'user_uuid' => $request->user('api')->uuid,

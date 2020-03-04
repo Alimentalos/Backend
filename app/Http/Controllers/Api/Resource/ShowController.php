@@ -18,9 +18,6 @@ class ShowController extends Controller
     public function __invoke(ShowRequest $request, $resource)
     {
         $resource->load($resource->lazy_relationships);
-        return response()->json(
-            $resource,
-            200
-        );
+        return response()->json($resource,200);
     }
 }

@@ -19,6 +19,8 @@ class RegisterController extends Controller
      */
     public function __invoke(RegisterRequest $request)
     {
+        // TODO - Reduce number of lines of RegisterController
+        // @body move into repository method as createViaRequest.
         $user = User::create([
             'email' => $request->input('email'),
             'name' => $request->input('name'),

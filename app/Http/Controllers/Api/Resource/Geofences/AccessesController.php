@@ -17,11 +17,6 @@ class AccessesController extends Controller
      */
     public function __invoke(AccessesRequest $request, $resource)
     {
-        return response()->json(
-            $resource->accesses()->with([
-                'accessible', 'geofence', 'first_location', 'last_location'
-            ])->latest()->paginate(20),
-            200
-        );
+        return response()->json($resource->accesses()->with(['accessible', 'geofence', 'first_location', 'last_location'])->latest()->paginate(20),200);
     }
 }
