@@ -14,6 +14,6 @@ class IndexRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('viewAny', binder()::bindResourceModelClass(binder()::detectResourceType()));
+        return $this->user('api')->can('viewAny', finder('resourceModelClass', finder('detectType')));
     }
 }

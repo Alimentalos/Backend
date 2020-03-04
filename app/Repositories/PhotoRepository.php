@@ -27,11 +27,7 @@ class PhotoRepository
      */
     public static function updatePhotoViaRequest(Request $request, Photo $photo)
     {
-        $photo->update([
-            'title' => FillRepository::fillMethod($request, 'title', $photo->title),
-            'description' => FillRepository::fillMethod($request, 'description', $photo->description),
-            'is_public' => FillRepository::fillMethod($request, 'is_public', $photo->is_public),
-        ]);
+        $photo->update(ParametersRepository::fillPropertiesWithRelated($request, ['title', 'description', 'is_public'], $photo));
 
         $photo->load('user');
         return $photo;
@@ -80,13 +76,10 @@ class PhotoRepository
      */
     public static function createDefaultPhotoCommentUsingRequest(Photo $photo, Request $request)
     {
-        $comment = $photo->comments()->create([
+        $comment = $photo->comments()->create(array_merge([
             'uuid' => UniqueNameRepository::createIdentifier(),
             'user_uuid' => $request->user('api')->uuid,
-            'title' => $request->input('title'),
-            'body' => $request->input('body'),
-            'is_public' => $request->has('is_public'),
-        ]);
+        ], $request->only('title', 'body', 'is_public')));
         $photo->comment()->associate($comment);
     }
 
@@ -99,11 +92,6 @@ class PhotoRepository
      */
     public static function storePhoto($uniqueName, $fileContent)
     {
-        Storage::disk(static::DEFAULT_DISK)
-            ->putFileAs(
-                static::DEFAULT_PHOTOS_DISK_PATH,
-                $fileContent,
-                ($uniqueName . $fileContent->extension())
-            );
+        Storage::disk(static::DEFAULT_DISK)->putFileAs(static::DEFAULT_PHOTOS_DISK_PATH, $fileContent, ($uniqueName . $fileContent->extension()));
     }
 }

@@ -99,7 +99,7 @@ class ModelLocationsRepository
      */
     public static function filterLocations($models, $parameters)
     {
-        $class = binder()::bindResourceModelClass($parameters['type']);
+        $class = finder('resourceModelClass', $parameters['type']);
         return static::resolveLocations($models, $parameters, get_class($class), $class::DEFAULT_LOCATION_DATE_COLUMN, $class::DEFAULT_LOCATION_GROUP_BY_COLUMN);
     }
 

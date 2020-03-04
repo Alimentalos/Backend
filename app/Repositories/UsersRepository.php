@@ -39,11 +39,7 @@ class UsersRepository
     {
         UploadRepository::checkPhotoForUpload($request, $user);
         $user->load('user', 'photo');
-        $user->update([
-            'email' => FillRepository::fillMethod($request, 'email', $user->email),
-            'name' => FillRepository::fillMethod($request, 'name', $user->name),
-            'is_public' => FillRepository::fillMethod($request, 'is_public', $user->is_public),
-        ]);
+        $user->update(ParametersRepository::fillPropertiesWithRelated($request, ['email', 'name', 'is_public'], $user));
         return $user;
     }
 
@@ -57,16 +53,13 @@ class UsersRepository
     public static function createUserViaRequest(Request $request)
     {
         $photo = PhotoRepository::createPhotoViaRequest($request);
-        $user = User::create([
+        $user = User::create(array_merge([
             'user_uuid' => $request->user('api')->uuid,
             'photo_uuid' => $photo->uuid,
             'photo_url' => config('storage.path') . $photo->photo_url,
-            'email' => $request->input('email'),
-            'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),
-            'is_public' => $request->input('is_public'),
             'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates')),
-        ]);
+        ], $request->only('name', 'email', 'is_public')));
         $user->photos()->attach($photo->uuid);
         event(new Registered($user));
         $user->load('photo', 'user');

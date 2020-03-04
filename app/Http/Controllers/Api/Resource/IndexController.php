@@ -16,6 +16,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        return response()->json(binder()::bindResourceModelClass(binder()::detectResourceType())::resolveModels($request), 200);
+        return response()->json(finder('resourceModelClass', finder('detectType'))::resolveModels($request), 200);
     }
 }

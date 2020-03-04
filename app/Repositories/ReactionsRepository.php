@@ -15,7 +15,7 @@ class ReactionsRepository
      */
     public static function fetchViaRequest(Request $request, $resource)
     {
-        return binder()::bindResource(get_class($resource))::AVAILABLE_REACTIONS == 'Follow' ?
+        return finder('resource', get_class($resource))::AVAILABLE_REACTIONS == 'Follow' ?
             LikeRepository::generateFollowStats($resource->getLoveReactant(), $request->user('api')->getLoveReacter()) :
             LikeRepository::generateStats($resource->getLoveReactant(), $request->user('api')->getLoveReacter());
     }

@@ -28,10 +28,6 @@ class ResourceRepository
      */
     public static function availableResource()
     {
-        return [
-            self::USER,
-            self::DEVICE,
-            self::PET,
-        ];
+        return [ self::USER, self::DEVICE, self::PET ];
     }
 }

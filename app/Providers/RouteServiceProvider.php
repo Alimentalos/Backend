@@ -38,9 +38,7 @@ class RouteServiceProvider extends ServiceProvider
             if (in_array($value, ['users', 'devices', 'pets', 'geofences', 'comments', 'groups', 'alerts']))
                 return $value;
 
-            $class = binder()::detectResourceType();
-
-            return binder()::bindResourceModelInstance($class, $value);
+            return finder('resourceModelInstance', finder('detectType'), $value);
         });
     }
 

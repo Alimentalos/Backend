@@ -17,14 +17,7 @@ class LoggerRepository
      */
     public static function createAction($user, $type, $resource, $parameters)
     {
-        return Action::create([
-            'uuid' => UniqueNameRepository::createIdentifier(),
-            'type' => $type,
-            'parameters' => $parameters,
-            'resource' => $resource,
-            'user_uuid' => $user->uuid,
-            'referenced_uuid' => null,
-        ]);
+        return Action::create(static::buildCreateParameters($type, $parameters, $resource, $user));
     }
 
     /**
@@ -36,13 +29,28 @@ class LoggerRepository
      */
     public static function createReferencedAction($user, $parameters)
     {
-        return Action::create([
+        return Action::create(static::buildCreateParameters($parameters['type'], $parameters['parameters'], $parameters['resource'], $user, $parameters['referenced']));
+    }
+
+    /**
+     * Create parameters for action create.
+     *
+     * @param $type
+     * @param $parameters
+     * @param $resource
+     * @param $user
+     * @param null $referenced
+     * @return array
+     */
+    public static function buildCreateParameters($type, $parameters, $resource, $user, $referenced = null)
+    {
+        return [
             'uuid' => UniqueNameRepository::createIdentifier(),
-            'type' => $parameters['type'],
-            'parameters' => $parameters['parameters'],
-            'resource' => $parameters['resource'],
+            'type' => $type,
+            'parameters' => $parameters,
+            'resource' => $resource,
             'user_uuid' => $user->uuid,
-            'referenced_uuid' => $parameters['referenced']
-        ]);
+            'referenced_uuid' => $referenced,
+        ];
     }
 }

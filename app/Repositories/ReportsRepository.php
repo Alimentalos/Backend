@@ -54,15 +54,8 @@ class ReportsRepository
      */
     public static function generateData($devices, $start_date, $end_date, $parameters)
     {
-        if ($devices == '') {
-            $devices = DevicesRepository::fetchInDatabase($devices);
-        }
-        return (new Report(
-            $devices,
-            $start_date,
-            $end_date,
-            $parameters
-        ))->fetchData();
+        if ($devices == '') { $devices = DevicesRepository::fetchInDatabase($devices); }
+        return (new Report($devices, $start_date, $end_date, $parameters))->fetchData();
     }
 
     /**

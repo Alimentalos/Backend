@@ -38,12 +38,6 @@ class StatusRepository
      */
     public static function availableAlertStatuses()
     {
-        return [
-            self::CREATED,
-            self::PUBLISHED,
-            self::FOUNDED,
-            self::RESOLVED,
-            self::CLOSED
-        ];
+        return [ self::CREATED, self::PUBLISHED, self::FOUNDED, self::RESOLVED, self::CLOSED ];
     }
 }

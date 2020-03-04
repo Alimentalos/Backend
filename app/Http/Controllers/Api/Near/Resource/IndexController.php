@@ -17,6 +17,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json(binder()::bindNearModel($resource, $request->input('coordinates'))->paginate(20),200);
+        return response()->json(finder('nearModels', $resource, $request->input('coordinates'))->paginate(20),200);
     }
 }

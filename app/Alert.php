@@ -94,7 +94,7 @@ class Alert extends Model implements Resource
      */
     public static function createViaRequest(Request $request)
     {
-        return AlertsRepository::createAlertViaRequest($request);
+        return AlertsRepository::createViaRequest($request);
     }
 
     /**

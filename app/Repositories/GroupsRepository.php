@@ -19,10 +19,7 @@ class GroupsRepository
     public static function updateGroupViaRequest(Request $request, Group $group)
     {
         UploadRepository::checkPhotoForUpload($request, $group);
-        $group->update([
-            'name' => FillRepository::fillMethod($request, 'name', $group->name),
-            'is_public' => FillRepository::fillMethod($request, 'is_public', $group->is_public)
-        ]);
+        $group->update(ParametersRepository::fillPropertiesWithRelated($request, ['name', 'is_public'], $group));
         $group->load('photo', 'user');
         return $group;
     }

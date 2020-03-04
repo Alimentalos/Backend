@@ -16,18 +16,11 @@ class TokenRepository
      */
     public static function handleAuthentication(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::once($credentials) && !is_null(Auth::user()->email_verified_at)) {
+        if (Auth::once($request->only('email', 'password')) && !is_null(Auth::user()->email_verified_at)) {
             // Authentication passed...
             LoggerRepository::createAction(Auth::user(), 'success', 'token', $request->only('email'));
-
-            return response()->json([
-                'api_token' => Auth::user()->api_token
-            ]);
+            return response()->json(['api_token' => Auth::user()->api_token]);
         }
-        return response()->json([
-            'message' => 'Unauthenticated.'
-        ]);
+        return response()->json(['message' => 'Unauthenticated.']);
     }
 }
