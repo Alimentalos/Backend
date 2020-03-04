@@ -23,7 +23,7 @@ trait AlertResource
      */
     public function updateViaRequest(Request $request)
     {
-        return AlertsRepository::updateAlertViaRequest($request, $this);
+        return alerts()->updateAlertViaRequest($request, $this);
     }
 
     /**
@@ -34,7 +34,7 @@ trait AlertResource
      */
     public function createViaRequest(Request $request)
     {
-        return AlertsRepository::createViaRequest($request);
+        return alerts()->createViaRequest($request);
     }
 
     /**

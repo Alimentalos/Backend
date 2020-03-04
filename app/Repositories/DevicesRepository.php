@@ -36,7 +36,7 @@ class DevicesRepository
      */
     public static function updateDeviceViaRequest(Request $request, Device $device)
     {
-        $device->update(ParametersRepository::fillPropertiesWithRelated($request, ['name', 'description', 'is_public'], $device));
+        $device->update(parameters()->fillPropertiesUsingResource(['name', 'description', 'is_public'], $device));
 
         return new DeviceResource($device);
     }

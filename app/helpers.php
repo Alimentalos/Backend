@@ -6,19 +6,10 @@ use App\Repositories\AlertsRepository;
 use App\Repositories\FinderRepository;
 use App\Repositories\GeofenceRepository;
 use App\Repositories\GroupsRepository;
+use App\Repositories\ParametersRepository;
 use App\Repositories\ResourceRepository;
 use App\Repositories\UsersRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
-
-if (! function_exists('actions')) {
-    /**
-     * @return ActionsRepository
-     */
-    function actions()
-    {
-        return new ActionsRepository();
-    }
-}
 
 if (! function_exists('actions')) {
     /**
@@ -68,6 +59,16 @@ if (! function_exists('authenticated')) {
     function authenticated($guard = 'api')
     {
         return auth($guard)->user();
+    }
+}
+
+if (! function_exists('parameters')) {
+    /**
+     * @return ParametersRepository
+     */
+    function parameters()
+    {
+        return new ParametersRepository();
     }
 }
 

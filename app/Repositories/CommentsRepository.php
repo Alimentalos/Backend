@@ -16,7 +16,7 @@ class CommentsRepository
      */
     public static function updateCommentViaRequest(Request $request, Comment $comment)
     {
-        $comment->update(ParametersRepository::fillPropertiesWithRelated($request, ['body', 'is_public'], $comment));
+        $comment->update(parameters()->fillPropertiesUsingResource(['body', 'is_public'], $comment));
         return $comment;
     }
 }

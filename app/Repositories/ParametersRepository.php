@@ -2,15 +2,18 @@
 
 namespace App\Repositories;
 
-use Illuminate\Http\Request;
-
 class ParametersRepository
 {
-    public static function fillPropertiesWithRelated(Request $request, $properties, $resource)
+    /**
+     * @param $properties
+     * @param $resource
+     * @return array
+     */
+    public function fillPropertiesUsingResource($properties, $resource)
     {
         $arr = [];
         foreach ($properties as $property){
-            $arr[$property] = FillRepository::fillMethod($request, $property, $resource->{$property});
+            $arr[$property] = FillRepository::fillAttribute($property, $resource->{$property});
         }
         return $arr;
     }

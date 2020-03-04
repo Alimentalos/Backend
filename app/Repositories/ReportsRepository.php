@@ -40,7 +40,7 @@ class ReportsRepository
 
     public static function fetchViaRequest(Request $request)
     {
-        return ReportsRepository::generateData($request->input('devices'), $request->input('start_date'), $request->input('end_date'), $request->only(ReportsRepository::requiredParameters(FillRepository::fillMethod($request, 'type', ReportsRepository::$defaultType))));
+        return ReportsRepository::generateData($request->input('devices'), $request->input('start_date'), $request->input('end_date'), $request->only(ReportsRepository::requiredParameters(FillRepository::fillAttribute( 'type', ReportsRepository::$defaultType))));
     }
 
     /**

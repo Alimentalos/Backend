@@ -43,6 +43,6 @@ class UserGroupsRepository
      */
     public static function retrieveInvitationAttachAttributes(Request $request)
     {
-        return ['status' => Group::PENDING_STATUS, 'is_admin' => FillRepository::fillMethod($request, 'is_admin', false)];
+        return ['status' => Group::PENDING_STATUS, 'is_admin' => FillRepository::fillAttribute( 'is_admin', false)];
     }
 }

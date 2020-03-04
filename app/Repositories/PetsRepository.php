@@ -44,7 +44,7 @@ class PetsRepository
     public static function updatePetViaRequest(Request $request, Pet $pet)
     {
         UploadRepository::checkPhotoForUpload($request, $pet);
-        $pet->update(ParametersRepository::fillPropertiesWithRelated($request, ['name', 'description', 'hair_color', 'born_at', 'left_eye_color', 'right_eye_color', 'size', 'is_public'], $pet));
+        $pet->update(parameters()->fillPropertiesUsingResource(['name', 'description', 'hair_color', 'born_at', 'left_eye_color', 'right_eye_color', 'size', 'is_public'], $pet));
         $pet->load('photo', 'user');
         return $pet;
     }

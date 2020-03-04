@@ -79,7 +79,7 @@ class UsersRepository
     {
         UploadRepository::checkPhotoForUpload($request, $user);
         $user->load('user', 'photo');
-        $user->update(ParametersRepository::fillPropertiesWithRelated($request, ['email', 'name', 'is_public'], $user));
+        $user->update(parameters()->fillPropertiesUsingResource(['email', 'name', 'is_public'], $user));
         return $user;
     }
 

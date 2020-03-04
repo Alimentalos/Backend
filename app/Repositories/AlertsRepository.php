@@ -31,11 +31,11 @@ class AlertsRepository
      * @param Request $request
      * @return Alert
      */
-    public static function createViaRequest(Request $request)
+    public function createViaRequest(Request $request)
     {
         $photo = PhotoRepository::createPhotoViaRequest($request);
         $related = finder()->findInstance($request->input('alert_type'), $request->input('alert_id'));
-        $obj = Alert::create(static::buildCreateParameters($request, $photo, $related, $request->input('alert_type')));
+        $obj = Alert::create($this->buildCreateParameters($request, $photo, $related, $request->input('alert_type')));
         $photo->alerts()->attach($obj->uuid);
         $obj->load('photo', 'user');
         return $obj;
@@ -50,7 +50,7 @@ class AlertsRepository
      * @param $alert_type
      * @return array
      */
-    public static function buildCreateParameters(Request $request, Photo $photo, $alert, $alert_type)
+    public function buildCreateParameters(Request $request, Photo $photo, $alert, $alert_type)
     {
         return array_merge([
             'user_uuid' => $request->user('api')->uuid,
@@ -69,10 +69,10 @@ class AlertsRepository
      * @param Alert $alert
      * @return Alert
      */
-    public static function updateAlertViaRequest(Request $request, Alert $alert)
+    public function updateAlertViaRequest(Request $request, Alert $alert)
     {
         UploadRepository::checkPhotoForUpload($request, $alert);
-        $alert->update(ParametersRepository::fillPropertiesWithRelated($request, ['type', 'status', 'title', 'body'], $alert));
+        $alert->update(parameters()->fillPropertiesUsingResource(['type', 'status', 'title', 'body'], $alert));
         $alert->load('photo', 'user', 'alert');
         return $alert;
     }

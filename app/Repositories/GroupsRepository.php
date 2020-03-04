@@ -42,7 +42,7 @@ class GroupsRepository
     public static function updateGroupViaRequest(Request $request, Group $group)
     {
         UploadRepository::checkPhotoForUpload($request, $group);
-        $group->update(ParametersRepository::fillPropertiesWithRelated($request, ['name', 'is_public'], $group));
+        $group->update(parameters()->fillPropertiesUsingResource(['name', 'is_public'], $group));
         $group->load('photo', 'user');
         return $group;
     }
