@@ -17,14 +17,454 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * @test testUpdateUserWithPhotoApi
+     */
+    final public function testUpdateUserWithPhotoApi()
+    {
+        Storage::fake('gcs');
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
+            'photo' => UploadedFile::fake()->image('photo50.jpg'),
+            'name' => 'New name',
+            'is_public' => true,
+            'coordinates' => '5.5,6.5',
+        ]);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'uuid',
+            'location',
+            'photo_uuid',
+            'api_token',
+            'name',
+            'email',
+            'email_verified_at',
+            'free',
+            'photo_url',
+            'photo' => [
+                'uuid',
+                'ext',
+                'is_public'
+            ]
+        ]);
+        $content = $response->getContent();
+        $this->assertTrue((json_decode($content))->photo_url !== $user->photo_url);
+        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+    }
+
+    /**
+     * @test testUserCanUpdateUser
+     */
+    final public function testUserCanUpdateUser()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
+            'name' => 'New name',
+            'coordinates' => '5.5,6.5',
+        ]);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => 'New name',
+            'email' => $user->email,
+        ]);
+    }
+
+    /**
+     * @test testUserCanViewNonOwnedUsers
+     */
+    final public function testUserCanViewNonOwnedUsers()
+    {
+        $user = factory(User::class)->create();
+        $userC = factory(User::class)->create();
+        $userB = factory(User::class)->create();
+        $userC->is_public = false;
+        $userB->user_uuid = $user->uuid;
+        $userC->user_uuid = $user->uuid;
+        $userB->save();
+        $userC->save();
+        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => $userC->name,
+            'email' => $userC->email,
+        ]);
+    }
+
+    /**
+     * @test testOwnerUserWatchingSpecificUser
+     */
+    final public function testOwnerUserWatchingSpecificUser()
+    {
+        $user = factory(User::class)->create();
+        $userB = factory(User::class)->create();
+        $userB->is_public = false;
+        $userB->user_uuid = $user->uuid;
+        $userB->save();
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $userB->uuid);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => $userB->name,
+            'email' => $userB->email,
+        ]);
+    }
+
+    /**
+     * @test testUserWatchingOwner
+     */
+    final public function testUserWatchingOwner()
+    {
+        $userA = factory(User::class)->create();
+        $userB = factory(User::class)->create();
+        $userB->user_uuid = $userA->uuid;
+        $userB->is_public = false;
+        $userB->save();
+        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userA->uuid);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => $userA->name,
+            'email' => $userA->email,
+        ]);
+    }
+
+    /**
+     * @test testUserWatchingOtherUserWithSameOwner
+     */
+    final public function testUserWatchingOtherUserWithSameOwner()
+    {
+        $owner = factory(User::class)->create();
+        $userB = factory(User::class)->create();
+        $userB->user_uuid = $owner->uuid;
+        $userB->save();
+        $userC = factory(User::class)->create();
+        $userC->user_uuid = $owner->uuid;
+        $userC->is_public = false;
+        $userC->save();
+        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => $userC->name,
+            'email' => $userC->email,
+        ]);
+    }
+
+    /**
+     * @test testUserCanViewHisUserInUsersApi
+     */
+    final public function testUserCanViewHisUserInUsersApi()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    }
+    /**
+     * @test testNonChildUserCanViewUsersList
+     */
+    final public function testNonChildUserCanViewUsersList()
+    {
+        $user = factory(User::class)->create();
+        $userB = factory(User::class)->create();
+        $user->user_uuid = $userB->uuid;
+        $user->save();
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
+        $response->assertOk();
+        $response -> assertJsonStructure([
+            'current_page',
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+            'data' => [
+                [
+                    'uuid',
+                    'user_uuid',
+                    'photo_uuid',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'free',
+                    'photo_url',
+                    'location'=>[
+                        'type',
+                        'coordinates'
+                    ],
+                    'is_public',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id',
+                    'love_reacter_id',
+                    'is_admin',
+                    'is_child',
+                    'user',
+                    'photo',
+                ]
+            ],
+        ]);
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid,
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    }
+    /**
+     * @test testAdministratorCanViewUsersList
+     */
+    final public function testAdministratorCanViewUsersList()
+    {
+        $user = factory(User::class)->create();
+        $user->email = 'iantorres@outlook.com';
+        $user->save();
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
+        $response->assertOk();
+        $response -> assertJsonStructure([
+            'current_page',
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+            'data' => [
+                [
+                    'uuid',
+                    'user_uuid',
+                    'photo_uuid',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'free',
+                    'photo_url',
+                    'location'=>[
+                        'type',
+                        'coordinates'
+                    ],
+                    'is_public',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id',
+                    'love_reacter_id',
+                    'is_admin',
+                    'is_child',
+                    'user',
+                    'photo',
+                ]
+            ],
+        ]);
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid,
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    }
+    /**
+     * @test testUserCanViewUsersList
+     */
+    final public function testUserCanViewUsersList()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'current_page',
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+            'data' => [
+                [
+                    'uuid',
+                    'user_uuid',
+                    'photo_uuid',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'free',
+                    'photo_url',
+                    'location'=>[
+                        'type',
+                        'coordinates'
+                    ],
+                    'is_public',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id',
+                    'love_reacter_id',
+                    'is_admin',
+                    'is_child',
+                    'user',
+                    'photo',
+                ]
+            ],
+        ]);
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid,
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    }
+
+    /**
+     * @test testUserCanViewOwnUserApi
+     */
+    final public function testUserCanViewOwnUserApi()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/user');
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    }
+
+    /**
      * @test testUserCanStoreUser
      */
-    public function testUserCanStoreUser()
+    final public function testUserCanStoreUser()
     {
-        // TODO - Add response structure asserts
         Storage::fake('gcs');
         $user = factory(User::class)->create();
         $userB = factory(User::class)->make();
+        $latitude = rand(1,5);
+        $longitude = rand(4,10);
+        $coordinates = $latitude . ',' . $longitude;
         $response = $this->actingAs($user, 'api')->json('POST', '/api/users', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'name' => $userB->name,
@@ -32,7 +472,72 @@ class UserTest extends TestCase
             'password' => $userB->password,
             'password_confirmation' => $userB->password,
             'is_public' => true,
-            'coordinates' => '5.5,6.5',
+            'coordinates' => $coordinates,
+        ]);
+        $response->assertJsonStructure([
+            'user_uuid',
+            'photo_uuid',
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child',
+            'photo' => [
+                'location' => [
+                    'type',
+                    'coordinates'
+                ],
+                'uuid',
+                'user_uuid',
+                'comment_uuid',
+                'ext',
+                'photo_url',
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+            ],
+            'user' => [
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'photo_url',
+                'name',
+                'email',
+                'is_public',
+                'location' => [
+                    'type',
+                    'coordinates'
+                ],
+                'love_reacter_id',
+                'love_reactant_id',
+                'updated_at',
+                'created_at',
+                'is_admin',
+                'is_child',
+                'user',
+            ]
+        ]);
+        $response->assertJsonFragment([
+            'name' => $userB->name,
+            'email' => $userB->email,
+            'is_public' => true,
+        ]);
+        $response->assertJsonFragment([
+            'coordinates' => [
+                $longitude,
+                $latitude,
+            ],
         ]);
         $response->assertCreated();
         $content = $response->getContent();
@@ -176,183 +681,6 @@ class UserTest extends TestCase
             ]);
 
         $response->assertStatus(403);
-    }
-
-    /**
-     * @test testUserCanViewOwnUserApi
-     */
-    public function testUserCanViewOwnUserApi()
-    {
-        // TODO - Add response structure and data asserts
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/user');
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUserCanViewUsersList
-     */
-    public function testUserCanViewUsersList()
-    {
-        // TODO - Add response structure and data asserts
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
-        $response->assertOk();
-    }
-
-    /**
-     * @test testAdministratorCanViewUsersList
-     */
-    public function testAdministratorCanViewUsersList()
-    {
-        // TODO - Add response structure and data asserts
-        $user = factory(User::class)->create();
-        $user->email = 'iantorres@outlook.com';
-        $user->save();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
-        $response->assertOk();
-    }
-
-    /**
-     * @test testNonChildUserCanViewUsersList
-     */
-    public function testNonChildUserCanViewUsersList()
-    {
-        // TODO - Add response structure and data asserts
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $user->user_uuid = $userB->uuid;
-        $user->save();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUserCanViewHisUserInUsersApi
-     */
-    public function testUserCanViewHisUserInUsersApi()
-    {
-        // TODO - Add response structure and data asserts
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid);
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUserWatchingOtherUserWithSameOwner
-     */
-    public function testUserWatchingOtherUserWithSameOwner()
-    {
-        // TODO - Add response structure and data asserts
-        $userA = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $userB->user_uuid = $userA->uuid;
-        $userB->save();
-        $userC = factory(User::class)->create();
-        $userC->user_uuid = $userA->uuid;
-        $userC->is_public = false;
-        $userC->save();
-        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUserWatchingOwner
-     */
-    public function testUserWatchingOwner()
-    {
-        // TODO - Add response structure and data asserts
-        $userA = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $userB->user_uuid = $userA->uuid;
-        $userB->is_public = false;
-        $userB->save();
-        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userA->uuid);
-        $response->assertOk();
-    }
-
-
-    /**
-     * @test testOwnerUserWatchingSpecificUser
-     */
-    public function testOwnerUserWatchingSpecificUser()
-    {
-        // TODO - Add response structure and data asserts
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $userB->is_public = false;
-        $userB->user_uuid = $user->uuid;
-        $userB->save();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $userB->uuid);
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUserCanViewNonOwnedUsers
-     */
-    public function testUserCanViewNonOwnedUsers()
-    {
-        // TODO - Add response structure asserts
-        $user = factory(User::class)->create();
-        $userC = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $userC->is_public = false;
-        $userB->user_uuid = $user->uuid;
-        $userC->user_uuid = $user->uuid;
-        $userB->save();
-        $userC->save();
-        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
-        $response->assertOk();
-    }
-
-
-    /**
-     * @test testUserCanUpdateUser
-     */
-    public function testUserCanUpdateUser()
-    {
-        // TODO - Add new name in response data and structure
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
-            'name' => 'New name',
-            'coordinates' => '5.5,6.5',
-        ]);
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUpdateUserWithPhotoApi
-     */
-    public function testUpdateUserWithPhotoApi()
-    {
-        // TODO - Add new photo was updated asserts
-        Storage::fake('gcs');
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
-            'photo' => UploadedFile::fake()->image('photo50.jpg'),
-            'name' => 'New name',
-            'is_public' => true,
-            'coordinates' => '5.5,6.5',
-        ]);
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'uuid',
-            'location',
-            'photo_uuid',
-            'api_token',
-            'name',
-            'email',
-            'email_verified_at',
-            'free',
-            'photo_url',
-            'photo' => [
-                'uuid',
-                'ext',
-                'is_public'
-            ]
-        ]);
-        $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
 
     /**
