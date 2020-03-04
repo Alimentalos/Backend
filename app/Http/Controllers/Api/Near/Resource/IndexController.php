@@ -18,9 +18,8 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        $coordinates = explode(',', $request->input('coordinates'));
         return response()->json(
-            HandleBindingRepository::bindNearModel($resource, $coordinates)->paginate(20),
+            HandleBindingRepository::bindNearModel($resource, $request->input('coordinates'))->paginate(20),
             200
         );
     }

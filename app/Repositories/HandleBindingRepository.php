@@ -162,7 +162,7 @@ class HandleBindingRepository {
     }
 
     /**
-     * Bind near resource model query.
+     * Bind near resource model query using comma-separated coordinates.
      *
      * @param $resource
      * @param $coordinates
@@ -172,22 +172,8 @@ class HandleBindingRepository {
         $model = static::bindResourceModel($resource);
         return $model->orderByDistance(
             static::bindResourceModelClass($resource)::DEFAULT_LOCATION_FIELD,
-            static::makePoint($coordinates),
+            LocationRepository::parsePointFromCoordinates($coordinates),
             'asc'
-        );
-    }
-
-    /**
-     * Transform coordinates into Point object.
-     *
-     * @param $coordinates
-     * @return Point
-     */
-    public static function makePoint($coordinates)
-    {
-        return new Point(
-            floatval($coordinates[LocationRepository::LATITUDE]),
-            floatval($coordinates[LocationRepository::LONGITUDE])
         );
     }
 }
