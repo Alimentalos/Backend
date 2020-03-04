@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\LocationCollection;
 use App\Parsers\LocationParser;
 use App\Queries\LocationQuery;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
@@ -24,6 +25,25 @@ class LocationsRepository
     public const LONGITUDE = 1;
 
     /**
+     * Fetch last locations via request.
+     *
+     * @param Request $request
+     * @return LocationCollection
+     */
+    public static function fetchLastLocationsViaRequest(Request $request)
+    {
+        $locations = static::searchLastLocations(
+            $request->input('type'),
+            $request->input('identifiers'),
+            $request->input('accuracy')
+        );
+
+        return new LocationCollection($locations->filter(function ($location) {
+            return !is_null($location);
+        }));
+    }
+
+    /**
      * Fetch locations via request.
      *
      * @param Request $request
@@ -33,7 +53,7 @@ class LocationsRepository
     {
         $models = binder()::bindResourceModelClass($request->input('type'))::whereIn('uuid', explode(',', $request->input('identifiers')))->get();
 
-        return LocationsRepository::searchLocations($models, $request->only('type', 'start_date', 'end_date', 'accuracy'));
+        return static::searchLocations($models, $request->only('type', 'start_date', 'end_date', 'accuracy'));
     }
 
     /**
