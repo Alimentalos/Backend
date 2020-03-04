@@ -4,6 +4,7 @@ namespace App;
 
 use App\Contracts\Resource;
 use App\Repositories\GroupsRepository;
+use App\Resources\GroupResource;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,8 @@ use Illuminate\Validation\Rule;
 
 class Group extends Model implements Resource
 {
+    use GroupResource;
+
     /**
      * Pending status
      */
@@ -92,23 +95,6 @@ class Group extends Model implements Resource
     }
 
     /**
-     * Update geofence validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function updateRules(Request $request)
-    {
-        return [
-            'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
-                }), new Coordinate()
-            ],
-        ];
-    }
-
-    /**
      * Create model via request.
      *
      * @param Request $request
@@ -117,22 +103,6 @@ class Group extends Model implements Resource
     public static function createViaRequest(Request $request)
     {
         return GroupsRepository::createGroupViaRequest($request);
-    }
-
-    /**
-     * Store geofence validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function storeRules(Request $request)
-    {
-        return [
-            'name' => 'required',
-            'photo' => 'required',
-            'is_public' => 'required|boolean',
-            'coordinates' => ['required', new Coordinate()],
-        ];
     }
 
     /**

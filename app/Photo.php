@@ -4,6 +4,7 @@ namespace App;
 
 use App\Contracts\Resource;
 use App\Repositories\PhotoRepository;
+use App\Resources\PhotoResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
@@ -18,13 +19,8 @@ class Photo extends Model implements ReactableContract, Resource
 {
     use SpatialTrait;
     use Reactable;
+    use PhotoResource;
 
-    /**
-     * Comma-separated accepted values.
-     *
-     * @var string
-     */
-    public const AVAILABLE_REACTIONS = 'Love,Pray,Like,Dislike,Sad,Hate';
 
     /**
      * The mass assignment fields of the photo
@@ -75,17 +71,6 @@ class Photo extends Model implements ReactableContract, Resource
     public function updateViaRequest(Request $request)
     {
         return PhotoRepository::updatePhotoViaRequest($request, $this);
-    }
-
-    /**
-     * Update geofence validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function updateRules(Request $request)
-    {
-        return [];
     }
 
     /**

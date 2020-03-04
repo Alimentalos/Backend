@@ -5,6 +5,7 @@ namespace App;
 use App\Contracts\Resource;
 use App\Repositories\AdminRepository;
 use App\Repositories\UsersRepository;
+use App\Resources\UserResource;
 use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
@@ -28,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     use Notifiable;
     use Reacterable;
     use Reactable;
+    use UserResource;
 
     /**
      * The default location field of user.
@@ -49,13 +51,6 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      * @var string
      */
     public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
-
-    /**
-     * Comma-separated accepted values.
-     *
-     * @var string
-     */
-    public const AVAILABLE_REACTIONS = 'Follow';
 
     /**
      * The attributes that are mass assignable.
@@ -171,23 +166,6 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     }
 
     /**
-     * Update user validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function updateRules(Request $request)
-    {
-        return [
-            'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
-                }), new Coordinate()
-            ],
-        ];
-    }
-
-    /**
      * Create model via request.
      *
      * @param Request $request
@@ -196,24 +174,6 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public static function createViaRequest(Request $request)
     {
         return UsersRepository::createUserViaRequest($request);
-    }
-
-    /**
-     * Store user validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function storeRules(Request $request)
-    {
-        return [
-            'name' => 'required',
-            'photo' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|confirmed|min:8',
-            'is_public' => 'required|boolean',
-            'coordinates' => ['required', new Coordinate()],
-        ];
     }
 
     /**

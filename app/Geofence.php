@@ -4,6 +4,7 @@ namespace App;
 
 use App\Contracts\Resource;
 use App\Repositories\GeofenceRepository;
+use App\Resources\GeofenceResource;
 use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
@@ -20,6 +21,7 @@ class Geofence extends Model implements ReactableContract, Resource
 {
     use SpatialTrait;
     use Reactable;
+    use GeofenceResource;
 
     /**
      * The default location field of geofence.
@@ -27,13 +29,6 @@ class Geofence extends Model implements ReactableContract, Resource
      * @var string
      */
     public const DEFAULT_LOCATION_FIELD = 'shape';
-
-    /**
-     * Comma-separated accepted values.
-     *
-     * @var string
-     */
-    public const AVAILABLE_REACTIONS = 'Follow';
 
     /**
      * The mass assignment fields of the geofence.
@@ -85,23 +80,6 @@ class Geofence extends Model implements ReactableContract, Resource
     }
 
     /**
-     * Update geofence validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function updateRules(Request $request)
-    {
-        return [
-            'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
-                }), new Coordinate()
-            ],
-        ];
-    }
-
-    /**
      * Create model via request.
      *
      * @param Request $request
@@ -110,23 +88,6 @@ class Geofence extends Model implements ReactableContract, Resource
     public static function createViaRequest(Request $request)
     {
         return GeofenceRepository::createGeofenceViaRequest($request);
-    }
-
-    /**
-     * Store geofence validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function storeRules(Request $request)
-    {
-        return [
-            'name' => 'required',
-            'photo' => 'required',
-            'shape.*.latitude' => 'required_with:shape.*.longitude',
-            'is_public' => 'required|boolean',
-            'coordinates' => ['required', new Coordinate()],
-        ];
     }
 
     /**

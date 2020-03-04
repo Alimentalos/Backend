@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Resources\LocationResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,7 @@ use Illuminate\Support\Collection;
 class Location extends Model implements Resource
 {
     use SpatialTrait;
+    use LocationResource;
 
     /**
      * The table name.

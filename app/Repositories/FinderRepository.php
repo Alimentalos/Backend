@@ -17,9 +17,9 @@ class FinderRepository {
      * @param $uuid
      * @return Builder|Model
      */
-    public static function bindResourceModelInstance($class, $uuid)
+    public function findModelInstance($class, $uuid)
     {
-        return static::bindResourceModel($class)->where('uuid', $uuid)->firstOrFail();
+        return $this->findModel($class)->where('uuid', $uuid)->firstOrFail();
     }
 
     /**
@@ -30,17 +30,17 @@ class FinderRepository {
      * @param $uuid
      * @return mixed
      */
-    public static function bindResourceInstance($resource, $uuid)
+    public function findInstance($resource, $uuid)
     {
-        return static::bindResourceQuery($resource)->where('uuid', $uuid)->firstOrFail();
+        return $this->findQuery($resource)->where('uuid', $uuid)->firstOrFail();
     }
 
     /**
-     * Detect resource type based on first request path parameter.
+     * Get resource type based on first parameter of request path.
      *
      * @return mixed
      */
-    public static function detectResourceType()
+    public function currentResource()
     {
         return explode('.', RequestFacade::route()->getName())[0];
     }
@@ -51,18 +51,28 @@ class FinderRepository {
      * @param $class
      * @return Builder
      */
-    public static function bindResourceModel($class) {
-        return static::bindResourceQuery('App\\' . Str::camel(Str::singular($class)));
+    public function findModel($class) {
+        return $this->findQuery('App\\' . Str::camel(Str::singular($class)));
     }
 
     /**
-     * Bind resource model class.
+     * Find resource type class.
      *
      * @param $class
      * @return mixed
      */
-    public static function bindResourceModelClass($class) {
-        return static::bindResource('App\\' . Str::camel(Str::singular($class)));
+    public function findClass($class) {
+        return $this->find('App\\' . Str::camel(Str::singular($class)));
+    }
+
+    /**
+     * Find instance class.
+     *
+     * @param $instance
+     * @return mixed
+     */
+    public function findInstanceClass($instance) {
+        return $this->find(get_class($instance));
     }
 
     /**
@@ -71,7 +81,7 @@ class FinderRepository {
      * @param $resource
      * @return mixed
      */
-    public static function bindResource($resource)
+    public function find($resource)
     {
         return resolve($resource);
     }
@@ -82,9 +92,9 @@ class FinderRepository {
      * @param $resource
      * @return mixed
      */
-    public static function bindResourceQuery($resource)
+    public function findQuery($resource)
     {
-        return static::bindResource($resource)->query();
+        return $this->find($resource)->query();
     }
 
     /**
@@ -94,10 +104,10 @@ class FinderRepository {
      * @param $coordinates
      * @return mixed
      */
-    public static function bindNearModel($resource, $coordinates) {
-        $model = static::bindResourceModel($resource);
+    public function findNearResources($resource, $coordinates) {
+        $model = $this->findModel($resource);
         return $model->orderByDistance(
-            static::bindResourceModelClass($resource)::DEFAULT_LOCATION_FIELD,
+            $this->findClass($resource)::DEFAULT_LOCATION_FIELD,
             LocationsRepository::parsePointFromCoordinates($coordinates),
             'asc'
         );

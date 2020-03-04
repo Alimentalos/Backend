@@ -7,6 +7,7 @@ use App\Repositories\AlertsRepository;
 use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
 use App\Repositories\TypeRepository;
+use App\Resources\AlertResource;
 use App\Rules\Coordinate;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -20,6 +21,7 @@ use Illuminate\Validation\Rule;
 class Alert extends Model implements Resource
 {
     use SpatialTrait;
+    use AlertResource;
 
     /**
      * The table name of alert.
@@ -63,7 +65,6 @@ class Alert extends Model implements Resource
         'location',
     ];
 
-
     /**
      * Update model via request.
      *
@@ -76,17 +77,6 @@ class Alert extends Model implements Resource
     }
 
     /**
-     * Update alert validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function updateRules(Request $request)
-    {
-        return [];
-    }
-
-    /**
      * Create model via request.
      *
      * @param Request $request
@@ -95,37 +85,6 @@ class Alert extends Model implements Resource
     public static function createViaRequest(Request $request)
     {
         return AlertsRepository::createViaRequest($request);
-    }
-
-    /**
-     * Store alert validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function storeRules(Request $request)
-    {
-        return [
-            'title' => 'required',
-            'body' => 'required',
-            'alert_type' => [
-                'required',
-                Rule::in(ResourceRepository::availableResource())
-            ],
-            'alert_id' => [
-                'required',
-            ],
-            'type' => [
-                'required',
-                Rule::in(TypeRepository::availableAlertTypes())
-            ],
-            'status' => [
-                'required',
-                Rule::in(StatusRepository::availableAlertStatuses())
-            ],
-            'photo' => 'required',
-            'coordinates' => ['required', new Coordinate()],
-        ];
     }
 
     /**

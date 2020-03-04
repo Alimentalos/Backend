@@ -4,6 +4,7 @@ namespace App;
 
 use App\Contracts\Resource;
 use App\Repositories\DevicesRepository;
+use App\Resources\DeviceResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,6 +23,7 @@ use Illuminate\Http\Request;
 class Device extends Authenticatable implements Resource
 {
     use SpatialTrait;
+    use DeviceResource;
 
     /**
      * The mass assignment fields of the device
@@ -96,37 +98,12 @@ class Device extends Authenticatable implements Resource
     }
 
     /**
-     * Update device validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function updateRules(Request $request)
-    {
-        return [];
-    }
-
-    /**
      * @param Request $request
      * @return Http\Resources\Device
      */
     public static function createViaRequest(Request $request)
     {
         return DevicesRepository::createDeviceViaRequest($request);
-    }
-
-    /**
-     * Store device validation rules.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public static function storeRules(Request $request)
-    {
-        return [
-            'name' => 'required',
-            'is_public' => 'required|boolean',
-        ];
     }
 
     /**

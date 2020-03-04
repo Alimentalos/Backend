@@ -37,6 +37,6 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        return response()->json(finder('resourceModelClass', $request->route('resource'))::createViaRequest($request),201);
+        return response()->json(finder()->findClass($request->route('resource'))::createViaRequest($request),201);
     }
 }
