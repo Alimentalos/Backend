@@ -17,6 +17,113 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * @test testUpdateUserWithPhotoApi
+     */
+    final public function testUpdateUserWithPhotoApi()
+    {
+        Storage::fake('gcs');
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
+            'photo' => UploadedFile::fake()->image('photo50.jpg'),
+            'name' => 'New name',
+            'is_public' => true,
+            'coordinates' => '5.5,6.5',
+        ]);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'uuid',
+            'location',
+            'photo_uuid',
+            'api_token',
+            'name',
+            'email',
+            'email_verified_at',
+            'free',
+            'photo_url',
+            'photo' => [
+                'uuid',
+                'ext',
+                'is_public'
+            ]
+        ]);
+        $content = $response->getContent();
+        $this->assertTrue((json_decode($content))->photo_url !== $user->photo_url);
+        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+    }
+
+    /**
+     * @test testUserCanUpdateUser
+     */
+    final public function testUserCanUpdateUser()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
+            'name' => 'New name',
+            'coordinates' => '5.5,6.5',
+        ]);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => 'New name',
+            'email' => $user->email,
+        ]);
+    }
+
+    /**
+     * @test testUserCanViewNonOwnedUsers
+     */
+    final public function testUserCanViewNonOwnedUsers()
+    {
+        $user = factory(User::class)->create();
+        $userC = factory(User::class)->create();
+        $userB = factory(User::class)->create();
+        $userC->is_public = false;
+        $userB->user_uuid = $user->uuid;
+        $userC->user_uuid = $user->uuid;
+        $userB->save();
+        $userC->save();
+        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => $userC->name,
+            'email' => $userC->email,
+        ]);
+    }
+
+    /**
      * @test testOwnerUserWatchingSpecificUser
      */
     final public function testOwnerUserWatchingSpecificUser()
@@ -50,6 +157,7 @@ class UserTest extends TestCase
             'email' => $userB->email,
         ]);
     }
+
     /**
      * @test testUserWatchingOwner
      */
@@ -573,74 +681,6 @@ class UserTest extends TestCase
             ]);
 
         $response->assertStatus(403);
-    }
-
-    /**
-     * @test testUserCanViewNonOwnedUsers
-     */
-    public function testUserCanViewNonOwnedUsers()
-    {
-        // TODO - Add response structure asserts
-        $user = factory(User::class)->create();
-        $userC = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $userC->is_public = false;
-        $userB->user_uuid = $user->uuid;
-        $userC->user_uuid = $user->uuid;
-        $userB->save();
-        $userC->save();
-        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
-        $response->assertOk();
-    }
-
-
-    /**
-     * @test testUserCanUpdateUser
-     */
-    public function testUserCanUpdateUser()
-    {
-        // TODO - Add new name in response data and structure
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
-            'name' => 'New name',
-            'coordinates' => '5.5,6.5',
-        ]);
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUpdateUserWithPhotoApi
-     */
-    public function testUpdateUserWithPhotoApi()
-    {
-        // TODO - Add new photo was updated asserts
-        Storage::fake('gcs');
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
-            'photo' => UploadedFile::fake()->image('photo50.jpg'),
-            'name' => 'New name',
-            'is_public' => true,
-            'coordinates' => '5.5,6.5',
-        ]);
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'uuid',
-            'location',
-            'photo_uuid',
-            'api_token',
-            'name',
-            'email',
-            'email_verified_at',
-            'free',
-            'photo_url',
-            'photo' => [
-                'uuid',
-                'ext',
-                'is_public'
-            ]
-        ]);
-        $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
 
     /**
