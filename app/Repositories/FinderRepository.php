@@ -4,83 +4,10 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as RequestFacade;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-class HandleBindingRepository {
-
-    /**
-     * Resolve binding parameters to create activity logs.
-     *
-     * @param Request $request
-     */
-    public static function resolve(Request $request) {
-        $parameters = array_reverse(array_keys($request->route()->parameters()), false);
-        if (count($parameters) > 0) {
-            if (count($parameters) === 2) {
-                static::createReferencedActionViaRequest($request, $parameters);
-            } else {
-                static::createSimpleReferencedActionViaRequest($request, $parameters);
-            }
-        } else {
-            static::createSimpleActionViaRequest($request);
-        }
-    }
-
-    /**
-     * Create referenced action via request.
-     *
-     * @param Request $request
-     * @param $parameters
-     */
-    public static function createReferencedActionViaRequest(Request $request, $parameters)
-    {
-        LoggerRepository::createReferencedAction(
-            $request->user('api'),
-            [
-                'type' => 'success',
-                'resource' => Route::currentRouteAction(),
-                'parameters' => $request->route($parameters[0])->uuid ?? $parameters[0],
-                'referenced' => $request->route($parameters[1])->uuid ?? $parameters[1]
-            ]
-        );
-    }
-
-    /**
-     * Create simple referenced action via request.
-     *
-     * @param Request $request
-     * @param $parameters
-     */
-    public static function createSimpleReferencedActionViaRequest(Request $request, $parameters)
-    {
-        LoggerRepository::createReferencedAction(
-            $request->user('api'),
-            [
-                'type' => 'success',
-                'resource' => Route::currentRouteAction(),
-                'parameters' => $request->except('photo', 'password', 'password_confirmation', 'shape'),
-                'referenced' => $request->route($parameters[0])->uuid ?? $parameters[0]
-            ]
-        );
-    }
-
-    /**
-     * Create simple action via request.
-     *
-     * @param Request $request
-     */
-    public static function createSimpleActionViaRequest(Request $request)
-    {
-        LoggerRepository::createAction(
-            $request->user('api'),
-            'success',
-            Route::currentRouteAction(),
-            $request->except('photo', 'password', 'password_confirmation', 'shape')
-        );
-    }
+class FinderRepository {
 
     /**
      * Bind resource model instance.
