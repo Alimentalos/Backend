@@ -158,26 +158,4 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     {
         return 'uuid';
     }
-
-    /**
-     * Update model via request.
-     *
-     * @param Request $request
-     * @return User
-     */
-    public function updateViaRequest(Request $request)
-    {
-        return UsersRepository::updateUserViaRequest($request, $this);
-    }
-
-    /**
-     * Create model via request.
-     *
-     * @param Request $request
-     * @return User
-     */
-    public function createViaRequest(Request $request)
-    {
-        return UsersRepository::createUserViaRequest($request);
-    }
 }

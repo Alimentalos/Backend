@@ -2,12 +2,25 @@
 
 namespace App\Resources;
 
+use App\Photo;
+use App\Repositories\PhotoRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 trait PhotoResource
 {
+    /**
+     * Update photo via request.
+     *
+     * @param Request $request
+     * @return Photo
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return PhotoRepository::updatePhotoViaRequest($request, $this);
+    }
+
     /**
      * Get available photo reactions.
      *

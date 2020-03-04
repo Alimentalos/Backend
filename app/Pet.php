@@ -99,26 +99,4 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      * @var array
      */
     protected $hidden = ['id'];
-
-    /**
-     * Update model via request.
-     *
-     * @param Request $request
-     * @return Pet
-     */
-    public function updateViaRequest(Request $request)
-    {
-        return PetsRepository::updatePetViaRequest($request, $this);
-    }
-
-    /**
-     * Create model via request.
-     *
-     * @param Request $request
-     * @return Pet
-     */
-    public static function createViaRequest(Request $request)
-    {
-        return PetsRepository::createPetViaRequest($request);
-    }
 }

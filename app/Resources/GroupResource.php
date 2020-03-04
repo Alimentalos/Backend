@@ -2,6 +2,8 @@
 
 namespace App\Resources;
 
+use App\Group;
+use App\Repositories\GroupsRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
@@ -9,6 +11,28 @@ use Illuminate\Validation\Rule;
 
 trait GroupResource
 {
+    /**
+     * Update group via request.
+     *
+     * @param Request $request
+     * @return Group
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return GroupsRepository::updateGroupViaRequest($request, $this);
+    }
+
+    /**
+     * Create group via request.
+     *
+     * @param Request $request
+     * @return Group
+     */
+    public function createViaRequest(Request $request)
+    {
+        return GroupsRepository::createGroupViaRequest($request);
+    }
+
     /**
      * Get available group reactions.
      *

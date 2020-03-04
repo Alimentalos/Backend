@@ -2,21 +2,21 @@
 
 namespace App;
 
+use App\Contracts\CreateFromRequest;
 use App\Contracts\Resource;
+use App\Contracts\UpdateFromRequest;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Groupable;
 use App\Relationships\Commons\HasPhoto;
 use App\Relationships\Commons\Photoable;
 use App\Relationships\GeofenceRelationships;
-use App\Repositories\GeofenceRepository;
 use App\Resources\GeofenceResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
-class Geofence extends Model implements ReactableContract, Resource
+class Geofence extends Model implements ReactableContract, Resource, CreateFromRequest, UpdateFromRequest
 {
     use SpatialTrait;
     use Reactable;
@@ -71,28 +71,6 @@ class Geofence extends Model implements ReactableContract, Resource
     protected $casts = [
         'is_public' => 'boolean',
     ];
-
-    /**
-     * Update model via request.
-     *
-     * @param Request $request
-     * @return Geofence
-     */
-    public function updateViaRequest(Request $request)
-    {
-        return GeofenceRepository::updateGeofenceViaRequest($request, $this);
-    }
-
-    /**
-     * Create model via request.
-     *
-     * @param Request $request
-     * @return Geofence
-     */
-    public function createViaRequest(Request $request)
-    {
-        return GeofenceRepository::createGeofenceViaRequest($request);
-    }
 
     /**
      * Get the route key for the model.

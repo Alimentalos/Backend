@@ -3,18 +3,17 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Contracts\UpdateFromRequest;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Commentable;
 use App\Relationships\PhotoRelationships;
-use App\Repositories\PhotoRepository;
 use App\Resources\PhotoResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
-class Photo extends Model implements ReactableContract, Resource
+class Photo extends Model implements ReactableContract, Resource, UpdateFromRequest
 {
     use SpatialTrait;
     use Reactable;
@@ -63,15 +62,4 @@ class Photo extends Model implements ReactableContract, Resource
      * @var array
      */
     protected $hidden = ['id'];
-
-    /**
-     * Update model via request.
-     *
-     * @param Request $request
-     * @return Photo
-     */
-    public function updateViaRequest(Request $request)
-    {
-        return PhotoRepository::updatePhotoViaRequest($request, $this);
-    }
 }

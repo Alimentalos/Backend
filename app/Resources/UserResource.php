@@ -2,13 +2,37 @@
 
 namespace App\Resources;
 
+use App\Repositories\UsersRepository;
 use App\Rules\Coordinate;
+use App\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait UserResource
 {
+    /**
+     * Update user via request.
+     *
+     * @param Request $request
+     * @return User
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return UsersRepository::updateUserViaRequest($request, $this);
+    }
+
+    /**
+     * Create user via request.
+     *
+     * @param Request $request
+     * @return User
+     */
+    public function createViaRequest(Request $request)
+    {
+        return UsersRepository::createUserViaRequest($request);
+    }
+
     /**
      * Get available user reactions.
      *
