@@ -2,6 +2,7 @@
 
 namespace App\Resources;
 
+use App\Rules\Coordinate;
 use Illuminate\Http\Request;
 
 trait PhotoResource
@@ -35,6 +36,10 @@ trait PhotoResource
      */
     public function storeRules(Request $request)
     {
-        return [];
+        return [
+            'photo' => 'required',
+            'is_public' => 'required|boolean',
+            'coordinates' => ['required', new Coordinate()],
+        ];
     }
 }

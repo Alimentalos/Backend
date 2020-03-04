@@ -66,16 +66,6 @@ class FinderRepository {
     }
 
     /**
-     * Find instance class.
-     *
-     * @param $instance
-     * @return mixed
-     */
-    public function findInstanceClass($instance) {
-        return $this->find(get_class($instance));
-    }
-
-    /**
      * Bind resource.
      *
      * @param $resource
