@@ -76,6 +76,8 @@ trait GroupResource
         $request->user('api')->is_admin ?
             self::with('user', 'photo') :
             self::with('user', 'photo')->where('user_uuid', $request->user('api')->uuid)
+                ->orWhere('is_public', true)
+                ->orWhereIn('uuid', $request->user('api')->groups->map(function($group) { return $group->uuid; }))
         )->latest()->paginate(25);
     }
 }
