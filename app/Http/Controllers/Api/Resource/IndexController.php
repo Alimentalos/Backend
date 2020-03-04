@@ -36,6 +36,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        return response()->json(finder()->findClass(finder()->currentResource())->getInstances($request), 200);
+        return response()->json(resource()->getInstances($request), 200);
     }
 }
