@@ -3,6 +3,8 @@
 
 namespace App\Resources;
 
+use App\Alert;
+use App\Repositories\AlertsRepository;
 use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
 use App\Repositories\TypeRepository;
@@ -13,6 +15,28 @@ use Illuminate\Validation\Rule;
 
 trait AlertResource
 {
+    /**
+     * Update model via request.
+     *
+     * @param Request $request
+     * @return Alert
+     */
+    public function updateViaRequest(Request $request)
+    {
+        return AlertsRepository::updateAlertViaRequest($request, $this);
+    }
+
+    /**
+     * Create alert via request.
+     *
+     * @param Request $request
+     * @return Alert
+     */
+    public function createViaRequest(Request $request)
+    {
+        return AlertsRepository::createViaRequest($request);
+    }
+
     /**
      * Get available alert reactions.
      *
