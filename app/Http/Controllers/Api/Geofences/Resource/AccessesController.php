@@ -20,6 +20,6 @@ class AccessesController extends Controller
      */
     public function __invoke(AccessesRequest $request, Geofence $geofence, $resource)
     {
-        return response()->json(GeofenceAccessesRepository::fetchResourceViaRequest($request, $geofence, $request),200);
+        return response()->json(GeofenceAccessesRepository::fetchResourceViaRequest($request, $geofence, $resource),200);
     }
 }
