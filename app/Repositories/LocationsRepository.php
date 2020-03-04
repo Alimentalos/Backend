@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Parsers\LocationParser;
 use App\Queries\LocationQuery;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class LocationsRepository
@@ -21,6 +22,19 @@ class LocationsRepository
      * Latitude position.
      */
     public const LONGITUDE = 1;
+
+    /**
+     * Fetch locations via request.
+     *
+     * @param Request $request
+     * @return Collection
+     */
+    public static function fetchViaRequest(Request $request)
+    {
+        $models = binder()::bindResourceModelClass($request->input('type'))::whereIn('uuid', explode(',', $request->input('identifiers')))->get();
+
+        return LocationsRepository::searchLocations($models, $request->only('type', 'start_date', 'end_date', 'accuracy'));
+    }
 
     /**
      * Search last devices locations.
