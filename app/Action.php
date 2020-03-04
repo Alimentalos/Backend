@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Resources\AlertResource;
+use App\Resources\ActionResource;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class Action extends Model implements Resource
 {
-    use AlertResource;
+    use ActionResource;
 
     /**
      * The attributes that should be cast to native types.
@@ -42,16 +42,6 @@ class Action extends Model implements Resource
      * @var array
      */
     protected $hidden = ['id'];
-
-    /**
-     * Get available pet reactions.
-     *
-     * @return string
-     */
-    public function getAvailableReactions()
-    {
-        return 'Love,Pray,Like,Dislike,Sad,Hate';
-    }
 
     /**
      * Get the related user of action.

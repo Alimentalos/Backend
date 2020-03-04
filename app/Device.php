@@ -3,13 +3,11 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Relationships\DeviceRelationships;
 use App\Repositories\DevicesRepository;
 use App\Resources\DeviceResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 
@@ -24,6 +22,7 @@ class Device extends Authenticatable implements Resource
 {
     use SpatialTrait;
     use DeviceResource;
+    use DeviceRelationships;
 
     /**
      * The mass assignment fields of the device
@@ -104,74 +103,6 @@ class Device extends Authenticatable implements Resource
     public static function createViaRequest(Request $request)
     {
         return DevicesRepository::createDeviceViaRequest($request);
-    }
-
-    /**
-     * The related Groups.
-     *
-     * @return BelongsToMany
-     */
-    public function groups()
-    {
-        return $this->morphToMany(
-            Group::class,
-            'groupable',
-            'groupables',
-            'groupable_id',
-            'group_uuid',
-            'uuid',
-            'uuid'
-        )->withPivot([
-            'is_admin',
-            'status',
-            'sender_uuid',
-        ])->withTimestamps();
-    }
-
-    /**
-     * The geofences that belongs to the device
-     *
-     * @return BelongsToMany
-     */
-    public function geofences()
-    {
-        return $this->morphToMany(Geofence::class, 'geofenceable',
-            'geofenceables',
-            'geofenceable_id',
-            'geofence_uuid',
-            'uuid',
-            'uuid'
-        );
-    }
-
-    /**
-     * The related Locations.
-     *
-     * @return MorphMany
-     */
-    public function locations()
-    {
-        return $this->morphMany(Location::class, 'trackable', 'trackable_type',
-            'trackable_id', 'uuid');
-    }
-
-    /**
-     * The user that belongs this device
-     *
-     * @return BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * @return MorphMany
-     */
-    public function accesses()
-    {
-        return $this->morphMany(Access::class, 'accessible', 'accessible_type',
-            'accessible_id', 'uuid');
     }
 
     /**

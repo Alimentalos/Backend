@@ -3,9 +3,12 @@
     <words>
       <w>commentable</w>
       <w>geofence</w>
+      <w>geofenceable</w>
+      <w>geofenceables</w>
       <w>geofences</w>
       <w>groupable</w>
       <w>photoable</w>
+      <w>photoables</w>
       <w>trackable</w>
     </words>
   </dictionary>

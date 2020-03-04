@@ -3,10 +3,10 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Relationships\UserRelationships;
 use App\Repositories\AdminRepository;
 use App\Repositories\UsersRepository;
 use App\Resources\UserResource;
-use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
@@ -14,14 +14,9 @@ use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Validation\Rule;
 
 class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource
 {
@@ -30,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     use Reacterable;
     use Reactable;
     use UserResource;
+    use UserRelationships;
 
     /**
      * The default location field of user.
@@ -174,130 +170,6 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public static function createViaRequest(Request $request)
     {
         return UsersRepository::createUserViaRequest($request);
-    }
-
-    /**
-     * The related Groups.
-     *
-     * @return BelongsToMany
-     */
-    public function groups()
-    {
-        return $this->morphToMany(
-            Group::class,
-            'groupable',
-            'groupables',
-            'groupable_id',
-            'group_uuid',
-            'uuid',
-            'uuid'
-        )->withPivot([
-            'is_admin',
-            'status',
-            'sender_uuid',
-        ])->withTimestamps();
-    }
-
-    /**
-     * The geofences that belongs to the user
-     *
-     * @return BelongsToMany
-     */
-    public function geofences()
-    {
-        return $this->morphToMany(Geofence::class, 'geofenceable',
-            'geofenceables',
-            'geofenceable_id',
-            'geofence_uuid',
-            'uuid',
-            'uuid'
-        );
-    }
-
-    /**
-     * The related Devices.
-     *
-     * @return HasMany
-     */
-    public function devices()
-    {
-        return $this->hasMany(Device::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * The related Pets.
-     *
-     * @return HasMany
-     */
-    public function pets()
-    {
-        return $this->hasMany(Pet::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * The related Users.
-     *
-     * @return HasMany
-     */
-    public function users()
-    {
-        return $this->hasMany(User::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * The related Locations.
-     *
-     * @return MorphMany
-     */
-    public function locations()
-    {
-        return $this->morphMany(Location::class, 'trackable', 'trackable_type',
-            'trackable_id', 'uuid');
-    }
-
-    /**
-     * The User creator.
-     *
-     * @return BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * The related Photo.
-     *
-     * @return BelongsTo
-     */
-    public function photo()
-    {
-        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
-    }
-
-    /**
-     * The related Photos.
-     *
-     * @return BelongsToMany
-     */
-    public function photos()
-    {
-        return $this->morphToMany(Photo::class, 'photoable',
-            'photoables',
-            'photoable_id',
-            'photo_uuid',
-            'uuid',
-            'uuid'
-        );
-    }
-
-    /**
-     * @return MorphMany
-     */
-    public function accesses()
-    {
-        return $this->morphMany(Access::class, 'accessible', 'accessible_type',
-            'accessible_id', 'uuid');
     }
 
     /**
