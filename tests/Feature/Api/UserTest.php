@@ -17,6 +17,89 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * @test testUserWatchingOwner
+     */
+    public function testUserWatchingOwner()
+    {
+        // TODO - Add response structure and data asserts
+        $userA = factory(User::class)->create();
+        $userB = factory(User::class)->create();
+        $userB->user_uuid = $userA->uuid;
+        $userB->is_public = false;
+        $userB->save();
+        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userA->uuid);
+        $response->assertOk();
+    }
+    
+    /**
+     * @test testUserWatchingOtherUserWithSameOwner
+     */
+    final public function testUserWatchingOtherUserWithSameOwner()
+    {
+        $owner = factory(User::class)->create();
+        $userB = factory(User::class)->create();
+        $userB->user_uuid = $owner->uuid;
+        $userB->save();
+        $userC = factory(User::class)->create();
+        $userC->user_uuid = $owner->uuid;
+        $userC->is_public = false;
+        $userC->save();
+        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => $userC->name,
+            'email' => $userC->email,
+        ]);
+    }
+
+    /**
+     * @test testUserCanViewHisUserInUsersApi
+     */
+    final public function testUserCanViewHisUserInUsersApi()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid);
+        $response->assertOk();
+        $response->assertJsonStructure([
+            'photo_url',
+            'email',
+            'name',
+            'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'uuid',
+            'updated_at',
+            'created_at',
+            'love_reacter_id',
+            'love_reactant_id',
+            'is_admin',
+            'is_child'
+        ]);
+        $response->assertJsonFragment([
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    }
+    /**
      * @test testNonChildUserCanViewUsersList
      */
     final public function testNonChildUserCanViewUsersList()
@@ -437,51 +520,6 @@ class UserTest extends TestCase
 
         $response->assertStatus(403);
     }
-
-    /**
-     * @test testUserCanViewHisUserInUsersApi
-     */
-    public function testUserCanViewHisUserInUsersApi()
-    {
-        // TODO - Add response structure and data asserts
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid);
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUserWatchingOtherUserWithSameOwner
-     */
-    public function testUserWatchingOtherUserWithSameOwner()
-    {
-        // TODO - Add response structure and data asserts
-        $userA = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $userB->user_uuid = $userA->uuid;
-        $userB->save();
-        $userC = factory(User::class)->create();
-        $userC->user_uuid = $userA->uuid;
-        $userC->is_public = false;
-        $userC->save();
-        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUserWatchingOwner
-     */
-    public function testUserWatchingOwner()
-    {
-        // TODO - Add response structure and data asserts
-        $userA = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $userB->user_uuid = $userA->uuid;
-        $userB->is_public = false;
-        $userB->save();
-        $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userA->uuid);
-        $response->assertOk();
-    }
-
 
     /**
      * @test testOwnerUserWatchingSpecificUser
