@@ -11,7 +11,6 @@ use App\Relationships\Commons\Groupable;
 use App\Relationships\Commons\Photoable;
 use App\Relationships\Commons\Trackable;
 use App\Relationships\UserRelationships;
-use App\Repositories\AdminRepository;
 use App\Resources\UserResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;

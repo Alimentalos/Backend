@@ -4,18 +4,12 @@
 namespace App\Relationships;
 
 
-use App\Access;
 use App\Device;
-use App\Geofence;
-use App\Group;
-use App\Location;
 use App\Pet;
 use App\Photo;
 use App\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait UserRelationships
 {

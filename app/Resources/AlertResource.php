@@ -4,7 +4,6 @@
 namespace App\Resources;
 
 use App\Alert;
-use App\Repositories\AlertsRepository;
 use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
 use App\Repositories\TypeRepository;
