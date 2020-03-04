@@ -20,7 +20,8 @@ class InviteController extends Controller
      */
     public function __invoke(InviteRequest $request, User $user, Group $group)
     {
-        // TODO - Remove unnecessary complexity
+        // TODO - Reduce number of lines of InviteController
+        // @body move into repository method as createViaRequest.
         if (
             $user->groups()
                 ->where('group_uuid', $group->uuid)

@@ -32,7 +32,7 @@ class LocationRepository
      */
     public static function searchLastLocations($type, $identifiers, $accuracy)
     {
-        return HandleBindingRepository::bindResourceModel($type)->whereIn('uuid', $identifiers)->get()->map(function ($model) use ($accuracy) {
+        return binder()::bindResourceModel($type)->whereIn('uuid', $identifiers)->get()->map(function ($model) use ($accuracy) {
             return static::searchModelLocations($model, $accuracy);
         });
     }

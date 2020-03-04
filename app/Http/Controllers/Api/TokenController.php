@@ -18,6 +18,8 @@ class TokenController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
+        // TODO - Reduce number of lines of ReportsController
+        // @body move into repository method as fetchAuthResponse.
         $credentials = $request->only('email', 'password');
 
         if (Auth::once($credentials) && !is_null(Auth::user()->email_verified_at)) {

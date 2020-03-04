@@ -13,9 +13,7 @@ class InviteRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('inviteGroup', [
-            $this->route('user'), $this->route('group')
-        ]);
+        return $this->user('api')->can('inviteGroup', [$this->route('user'), $this->route('group')]);
     }
 
     /**
@@ -25,8 +23,6 @@ class InviteRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'is_admin' => 'required|boolean'
-        ];
+        return ['is_admin' => 'required|boolean'];
     }
 }

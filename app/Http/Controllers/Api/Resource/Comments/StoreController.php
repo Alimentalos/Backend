@@ -18,15 +18,14 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
+        // TODO - Reduce number of lines of Resource Comments StoreController
+        // @body move into repository method as fetchViaRequest.
         $comment = $resource->comments()->create([
             'uuid' => UniqueNameRepository::createIdentifier(),
             'body' => $request->input('body'),
             'user_uuid' => $request->user('api')->uuid,
         ]);
 
-        return response()->json(
-            $comment,
-            200
-        );
+        return response()->json($comment,200);
     }
 }

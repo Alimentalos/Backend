@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Api\Resource\Groups;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\AuthorizedRequest;
 
-class DetachRequest extends FormRequest
+class DetachRequest extends AuthorizedRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,20 +13,6 @@ class DetachRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('detachGroup', [
-            $this->route('resource'), $this->route('group')
-        ]);
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            //
-        ];
+        return $this->user('api')->can('detachGroup', [$this->route('resource'), $this->route('group')]);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\Resource;
 
-use App\Repositories\HandleBindingRepository;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('create', HandleBindingRepository::bindResourceModelClass($this->route('resource')));
+        return $this->user('api')->can('create', binder()::bindResourceModelClass($this->route('resource')));
     }
 
     /**
@@ -24,6 +24,6 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        return HandleBindingRepository::bindResourceModelClass($this->route('resource'))::storeRules($this);
+        return binder()::bindResourceModelClass($this->route('resource'))::storeRules($this);
     }
 }

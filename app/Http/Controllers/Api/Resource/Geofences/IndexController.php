@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Resource\Geofences;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Geofences\IndexRequest;
+use App\Http\Requests\Api\Resource\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -17,9 +17,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json(
-            $resource->geofences()->latest()->with('user', 'photo')->paginate(20),
-            200
-        );
+        return response()->json($resource->geofences()->latest()->with('user', 'photo')->paginate(20),200);
     }
 }

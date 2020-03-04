@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Repositories\HandleBindingRepository;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -39,9 +38,9 @@ class RouteServiceProvider extends ServiceProvider
             if (in_array($value, ['users', 'devices', 'pets', 'geofences', 'comments', 'groups', 'alerts']))
                 return $value;
 
-            $class = HandleBindingRepository::detectResourceType();
+            $class = binder()::detectResourceType();
 
-            return HandleBindingRepository::bindResourceModelInstance($class, $value);
+            return binder()::bindResourceModelInstance($class, $value);
         });
     }
 

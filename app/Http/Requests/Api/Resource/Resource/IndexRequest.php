@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Api\Resource;
+namespace App\Http\Requests\Api\Resource\Resource;
 
 use App\Http\Requests\AuthorizedRequest;
-
 
 class IndexRequest extends AuthorizedRequest
 {
@@ -14,6 +13,6 @@ class IndexRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('viewAny', binder()::bindResourceModelClass(binder()::detectResourceType()));
+        return $this->user('api')->can('view', $this->route('resource'));
     }
 }

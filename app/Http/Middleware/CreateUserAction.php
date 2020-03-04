@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Repositories\HandleBindingRepository;
+
 use Closure;
 
 class CreateUserAction
@@ -17,7 +17,7 @@ class CreateUserAction
     public function handle($request, Closure $next)
     {
         if (auth('api')->check()) {
-            HandleBindingRepository::resolve($request);
+            binder()::resolve($request);
         }
 
         $response = $next($request);

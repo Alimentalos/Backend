@@ -16,14 +16,7 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        LikeRepository::updateLike(
-            $resource->getLoveReactant(),
-            $request->user('api')->getLoveReacter(),
-            $request->input('type')
-        );
-        return response()->json(
-            [],
-            200
-        );
+        LikeRepository::updateLike($resource->getLoveReactant(), $request->user('api')->getLoveReacter(), $request->input('type'));
+        return response()->json([],200);
     }
 }

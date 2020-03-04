@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Api\Resource\Groups;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Groups\IndexRequest;
-use App\Pet;
+use App\Http\Requests\Api\Resource\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
@@ -19,9 +17,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json(
-            $resource->groups()->latest()->with('user', 'photo')->paginate(20),
-            200
-        );
+        return response()->json($resource->groups()->latest()->with('user', 'photo')->paginate(20),200);
     }
 }

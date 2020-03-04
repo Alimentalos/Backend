@@ -20,9 +20,7 @@ class BlockController extends Controller
      */
     public function __invoke(BlockRequest $request, User $user, Group $group)
     {
-        $user->groups()->updateExistingPivot($group->uuid, [
-            'status' => Group::BLOCKED_STATUS,
-        ]);
+        $user->groups()->updateExistingPivot($group->uuid, ['status' => Group::BLOCKED_STATUS]);
         return response()->json([], 200);
     }
 }

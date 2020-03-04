@@ -2,20 +2,10 @@
 
 namespace App\Http\Requests\Api\Token;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\RuledRequest;
 
-class IndexRequest extends FormRequest
+class IndexRequest extends RuledRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

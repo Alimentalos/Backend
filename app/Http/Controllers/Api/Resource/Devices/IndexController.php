@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Resource\Devices;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Devices\IndexRequest;
+use App\Http\Requests\Api\Resource\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -17,9 +17,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json(
-            $resource->devices()->latest()->with('user')->paginate(20),
-            200
-        );
+        return response()->json($resource->devices()->latest()->with('user')->paginate(20),200);
     }
 }
