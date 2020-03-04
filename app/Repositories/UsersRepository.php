@@ -10,6 +10,31 @@ use Illuminate\Http\Request;
 
 class UsersRepository
 {
+    /**
+     * Register user via request.
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public static function registerViaRequest(Request $request)
+    {
+        $user = User::create([
+            'email' => $request->input('email'),
+            'name' => $request->input('name'),
+            'password' => bcrypt($request->input('password')),
+            'is_public' => $request->has('is_public')
+        ]);
+        event(new Registered($user));
+        return $user;
+    }
+
+    /**
+     * Update user via request.
+     *
+     * @param Request $request
+     * @param User $user
+     * @return User
+     */
     public static function updateUserViaRequest(Request $request, User $user)
     {
         UploadRepository::checkPhotoForUpload($request, $user);
