@@ -48,7 +48,7 @@ class LikesTest extends TestCase
 
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/comments/' . $comment->uuid . '/reactions');
-        
+
         $response->assertOk();
 
         $response->assertJsonStructure([

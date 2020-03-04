@@ -18,22 +18,6 @@ class ReportsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        // TODO - Reduce number of lines of ReportsController
-        // @body move into repository method as createViaRequest.
-        $data = ReportsRepository::generateData( // Generate data
-            $request->input('devices'), // of those devices
-            $request->input('start_date'), // between an start date
-            $request->input('end_date'), // and end date
-            $request->only( // including required parameters
-                ReportsRepository::requiredParameters(
-                    FillRepository::fillMethod($request, 'type', ReportsRepository::$defaultType)
-                )
-            )
-        );
-
-        return response()->json(
-            $data,
-            200
-        );
+        return response()->json(ReportsRepository::fetchViaRequest($request),200);
     }
 }
