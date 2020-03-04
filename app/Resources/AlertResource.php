@@ -16,6 +16,8 @@ trait AlertResource
      * Get available alert reactions.
      *
      * @return string
+     * @codeCoverageIgnore TODO Support alert reactions
+     * @body Increase code coverage support enabling the alert reactions. Just add routes and tests.
      */
     public function getAvailableReactions()
     {

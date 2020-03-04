@@ -3,7 +3,13 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Relationships\PetRelationships;
+use App\Relationships\Commons\BelongsToUser;
+use App\Relationships\Commons\Commentable;
+use App\Relationships\Commons\Geofenceable;
+use App\Relationships\Commons\Groupable;
+use App\Relationships\Commons\HasPhoto;
+use App\Relationships\Commons\Photoable;
+use App\Relationships\Commons\Trackable;
 use App\Repositories\PetsRepository;
 use App\Resources\PetResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
@@ -18,7 +24,13 @@ class Pet extends Authenticatable implements ReactableContract, Resource
     use SpatialTrait;
     use Reactable;
     use PetResource;
-    use PetRelationships;
+    use BelongsToUser;
+    use HasPhoto;
+    use Trackable;
+    use Photoable;
+    use Commentable;
+    use Geofenceable;
+    use Groupable;
 
     /**
      * The default location field of pet.

@@ -3,15 +3,16 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Relationships\Commons\BelongsToUser;
 use App\Resources\ActionResource;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 
 class Action extends Model implements Resource
 {
     use ActionResource;
+    use BelongsToUser;
 
     /**
      * The attributes that should be cast to native types.
@@ -42,16 +43,6 @@ class Action extends Model implements Resource
      * @var array
      */
     protected $hidden = ['id'];
-
-    /**
-     * Get the related user of action.
-     *
-     * @return BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
-    }
 
     /**
      * Get lazy loaded relationships of Action.

@@ -33,6 +33,8 @@ trait CommentResource
      *
      * @param Request $request
      * @return array
+     * @codeCoverageIgnore TODO Support store validation rules.
+     *
      */
     public function storeRules(Request $request)
     {

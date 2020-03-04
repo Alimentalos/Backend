@@ -4,6 +4,10 @@ namespace App;
 
 use App\Contracts\Resource;
 use App\Relationships\AlertRelationships;
+use App\Relationships\Commons\BelongsToUser;
+use App\Relationships\Commons\Commentable;
+use App\Relationships\Commons\HasPhoto;
+use App\Relationships\Commons\Photoable;
 use App\Repositories\AlertsRepository;
 use App\Repositories\StatusRepository;
 use App\Resources\AlertResource;
@@ -17,6 +21,10 @@ class Alert extends Model implements Resource
     use SpatialTrait;
     use AlertResource;
     use AlertRelationships;
+    use BelongsToUser;
+    use Commentable;
+    use HasPhoto;
+    use Photoable;
 
     /**
      * The table name of alert.

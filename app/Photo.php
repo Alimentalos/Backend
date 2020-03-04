@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Relationships\Commons\BelongsToUser;
+use App\Relationships\Commons\Commentable;
 use App\Relationships\PhotoRelationships;
 use App\Repositories\PhotoRepository;
 use App\Resources\PhotoResource;
@@ -19,6 +21,8 @@ class Photo extends Model implements ReactableContract, Resource
     use Reactable;
     use PhotoResource;
     use PhotoRelationships;
+    use BelongsToUser;
+    use Commentable;
 
 
     /**

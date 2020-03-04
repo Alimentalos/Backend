@@ -12,6 +12,8 @@ trait GroupResource
      * Get available group reactions.
      *
      * @return string
+     * @codeCoverageIgnore TODO Support group reactions
+     * @body Increase code coverage support enabling the group reactions. Just add routes and tests.
      */
     public function getAvailableReactions()
     {

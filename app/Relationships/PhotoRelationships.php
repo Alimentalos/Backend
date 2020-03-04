@@ -10,7 +10,6 @@ use App\Pet;
 use App\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait PhotoRelationships
 {
@@ -19,17 +18,7 @@ trait PhotoRelationships
      */
     public function photoable()
     {
-        return $this->morphTo();
-    }
-
-    /**
-     * The related Photo user.
-     *
-     * @return BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
+        return $this->morphTo('photoable', 'photoable_type', 'photoable_id', 'uuid');
     }
 
     /**
@@ -38,17 +27,7 @@ trait PhotoRelationships
      */
     public function comment()
     {
-        return $this->belongsTo(Comment::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * The related Photo comments.
-     *
-     * @return MorphMany
-     */
-    public function comments()
-    {
-        return $this->morphMany(Comment::class,'commentable','commentable_type','commentable_id','uuid');
+        return $this->belongsTo(Comment::class, 'comment_uuid', 'uuid');
     }
 
     /**

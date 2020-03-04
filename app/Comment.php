@@ -4,6 +4,8 @@ namespace App;
 
 use App\Contracts\Resource;
 use App\Relationships\CommentRelationships;
+use App\Relationships\Commons\BelongsToUser;
+use App\Relationships\Commons\Commentable;
 use App\Repositories\CommentsRepository;
 use App\Resources\CommentResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
@@ -17,6 +19,8 @@ class Comment extends Model implements ReactableContract, Resource
     use Reactable;
     use CommentResource;
     use CommentRelationships;
+    use BelongsToUser;
+    use Commentable;
 
     /**
      * The mass assignment fields of the comment

@@ -3,6 +3,10 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Relationships\Commons\BelongsToUser;
+use App\Relationships\Commons\Groupable;
+use App\Relationships\Commons\HasPhoto;
+use App\Relationships\Commons\Photoable;
 use App\Relationships\GeofenceRelationships;
 use App\Repositories\GeofenceRepository;
 use App\Resources\GeofenceResource;
@@ -19,6 +23,10 @@ class Geofence extends Model implements ReactableContract, Resource
     use Reactable;
     use GeofenceResource;
     use GeofenceRelationships;
+    use BelongsToUser;
+    use Photoable;
+    use Groupable;
+    use HasPhoto;
 
     /**
      * The default location field of geofence.

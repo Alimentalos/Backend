@@ -3,6 +3,11 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Relationships\Commons\BelongsToUser;
+use App\Relationships\Commons\Geofenceable;
+use App\Relationships\Commons\Groupable;
+use App\Relationships\Commons\Photoable;
+use App\Relationships\Commons\Trackable;
 use App\Relationships\UserRelationships;
 use App\Repositories\AdminRepository;
 use App\Repositories\UsersRepository;
@@ -26,6 +31,11 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     use Reactable;
     use UserResource;
     use UserRelationships;
+    use BelongsToUser;
+    use Groupable;
+    use Geofenceable;
+    use Trackable;
+    use Photoable;
 
     /**
      * The default location field of user.

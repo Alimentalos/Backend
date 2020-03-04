@@ -3,6 +3,10 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Relationships\Commons\BelongsToUser;
+use App\Relationships\Commons\Commentable;
+use App\Relationships\Commons\HasPhoto;
+use App\Relationships\Commons\Photoable;
 use App\Relationships\GroupRelationships;
 use App\Repositories\GroupsRepository;
 use App\Resources\GroupResource;
@@ -14,6 +18,10 @@ class Group extends Model implements Resource
 {
     use GroupResource;
     use GroupRelationships;
+    use BelongsToUser;
+    use Photoable;
+    use Commentable;
+    use HasPhoto;
 
     /**
      * Pending status

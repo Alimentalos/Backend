@@ -3,7 +3,10 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Relationships\DeviceRelationships;
+use App\Relationships\Commons\BelongsToUser;
+use App\Relationships\Commons\Geofenceable;
+use App\Relationships\Commons\Groupable;
+use App\Relationships\Commons\Trackable;
 use App\Repositories\DevicesRepository;
 use App\Resources\DeviceResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
@@ -22,7 +25,10 @@ class Device extends Authenticatable implements Resource
 {
     use SpatialTrait;
     use DeviceResource;
-    use DeviceRelationships;
+    use Groupable;
+    use Geofenceable;
+    use BelongsToUser;
+    use Trackable;
 
     /**
      * The mass assignment fields of the device

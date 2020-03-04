@@ -17,26 +17,6 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 trait GroupRelationships
 {
     /**
-     * The related User.
-     *
-     * @return BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_uuid', 'uuid');
-    }
-
-    /**
-     * The related Photo.
-     *
-     * @return BelongsTo
-     */
-    public function photo()
-    {
-        return $this->belongsTo(Photo::class, 'photo_uuid', 'uuid');
-    }
-
-    /**
      * The related Groupable.
      *
      * @codeCoverageIgnore
@@ -88,25 +68,5 @@ trait GroupRelationships
     {
         return $this->morphedByMany(Geofence::class,'groupable','groupables','group_uuid','groupable_id','uuid','uuid')
             ->withPivot(['is_admin','status','sender_uuid']);
-    }
-
-    /**
-     * The related Photos.
-     *
-     * @return BelongsToMany
-     */
-    public function photos()
-    {
-        return $this->morphToMany(Photo::class,'photoable','photoables','photoable_id','photo_uuid','uuid','uuid');
-    }
-
-    /**
-     * The related Comments.
-     *
-     * @return MorphMany
-     */
-    public function comments()
-    {
-        return $this->morphMany(Comment::class,'commentable','commentable_type','commentable_id','uuid');
     }
 }
