@@ -9,7 +9,27 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *      path="/{resource}/",
+     *      operationId="getResourceList",
+     *      tags={"Resources"},
+     *      summary="Get resource paginated instance list",
+     *      description="Returns the resource list paginated by a default quantity, payload includes pagination links and stats",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource list fetched successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     * )
      *
      * @param IndexRequest $request
      * @return JsonResponse

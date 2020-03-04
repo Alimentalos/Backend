@@ -9,7 +9,27 @@ use Illuminate\Http\JsonResponse;
 class StoreController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * @OA\Post(
+     *      path="/{resource}/",
+     *      operationId="createResourceInstance",
+     *      tags={"Resources"},
+     *      summary="Create resource instance",
+     *      description="Returns the recently created instance as JSON Object",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource instance created successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     * )
      *
      * @param StoreRequest $request
      * @param $resource
