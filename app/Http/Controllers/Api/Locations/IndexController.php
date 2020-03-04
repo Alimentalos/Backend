@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Locations;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Locations\IndexRequest;
 use App\Http\Resources\LocationCollection;
-
 use App\Repositories\LocationsRepository;
 use Illuminate\Http\JsonResponse;
 

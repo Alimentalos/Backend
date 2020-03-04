@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Geofences\Resource;
 use App\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Geofences\Resource\AccessesRequest;
-
 use Illuminate\Http\JsonResponse;
 
 class AccessesController extends Controller
