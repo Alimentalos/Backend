@@ -3,9 +3,7 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Repositories\DevicesRepository;
 use App\Repositories\GeofenceRepository;
-use App\Repositories\GroupsRepository;
 use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;

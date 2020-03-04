@@ -4,7 +4,6 @@ namespace App;
 
 use App\Contracts\Resource;
 use App\Repositories\AdminRepository;
-use App\Repositories\PetsRepository;
 use App\Repositories\UsersRepository;
 use App\Rules\Coordinate;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;

@@ -3,9 +3,7 @@
 namespace App;
 
 use App\Contracts\Resource;
-use App\Repositories\GeofenceRepository;
 use App\Repositories\GroupsRepository;
-use App\Repositories\UsersRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;

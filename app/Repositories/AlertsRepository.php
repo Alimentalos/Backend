@@ -4,7 +4,6 @@
 namespace App\Repositories;
 
 use App\Alert;
-use App\Photo;
 use Illuminate\Http\Request;
 
 class AlertsRepository
