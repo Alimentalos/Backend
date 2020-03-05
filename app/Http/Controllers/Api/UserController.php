@@ -16,6 +16,7 @@ class UserController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return response()->json($request->user('api'),200);
+        $authenticated = authenticated();
+        return response()->json($authenticated,200);
     }
 }

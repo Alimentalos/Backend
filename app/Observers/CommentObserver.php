@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Comment;
-use App\Repositories\UniqueNameRepository;
 
 class CommentObserver
 {
@@ -15,6 +14,6 @@ class CommentObserver
      */
     public function creating(Comment $comment)
     {
-        $comment->uuid = UniqueNameRepository::createIdentifier();
+        $comment->uuid = uuid();
     }
 }

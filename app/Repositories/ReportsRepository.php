@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Reports\Report;
-use Illuminate\Http\Request;
 
 class ReportsRepository
 {
@@ -12,14 +11,14 @@ class ReportsRepository
      *
      * @var string
      */
-    public static $defaultType = 'activity';
+    public const DEFAULT_TYPE = 'activity';
 
     /**
      * Available reports
      *
      * @var array
      */
-    protected static $availableReports = [
+    protected array $availableReports = [
         'activity' => [
             'parameters' => [],
         ],
@@ -33,14 +32,23 @@ class ReportsRepository
      *
      * @var array
      */
-    protected static $defaultParameters = [
+    protected array $defaultParameters = [
         'type',
         'accuracy'
     ];
 
-    public static function fetchViaRequest(Request $request)
+    public function fetchViaRequest()
     {
-        return ReportsRepository::generateData($request->input('devices'), $request->input('start_date'), $request->input('end_date'), $request->only(ReportsRepository::requiredParameters(FillRepository::fillMethod($request, 'type', ReportsRepository::$defaultType))));
+        return $this->generateData(
+            input('devices'),
+            input('start_date'),
+            input('end_date'),
+            request()->only(
+                $this->requiredParameters(
+                    fill( 'type', static::DEFAULT_TYPE)
+                )
+            )
+        );
     }
 
     /**
@@ -52,9 +60,9 @@ class ReportsRepository
      * @param $parameters
      * @return array
      */
-    public static function generateData($devices, $start_date, $end_date, $parameters)
+    public function generateData($devices, $start_date, $end_date, $parameters)
     {
-        if ($devices == '') { $devices = DevicesRepository::fetchInDatabase($devices); }
+        if ($devices == '') { $devices = devices()->fetchInDatabase($devices); }
         return (new Report($devices, $start_date, $end_date, $parameters))->fetchData();
     }
 
@@ -64,8 +72,8 @@ class ReportsRepository
      * @param $type
      * @return array
      */
-    public static function requiredParameters($type)
+    public function requiredParameters($type)
     {
-        return array_merge(self::$defaultParameters, self::$availableReports[$type]['parameters']);
+        return array_merge($this->defaultParameters, $this->availableReports[$type]['parameters']);
     }
 }

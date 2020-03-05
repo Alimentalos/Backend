@@ -1,15 +1,15 @@
 <?php
 
-
 namespace App\Repositories;
-
-
-use Illuminate\Http\Request;
 
 class ResourceCommentsRepository
 {
-    public static function createCommentViaRequest(Request $request, $resource)
+    public function createCommentViaRequest($resource)
     {
-        return $resource->comments()->create(['uuid' => UniqueNameRepository::createIdentifier(), 'body' => $request->input('body'), 'user_uuid' => $request->user('api')->uuid]);
+        return $resource->comments()->create([
+            'uuid' => uuid(),
+            'body' => input('body'),
+            'user_uuid' => authenticated()->uuid
+        ]);
     }
 }

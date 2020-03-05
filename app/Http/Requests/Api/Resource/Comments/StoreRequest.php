@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Api\Resource\Comments;
 
 use App\Comment;
-use App\Http\Requests\AuthorizedRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest

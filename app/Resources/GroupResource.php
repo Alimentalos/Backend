@@ -2,13 +2,33 @@
 
 namespace App\Resources;
 
+use App\Group;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait GroupResource
 {
+    /**
+     * Update group via request.
+     *
+     * @return Group
+     */
+    public function updateViaRequest()
+    {
+        return groups()->updateGroupViaRequest($this);
+    }
+
+    /**
+     * Create group via request.
+     *
+     * @return Group
+     */
+    public function createViaRequest()
+    {
+        return groups()->createGroupViaRequest();
+    }
+
     /**
      * Get available group reactions.
      *
@@ -24,16 +44,14 @@ trait GroupResource
     /**
      * Update group validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [
             'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
-                }), new Coordinate()
+                Rule::requiredIf(fn() => request()->has('photo')),
+                new Coordinate()
             ],
         ];
     }
@@ -41,10 +59,9 @@ trait GroupResource
     /**
      * Store group validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'name' => 'required',
@@ -67,15 +84,10 @@ trait GroupResource
     /**
      * Get group instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
-        return (
-        $request->user('api')->is_admin ?
-            self::with('user', 'photo') :
-            self::with('user', 'photo')->where('user_uuid', $request->user('api')->uuid)
-        )->latest()->paginate(25);
+        return authenticated()->is_admin ? groups()->getAdministratorGroups() : groups()->getUserGroups();
     }
 }

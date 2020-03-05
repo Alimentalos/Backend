@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Comment;
-use App\Repositories\SubscriptionsRepository;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -31,7 +30,7 @@ class CommentPolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'comments', $user);
+        return $user->is_admin || subscriptions()->can('create', 'comments', $user);
     }
 
     /**

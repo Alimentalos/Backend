@@ -2,12 +2,22 @@
 
 namespace App\Resources;
 
+use App\Photo;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 trait PhotoResource
 {
+    /**
+     * Update photo via request.
+     *
+     * @return Photo
+     */
+    public function updateViaRequest()
+    {
+        return photos()->updatePhotoViaRequest($this);
+    }
+
     /**
      * Get available photo reactions.
      *
@@ -21,10 +31,9 @@ trait PhotoResource
     /**
      * Update photo validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [];
     }
@@ -32,10 +41,9 @@ trait PhotoResource
     /**
      * Store photo validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'photo' => 'required',
@@ -57,11 +65,10 @@ trait PhotoResource
     /**
      * Get photo instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
-        return self::with('user', 'photoable')->latest()->paginate(20);
+        return Photo::with('user', 'photoable')->latest()->paginate(20);
     }
 }

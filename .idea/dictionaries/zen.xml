@@ -2,6 +2,7 @@
   <dictionary name="zen">
     <words>
       <w>commentable</w>
+      <w>einput</w>
       <w>geofence</w>
       <w>geofenceable</w>
       <w>geofenceables</w>
@@ -9,6 +10,7 @@
       <w>groupable</w>
       <w>photoable</w>
       <w>photoables</w>
+      <w>reacterable</w>
       <w>trackable</w>
     </words>
   </dictionary>

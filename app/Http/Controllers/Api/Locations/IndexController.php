@@ -5,19 +5,77 @@ namespace App\Http\Controllers\Api\Locations;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Locations\IndexRequest;
 use App\Http\Resources\LocationCollection;
-use App\Repositories\LocationsRepository;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *      path="/locations",
+     *      operationId="getLocations",
+     *      tags={"Resources"},
+     *      summary="Get resource locations.",
+     *      description="Returns resource locations.",
+     *      @OA\Parameter(
+     *          name="identifier",
+     *          description="Resource comma-separated identifiers",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="type",
+     *          description="Resource type",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="start_date",
+     *          description="Start date used to filter results",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="end_date",
+     *          description="End date used to filter results",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *     @OA\Parameter(
+     *          name="accuracy",
+     *          description="Max accuracy used to filter results",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Locations retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource doesn't implements has location trait")
+     * )
+     * Retrieve locations of instances.
      *
      * @param IndexRequest $request
      * @return JsonResponse
      */
     public function __invoke(IndexRequest $request)
     {
-        return response()->json(new LocationCollection(LocationsRepository::fetchViaRequest($request)),200);
+        $locations = locations()->fetchViaRequest();
+        return response()->json(new LocationCollection($locations), 200);
     }
 }

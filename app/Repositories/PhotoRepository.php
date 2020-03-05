@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Photo;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PhotoRepository
@@ -21,14 +20,12 @@ class PhotoRepository
     /**
      * Update photo via request.
      *
-     * @param Request $request
      * @param Photo $photo
      * @return Photo
      */
-    public static function updatePhotoViaRequest(Request $request, Photo $photo)
+    public function updatePhotoViaRequest(Photo $photo)
     {
-        $photo->update(ParametersRepository::fillPropertiesWithRelated($request, ['title', 'description', 'is_public'], $photo));
-
+        $photo->update(parameters()->fill(['title', 'description', 'is_public'], $photo));
         $photo->load('user');
         return $photo;
     }
@@ -36,33 +33,31 @@ class PhotoRepository
     /**
      * Create photo via request.
      *
-     * @param $request
      * @return Photo
      */
-    public static function createPhotoViaRequest(Request $request)
+    public function createPhotoViaRequest()
     {
-        $photo = static::createPhotoUsingRequest($request);
-        static::createDefaultPhotoCommentUsingRequest($photo, $request);
-        static::storePhoto($photo->uuid, $request->file('photo'));
+        $photo = $this->createPhotoUsingRequest();
+        $this->createDefaultPhotoCommentUsingRequest($photo);
+        $this->storePhoto($photo->uuid, uploaded('photo'));
         return $photo;
     }
 
     /**
      * Create photo instance using request.
      *
-     * @param $request
      * @return mixed
      */
-    public static function createPhotoUsingRequest(Request $request)
+    public function createPhotoUsingRequest()
     {
-        $photoUniqueName = UniqueNameRepository::createIdentifier();
+        $photoUniqueName = uuid();
         $photo = Photo::create([
-            'user_uuid' => $request->user('api')->uuid,
+            'user_uuid' => authenticated()->uuid,
             'uuid' => $photoUniqueName,
-            'photo_url' => $photoUniqueName . $request->file('photo')->extension(),
-            'ext' => $request->file('photo')->extension(),
-            'is_public' => $request->has('is_public'),
-            'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates'))
+            'photo_url' => $photoUniqueName . uploaded('photo')->extension(),
+            'ext' => uploaded('photo')->extension(),
+            'is_public' => fill('is_public', true),
+            'location' => parser()->pointFromCoordinates(input('coordinates'))
         ]);
         $photo->load('user');
         return $photo;
@@ -72,14 +67,13 @@ class PhotoRepository
      * Create default photo comment using request.
      *
      * @param Photo $photo
-     * @param Request $request
      */
-    public static function createDefaultPhotoCommentUsingRequest(Photo $photo, Request $request)
+    public function createDefaultPhotoCommentUsingRequest(Photo $photo)
     {
         $comment = $photo->comments()->create(array_merge([
-            'uuid' => UniqueNameRepository::createIdentifier(),
-            'user_uuid' => $request->user('api')->uuid,
-        ], $request->only('title', 'body', 'is_public')));
+            'uuid' => uuid(),
+            'user_uuid' => authenticated()->uuid,
+        ], only('title', 'body', 'is_public')));
         $photo->comment()->associate($comment);
     }
 
@@ -90,8 +84,13 @@ class PhotoRepository
      * @param $uniqueName
      * @param $fileContent
      */
-    public static function storePhoto($uniqueName, $fileContent)
+    public function storePhoto($uniqueName, $fileContent)
     {
-        Storage::disk(static::DEFAULT_DISK)->putFileAs(static::DEFAULT_PHOTOS_DISK_PATH, $fileContent, ($uniqueName . $fileContent->extension()));
+        Storage::disk(static::DEFAULT_DISK)
+            ->putFileAs(
+                static::DEFAULT_PHOTOS_DISK_PATH,
+                $fileContent,
+                ($uniqueName . $fileContent->extension())
+            );
     }
 }

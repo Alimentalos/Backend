@@ -6,9 +6,6 @@ use App\Geofence;
 use App\Group;
 use App\Pet;
 use App\Photo;
-use App\Repositories\GroupsRepository;
-use App\Repositories\SubscriptionsRepository;
-use App\Repositories\UsersRepository;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -47,7 +44,7 @@ class PetPolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'pets', $user);
+        return $user->is_admin || subscriptions()->can('create', 'pets', $user);
     }
 
     /**
@@ -99,9 +96,9 @@ class PetPolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($pet, $user) &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                !GroupsRepository::modelIsGroupModel($pet, $group)
+                users()->isProperty($pet, $user) &&
+                groups()->userIsGroupAdmin($user, $group) &&
+                !groups()->modelIsGroupModel($pet, $group)
             );
     }
 
@@ -117,9 +114,9 @@ class PetPolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($pet, $user) &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                GroupsRepository::modelIsGroupModel($pet, $group)
+                users()->isProperty($pet, $user) &&
+                groups()->userIsGroupAdmin($user, $group) &&
+                groups()->modelIsGroupModel($pet, $group)
             );
     }
 
@@ -135,7 +132,7 @@ class PetPolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($pet, $user) &&
+                users()->isProperty($pet, $user) &&
                 !in_array($pet->uuid, $geofence->pets->pluck('uuid')->toArray())
             );
     }
@@ -152,7 +149,7 @@ class PetPolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($pet, $user) &&
+                users()->isProperty($pet, $user) &&
                 in_array($pet->uuid, $geofence->pets->pluck('uuid')->toArray())
             );
     }

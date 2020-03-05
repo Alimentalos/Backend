@@ -28,7 +28,7 @@ class ResourceRepository
      *
      * @return array
      */
-    public static function availableResource()
+    public function values()
     {
         return [ self::USER, self::DEVICE, self::PET ];
     }

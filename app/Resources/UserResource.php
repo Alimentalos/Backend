@@ -3,12 +3,32 @@
 namespace App\Resources;
 
 use App\Rules\Coordinate;
+use App\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait UserResource
 {
+    /**
+     * Update user via request.
+     *
+     * @return User
+     */
+    public function updateViaRequest()
+    {
+        return users()->updateUserViaRequest($this);
+    }
+
+    /**
+     * Create user via request.
+     *
+     * @return User
+     */
+    public function createViaRequest()
+    {
+        return users()->createUserViaRequest();
+    }
+
     /**
      * Get available user reactions.
      *
@@ -22,16 +42,14 @@ trait UserResource
     /**
      * Update user validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [
             'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
-                }), new Coordinate()
+                Rule::requiredIf(fn() => request()->has('photo')),
+                new Coordinate()
             ],
         ];
     }
@@ -39,10 +57,9 @@ trait UserResource
     /**
      * Store user validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'name' => 'required',
@@ -67,25 +84,33 @@ trait UserResource
     /**
      * Get user instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
-        if (!is_null($request->user('api')->user_uuid)) {
-            return self::with('photo', 'user')->latest()->where([
-                ['user_uuid', $request->user('api')->user_uuid]
-            ])->orWhere([
-                ['uuid', $request->user('api')->user_uuid]
-            ])->paginate(20);
-        } elseif ($request->user('api')->is_admin) {
-            return self::with('photo', 'user')->latest()->paginate(20);
-        } else {
-            return self::with('photo', 'user')->latest()->where([
-                ['user_uuid', $request->user()->uuid]
-            ])->orWhere([
-                ['uuid', $request->user('api')->uuid]
-            ])->paginate(20);
-        }
+        if (authenticated()->is_admin)
+            return users()->getUsers();
+
+        return authenticated()->is_child ? users()->getChildUsers() : users()->getOwnerUsers();
+    }
+
+    /**
+     * Get is_admin custom attribute
+     *
+     * @return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return admin()->isAdmin($this);
+    }
+
+    /**
+     * Get is_child custom attribute.
+     *
+     * @return bool
+     */
+    public function getIsChildAttribute()
+    {
+        return !is_null($this->user_uuid);
     }
 }

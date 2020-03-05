@@ -98,7 +98,7 @@ class FinderRepository {
     public function findNearResources($resource, $coordinates) {
         return $resource->orderByDistance(
             $resource::DEFAULT_LOCATION_FIELD,
-            LocationsRepository::parsePointFromCoordinates($coordinates),
+            parser()->pointFromCoordinates($coordinates),
             'asc'
         );
     }

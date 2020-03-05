@@ -3,13 +3,33 @@
 
 namespace App\Resources;
 
+use App\Geofence;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait GeofenceResource
 {
+    /**
+     * Update model via request.
+     *
+     * @return Geofence
+     */
+    public function updateViaRequest()
+    {
+        return geofences()->updateGeofenceViaRequest($this);
+    }
+
+    /**
+     * Create model via request.
+     *
+     * @return Geofence
+     */
+    public function createViaRequest()
+    {
+        return geofences()->createGeofenceViaRequest();
+    }
+
     /**
      * Get available geofence reactions.
      *
@@ -23,15 +43,14 @@ trait GeofenceResource
     /**
      * Update geofence validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [
             'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
+                Rule::requiredIf(function () {
+                    return request()->has('photo');
                 }), new Coordinate()
             ],
         ];
@@ -40,10 +59,9 @@ trait GeofenceResource
     /**
      * Store geofence validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'name' => 'required',
@@ -67,17 +85,10 @@ trait GeofenceResource
     /**
      * Get geofence instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
-        return $request->user('api')->is_child ? self::with('user', 'photo')->where(
-            'user_uuid',
-            $request->user('api')->user_uuid
-        )->orWhere('is_public', true)->latest()->paginate(20) : self::with('user', 'photo')->where(
-            'user_uuid',
-            $request->user('api')->uuid
-        )->orWhere('is_public', true)->latest()->paginate(20);
+        return authenticated()->is_child ? geofences()->getChildGeofences() : geofences()->getOwnerGeofences();
     }
 }

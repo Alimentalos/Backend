@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Group;
-use App\Repositories\UniqueNameRepository;
 
 class GroupObserver
 {
@@ -15,6 +14,6 @@ class GroupObserver
      */
     public function creating(Group $group)
     {
-        $group->uuid = UniqueNameRepository::createIdentifier();
+        $group->uuid = uuid();
     }
 }

@@ -4,8 +4,6 @@ namespace App\Reports\Types;
 
 use App\Device;
 use App\Http\Resources\Location;
-use App\Repositories\DevicesRepository;
-use App\Repositories\ModelLocationsRepository;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 
@@ -79,7 +77,7 @@ class Type
      */
     public function setParameters($devices, $start_date, $end_date, $parameters)
     {
-        $this->devices = DevicesRepository::fetchInDatabase($devices);
+        $this->devices = devices()->fetchInDatabase($devices);
         $this->start_date = $start_date;
         $this->start_day = explode(" ", $start_date)[0];
         $this->end_date = $end_date;
@@ -94,7 +92,7 @@ class Type
      */
     public function getFilterableQuery()
     {
-        return ModelLocationsRepository::filterLocations( // Search locations
+        return modelLocations()->filterLocations( // Search locations
             $this->devices, // of those devices
             [
                 'type' => 'devices',

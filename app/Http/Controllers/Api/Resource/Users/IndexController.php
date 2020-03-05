@@ -9,7 +9,28 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Display a list with users of a group
+     * @OA\Get(
+     *      path="/{resource}/users",
+     *      operationId="getResourceUsersPaginated",
+     *      tags={"Resources"},
+     *      summary="Get resource users paginated.",
+     *      description="Returns the resource users instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource users retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     * )
+     * Get resource users paginated.
      *
      * @param IndexRequest $request
      * @param $resource
@@ -17,6 +38,11 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json($resource->users()->latest()->with('photo', 'user')->paginate(20),200);
+        $users = $resource
+            ->users()
+            ->latest()
+            ->with('photo', 'user')
+            ->paginate(20);
+        return response()->json($users,200);
     }
 }

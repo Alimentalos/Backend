@@ -13,8 +13,8 @@ class ShowController extends Controller
      *      path="/{resource}/{uuid}",
      *      operationId="getResourceInstance",
      *      tags={"Resources"},
-     *      summary="Get specific resource instance",
-     *      description="Returns the specified resource instance as JSON Object",
+     *      summary="Get specific instance of resource.",
+     *      description="Returns the specified resource instance identified by UUID as JSON Object.",
      *      @OA\Parameter(
      *          name="resource",
      *          description="Resource class type",
@@ -35,16 +35,12 @@ class ShowController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource instance fetched successfully"
+     *          description="Resource instance retrieved successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      security={
-     *         {
-     *             "oauth2_security_example": {"write:projects", "read:projects"}
-     *         }
-     *     },
+     *      @OA\Response(response=404, description="Resource Not Found")
      * )
+     * Get specific instance of resource.
      *
      * @param ShowRequest $request
      * @param $resource

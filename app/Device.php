@@ -2,16 +2,16 @@
 
 namespace App;
 
+use App\Contracts\CreateFromRequest;
 use App\Contracts\Resource;
+use App\Contracts\UpdateFromRequest;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Geofenceable;
 use App\Relationships\Commons\Groupable;
 use App\Relationships\Commons\Trackable;
-use App\Repositories\DevicesRepository;
 use App\Resources\DeviceResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Http\Request;
 
 /**
  * Class Device
@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
  * @author Ian Torres
  * @license MIT
  */
-class Device extends Authenticatable implements Resource
+class Device extends Authenticatable implements Resource, CreateFromRequest, UpdateFromRequest
 {
     use SpatialTrait;
     use DeviceResource;
@@ -89,24 +89,4 @@ class Device extends Authenticatable implements Resource
      * @var string
      */
     public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
-
-    /**
-     * Update model via request.
-     *
-     * @param Request $request
-     * @return Http\Resources\Device
-     */
-    public function updateViaRequest(Request $request)
-    {
-        return DevicesRepository::updateDeviceViaRequest($request, $this);
-    }
-
-    /**
-     * @param Request $request
-     * @return Http\Resources\Device
-     */
-    public function createViaRequest(Request $request)
-    {
-        return DevicesRepository::createDeviceViaRequest($request);
-    }
 }

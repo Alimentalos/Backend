@@ -17,6 +17,191 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
     /**
+     * @test testUserCanViewUserAvailableDevices
+     */
+    final public function testUserCanViewUserAvailableDevices()
+    {
+        $user = factory(User::class)->create();
+        $device = factory(Device::class)->create();
+        $device->user_uuid = $user->uuid;
+        $device->save();
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/devices');
+        $response->assertOk();
+
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [
+                [
+                    'uuid',
+                    'user_uuid',
+                    'location' => [
+                        'type',
+                        'coordinates',
+                    ],
+                    'name',
+                    'description',
+                    'is_public',
+                    'created_at',
+                    'updated_at',
+                    'user' => [
+                        'uuid',
+                        'user_uuid',
+                        'photo_uuid',
+                        'name',
+                        'email',
+                        'email_verified_at',
+                        'free',
+                        'photo_url',
+                        'location' => [
+                            'type',
+                            'coordinates',
+                        ],
+                        'is_public',
+                        'created_at',
+                        'updated_at',
+                        'love_reactant_id',
+                        'love_reacter_id',
+                        'is_admin',
+                        'is_child',
+                        'user',
+                    ] ,
+                ],
+            ],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+        ]);
+
+        $response->assertJsonFragment([
+            'uuid' => $device->uuid,
+            'user_uuid' => $user->uuid,
+        ]);
+    }
+
+    /**
+     * @test testUserCanViewUserAvailableGroups
+     */
+    final public function testUserCanViewUserAvailableGroups()
+    {
+        $user = factory(User::class)->create();
+        $group = factory(Group::class)->create();
+        $group->user_uuid = $user->uuid;
+        $group->save();
+        $user->groups()->attach($group->uuid, [
+            'status' => Group::ACCEPTED_STATUS,
+            'is_admin' => false,
+        ]);
+
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/groups');
+        $response->assertOk();
+
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [
+                [
+                    'uuid',
+                    'user_uuid',
+                    'photo_uuid',
+                    'name',
+                    'description',
+                    'is_public',
+                    'photo_url',
+                    'created_at',
+                    'updated_at',
+                    'user' => [
+                        'uuid',
+                        'user_uuid',
+                        'photo_uuid',
+                        'name',
+                        'email',
+                        'email_verified_at',
+                        'free',
+                        'photo_url',
+                        'location' => [
+                            'type',
+                            'coordinates',
+                        ],
+                        'is_public',
+                        'created_at',
+                        'updated_at',
+                        'love_reactant_id',
+                        'love_reacter_id',
+                        'is_admin',
+                        'is_child',
+                        'user',
+                    ] ,
+                    'photo' => [
+                        'location' => [
+                            'type',
+                            'coordinates',
+                        ],
+                        'uuid',
+                        'user_uuid',
+                        'comment_uuid',
+                        'ext',
+                        'photo_url',
+                        'is_public',
+                        'created_at',
+                        'updated_at',
+                        'love_reactant_id',
+                    ],
+                    'pivot' => [
+                        'groupable_id',
+                        'group_uuid',
+                        'groupable_type',
+                        'is_admin',
+                        'status',
+                        'sender_uuid',
+                        'created_at',
+                        'updated_at',
+                    ]
+                ],
+            ],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+        ]);
+        // Assert contains the group uuid and user uuid.
+        $response->assertJsonFragment([
+            'uuid' => $group->uuid,
+            'user_uuid' => $user->uuid,
+        ]);
+    }
+
+    /**
+     * @test testUserCanDeleteOwnedDevice
+     */
+    final public function testUserCanDeleteOwnedDevice()
+    {
+        $user = factory(User::class)->create();
+        $userB = factory(User::class)->create();
+        $userB->user_uuid = $user->uuid;
+        $userB->save();
+        $response = $this->actingAs($user, 'api')->json('DELETE', '/api/users/' . $userB->uuid);
+        $response->assertOk();
+
+        $response->assertJsonStructure([
+            'message'
+        ]);
+        $response->assertJsonFragment([
+           'message' => 'Deleted successfully.'
+        ]);
+    }
+    /**
      * @test testUpdateUserWithPhotoApi
      */
     final public function testUpdateUserWithPhotoApi()
@@ -29,6 +214,7 @@ class UserTest extends TestCase
             'is_public' => true,
             'coordinates' => '5.5,6.5',
         ]);
+
         $response->assertOk();
         $response->assertJsonStructure([
             'uuid',
@@ -60,6 +246,7 @@ class UserTest extends TestCase
             'name' => 'New name',
             'coordinates' => '5.5,6.5',
         ]);
+
         $response->assertOk();
         $response->assertJsonStructure([
             'photo_url',
@@ -682,41 +869,6 @@ class UserTest extends TestCase
         $response->assertStatus(403);
     }
 
-    /**
-     * @test testUserCanDeleteOwnedDevice
-     */
-    public function testUserCanDeleteOwnedDevice()
-    {
-        // TODO - Add response structure asserts
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $userB->user_uuid = $user->uuid;
-        $userB->save();
-        $response = $this->actingAs($user, 'api')->json('DELETE', '/api/users/' . $userB->uuid);
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUserCanViewUserAvailableGroups
-     */
-    public function testUserCanViewUserAvailableGroups()
-    {
-        // TODO - Add response structure asserts
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/groups');
-        $response->assertOk();
-    }
-
-    /**
-     * @test testUserCanViewUserAvailableDevices
-     */
-    public function testUserCanViewUserAvailableDevices()
-    {
-        // TODO - Add response structure asserts
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/devices');
-        $response->assertOk();
-    }
 
     /**
      * @test testOwnerUserCanAttachChildUserOwnedGroups

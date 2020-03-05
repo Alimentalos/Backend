@@ -16,7 +16,7 @@ trait LocationQuery
      * @param string $column
      * @return Builder
      */
-    public static function groupByColumn(Builder $locations, $column = 'uuid')
+    public function groupByColumn(Builder $locations, $column = 'uuid')
     {
         return $locations->groupBy($column);
     }
@@ -29,7 +29,7 @@ trait LocationQuery
      * @param string $order
      * @return Builder
      */
-    public static function orderByColumn(Builder $query, $column, $order = 'desc')
+    public function orderByColumn(Builder $query, $column, $order = 'desc')
     {
         return $query->orderBy($column, $order);
     }
@@ -44,7 +44,7 @@ trait LocationQuery
      * @param string $order
      * @return Builder
      */
-    public static function queryRangeOfDates(Builder $query, $start_date, $end_date, $column, $order = 'desc')
+    public function queryRangeOfDates(Builder $query, $start_date, $end_date, $column, $order = 'desc')
     {
         return $query->whereBetween($column, [
             Carbon::parse($start_date),
@@ -59,7 +59,7 @@ trait LocationQuery
      * @param $accuracy
      * @return Builder
      */
-    public static function maxAccuracy(Builder $locations, $accuracy)
+    public function maxAccuracy(Builder $locations, $accuracy)
     {
         return $locations->where('accuracy', '<=', $accuracy);
     }
@@ -71,7 +71,7 @@ trait LocationQuery
      * @param string $type
      * @return Builder
      */
-    public static function trackableQuery(Collection $devices, $type = 'App\\Pet')
+    public function trackableQuery(Collection $devices, $type = 'App\\Pet')
     {
         return Location::whereIn(
             'trackable_id',

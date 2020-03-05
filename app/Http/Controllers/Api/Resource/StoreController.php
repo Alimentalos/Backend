@@ -10,11 +10,11 @@ class StoreController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/{resource}/",
+     *      path="/{resource}",
      *      operationId="createResourceInstance",
      *      tags={"Resources"},
-     *      summary="Create resource instance",
-     *      description="Returns the recently created instance as JSON Object",
+     *      summary="Create resource instance.",
+     *      description="Returns the recently created resource instance as JSON Object.",
      *      @OA\Parameter(
      *          name="resource",
      *          description="Resource class type",
@@ -30,6 +30,7 @@ class StoreController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      * )
+     * Create resource instance.
      *
      * @param StoreRequest $request
      * @param $resource
@@ -37,6 +38,7 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        return response()->json($request->route('resource')->createViaRequest($request),201);
+        $resource = $request->route('resource')->createViaRequest();
+        return response()->json($resource,201);
     }
 }

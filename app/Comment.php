@@ -3,17 +3,16 @@
 namespace App;
 
 use App\Contracts\Resource;
+use App\Contracts\UpdateFromRequest;
 use App\Relationships\CommentRelationships;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Commentable;
-use App\Repositories\CommentsRepository;
 use App\Resources\CommentResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
-class Comment extends Model implements ReactableContract, Resource
+class Comment extends Model implements ReactableContract, Resource, UpdateFromRequest
 {
     use Reactable;
     use CommentResource;
@@ -39,15 +38,4 @@ class Comment extends Model implements ReactableContract, Resource
      * @var array
      */
     protected $hidden = ['id'];
-
-    /**
-     * Update model via request.
-     *
-     * @param Request $request
-     * @return Comment
-     */
-    public function updateViaRequest(Request $request)
-    {
-        return CommentsRepository::updateCommentViaRequest($request, $this);
-    }
 }

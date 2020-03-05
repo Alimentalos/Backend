@@ -3,16 +3,34 @@
 
 namespace App\Resources;
 
-use App\Repositories\ResourceRepository;
-use App\Repositories\StatusRepository;
+use App\Alert;
 use App\Repositories\TypeRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait AlertResource
 {
+    /**
+     * Update model via request.
+     *
+     * @return Alert
+     */
+    public function updateViaRequest()
+    {
+        return alerts()->updateAlertViaRequest($this);
+    }
+
+    /**
+     * Create alert via request.
+     *
+     * @return Alert
+     */
+    public function createViaRequest()
+    {
+        return alerts()->createViaRequest();
+    }
+
     /**
      * Get available alert reactions.
      *
@@ -28,10 +46,9 @@ trait AlertResource
     /**
      * Update alert validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [];
     }
@@ -39,17 +56,16 @@ trait AlertResource
     /**
      * Store alert validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'title' => 'required',
             'body' => 'required',
             'alert_type' => [
                 'required',
-                Rule::in(ResourceRepository::availableResource())
+                Rule::in(resources()->values())
             ],
             'alert_id' => [
                 'required',
@@ -60,7 +76,7 @@ trait AlertResource
             ],
             'status' => [
                 'required',
-                Rule::in(StatusRepository::availableAlertStatuses())
+                Rule::in(status()->values())
             ],
             'photo' => 'required',
             'coordinates' => ['required', new Coordinate()],
@@ -80,16 +96,10 @@ trait AlertResource
     /**
      * Get alert instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
-        return self::with('user', 'photo', 'alert')
-            ->whereIn(
-                'status',
-                $request->has('whereInStatus') ?
-                    explode(',', $request->input('whereInStatus')) : StatusRepository::availableAlertStatuses() // Filter by statuses
-            )->latest('created_at')->paginate(25); // Order by latest
+        return alerts()->getAlerts();
     }
 }
