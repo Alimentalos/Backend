@@ -10,13 +10,15 @@ use Illuminate\Http\JsonResponse;
 class StoreController extends Controller
 {
     /**
+     *
+     *
      * @param StoreRequest $request
      * @param $resource
      * @return JsonResponse
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        LikeRepository::updateLike($resource->getLoveReactant(), $request->user('api')->getLoveReacter(), $request->input('type'));
+        likes()->updateLike($resource->getLoveReactant(), authenticated()->getLoveReacter(), input('type'));
         return response()->json([],200);
     }
 }

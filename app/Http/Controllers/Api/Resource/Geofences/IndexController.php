@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Fetch all Geofences of resource.
+     * Retrieve paginated geofences of resource.
      *
      * @param IndexRequest $request
      * @param $resource
@@ -17,6 +17,7 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json($resource->geofences()->latest()->with('user', 'photo')->paginate(20),200);
+        $geofences = $resource->geofences()->latest()->with('user', 'photo')->paginate(20);
+        return response()->json($geofences,200);
     }
 }

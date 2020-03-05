@@ -11,13 +11,14 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Retrieve locations.
      *
      * @param IndexRequest $request
      * @return JsonResponse
      */
     public function __invoke(IndexRequest $request)
     {
-        return response()->json(new LocationCollection(locations()->fetchViaRequest($request)),200);
+        $locations = locations()->fetchViaRequest();
+        return response()->json(new LocationCollection($locations),200);
     }
 }

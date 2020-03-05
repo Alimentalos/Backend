@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 class BlockController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Block user group invitation.
      *
      * @param BlockRequest $request
      * @param User $user

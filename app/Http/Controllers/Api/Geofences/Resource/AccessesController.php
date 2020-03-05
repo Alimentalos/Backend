@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 class AccessesController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Retrieve paginated accesses of geofence.
      *
      * @param AccessesRequest $request
      * @param Geofence $geofence
@@ -20,6 +20,7 @@ class AccessesController extends Controller
      */
     public function __invoke(AccessesRequest $request, Geofence $geofence, $resource)
     {
-        return response()->json(GeofenceAccessesRepository::fetchResourceViaRequest($request, $geofence, $resource),200);
+        $accesses = geofencesAccesses()->fetchResourceViaRequest($geofence, $resource);
+        return response()->json($accesses,200);
     }
 }

@@ -12,7 +12,7 @@ use Illuminate\Http\JsonResponse;
 class InviteController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Invite user group invitation.
      *
      * @param InviteRequest $request
      * @param User $user
@@ -21,7 +21,7 @@ class InviteController extends Controller
      */
     public function __invoke(InviteRequest $request, User $user, Group $group)
     {
-        UserGroupsRepository::inviteViaRequest($request, $user, $group);
+        userGroups()->inviteViaRequest($user, $group);
         return response()->json([], 200);
     }
 }

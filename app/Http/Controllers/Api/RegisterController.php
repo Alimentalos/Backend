@@ -17,6 +17,6 @@ class RegisterController extends Controller
      */
     public function __invoke(RegisterRequest $request)
     {
-        return response()->json(users()->registerViaRequest(), 201);
+        return response()->json(users()->registerViaRequest(),201);
     }
 }

@@ -7,6 +7,7 @@ use App\Repositories\AlertsRepository;
 use App\Repositories\DevicesRepository;
 use App\Repositories\FillRepository;
 use App\Repositories\FinderRepository;
+use App\Repositories\GeofenceAccessesRepository;
 use App\Repositories\GeofenceRepository;
 use App\Repositories\GroupsRepository;
 use App\Repositories\LikeRepository;
@@ -15,11 +16,15 @@ use App\Repositories\ModelLocationsRepository;
 use App\Repositories\ParserRepository;
 use App\Repositories\ParametersRepository;
 use App\Repositories\PhotoRepository;
+use App\Repositories\ReactionsRepository;
+use App\Repositories\ReportsRepository;
+use App\Repositories\ResourceCommentsRepository;
 use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
 use App\Repositories\TokenRepository;
 use App\Repositories\UniqueNameRepository;
 use App\Repositories\UploadRepository;
+use App\Repositories\UserGroupsRepository;
 use App\Repositories\UsersRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -50,6 +55,16 @@ if (! function_exists('groups')) {
     function groups()
     {
         return new GroupsRepository();
+    }
+}
+
+if (! function_exists('reactions')) {
+    /**
+     * @return ReactionsRepository
+     */
+    function reactions()
+    {
+        return new ReactionsRepository();
     }
 }
 
@@ -232,6 +247,16 @@ if (! function_exists('users')) {
     }
 }
 
+if (! function_exists('geofencesAccesses')) {
+    /**
+     * @return GeofenceAccessesRepository
+     */
+    function geofencesAccesses()
+    {
+        return new GeofenceAccessesRepository();
+    }
+}
+
 if (! function_exists('finder')) {
     /**
      * @return FinderRepository
@@ -266,6 +291,36 @@ if (! function_exists('resource')) {
     function resource()
     {
         return (new ResourceRepository())->currentResource();
+    }
+}
+
+if (! function_exists('userGroups')) {
+    /**
+     * @return UserGroupsRepository
+     */
+    function userGroups()
+    {
+        return new UserGroupsRepository();
+    }
+}
+
+if (! function_exists('reports')) {
+    /**
+     * @return ReportsRepository
+     */
+    function reports()
+    {
+        return new ReportsRepository();
+    }
+}
+
+if (! function_exists('resourceComments')) {
+    /**
+     * @return ResourceCommentsRepository
+     */
+    function resourceComments()
+    {
+        return new ResourceCommentsRepository();
     }
 }
 

@@ -30,6 +30,6 @@ class TokenController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        return TokenRepository::handleAuthentication($request);
+        return token()->handle();
     }
 }

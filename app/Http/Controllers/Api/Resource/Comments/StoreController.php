@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class StoreController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Store comment of resource.
      *
      * @param StoreRequest $request
      * @param $resource
@@ -18,6 +18,7 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        return response()->json(ResourceCommentsRepository::createCommentViaRequest($request, $resource),200);
+        $comment = resourceComments()->createCommentViaRequest($resource);
+        return response()->json($comment,200);
     }
 }

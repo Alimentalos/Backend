@@ -13,12 +13,11 @@ class GeofenceAccessesRepository
     /**
      * Fetch via Geofence resource accesses.
      *
-     * @param Request $request
      * @param Geofence $geofence
      * @param Resource $resource
      * @return LengthAwarePaginator
      */
-    public static function fetchResourceViaRequest(Request $request, Geofence $geofence, Resource $resource)
+    public function fetchResourceViaRequest(Geofence $geofence, Resource $resource)
     {
         return $geofence->accesses()->with('accessible', 'first_location', 'last_location', 'geofence')
             ->where('accessible_type', get_class($resource))
