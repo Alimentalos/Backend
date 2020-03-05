@@ -42,7 +42,7 @@ class PetsRepository
      */
     public function updatePetViaRequest(Pet $pet)
     {
-        UploadRepository::check($pet);
+        upload()->check($pet);
         $pet->update(parameters()->fill(['name', 'description', 'hair_color', 'born_at', 'left_eye_color', 'right_eye_color', 'size', 'is_public'], $pet));
         $pet->load('photo', 'user');
         return $pet;
