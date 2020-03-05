@@ -19,14 +19,123 @@
         }
     ],
     "paths": {
-        "/{resource}/": {
+        "/geofences/{geofence}/{resource}/accesses": {
             "get": {
                 "tags": [
                     "Resources"
                 ],
-                "summary": "Get resource paginated instance list",
-                "description": "Returns the resource list paginated by a default quantity, payload includes pagination links and stats",
-                "operationId": "getResourceList",
+                "summary": "Get geofence resource accesses paginated.",
+                "description": "Returns the geofence resource accesses instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getGeofenceResourceAccessesPaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "geofence",
+                        "in": "path",
+                        "description": "Geofence identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Geofence resource accesses retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has geofences trait"
+                    }
+                }
+            }
+        },
+        "/locations": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource locations.",
+                "description": "Returns resource locations.",
+                "operationId": "getLocations",
+                "parameters": [
+                    {
+                        "name": "identifier",
+                        "in": "query",
+                        "description": "Resource comma-separated identifiers",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Resource type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "description": "Start date used to filter results",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "description": "End date used to filter results",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "accuracy",
+                        "in": "query",
+                        "description": "Max accuracy used to filter results",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Locations retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has location trait"
+                    }
+                }
+            }
+        },
+        "/near/{resource}": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get near resources paginated.",
+                "description": "Returns the near located resource instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getNearResourcesPaginated",
                 "parameters": [
                     {
                         "name": "resource",
@@ -40,7 +149,133 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Resource list fetched successfully"
+                        "description": "Resource retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has location trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/accesses": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource accesses paginated.",
+                "description": "Returns the resource accesses instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourceAccessesPaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource accesses retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has geofences trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/comments": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource comments paginated.",
+                "description": "Returns the resource comments instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourceCommentsPaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource comments retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has comments trait"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Create resource comments instance.",
+                "description": "Returns the recently created comment instance as JSON Object.",
+                "operationId": "createResourceCommentsInstance",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource comment instance created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has comments trait"
+                    }
+                }
+            }
+        },
+        "/{resource}": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource paginated.",
+                "description": "Returns the resource instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourcePaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resources retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
@@ -51,8 +286,8 @@
                 "tags": [
                     "Resources"
                 ],
-                "summary": "Create resource instance",
-                "description": "Returns the recently created instance as JSON Object",
+                "summary": "Create resource instance.",
+                "description": "Returns the recently created resource instance as JSON Object.",
                 "operationId": "createResourceInstance",
                 "parameters": [
                     {
@@ -73,6 +308,513 @@
                         "description": "Bad request"
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Delete resource instance.",
+                "description": "Returns empty array as JSON response.",
+                "operationId": "destroyResourceInstance",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource instance deleted successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/{resource}/devices": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource devices paginated.",
+                "description": "Returns the resource devices instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourceDevicesPaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource devices retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has devices trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/geofences/{geofence}/accesses": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource specific geofence accesses paginated.",
+                "description": "Returns the resource accesses instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourceGeofencesAccessesPaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "geofence",
+                        "in": "path",
+                        "description": "Geofence identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource accesses retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has geofences trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/geofence/{geofence}/attach": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Attach geofence to resource instance.",
+                "description": "Returns empty array as JSON response.",
+                "operationId": "attachResourceGeofenceInstance",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "geofence",
+                        "in": "path",
+                        "description": "Geofence identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource instance attached to geofence successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has geofences trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/geofence/{geofence}/detach": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Detach geofence to resource instance.",
+                "description": "Returns empty array as JSON response.",
+                "operationId": "detachResourceGeofenceInstance",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "geofence",
+                        "in": "path",
+                        "description": "Geofence identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource instance detached to geofence successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has geofences trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/geofences": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource geofences paginated.",
+                "description": "Returns the resource geofences instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourceGeofencesPaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource geofences retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has geofences trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/groups/{group}/attach": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Attach group to resource instance.",
+                "description": "Returns empty array as JSON response.",
+                "operationId": "attachResourceGroupInstance",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Group identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource instance attached to group successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has groups trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/groups/{group}/detach": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Detach group to resource instance.",
+                "description": "Returns empty array as JSON response.",
+                "operationId": "detachResourceGroupInstance",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Group identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource instance detached to group successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has groups trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/groups": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource groups paginated.",
+                "description": "Returns the resource groups instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourceGroupsPaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource groups retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has groups trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/locations": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Create resource locations instance.",
+                "description": "Returns the recently created location instance as JSON Object.",
+                "operationId": "createResourceLocationInstance",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource location instance created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/{resource}/pets": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource pets paginated.",
+                "description": "Returns the resource pets instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourcePetsPaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource pets retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implemented has pets trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/photos": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource photos paginated.",
+                "description": "Returns the resource photos instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourcePhotosPaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource photos retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has photos trait"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Create resource photo instance.",
+                "description": "Returns the recently created resource photo instance as JSON Object.",
+                "operationId": "createResourcePhotoInstance",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource photo instance created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource doesn't implements has photos trait"
+                    }
+                }
+            }
+        },
+        "/{resource}/reactions": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource reactions stats.",
+                "description": "Returns the resource reactions stats.",
+                "operationId": "getResourceReactions",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource reactions retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Create resource reaction.",
+                "description": "Returns the empty array as JSON response.",
+                "operationId": "createResourceReaction",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource instance reaction created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
             }
         },
         "/{resource}/{uuid}": {
@@ -80,8 +822,8 @@
                 "tags": [
                     "Resources"
                 ],
-                "summary": "Get specific resource instance",
-                "description": "Returns the specified resource instance as JSON Object",
+                "summary": "Get specific instance of resource.",
+                "description": "Returns the specified resource instance identified by UUID as JSON Object.",
                 "operationId": "getResourceInstance",
                 "parameters": [
                     {
@@ -105,7 +847,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Resource instance fetched successfully"
+                        "description": "Resource instance retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
@@ -113,15 +855,75 @@
                     "404": {
                         "description": "Resource Not Found"
                     }
-                },
-                "security": [
+                }
+            },
+            "put": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Update specific instance of resource.",
+                "description": "Returns the updated specified resource instance identified by UUID as JSON Object.",
+                "operationId": "updateResourceInstance",
+                "parameters": [
                     {
-                        "oauth2_security_example": [
-                            "write:projects",
-                            "read:projects"
-                        ]
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of specific Resource class instance",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                ]
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource instance updated and retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/{resource}/users": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get resource users paginated.",
+                "description": "Returns the resource users instances paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourceUsersPaginated",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource class type",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource users retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
             }
         },
         "/token": {
@@ -129,8 +931,8 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "Get authentication token based on user credentials",
-                "description": "Returns the user personal access token",
+                "summary": "Get authentication token based on user credentials.",
+                "description": "Returns the user personal access token.",
                 "operationId": "getUserToken",
                 "responses": {
                     "200": {
@@ -138,6 +940,158 @@
                     },
                     "401": {
                         "description": "Unauthenticated."
+                    }
+                }
+            }
+        },
+        "/users/{user}/groups/{group}/accept": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Accept user group invitation.",
+                "description": "Returns empty array as JSON response.",
+                "operationId": "acceptUserGroupInstance",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "User identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Group identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User instance accepted to group successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/users/{user}/groups/{group}/block": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Block user group invitation.",
+                "description": "Returns empty array as JSON response.",
+                "operationId": "blockUserGroupInstance",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "User identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Group identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User instance blocked to group successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/users/{user}/groups/{group}/invite": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Invite user to group.",
+                "description": "Returns empty array as JSON response.",
+                "operationId": "inviteUserGroupInstance",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "User identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Group identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User instance invited to group successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/users/{user}/groups/{group}/reject": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Reject user group invitation.",
+                "description": "Returns empty array as JSON response.",
+                "operationId": "rejectUserGroupInstance",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "User identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Group identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User instance reject to group successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
                     }
                 }
             }

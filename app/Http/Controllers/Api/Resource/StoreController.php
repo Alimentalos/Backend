@@ -10,11 +10,11 @@ class StoreController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/{resource}/",
+     *      path="/{resource}",
      *      operationId="createResourceInstance",
      *      tags={"Resources"},
-     *      summary="Create resource instance",
-     *      description="Returns the recently created instance as JSON Object",
+     *      summary="Create resource instance.",
+     *      description="Returns the recently created resource instance as JSON Object.",
      *      @OA\Parameter(
      *          name="resource",
      *          description="Resource class type",
@@ -30,7 +30,7 @@ class StoreController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      * )
-     * Store instance.
+     * Create resource instance.
      *
      * @param StoreRequest $request
      * @param $resource

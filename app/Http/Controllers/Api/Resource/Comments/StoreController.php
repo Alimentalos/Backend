@@ -9,7 +9,29 @@ use Illuminate\Http\JsonResponse;
 class StoreController extends Controller
 {
     /**
-     * Store comment of instance.
+     * @OA\Post(
+     *      path="/{resource}/comments",
+     *      operationId="createResourceCommentsInstance",
+     *      tags={"Resources"},
+     *      summary="Create resource comments instance.",
+     *      description="Returns the recently created comment instance as JSON Object.",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource comment instance created successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource doesn't implements has comments trait")
+     * )
+     * Create resource comments instance.
      *
      * @param StoreRequest $request
      * @param $resource

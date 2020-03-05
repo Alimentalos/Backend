@@ -9,7 +9,28 @@ use Illuminate\Http\JsonResponse;
 class StoreController extends Controller
 {
     /**
-     * Store reaction of instance.
+     * @OA\Post(
+     *      path="/{resource}/reactions",
+     *      operationId="createResourceReaction",
+     *      tags={"Resources"},
+     *      summary="Create resource reaction.",
+     *      description="Returns the empty array as JSON response.",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource instance reaction created successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     * )
+     * Create resource reaction.
      *
      * @param StoreRequest $request
      * @param $resource

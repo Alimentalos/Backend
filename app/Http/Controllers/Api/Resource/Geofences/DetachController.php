@@ -10,7 +10,38 @@ use Illuminate\Http\JsonResponse;
 class DetachController extends Controller
 {
     /**
-     * Detach geofence of instance.
+     * @OA\Post(
+     *      path="/{resource}/geofence/{geofence}/detach",
+     *      operationId="detachResourceGeofenceInstance",
+     *      tags={"Resources"},
+     *      summary="Detach geofence to resource instance.",
+     *      description="Returns empty array as JSON response.",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="geofence",
+     *          description="Geofence identifier",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource instance detached to geofence successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource doesn't implements has geofences trait"),
+     * )
+     * Detach geofence to resource instance.
      *
      * @param DetachRequest $request
      * @param $resource

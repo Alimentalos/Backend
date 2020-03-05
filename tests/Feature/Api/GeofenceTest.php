@@ -320,7 +320,7 @@ class GeofenceTest extends TestCase
 
         // Users tests
         $response = $this->actingAs($user, 'api')
-            ->get('/api/users/' . $user->uuid . '/geofences/accesses');
+            ->get('/api/users/' . $user->uuid . '/accesses');
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
@@ -366,7 +366,7 @@ class GeofenceTest extends TestCase
 
         // Devices tests
         $response = $this->actingAs($user, 'api')
-            ->get('/api/devices/' . $device->uuid . '/geofences/accesses');
+            ->get('/api/devices/' . $device->uuid . '/accesses');
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
@@ -441,7 +441,7 @@ class GeofenceTest extends TestCase
         ]);
 
         $response = $this->actingAs($user, 'api')
-            ->get('/api/pets/' . $pet->uuid . '/geofences/accesses');
+            ->get('/api/pets/' . $pet->uuid . '/accesses');
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
@@ -709,7 +709,7 @@ class GeofenceTest extends TestCase
 
         // Users tests
         $response = $this->actingAs($user, 'api')
-            ->get('/api/users/' . $user->uuid . '/geofences/accesses');
+            ->get('/api/users/' . $user->uuid . '/accesses');
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
@@ -755,7 +755,7 @@ class GeofenceTest extends TestCase
 
         // Devices tests
         $response = $this->actingAs($user, 'api')
-            ->get('/api/devices/' . $device->uuid . '/geofences/accesses');
+            ->get('/api/devices/' . $device->uuid . '/accesses');
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
@@ -830,7 +830,7 @@ class GeofenceTest extends TestCase
         ]);
 
         $response = $this->actingAs($user, 'api')
-            ->get('/api/pets/' . $pet->uuid . '/geofences/accesses');
+            ->get('/api/pets/' . $pet->uuid . '/accesses');
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
