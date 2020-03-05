@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Resource\Geofences;
+namespace App\Http\Requests\Api\Resource;
 
 use App\Http\Requests\AuthorizedRequest;
 

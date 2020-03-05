@@ -9,7 +9,29 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Retrieve paginated groups of instance.
+     * @OA\Get(
+     *      path="/{resource}/groups",
+     *      operationId="getResourceGroupsPaginated",
+     *      tags={"Resources"},
+     *      summary="Get resource groups paginated.",
+     *      description="Returns the resource groups instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource groups retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource doesn't implements has groups trait"),
+     * )
+     * Get resource groups paginated.
      *
      * @param IndexRequest $request
      * @param $resource

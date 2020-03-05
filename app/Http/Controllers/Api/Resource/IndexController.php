@@ -10,11 +10,11 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/{resource}/",
-     *      operationId="getResourceList",
+     *      path="/{resource}",
+     *      operationId="getResourcePaginated",
      *      tags={"Resources"},
-     *      summary="Get resource paginated instance list",
-     *      description="Returns the resource list paginated by a default quantity, payload includes pagination links and stats",
+     *      summary="Get resource paginated.",
+     *      description="Returns the resource instances paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
      *          name="resource",
      *          description="Resource class type",
@@ -26,11 +26,11 @@ class IndexController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource list fetched successfully"
+     *          description="Resources retrieved successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      * )
-     * Retrieve paginated instances.
+     * Get resource paginated.
      *
      * @param IndexRequest $request
      * @return JsonResponse

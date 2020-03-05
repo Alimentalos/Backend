@@ -9,7 +9,38 @@ use Illuminate\Http\JsonResponse;
 class UpdateController extends Controller
 {
     /**
-     * Update instance.
+     * @OA\Put(
+     *      path="/{resource}/{uuid}",
+     *      operationId="updateResourceInstance",
+     *      tags={"Resources"},
+     *      summary="Update specific instance of resource.",
+     *      description="Returns the updated specified resource instance identified by UUID as JSON Object.",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of specific Resource class instance",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource instance updated and retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found")
+     * )
+     * Update specific instance of resource.
      *
      * @param UpdateRequest $request
      * @param $resource

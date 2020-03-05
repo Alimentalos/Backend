@@ -9,7 +9,29 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Retrieve paginated devices of instance.
+     * @OA\Get(
+     *      path="/{resource}/devices",
+     *      operationId="getResourceDevicesPaginated",
+     *      tags={"Resources"},
+     *      summary="Get resource devices paginated.",
+     *      description="Returns the resource devices instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource devices retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource doesn't implements has devices trait"),
+     * )
+     * Get resource devices paginated.
      *
      * @param IndexRequest $request
      * @param $resource

@@ -153,8 +153,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Resource Geofences
 
     foreach(['pets', 'devices', 'users'] as $resource) {
-        Route::get("/{$resource}/{resource}/geofences/accesses", 'Api\Resource\Geofences\AccessesController')
-            ->name("{$resource}.geofences.accesses");
+        Route::get("/{$resource}/{resource}/accesses", 'Api\Resource\AccessesController')
+            ->name("{$resource}.accesses");
         Route::get("/{$resource}/{resource}/geofences/{geofence}/accesses", 'Api\Resource\Geofences\Accesses\IndexController')
             ->name("{$resource}.geofences.accesses.index");
     }

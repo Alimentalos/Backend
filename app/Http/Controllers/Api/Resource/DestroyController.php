@@ -10,7 +10,28 @@ use Illuminate\Http\JsonResponse;
 class DestroyController extends Controller
 {
     /**
-     * Remove the specified resource instance from database.
+     * @OA\Delete(
+     *      path="/{resource}",
+     *      operationId="destroyResourceInstance",
+     *      tags={"Resources"},
+     *      summary="Delete resource instance.",
+     *      description="Returns empty array as JSON response.",
+     *      @OA\Parameter(
+     *          name="resource",
+     *          description="Resource class type",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Resource instance deleted successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     * )
+     * Delete resource instance.
      *
      * @param DestroyRequest $request
      * @param $resource

@@ -1,33 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Api\Resource\Geofences\Accesses;
+namespace App\Http\Controllers\Api\Resource;
 
-use App\Geofence;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Geofences\Accesses\IndexRequest;
+use App\Http\Requests\Api\Resource\AccessesRequest;
 use Illuminate\Http\JsonResponse;
 
-class IndexController extends Controller
+class AccessesController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/{resource}/geofences/{geofence}/accesses",
-     *      operationId="getResourceGeofencesAccessesPaginated",
+     *      path="/{resource}/accesses",
+     *      operationId="getResourceAccessesPaginated",
      *      tags={"Resources"},
-     *      summary="Get resource specific geofence accesses paginated.",
+     *      summary="Get resource accesses paginated.",
      *      description="Returns the resource accesses instances paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
      *          name="resource",
      *          description="Resource class type",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          name="geofence",
-     *          description="Geofence identifier",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -41,21 +31,19 @@ class IndexController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource doesn't implements has geofences trait"),
      * )
-     * Get resource specific geofence accesses paginated.
+     * Get resource accesses paginated.
      *
-     * @param IndexRequest $request
+     * @param AccessesRequest $request
      * @param $resource
-     * @param Geofence $geofence
      * @return JsonResponse
      */
-    public function __invoke(IndexRequest $request, $resource, Geofence $geofence)
+    public function __invoke(AccessesRequest $request, $resource)
     {
         $accesses = $resource
             ->accesses()
             ->with(['accessible', 'geofence', 'first_location', 'last_location'])
-            ->where([['geofence_uuid', $geofence->uuid]])
             ->latest()
             ->paginate(20);
-        return response()->json($accesses,200);
+        return response()->json($accesses, 200);
     }
 }
