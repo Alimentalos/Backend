@@ -31,7 +31,7 @@ class CommentPolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'comments', $user);
+        return $user->is_admin || subscriptions()->can('create', 'comments', $user);
     }
 
     /**

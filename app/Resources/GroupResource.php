@@ -14,23 +14,21 @@ trait GroupResource
     /**
      * Update group via request.
      *
-     * @param Request $request
      * @return Group
      */
-    public function updateViaRequest(Request $request)
+    public function updateViaRequest()
     {
-        return GroupsRepository::updateGroupViaRequest($request, $this);
+        return groups()->updateGroupViaRequest($this);
     }
 
     /**
      * Create group via request.
      *
-     * @param Request $request
      * @return Group
      */
-    public function createViaRequest(Request $request)
+    public function createViaRequest()
     {
-        return GroupsRepository::createGroupViaRequest($request);
+        return groups()->createGroupViaRequest();
     }
 
     /**
@@ -48,16 +46,14 @@ trait GroupResource
     /**
      * Update group validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [
             'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
-                }), new Coordinate()
+                Rule::requiredIf(fn() => request()->has('photo')),
+                new Coordinate()
             ],
         ];
     }
@@ -65,10 +61,9 @@ trait GroupResource
     /**
      * Store group validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'name' => 'required',
@@ -91,10 +86,9 @@ trait GroupResource
     /**
      * Get group instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
         return authenticated()->is_admin ? groups()->getAdministratorGroups() : groups()->getUserGroups();
     }

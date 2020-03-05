@@ -42,7 +42,7 @@ class PhotoPolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'photos', $user);
+        return $user->is_admin || subscriptions()->can('create', 'photos', $user);
     }
 
     /**

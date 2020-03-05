@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Retrieve paginated devices of resource.
+     * Retrieve paginated devices of instance.
      *
      * @param IndexRequest $request
      * @param $resource

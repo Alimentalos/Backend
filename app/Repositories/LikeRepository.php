@@ -12,8 +12,8 @@ class LikeRepository
     /**
      * Generate stats.
      *
-     * @param Reactant $reactant
-     * @param Reactable $reacterable
+     * @param $reactant
+     * @param $reacterable
      * @return array
      */
     public function generateStats($reactant, $reacterable)
@@ -34,11 +34,11 @@ class LikeRepository
     /**
      * Generate follow stats.
      *
-     * @param Reactant $reactant
-     * @param Reactable $reacterable
+     * @param $reactant
+     * @param $reacterable
      * @return array
      */
-    public function generateFollowStats(Reactant $reactant, Reactable $reacterable)
+    public function generateFollowStats($reactant, $reacterable)
     {
         return [
             'reactable' => [
@@ -51,11 +51,11 @@ class LikeRepository
     /**
      * Update likes stat.
      *
-     * @param Reactant $reactant
-     * @param Reactable $reacterable
+     * @param $reactant
+     * @param $reacterable
      * @param string $type
      */
-    public function updateLike(Reactant $reactant, Reactable $reacterable, string $type)
+    public function updateLike($reactant, $reacterable, string $type)
     {
         if (
             $reacterable->hasReactedTo(
@@ -79,7 +79,7 @@ class LikeRepository
      * @param $name
      * @return boolean
      */
-    public function reacted(Reacterable $reacterable, Reactant $reactant, string $name)
+    public function reacted($reacterable, $reactant, string $name)
     {
         return $reacterable->hasReactedTo($reactant, ReactionType::fromName($name));
     }

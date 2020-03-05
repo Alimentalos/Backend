@@ -14,23 +14,21 @@ trait PetResource
     /**
      * Update pet via request.
      *
-     * @param Request $request
      * @return Pet
      */
-    public function updateViaRequest(Request $request)
+    public function updateViaRequest()
     {
-        return PetsRepository::updatePetViaRequest($request, $this);
+        return pets()->updatePetViaRequest($this);
     }
 
     /**
      * Create pet via request.
      *
-     * @param Request $request
      * @return Pet
      */
-    public static function createViaRequest(Request $request)
+    public static function createViaRequest()
     {
-        return PetsRepository::createPetViaRequest($request);
+        return pets()->createPetViaRequest();
     }
 
     /**
@@ -46,16 +44,14 @@ trait PetResource
     /**
      * Update pet validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [
             'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
-                }), new Coordinate()
+                Rule::requiredIf(fn() => request()->has('photo')),
+                new Coordinate()
             ],
         ];
     }
@@ -63,10 +59,9 @@ trait PetResource
     /**
      * Store pet validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'name' => 'required',
@@ -77,11 +72,11 @@ trait PetResource
             'right_eye_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'size' => [
                 Rule::in([
-                    PetsRepository::SIZE_EXTRA_SMALL,
-                    PetsRepository::SIZE_SMALL,
-                    PetsRepository::SIZE_MEDIUM,
-                    PetsRepository::SIZE_LARGE,
-                    PetsRepository::SIZE_EXTRA_LARGE
+                    pets()::SIZE_EXTRA_SMALL,
+                    pets()::SIZE_SMALL,
+                    pets()::SIZE_MEDIUM,
+                    pets()::SIZE_LARGE,
+                    pets()::SIZE_EXTRA_LARGE
                 ])
             ],
             'born_at' => 'required',
@@ -102,10 +97,9 @@ trait PetResource
     /**
      * Get pet instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
         return Pet::with('user', 'photo')->latest()->paginate(20);
     }

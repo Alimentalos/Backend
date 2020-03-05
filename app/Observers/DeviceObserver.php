@@ -23,6 +23,6 @@ class DeviceObserver
             // TODO - Handle random bytes exception.
         }
         // @codeCoverageIgnoreEnd
-        $device->uuid = UniqueNameRepository::createIdentifier();
+        $device->uuid = uuid();
     }
 }

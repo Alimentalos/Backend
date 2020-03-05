@@ -23,12 +23,11 @@ trait AccessResource
     /**
      * Update accesses validation rules.
      *
-     * @param Request $request
      * @return array
      * @codeCoverageIgnore
      * @reason Accesses can't be updated, are system generated.
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [];
     }
@@ -36,12 +35,11 @@ trait AccessResource
     /**
      * Store accesses validation rules.
      *
-     * @param Request $request
      * @return array
      * @codeCoverageIgnore
      * @reason Accesses can't be created by request, are system generated.
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [];
     }
@@ -61,13 +59,12 @@ trait AccessResource
     /**
      * Get access instances.
      *
-     * @param Request $request
      * @return array
      * @codeCoverageIgnore TODO Support accesses index
      * @body Increase code coverage support enabling the accesses index. Just add routes and tests.
      * @reason Not implemented.
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
         return [];
     }

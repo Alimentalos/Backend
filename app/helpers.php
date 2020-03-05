@@ -4,6 +4,7 @@ use App\Contracts\Resource;
 use App\Repositories\ActionsRepository;
 use App\Repositories\AdminRepository;
 use App\Repositories\AlertsRepository;
+use App\Repositories\CommentsRepository;
 use App\Repositories\DevicesRepository;
 use App\Repositories\FillRepository;
 use App\Repositories\FinderRepository;
@@ -15,12 +16,16 @@ use App\Repositories\LocationsRepository;
 use App\Repositories\ModelLocationsRepository;
 use App\Repositories\ParserRepository;
 use App\Repositories\ParametersRepository;
+use App\Repositories\PetsRepository;
 use App\Repositories\PhotoRepository;
 use App\Repositories\ReactionsRepository;
 use App\Repositories\ReportsRepository;
 use App\Repositories\ResourceCommentsRepository;
+use App\Repositories\ResourceLocationsRepository;
+use App\Repositories\ResourcePhotosRepository;
 use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
+use App\Repositories\SubscriptionsRepository;
 use App\Repositories\TokenRepository;
 use App\Repositories\UniqueNameRepository;
 use App\Repositories\UploadRepository;
@@ -35,6 +40,36 @@ if (! function_exists('actions')) {
     function actions()
     {
         return new ActionsRepository();
+    }
+}
+
+if (! function_exists('pets')) {
+    /**
+     * @return PetsRepository
+     */
+    function pets()
+    {
+        return new PetsRepository();
+    }
+}
+
+if (! function_exists('comments')) {
+    /**
+     * @return CommentsRepository
+     */
+    function comments()
+    {
+        return new CommentsRepository();
+    }
+}
+
+if (! function_exists('resources')) {
+    /**
+     * @return ResourceRepository
+     */
+    function resources()
+    {
+        return new ResourceRepository();
     }
 }
 
@@ -55,6 +90,36 @@ if (! function_exists('groups')) {
     function groups()
     {
         return new GroupsRepository();
+    }
+}
+
+if (! function_exists('resourceLocations')) {
+    /**
+     * @return ResourceLocationsRepository
+     */
+    function resourceLocations()
+    {
+        return new ResourceLocationsRepository();
+    }
+}
+
+if (! function_exists('subscriptions')) {
+    /**
+     * @return SubscriptionsRepository
+     */
+    function subscriptions()
+    {
+        return new SubscriptionsRepository();
+    }
+}
+
+if (! function_exists('resourcePhotos')) {
+    /**
+     * @return ResourcePhotosRepository
+     */
+    function resourcePhotos()
+    {
+        return new ResourcePhotosRepository();
     }
 }
 

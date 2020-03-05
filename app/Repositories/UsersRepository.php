@@ -70,7 +70,7 @@ class UsersRepository
      */
     public function updateUserViaRequest(User $user)
     {
-        UploadRepository::check($user);
+        upload()->check($user);
         $user->load('user', 'photo');
         $user->update(parameters()->fill(['email', 'name', 'is_public'], $user));
         return $user;

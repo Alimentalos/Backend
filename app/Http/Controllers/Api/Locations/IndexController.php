@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Retrieve locations.
+     * Retrieve locations of instances.
      *
      * @param IndexRequest $request
      * @return JsonResponse
@@ -19,6 +19,6 @@ class IndexController extends Controller
     public function __invoke(IndexRequest $request)
     {
         $locations = locations()->fetchViaRequest();
-        return response()->json(new LocationCollection($locations),200);
+        return response()->json(new LocationCollection($locations), 200);
     }
 }

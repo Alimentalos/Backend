@@ -224,9 +224,11 @@ class GeofenceRepository
      */
     public function checkIntersectedGeofence(Model $model, Geofence $geofence, Model $location)
     {
-        if ($this->inAndStillAccessQuery($model, $geofence)->exists())
+        if ($this->inAndStillAccessQuery($model, $geofence)->exists()) {
             $this->updateStillAccess($model, $geofence, $location);
-        $this->createAccess($model, $geofence, $location);
+        } else {
+            $this->createAccess($model, $geofence, $location);
+        }
     }
 
     /**
@@ -238,7 +240,8 @@ class GeofenceRepository
      */
     public function checkDisjointedGeofence(Model $model, Geofence $geofence, Model $location)
     {
-        if ($this->inAndStillAccessQuery($model, $geofence)->exists())
+        if ($this->inAndStillAccessQuery($model, $geofence)->exists()) {
             $this->updateOutAccess($model, $geofence, $location);
+        }
     }
 }

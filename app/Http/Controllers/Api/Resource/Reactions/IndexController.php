@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Retrieve reactions of resource.
+     * Retrieve reactions of instance.
      *
      * @param IndexRequest $request
      * @param $resource
@@ -18,6 +18,7 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json(reactions()->fetchViaRequest($resource),200);
+        $reactions = reactions()->fetchViaRequest($resource);
+        return response()->json($reactions,200);
     }
 }

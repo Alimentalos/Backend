@@ -17,6 +17,7 @@ class ReportsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return response()->json(reports()->fetchViaRequest(),200);
+        $report = reports()->fetchViaRequest();
+        return response()->json($report,200);
     }
 }

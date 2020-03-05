@@ -18,7 +18,7 @@ class PetObserver
     {
         try {
             $pet->api_token = bin2hex(random_bytes(16));
-            $pet->uuid = UniqueNameRepository::createIdentifier();
+            $pet->uuid = uuid();
             // @codeCoverageIgnoreStart
         } catch (Exception $exception) {
             // TODO - Handle random bytes exception.

@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class AccessesController extends Controller
 {
     /**
-     * Retrieve paginated accesses of resource.
+     * Retrieve paginated accesses of instance.
      *
      * @param AccessesRequest $request
      * @param $resource

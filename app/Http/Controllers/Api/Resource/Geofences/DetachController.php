@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class DetachController extends Controller
 {
     /**
-     * Detach geofence of resource.
+     * Detach geofence of instance.
      *
      * @param DetachRequest $request
      * @param $resource

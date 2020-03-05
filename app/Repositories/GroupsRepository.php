@@ -35,11 +35,10 @@ class GroupsRepository
     /**
      * Update group via request.
      *
-     * @param Request $request
      * @param Group $group
      * @return Group
      */
-    public static function updateGroupViaRequest(Request $request, Group $group)
+    public static function updateGroupViaRequest(Group $group)
     {
         upload()->check($group);
         $group->update(parameters()->fill(['name', 'is_public'], $group));

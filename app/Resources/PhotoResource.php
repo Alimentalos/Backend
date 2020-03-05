@@ -13,12 +13,11 @@ trait PhotoResource
     /**
      * Update photo via request.
      *
-     * @param Request $request
      * @return Photo
      */
-    public function updateViaRequest(Request $request)
+    public function updateViaRequest()
     {
-        return PhotoRepository::updatePhotoViaRequest($request, $this);
+        return photos()->updatePhotoViaRequest($this);
     }
 
     /**
@@ -34,10 +33,9 @@ trait PhotoResource
     /**
      * Update photo validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [];
     }
@@ -45,10 +43,9 @@ trait PhotoResource
     /**
      * Store photo validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'photo' => 'required',
@@ -70,10 +67,9 @@ trait PhotoResource
     /**
      * Get photo instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
         return Photo::with('user', 'photoable')->latest()->paginate(20);
     }

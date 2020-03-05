@@ -15,23 +15,21 @@ trait GeofenceResource
     /**
      * Update model via request.
      *
-     * @param Request $request
      * @return Geofence
      */
-    public function updateViaRequest(Request $request)
+    public function updateViaRequest()
     {
-        return GeofenceRepository::updateGeofenceViaRequest($request, $this);
+        return geofences()->updateGeofenceViaRequest($this);
     }
 
     /**
      * Create model via request.
      *
-     * @param Request $request
      * @return Geofence
      */
-    public function createViaRequest(Request $request)
+    public function createViaRequest()
     {
-        return GeofenceRepository::createGeofenceViaRequest($request);
+        return geofences()->createGeofenceViaRequest();
     }
 
     /**
@@ -47,15 +45,14 @@ trait GeofenceResource
     /**
      * Update geofence validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [
             'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
+                Rule::requiredIf(function () {
+                    return request()->has('photo');
                 }), new Coordinate()
             ],
         ];
@@ -64,10 +61,9 @@ trait GeofenceResource
     /**
      * Store geofence validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'name' => 'required',
@@ -91,10 +87,9 @@ trait GeofenceResource
     /**
      * Get geofence instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
         return authenticated()->is_child ? geofences()->getChildGeofences() : geofences()->getOwnerGeofences();
     }

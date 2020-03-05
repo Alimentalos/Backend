@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class StoreController extends Controller
 {
     /**
-     * Store comment of resource.
+     * Store comment of instance.
      *
      * @param StoreRequest $request
      * @param $resource

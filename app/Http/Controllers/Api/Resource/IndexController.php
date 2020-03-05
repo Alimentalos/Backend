@@ -30,12 +30,14 @@ class IndexController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      * )
+     * Retrieve paginated instances.
      *
      * @param IndexRequest $request
      * @return JsonResponse
      */
     public function __invoke(IndexRequest $request)
     {
-        return response()->json(resource()->getInstances($request), 200);
+        $instances = resource()->getInstances();
+        return response()->json($instances, 200);
     }
 }

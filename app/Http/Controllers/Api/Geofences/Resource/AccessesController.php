@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 class AccessesController extends Controller
 {
     /**
-     * Retrieve paginated accesses of geofence.
+     * Retrieve paginated resource access of geofences.
      *
      * @param AccessesRequest $request
      * @param Geofence $geofence

@@ -45,6 +45,7 @@ class ShowController extends Controller
      *         }
      *     },
      * )
+     * Retrieve specific instance.
      *
      * @param ShowRequest $request
      * @param $resource

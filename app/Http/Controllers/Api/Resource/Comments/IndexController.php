@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Retrieve paginated comments of resource.
+     * Retrieve paginated comments of instance.
      *
      * @param IndexRequest $request
      * @param $resource

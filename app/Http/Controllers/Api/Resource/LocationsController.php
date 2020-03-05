@@ -10,13 +10,14 @@ use Illuminate\Http\JsonResponse;
 class LocationsController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Store instance location.
      *
      * @param AuthorizedRequest $request
      * @return JsonResponse
      */
     public function __invoke(AuthorizedRequest $request)
     {
-        return response()->json(ResourceLocationsRepository::createViaRequest($request),201);
+        $locations = resourceLocations()->createViaRequest();
+        return response()->json($locations,201);
     }
 }

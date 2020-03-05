@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class AttachController extends Controller
 {
     /**
-     * Attach geofence to resource.
+     * Attach geofence to instance.
      *
      * @param AttachRequest $request
      * @param $resource

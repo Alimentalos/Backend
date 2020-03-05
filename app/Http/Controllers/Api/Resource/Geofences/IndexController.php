@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Retrieve paginated geofences of resource.
+     * Retrieve paginated geofences of instance.
      *
      * @param IndexRequest $request
      * @param $resource

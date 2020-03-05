@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class UpdateController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Update instance.
      *
      * @param UpdateRequest $request
      * @param $resource
@@ -17,7 +17,7 @@ class UpdateController extends Controller
      */
     public function __invoke(UpdateRequest $request, $resource)
     {
-        $payload = $resource->updateViaRequest($request);
+        $payload = $resource->updateViaRequest();
         return response()->json($payload, 200);
     }
 }

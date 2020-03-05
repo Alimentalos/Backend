@@ -10,12 +10,15 @@ use Illuminate\Http\JsonResponse;
 class StoreController extends Controller
 {
     /**
+     * Store photo of instance.
+     *
      * @param StoreRequest $request
      * @param $resource
      * @return JsonResponse
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        return response()->json(ResourcePhotosRepository::createPhotoViaRequest($request, $resource),200);
+        $photo = resourcePhotos()->createPhotoViaRequest($resource);
+        return response()->json($photo,200);
     }
 }

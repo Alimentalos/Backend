@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class DestroyController extends Controller
 {
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource instance from database.
      *
      * @param DestroyRequest $request
      * @param $resource

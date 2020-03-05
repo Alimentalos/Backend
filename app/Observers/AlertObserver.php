@@ -15,6 +15,6 @@ class AlertObserver
      */
     public function creating(Alert $alert)
     {
-        $alert->uuid = UniqueNameRepository::createIdentifier();
+        $alert->uuid = uuid();
     }
 }

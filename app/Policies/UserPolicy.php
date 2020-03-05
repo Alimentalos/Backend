@@ -40,8 +40,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 users()->isProperty($attached, $user) &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                !GroupsRepository::modelIsGroupModel($attached, $group)
+                groups()->userIsGroupAdmin($user, $group) &&
+                !groups()->modelIsGroupModel($attached, $group)
             );
     }
 
@@ -58,9 +58,9 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid !== $invited->uuid &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                !GroupsRepository::modelIsGroupModel($invited, $group) &&
-                !GroupsRepository::modelIsBlocked($invited, $group)
+                groups()->userIsGroupAdmin($user, $group) &&
+                !groups()->modelIsGroupModel($invited, $group) &&
+                !groups()->modelIsBlocked($invited, $group)
             );
     }
 
@@ -77,8 +77,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !GroupsRepository::modelIsGroupModel($invited, $group) &&
-                !GroupsRepository::modelIsBlocked($invited, $group)
+                !groups()->modelIsGroupModel($invited, $group) &&
+                !groups()->modelIsBlocked($invited, $group)
             );
     }
 
@@ -95,8 +95,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !GroupsRepository::modelIsGroupModel($invited, $group) &&
-                !GroupsRepository::modelIsBlocked($invited, $group)
+                !groups()->modelIsGroupModel($invited, $group) &&
+                !groups()->modelIsBlocked($invited, $group)
             );
     }
 
@@ -113,8 +113,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !GroupsRepository::modelIsGroupModel($invited, $group) &&
-                !GroupsRepository::modelIsBlocked($invited, $group)
+                !groups()->modelIsGroupModel($invited, $group) &&
+                !groups()->modelIsBlocked($invited, $group)
             );
     }
 
@@ -131,8 +131,8 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                GroupsRepository::modelIsGroupModel($detached, $group)
+                groups()->userIsGroupAdmin($user, $group) &&
+                groups()->modelIsGroupModel($detached, $group)
             );
     }
 
@@ -198,7 +198,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'users', $user);
+        return $user->is_admin || subscriptions()->can('create', 'users', $user);
     }
 
     /**

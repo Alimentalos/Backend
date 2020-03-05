@@ -15,6 +15,6 @@ class GroupObserver
      */
     public function creating(Group $group)
     {
-        $group->uuid = UniqueNameRepository::createIdentifier();
+        $group->uuid = uuid();
     }
 }

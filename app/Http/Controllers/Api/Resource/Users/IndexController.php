@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Display a list with users of a group
+     * Retrieve paginated users of instance.
      *
      * @param IndexRequest $request
      * @param $resource
@@ -17,6 +17,11 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json($resource->users()->latest()->with('photo', 'user')->paginate(20),200);
+        $users = $resource
+            ->users()
+            ->latest()
+            ->with('photo', 'user')
+            ->paginate(20);
+        return response()->json($users,200);
     }
 }

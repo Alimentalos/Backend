@@ -11,14 +11,13 @@ class ResourceLocationsRepository
     /**
      * Create resource location via request.
      *
-     * @param Request $request
      * @return LocationResource
      */
-    public function createViaRequest(Request $request)
+    public function createViaRequest()
     {
         $model = modelLocations()->resolveLocationModel();
-        $location = modelLocations()->createLocation($model, $request->all());
-        $model->update(["location" => parser()->point($request->all())]);
+        $location = modelLocations()->createLocation($model, request()->all());
+        $model->update(["location" => parser()->point(request()->all())]);
         geofences()->checkLocationUsingModelGeofences($model, $location);
         $payload = new LocationResource($location);
         event(new LocationEvent($payload, $model));

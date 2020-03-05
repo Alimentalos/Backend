@@ -11,7 +11,7 @@ class ReportsRepository
      *
      * @var string
      */
-    public string $defaultType = 'activity';
+    public const DEFAULT_TYPE = 'activity';
 
     /**
      * Available reports
@@ -43,7 +43,11 @@ class ReportsRepository
             input('devices'),
             input('start_date'),
             input('end_date'),
-            only($this->requiredParameters(fill('type', $this->defaultType)))
+            request()->only(
+                $this->requiredParameters(
+                    fill( 'type', static::DEFAULT_TYPE)
+                )
+            )
         );
     }
 

@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Retrieve paginated accesses of resource using geofence.
+     * Retrieve paginated accesses of instance filtering only one geofence.
      *
      * @param IndexRequest $request
      * @param $resource
@@ -25,9 +25,6 @@ class IndexController extends Controller
             ->where([['geofence_uuid', $geofence->uuid]])
             ->latest()
             ->paginate(20);
-        return response()->json(
-            $accesses,
-            200
-        );
+        return response()->json($accesses,200);
     }
 }

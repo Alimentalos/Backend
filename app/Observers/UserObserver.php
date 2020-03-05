@@ -19,11 +19,13 @@ class UserObserver
     {
         try {
             $user->api_token = bin2hex(random_bytes(16));
-            $user->uuid = UniqueNameRepository::createIdentifier();
+            $user->uuid = uuid();
+            // @codeCoverageIgnoreStart
         } catch (Exception $exception) {
             // TODO - Handle random bytes exception.
         }
     }
+    // @codeCoverageIgnoreEnd
 
     /**
      * Handle the user "created" event.

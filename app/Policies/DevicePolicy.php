@@ -35,7 +35,7 @@ class DevicePolicy
      */
     public function view(User $user, Device $device)
     {
-        return $user->is_admin || $device->is_public || GroupsRepository::userHasModel($user, $device);
+        return $user->is_admin || $device->is_public || groups()->userHasModel($user, $device);
     }
 
     /**
@@ -46,7 +46,7 @@ class DevicePolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'devices', $user);
+        return $user->is_admin || subscriptions()->can('create', 'devices', $user);
     }
 
     /**
@@ -62,8 +62,8 @@ class DevicePolicy
         return $user->is_admin ||
             (
                 users()->isProperty($device, $user) &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                !GroupsRepository::modelIsGroupModel($device, $group)
+                groups()->userIsGroupAdmin($user, $group) &&
+                !groups()->modelIsGroupModel($device, $group)
             );
     }
 
@@ -80,8 +80,8 @@ class DevicePolicy
         return $user->is_admin ||
             (
                 users()->isProperty($device, $user) &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                GroupsRepository::modelIsGroupModel($device, $group)
+                groups()->userIsGroupAdmin($user, $group) &&
+                groups()->modelIsGroupModel($device, $group)
             );
     }
 

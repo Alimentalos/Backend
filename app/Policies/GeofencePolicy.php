@@ -43,7 +43,7 @@ class GeofencePolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'geofences', $user);
+        return $user->is_admin || subscriptions()->can('create', 'geofences', $user);
     }
 
     /**

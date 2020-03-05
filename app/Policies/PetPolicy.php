@@ -47,7 +47,7 @@ class PetPolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'pets', $user);
+        return $user->is_admin || subscriptions()->can('create', 'pets', $user);
     }
 
     /**
@@ -100,8 +100,8 @@ class PetPolicy
         return $user->is_admin ||
             (
                 users()->isProperty($pet, $user) &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                !GroupsRepository::modelIsGroupModel($pet, $group)
+                groups()->userIsGroupAdmin($user, $group) &&
+                !groups()->modelIsGroupModel($pet, $group)
             );
     }
 
@@ -118,8 +118,8 @@ class PetPolicy
         return $user->is_admin ||
             (
                 users()->isProperty($pet, $user) &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                GroupsRepository::modelIsGroupModel($pet, $group)
+                groups()->userIsGroupAdmin($user, $group) &&
+                groups()->modelIsGroupModel($pet, $group)
             );
     }
 

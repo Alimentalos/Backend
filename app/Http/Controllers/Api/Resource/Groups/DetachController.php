@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class DetachController extends Controller
 {
     /**
-     * Detach resource of Group.
+     * Detach group of instance.
      *
      * @param DetachRequest $request
      * @param $resource
