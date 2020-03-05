@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\Resource\Reactions;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Reactions\StoreRequest;
-use App\Repositories\LikeRepository;
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller

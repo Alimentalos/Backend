@@ -11,7 +11,6 @@ use App\Queries\LocationQuery;
 use App\User;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
 class ModelLocationsRepository
 {

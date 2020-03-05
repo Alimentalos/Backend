@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Device;
-use App\Repositories\UniqueNameRepository;
 use Exception;
 
 class DeviceObserver

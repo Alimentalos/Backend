@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Token\IndexRequest;
-use App\Repositories\TokenRepository;
 use Illuminate\Http\JsonResponse;
 
 class TokenController extends Controller

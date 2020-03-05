@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Pet;
-use App\Repositories\UniqueNameRepository;
 use Exception;
 
 class PetObserver

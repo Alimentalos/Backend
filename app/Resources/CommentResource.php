@@ -4,9 +4,7 @@
 namespace App\Resources;
 
 use App\Comment;
-use App\Repositories\CommentsRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 trait CommentResource
 {

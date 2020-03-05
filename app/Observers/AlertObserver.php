@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Alert;
-use App\Repositories\UniqueNameRepository;
 
 class AlertObserver
 {

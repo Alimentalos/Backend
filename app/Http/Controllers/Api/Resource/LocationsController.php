@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\Resource;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorizedRequest;
-use App\Repositories\ResourceLocationsRepository;
 use Illuminate\Http\JsonResponse;
 
 class LocationsController extends Controller

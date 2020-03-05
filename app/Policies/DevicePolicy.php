@@ -5,9 +5,6 @@ namespace App\Policies;
 use App\Device;
 use App\Geofence;
 use App\Group;
-use App\Repositories\GroupsRepository;
-use App\Repositories\SubscriptionsRepository;
-use App\Repositories\UsersRepository;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

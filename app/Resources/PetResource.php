@@ -3,10 +3,8 @@
 namespace App\Resources;
 
 use App\Pet;
-use App\Repositories\PetsRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait PetResource

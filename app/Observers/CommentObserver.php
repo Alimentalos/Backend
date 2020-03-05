@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Comment;
-use App\Repositories\UniqueNameRepository;
 
 class CommentObserver
 {

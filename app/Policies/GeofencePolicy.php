@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Geofence;
 use App\Photo;
-use App\Repositories\SubscriptionsRepository;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

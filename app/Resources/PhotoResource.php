@@ -3,10 +3,8 @@
 namespace App\Resources;
 
 use App\Photo;
-use App\Repositories\PhotoRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 trait PhotoResource
 {

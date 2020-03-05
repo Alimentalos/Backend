@@ -4,7 +4,6 @@ namespace App\Resources;
 
 use App\Location;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 trait LocationResource
 {

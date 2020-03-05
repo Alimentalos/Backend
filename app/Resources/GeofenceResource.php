@@ -4,10 +4,8 @@
 namespace App\Resources;
 
 use App\Geofence;
-use App\Repositories\GeofenceRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait GeofenceResource

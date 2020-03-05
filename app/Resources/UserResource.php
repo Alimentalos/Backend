@@ -2,12 +2,9 @@
 
 namespace App\Resources;
 
-use App\Repositories\AdminRepository;
-use App\Repositories\UsersRepository;
 use App\Rules\Coordinate;
 use App\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait UserResource

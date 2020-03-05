@@ -2,7 +2,6 @@
 
 namespace App\Contracts;
 
-use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface Resource

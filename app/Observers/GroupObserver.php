@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Group;
-use App\Repositories\UniqueNameRepository;
 
 class GroupObserver
 {

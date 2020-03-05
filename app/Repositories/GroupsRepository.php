@@ -6,7 +6,6 @@ use App\Group;
 use App\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
 class GroupsRepository
 {

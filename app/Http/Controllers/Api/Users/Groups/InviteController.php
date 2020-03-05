@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Users\Groups;
 use App\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Users\Groups\InviteRequest;
-use App\Repositories\UserGroupsRepository;
 use App\User;
 use Illuminate\Http\JsonResponse;
 

@@ -3,10 +3,8 @@
 namespace App\Resources;
 
 use App\Group;
-use App\Repositories\GroupsRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait GroupResource

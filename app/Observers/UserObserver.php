@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-use App\Repositories\UniqueNameRepository;
 use App\User;
 use Exception;
 use Illuminate\Auth\Events\Registered;

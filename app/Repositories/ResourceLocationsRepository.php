@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Events\Location as LocationEvent;
 use App\Http\Resources\Location as LocationResource;
-use Illuminate\Http\Request;
 
 class ResourceLocationsRepository
 {

@@ -4,8 +4,6 @@ namespace App\Reports\Types;
 
 use App\Device;
 use App\Http\Resources\Location;
-use App\Repositories\DevicesRepository;
-use App\Repositories\ModelLocationsRepository;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 

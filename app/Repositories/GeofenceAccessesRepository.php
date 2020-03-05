@@ -6,7 +6,6 @@ namespace App\Repositories;
 use App\Contracts\Resource;
 use App\Geofence;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 class GeofenceAccessesRepository
 {

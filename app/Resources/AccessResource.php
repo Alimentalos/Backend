@@ -3,8 +3,6 @@
 
 namespace App\Resources;
 
-use Illuminate\Http\Request;
-
 trait AccessResource
 {
     /**

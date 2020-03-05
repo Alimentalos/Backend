@@ -5,7 +5,6 @@ namespace App\Resources;
 use App\Http\Resources\Device;
 use App\Repositories\DevicesRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 trait DeviceResource
 {

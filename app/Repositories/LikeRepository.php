@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use Cog\Contracts\Love\Reactable\Models\Reactable;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable;
 use Cog\Laravel\Love\Reactant\Models\Reactant;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;

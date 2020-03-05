@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Comment;
-use App\Repositories\SubscriptionsRepository;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

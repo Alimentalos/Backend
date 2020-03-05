@@ -11,7 +11,6 @@ use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
-use Illuminate\Http\Request;
 
 class GeofenceRepository
 {

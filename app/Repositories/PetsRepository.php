@@ -3,8 +3,6 @@
 namespace App\Repositories;
 
 use App\Pet;
-use App\Photo;
-use Illuminate\Http\Request;
 
 class PetsRepository
 {

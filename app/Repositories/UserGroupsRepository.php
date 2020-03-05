@@ -5,7 +5,6 @@ namespace App\Repositories;
 
 use App\Group;
 use App\User;
-use Illuminate\Http\Request;
 
 class UserGroupsRepository
 {
