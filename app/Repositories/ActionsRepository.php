@@ -17,13 +17,11 @@ class ActionsRepository
     public function getOwnerActions()
     {
         return Action::with('user')
-            ->whereIn(
-                'user_uuid',
-                authenticated()
-                    ->users
-                    ->pluck('uuid')
-                    ->push(authenticated()->uuid)
-                    ->toArray()
+            ->whereIn('user_uuid', authenticated()
+                ->users
+                ->pluck('uuid')
+                ->push(authenticated()->uuid)
+                ->toArray()
             )->paginate(25);
     }
 

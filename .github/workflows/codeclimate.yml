@@ -1,0 +1,32 @@
+name: Codeclimate
+
+on: [push]
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop
+      - name: Setting MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: "5.7.17"
+          mysql root password: "test"
+          mysql database: 'test'
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      - name: Generate key
+        run: php artisan key:generate
+      - name: Execute tests (Unit and Feature tests) via PHPUnit
+          uses: paambaati/codeclimate-action@v2.5.3
+          env:
+            CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          with:
+            coverageCommand: vendor/bin/phpunit --coverage-clover=coverage.xml
+            coverageLocations:
+              "./coverage.xml:clover"
+            prefix: "${{github.workspace}}"
