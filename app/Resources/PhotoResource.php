@@ -59,7 +59,7 @@ trait PhotoResource
      */
     public function getLazyRelationshipsAttribute()
     {
-        return ['user'];
+        return ['user', 'comment'];
     }
 
     /**

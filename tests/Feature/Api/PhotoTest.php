@@ -39,9 +39,17 @@ class PhotoTest extends TestCase
         $photo->save();
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/photos/' . $photo->uuid, [
-            'title' => 'New title'
+            'title' => 'New title',
+            'body' => 'New body added'
         ]);
         $response->assertOk();
+
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid);
+        $response->assertOk();
+        $response->assertJsonFragment([
+            'title' => 'New title',
+            'body' => 'New body added'
+        ]);
     }
 
     final public function testUserCanCreateResourcePhotos()
