@@ -1,21 +1,24 @@
 <?php
 
-
 namespace App\Contracts;
 
-
-use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface Resource
 {
+    /**
+     * Get resource relationships attribute using lazy loading.
+     *
+     * @return array
+     */
     public function getLazyRelationshipsAttribute();
 
     /**
-     * @param Request $request
+     * Get resource instances.
+     *
      * @return array|LengthAwarePaginator
      */
-    public function getInstances(Request $request);
+    public function getInstances();
 
     /**
      * Get available reactions.
@@ -27,16 +30,14 @@ interface Resource
     /**
      * Get store validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request);
+    public function storeRules();
 
     /**
      * Get update validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request);
+    public function updateRules();
 }

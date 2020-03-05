@@ -6,9 +6,6 @@ use App\Device;
 use App\Geofence;
 use App\Group;
 use App\Photo;
-use App\Repositories\GroupsRepository;
-use App\Repositories\SubscriptionsRepository;
-use App\Repositories\UsersRepository;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -39,9 +36,9 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($attached, $user) &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                !GroupsRepository::modelIsGroupModel($attached, $group)
+                users()->isProperty($attached, $user) &&
+                groups()->userIsGroupAdmin($user, $group) &&
+                !groups()->modelIsGroupModel($attached, $group)
             );
     }
 
@@ -58,9 +55,9 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid !== $invited->uuid &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                !GroupsRepository::modelIsGroupModel($invited, $group) &&
-                !GroupsRepository::modelIsBlocked($invited, $group)
+                groups()->userIsGroupAdmin($user, $group) &&
+                !groups()->modelIsGroupModel($invited, $group) &&
+                !groups()->modelIsBlocked($invited, $group)
             );
     }
 
@@ -77,8 +74,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !GroupsRepository::modelIsGroupModel($invited, $group) &&
-                !GroupsRepository::modelIsBlocked($invited, $group)
+                !groups()->modelIsGroupModel($invited, $group) &&
+                !groups()->modelIsBlocked($invited, $group)
             );
     }
 
@@ -95,8 +92,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !GroupsRepository::modelIsGroupModel($invited, $group) &&
-                !GroupsRepository::modelIsBlocked($invited, $group)
+                !groups()->modelIsGroupModel($invited, $group) &&
+                !groups()->modelIsBlocked($invited, $group)
             );
     }
 
@@ -113,8 +110,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !GroupsRepository::modelIsGroupModel($invited, $group) &&
-                !GroupsRepository::modelIsBlocked($invited, $group)
+                !groups()->modelIsGroupModel($invited, $group) &&
+                !groups()->modelIsBlocked($invited, $group)
             );
     }
 
@@ -131,8 +128,8 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                GroupsRepository::modelIsGroupModel($detached, $group)
+                groups()->userIsGroupAdmin($user, $group) &&
+                groups()->modelIsGroupModel($detached, $group)
             );
     }
 
@@ -171,10 +168,10 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return $user->is_admin || $model->is_public || UsersRepository::isWorker($user, $model) ||
-            UsersRepository::isOwner($user, $model) ||
-            UsersRepository::sameUser($model, $user) ||
-            UsersRepository::sameOwner($model, $user);
+        return $user->is_admin || $model->is_public || users()->isWorker($user, $model) ||
+            users()->isOwner($user, $model) ||
+            users()->sameUser($model, $user) ||
+            users()->sameOwner($model, $user);
     }
 
     /**
@@ -198,7 +195,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'users', $user);
+        return $user->is_admin || subscriptions()->can('create', 'users', $user);
     }
 
     /**
@@ -210,7 +207,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->is_admin ||  UsersRepository::sameUser($model, $user) || UsersRepository::isOwner($user, $model);
+        return $user->is_admin ||  users()->sameUser($model, $user) || users()->isOwner($user, $model);
     }
 
     /**
@@ -222,6 +219,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return $user->is_admin || UsersRepository::isOwner($user, $model);
+        return $user->is_admin || users()->isOwner($user, $model);
     }
 }

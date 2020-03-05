@@ -32,12 +32,18 @@ class StatusRepository
     public const CLOSED = 5;
 
     /**
-     * Available alert statuses.
+     * Get statuses values.
      *
      * @return array
      */
-    public static function availableAlertStatuses()
+    public function values()
     {
-        return [ self::CREATED, self::PUBLISHED, self::FOUNDED, self::RESOLVED, self::CLOSED ];
+        return [
+            self::CREATED,
+            self::PUBLISHED,
+            self::FOUNDED,
+            self::RESOLVED,
+            self::CLOSED
+        ];
     }
 }

@@ -6,7 +6,6 @@ namespace App\Repositories;
 use App\Alert;
 use App\Photo;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 class AlertsRepository
 {
@@ -21,58 +20,57 @@ class AlertsRepository
             ->whereIn(
                 'status',
                 request()->has('whereInStatus') ?
-                    explode(',', request()->input('whereInStatus')) : StatusRepository::availableAlertStatuses() // Filter by statuses
+                    einput(',','whereInStatus') : status()->values() // Filter by statuses
             )->latest('created_at')->paginate(25);
     }
 
     /**
      * Create alert via request.
      *
-     * @param Request $request
      * @return Alert
      */
-    public function createViaRequest(Request $request)
+    public function createViaRequest()
     {
-        $photo = PhotoRepository::createPhotoViaRequest($request);
-        $related = finder()->findInstance($request->input('alert_type'), $request->input('alert_id'));
-        $obj = Alert::create($this->buildCreateParameters($request, $photo, $related, $request->input('alert_type')));
-        $photo->alerts()->attach($obj->uuid);
-        $obj->load('photo', 'user');
-        return $obj;
+        $photo = photos()->createPhotoViaRequest();
+        $related = finder()->findInstance(
+            input('alert_type'), input('alert_id')
+        );
+        $alert = Alert::create($this->buildCreateParameters($photo, $related, input('alert_type')));
+        $photo->alerts()->attach($alert->uuid);
+        $alert->load('photo', 'user');
+        return $alert;
     }
 
     /**
      * Build create parameters.
      *
-     * @param Request $request
      * @param Photo $photo
      * @param $alert
      * @param $alert_type
      * @return array
      */
-    public function buildCreateParameters(Request $request, Photo $photo, $alert, $alert_type)
+    public function buildCreateParameters(Photo $photo, $alert, $alert_type)
     {
         return array_merge([
-            'user_uuid' => $request->user('api')->uuid,
+            'user_uuid' => authenticated()->uuid,
             'photo_uuid' => $photo->uuid,
             'alert_id' => $alert->uuid,
             'alert_type' => $alert_type,
             'photo_url' => config('storage.path') . $photo->photo_url,
-            'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates')),
-        ], $request->only('name', 'title', 'body', 'type', 'status'));
+            'location' => parser()->pointFromCoordinates(input('coordinates')),
+        ], only('name', 'title', 'body', 'type', 'status'));
     }
 
     /**
      * Update alert via request.
      *
-     * @param Request $request
      * @param Alert $alert
      * @return Alert
      */
-    public function updateAlertViaRequest(Request $request, Alert $alert)
+    public function updateAlertViaRequest(Alert $alert)
     {
-        UploadRepository::checkPhotoForUpload($request, $alert);
-        $alert->update(parameters()->fillPropertiesUsingResource(['type', 'status', 'title', 'body'], $alert));
+        upload()->check($alert);
+        $alert->update(parameters()->fill(['type', 'status', 'title', 'body'], $alert));
         $alert->load('photo', 'user', 'alert');
         return $alert;
     }

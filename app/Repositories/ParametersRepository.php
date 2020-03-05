@@ -2,18 +2,22 @@
 
 namespace App\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
+
 class ParametersRepository
 {
     /**
-     * @param $properties
-     * @param $resource
+     * Fill array with a list using model properties
+     *
+     * @param array $properties
+     * @param Model $resource
      * @return array
      */
-    public function fillPropertiesUsingResource($properties, $resource)
+    public function fill($properties, Model $resource)
     {
         $arr = [];
-        foreach ($properties as $property){
-            $arr[$property] = FillRepository::fillAttribute($property, $resource->{$property});
+        foreach ($properties as $prop){
+            $arr[$prop] = fill($prop, $resource->{$prop});
         }
         return $arr;
     }

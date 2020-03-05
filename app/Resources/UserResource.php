@@ -2,12 +2,9 @@
 
 namespace App\Resources;
 
-use App\Repositories\AdminRepository;
-use App\Repositories\UsersRepository;
 use App\Rules\Coordinate;
 use App\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 trait UserResource
@@ -15,23 +12,21 @@ trait UserResource
     /**
      * Update user via request.
      *
-     * @param Request $request
      * @return User
      */
-    public function updateViaRequest(Request $request)
+    public function updateViaRequest()
     {
-        return UsersRepository::updateUserViaRequest($request, $this);
+        return users()->updateUserViaRequest($this);
     }
 
     /**
      * Create user via request.
      *
-     * @param Request $request
      * @return User
      */
-    public function createViaRequest(Request $request)
+    public function createViaRequest()
     {
-        return UsersRepository::createUserViaRequest($request);
+        return users()->createUserViaRequest();
     }
 
     /**
@@ -47,16 +42,14 @@ trait UserResource
     /**
      * Update user validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [
             'coordinates' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->has('photo');
-                }), new Coordinate()
+                Rule::requiredIf(fn() => request()->has('photo')),
+                new Coordinate()
             ],
         ];
     }
@@ -64,10 +57,9 @@ trait UserResource
     /**
      * Store user validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'name' => 'required',
@@ -92,10 +84,9 @@ trait UserResource
     /**
      * Get user instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
         if (authenticated()->is_admin)
             return users()->getUsers();
@@ -110,7 +101,7 @@ trait UserResource
      */
     public function getIsAdminAttribute()
     {
-        return AdminRepository::isAdmin($this);
+        return admin()->isAdmin($this);
     }
 
     /**

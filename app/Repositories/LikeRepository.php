@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use Cog\Contracts\Love\Reacterable\Models\Reacterable;
+use Cog\Laravel\Love\Reactant\Models\Reactant;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 
 class LikeRepository
@@ -13,16 +15,16 @@ class LikeRepository
      * @param $reacterable
      * @return array
      */
-    public static function generateStats($reactant, $reacterable)
+    public function generateStats($reactant, $reacterable)
     {
         return [
             'reactable' => [
-                'like' => static::reacted($reacterable, $reactant, 'Like'),
-                'pray' => static::reacted($reacterable, $reactant, 'Pray'),
-                'love' => static::reacted($reacterable, $reactant, 'Love'),
-                'hate' => static::reacted($reacterable, $reactant, 'Hate'),
-                'dislike' => static::reacted($reacterable, $reactant, 'Dislike'),
-                'sad' => static::reacted($reacterable, $reactant, 'Sad'),
+                'like' => $this->reacted($reacterable, $reactant, 'Like'),
+                'pray' => $this->reacted($reacterable, $reactant, 'Pray'),
+                'love' => $this->reacted($reacterable, $reactant, 'Love'),
+                'hate' => $this->reacted($reacterable, $reactant, 'Hate'),
+                'dislike' => $this->reacted($reacterable, $reactant, 'Dislike'),
+                'sad' => $this->reacted($reacterable, $reactant, 'Sad'),
             ],
             'reactant' => $reactant->getReactionCounters()
         ];
@@ -35,11 +37,11 @@ class LikeRepository
      * @param $reacterable
      * @return array
      */
-    public static function generateFollowStats($reactant, $reacterable)
+    public function generateFollowStats($reactant, $reacterable)
     {
         return [
             'reactable' => [
-                'follow' => static::reacted($reacterable, $reactant, 'Follow'),
+                'follow' => $this->reacted($reacterable, $reactant, 'Follow'),
             ],
             'reactant' => $reactant->getReactionCounters()
         ];
@@ -50,9 +52,9 @@ class LikeRepository
      *
      * @param $reactant
      * @param $reacterable
-     * @param $type
+     * @param string $type
      */
-    public static function updateLike($reactant, $reacterable, $type)
+    public function updateLike($reactant, $reacterable, string $type)
     {
         if (
             $reacterable->hasReactedTo(
@@ -71,12 +73,12 @@ class LikeRepository
     /**
      * Check if reactant was reacted by reacterable (comment liked by user)
      *
-     * @param $reacterable
-     * @param $reactant
+     * @param Reacterable $reacterable
+     * @param Reactant $reactant
      * @param $name
      * @return boolean
      */
-    public static function reacted($reacterable, $reactant, $name)
+    public function reacted($reacterable, $reactant, string $name)
     {
         return $reacterable->hasReactedTo($reactant, ReactionType::fromName($name));
     }

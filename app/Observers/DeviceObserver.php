@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Device;
-use App\Repositories\UniqueNameRepository;
 use Exception;
 
 class DeviceObserver
@@ -23,6 +22,6 @@ class DeviceObserver
             // TODO - Handle random bytes exception.
         }
         // @codeCoverageIgnoreEnd
-        $device->uuid = UniqueNameRepository::createIdentifier();
+        $device->uuid = uuid();
     }
 }

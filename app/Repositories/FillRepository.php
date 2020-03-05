@@ -13,6 +13,6 @@ class FillRepository
      */
     public static function fillAttribute($attribute, $default)
     {
-        return request()->has($attribute) ? request()->input($attribute) : $default;
+        return request()->has($attribute) ? input($attribute) : $default;
     }
 }

@@ -4,21 +4,18 @@
 namespace App\Resources;
 
 use App\Comment;
-use App\Repositories\CommentsRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 trait CommentResource
 {
     /**
-     * Update model via request.
+     * Update comment via request.
      *
-     * @param Request $request
      * @return Comment
      */
-    public function updateViaRequest(Request $request)
+    public function updateViaRequest()
     {
-        return CommentsRepository::updateCommentViaRequest($request, $this);
+        return comments()->updateCommentViaRequest($this);
     }
 
     /**
@@ -34,10 +31,9 @@ trait CommentResource
     /**
      * Update comment validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [];
     }
@@ -45,12 +41,11 @@ trait CommentResource
     /**
      * Store comment validation rules.
      *
-     * @param Request $request
      * @return array
      * @codeCoverageIgnore TODO Support store validation rules.
      *
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [];
     }
@@ -68,11 +63,10 @@ trait CommentResource
     /**
      * Get comment instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      * @codeCoverageIgnore
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
         return Comment::with('user')->latest()->paginate(20);
     }

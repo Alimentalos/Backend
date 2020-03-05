@@ -2,14 +2,14 @@
 
 namespace App\Observers;
 
-use App\Repositories\UniqueNameRepository;
 use App\User;
 use Exception;
+use Illuminate\Auth\Events\Registered;
 
 class UserObserver
 {
     /**
-     * Handle the device "creating" event.
+     * Handle the user "creating" event.
      *
      * @param User $user
      * @return void
@@ -18,11 +18,21 @@ class UserObserver
     {
         try {
             $user->api_token = bin2hex(random_bytes(16));
-            $user->uuid = UniqueNameRepository::createIdentifier();
+            $user->uuid = uuid();
             // @codeCoverageIgnoreStart
         } catch (Exception $exception) {
             // TODO - Handle random bytes exception.
         }
-        // @codeCoverageIgnoreEnd
+    }
+    // @codeCoverageIgnoreEnd
+
+    /**
+     * Handle the user "created" event.
+     *
+     * @param User $user
+     */
+    public function created(User $user)
+    {
+        event(new Registered($user));
     }
 }

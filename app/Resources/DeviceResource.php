@@ -5,30 +5,27 @@ namespace App\Resources;
 use App\Http\Resources\Device;
 use App\Repositories\DevicesRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 trait DeviceResource
 {
     /**
      * Update device via request.
      *
-     * @param Request $request
      * @return Device
      */
-    public function updateViaRequest(Request $request)
+    public function updateViaRequest()
     {
-        return DevicesRepository::updateDeviceViaRequest($request, $this);
+        return devices()->updateDeviceViaRequest($this);
     }
 
     /**
      * Create device via request.
      *
-     * @param Request $request
      * @return Device
      */
-    public function createViaRequest(Request $request)
+    public function createViaRequest()
     {
-        return DevicesRepository::createDeviceViaRequest($request);
+        return devices()->createDeviceViaRequest();
     }
 
     /**
@@ -46,10 +43,9 @@ trait DeviceResource
     /**
      * Update device validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [];
     }
@@ -57,10 +53,9 @@ trait DeviceResource
     /**
      * Store device validation rules.
      *
-     * @param Request $request
      * @return array
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [
             'name' => 'required',
@@ -81,10 +76,9 @@ trait DeviceResource
     /**
      * Get device instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
         $devices = DevicesRepository::fetchInDatabaseDevicesQuery();
 

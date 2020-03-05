@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Fetch all Groups of resource.
+     * Retrieve paginated groups of instance.
      *
      * @param IndexRequest $request
      * @param $resource
@@ -17,6 +17,7 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json($resource->groups()->latest()->with('user', 'photo')->paginate(20),200);
+        $groups = $resource->groups()->latest()->with('user', 'photo')->paginate(20);
+        return response()->json($groups,200);
     }
 }

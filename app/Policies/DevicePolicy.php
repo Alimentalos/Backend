@@ -5,9 +5,6 @@ namespace App\Policies;
 use App\Device;
 use App\Geofence;
 use App\Group;
-use App\Repositories\GroupsRepository;
-use App\Repositories\SubscriptionsRepository;
-use App\Repositories\UsersRepository;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -35,7 +32,7 @@ class DevicePolicy
      */
     public function view(User $user, Device $device)
     {
-        return $user->is_admin || $device->is_public || GroupsRepository::userHasModel($user, $device);
+        return $user->is_admin || $device->is_public || groups()->userHasModel($user, $device);
     }
 
     /**
@@ -46,7 +43,7 @@ class DevicePolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'devices', $user);
+        return $user->is_admin || subscriptions()->can('create', 'devices', $user);
     }
 
     /**
@@ -61,9 +58,9 @@ class DevicePolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($device, $user) &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                !GroupsRepository::modelIsGroupModel($device, $group)
+                users()->isProperty($device, $user) &&
+                groups()->userIsGroupAdmin($user, $group) &&
+                !groups()->modelIsGroupModel($device, $group)
             );
     }
 
@@ -79,9 +76,9 @@ class DevicePolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($device, $user) &&
-                GroupsRepository::userIsGroupAdmin($user, $group) &&
-                GroupsRepository::modelIsGroupModel($device, $group)
+                users()->isProperty($device, $user) &&
+                groups()->userIsGroupAdmin($user, $group) &&
+                groups()->modelIsGroupModel($device, $group)
             );
     }
 
@@ -97,7 +94,7 @@ class DevicePolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($device, $user) &&
+                users()->isProperty($device, $user) &&
                 !in_array($device->uuid, $geofence->devices->pluck('uuid')->toArray())
             );
     }
@@ -114,7 +111,7 @@ class DevicePolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($device, $user) &&
+                users()->isProperty($device, $user) &&
                 in_array($device->uuid, $geofence->devices->pluck('uuid')->toArray())
             );
     }
@@ -128,7 +125,7 @@ class DevicePolicy
      */
     public function update(User $user, Device $device)
     {
-        return $user->is_admin || UsersRepository::isProperty($device, $user);
+        return $user->is_admin || users()->isProperty($device, $user);
     }
 
     /**
@@ -140,6 +137,6 @@ class DevicePolicy
      */
     public function delete(User $user, Device $device)
     {
-        return $user->is_admin || UsersRepository::isProperty($device, $user);
+        return $user->is_admin || users()->isProperty($device, $user);
     }
 }

@@ -13,7 +13,7 @@ class SubscriptionsRepository
      * @param User $user
      * @return string
      */
-    public static function determineTier(User $user)
+    public function determineTier(User $user)
     {
         if ($user->free) {
             return 'free';
@@ -29,7 +29,7 @@ class SubscriptionsRepository
      * @param $user
      * @return mixed
      */
-    public static function getUserResourcesQuota($resource, $user)
+    public function getUserResourcesQuota($resource, $user)
     {
         return resolve('App\\' . Str::camel(Str::singular($resource)))->where('user_uuid', $user->uuid)->count();
     }
@@ -42,11 +42,11 @@ class SubscriptionsRepository
      * @param User $user
      * @return bool
      */
-    public static function can($method, $resource, User $user)
+    public function can($method, $resource, User $user)
     {
-        $tier = static::determineTier($user);
-        $quantity = static::getUserResourcesQuota($resource, $user);
-        return ($quantity + 1) <= self::getOptions($tier, $resource, $method);
+        $tier = $this->determineTier($user);
+        $quantity = $this->getUserResourcesQuota($resource, $user);
+        return ($quantity + 1) <= $this->getOptions($tier, $resource, $method);
     }
 
     /**
@@ -56,9 +56,9 @@ class SubscriptionsRepository
      * @param $method
      * @return mixed
      */
-    public static function getPremiumLimits($resource, $method)
+    public function getPremiumLimits($resource, $method)
     {
-        return static::calcLimits(config('limits.premium'), $resource, $method);
+        return $this->calcLimits(config('limits.premium'), $resource, $method);
     }
 
     /**
@@ -68,9 +68,9 @@ class SubscriptionsRepository
      * @param $method
      * @return mixed
      */
-    public static function getFreeLimits($resource, $method)
+    public function getFreeLimits($resource, $method)
     {
-        return static::calcLimits(config('limits.free'), $resource, $method);
+        return $this->calcLimits(config('limits.free'), $resource, $method);
     }
 
     /**
@@ -81,7 +81,7 @@ class SubscriptionsRepository
      * @param $method
      * @return mixed
      */
-    public static function calcLimits($limits, $resource, $method)
+    public function calcLimits($limits, $resource, $method)
     {
         return $limits[$resource][$method];
     }
@@ -94,11 +94,11 @@ class SubscriptionsRepository
      * @param $method
      * @return mixed
      */
-    public static function getOptions($tier, $resource, $method)
+    public function getOptions($tier, $resource, $method)
     {
         if ($tier === 'free') {
-            return static::getFreeLimits($resource, $method);
+            return $this->getFreeLimits($resource, $method);
         }
-        return static::getPremiumLimits($resource, $method);
+        return $this->getPremiumLimits($resource, $method);
     }
 }

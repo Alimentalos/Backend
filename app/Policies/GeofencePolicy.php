@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Geofence;
 use App\Photo;
-use App\Repositories\SubscriptionsRepository;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -43,7 +42,7 @@ class GeofencePolicy
      */
     public function create(User $user)
     {
-        return $user->is_admin || SubscriptionsRepository::can('create', 'geofences', $user);
+        return $user->is_admin || subscriptions()->can('create', 'geofences', $user);
     }
 
     /**

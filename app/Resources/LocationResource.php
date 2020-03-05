@@ -4,7 +4,6 @@ namespace App\Resources;
 
 use App\Location;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 trait LocationResource
 {
@@ -23,12 +22,11 @@ trait LocationResource
     /**
      * Update location validation rules.
      *
-     * @param Request $request
      * @return array
      * @codeCoverageIgnore
      * @reason Locations are device generated, can't be modified by user.
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [];
     }
@@ -36,12 +34,11 @@ trait LocationResource
     /**
      * Store location validation rules.
      *
-     * @param Request $request
      * @return array
      * @codeCoverageIgnore
      * @reason Locations are device generated, can't be predefined validation rules.
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [];
     }
@@ -59,12 +56,11 @@ trait LocationResource
     /**
      * Get location instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      * @codeCoverageIgnore
      * @reason Locations uses custom LocationRepository query.
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
         return Location::query()->paginate(25);
     }

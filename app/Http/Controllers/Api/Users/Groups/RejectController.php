@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 class RejectController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Reject user group invitation.
      *
      * @param RejectRequest $request
      * @param User $user

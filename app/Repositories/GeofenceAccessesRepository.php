@@ -3,21 +3,20 @@
 
 namespace App\Repositories;
 
+use App\Contracts\Resource;
 use App\Geofence;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 class GeofenceAccessesRepository
 {
     /**
      * Fetch via Geofence resource accesses.
      *
-     * @param Request $request
      * @param Geofence $geofence
-     * @param $resource
+     * @param Resource $resource
      * @return LengthAwarePaginator
      */
-    public static function fetchResourceViaRequest(Request $request, Geofence $geofence, $resource)
+    public function fetchResourceViaRequest(Geofence $geofence, Resource $resource)
     {
         return $geofence->accesses()->with('accessible', 'first_location', 'last_location', 'geofence')
             ->where('accessible_type', get_class($resource))

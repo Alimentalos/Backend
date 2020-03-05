@@ -3,8 +3,6 @@
 namespace App\Repositories;
 
 use App\Pet;
-use App\Photo;
-use Illuminate\Http\Request;
 
 class PetsRepository
 {
@@ -37,14 +35,13 @@ class PetsRepository
     /**
      * Update pet via request.
      *
-     * @param Request $request
      * @param Pet $pet
      * @return Pet
      */
-    public static function updatePetViaRequest(Request $request, Pet $pet)
+    public function updatePetViaRequest(Pet $pet)
     {
-        UploadRepository::checkPhotoForUpload($request, $pet);
-        $pet->update(parameters()->fillPropertiesUsingResource(['name', 'description', 'hair_color', 'born_at', 'left_eye_color', 'right_eye_color', 'size', 'is_public'], $pet));
+        upload()->check($pet);
+        $pet->update(parameters()->fill(['name', 'description', 'hair_color', 'born_at', 'left_eye_color', 'right_eye_color', 'size', 'is_public'], $pet));
         $pet->load('photo', 'user');
         return $pet;
     }
@@ -52,19 +49,17 @@ class PetsRepository
     /**
      * Create pet via request.
      *
-     * @param Request $request
-     * @param Photo $photo
      * @return Pet
      */
-    public static function createPetViaRequest(Request $request)
+    public function createPetViaRequest()
     {
-        $photo = PhotoRepository::createPhotoViaRequest($request);
+        $photo = photos()->createPhotoViaRequest();
         $pet = Pet::create(array_merge([
             'photo_url' => config('storage.path') . $photo->photo_url,
-            'user_uuid' => $request->user('api')->uuid,
+            'user_uuid' => authenticated()->uuid,
             'photo_uuid' => $photo->uuid,
-            'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates')),
-        ], $request->only('name', 'description', 'hair_color', 'born_at', 'left_eye_color', 'right_eye_color', 'size', 'is_public')));
+            'location' => parser()->pointFromCoordinates(input('coordinates')),
+        ], only('name', 'description', 'hair_color', 'born_at', 'left_eye_color', 'right_eye_color', 'size', 'is_public')));
         $photo->pets()->attach($pet->uuid);
         $pet->load('user', 'photo');
         return $pet;

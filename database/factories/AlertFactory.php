@@ -33,7 +33,7 @@ $factory->define(Alert::class, function (Faker $faker) {
         'alert_id' => $alert_id,
         'title' => $faker->sentence($faker->numberBetween(5, 10)),
         'body' => $faker->sentence($faker->numberBetween(50, 200)),
-        'status' => $faker->randomElement(StatusRepository::availableAlertStatuses()),
+        'status' => $faker->randomElement(status()->values()),
         'type' => $faker->randomElement(TypeRepository::availableAlertTypes()),
     ];
 });

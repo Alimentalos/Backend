@@ -22,7 +22,7 @@ class AdminRepository
      * @param User $user
      * @return boolean
      */
-    public static function isAdmin(User $user)
+    public function isAdmin(User $user)
     {
         return in_array($user->email, static::$list);
     }

@@ -214,6 +214,7 @@ class UserTest extends TestCase
             'is_public' => true,
             'coordinates' => '5.5,6.5',
         ]);
+
         $response->assertOk();
         $response->assertJsonStructure([
             'uuid',
@@ -245,6 +246,7 @@ class UserTest extends TestCase
             'name' => 'New name',
             'coordinates' => '5.5,6.5',
         ]);
+
         $response->assertOk();
         $response->assertJsonStructure([
             'photo_url',

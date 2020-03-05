@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Find\IndexRequest;
-use App\Repositories\LocationsRepository;
 use Illuminate\Http\JsonResponse;
 
 class FindController extends Controller
@@ -17,6 +16,7 @@ class FindController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        return response()->json(LocationsRepository::fetchLastLocationsViaRequest($request),200);
+        $locations = locations()->fetchLastLocationsViaRequest();
+        return response()->json($locations,200);
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Resources;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 trait ActionResource
 {
@@ -22,12 +21,11 @@ trait ActionResource
     /**
      * Update action validation rules.
      *
-     * @param Request $request
      * @return array
      * @codeCoverageIgnore
      * @reason Actions can't be updated, are system generated.
      */
-    public function updateRules(Request $request)
+    public function updateRules()
     {
         return [];
     }
@@ -35,12 +33,11 @@ trait ActionResource
     /**
      * Store action validation rules.
      *
-     * @param Request $request
      * @return array
      * @codeCoverageIgnore
      * @reason Actions can't be created by request, are system generated.
      */
-    public function storeRules(Request $request)
+    public function storeRules()
     {
         return [];
     }
@@ -58,10 +55,9 @@ trait ActionResource
     /**
      * Get action instances.
      *
-     * @param Request $request
      * @return LengthAwarePaginator
      */
-    public function getInstances(Request $request)
+    public function getInstances()
     {
         return authenticated()->is_child ? actions()->getChildActions() : actions()->getOwnerActions();
     }

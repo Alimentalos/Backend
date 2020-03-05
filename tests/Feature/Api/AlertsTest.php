@@ -6,7 +6,6 @@ use App\Alert;
 use App\Comment;
 use App\Device;
 use App\Pet;
-use App\Photo;
 use App\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;

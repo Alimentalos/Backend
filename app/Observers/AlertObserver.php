@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Alert;
-use App\Repositories\UniqueNameRepository;
 
 class AlertObserver
 {
@@ -15,6 +14,6 @@ class AlertObserver
      */
     public function creating(Alert $alert)
     {
-        $alert->uuid = UniqueNameRepository::createIdentifier();
+        $alert->uuid = uuid();
     }
 }

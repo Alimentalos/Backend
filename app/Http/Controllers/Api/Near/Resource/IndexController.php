@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Retrieve paginated near instances.
      *
      * @param IndexRequest $request
      * @param $resource
@@ -17,6 +17,7 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json(finder()->findNearResources($resource, $request->input('coordinates'))->paginate(20),200);
+        $resources = finder()->findNearResources($resource, input('coordinates'))->paginate(20);
+        return response()->json($resources,200);
     }
 }

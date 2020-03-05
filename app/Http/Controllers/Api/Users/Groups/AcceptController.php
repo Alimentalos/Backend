@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 class AcceptController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Accept user group invitation.
      *
      * @param AcceptRequest $request
      * @param User $user

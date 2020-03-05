@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
-     * Display a list with devices of a group
+     * Retrieve paginated pets of instance.
      *
      * @param IndexRequest $request
      * @param $resource
@@ -17,6 +17,7 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json($resource->pets()->latest()->with('photo', 'user')->paginate(20),200);
+        $pets = $resource->pets()->latest()->with('photo', 'user')->paginate(20);
+        return response()->json($pets,200);
     }
 }

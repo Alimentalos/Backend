@@ -9,12 +9,15 @@ use Illuminate\Http\JsonResponse;
 class IndexController extends Controller
 {
     /**
+     * Retrieve paginated photos of instance.
+     *
      * @param IndexRequest $request
      * @param $resource
      * @return JsonResponse
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        return response()->json($resource->photos()->latest()->with('user', 'comment')->paginate(20),200);
+        $photos = $resource->photos()->latest()->with('user', 'comment')->paginate(20);
+        return response()->json($photos,200);
     }
 }

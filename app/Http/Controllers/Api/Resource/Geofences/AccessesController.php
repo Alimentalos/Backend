@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class AccessesController extends Controller
 {
     /**
-     * Fetch all Accesses of a Device.
+     * Retrieve paginated accesses of instance.
      *
      * @param AccessesRequest $request
      * @param $resource
@@ -17,6 +17,11 @@ class AccessesController extends Controller
      */
     public function __invoke(AccessesRequest $request, $resource)
     {
-        return response()->json($resource->accesses()->with(['accessible', 'geofence', 'first_location', 'last_location'])->latest()->paginate(20),200);
+        $accesses = $resource
+            ->accesses()
+            ->with(['accessible', 'geofence', 'first_location', 'last_location'])
+            ->latest()
+            ->paginate(20);
+        return response()->json($accesses, 200);
     }
 }
