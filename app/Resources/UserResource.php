@@ -15,23 +15,21 @@ trait UserResource
     /**
      * Update user via request.
      *
-     * @param Request $request
      * @return User
      */
-    public function updateViaRequest(Request $request)
+    public function updateViaRequest()
     {
-        return UsersRepository::updateUserViaRequest($request, $this);
+        return users()->updateUserViaRequest($this);
     }
 
     /**
      * Create user via request.
      *
-     * @param Request $request
      * @return User
      */
-    public function createViaRequest(Request $request)
+    public function createViaRequest()
     {
-        return UsersRepository::createUserViaRequest($request);
+        return users()->createUserViaRequest();
     }
 
     /**

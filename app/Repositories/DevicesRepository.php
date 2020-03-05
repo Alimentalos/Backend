@@ -13,16 +13,15 @@ class DevicesRepository
     /**
      * Create device via request.
      *
-     * @param Request $request
      * @return DeviceResource
      */
-    public static function createDeviceViaRequest(Request $request)
+    public static function createDeviceViaRequest()
     {
         $device = Device::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'user_uuid' => $request->user('api')->uuid,
-            'is_public' => $request->input('is_public'),
+            'name' => input('name'),
+            'description' => input('description'),
+            'user_uuid' => authenticated()->uuid,
+            'is_public' => input('is_public'),
         ]);
         return (new DeviceResource($device));
     }
@@ -30,11 +29,10 @@ class DevicesRepository
     /**
      * Update device via request.
      *
-     * @param Request $request
      * @param Device $device
      * @return DeviceResource
      */
-    public static function updateDeviceViaRequest(Request $request, Device $device)
+    public function updateDeviceViaRequest(Device $device)
     {
         $device->update(parameters()->fillPropertiesUsingResource(['name', 'description', 'is_public'], $device));
 
@@ -46,21 +44,19 @@ class DevicesRepository
      */
     public static function fetchInDatabaseDevicesQuery()
     {
-        $userGroups = auth('api')->user()->groups->pluck('uuid')->toArray();
-        return Device::where('user_uuid', auth('api')->user()->uuid)
+        $userGroups = authenticated()->groups->pluck('uuid')->toArray();
+        return Device::where('user_uuid', authenticated()->uuid)
             ->orWhere('is_public', true)
-            ->OrWhereHas('groups', function (Builder $query) use ($userGroups) {
-                $query->whereIn('uuid', $userGroups);
-            });
+            ->OrWhereHas('groups', fn(Builder $query) => $query->whereIn('uuid', $userGroups));
     }
 
     /**
      * Fetch in database devices
      * @return Device[]|Collection
      */
-    public static function fetchInDatabaseDevices()
+    public function fetchInDatabaseDevices()
     {
-        return static::fetchInDatabaseDevicesQuery()->get();
+        return $this->fetchInDatabaseDevicesQuery()->get();
     }
 
     /**
@@ -69,13 +65,13 @@ class DevicesRepository
      * @param $devices
      * @return Collection
      */
-    public static function fetchInDatabase($devices)
+    public function fetchInDatabase($devices)
     {
         if (is_null($devices) or $devices === '') {
-            return static::fetchInDatabaseDevices();
+            return $this->fetchInDatabaseDevices();
         }
         return Device::whereIn('uuid', explode(',', $devices))
-            ->where('user_uuid', auth('api')->user()->uuid)
+            ->where('user_uuid', authenticated()->uuid)
             ->get();
     }
 }

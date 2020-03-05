@@ -2,12 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Photo;
 use App\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
 class UsersRepository
 {
@@ -56,28 +53,24 @@ class UsersRepository
     /**
      * Register user via request.
      *
-     * @param Request $request
      * @return mixed
      */
-    public static function registerViaRequest(Request $request)
+    public function registerViaRequest()
     {
-        $user = User::create(array_merge([
-            'password' => bcrypt($request->input('password')),
-        ], $request->only('email', 'name', 'is_public')));
-        event(new Registered($user));
-        return $user;
+        return User::create(array_merge([
+            'password' => bcrypt(input('password')),
+        ], only('email', 'name', 'is_public')));
     }
 
     /**
      * Update user via request.
      *
-     * @param Request $request
      * @param User $user
      * @return User
      */
-    public static function updateUserViaRequest(Request $request, User $user)
+    public function updateUserViaRequest(User $user)
     {
-        UploadRepository::checkPhotoForUpload($request, $user);
+        UploadRepository::checkPhotoForUpload($user);
         $user->load('user', 'photo');
         $user->update(parameters()->fillPropertiesUsingResource(['email', 'name', 'is_public'], $user));
         return $user;
@@ -86,22 +79,19 @@ class UsersRepository
     /**
      * Create user via request.
      *
-     * @param Request $request
-     * @param Photo $photo
      * @return mixed
      */
-    public static function createUserViaRequest(Request $request)
+    public function createUserViaRequest()
     {
-        $photo = PhotoRepository::createPhotoViaRequest($request);
+        $photo = photos()->createPhotoViaRequest();
         $user = User::create(array_merge([
-            'user_uuid' => $request->user('api')->uuid,
+            'user_uuid' => authenticated()->uuid,
             'photo_uuid' => $photo->uuid,
             'photo_url' => config('storage.path') . $photo->photo_url,
-            'password' => bcrypt($request->input('password')),
-            'location' => LocationsRepository::parsePointFromCoordinates($request->input('coordinates')),
-        ], $request->only('name', 'email', 'is_public')));
+            'password' => bcrypt(input('password')),
+            'location' => parser()->pointFromCoordinates(input('coordinates')),
+        ], only('name', 'email', 'is_public')));
         $user->photos()->attach($photo->uuid);
-        event(new Registered($user));
         $user->load('photo', 'user');
         return $user;
     }
@@ -113,7 +103,7 @@ class UsersRepository
      * @param object|User $userB
      * @return bool
      */
-    public static function sameUser(User $userA, User $userB)
+    public function sameUser(User $userA, User $userB)
     {
         return $userA->uuid === $userB->uuid;
     }
@@ -125,7 +115,7 @@ class UsersRepository
      * @param object|User $userB
      * @return bool
      */
-    public static function sameOwner(User $userA, User $userB)
+    public function sameOwner(User $userA, User $userB)
     {
         return $userA->user_uuid === $userB->user_uuid;
     }
@@ -137,7 +127,7 @@ class UsersRepository
      * @param object|User $userB
      * @return bool
      */
-    public static function isOwner(User $userA, User $userB)
+    public function isOwner(User $userA, User $userB)
     {
         return $userA->uuid === $userB->user_uuid;
     }
@@ -149,7 +139,7 @@ class UsersRepository
      * @param object|User $userB
      * @return bool
      */
-    public static function isWorker(User $userA, User $userB)
+    public function isWorker(User $userA, User $userB)
     {
         return $userA->user_uuid === $userB->uuid;
     }
@@ -161,7 +151,7 @@ class UsersRepository
      * @param object|User $user
      * @return bool
      */
-    public static function isProperty(Model $model, User $user)
+    public function isProperty(Model $model, User $user)
     {
         return $model->user_uuid === $user->uuid;
     }

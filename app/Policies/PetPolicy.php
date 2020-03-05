@@ -99,7 +99,7 @@ class PetPolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($pet, $user) &&
+                users()->isProperty($pet, $user) &&
                 GroupsRepository::userIsGroupAdmin($user, $group) &&
                 !GroupsRepository::modelIsGroupModel($pet, $group)
             );
@@ -117,7 +117,7 @@ class PetPolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($pet, $user) &&
+                users()->isProperty($pet, $user) &&
                 GroupsRepository::userIsGroupAdmin($user, $group) &&
                 GroupsRepository::modelIsGroupModel($pet, $group)
             );
@@ -135,7 +135,7 @@ class PetPolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($pet, $user) &&
+                users()->isProperty($pet, $user) &&
                 !in_array($pet->uuid, $geofence->pets->pluck('uuid')->toArray())
             );
     }
@@ -152,7 +152,7 @@ class PetPolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($pet, $user) &&
+                users()->isProperty($pet, $user) &&
                 in_array($pet->uuid, $geofence->pets->pluck('uuid')->toArray())
             );
     }

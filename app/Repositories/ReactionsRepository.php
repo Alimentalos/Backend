@@ -10,14 +10,13 @@ class ReactionsRepository
     /**
      * Fetch reactions via request.
      *
-     * @param Request $request
      * @param Resource $resource
      * @return array
      */
-    public static function fetchViaRequest(Request $request, Resource $resource)
+    public function fetchViaRequest(Resource $resource)
     {
         return $resource->getAvailableReactions() == 'Follow' ?
-            LikeRepository::generateFollowStats($resource->getLoveReactant(), $request->user('api')->getLoveReacter()) :
-            LikeRepository::generateStats($resource->getLoveReactant(), $request->user('api')->getLoveReacter());
+            LikeRepository::generateFollowStats($resource->getLoveReactant(), authenticated()->getLoveReacter()) :
+            LikeRepository::generateStats($resource->getLoveReactant(), authenticated()->getLoveReacter());
     }
 }

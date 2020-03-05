@@ -27,27 +27,34 @@ class LocationsRepository
     /**
      * Fetch last locations via request.
      *
-     * @param Request $request
      * @return LocationCollection
      */
-    public static function fetchLastLocationsViaRequest(Request $request)
+    public function fetchLastLocationsViaRequest()
     {
-        $locations = static::searchLastLocations($request->input('type'),$request->input('identifiers'),$request->input('accuracy'));
+        $locations = $this->searchLastLocations(
+            request()->input('type'), request()->input('identifiers'), request()->input('accuracy')
+        );
 
-        return new LocationCollection($locations->filter(function ($location) { return !is_null($location); }));
+        return new LocationCollection(
+            $locations->filter(fn($location) => !is_null($location))
+        );
     }
 
     /**
      * Fetch locations via request.
      *
-     * @param Request $request
      * @return Collection
      */
-    public static function fetchViaRequest(Request $request)
+    public function fetchViaRequest()
     {
-        $models = finder()->findClass($request->input('type'))::whereIn('uuid', explode(',', $request->input('identifiers')))->get();
+        $class = finder()
+            ->findClass(request()->input('type'));
 
-        return static::searchLocations($models, $request->only('type', 'start_date', 'end_date', 'accuracy'));
+        $models= $class::whereIn(
+            'uuid', explode(',', request()->input('identifiers'))
+        )->get();
+
+        return $this->searchLocations($models, request()->only('type', 'start_date', 'end_date', 'accuracy'));
     }
 
     /**
@@ -58,9 +65,13 @@ class LocationsRepository
      * @param $accuracy
      * @return Collection
      */
-    public static function searchLastLocations($type, $identifiers, $accuracy)
+    public function searchLastLocations($type, $identifiers, $accuracy)
     {
-        return finder()->findModel($type)->whereIn('uuid', $identifiers)->get()->map(function ($model) use ($accuracy) { return static::searchModelLocations($model, $accuracy); });
+        return finder()
+            ->findModel($type)
+            ->whereIn('uuid', $identifiers)
+            ->get()
+            ->map(fn($model) => $this->searchModelLocations($model, $accuracy));
     }
 
     /**
@@ -70,10 +81,16 @@ class LocationsRepository
      * @param $accuracy
      * @return Builder
      */
-    public static function searchModelLocations($model, $accuracy)
+    public function searchModelLocations($model, $accuracy)
     {
         $class = get_class($model);
-        return static::orderByColumn(static::maxAccuracy(static::trackableQuery(collect([$model]), $class), $accuracy), $class::DEFAULT_LOCATION_DATE_COLUMN)->first();
+        return $this->orderByColumn(
+            $this->maxAccuracy(
+                $this->trackableQuery(collect([$model]), $class),
+                $accuracy
+            ),
+            $class::DEFAULT_LOCATION_DATE_COLUMN
+        )->first();
     }
 
     /**
@@ -83,7 +100,7 @@ class LocationsRepository
      * @param $parameters
      * @return Collection
      */
-    public static function searchLocations($devices, $parameters)
+    public function searchLocations($devices, $parameters)
     {
         return ModelLocationsRepository::filterLocations($devices, $parameters)->get();
     }

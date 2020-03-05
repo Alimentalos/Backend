@@ -13,7 +13,7 @@ class ParametersRepository
     {
         $arr = [];
         foreach ($properties as $property){
-            $arr[$property] = FillRepository::fillAttribute($property, $resource->{$property});
+            $arr[$property] = fill($property, $resource->{$property});
         }
         return $arr;
     }

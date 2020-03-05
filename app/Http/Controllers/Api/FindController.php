@@ -17,6 +17,9 @@ class FindController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        return response()->json(LocationsRepository::fetchLastLocationsViaRequest($request),200);
+        return response()->json(
+            locations()->fetchLastLocationsViaRequest(),
+            200
+        );
     }
 }

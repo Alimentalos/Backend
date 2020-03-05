@@ -39,7 +39,7 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                UsersRepository::isProperty($attached, $user) &&
+                users()->isProperty($attached, $user) &&
                 GroupsRepository::userIsGroupAdmin($user, $group) &&
                 !GroupsRepository::modelIsGroupModel($attached, $group)
             );
@@ -171,10 +171,10 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return $user->is_admin || $model->is_public || UsersRepository::isWorker($user, $model) ||
-            UsersRepository::isOwner($user, $model) ||
-            UsersRepository::sameUser($model, $user) ||
-            UsersRepository::sameOwner($model, $user);
+        return $user->is_admin || $model->is_public || users()->isWorker($user, $model) ||
+            users()->isOwner($user, $model) ||
+            users()->sameUser($model, $user) ||
+            users()->sameOwner($model, $user);
     }
 
     /**
@@ -210,7 +210,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->is_admin ||  UsersRepository::sameUser($model, $user) || UsersRepository::isOwner($user, $model);
+        return $user->is_admin ||  users()->sameUser($model, $user) || users()->isOwner($user, $model);
     }
 
     /**
@@ -222,6 +222,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return $user->is_admin || UsersRepository::isOwner($user, $model);
+        return $user->is_admin || users()->isOwner($user, $model);
     }
 }

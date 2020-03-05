@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Parsers;
 
-use App\Repositories\LocationsRepository;
+namespace App\Repositories;
+
+
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 
-trait LocationParser
+class ParserRepository
 {
     /**
      * Parse data latitude and longitude to Spatial Point type
@@ -14,7 +15,7 @@ trait LocationParser
      * @param $data
      * @return Point
      */
-    public function parsePoint($data)
+    public function point($data)
     {
         return new Point(
             $data["location"]["coords"]["latitude"],
@@ -28,7 +29,7 @@ trait LocationParser
      * @param $coordinates
      * @return Point
      */
-    public function parsePointFromCoordinates($coordinates)
+    public function pointFromCoordinates($coordinates)
     {
         $array = explode(',', $coordinates);
         return (new Point(
@@ -43,7 +44,7 @@ trait LocationParser
      * @param $data
      * @return Carbon
      */
-    public function parseTimestamp($data)
+    public function timestamp($data)
     {
         return Carbon::parse($data["location"]["timestamp"])->subHours(3);
     }
@@ -54,7 +55,7 @@ trait LocationParser
      * @param $data
      * @return string|null
      */
-    public function parseEvent($data)
+    public function event($data)
     {
         return array_key_exists("event", $data["location"]) ? $data["location"]["event"] : 'default';
     }

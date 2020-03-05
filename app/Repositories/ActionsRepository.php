@@ -19,8 +19,12 @@ class ActionsRepository
         return Action::with('user')
             ->whereIn(
                 'user_uuid',
-                authenticated()->users->pluck('uuid')->push(authenticated()->uuid)->toArray())
-            ->paginate(25);
+                authenticated()
+                    ->users
+                    ->pluck('uuid')
+                    ->push(authenticated()->uuid)
+                    ->toArray()
+            )->paginate(25);
     }
 
     /**
@@ -30,7 +34,9 @@ class ActionsRepository
      */
     public function getChildActions()
     {
-        return Action::with('user')->where('user_uuid', authenticated()->uuid)->paginate(25);
+        return Action::with('user')
+            ->where('user_uuid', authenticated()->uuid)
+            ->paginate(25);
     }
 
     /**

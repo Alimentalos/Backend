@@ -18,6 +18,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        return response()->json(new LocationCollection(LocationsRepository::fetchViaRequest($request)),200);
+        return response()->json(new LocationCollection(locations()->fetchViaRequest($request)),200);
     }
 }
