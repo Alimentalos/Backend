@@ -26,7 +26,7 @@ class PhotoRepository
      */
     public function updatePhotoViaRequest(Photo $photo)
     {
-        $photo->update(parameters()->fillPropertiesUsingResource(['title', 'description', 'is_public'], $photo));
+        $photo->update(parameters()->fill(['title', 'description', 'is_public'], $photo));
         $photo->load('user');
         return $photo;
     }
@@ -40,7 +40,7 @@ class PhotoRepository
     {
         $photo = $this->createPhotoUsingRequest();
         $this->createDefaultPhotoCommentUsingRequest($photo);
-        $this->storePhoto($photo->uuid, request()->file('photo'));
+        $this->storePhoto($photo->uuid, uploaded('photo'));
         return $photo;
     }
 
@@ -51,13 +51,13 @@ class PhotoRepository
      */
     public function createPhotoUsingRequest()
     {
-        $photoUniqueName = UniqueNameRepository::createIdentifier();
+        $photoUniqueName = uuid();
         $photo = Photo::create([
             'user_uuid' => authenticated()->uuid,
             'uuid' => $photoUniqueName,
-            'photo_url' => $photoUniqueName . request()->file('photo')->extension(),
-            'ext' => request()->file('photo')->extension(),
-            'is_public' => FillRepository::fillAttribute('is_public', true),
+            'photo_url' => $photoUniqueName . uploaded('photo')->extension(),
+            'ext' => uploaded('photo')->extension(),
+            'is_public' => fill('is_public', true),
             'location' => parser()->pointFromCoordinates(input('coordinates'))
         ]);
         $photo->load('user');
@@ -72,7 +72,7 @@ class PhotoRepository
     public function createDefaultPhotoCommentUsingRequest(Photo $photo)
     {
         $comment = $photo->comments()->create(array_merge([
-            'uuid' => UniqueNameRepository::createIdentifier(),
+            'uuid' => uuid(),
             'user_uuid' => authenticated()->uuid,
         ], only('title', 'body', 'is_public')));
         $photo->comment()->associate($comment);

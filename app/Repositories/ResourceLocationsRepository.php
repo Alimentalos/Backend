@@ -19,7 +19,7 @@ class ResourceLocationsRepository
         $model = modelLocations()->resolveLocationModel();
         $location = modelLocations()->createLocation($model, $request->all());
         $model->update(["location" => parser()->point($request->all())]);
-        GeofenceRepository::checkLocationUsingModelGeofences($model, $location);
+        geofences()->checkLocationUsingModelGeofences($model, $location);
         $payload = new LocationResource($location);
         event(new LocationEvent($payload, $model));
         return $payload;

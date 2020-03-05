@@ -21,7 +21,7 @@ class AlertsRepository
             ->whereIn(
                 'status',
                 request()->has('whereInStatus') ?
-                    explode(',', input('whereInStatus')) : StatusRepository::availableAlertStatuses() // Filter by statuses
+                    einput(',','whereInStatus') : status()->values() // Filter by statuses
             )->latest('created_at')->paginate(25);
     }
 
@@ -70,8 +70,8 @@ class AlertsRepository
      */
     public function updateAlertViaRequest(Alert $alert)
     {
-        UploadRepository::checkPhotoForUpload($alert);
-        $alert->update(parameters()->fillPropertiesUsingResource(['type', 'status', 'title', 'body'], $alert));
+        upload()->check($alert);
+        $alert->update(parameters()->fill(['type', 'status', 'title', 'body'], $alert));
         $alert->load('photo', 'user', 'alert');
         return $alert;
     }

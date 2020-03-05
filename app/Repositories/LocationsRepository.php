@@ -31,9 +31,7 @@ class LocationsRepository
      */
     public function fetchLastLocationsViaRequest()
     {
-        $locations = $this->searchLastLocations(
-            request()->input('type'), request()->input('identifiers'), request()->input('accuracy')
-        );
+        $locations = $this->searchLastLocations(input('type'), input('identifiers'), input('accuracy'));
 
         return new LocationCollection(
             $locations->filter(fn($location) => !is_null($location))
@@ -48,13 +46,11 @@ class LocationsRepository
     public function fetchViaRequest()
     {
         $class = finder()
-            ->findClass(request()->input('type'));
+            ->findClass(input('type'));
 
-        $models= $class::whereIn(
-            'uuid', explode(',', request()->input('identifiers'))
-        )->get();
+        $models= $class::whereIn('uuid', einput(',', 'identifiers'))->get();
 
-        return $this->searchLocations($models, request()->only('type', 'start_date', 'end_date', 'accuracy'));
+        return $this->searchLocations($models, only('type', 'start_date', 'end_date', 'accuracy'));
     }
 
     /**
@@ -102,6 +98,6 @@ class LocationsRepository
      */
     public function searchLocations($devices, $parameters)
     {
-        return ModelLocationsRepository::filterLocations($devices, $parameters)->get();
+        return modelLocations()->filterLocations($devices, $parameters)->get();
     }
 }

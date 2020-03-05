@@ -4,14 +4,13 @@ namespace App\Repositories;
 
 use App\Contracts\Resource;
 use App\Photo;
-use Illuminate\Http\Request;
 
 class ResourcePhotosRepository
 {
     /**
      * Create resource photo via request.
      *
-     * @param $resource
+     * @param Resource $resource
      * @return Photo
      */
     public function createPhotoViaRequest(Resource $resource)

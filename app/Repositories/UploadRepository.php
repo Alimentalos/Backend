@@ -4,17 +4,16 @@
 namespace App\Repositories;
 
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use App\Contracts\Resource;
 
 class UploadRepository
 {
     /**
      * Check if request has a model photo pending to upload.
      *
-     * @param Model $model
+     * @param Resource $model
      */
-    public static function checkPhotoForUpload(Model $model)
+    public function check(Resource $model)
     {
         if (request()->has('photo')) {
             $photo = photos()->createPhotoViaRequest();

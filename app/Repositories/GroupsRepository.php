@@ -15,7 +15,7 @@ class GroupsRepository
         return Group::with('user', 'photo')
             ->where('user_uuid', authenticated()->uuid)
             ->orWhere('is_public', true)
-            ->orWhereIn('uuid', authenticated()->groups->map(function($group) { return $group->uuid; }))
+            ->orWhereIn('uuid', authenticated()->groups->pluck('uuid')->toArray())
             ->latest()
             ->paginate(25);
     }
@@ -41,8 +41,8 @@ class GroupsRepository
      */
     public static function updateGroupViaRequest(Request $request, Group $group)
     {
-        UploadRepository::checkPhotoForUpload($request, $group);
-        $group->update(parameters()->fillPropertiesUsingResource(['name', 'is_public'], $group));
+        upload()->check($group);
+        $group->update(parameters()->fill(['name', 'is_public'], $group));
         $group->load('photo', 'user');
         return $group;
     }
@@ -50,26 +50,25 @@ class GroupsRepository
     /**
      * Create group via request.
      *
-     * @param Request $request
      * @return Group
      */
-    public static function createGroupViaRequest(Request $request)
+    public static function createGroupViaRequest()
     {
-        $photo = PhotoRepository::createPhotoViaRequest($request);
+        $photo = photos()->createPhotoViaRequest();
         $group = Group::create([
-            'name' => $request->input('name'),
-            'user_uuid' => $request->user('api')->uuid,
+            'name' => input('name'),
+            'user_uuid' => authenticated()->uuid,
             'photo_uuid' => $photo->uuid,
             'photo_url' => config('storage.path') . $photo->photo_url,
         ]);
-        $request->user('api')
+        authenticated()
             ->groups()
             ->attach(
                 $group->uuid,
                 [
                     'is_admin' => true,
                     'status' => Group::ACCEPTED_STATUS,
-                    'sender_uuid' => $request->user('api')->uuid,
+                    'sender_uuid' => authenticated()->uuid,
                 ]
             );
         $group->photos()->attach($photo->uuid);

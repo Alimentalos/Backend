@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Auth;
 class TokenRepository
 {
     /**
+     * Handle token retrieve attempt.
+     *
      * @return JsonResponse
      */
-    public static function handleAuthentication()
+    public function handle()
     {
         if (Auth::once(only('email', 'password')) && !is_null(Auth::user()->email_verified_at)) {
             // Authentication passed...
