@@ -4,8 +4,6 @@
 namespace App\Procedures;
 
 
-use App\Repositories\UniqueNameRepository;
-
 trait ActionProcedure
 {
     /**

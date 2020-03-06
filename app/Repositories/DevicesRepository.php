@@ -5,8 +5,6 @@ namespace App\Repositories;
 use App\Device;
 use App\Http\Resources\Device as DeviceResource;
 use App\Lists\DeviceList;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 
 class DevicesRepository
 {

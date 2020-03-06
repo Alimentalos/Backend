@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Comment;
-use Illuminate\Http\Request;
 
 class CommentsRepository
 {

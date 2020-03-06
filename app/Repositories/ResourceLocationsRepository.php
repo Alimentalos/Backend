@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Creations\ResourceLocation as CreatesLocation;
 use App\Events\Location as LocationEvent;
 use App\Http\Resources\Location as LocationResource;
-use App\Creations\ResourceLocation as CreatesLocation;
 use App\Procedures\ResourceLocationProcedure;
 use App\Queries\LocationQuery;
 
