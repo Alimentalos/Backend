@@ -3,10 +3,12 @@
 namespace App\Repositories;
 
 use App\Photo;
-use Illuminate\Support\Facades\Storage;
+use App\Procedures\PhotoProcedure;
 
 class PhotoRepository
 {
+    use PhotoProcedure;
+
     /**
      * Default photo disk path.
      */
@@ -23,7 +25,7 @@ class PhotoRepository
      * @param Photo $photo
      * @return Photo
      */
-    public function updatePhotoViaRequest(Photo $photo)
+    public function updateViaRequest(Photo $photo)
     {
         $photo->update(parameters()->fill(['title', 'description', 'is_public'], $photo));
         $photo->load('user');
@@ -35,62 +37,11 @@ class PhotoRepository
      *
      * @return Photo
      */
-    public function createPhotoViaRequest()
+    public function createViaRequest()
     {
-        $photo = $this->createPhotoUsingRequest();
-        $this->createDefaultPhotoCommentUsingRequest($photo);
+        $photo = $this->createInstance();
+        $this->createComment($photo);
         $this->storePhoto($photo->uuid, uploaded('photo'));
         return $photo;
-    }
-
-    /**
-     * Create photo instance using request.
-     *
-     * @return mixed
-     */
-    public function createPhotoUsingRequest()
-    {
-        $photoUniqueName = uuid();
-        $photo = Photo::create([
-            'user_uuid' => authenticated()->uuid,
-            'uuid' => $photoUniqueName,
-            'photo_url' => $photoUniqueName . uploaded('photo')->extension(),
-            'ext' => uploaded('photo')->extension(),
-            'is_public' => fill('is_public', true),
-            'location' => parser()->pointFromCoordinates(input('coordinates'))
-        ]);
-        $photo->load('user');
-        return $photo;
-    }
-
-    /**
-     * Create default photo comment using request.
-     *
-     * @param Photo $photo
-     */
-    public function createDefaultPhotoCommentUsingRequest(Photo $photo)
-    {
-        $comment = $photo->comments()->create(array_merge([
-            'uuid' => uuid(),
-            'user_uuid' => authenticated()->uuid,
-        ], only('title', 'body', 'is_public')));
-        $photo->comment()->associate($comment);
-    }
-
-
-    /**
-     * Store photo.
-     *
-     * @param $uniqueName
-     * @param $fileContent
-     */
-    public function storePhoto($uniqueName, $fileContent)
-    {
-        Storage::disk(static::DEFAULT_DISK)
-            ->putFileAs(
-                static::DEFAULT_PHOTOS_DISK_PATH,
-                $fileContent,
-                ($uniqueName . $fileContent->extension())
-            );
     }
 }

@@ -3,14 +3,12 @@
 namespace App\Repositories;
 
 use App\Comment;
-use Illuminate\Http\Request;
 
 class CommentsRepository
 {
     /**
      * Update comment via request.
      *
-     * @param Request $request
      * @param Comment $comment
      * @return Comment
      */

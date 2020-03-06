@@ -37,8 +37,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 users()->isProperty($attached, $user) &&
-                groups()->userIsGroupAdmin($user, $group) &&
-                !groups()->modelIsGroupModel($attached, $group)
+                groups()->hasAdministrator($group, $user) &&
+                !resources()->hasGroup($attached, $group)
             );
     }
 
@@ -55,9 +55,9 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid !== $invited->uuid &&
-                groups()->userIsGroupAdmin($user, $group) &&
-                !groups()->modelIsGroupModel($invited, $group) &&
-                !groups()->modelIsBlocked($invited, $group)
+                groups()->hasAdministrator($group, $user) &&
+                !resources()->hasGroup($invited, $group) &&
+                !resources()->isBlocked($invited, $group)
             );
     }
 
@@ -74,8 +74,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !groups()->modelIsGroupModel($invited, $group) &&
-                !groups()->modelIsBlocked($invited, $group)
+                !resources()->hasGroup($invited, $group) &&
+                !resources()->isBlocked($invited, $group)
             );
     }
 
@@ -92,8 +92,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !groups()->modelIsGroupModel($invited, $group) &&
-                !groups()->modelIsBlocked($invited, $group)
+                !resources()->hasGroup($invited, $group) &&
+                !resources()->isBlocked($invited, $group)
             );
     }
 
@@ -110,8 +110,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !groups()->modelIsGroupModel($invited, $group) &&
-                !groups()->modelIsBlocked($invited, $group)
+                !resources()->hasGroup($invited, $group) &&
+                !resources()->isBlocked($invited, $group)
             );
     }
 
@@ -128,8 +128,8 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                groups()->userIsGroupAdmin($user, $group) &&
-                groups()->modelIsGroupModel($detached, $group)
+                groups()->hasAdministrator($group, $user) &&
+                resources()->hasGroup($detached, $group)
             );
     }
 

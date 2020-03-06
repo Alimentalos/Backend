@@ -32,7 +32,7 @@ class DevicePolicy
      */
     public function view(User $user, Device $device)
     {
-        return $user->is_admin || $device->is_public || groups()->userHasModel($user, $device);
+        return $user->is_admin || $device->is_public || users()->hasIndirectRelationship($user, $device);
     }
 
     /**
@@ -59,8 +59,8 @@ class DevicePolicy
         return $user->is_admin ||
             (
                 users()->isProperty($device, $user) &&
-                groups()->userIsGroupAdmin($user, $group) &&
-                !groups()->modelIsGroupModel($device, $group)
+                groups()->hasAdministrator($group, $user) &&
+                !resources()->hasGroup($device, $group)
             );
     }
 
@@ -77,8 +77,8 @@ class DevicePolicy
         return $user->is_admin ||
             (
                 users()->isProperty($device, $user) &&
-                groups()->userIsGroupAdmin($user, $group) &&
-                groups()->modelIsGroupModel($device, $group)
+                groups()->hasAdministrator($group, $user) &&
+                resources()->hasGroup($device, $group)
             );
     }
 

@@ -97,8 +97,8 @@ class PetPolicy
         return $user->is_admin ||
             (
                 users()->isProperty($pet, $user) &&
-                groups()->userIsGroupAdmin($user, $group) &&
-                !groups()->modelIsGroupModel($pet, $group)
+                groups()->hasAdministrator($group, $user) &&
+                !resources()->hasGroup($pet, $group)
             );
     }
 
@@ -115,8 +115,8 @@ class PetPolicy
         return $user->is_admin ||
             (
                 users()->isProperty($pet, $user) &&
-                groups()->userIsGroupAdmin($user, $group) &&
-                groups()->modelIsGroupModel($pet, $group)
+                groups()->hasAdministrator($group, $user) &&
+                resources()->hasGroup($pet, $group)
             );
     }
 

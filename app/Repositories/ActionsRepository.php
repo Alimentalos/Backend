@@ -3,39 +3,15 @@
 namespace App\Repositories;
 
 use App\Action;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Lists\ActionList;
+use App\Procedures\ActionProcedure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 class ActionsRepository
 {
-    /**
-     * Get owner actions.
-     *
-     * @return LengthAwarePaginator
-     */
-    public function getOwnerActions()
-    {
-        return Action::with('user')
-            ->whereIn('user_uuid', authenticated()
-                ->users
-                ->pluck('uuid')
-                ->push(authenticated()->uuid)
-                ->toArray()
-            )->paginate(25);
-    }
-
-    /**
-     * Get child actions.
-     *
-     * @return LengthAwarePaginator
-     */
-    public function getChildActions()
-    {
-        return Action::with('user')
-            ->where('user_uuid', authenticated()->uuid)
-            ->paginate(25);
-    }
+    use ActionList;
+    use ActionProcedure;
 
     /**
      * Resolve binding parameters to create activity logs.
@@ -115,7 +91,7 @@ class ActionsRepository
      */
     public function createAction($type, $resource, $parameters)
     {
-        return Action::create($this->buildCreateParameters($type, $parameters, $resource));
+        return Action::create($this->parameters($type, $parameters, $resource));
     }
 
     /**
@@ -127,30 +103,9 @@ class ActionsRepository
     public function createReferencedAction($parameters)
     {
         return Action::create(
-            $this->buildCreateParameters(
+            $this->parameters(
                 $parameters['type'], $parameters['parameters'], $parameters['resource'], $parameters['referenced']
             )
         );
-    }
-
-    /**
-     * Create parameters for action create.
-     *
-     * @param $type
-     * @param $parameters
-     * @param $resource
-     * @param null $referenced
-     * @return array
-     */
-    public function buildCreateParameters($type, $parameters, $resource, $referenced = null)
-    {
-        return [
-            'uuid' => UniqueNameRepository::createIdentifier(),
-            'type' => $type,
-            'parameters' => $parameters,
-            'resource' => $resource,
-            'user_uuid' => authenticated()->uuid,
-            'referenced_uuid' => $referenced,
-        ];
     }
 }

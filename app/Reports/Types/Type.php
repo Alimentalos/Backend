@@ -92,7 +92,7 @@ class Type
      */
     public function getFilterableQuery()
     {
-        return modelLocations()->filterLocations( // Search locations
+        return resourceLocations()->filterLocations( // Search locations
             $this->devices, // of those devices
             [
                 'type' => 'devices',

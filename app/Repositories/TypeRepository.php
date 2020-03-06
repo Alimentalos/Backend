@@ -26,7 +26,7 @@ class TypeRepository
      *
      * @return array
      */
-    public static function availableAlertTypes()
+    public static function values()
     {
         return [
             self::FOUND,

@@ -13,10 +13,10 @@ class ResourcePhotosRepository
      * @param Resource $resource
      * @return Photo
      */
-    public function createPhotoViaRequest(Resource $resource)
+    public function createViaRequest(Resource $resource)
     {
-        $photo = photos()->createPhotoViaRequest();
-        $resource = modelLocations()->updateModelLocation($resource);
+        $photo = photos()->createViaRequest();
+        $resource = resourceLocations()->update($resource);
         $resource->photos()->attach($photo->uuid);
         $photo->load('comment');
         return $photo;
