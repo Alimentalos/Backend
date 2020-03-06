@@ -10,27 +10,69 @@ class LocationsController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/{resource}/locations",
-     *      operationId="createResourceLocationInstance",
-     *      tags={"Resources"},
-     *      summary="Create resource locations instance.",
-     *      description="Returns the recently created location instance as JSON Object.",
+     *      path="/pet/locations",
+     *      operationId="createPetLocationInstance",
+     *      tags={"Locations"},
+     *      summary="Create location of pet.",
+     *      description="Returns the recently created location of pet as JSON Object.",
      *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
+     *          name="api_token",
+     *          description="Pet personal access token",
      *          required=true,
-     *          in="path",
+     *          in="query",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource location instance created successfully"
+     *          description="Pet location created successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      * )
-     * Create resource locations instance.
+     * @OA\Post(
+     *      path="/user/locations",
+     *      operationId="createUserLocationInstance",
+     *      tags={"Locations"},
+     *      summary="Create location of user.",
+     *      description="Returns the recently created location of user as JSON Object.",
+     *      @OA\Parameter(
+     *          name="api_token",
+     *          description="User personal access token",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="User location instance created successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     * )
+     * @OA\Post(
+     *      path="/device/locations",
+     *      operationId="createDeviceLocationInstance",
+     *      tags={"Locations"},
+     *      summary="Create location of device.",
+     *      description="Returns the recently created location of device as JSON Object.",
+     *      @OA\Parameter(
+     *          name="api_token",
+     *          description="User personal access token",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Device location instance created successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     * )
+     * Create resource locations.
      *
      * @param AuthorizedRequest $request
      * @return JsonResponse

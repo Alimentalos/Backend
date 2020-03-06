@@ -35,7 +35,7 @@ class GeofenceIn implements ShouldBroadcast
     public $type;
 
     /**
-     * Create a new event instance.
+     * Create a new event.
      *
      * @param Model $location
      * @param Geofence $geofence

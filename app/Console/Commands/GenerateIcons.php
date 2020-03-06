@@ -21,7 +21,7 @@ class GenerateIcons extends Command
     protected $description = 'Generate SVG Icons for Map';
 
     /**
-     * Create a new command instance.
+     * Create a new command.
      *
      * @return void
      */

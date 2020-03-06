@@ -9,6 +9,18 @@ use Illuminate\Http\JsonResponse;
 class RegisterController extends Controller
 {
     /**
+     * @OA\Post(
+     *  path="/register",
+     *  operationId="registerUser",
+     *  tags={"Authentication"},
+     *  summary="Crea user via register.",
+     *  description="Returns the registered user as JSON Object.",
+     *  @OA\Response(
+     *      response=200,
+     *      description="User registered successfully"
+     *  ),
+     *  @OA\Response(response=401, description="Unauthenticated.")
+     *  )
      * Handle the incoming request.
      *
      * @param RegisterRequest $request

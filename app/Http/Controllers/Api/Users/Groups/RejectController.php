@@ -15,8 +15,8 @@ class RejectController extends Controller
      *      path="/users/{user}/groups/{group}/reject",
      *      operationId="rejectUserGroupInstance",
      *      tags={"Users"},
-     *      summary="Reject user group invitation.",
-     *      description="Returns empty array as JSON response.",
+     *      summary="Reject user invitation to join group.",
+     *      description="Update the user relationship status of group by setting as REJECTED only when user is the authenticated and has one PENDING invitation.",
      *      @OA\Parameter(
      *          name="user",
      *          description="User identifier",

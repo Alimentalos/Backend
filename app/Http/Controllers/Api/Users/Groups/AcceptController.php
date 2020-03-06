@@ -15,8 +15,8 @@ class AcceptController extends Controller
      *      path="/users/{user}/groups/{group}/accept",
      *      operationId="acceptUserGroupInstance",
      *      tags={"Users"},
-     *      summary="Accept user group invitation.",
-     *      description="Returns empty array as JSON response.",
+     *      summary="Accept invitation to join group of user.",
+     *      description="Update the user relationship status of group by setting as ACCEPTED only when user is the authenticated and has one PENDING invitation.",
      *      @OA\Parameter(
      *          name="user",
      *          description="User identifier",

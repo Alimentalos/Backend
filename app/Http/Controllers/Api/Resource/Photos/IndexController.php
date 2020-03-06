@@ -10,14 +10,14 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/{resource}/photos",
-     *      operationId="getResourcePhotosPaginated",
-     *      tags={"Resources"},
-     *      summary="Get resource photos paginated.",
-     *      description="Returns the resource photos instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      path="/pets/{pet}/photos",
+     *      operationId="getPetPhotos",
+     *      tags={"Pets"},
+     *      summary="Get photos of user.",
+     *      description="Returns the pet photos paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
+     *          name="pet",
+     *          description="Unique identifier of pet",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -26,10 +26,72 @@ class IndexController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource photos retrieved successfully"
+     *          description="Photos retrieved successfully"
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource doesn't implements has photos trait"),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Get(
+     *      path="/geofences/{geofence}/photos",
+     *      operationId="getGeofencePhotos",
+     *      tags={"Geofences"},
+     *      summary="Get photos of geofence.",
+     *      description="Returns the geofence photos paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="geofence",
+     *          description="Unique identifier of geofence",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Photos retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Get(
+     *      path="/users/{user}/photos",
+     *      operationId="getUserPhotos",
+     *      tags={"Users"},
+     *      summary="Get photos of user.",
+     *      description="Returns the user photos paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="user",
+     *          description="Unique identifier of user",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Photos retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Get(
+     *      path="/groups/{group}/photos",
+     *      operationId="getGroupPhotos",
+     *      tags={"Groups"},
+     *      summary="Get photos of group.",
+     *      description="Returns the group photos paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="group",
+     *          description="Unique identifier of group",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Photos retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
      * )
      * Get resource photos paginated.
      *

@@ -10,14 +10,14 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/{resource}/groups",
-     *      operationId="getResourceGroupsPaginated",
-     *      tags={"Resources"},
-     *      summary="Get resource groups paginated.",
-     *      description="Returns the resource groups instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      path="/geofences/{geofence}/groups",
+     *      operationId="getGeofenceGroups",
+     *      tags={"Geofences"},
+     *      summary="Get groups of geofence.",
+     *      description="Returns the groups of geofence paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
+     *          name="geofence",
+     *          description="Unique identifier of geofence",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -26,10 +26,72 @@ class IndexController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource groups retrieved successfully"
+     *          description="Groups retrieved successfully"
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource doesn't implements has groups trait"),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Get(
+     *      path="/pets/{pet}/groups",
+     *      operationId="getPetGroups",
+     *      tags={"Pets"},
+     *      summary="Get groups of pet.",
+     *      description="Returns the groups of pet paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="pet",
+     *          description="Unique identifier of pet",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Groups retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Get(
+     *      path="/devices/{device}/groups",
+     *      operationId="getDeviceGroups",
+     *      tags={"Devices"},
+     *      summary="Get groups of device.",
+     *      description="Returns the groups of device paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="device",
+     *          description="Unique identifier of device",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Groups retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Get(
+     *      path="/users/{user}/groups",
+     *      operationId="getUserGroups",
+     *      tags={"Users"},
+     *      summary="Get groups of user.",
+     *      description="Returns the groups of user paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="user",
+     *          description="Unique identifier of user",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Groups retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
      * )
      * Get resource groups paginated.
      *

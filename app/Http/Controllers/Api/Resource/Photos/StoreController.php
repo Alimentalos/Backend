@@ -10,14 +10,14 @@ class StoreController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/{resource}/photos",
-     *      operationId="createResourcePhotoInstance",
-     *      tags={"Resources"},
-     *      summary="Create resource photo instance.",
-     *      description="Returns the recently created resource photo instance as JSON Object.",
+     *      path="/users/{user}/photos",
+     *      operationId="createUserPhoto",
+     *      tags={"Users"},
+     *      summary="Create photo of user.",
+     *      description="Returns the recently created photo as JSON Object.",
      *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
+     *          name="user",
+     *          description="Unique identifier of user",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -26,12 +26,74 @@ class StoreController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource photo instance created successfully"
+     *          description="Photo created successfully"
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource doesn't implements has photos trait"),
+     *      @OA\Response(response=400, description="Bad request")
      * )
-     * Create resource photo instance.
+     * @OA\Post(
+     *      path="/groups/{group}/photos",
+     *      operationId="createGroupPhoto",
+     *      tags={"Groups"},
+     *      summary="Create photo of group.",
+     *      description="Returns the recently created photo as JSON Object.",
+     *      @OA\Parameter(
+     *          name="group",
+     *          description="Unique identifier of group",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Photo created successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Post(
+     *      path="/geofences/{geofence}/photos",
+     *      operationId="createGeofencePhoto",
+     *      tags={"Groups"},
+     *      summary="Create photo of geofence.",
+     *      description="Returns the recently created photo as JSON Object.",
+     *      @OA\Parameter(
+     *          name="geofence",
+     *          description="Unique identifier of geofence",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Photo created successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Post(
+     *      path="/pets/{pet}/photos",
+     *      operationId="createPetPhoto",
+     *      tags={"Pets"},
+     *      summary="Create photo of pet.",
+     *      description="Returns the recently created photo as JSON Object.",
+     *      @OA\Parameter(
+     *          name="pet",
+     *          description="Unique identifier of pet",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Photo created successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * Create resource photo.
      *
      * @param StoreRequest $request
      * @param $resource
