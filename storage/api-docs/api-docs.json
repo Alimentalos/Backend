@@ -19,6 +19,83 @@
         }
     ],
     "paths": {
+        "/find": {
+            "get": {
+                "tags": [
+                    "Find"
+                ],
+                "summary": "Find the last known location of resources.",
+                "description": "Returns resource locations.",
+                "operationId": "findResources",
+                "parameters": [
+                    {
+                        "name": "identifiers",
+                        "in": "query",
+                        "description": "Array with identifiers",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Resource type that need to be considered for filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "pets",
+                                "enum": [
+                                    "pets",
+                                    "users",
+                                    "devices"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "description": "Start date that need to be considered filter, only dates with format Y-m-d H:i:s are accepted.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "query",
+                        "description": "End date that need to be considered filter, only dates with format Y-m-d H:i:s are accepted.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "accuracy",
+                        "in": "query",
+                        "description": "Max accuracy that need to be considered filter.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Locations retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
         "/geofences/{geofence}/{resource}/accesses": {
             "get": {
                 "tags": [
@@ -638,19 +715,163 @@
                 }
             }
         },
-        "/{resource}/locations": {
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get users paginated.",
+                "description": "Returns the users paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getUsers",
+                "responses": {
+                    "200": {
+                        "description": "Users retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/groups": {
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Get groups paginated.",
+                "description": "Returns the groups paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getGroups",
+                "responses": {
+                    "200": {
+                        "description": "Groups retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/alerts": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Get alerts paginated.",
+                "description": "Returns the alerts paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getAlerts",
+                "responses": {
+                    "200": {
+                        "description": "Alerts retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/devices": {
+            "get": {
+                "tags": [
+                    "Devices"
+                ],
+                "summary": "Get devices paginated.",
+                "description": "Returns the devices paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getDevicesPaginated",
+                "responses": {
+                    "200": {
+                        "description": "Devices retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/geofences": {
+            "get": {
+                "tags": [
+                    "Geofences"
+                ],
+                "summary": "Get geofences paginated.",
+                "description": "Returns the geofences paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getGeofences",
+                "responses": {
+                    "200": {
+                        "description": "Geofences retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/pets": {
+            "get": {
+                "tags": [
+                    "Pets"
+                ],
+                "summary": "Get pets paginated.",
+                "description": "Returns the pets paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getPets",
+                "responses": {
+                    "200": {
+                        "description": "Pets retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/actions": {
+            "get": {
+                "tags": [
+                    "Actions"
+                ],
+                "summary": "Get actions paginated.",
+                "description": "Returns the actions paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getActions",
+                "responses": {
+                    "200": {
+                        "description": "Actions retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/photos": {
+            "get": {
+                "tags": [
+                    "Photos"
+                ],
+                "summary": "Get photos paginated.",
+                "description": "Returns the photos paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getPhotos",
+                "responses": {
+                    "200": {
+                        "description": "Photos retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/pet/locations": {
             "post": {
                 "tags": [
-                    "Resources"
+                    "Pets"
                 ],
-                "summary": "Create resource locations instance.",
-                "description": "Returns the recently created location instance as JSON Object.",
-                "operationId": "createResourceLocationInstance",
+                "summary": "Create location of pet.",
+                "description": "Returns the recently created location of pet as JSON Object.",
+                "operationId": "createPetLocationInstance",
                 "parameters": [
                     {
-                        "name": "resource",
-                        "in": "path",
-                        "description": "Resource class type",
+                        "name": "api_token",
+                        "in": "query",
+                        "description": "Pet personal access token",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -659,7 +880,65 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Resource location instance created successfully"
+                        "description": "Pet location created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/user/locations": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create location of user.",
+                "description": "Returns the recently created location of user as JSON Object.",
+                "operationId": "createUserLocationInstance",
+                "parameters": [
+                    {
+                        "name": "api_token",
+                        "in": "query",
+                        "description": "User personal access token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User location instance created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/device/{uuid}/locations": {
+            "post": {
+                "tags": [
+                    "Devices"
+                ],
+                "summary": "Create location of device.",
+                "description": "Returns the recently created location of device as JSON Object.",
+                "operationId": "createDeviceLocationInstance",
+                "parameters": [
+                    {
+                        "name": "api_token",
+                        "in": "query",
+                        "description": "User personal access token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Device location instance created successfully"
                     },
                     "400": {
                         "description": "Bad request"
@@ -817,28 +1096,19 @@
                 }
             }
         },
-        "/{resource}/{uuid}": {
+        "/users/{uuid}": {
             "get": {
                 "tags": [
-                    "Resources"
+                    "Users"
                 ],
-                "summary": "Get specific instance of resource.",
-                "description": "Returns the specified resource instance identified by UUID as JSON Object.",
-                "operationId": "getResourceInstance",
+                "summary": "Get specific user.",
+                "description": "Returns the specified user as JSON Object.",
+                "operationId": "getUser",
                 "parameters": [
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "description": "Resource class type",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "name": "uuid",
                         "in": "path",
-                        "description": "Unique universally identifier of specific Resource class instance",
+                        "description": "Unique universally identifier of user",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -847,16 +1117,306 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Resource instance retrieved successfully"
+                        "description": "User retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
                     },
                     "404": {
-                        "description": "Resource Not Found"
+                        "description": "User not found"
                     }
                 }
-            },
+            }
+        },
+        "/devices/{uuid}": {
+            "get": {
+                "tags": [
+                    "Devices"
+                ],
+                "summary": "Get specific device.",
+                "description": "Returns the specified device as JSON Object.",
+                "operationId": "getUser",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of device",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Device retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Device not found"
+                    }
+                }
+            }
+        },
+        "/groups/{uuid}": {
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Get specific group.",
+                "description": "Returns the specified group as JSON Object.",
+                "operationId": "getGroup",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of group",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Group retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Group not found"
+                    }
+                }
+            }
+        },
+        "/pets/{uuid}": {
+            "get": {
+                "tags": [
+                    "Pets"
+                ],
+                "summary": "Get specific pet.",
+                "description": "Returns the specified pet as JSON Object.",
+                "operationId": "getPet",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of pet",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pet retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Pet not found"
+                    }
+                }
+            }
+        },
+        "/actions/{uuid}": {
+            "get": {
+                "tags": [
+                    "Actions"
+                ],
+                "summary": "Get specific action.",
+                "description": "Returns the specified action as JSON Object.",
+                "operationId": "getAction",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of action",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Action retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Action not found"
+                    }
+                }
+            }
+        },
+        "/locations/{uuid}": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get specific location.",
+                "description": "Returns the specified location as JSON Object.",
+                "operationId": "getLocation",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of location",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Location retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Location not found"
+                    }
+                }
+            }
+        },
+        "/geofences/{uuid}": {
+            "get": {
+                "tags": [
+                    "Geofences"
+                ],
+                "summary": "Get specific geofence.",
+                "description": "Returns the specified geofence as JSON Object.",
+                "operationId": "getGeofence",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of geofence",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Geofence retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Geofence not found"
+                    }
+                }
+            }
+        },
+        "/photos/{uuid}": {
+            "get": {
+                "tags": [
+                    "Photos"
+                ],
+                "summary": "Get specific photo.",
+                "description": "Returns the specified photo as JSON Object.",
+                "operationId": "getPhoto",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of photo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Photo retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Photo not found"
+                    }
+                }
+            }
+        },
+        "/comments/{uuid}": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Get specific comment.",
+                "description": "Returns the specified comment as JSON Object.",
+                "operationId": "getComment",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of comment",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Comment not found"
+                    }
+                }
+            }
+        },
+        "/alerts/{uuid}": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Get specific alert.",
+                "description": "Returns the specified alert as JSON Object.",
+                "operationId": "getAlert",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique universally identifier of alert",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Alert retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Alert not found"
+                    }
+                }
+            }
+        },
+        "/{resource}/{uuid}": {
             "put": {
                 "tags": [
                     "Resources"
@@ -949,8 +1509,8 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "Accept user group invitation.",
-                "description": "Returns empty array as JSON response.",
+                "summary": "Accept invitation to join group of user.",
+                "description": "Update the user relationship status of group by setting as ACCEPTED only when user is the authenticated and has one PENDING invitation.",
                 "operationId": "acceptUserGroupInstance",
                 "parameters": [
                     {
@@ -987,8 +1547,8 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "Block user group invitation.",
-                "description": "Returns empty array as JSON response.",
+                "summary": "Block user invitation to join group.",
+                "description": "Update the user relationship status of group by setting as BLOCKED only when user is the authenticated and has one PENDING invitation. This disable to other users send new applications to this user and group.",
                 "operationId": "blockUserGroupInstance",
                 "parameters": [
                     {
@@ -1026,7 +1586,7 @@
                     "Users"
                 ],
                 "summary": "Invite user to group.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Create a relationship between the group and user marked as PENDING. Only the owner group and administrators can submit a new applications.",
                 "operationId": "inviteUserGroupInstance",
                 "parameters": [
                     {
@@ -1063,8 +1623,8 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "Reject user group invitation.",
-                "description": "Returns empty array as JSON response.",
+                "summary": "Reject user invitation to join group.",
+                "description": "Update the user relationship status of group by setting as REJECTED only when user is the authenticated and has one PENDING invitation.",
                 "operationId": "rejectUserGroupInstance",
                 "parameters": [
                     {

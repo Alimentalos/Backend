@@ -16,7 +16,7 @@ class InviteController extends Controller
      *      operationId="inviteUserGroupInstance",
      *      tags={"Users"},
      *      summary="Invite user to group.",
-     *      description="Returns empty array as JSON response.",
+     *      description="Create a relationship between the group and user marked as PENDING. Only the owner group and administrators can submit a new applications.",
      *      @OA\Parameter(
      *          name="user",
      *          description="User identifier",

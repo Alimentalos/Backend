@@ -15,8 +15,8 @@ class BlockController extends Controller
      *      path="/users/{user}/groups/{group}/block",
      *      operationId="blockUserGroupInstance",
      *      tags={"Users"},
-     *      summary="Block user group invitation.",
-     *      description="Returns empty array as JSON response.",
+     *      summary="Block user invitation to join group.",
+     *      description="Update the user relationship status of group by setting as BLOCKED only when user is the authenticated and has one PENDING invitation. This disable to other users send new applications to this user and group.",
      *      @OA\Parameter(
      *          name="user",
      *          description="User identifier",

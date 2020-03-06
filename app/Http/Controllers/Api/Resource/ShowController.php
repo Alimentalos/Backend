@@ -10,23 +10,14 @@ class ShowController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/{resource}/{uuid}",
-     *      operationId="getResourceInstance",
-     *      tags={"Resources"},
-     *      summary="Get specific instance of resource.",
-     *      description="Returns the specified resource instance identified by UUID as JSON Object.",
-     *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
+     *      path="/users/{uuid}",
+     *      operationId="getUser",
+     *      tags={"Users"},
+     *      summary="Get specific user.",
+     *      description="Returns the specified user as JSON Object.",
      *      @OA\Parameter(
      *          name="uuid",
-     *          description="Unique universally identifier of specific Resource class instance",
+     *          description="Unique universally identifier of user",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -35,10 +26,208 @@ class ShowController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource instance retrieved successfully"
+     *          description="User retrieved successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="User not found")
+     * )
+     * @OA\Get(
+     *      path="/devices/{uuid}",
+     *      operationId="getUser",
+     *      tags={"Devices"},
+     *      summary="Get specific device.",
+     *      description="Returns the specified device as JSON Object.",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of device",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Device retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Device not found")
+     * )
+     * @OA\Get(
+     *      path="/groups/{uuid}",
+     *      operationId="getGroup",
+     *      tags={"Groups"},
+     *      summary="Get specific group.",
+     *      description="Returns the specified group as JSON Object.",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of group",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Group retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Group not found")
+     * )
+     * @OA\Get(
+     *      path="/pets/{uuid}",
+     *      operationId="getPet",
+     *      tags={"Pets"},
+     *      summary="Get specific pet.",
+     *      description="Returns the specified pet as JSON Object.",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of pet",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Pet retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Pet not found")
+     * )
+     * @OA\Get(
+     *      path="/actions/{uuid}",
+     *      operationId="getAction",
+     *      tags={"Actions"},
+     *      summary="Get specific action.",
+     *      description="Returns the specified action as JSON Object.",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of action",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Action retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Action not found")
+     * )
+     * @OA\Get(
+     *      path="/locations/{uuid}",
+     *      operationId="getLocation",
+     *      tags={"Locations"},
+     *      summary="Get specific location.",
+     *      description="Returns the specified location as JSON Object.",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of location",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Location retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Location not found")
+     * )
+     * @OA\Get(
+     *      path="/geofences/{uuid}",
+     *      operationId="getGeofence",
+     *      tags={"Geofences"},
+     *      summary="Get specific geofence.",
+     *      description="Returns the specified geofence as JSON Object.",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of geofence",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Geofence retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Geofence not found")
+     * )
+     * @OA\Get(
+     *      path="/photos/{uuid}",
+     *      operationId="getPhoto",
+     *      tags={"Photos"},
+     *      summary="Get specific photo.",
+     *      description="Returns the specified photo as JSON Object.",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of photo",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Photo retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Photo not found")
+     * )
+     * @OA\Get(
+     *      path="/comments/{uuid}",
+     *      operationId="getComment",
+     *      tags={"Comments"},
+     *      summary="Get specific comment.",
+     *      description="Returns the specified comment as JSON Object.",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of comment",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Comment retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Comment not found")
+     * )
+     * @OA\Get(
+     *      path="/alerts/{uuid}",
+     *      operationId="getAlert",
+     *      tags={"Alerts"},
+     *      summary="Get specific alert.",
+     *      description="Returns the specified alert as JSON Object.",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Unique universally identifier of alert",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Alert retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Alert not found")
      * )
      * Get specific instance of resource.
      *
