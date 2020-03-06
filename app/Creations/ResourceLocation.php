@@ -1,24 +1,17 @@
 <?php
 
 
-namespace App\Repositories;
+namespace App\Creations;
 
 
 use App\Contracts\Resource;
 use App\Device;
 use App\Pet;
-use App\Procedures\ResourceLocationProcedure;
-use App\Queries\LocationQuery;
 use App\User;
-use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
-class ModelLocationsRepository
+trait ResourceLocation
 {
-    use LocationQuery;
-    use ResourceLocationProcedure;
-
     /**
      * Update current model location.
      *

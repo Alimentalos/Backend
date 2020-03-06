@@ -1,13 +1,14 @@
 <?php
 
 
-namespace App\Repositories;
+namespace App\Tools;
 
 
+use App\Repositories\LocationsRepository;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 
-class ParserRepository
+class Parser
 {
     /**
      * Parse data latitude and longitude to Spatial Point type

@@ -4,9 +4,16 @@ namespace App\Repositories;
 
 use App\Events\Location as LocationEvent;
 use App\Http\Resources\Location as LocationResource;
+use App\Creations\ResourceLocation as CreatesLocation;
+use App\Procedures\ResourceLocationProcedure;
+use App\Queries\LocationQuery;
 
 class ResourceLocationsRepository
 {
+    use LocationQuery;
+    use ResourceLocationProcedure;
+    use CreatesLocation;
+
     /**
      * Create resource location via request.
      *
@@ -14,8 +21,8 @@ class ResourceLocationsRepository
      */
     public function createViaRequest()
     {
-        $model = modelLocations()->resolveLocationModel();
-        $location = modelLocations()->createLocation($model, request()->all());
+        $model = $this->resolveLocationModel();
+        $location = $this->createLocation($model, request()->all());
         $model->update(["location" => parser()->point(request()->all())]);
         geofences()->checkLocationUsingModelGeofences($model, $location);
         $payload = new LocationResource($location);

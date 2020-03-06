@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Repositories;
+
+namespace App\Tools;
+
 
 use Illuminate\Database\Eloquent\Model;
 
-class ParametersRepository
+class Parameterizer
 {
     /**
      * Fill array with a list using model properties

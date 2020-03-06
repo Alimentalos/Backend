@@ -54,6 +54,6 @@ trait LocationProcedure
      */
     public function searchLocations($devices, $parameters)
     {
-        return modelLocations()->filterLocations($devices, $parameters)->get();
+        return resourceLocations()->filterLocations($devices, $parameters)->get();
     }
 }

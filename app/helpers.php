@@ -16,9 +16,6 @@ use App\Repositories\GeofenceRepository;
 use App\Repositories\GroupsRepository;
 use App\Repositories\LikeRepository;
 use App\Repositories\LocationsRepository;
-use App\Repositories\ModelLocationsRepository;
-use App\Repositories\ParametersRepository;
-use App\Repositories\ParserRepository;
 use App\Repositories\PetsRepository;
 use App\Repositories\PhotoRepository;
 use App\Repositories\ReactionsRepository;
@@ -34,6 +31,8 @@ use App\Repositories\UniqueNameRepository;
 use App\Repositories\UploadRepository;
 use App\Repositories\UserGroupsRepository;
 use App\Repositories\UsersRepository;
+use App\Tools\Parameterizer;
+use App\Tools\Parser;
 use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -180,11 +179,11 @@ if (! function_exists('status')) {
 
 if (! function_exists('parameters')) {
     /**
-     * @return ParametersRepository
+     * @return Parameterizer
      */
     function parameters()
     {
-        return new ParametersRepository();
+        return new Parameterizer();
     }
 }
 
@@ -301,11 +300,11 @@ if (! function_exists('only')) {
 
 if (! function_exists('parser')) {
     /**
-     * @return ParserRepository
+     * @return Parser
      */
     function parser()
     {
-        return new ParserRepository();
+        return new Parser();
     }
 }
 
@@ -403,15 +402,5 @@ if (! function_exists('resourceComments')) {
     function resourceComments()
     {
         return new ResourceCommentsRepository();
-    }
-}
-
-if (! function_exists('modelLocations')) {
-    /**
-     * @return ModelLocationsRepository
-     */
-    function modelLocations()
-    {
-        return new ModelLocationsRepository();
     }
 }
