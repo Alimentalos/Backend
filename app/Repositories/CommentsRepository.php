@@ -10,7 +10,6 @@ class CommentsRepository
     /**
      * Update comment via request.
      *
-     * @param Request $request
      * @param Comment $comment
      * @return Comment
      */

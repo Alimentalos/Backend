@@ -1,14 +1,44 @@
 <?php
 
 
-namespace App\Repositories;
+namespace App\Asserts;
 
 
+use App\Group;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class TestsRepository
+trait UserAssert
 {
+    /**
+     * Assert user has indirect relationship.
+     *
+     * @param User $user
+     * @param object|Model $resource
+     * @return boolean
+     */
+    public function hasIndirectRelationship(User $user, Model $resource)
+    {
+        // Share group or have same owner are both indirect user relationship.
+        return $resource->user_uuid === $user->uuid || $user->groups()
+                ->whereIn(
+                    'uuid',
+                    $resource->groups->pluck('uuid')->toArray()
+                )->exists();
+    }
+
+    /**
+     * Assert user has group.
+     *
+     * @param User $user
+     * @param Group $group
+     * @return bool
+     */
+    public function hasGroup(User $user, Group $group)
+    {
+        return in_array($group->uuid, $user->groups->pluck('uuid')->toArray());
+    }
+
     /**
      * Check if userA is same of userB
      *

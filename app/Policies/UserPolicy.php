@@ -36,9 +36,9 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                tests()->isProperty($attached, $user) &&
-                groups()->userIsGroupAdmin($user, $group) &&
-                !groups()->modelIsGroupModel($attached, $group)
+                users()->isProperty($attached, $user) &&
+                groups()->hasAdministrator($group, $user) &&
+                !resources()->hasGroup($attached, $group)
             );
     }
 
@@ -55,9 +55,9 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid !== $invited->uuid &&
-                groups()->userIsGroupAdmin($user, $group) &&
-                !groups()->modelIsGroupModel($invited, $group) &&
-                !groups()->modelIsBlocked($invited, $group)
+                groups()->hasAdministrator($group, $user) &&
+                !resources()->hasGroup($invited, $group) &&
+                !resources()->isBlocked($invited, $group)
             );
     }
 
@@ -74,8 +74,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !groups()->modelIsGroupModel($invited, $group) &&
-                !groups()->modelIsBlocked($invited, $group)
+                !resources()->hasGroup($invited, $group) &&
+                !resources()->isBlocked($invited, $group)
             );
     }
 
@@ -92,8 +92,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !groups()->modelIsGroupModel($invited, $group) &&
-                !groups()->modelIsBlocked($invited, $group)
+                !resources()->hasGroup($invited, $group) &&
+                !resources()->isBlocked($invited, $group)
             );
     }
 
@@ -110,8 +110,8 @@ class UserPolicy
         return $user->is_admin ||
             (
                 $user->uuid === $invited->uuid &&
-                !groups()->modelIsGroupModel($invited, $group) &&
-                !groups()->modelIsBlocked($invited, $group)
+                !resources()->hasGroup($invited, $group) &&
+                !resources()->isBlocked($invited, $group)
             );
     }
 
@@ -128,8 +128,8 @@ class UserPolicy
     {
         return $user->is_admin ||
             (
-                groups()->userIsGroupAdmin($user, $group) &&
-                groups()->modelIsGroupModel($detached, $group)
+                groups()->hasAdministrator($group, $user) &&
+                resources()->hasGroup($detached, $group)
             );
     }
 
@@ -168,10 +168,10 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return $user->is_admin || $model->is_public || tests()->isWorker($user, $model) ||
-            tests()->isOwner($user, $model) ||
-            tests()->sameUser($model, $user) ||
-            tests()->sameOwner($model, $user);
+        return $user->is_admin || $model->is_public || users()->isWorker($user, $model) ||
+            users()->isOwner($user, $model) ||
+            users()->sameUser($model, $user) ||
+            users()->sameOwner($model, $user);
     }
 
     /**
@@ -207,7 +207,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->is_admin ||  tests()->sameUser($model, $user) || tests()->isOwner($user, $model);
+        return $user->is_admin ||  users()->sameUser($model, $user) || users()->isOwner($user, $model);
     }
 
     /**
@@ -219,6 +219,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return $user->is_admin || tests()->isOwner($user, $model);
+        return $user->is_admin || users()->isOwner($user, $model);
     }
 }

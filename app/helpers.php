@@ -1,5 +1,8 @@
 <?php
 
+use App\Asserts\GroupAssert;
+use App\Asserts\ResourceGroupAssert;
+use App\Asserts\UserAssert;
 use App\Contracts\Resource;
 use App\Repositories\ActionsRepository;
 use App\Repositories\AdminRepository;
@@ -26,23 +29,13 @@ use App\Repositories\ResourcePhotosRepository;
 use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
 use App\Repositories\SubscriptionsRepository;
-use App\Repositories\TestsRepository;
 use App\Repositories\TokenRepository;
 use App\Repositories\UniqueNameRepository;
 use App\Repositories\UploadRepository;
 use App\Repositories\UserGroupsRepository;
 use App\Repositories\UsersRepository;
+use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
-
-if (! function_exists('actions')) {
-    /**
-     * @return TestsRepository
-     */
-    function tests()
-    {
-        return new TestsRepository();
-    }
-}
 
 if (! function_exists('actions')) {
     /**
@@ -167,7 +160,7 @@ if (! function_exists('geofences')) {
 if (! function_exists('authenticated')) {
     /**
      * @param string $guard
-     * @return Authenticatable
+     * @return Authenticatable|User
      */
     function authenticated($guard = 'api')
     {

@@ -4,17 +4,20 @@ namespace App\Repositories;
 
 use App\Device;
 use App\Http\Resources\Device as DeviceResource;
+use App\Lists\DeviceList;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class DevicesRepository
 {
+    use DeviceList;
+
     /**
      * Create device via request.
      *
      * @return DeviceResource
      */
-    public static function createDeviceViaRequest()
+    public static function createViaRequest()
     {
         $device = Device::create([
             'name' => input('name'),
@@ -31,46 +34,10 @@ class DevicesRepository
      * @param Device $device
      * @return DeviceResource
      */
-    public function updateDeviceViaRequest(Device $device)
+    public function updateViaRequest(Device $device)
     {
         $device->update(parameters()->fill(['name', 'description', 'is_public'], $device));
 
         return new DeviceResource($device);
-    }
-
-    /**
-     * @return Builder
-     */
-    public static function fetchInDatabaseDevicesQuery()
-    {
-        $userGroups = authenticated()->groups->pluck('uuid')->toArray();
-        return Device::where('user_uuid', authenticated()->uuid)
-            ->orWhere('is_public', true)
-            ->OrWhereHas('groups', fn(Builder $query) => $query->whereIn('uuid', $userGroups));
-    }
-
-    /**
-     * Fetch in database devices
-     * @return Device[]|Collection
-     */
-    public function fetchInDatabaseDevices()
-    {
-        return $this->fetchInDatabaseDevicesQuery()->get();
-    }
-
-    /**
-     * Fetch in database devices by comma separated string of devices uuid
-     *
-     * @param $devices
-     * @return Collection
-     */
-    public function fetchInDatabase($devices)
-    {
-        if (is_null($devices) or $devices === '') {
-            return $this->fetchInDatabaseDevices();
-        }
-        return Device::whereIn('uuid', explode(',', $devices))
-            ->where('user_uuid', authenticated()->uuid)
-            ->get();
     }
 }

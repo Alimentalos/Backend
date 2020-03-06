@@ -3,11 +3,13 @@
 
 namespace App\Repositories;
 
-
+use App\Asserts\ResourceGroupAssert;
 use App\Contracts\Resource;
 
 class ResourceRepository
 {
+    use ResourceGroupAssert;
+
     /**
      * User resource.
      */

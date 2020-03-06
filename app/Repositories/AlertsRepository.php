@@ -4,24 +4,13 @@
 namespace App\Repositories;
 
 use App\Alert;
-use App\Photo;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Lists\AlertList;
+use App\Procedures\AlertProcedure;
 
 class AlertsRepository
 {
-    /**
-     * Get alerts.
-     *
-     * @return LengthAwarePaginator
-     */
-    public function getAlerts()
-    {
-        return Alert::with('user', 'photo', 'alert')
-            ->whereIn('status',rhas('whereInStatus') ?
-                    einput(',','whereInStatus') : status()->values()
-            )->latest('created_at')
-            ->paginate(25);
-    }
+    use AlertList;
+    use AlertProcedure;
 
     /**
      * Create alert via request.
@@ -36,26 +25,6 @@ class AlertsRepository
         $photo->alerts()->attach($alert->uuid);
         $alert->load('photo', 'user');
         return $alert;
-    }
-
-    /**
-     * Generate parameters.
-     *
-     * @param Photo $photo
-     * @param $alert
-     * @param $alert_type
-     * @return array
-     */
-    public function parameters(Photo $photo, $alert, $alert_type)
-    {
-        return array_merge([
-            'user_uuid' => authenticated()->uuid,
-            'photo_uuid' => $photo->uuid,
-            'alert_id' => $alert->uuid,
-            'alert_type' => $alert_type,
-            'photo_url' => config('storage.path') . $photo->photo_url,
-            'location' => parser()->pointFromCoordinates(input('coordinates')),
-        ], only('name', 'title', 'body', 'type', 'status'));
     }
 
     /**

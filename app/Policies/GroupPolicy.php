@@ -32,7 +32,7 @@ class GroupPolicy
      */
     public function view(User $user, Group $group)
     {
-        return $user->is_admin || $group->is_public || groups()->userHasGroup($user, $group->uuid);
+        return $user->is_admin || $group->is_public || users()->hasGroup($user, $group);
     }
 
     /**
@@ -55,7 +55,7 @@ class GroupPolicy
      */
     public function update(User $user, Group $group)
     {
-        return $user->is_admin || groups()->userIsGroupAdmin($user, $group);
+        return $user->is_admin || groups()->hasAdministrator($group, $user);
     }
 
     /**
@@ -68,7 +68,7 @@ class GroupPolicy
     public function createPhoto(User $user, Group $group)
     {
         return $user->can('create', Photo::class) &&
-            ($user->is_admin || groups()->userIsGroupAdmin($user, $group) || groups()->userHasGroup($user, $group->uuid));
+            ($user->is_admin || groups()->hasAdministrator($group, $user) || groups()->hasAdministrator($user, $group));
     }
 
     /**
@@ -95,7 +95,7 @@ class GroupPolicy
     {
         return true || $user->is_admin ||
             (
-                groups()->userIsGroupAdmin($user, $group) &&
+                groups()->hasAdministrator($group, $user) &&
                 !in_array($group->uuid, $geofence->groups->pluck('uuid')->toArray())
             );
     }
@@ -112,7 +112,7 @@ class GroupPolicy
     {
         return true || $user->is_admin ||
             (
-                groups()->userIsGroupAdmin($user, $group) &&
+                groups()->hasAdministrator($group, $user) &&
                 in_array($group->uuid, $geofence->groups->pluck('uuid')->toArray())
             );
     }

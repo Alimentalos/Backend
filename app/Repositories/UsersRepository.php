@@ -2,12 +2,14 @@
 
 namespace App\Repositories;
 
+use App\Asserts\UserAssert;
 use App\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Model;
 
 class UsersRepository
 {
+    use UserAssert;
+
     /**
      * Get users.
      *

@@ -100,6 +100,6 @@ trait AlertResource
      */
     public function getInstances()
     {
-        return alerts()->getAlerts();
+        return alerts()->index();
     }
 }

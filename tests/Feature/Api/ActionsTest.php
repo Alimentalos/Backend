@@ -57,8 +57,8 @@ class ActionsTest extends TestCase
         $userB->user_uuid = $user->uuid;
         $userB->save();
         $response = $this->actingAs($userB, 'api')->json('GET', '/api/actions');
-        $response->assertJsonCount(1, 'data');
         $response->assertOk();
+        $response->assertJsonCount(1, 'data');
     }
 
     /**
