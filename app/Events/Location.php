@@ -20,7 +20,7 @@ class Location implements ShouldBroadcast
     public $trackable;
 
     /**
-     * Create a new event instance.
+     * Create a new event.
      *
      * @param $location
      */

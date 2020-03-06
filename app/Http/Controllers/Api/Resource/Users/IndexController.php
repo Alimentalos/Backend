@@ -10,14 +10,14 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/{resource}/users",
-     *      operationId="getResourceUsersPaginated",
-     *      tags={"Resources"},
-     *      summary="Get resource users paginated.",
-     *      description="Returns the resource users instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      path="/geofences/{geofence}/users",
+     *      operationId="getGeofenceUsers",
+     *      tags={"Geofences"},
+     *      summary="Get users of geofence.",
+     *      description="Returns the geofence users instances paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
+     *          name="geofence",
+     *          description="Unique identifier of geofence",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -26,7 +26,28 @@ class IndexController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource users retrieved successfully"
+     *          description="Geofence users retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     * )
+     * @OA\Get(
+     *      path="/groups/{group}/users",
+     *      operationId="getGroupUsers",
+     *      tags={"Groups"},
+     *      summary="Get users of group.",
+     *      description="Returns the group users instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="group",
+     *          description="Unique identifier of group",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Group users retrieved successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      * )

@@ -13,7 +13,7 @@ class IndexController extends Controller
      *      path="/{resource}/devices",
      *      operationId="getResourceDevicesPaginated",
      *      tags={"Resources"},
-     *      summary="Get resource devices paginated.",
+     *      summary="Get resource devices.",
      *      description="Returns the resource devices instances paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
      *          name="resource",

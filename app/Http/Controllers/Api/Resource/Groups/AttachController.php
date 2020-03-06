@@ -11,14 +11,14 @@ class AttachController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/{resource}/groups/{group}/attach",
-     *      operationId="attachResourceGroupInstance",
-     *      tags={"Resources"},
-     *      summary="Attach group to resource instance.",
+     *      path="/users/{user}/groups/{group}/attach",
+     *      operationId="attachUserGroup",
+     *      tags={"Users"},
+     *      summary="Attach group of user.",
      *      description="Returns empty array as JSON response.",
      *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
+     *          name="user",
+     *          description="Unique identifier of user",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -27,7 +27,7 @@ class AttachController extends Controller
      *      ),
      *      @OA\Parameter(
      *          name="group",
-     *          description="Group identifier",
+     *          description="Unique identifier of group",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -36,12 +36,71 @@ class AttachController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource instance attached to group successfully"
+     *          description="User attached to group successfully"
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource doesn't implements has groups trait"),
+     *      @OA\Response(response=400, description="Bad request")
      * )
-     * Attach group to resource instance.
+     * @OA\Post(
+     *      path="/pets/{pet}/groups/{group}/attach",
+     *      operationId="attachPetGroup",
+     *      tags={"Pets"},
+     *      summary="Attach group of pet.",
+     *      description="Returns empty array as JSON response.",
+     *      @OA\Parameter(
+     *          name="pet",
+     *          description="Unique identifier of pet",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="group",
+     *          description="Unique identifier of group",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Pet attached to group successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Post(
+     *      path="/devices/{device}/groups/{group}/attach",
+     *      operationId="attachPetGroup",
+     *      tags={"Devices"},
+     *      summary="Attach group of device.",
+     *      description="Returns empty array as JSON response.",
+     *      @OA\Parameter(
+     *          name="device",
+     *          description="Unique identifier of device",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="group",
+     *          description="Unique identifier of group",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Device attached to group successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * Attach group to resource.
      *
      * @param AttachRequest $request
      * @param $resource

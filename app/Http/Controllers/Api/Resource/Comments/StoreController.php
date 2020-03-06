@@ -13,7 +13,7 @@ class StoreController extends Controller
      *      path="/{resource}/comments",
      *      operationId="createResourceCommentsInstance",
      *      tags={"Resources"},
-     *      summary="Create resource comments instance.",
+     *      summary="Create resource comments",
      *      description="Returns the recently created comment instance as JSON Object.",
      *      @OA\Parameter(
      *          name="resource",
@@ -31,7 +31,7 @@ class StoreController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource doesn't implements has comments trait")
      * )
-     * Create resource comments instance.
+     * Create resource comments.
      *
      * @param StoreRequest $request
      * @param $resource

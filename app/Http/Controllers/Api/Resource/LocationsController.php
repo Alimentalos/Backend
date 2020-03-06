@@ -12,7 +12,7 @@ class LocationsController extends Controller
      * @OA\Post(
      *      path="/pet/locations",
      *      operationId="createPetLocationInstance",
-     *      tags={"Pets"},
+     *      tags={"Locations"},
      *      summary="Create location of pet.",
      *      description="Returns the recently created location of pet as JSON Object.",
      *      @OA\Parameter(
@@ -33,7 +33,7 @@ class LocationsController extends Controller
      * @OA\Post(
      *      path="/user/locations",
      *      operationId="createUserLocationInstance",
-     *      tags={"Users"},
+     *      tags={"Locations"},
      *      summary="Create location of user.",
      *      description="Returns the recently created location of user as JSON Object.",
      *      @OA\Parameter(
@@ -52,9 +52,9 @@ class LocationsController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      * )
      * @OA\Post(
-     *      path="/device/{uuid}/locations",
+     *      path="/device/locations",
      *      operationId="createDeviceLocationInstance",
-     *      tags={"Devices"},
+     *      tags={"Locations"},
      *      summary="Create location of device.",
      *      description="Returns the recently created location of device as JSON Object.",
      *      @OA\Parameter(
@@ -72,7 +72,7 @@ class LocationsController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      * )
-     * Create resource locations instance.
+     * Create resource locations.
      *
      * @param AuthorizedRequest $request
      * @return JsonResponse

@@ -13,7 +13,7 @@ class IndexController extends Controller
      *      path="/{resource}/comments",
      *      operationId="getResourceCommentsPaginated",
      *      tags={"Resources"},
-     *      summary="Get resource comments paginated.",
+     *      summary="Get resource comments.",
      *      description="Returns the resource comments instances paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
      *          name="resource",

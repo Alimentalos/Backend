@@ -13,7 +13,7 @@ class IndexController extends Controller
      *      path="/near/{resource}",
      *      operationId="getNearResourcesPaginated",
      *      tags={"Resources"},
-     *      summary="Get near resources paginated.",
+     *      summary="Get near resources.",
      *      description="Returns the near located resource instances paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
      *          name="resource",

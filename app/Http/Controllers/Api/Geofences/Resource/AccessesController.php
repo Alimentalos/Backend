@@ -14,7 +14,7 @@ class AccessesController extends Controller
      *      path="/geofences/{geofence}/{resource}/accesses",
      *      operationId="getGeofenceResourceAccessesPaginated",
      *      tags={"Resources"},
-     *      summary="Get geofence resource accesses paginated.",
+     *      summary="Get geofence resource accesses.",
      *      description="Returns the geofence resource accesses instances paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
      *          name="resource",

@@ -10,14 +10,14 @@ class AccessesController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/{resource}/accesses",
-     *      operationId="getResourceAccessesPaginated",
-     *      tags={"Resources"},
-     *      summary="Get resource accesses paginated.",
-     *      description="Returns the resource accesses instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      path="/pets/{pet}/accesses",
+     *      operationId="getPetAccesses",
+     *      tags={"Pets"},
+     *      summary="Get accesses of pet.",
+     *      description="Returns the pet accesses paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
+     *          name="pet",
+     *          description="Unique identifier of pet",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -26,10 +26,51 @@ class AccessesController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource accesses retrieved successfully"
+     *          description="Pet accesses retrieved successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource doesn't implements has geofences trait"),
+     * )
+     * @OA\Get(
+     *      path="/devices/{device}/accesses",
+     *      operationId="getDeviceAccesses",
+     *      tags={"Devices"},
+     *      summary="Get accesses of device.",
+     *      description="Returns the device accesses paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="device",
+     *          description="Unique identifier of device",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Device accesses retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     * )
+     * @OA\Get(
+     *      path="/users/{user}/accesses",
+     *      operationId="getUserAccesses",
+     *      tags={"Users"},
+     *      summary="Get accesses of user.",
+     *      description="Returns the user accesses paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="user",
+     *          description="Unique identifier of user",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="User accesses retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
      * )
      * Get resource accesses paginated.
      *

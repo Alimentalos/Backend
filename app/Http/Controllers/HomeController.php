@@ -7,7 +7,7 @@ use Illuminate\Contracts\Support\Renderable;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Create a new controller.
      *
      * @return void
      */

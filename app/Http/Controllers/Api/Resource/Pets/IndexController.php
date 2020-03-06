@@ -10,14 +10,14 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/{resource}/pets",
-     *      operationId="getResourcePetsPaginated",
-     *      tags={"Resources"},
-     *      summary="Get resource pets paginated.",
-     *      description="Returns the resource pets instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      path="/groups/{group}/pets",
+     *      operationId="getGroupPets",
+     *      tags={"Groups"},
+     *      summary="Get pets of group.",
+     *      description="Returns the pets of group paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
+     *          name="group",
+     *          description="Unique identifier of group",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -26,10 +26,30 @@ class IndexController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource pets retrieved successfully"
+     *          description="Pets retrieved successfully"
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource doesn't implemented has pets trait"),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Get(
+     *      path="/users/{user}/pets",
+     *      operationId="getUserPets",
+     *      tags={"Users"},
+     *      summary="Get pets of user.",
+     *      description="Returns the pets of user paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="user",
+     *          description="Unique identifier of user",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Pets retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
      * )
      * Get resource pets paginated.
      *

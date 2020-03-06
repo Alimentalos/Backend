@@ -10,31 +10,10 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/{resource}",
-     *      operationId="getResourcePaginated",
-     *      tags={"Resources"},
-     *      summary="Get resource paginated.",
-     *      description="Returns the resource instances paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Resources retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     * @OA\Get(
      *      path="/users",
      *      operationId="getUsers",
      *      tags={"Users"},
-     *      summary="Get users paginated.",
+     *      summary="Get users.",
      *      description="Returns the users paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Response(
      *          response=200,
@@ -46,7 +25,7 @@ class IndexController extends Controller
      *      path="/groups",
      *      operationId="getGroups",
      *      tags={"Groups"},
-     *      summary="Get groups paginated.",
+     *      summary="Get groups.",
      *      description="Returns the groups paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Response(
      *          response=200,
@@ -58,7 +37,7 @@ class IndexController extends Controller
      *      path="/alerts",
      *      operationId="getAlerts",
      *      tags={"Alerts"},
-     *      summary="Get alerts paginated.",
+     *      summary="Get alerts.",
      *      description="Returns the alerts paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Response(
      *          response=200,
@@ -70,7 +49,7 @@ class IndexController extends Controller
      *      path="/devices",
      *      operationId="getDevicesPaginated",
      *      tags={"Devices"},
-     *      summary="Get devices paginated.",
+     *      summary="Get devices.",
      *      description="Returns the devices paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Response(
      *          response=200,
@@ -82,7 +61,7 @@ class IndexController extends Controller
      *      path="/geofences",
      *      operationId="getGeofences",
      *      tags={"Geofences"},
-     *      summary="Get geofences paginated.",
+     *      summary="Get geofences.",
      *      description="Returns the geofences paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Response(
      *          response=200,
@@ -94,7 +73,7 @@ class IndexController extends Controller
      *      path="/pets",
      *      operationId="getPets",
      *      tags={"Pets"},
-     *      summary="Get pets paginated.",
+     *      summary="Get pets.",
      *      description="Returns the pets paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Response(
      *          response=200,
@@ -106,7 +85,7 @@ class IndexController extends Controller
      *      path="/actions",
      *      operationId="getActions",
      *      tags={"Actions"},
-     *      summary="Get actions paginated.",
+     *      summary="Get actions.",
      *      description="Returns the actions paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Response(
      *          response=200,
@@ -118,7 +97,7 @@ class IndexController extends Controller
      *      path="/photos",
      *      operationId="getPhotos",
      *      tags={"Photos"},
-     *      summary="Get photos paginated.",
+     *      summary="Get photos.",
      *      description="Returns the photos paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Response(
      *          response=200,
