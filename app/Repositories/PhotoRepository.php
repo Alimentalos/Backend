@@ -28,6 +28,10 @@ class PhotoRepository
     public function updateViaRequest(Photo $photo)
     {
         $photo->update(parameters()->fill(['title', 'description', 'is_public'], $photo));
+        $photo->comment->update(array_merge(
+            parameters()->fill(['title', 'is_public'], $photo->comment),
+            ['body' => fill('body', $photo->comment->body)]
+        ));
         $photo->load('user');
         return $photo;
     }
