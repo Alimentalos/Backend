@@ -122,7 +122,7 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        $comment = resourceComments()->createCommentViaRequest($resource);
+        $comment = resourceComments()->createViaRequest($resource);
         return response()->json($comment,200);
     }
 }
