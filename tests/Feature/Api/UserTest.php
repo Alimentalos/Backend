@@ -5,6 +5,7 @@ namespace Tests\Feature\Api;
 use App\Device;
 use App\Group;
 use App\Location;
+use App\Photo;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -389,6 +390,7 @@ class UserTest extends TestCase
         $userB->user_uuid = $owner->uuid;
         $userB->save();
         $userC = factory(User::class)->create();
+        $userC->photo_uuid = factory(Photo::class)->create()->uuid;
         $userC->user_uuid = $owner->uuid;
         $userC->is_public = false;
         $userC->save();
@@ -403,7 +405,46 @@ class UserTest extends TestCase
                 'type',
                 'coordinates'
             ],
+            'photo' => [
+                'location' => [
+                    'type',
+                    'coordinates'
+                ],
+                'uuid',
+                'user_uuid',
+                'comment_uuid',
+                'ext',
+                'photo_url',
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+            ],
+            'user' => [
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location'=>[
+                    'type',
+                    'coordinates'
+                ],
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
             'uuid',
+            'user_uuid',
+            'photo_uuid',
             'updated_at',
             'created_at',
             'love_reacter_id',
