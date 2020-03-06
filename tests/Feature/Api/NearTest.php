@@ -24,7 +24,7 @@ class NearTest extends TestCase
     {
         $user = factory(User::class)->create();
         $nearGeofence = new Geofence();
-        $nearGeofence->uuid = UniqueNameRepository::createIdentifier();
+        $nearGeofence->uuid = uuid();
         $nearGeofence->name = "Near Geofence";
         $nearGeofence->user_uuid = $user->uuid;
         $nearGeofence->shape = new Polygon([new LineString([
@@ -37,7 +37,7 @@ class NearTest extends TestCase
         $nearGeofence->save();
 
         $farGeofence = new Geofence();
-        $farGeofence->uuid = UniqueNameRepository::createIdentifier();
+        $farGeofence->uuid = uuid();
         $farGeofence->name = "Far Geofence";
         $farGeofence->user_uuid = $user->uuid;
         $farGeofence->shape = new Polygon([new LineString([

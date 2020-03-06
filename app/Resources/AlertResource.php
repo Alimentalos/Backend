@@ -4,7 +4,6 @@
 namespace App\Resources;
 
 use App\Alert;
-use App\Repositories\TypeRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
@@ -72,7 +71,7 @@ trait AlertResource
             ],
             'type' => [
                 'required',
-                Rule::in(TypeRepository::values())
+                Rule::in(alerts()->types())
             ],
             'status' => [
                 'required',

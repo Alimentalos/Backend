@@ -13,6 +13,35 @@ class AlertsRepository
     use AlertProcedure;
 
     /**
+     * Lost type.
+     */
+    public const LOST = 0;
+
+    /**
+     * Dead type.
+     */
+    public const DEAD = -1;
+
+    /**
+     * Found type.
+     */
+    public const FOUND = 1;
+
+    /**
+     * Available alert types.
+     *
+     * @return array
+     */
+    public function types()
+    {
+        return [
+            self::FOUND,
+            self::DEAD,
+            self::LOST,
+        ];
+    }
+
+    /**
      * Create alert via request.
      *
      * @return Alert
@@ -47,7 +76,7 @@ class AlertsRepository
      *
      * @return array
      */
-    public function types()
+    public function alert_types()
     {
         return [
             'App\\User',

@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Repositories\SpeedRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,7 +23,7 @@ class Location extends JsonResource
             "altitude" => $this->altitude,
             "latitude" => $this->location->getLat(),
             "longitude" => $this->location->getLng(),
-            "speed" => round(SpeedRepository::transformMetersToKilometers($this->speed)),
+            "speed" => round(measurer()->transformMetersToKilometers($this->speed)),
             "odometer" => $this->odometer,
             "heading" => round($this->heading),
             "battery" => round((float) $this->battery_level * 100),

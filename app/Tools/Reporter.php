@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Repositories;
+
+namespace App\Tools;
+
 
 use App\Contracts\CanGenerateReports;
 use App\Procedures\ReportProcedure;
 
-class ReportsRepository implements CanGenerateReports
+class Reporter implements CanGenerateReports
 {
     use ReportProcedure;
 

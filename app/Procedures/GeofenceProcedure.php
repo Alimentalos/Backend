@@ -48,7 +48,7 @@ trait GeofenceProcedure
     public function createAccess(Model $model, Geofence $geofence, Model $location)
     {
         $model->accesses()->create([
-            'uuid' => UniqueNameRepository::createIdentifier(),
+            'uuid' => uuid(),
             'geofence_uuid' => $geofence->uuid,
             'first_location_uuid' => $location->uuid,
             'last_location_uuid' => $location->uuid,

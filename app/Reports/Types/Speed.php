@@ -16,8 +16,8 @@ class Speed extends Type
     public function toArray()
     {
         $locations = $this->getFilterableQuery()
-            ->where('speed', '<=', SpeedRepository::transformKilometersToMeters($this->parameters['max']))
-            ->where('speed', '>=', SpeedRepository::transformKilometersToMeters($this->parameters['min']))
+            ->where('speed', '<=', measurer()->transformKilometersToMeters($this->parameters['max']))
+            ->where('speed', '>=', measurer()->transformKilometersToMeters($this->parameters['min']))
             ->get();
 
         return new LocationCollection($locations);

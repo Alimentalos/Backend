@@ -16,7 +16,6 @@ use App\Repositories\LocationsRepository;
 use App\Repositories\PetsRepository;
 use App\Repositories\PhotoRepository;
 use App\Repositories\ReactionsRepository;
-use App\Repositories\ReportsRepository;
 use App\Repositories\ResourceCommentsRepository;
 use App\Repositories\ResourceLocationsRepository;
 use App\Repositories\ResourcePhotosRepository;
@@ -28,8 +27,11 @@ use App\Repositories\UniqueNameRepository;
 use App\Repositories\UploadRepository;
 use App\Repositories\UserGroupsRepository;
 use App\Repositories\UsersRepository;
+use App\Tools\Identifier;
+use App\Tools\Measurer;
 use App\Tools\Parameterizer;
 use App\Tools\Parser;
+use App\Tools\Reporter;
 use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -239,7 +241,7 @@ if (! function_exists('uuid')) {
      */
     function uuid()
     {
-        return UniqueNameRepository::createIdentifier();
+        return (new Identifier())->create();
     }
 }
 
@@ -384,13 +386,24 @@ if (! function_exists('userGroups')) {
 
 if (! function_exists('reports')) {
     /**
-     * @return ReportsRepository
+     * @return Reporter
      */
     function reports()
     {
-        return new ReportsRepository();
+        return new Reporter();
     }
 }
+
+if (! function_exists('measurer')) {
+    /**
+     * @return Measurer
+     */
+    function measurer()
+    {
+        return new Measurer();
+    }
+}
+
 
 if (! function_exists('resourceComments')) {
     /**

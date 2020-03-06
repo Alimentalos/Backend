@@ -6,16 +6,13 @@ use App\Alert;
 use App\Device;
 use App\Pet;
 use App\Photo;
-use App\Repositories\AlertsRepository;
-use App\Repositories\StatusRepository;
-use App\Repositories\TypeRepository;
 use App\User;
 use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Alert::class, function (Faker $faker) {
-    $class = $faker->randomElement(alerts()->types());
+    $class = $faker->randomElement(alerts()->alert_types());
     $alert_id = (
         $class === 'App\\User' ?
             factory(User::class)->create()->uuid :
@@ -34,6 +31,6 @@ $factory->define(Alert::class, function (Faker $faker) {
         'title' => $faker->sentence($faker->numberBetween(5, 10)),
         'body' => $faker->sentence($faker->numberBetween(50, 200)),
         'status' => $faker->randomElement(status()->values()),
-        'type' => $faker->randomElement(TypeRepository::values()),
+        'type' => $faker->randomElement(alerts()->types()),
     ];
 });
