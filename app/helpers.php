@@ -6,8 +6,6 @@ use App\Repositories\AdminRepository;
 use App\Repositories\AlertsRepository;
 use App\Repositories\CommentsRepository;
 use App\Repositories\DevicesRepository;
-use App\Repositories\FillRepository;
-use App\Repositories\FinderRepository;
 use App\Repositories\GeofenceAccessesRepository;
 use App\Repositories\GeofenceRepository;
 use App\Repositories\GroupsRepository;
@@ -23,11 +21,13 @@ use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
 use App\Repositories\SubscriptionsRepository;
 use App\Repositories\TokenRepository;
-use App\Repositories\UniqueNameRepository;
 use App\Repositories\UploadRepository;
 use App\Repositories\UserGroupsRepository;
 use App\Repositories\UsersRepository;
+use App\Tools\Filler;
+use App\Tools\Finder;
 use App\Tools\Identifier;
+use App\Tools\Liker;
 use App\Tools\Measurer;
 use App\Tools\Parameterizer;
 use App\Tools\Parser;
@@ -249,11 +249,11 @@ if (! function_exists('likes')) {
     /**
      * Get LikesRepository instance.
      *
-     * @return LikeRepository
+     * @return Liker
      */
     function likes()
     {
-        return new LikeRepository();
+        return new Liker();
     }
 }
 
@@ -286,7 +286,7 @@ if (! function_exists('uploaded')) {
 if (! function_exists('fill')) {
     function fill($key, $value)
     {
-        return FillRepository::fillAttribute( $key, $value);
+        return Filler::make( $key, $value);
     }
 }
 
@@ -339,10 +339,10 @@ if (! function_exists('geofencesAccesses')) {
 
 if (! function_exists('finder')) {
     /**
-     * @return FinderRepository
+     * @return Finder
      */
     function finder() {
-        return new FinderRepository();
+        return new Finder();
     }
 }
 

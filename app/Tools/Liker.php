@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Repositories;
+
+namespace App\Tools;
 
 use Cog\Contracts\Love\Reacterable\Models\Reacterable;
 use Cog\Laravel\Love\Reactant\Models\Reactant;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 
-class LikeRepository
+class Liker
 {
     /**
      * Generate stats.
@@ -15,7 +16,7 @@ class LikeRepository
      * @param $reacterable
      * @return array
      */
-    public function generateStats($reactant, $reacterable)
+    public function stats($reactant, $reacterable)
     {
         return [
             'reactable' => [
@@ -37,7 +38,7 @@ class LikeRepository
      * @param $reacterable
      * @return array
      */
-    public function generateFollowStats($reactant, $reacterable)
+    public function followStats($reactant, $reacterable)
     {
         return [
             'reactable' => [
@@ -54,15 +55,15 @@ class LikeRepository
      * @param $reacterable
      * @param string $type
      */
-    public function updateLike($reactant, $reacterable, string $type)
+    public function update($reactant, $reacterable, string $type)
     {
         if (
-            $reacterable->hasReactedTo(
-                $reactant,
-                ReactionType::fromName(
-                    $type
-                )
+        $reacterable->hasReactedTo(
+            $reactant,
+            ReactionType::fromName(
+                $type
             )
+        )
         ) {
             $reacterable->unreactTo($reactant, ReactionType::fromName($type));
         } else {

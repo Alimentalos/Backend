@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Repositories;
 
-class FillRepository
+namespace App\Tools;
+
+
+class Filler
 {
     /**
      * Fill using request attribute or default value.
@@ -11,7 +13,7 @@ class FillRepository
      * @param $default
      * @return mixed
      */
-    public static function fillAttribute($attribute, $default)
+    public static function make($attribute, $default)
     {
         return request()->has($attribute) ? input($attribute) : $default;
     }

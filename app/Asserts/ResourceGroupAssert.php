@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 trait ResourceGroupAssert
 {
     /**
-     * Check resource has group.
+     * Assert resource has group.
      *
      * @param object|Model $resource
      * @param object|Group $group
@@ -25,7 +25,7 @@ trait ResourceGroupAssert
     }
 
     /**
-     * Check resource has group blocked.
+     * Assert resource has group blocked.
      *
      * @param object|Model $resource
      * @param object|Group $group

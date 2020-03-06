@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 trait UserAssert
 {
     /**
-     * Assert user has indirect relationship.
+     * Assert user has indirect relationship with resource.
      *
      * @param User $user
      * @param object|Model $resource
@@ -40,7 +40,7 @@ trait UserAssert
     }
 
     /**
-     * Check if userA is same of userB
+     * Assert first user is same of second user.
      *
      * @param object|User $userA
      * @param object|User $userB
@@ -52,43 +52,43 @@ trait UserAssert
     }
 
     /**
-     * Check if userA has same owner of userB
+     * Assert first user has same owner of second user.
      *
-     * @param object|User $userA
-     * @param object|User $userB
+     * @param object|User $first
+     * @param object|User $second
      * @return bool
      */
-    public function sameOwner(User $userA, User $userB)
+    public function sameOwner(User $first, User $second)
     {
-        return $userA->user_uuid === $userB->user_uuid;
+        return $first->user_uuid === $second->user_uuid;
     }
 
     /**
-     * Check if userA is owner of userB
+     * Assert first user is owner of second user.
      *
-     * @param object|User $userA
-     * @param object|User $userB
+     * @param object|User $first
+     * @param object|User $second
      * @return bool
      */
-    public function isOwner(User $userA, User $userB)
+    public function isOwner(User $first, User $second)
     {
-        return $userA->uuid === $userB->user_uuid;
+        return $first->uuid === $second->user_uuid;
     }
 
     /**
-     * Check if userA is worker of userB
+     * Assert first user is child of second user.
      *
-     * @param object|User $userA
-     * @param object|User $userB
+     * @param object|User $first
+     * @param object|User $second
      * @return bool
      */
-    public function isWorker(User $userA, User $userB)
+    public function isWorker(User $first, User $second)
     {
-        return $userA->user_uuid === $userB->uuid;
+        return $first->user_uuid === $second->uuid;
     }
 
     /**
-     * Check if device is property of user
+     * Assert model is user property.
      *
      * @param object|Model $model
      * @param object|User $user

@@ -122,7 +122,7 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        likes()->updateLike($resource->getLoveReactant(), authenticated()->getLoveReacter(), input('type'));
+        likes()->update($resource->getLoveReactant(), authenticated()->getLoveReacter(), input('type'));
         return response()->json([],200);
     }
 }

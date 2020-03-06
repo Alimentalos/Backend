@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Repositories;
 
-use App\Contracts\Trackable;
+namespace App\Tools;
+
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\Support\Str;
 
-class FinderRepository {
-
+class Finder
+{
     /**
      * Bind resource model instance.
      * (Uses prefix 'App')
