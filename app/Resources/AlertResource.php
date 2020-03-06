@@ -75,7 +75,7 @@ trait AlertResource
             ],
             'status' => [
                 'required',
-                Rule::in(status()->values())
+                Rule::in(cataloger()->types())
             ],
             'photo' => 'required',
             'coordinates' => ['required', new Coordinate()],

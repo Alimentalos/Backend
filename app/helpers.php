@@ -9,7 +9,6 @@ use App\Repositories\DevicesRepository;
 use App\Repositories\GeofenceAccessesRepository;
 use App\Repositories\GeofenceRepository;
 use App\Repositories\GroupsRepository;
-use App\Repositories\LikeRepository;
 use App\Repositories\LocationsRepository;
 use App\Repositories\PetsRepository;
 use App\Repositories\PhotoRepository;
@@ -18,12 +17,12 @@ use App\Repositories\ResourceCommentsRepository;
 use App\Repositories\ResourceLocationsRepository;
 use App\Repositories\ResourcePhotosRepository;
 use App\Repositories\ResourceRepository;
-use App\Repositories\StatusRepository;
 use App\Repositories\SubscriptionsRepository;
 use App\Repositories\TokenRepository;
 use App\Repositories\UploadRepository;
 use App\Repositories\UserGroupsRepository;
 use App\Repositories\UsersRepository;
+use App\Tools\Cataloger;
 use App\Tools\Filler;
 use App\Tools\Finder;
 use App\Tools\Identifier;
@@ -166,16 +165,6 @@ if (! function_exists('authenticated')) {
     }
 }
 
-if (! function_exists('status')) {
-    /**
-     * @return StatusRepository
-     */
-    function status()
-    {
-        return new StatusRepository();
-    }
-}
-
 if (! function_exists('parameters')) {
     /**
      * @return Parameterizer
@@ -254,6 +243,18 @@ if (! function_exists('likes')) {
     function likes()
     {
         return new Liker();
+    }
+}
+
+if (! function_exists('cataloger')) {
+    /**
+     * Get Cataloger instance.
+     *
+     * @return Cataloger
+     */
+    function cataloger()
+    {
+        return new Cataloger();
     }
 }
 
