@@ -18,7 +18,7 @@ trait AlertResource
      */
     public function updateViaRequest()
     {
-        return alerts()->updateAlertViaRequest($this);
+        return alerts()->updateViaRequest($this);
     }
 
     /**
@@ -72,7 +72,7 @@ trait AlertResource
             ],
             'type' => [
                 'required',
-                Rule::in(TypeRepository::availableAlertTypes())
+                Rule::in(TypeRepository::values())
             ],
             'status' => [
                 'required',

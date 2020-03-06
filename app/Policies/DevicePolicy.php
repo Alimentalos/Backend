@@ -58,7 +58,7 @@ class DevicePolicy
     {
         return $user->is_admin ||
             (
-                users()->isProperty($device, $user) &&
+                tests()->isProperty($device, $user) &&
                 groups()->userIsGroupAdmin($user, $group) &&
                 !groups()->modelIsGroupModel($device, $group)
             );
@@ -76,7 +76,7 @@ class DevicePolicy
     {
         return $user->is_admin ||
             (
-                users()->isProperty($device, $user) &&
+                tests()->isProperty($device, $user) &&
                 groups()->userIsGroupAdmin($user, $group) &&
                 groups()->modelIsGroupModel($device, $group)
             );
@@ -94,7 +94,7 @@ class DevicePolicy
     {
         return $user->is_admin ||
             (
-                users()->isProperty($device, $user) &&
+                tests()->isProperty($device, $user) &&
                 !in_array($device->uuid, $geofence->devices->pluck('uuid')->toArray())
             );
     }
@@ -111,7 +111,7 @@ class DevicePolicy
     {
         return $user->is_admin ||
             (
-                users()->isProperty($device, $user) &&
+                tests()->isProperty($device, $user) &&
                 in_array($device->uuid, $geofence->devices->pluck('uuid')->toArray())
             );
     }
@@ -125,7 +125,7 @@ class DevicePolicy
      */
     public function update(User $user, Device $device)
     {
-        return $user->is_admin || users()->isProperty($device, $user);
+        return $user->is_admin || tests()->isProperty($device, $user);
     }
 
     /**
@@ -137,6 +137,6 @@ class DevicePolicy
      */
     public function delete(User $user, Device $device)
     {
-        return $user->is_admin || users()->isProperty($device, $user);
+        return $user->is_admin || tests()->isProperty($device, $user);
     }
 }

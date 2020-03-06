@@ -91,7 +91,7 @@ trait UserResource
         if (authenticated()->is_admin)
             return users()->getUsers();
 
-        return authenticated()->is_child ? users()->getChildUsers() : users()->getOwnerUsers();
+        return users()->getScopedUsers();
     }
 
     /**

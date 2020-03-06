@@ -53,7 +53,7 @@ class PetsRepository
      */
     public function createPetViaRequest()
     {
-        $photo = photos()->createPhotoViaRequest();
+        $photo = photos()->createViaRequest();
         $pet = Pet::create(array_merge([
             'photo_url' => config('storage.path') . $photo->photo_url,
             'user_uuid' => authenticated()->uuid,

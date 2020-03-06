@@ -52,7 +52,7 @@ class GroupsRepository
      */
     public static function createGroupViaRequest()
     {
-        $photo = photos()->createPhotoViaRequest();
+        $photo = photos()->createViaRequest();
         $group = Group::create([
             'name' => input('name'),
             'user_uuid' => authenticated()->uuid,

@@ -100,7 +100,7 @@ class GeofenceRepository
      */
     public static function createGeofenceViaRequest()
     {
-        $photo = photos()->createPhotoViaRequest();
+        $photo = photos()->createViaRequest();
         $geofence = new Geofence();
         $geofence->uuid = UniqueNameRepository::createIdentifier();
         $geofence->photo_uuid = $photo->uuid;

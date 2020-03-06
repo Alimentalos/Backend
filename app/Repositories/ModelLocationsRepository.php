@@ -11,6 +11,7 @@ use App\Queries\LocationQuery;
 use App\User;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class ModelLocationsRepository
 {
@@ -22,10 +23,10 @@ class ModelLocationsRepository
      * @param Resource $model
      * @return Resource
      */
-    public function updateModelLocation(Resource $model)
+    public function update(Resource $model)
     {
         $model->update([
-            'location' => parser()->pointFromCoordinates(request()->input('coordinates')),
+            'location' => parser()->pointFromCoordinates(input('coordinates')),
         ]);
         return $model;
     }

@@ -47,6 +47,12 @@ return [
             'hash' => false,
         ],
 
+        'users' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+
         'devices' => [
             'driver' => 'token',
             'provider' => 'devices',

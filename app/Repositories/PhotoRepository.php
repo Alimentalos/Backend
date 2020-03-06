@@ -23,7 +23,7 @@ class PhotoRepository
      * @param Photo $photo
      * @return Photo
      */
-    public function updatePhotoViaRequest(Photo $photo)
+    public function updateViaRequest(Photo $photo)
     {
         $photo->update(parameters()->fill(['title', 'description', 'is_public'], $photo));
         $photo->load('user');
@@ -35,26 +35,26 @@ class PhotoRepository
      *
      * @return Photo
      */
-    public function createPhotoViaRequest()
+    public function createViaRequest()
     {
-        $photo = $this->createPhotoUsingRequest();
-        $this->createDefaultPhotoCommentUsingRequest($photo);
+        $photo = $this->createInstance();
+        $this->createComment($photo);
         $this->storePhoto($photo->uuid, uploaded('photo'));
         return $photo;
     }
 
     /**
-     * Create photo instance using request.
+     * Create photo.
      *
-     * @return mixed
+     * @return Photo
      */
-    public function createPhotoUsingRequest()
+    public function createInstance()
     {
-        $photoUniqueName = uuid();
+        $photo_uuid = uuid();
         $photo = Photo::create([
             'user_uuid' => authenticated()->uuid,
-            'uuid' => $photoUniqueName,
-            'photo_url' => $photoUniqueName . uploaded('photo')->extension(),
+            'uuid' => $photo_uuid,
+            'photo_url' => $photo_uuid . uploaded('photo')->extension(),
             'ext' => uploaded('photo')->extension(),
             'is_public' => fill('is_public', true),
             'location' => parser()->pointFromCoordinates(input('coordinates'))
@@ -64,11 +64,11 @@ class PhotoRepository
     }
 
     /**
-     * Create default photo comment using request.
+     * Create default comment of photo.
      *
      * @param Photo $photo
      */
-    public function createDefaultPhotoCommentUsingRequest(Photo $photo)
+    public function createComment(Photo $photo)
     {
         $comment = $photo->comments()->create(array_merge([
             'uuid' => uuid(),

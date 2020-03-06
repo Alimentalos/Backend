@@ -26,12 +26,23 @@ use App\Repositories\ResourcePhotosRepository;
 use App\Repositories\ResourceRepository;
 use App\Repositories\StatusRepository;
 use App\Repositories\SubscriptionsRepository;
+use App\Repositories\TestsRepository;
 use App\Repositories\TokenRepository;
 use App\Repositories\UniqueNameRepository;
 use App\Repositories\UploadRepository;
 use App\Repositories\UserGroupsRepository;
 use App\Repositories\UsersRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
+
+if (! function_exists('actions')) {
+    /**
+     * @return TestsRepository
+     */
+    function tests()
+    {
+        return new TestsRepository();
+    }
+}
 
 if (! function_exists('actions')) {
     /**
@@ -201,6 +212,19 @@ if (! function_exists('locations')) {
     function locations()
     {
         return new LocationsRepository();
+    }
+}
+
+if (! function_exists('rhas')) {
+    /**
+     * Check if request has key.
+     *
+     * @param $key
+     * @return bool
+     */
+    function rhas($key)
+    {
+        return request()->has($key);
     }
 }
 

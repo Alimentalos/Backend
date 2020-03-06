@@ -16,11 +16,9 @@ class UserGroupsRepository
      */
     public function inviteViaRequest(User $user, Group $group)
     {
-        $this->checkUserGroupRejected($user, $group) ?
-            $user->groups()
-                ->updateExistingPivot($group->uuid, $this->retrieveInvitationAttachAttributes()) :
-            $user->groups()
-                ->attach($group->uuid, $this->retrieveInvitationAttachAttributes());
+        $this->hasRejected($user, $group) ?
+            $user->groups()->updateExistingPivot($group->uuid, $this->attributes()) :
+            $user->groups()->attach($group->uuid, $this->attributes());
     }
 
     /**
@@ -30,7 +28,7 @@ class UserGroupsRepository
      * @param Group $group
      * @return bool
      */
-    public function checkUserGroupRejected(User $user, Group $group)
+    public function hasRejected(User $user, Group $group)
     {
         return $user->groups()
             ->where('group_uuid', $group->uuid)
@@ -43,7 +41,7 @@ class UserGroupsRepository
      *
      * @return array
      */
-    public function retrieveInvitationAttachAttributes()
+    public function attributes()
     {
         return [
             'status' => Group::PENDING_STATUS,

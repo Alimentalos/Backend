@@ -17,11 +17,10 @@ class AlertsRepository
     public function getAlerts()
     {
         return Alert::with('user', 'photo', 'alert')
-            ->whereIn(
-                'status',
-                request()->has('whereInStatus') ?
-                    einput(',','whereInStatus') : status()->values() // Filter by statuses
-            )->latest('created_at')->paginate(25);
+            ->whereIn('status',rhas('whereInStatus') ?
+                    einput(',','whereInStatus') : status()->values()
+            )->latest('created_at')
+            ->paginate(25);
     }
 
     /**
@@ -31,25 +30,23 @@ class AlertsRepository
      */
     public function createViaRequest()
     {
-        $photo = photos()->createPhotoViaRequest();
-        $related = finder()->findInstance(
-            input('alert_type'), input('alert_id')
-        );
-        $alert = Alert::create($this->buildCreateParameters($photo, $related, input('alert_type')));
+        $photo = photos()->createViaRequest();
+        $related = finder()->findInstance(input('alert_type'), input('alert_id'));
+        $alert = Alert::create($this->parameters($photo, $related, input('alert_type')));
         $photo->alerts()->attach($alert->uuid);
         $alert->load('photo', 'user');
         return $alert;
     }
 
     /**
-     * Build create parameters.
+     * Generate parameters.
      *
      * @param Photo $photo
      * @param $alert
      * @param $alert_type
      * @return array
      */
-    public function buildCreateParameters(Photo $photo, $alert, $alert_type)
+    public function parameters(Photo $photo, $alert, $alert_type)
     {
         return array_merge([
             'user_uuid' => authenticated()->uuid,
@@ -67,7 +64,7 @@ class AlertsRepository
      * @param Alert $alert
      * @return Alert
      */
-    public function updateAlertViaRequest(Alert $alert)
+    public function updateViaRequest(Alert $alert)
     {
         upload()->check($alert);
         $alert->update(parameters()->fill(['type', 'status', 'title', 'body'], $alert));
@@ -81,7 +78,7 @@ class AlertsRepository
      *
      * @return array
      */
-    public function getAvailableAlertTypes()
+    public function types()
     {
         return [
             'App\\User',
