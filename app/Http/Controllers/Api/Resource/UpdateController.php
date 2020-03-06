@@ -30,7 +30,7 @@ class UpdateController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Photo not found"),
-     *      @OA\Response(response=422, description="Unprocessable Entity")
+     *      @OA\Response(response=422, description="Unprocessable entity")
      * )
      * @OA\Put(
      *      path="/alerts/{alert}",
@@ -53,7 +53,7 @@ class UpdateController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Alert not found"),
-     *      @OA\Response(response=422, description="Unprocessable Entity")
+     *      @OA\Response(response=422, description="Unprocessable entity")
      * )
      * @OA\Put(
      *      path="/comments/{comment}",
@@ -76,7 +76,7 @@ class UpdateController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Comment not found"),
-     *      @OA\Response(response=422, description="Unprocessable Entity")
+     *      @OA\Response(response=422, description="Unprocessable entity")
      * )
      * @OA\Put(
      *      path="/users/{user}",
@@ -99,7 +99,7 @@ class UpdateController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="User not found"),
-     *      @OA\Response(response=422, description="Unprocessable Entity")
+     *      @OA\Response(response=422, description="Unprocessable entity")
      * )
      * @OA\Put(
      *      path="/devices/{device}",
@@ -122,7 +122,7 @@ class UpdateController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Device not found"),
-     *      @OA\Response(response=422, description="Unprocessable Entity")
+     *      @OA\Response(response=422, description="Unprocessable entity")
      * )
      * @OA\Put(
      *      path="/pets/{pet}",
@@ -145,7 +145,7 @@ class UpdateController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Pet not found"),
-     *      @OA\Response(response=422, description="Unprocessable Entity")
+     *      @OA\Response(response=422, description="Unprocessable entity")
      * )
      * @OA\Put(
      *      path="/groups/{group}",
@@ -168,7 +168,7 @@ class UpdateController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Group not found"),
-     *      @OA\Response(response=422, description="Unprocessable Entity")
+     *      @OA\Response(response=422, description="Unprocessable entity")
      * )
      * @OA\Put(
      *      path="/geofences/{geofence}",
@@ -191,7 +191,7 @@ class UpdateController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Geofence not found"),
-     *      @OA\Response(response=422, description="Unprocessable Entity")
+     *      @OA\Response(response=422, description="Unprocessable entity")
      * )
      * Update specific instance of resource.
      *

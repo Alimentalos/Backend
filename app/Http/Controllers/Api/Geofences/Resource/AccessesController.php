@@ -17,7 +17,7 @@ class AccessesController extends Controller
      *      summary="Get geofence accesses of users.",
      *      description="Returns the geofence accesses of users paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="pet",
+     *          name="geofence",
      *          description="Unique identifier of geofence",
      *          required=true,
      *          in="path",
@@ -38,7 +38,7 @@ class AccessesController extends Controller
      *      summary="Get geofence accesses of devices.",
      *      description="Returns the geofence accesses of devices paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="pet",
+     *          name="geofence",
      *          description="Unique identifier of geofence",
      *          required=true,
      *          in="path",
@@ -59,8 +59,8 @@ class AccessesController extends Controller
      *      summary="Get geofence accesses of pets.",
      *      description="Returns the geofence accesses of pets paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="pet",
-     *          description="Unique identifier of pet",
+     *          name="geofence",
+     *          description="Unique identifier of geofence",
      *          required=true,
      *          in="path",
      *          @OA\Schema(

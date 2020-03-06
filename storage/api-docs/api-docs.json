@@ -106,7 +106,7 @@
                 "operationId": "getGeofenceUsersAccesses",
                 "parameters": [
                     {
-                        "name": "pet",
+                        "name": "geofence",
                         "in": "path",
                         "description": "Unique identifier of geofence",
                         "required": true,
@@ -135,7 +135,7 @@
                 "operationId": "getGeofenceDevicesAccesses",
                 "parameters": [
                     {
-                        "name": "pet",
+                        "name": "geofence",
                         "in": "path",
                         "description": "Unique identifier of geofence",
                         "required": true,
@@ -164,9 +164,9 @@
                 "operationId": "getGeofencePetsAccesses",
                 "parameters": [
                     {
-                        "name": "pet",
+                        "name": "geofence",
                         "in": "path",
-                        "description": "Unique identifier of pet",
+                        "description": "Unique identifier of geofence",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -352,6 +352,24 @@
                     },
                     "400": {
                         "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Crea user via register.",
+                "description": "Returns the registered user as JSON Object.",
+                "operationId": "registerUser",
+                "responses": {
+                    "200": {
+                        "description": "User registered successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
                     }
                 }
             }
@@ -787,7 +805,7 @@
                         "description": "User not found"
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable entity"
                     }
                 }
             },
@@ -879,7 +897,7 @@
                         "description": "Photo not found"
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable entity"
                     }
                 }
             },
@@ -971,7 +989,7 @@
                         "description": "Comment not found"
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable entity"
                     }
                 }
             },
@@ -1122,7 +1140,7 @@
                         "description": "Device not found"
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable entity"
                     }
                 }
             },
@@ -1214,7 +1232,7 @@
                         "description": "Pet not found"
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable entity"
                     }
                 }
             },
@@ -1306,7 +1324,7 @@
                         "description": "Geofence not found"
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable entity"
                     }
                 }
             },
@@ -1398,7 +1416,7 @@
                         "description": "Group not found"
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable entity"
                     }
                 }
             },
@@ -1490,7 +1508,7 @@
                         "description": "Alert not found"
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable entity"
                     }
                 }
             },
@@ -2483,7 +2501,7 @@
                 "description": "Returns the recently created user instance as JSON Object.",
                 "operationId": "createUser",
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "User created successfully"
                     },
                     "400": {
@@ -2517,7 +2535,7 @@
                 "description": "Returns the recently created group instance as JSON Object.",
                 "operationId": "createGroup",
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Group created successfully"
                     },
                     "400": {
@@ -2551,7 +2569,7 @@
                 "description": "Returns the recently created alert instance as JSON Object.",
                 "operationId": "createAlert",
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Alert created successfully"
                     },
                     "400": {
@@ -2585,7 +2603,7 @@
                 "description": "Returns the recently created device instance as JSON Object.",
                 "operationId": "createDevice",
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Device created successfully"
                     },
                     "400": {
@@ -2619,7 +2637,7 @@
                 "description": "Returns the recently created geofence instance as JSON Object.",
                 "operationId": "createGeofence",
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Geofence created successfully"
                     },
                     "400": {
@@ -2653,7 +2671,7 @@
                 "description": "Returns the recently created pet instance as JSON Object.",
                 "operationId": "createPet",
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Pet created successfully"
                     },
                     "400": {
@@ -3447,7 +3465,25 @@
                 "operationId": "getUserToken",
                 "responses": {
                     "200": {
-                        "description": "Token fetched successfully"
+                        "description": "Token retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Get authenticated user.",
+                "description": "Returns the user as JSON Object.",
+                "operationId": "getUser",
+                "responses": {
+                    "200": {
+                        "description": "User retrieved successfully"
                     },
                     "401": {
                         "description": "Unauthenticated."

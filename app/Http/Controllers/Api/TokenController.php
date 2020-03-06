@@ -17,7 +17,7 @@ class TokenController extends Controller
      *  description="Returns the user personal access token.",
      *  @OA\Response(
      *      response=200,
-     *      description="Token fetched successfully"
+     *      description="Token retrieved successfully"
      *  ),
      *  @OA\Response(response=401, description="Unauthenticated.")
      *  )

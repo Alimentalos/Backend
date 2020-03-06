@@ -9,6 +9,18 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
+     * @OA\Get(
+     *  path="/user",
+     *  operationId="getUser",
+     *  tags={"Authentication"},
+     *  summary="Get authenticated user.",
+     *  description="Returns the user as JSON Object.",
+     *  @OA\Response(
+     *      response=200,
+     *      description="User retrieved successfully"
+     *  ),
+     *  @OA\Response(response=401, description="Unauthenticated.")
+     *  )
      * Show the current api user logged.
      *
      * @param Request $request

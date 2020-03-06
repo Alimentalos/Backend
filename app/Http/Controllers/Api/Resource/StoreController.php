@@ -16,7 +16,7 @@ class StoreController extends Controller
      *      summary="Create user.",
      *      description="Returns the recently created user instance as JSON Object.",
      *      @OA\Response(
-     *          response=200,
+     *          response=201,
      *          description="User created successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
@@ -28,7 +28,7 @@ class StoreController extends Controller
      *      summary="Create pet.",
      *      description="Returns the recently created pet instance as JSON Object.",
      *      @OA\Response(
-     *          response=200,
+     *          response=201,
      *          description="Pet created successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
@@ -40,7 +40,7 @@ class StoreController extends Controller
      *      summary="Create group.",
      *      description="Returns the recently created group instance as JSON Object.",
      *      @OA\Response(
-     *          response=200,
+     *          response=201,
      *          description="Group created successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
@@ -52,7 +52,7 @@ class StoreController extends Controller
      *      summary="Create geofence.",
      *      description="Returns the recently created geofence instance as JSON Object.",
      *      @OA\Response(
-     *          response=200,
+     *          response=201,
      *          description="Geofence created successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
@@ -64,7 +64,7 @@ class StoreController extends Controller
      *      summary="Create device.",
      *      description="Returns the recently created device instance as JSON Object.",
      *      @OA\Response(
-     *          response=200,
+     *          response=201,
      *          description="Device created successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
@@ -76,7 +76,7 @@ class StoreController extends Controller
      *      summary="Create alert.",
      *      description="Returns the recently created alert instance as JSON Object.",
      *      @OA\Response(
-     *          response=200,
+     *          response=201,
      *          description="Alert created successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
