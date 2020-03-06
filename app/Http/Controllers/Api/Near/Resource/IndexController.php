@@ -10,26 +10,79 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/near/{resource}",
-     *      operationId="getNearResourcesPaginated",
-     *      tags={"Resources"},
-     *      summary="Get near resources.",
-     *      description="Returns the near located resource instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      path="/near/users",
+     *      operationId="getNearUsers",
+     *      tags={"Near"},
+     *      summary="Get near users.",
+     *      description="Returns the near located users paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="resource",
-     *          description="Resource class type",
+     *          name="coordinates",
+     *          description="Comma-separated latitude and longitude.",
      *          required=true,
-     *          in="path",
+     *          in="query",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource retrieved successfully"
+     *          description="Users retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Get(
+     *      path="/near/devices",
+     *      operationId="getNearDevices",
+     *      tags={"Near"},
+     *      summary="Get near devices.",
+     *      description="Returns the near located devices paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="coordinates",
+     *          description="Comma-separated latitude and longitude.",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Devices retrieved successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource doesn't implements has location trait")
+     * )
+     * @OA\Get(
+     *      path="/near/pets",
+     *      operationId="getNearPets",
+     *      tags={"Near"},
+     *      summary="Get near pets.",
+     *      description="Returns the near located pets paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Parameter(
+     *          name="coordinates",
+     *          description="Comma-separated latitude and longitude.",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Pets retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
+     * )
+     * @OA\Get(
+     *      path="/near/geofences",
+     *      operationId="getNearGeofences",
+     *      tags={"Near"},
+     *      summary="Get near geofences.",
+     *      description="Returns the near located geofences paginated by a default quantity, payload includes pagination links and stats.",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Geofences retrieved successfully"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request")
      * )
      * Retrieve paginated near instances.
      *

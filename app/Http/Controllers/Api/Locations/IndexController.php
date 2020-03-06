@@ -13,7 +13,7 @@ class IndexController extends Controller
      * @OA\Get(
      *      path="/locations",
      *      operationId="getLocations",
-     *      tags={"Resources"},
+     *      tags={"Locations"},
      *      summary="Get resource locations.",
      *      description="Returns resource locations.",
      *      @OA\Parameter(

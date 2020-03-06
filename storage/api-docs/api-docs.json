@@ -10,7 +10,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.0.6-beta"
+        "version": "v.0.7-beta"
     },
     "servers": [
         {
@@ -96,28 +96,19 @@
                 }
             }
         },
-        "/geofences/{geofence}/{resource}/accesses": {
+        "/geofences/{geofence}/users/accesses": {
             "get": {
                 "tags": [
-                    "Resources"
+                    "Geofences"
                 ],
-                "summary": "Get geofence resource accesses.",
-                "description": "Returns the geofence resource accesses instances paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getGeofenceResourceAccessesPaginated",
+                "summary": "Get geofence accesses of users.",
+                "description": "Returns the geofence accesses of users paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getGeofenceUsersAccesses",
                 "parameters": [
                     {
-                        "name": "resource",
+                        "name": "pet",
                         "in": "path",
-                        "description": "Resource class type",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "geofence",
-                        "in": "path",
-                        "description": "Geofence identifier",
+                        "description": "Unique identifier of geofence",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -126,13 +117,68 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Geofence resource accesses retrieved successfully"
+                        "description": "Geofence accesses retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/geofences/{geofence}/devices/accesses": {
+            "get": {
+                "tags": [
+                    "Geofences"
+                ],
+                "summary": "Get geofence accesses of devices.",
+                "description": "Returns the geofence accesses of devices paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getGeofenceDevicesAccesses",
+                "parameters": [
+                    {
+                        "name": "pet",
+                        "in": "path",
+                        "description": "Unique identifier of geofence",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Geofence accesses retrieved successfully"
                     },
-                    "404": {
-                        "description": "Resource doesn't implements has geofences trait"
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/geofences/{geofence}/pets/accesses": {
+            "get": {
+                "tags": [
+                    "Geofences"
+                ],
+                "summary": "Get geofence accesses of pets.",
+                "description": "Returns the geofence accesses of pets paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getGeofencePetsAccesses",
+                "parameters": [
+                    {
+                        "name": "pet",
+                        "in": "path",
+                        "description": "Unique identifier of pet",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Geofence accesses retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
                     }
                 }
             }
@@ -140,7 +186,7 @@
         "/locations": {
             "get": {
                 "tags": [
-                    "Resources"
+                    "Locations"
                 ],
                 "summary": "Get resource locations.",
                 "description": "Returns resource locations.",
@@ -205,19 +251,19 @@
                 }
             }
         },
-        "/near/{resource}": {
+        "/near/users": {
             "get": {
                 "tags": [
-                    "Resources"
+                    "Near"
                 ],
-                "summary": "Get near resources.",
-                "description": "Returns the near located resource instances paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getNearResourcesPaginated",
+                "summary": "Get near users.",
+                "description": "Returns the near located users paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getNearUsers",
                 "parameters": [
                     {
-                        "name": "resource",
-                        "in": "path",
-                        "description": "Resource class type",
+                        "name": "coordinates",
+                        "in": "query",
+                        "description": "Comma-separated latitude and longitude.",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -226,13 +272,86 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Resource retrieved successfully"
+                        "description": "Users retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/near/devices": {
+            "get": {
+                "tags": [
+                    "Near"
+                ],
+                "summary": "Get near devices.",
+                "description": "Returns the near located devices paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getNearDevices",
+                "parameters": [
+                    {
+                        "name": "coordinates",
+                        "in": "query",
+                        "description": "Comma-separated latitude and longitude.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Devices retrieved successfully"
                     },
-                    "404": {
-                        "description": "Resource doesn't implements has location trait"
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/near/pets": {
+            "get": {
+                "tags": [
+                    "Near"
+                ],
+                "summary": "Get near pets.",
+                "description": "Returns the near located pets paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getNearPets",
+                "parameters": [
+                    {
+                        "name": "coordinates",
+                        "in": "query",
+                        "description": "Comma-separated latitude and longitude.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pets retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/near/geofences": {
+            "get": {
+                "tags": [
+                    "Near"
+                ],
+                "summary": "Get near geofences.",
+                "description": "Returns the near located geofences paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getNearGeofences",
+                "responses": {
+                    "200": {
+                        "description": "Geofences retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
                     }
                 }
             }
@@ -324,19 +443,19 @@
                 }
             }
         },
-        "/{resource}/comments": {
+        "/pets/{pet}/comments": {
             "get": {
                 "tags": [
-                    "Resources"
+                    "Pets"
                 ],
-                "summary": "Get resource comments.",
-                "description": "Returns the resource comments instances paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getResourceCommentsPaginated",
+                "summary": "Get comments of pet.",
+                "description": "Returns the comments of pet paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getPetComments",
                 "parameters": [
                     {
-                        "name": "resource",
+                        "name": "pet",
                         "in": "path",
-                        "description": "Resource class type",
+                        "description": "Unique identifier of pet",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -345,28 +464,25 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Resource comments retrieved successfully"
+                        "description": "Comments retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource doesn't implements has comments trait"
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "Resources"
+                    "Pets"
                 ],
-                "summary": "Create resource comments",
+                "summary": "Create comment of pet.",
                 "description": "Returns the recently created comment instance as JSON Object.",
-                "operationId": "createResourceCommentsInstance",
+                "operationId": "createPetComment",
                 "parameters": [
                     {
-                        "name": "resource",
+                        "name": "pet",
                         "in": "path",
-                        "description": "Resource class type",
+                        "description": "Unique identifier of pet",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -375,13 +491,238 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Resource comment instance created successfully"
+                        "description": "Comment created successfully"
                     },
                     "400": {
                         "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/photos/{photo}/comments": {
+            "get": {
+                "tags": [
+                    "Photos"
+                ],
+                "summary": "Get comments of photo.",
+                "description": "Returns the comments of photo paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getPhotoComments",
+                "parameters": [
+                    {
+                        "name": "photo",
+                        "in": "path",
+                        "description": "Unique identifier of photo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comments retrieved successfully"
                     },
-                    "404": {
-                        "description": "Resource doesn't implements has comments trait"
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Photos"
+                ],
+                "summary": "Create comment of photo.",
+                "description": "Returns the recently created comment instance as JSON Object.",
+                "operationId": "createPhotoComment",
+                "parameters": [
+                    {
+                        "name": "photo",
+                        "in": "path",
+                        "description": "Unique identifier of photo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/comment/{comment}/comments": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Get comments of comment.",
+                "description": "Returns the comments of comment paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getCommentComments",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "Unique identifier of comment",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comments retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/alerts/{alert}/comments": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Get comments of alert.",
+                "description": "Returns the comments of alert paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getAlertComments",
+                "parameters": [
+                    {
+                        "name": "alert",
+                        "in": "path",
+                        "description": "Unique identifier of alert",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comments retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Create comment of alert.",
+                "description": "Returns the recently created comment instance as JSON Object.",
+                "operationId": "createAlertComment",
+                "parameters": [
+                    {
+                        "name": "alert",
+                        "in": "path",
+                        "description": "Unique identifier of alert",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/groups/{groups}/comments": {
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Get comments of group.",
+                "description": "Returns the comments of group paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getGroupComments",
+                "parameters": [
+                    {
+                        "name": "groups",
+                        "in": "path",
+                        "description": "Unique identifier of groups",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comments retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/comments/{comment}/comments": {
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Create comment of comment.",
+                "description": "Returns the recently created comment instance as JSON Object.",
+                "operationId": "createCommentComment",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "Unique identifier of comment",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/groups/{group}/comments": {
+            "post": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Create comment of group.",
+                "description": "Returns the recently created comment instance as JSON Object.",
+                "operationId": "createGroupComment",
+                "parameters": [
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Unique identifier of group",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
                     }
                 }
             }
@@ -1181,19 +1522,19 @@
                 }
             }
         },
-        "/{resource}/devices": {
+        "/users/{user}/devices": {
             "get": {
                 "tags": [
-                    "Resources"
+                    "Users"
                 ],
-                "summary": "Get resource devices.",
-                "description": "Returns the resource devices instances paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getResourceDevicesPaginated",
+                "summary": "Get devices of user.",
+                "description": "Returns the devices of user paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getUserDevices",
                 "parameters": [
                     {
-                        "name": "resource",
+                        "name": "user",
                         "in": "path",
-                        "description": "Resource class type",
+                        "description": "Unique identifier of user",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1202,13 +1543,39 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Resource devices retrieved successfully"
+                        "description": "Devices retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/groups/{groups}/devices": {
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Get devices of group.",
+                "description": "Returns the devices of group paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getGroupDevices",
+                "parameters": [
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Unique identifier of group",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Devices retrieved successfully"
                     },
-                    "404": {
-                        "description": "Resource doesn't implements has devices trait"
+                    "400": {
+                        "description": "Bad request"
                     }
                 }
             }
