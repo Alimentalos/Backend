@@ -15,7 +15,7 @@ class IndexController extends Controller
      *      operationId="getLocations",
      *      tags={"Locations"},
      *      summary="Get resource locations.",
-     *      description="Returns resource locations.",
+     *      description="Returns the locations.",
      *      @OA\Parameter(
      *          name="identifier",
      *          description="Resource comma-separated identifiers",
@@ -31,9 +31,14 @@ class IndexController extends Controller
      *          required=true,
      *          in="query",
      *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
+     *          type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"pets", "users", "devices"},
+     *               default="pets"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Parameter(
      *          name="start_date",
      *          description="Start date used to filter results",
@@ -75,7 +80,7 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        $locations = locations()->fetchViaRequest();
+        $locations = locations()->index();
         return response()->json(new LocationCollection($locations), 200);
     }
 }

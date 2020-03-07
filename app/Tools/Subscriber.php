@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Repositories;
+
+namespace App\Tools;
+
 
 use App\User;
 use Illuminate\Support\Str;
 
-class SubscriptionsRepository
+class Subscriber
 {
     /**
      * Determine user tier.

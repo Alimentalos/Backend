@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Repositories;
+namespace App\Tools;
 
 
 use App\Contracts\Resource;
 
-class UploadRepository
+class Uploader
 {
     /**
      * Check if request has a model photo pending to upload.
@@ -16,7 +16,7 @@ class UploadRepository
     public function check(Resource $model)
     {
         if (request()->has('photo')) {
-            $photo = photos()->createViaRequest();
+            $photo = photos()->create();
             $model->update([
                 'photo_uuid' => $photo->uuid,
                 'photo_url' => config('storage.path') . $photo->photo_url,

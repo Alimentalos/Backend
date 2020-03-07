@@ -18,7 +18,7 @@ trait ResourceLocation
      * @param Resource $model
      * @return Resource
      */
-    public function update(Resource $model)
+    public function updateLocation(Resource $model)
     {
         $model->update([
             'location' => parser()->pointFromCoordinates(input('coordinates')),
@@ -31,7 +31,7 @@ trait ResourceLocation
      *
      * @return mixed
      */
-    public function resolveLocationModel()
+    public function current()
     {
         $resource = explode('.', request()->route()->getName())[0];
         switch ($resource) {
@@ -54,7 +54,7 @@ trait ResourceLocation
      * @param $data
      * @return Model
      */
-    public function createLocation(Model $model, $data)
+    public function createInstance(Model $model, $data)
     {
         if ($model instanceof User || $model instanceof Device) {
             return $model->locations()->create([

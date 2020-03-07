@@ -10,104 +10,34 @@ class StoreController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/pets/{pet}/comments",
-     *      operationId="createPetComment",
-     *      tags={"Pets"},
-     *      summary="Create comment of pet.",
-     *      description="Returns the recently created comment instance as JSON Object.",
+     *      path="/{resource}/{uuid}/comments",
+     *      operationId="createResourceComment",
+     *      tags={"Resources"},
+     *      summary="Create comment of resource.",
+     *      description="Returns the recently created comment as JSON Object.",
      *      @OA\Parameter(
-     *          name="pet",
-     *          description="Unique identifier of pet",
+     *          name="uuid",
+     *          description="Unique identifier of resource",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Comment created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/photos/{photo}/comments",
-     *      operationId="createPhotoComment",
-     *      tags={"Photos"},
-     *      summary="Create comment of photo.",
-     *      description="Returns the recently created comment instance as JSON Object.",
-     *      @OA\Parameter(
-     *          name="photo",
-     *          description="Unique identifier of photo",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Comment created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/comments/{comment}/comments",
-     *      operationId="createCommentComment",
-     *      tags={"Comments"},
-     *      summary="Create comment of comment.",
-     *      description="Returns the recently created comment instance as JSON Object.",
-     *      @OA\Parameter(
-     *          name="comment",
-     *          description="Unique identifier of comment",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Comment created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/alerts/{alert}/comments",
-     *      operationId="createAlertComment",
-     *      tags={"Alerts"},
-     *      summary="Create comment of alert.",
-     *      description="Returns the recently created comment instance as JSON Object.",
-     *      @OA\Parameter(
-     *          name="alert",
-     *          description="Unique identifier of alert",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Comment created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/groups/{group}/comments",
-     *      operationId="createGroupComment",
-     *      tags={"Groups"},
-     *      summary="Create comment of group.",
-     *      description="Returns the recently created comment instance as JSON Object.",
-     *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
+     *     @OA\Parameter(
+     *         name="resource",
+     *         in="path",
+     *         description="Resource type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"pets", "photos", "comments", "alerts", "groups"},
+     *               default="pets"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Comment created successfully"
@@ -122,7 +52,7 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        $comment = resourceComments()->createCommentViaRequest($resource);
+        $comment = resourceComments()->create($resource);
         return response()->json($comment,200);
     }
 }

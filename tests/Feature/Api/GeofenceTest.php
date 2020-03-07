@@ -39,7 +39,7 @@ class GeofenceTest extends TestCase
         $device->user_uuid = $user->uuid;
         $device->save();
         $geofence = new Geofence();
-        $geofence->uuid = UniqueNameRepository::createIdentifier();
+        $geofence->uuid = uuid();
         $geofence->name = "Geofence";
         $geofence->user_uuid = $user->uuid;
         $geofence->shape = new Polygon([new LineString([
@@ -1034,7 +1034,7 @@ class GeofenceTest extends TestCase
         $geofence = new Geofence();
         $geofence->name = "Geofence";
         $geofence->user_uuid = $user->uuid;
-        $geofence->uuid = UniqueNameRepository::createIdentifier();
+        $geofence->uuid = uuid();
         $geofence->shape = new Polygon([new LineString([
             new Point(0, 0),
             new Point(0, 5),
@@ -1871,7 +1871,7 @@ class GeofenceTest extends TestCase
         $geofence = new Geofence();
         $geofence->name = "Geofence";
         $geofence->user_uuid = $user->uuid;
-        $geofence->uuid = UniqueNameRepository::createIdentifier();
+        $geofence->uuid = uuid();
         $geofence->shape = new Polygon([new LineString([
             new Point(0, 0),
             new Point(0, 5),
@@ -1907,7 +1907,7 @@ class GeofenceTest extends TestCase
         $geofence = new Geofence();
         $geofence->name = "Geofence";
         $geofence->user_uuid = $owner->uuid;
-        $geofence->uuid = UniqueNameRepository::createIdentifier();
+        $geofence->uuid = uuid();
         $geofence->shape = new Polygon([new LineString([
             new Point(0, 0),
             new Point(0, 5),

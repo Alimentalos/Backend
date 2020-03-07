@@ -6,30 +6,31 @@ use App\Repositories\AdminRepository;
 use App\Repositories\AlertsRepository;
 use App\Repositories\CommentsRepository;
 use App\Repositories\DevicesRepository;
-use App\Repositories\FillRepository;
-use App\Repositories\FinderRepository;
 use App\Repositories\GeofenceAccessesRepository;
 use App\Repositories\GeofenceRepository;
 use App\Repositories\GroupsRepository;
-use App\Repositories\LikeRepository;
 use App\Repositories\LocationsRepository;
 use App\Repositories\PetsRepository;
 use App\Repositories\PhotoRepository;
 use App\Repositories\ReactionsRepository;
-use App\Repositories\ReportsRepository;
 use App\Repositories\ResourceCommentsRepository;
 use App\Repositories\ResourceLocationsRepository;
 use App\Repositories\ResourcePhotosRepository;
 use App\Repositories\ResourceRepository;
-use App\Repositories\StatusRepository;
-use App\Repositories\SubscriptionsRepository;
-use App\Repositories\TokenRepository;
-use App\Repositories\UniqueNameRepository;
-use App\Repositories\UploadRepository;
 use App\Repositories\UserGroupsRepository;
 use App\Repositories\UsersRepository;
+use App\Tools\Cataloger;
+use App\Tools\Filler;
+use App\Tools\Finder;
+use App\Tools\Identifier;
+use App\Tools\Liker;
+use App\Tools\Measurer;
 use App\Tools\Parameterizer;
 use App\Tools\Parser;
+use App\Tools\Reporter;
+use App\Tools\Subscriber;
+use App\Tools\Tokenizer;
+use App\Tools\Uploader;
 use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -105,11 +106,11 @@ if (! function_exists('resourceLocations')) {
 
 if (! function_exists('subscriptions')) {
     /**
-     * @return SubscriptionsRepository
+     * @return Subscriber
      */
     function subscriptions()
     {
-        return new SubscriptionsRepository();
+        return new Subscriber();
     }
 }
 
@@ -135,11 +136,11 @@ if (! function_exists('reactions')) {
 
 if (! function_exists('token')) {
     /**
-     * @return TokenRepository
+     * @return Tokenizer
      */
     function token()
     {
-        return new TokenRepository();
+        return new Tokenizer();
     }
 }
 
@@ -161,16 +162,6 @@ if (! function_exists('authenticated')) {
     function authenticated($guard = 'api')
     {
         return auth($guard)->user();
-    }
-}
-
-if (! function_exists('status')) {
-    /**
-     * @return StatusRepository
-     */
-    function status()
-    {
-        return new StatusRepository();
     }
 }
 
@@ -239,7 +230,7 @@ if (! function_exists('uuid')) {
      */
     function uuid()
     {
-        return UniqueNameRepository::createIdentifier();
+        return (new Identifier())->create();
     }
 }
 
@@ -247,11 +238,23 @@ if (! function_exists('likes')) {
     /**
      * Get LikesRepository instance.
      *
-     * @return LikeRepository
+     * @return Liker
      */
     function likes()
     {
-        return new LikeRepository();
+        return new Liker();
+    }
+}
+
+if (! function_exists('cataloger')) {
+    /**
+     * Get Cataloger instance.
+     *
+     * @return Cataloger
+     */
+    function cataloger()
+    {
+        return new Cataloger();
     }
 }
 
@@ -284,7 +287,7 @@ if (! function_exists('uploaded')) {
 if (! function_exists('fill')) {
     function fill($key, $value)
     {
-        return FillRepository::fillAttribute( $key, $value);
+        return Filler::make( $key, $value);
     }
 }
 
@@ -337,10 +340,10 @@ if (! function_exists('geofencesAccesses')) {
 
 if (! function_exists('finder')) {
     /**
-     * @return FinderRepository
+     * @return Finder
      */
     function finder() {
-        return new FinderRepository();
+        return new Finder();
     }
 }
 
@@ -355,10 +358,10 @@ if (! function_exists('admin')) {
 
 if (! function_exists('upload')) {
     /**
-     * @return UploadRepository
+     * @return Uploader
      */
     function upload() {
-        return new UploadRepository();
+        return new Uploader();
     }
 }
 
@@ -368,7 +371,7 @@ if (! function_exists('resource')) {
      */
     function resource()
     {
-        return (new ResourceRepository())->currentResource();
+        return (new ResourceRepository())->current();
     }
 }
 
@@ -384,13 +387,24 @@ if (! function_exists('userGroups')) {
 
 if (! function_exists('reports')) {
     /**
-     * @return ReportsRepository
+     * @return Reporter
      */
     function reports()
     {
-        return new ReportsRepository();
+        return new Reporter();
     }
 }
+
+if (! function_exists('measurer')) {
+    /**
+     * @return Measurer
+     */
+    function measurer()
+    {
+        return new Measurer();
+    }
+}
+
 
 if (! function_exists('resourceComments')) {
     /**

@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/demency/alimentalos-backend.svg)](https://github.com/demency/alimentalos-backend/releases/) [![Actions Status](https://github.com/demency/alimentalos-backend/workflows/Testing/badge.svg)](https://github.com/demency/alimentalos-backend/actions) [![codecov](https://codecov.io/gh/demency/alimentalos-backend/branch/master/graph/badge.svg)](https://codecov.io/gh/demency/alimentalos-backend) [![Maintainability](https://api.codeclimate.com/v1/badges/ccd2e2ff7f49a0ee6c6f/maintainability)](https://codeclimate.com/github/demency/alimentalos-backend/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ccd2e2ff7f49a0ee6c6f/test_coverage)](https://codeclimate.com/github/demency/alimentalos-backend/test_coverage)
 
-[**Official website**](https://www.alimentalos.cl) — [**About**](https://www.alimentalos.cl/about) — [**Developer guide**](https://www.alimentalos.cl/developers) — [**OpenApi Specification**](https://www.alimentalos.cl/api/documentation)
+[**Official website**](https://www.alimentalos.cl) — [**About**](https://www.alimentalos.cl/about) — [**Developer guide**](https://www.alimentalos.cl/about/developers) — [**OpenApi Specification**](https://www.alimentalos.cl/api/documentation)
 
 ### Brief
 

@@ -10,74 +10,28 @@ class StoreController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/users",
-     *      operationId="createUser",
-     *      tags={"Users"},
-     *      summary="Create user.",
-     *      description="Returns the recently created user instance as JSON Object.",
+     *      path="/{resource}",
+     *      operationId="createResource",
+     *      tags={"Resources"},
+     *      summary="Create resource.",
+     *      description="Returns the recently created resource as JSON Object.",
+     *     @OA\Parameter(
+     *         name="resource",
+     *         in="path",
+     *         description="Resource type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"users", "pets", "groups", "geofences", "devices", "alerts"},
+     *               default="devices"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=201,
      *          description="User created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     * @OA\Post(
-     *      path="/pets",
-     *      operationId="createPet",
-     *      tags={"Pets"},
-     *      summary="Create pet.",
-     *      description="Returns the recently created pet instance as JSON Object.",
-     *      @OA\Response(
-     *          response=201,
-     *          description="Pet created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     * @OA\Post(
-     *      path="/groups",
-     *      operationId="createGroup",
-     *      tags={"Groups"},
-     *      summary="Create group.",
-     *      description="Returns the recently created group instance as JSON Object.",
-     *      @OA\Response(
-     *          response=201,
-     *          description="Group created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     * @OA\Post(
-     *      path="/geofences",
-     *      operationId="createGeofence",
-     *      tags={"Geofences"},
-     *      summary="Create geofence.",
-     *      description="Returns the recently created geofence instance as JSON Object.",
-     *      @OA\Response(
-     *          response=201,
-     *          description="Geofence created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     * @OA\Post(
-     *      path="/devices",
-     *      operationId="createDevice",
-     *      tags={"Devices"},
-     *      summary="Create device.",
-     *      description="Returns the recently created device instance as JSON Object.",
-     *      @OA\Response(
-     *          response=201,
-     *          description="Device created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     * @OA\Post(
-     *      path="/alerts",
-     *      operationId="createAlert",
-     *      tags={"Alerts"},
-     *      summary="Create alert.",
-     *      description="Returns the recently created alert instance as JSON Object.",
-     *      @OA\Response(
-     *          response=201,
-     *          description="Alert created successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      * )

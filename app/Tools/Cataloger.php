@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Repositories;
+namespace App\Tools;
 
 
-class StatusRepository
+class Cataloger
 {
     /**
      * Created status-
@@ -36,7 +36,7 @@ class StatusRepository
      *
      * @return array
      */
-    public function values()
+    public function types()
     {
         return [
             self::CREATED,

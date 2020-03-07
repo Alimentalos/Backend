@@ -15,14 +15,14 @@ class ResourceLocationsRepository
     use CreatesLocation;
 
     /**
-     * Create resource location via request.
+     * Create resource location.
      *
      * @return LocationResource
      */
-    public function createViaRequest()
+    public function create()
     {
-        $model = $this->resolveLocationModel();
-        $location = $this->createLocation($model, request()->all());
+        $model = $this->current();
+        $location = $this->createInstance($model, request()->all());
         $model->update(["location" => parser()->point(request()->all())]);
         geofences()->checkLocationUsingModelGeofences($model, $location);
         $payload = new LocationResource($location);

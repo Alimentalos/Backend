@@ -5,25 +5,21 @@ namespace App\Repositories;
 use App\Device;
 use App\Http\Resources\Device as DeviceResource;
 use App\Lists\DeviceList;
+use App\Procedures\DeviceProcedure;
 
 class DevicesRepository
 {
     use DeviceList;
+    use DeviceProcedure;
 
     /**
-     * Create device via request.
+     * Create device.
      *
      * @return DeviceResource
      */
-    public static function createViaRequest()
+    public function create()
     {
-        $device = Device::create([
-            'name' => input('name'),
-            'description' => input('description'),
-            'user_uuid' => authenticated()->uuid,
-            'is_public' => input('is_public'),
-        ]);
-        return (new DeviceResource($device));
+        return $this->createInstance();
     }
 
     /**
@@ -32,10 +28,8 @@ class DevicesRepository
      * @param Device $device
      * @return DeviceResource
      */
-    public function updateViaRequest(Device $device)
+    public function update(Device $device)
     {
-        $device->update(parameters()->fill(['name', 'description', 'is_public'], $device));
-
-        return new DeviceResource($device);
+        return $this->updateInstance($device);
     }
 }

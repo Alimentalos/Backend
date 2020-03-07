@@ -2,7 +2,7 @@
 
 /**
  * @OA\Info(
- *      version="v.1.1",
+ *      version="v.1.2",
  *      title="Alimentalos API",
  *      description="Official Alimentalos API Documentation",
  *      @OA\Contact(
@@ -25,19 +25,59 @@
 /**
  * @OA\Tag(
  *     name="Authentication",
- *     description="Specifications related User authentication",
+ *     description="Specifications related user authentication",
  *     @OA\ExternalDocumentation(
  *         description="Read more",
- *         url="https://docs.alimentalos.cl/about/authentication"
+ *         url="https://www.alimentalos.cl/about/authentication"
  *     )
  * )
  *
  * @OA\Tag(
  *     name="Resources",
- *     description="Resource related specifications",
+ *     description="Resources related specifications",
  *     @OA\ExternalDocumentation(
  *         description="Read more",
- *         url="https://docs.alimentalos.cl/about/resources"
+ *         url="https://www.alimentalos.cl/about/resources"
+ *     )
+ * )
+ * @OA\Tag(
+ *     name="Find",
+ *     description="Find related specifications",
+ *     @OA\ExternalDocumentation(
+ *         description="Read more",
+ *         url="https://www.alimentalos.cl/about/find"
+ *     )
+ * )
+ * @OA\Tag(
+ *     name="Geofences",
+ *     description="Geofences related specifications",
+ *     @OA\ExternalDocumentation(
+ *         description="Read more",
+ *         url="https://www.alimentalos.cl/about/geofences"
+ *     )
+ * )
+ * @OA\Tag(
+ *     name="Locations",
+ *     description="Locations related specifications",
+ *     @OA\ExternalDocumentation(
+ *         description="Read more",
+ *         url="https://www.alimentalos.cl/about/locations"
+ *     )
+ * )
+ * @OA\Tag(
+ *     name="Near",
+ *     description="Near resources related specifications.",
+ *     @OA\ExternalDocumentation(
+ *         description="Read more",
+ *         url="https://www.alimentalos.cl/about/near"
+ *     )
+ * )
+ * @OA\Tag(
+ *     name="Users",
+ *     description="Users related specifications.",
+ *     @OA\ExternalDocumentation(
+ *         description="Read more",
+ *         url="https://www.alimentalos.cl/about/users"
  *     )
  * )
  * @OA\ExternalDocumentation(

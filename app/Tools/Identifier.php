@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Repositories;
 
-use Exception;
+namespace App\Tools;
+
+
 use Ramsey\Uuid\Uuid;
 
-class UniqueNameRepository
+class Identifier
 {
     /**
      * Create unique identifier.
      *
      * @return string
      */
-    public static function createIdentifier()
+    public function create()
     {
         try {
             return (string) Uuid::uuid4();

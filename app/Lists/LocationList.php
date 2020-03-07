@@ -14,7 +14,7 @@ trait LocationList
      *
      * @return LocationCollection
      */
-    public function fetchLastLocationsViaRequest()
+    public function find()
     {
         $locations = $this->searchLastLocations(input('type'), input('identifiers'), input('accuracy'));
 
@@ -28,7 +28,7 @@ trait LocationList
      *
      * @return Collection
      */
-    public function fetchViaRequest()
+    public function index()
     {
         $class = finder()
             ->findClass(input('type'));

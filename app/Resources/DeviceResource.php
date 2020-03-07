@@ -15,7 +15,7 @@ trait DeviceResource
      */
     public function updateViaRequest()
     {
-        return devices()->updateViaRequest($this);
+        return devices()->update($this);
     }
 
     /**
@@ -25,7 +25,7 @@ trait DeviceResource
      */
     public function createViaRequest()
     {
-        return devices()->createViaRequest();
+        return devices()->create();
     }
 
     /**

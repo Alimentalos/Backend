@@ -13,7 +13,7 @@ class RegisterController extends Controller
      *  path="/register",
      *  operationId="registerUser",
      *  tags={"Authentication"},
-     *  summary="Crea user via register.",
+     *  summary="Register user.",
      *  description="Returns the registered user as JSON Object.",
      *  @OA\Response(
      *      response=200,
@@ -28,7 +28,7 @@ class RegisterController extends Controller
      */
     public function __invoke(RegisterRequest $request)
     {
-        $registered = users()->registerViaRequest();
+        $registered = users()->register();
         return response()->json($registered,201);
     }
 }

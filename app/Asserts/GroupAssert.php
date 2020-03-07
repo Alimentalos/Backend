@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Asserts;
-
 
 use App\Group;
 use App\User;

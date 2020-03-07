@@ -10,6 +10,16 @@ use Illuminate\Support\Collection;
 trait LocationProcedure
 {
     /**
+     * Longitude position.
+     */
+    public int $latitude = 0;
+
+    /**
+     * Latitude position.
+     */
+    public int $longitude = 1;
+
+    /**
      * Search last devices locations.
      *
      * @param $type

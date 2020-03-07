@@ -10,83 +10,34 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/users/{user}/geofences",
-     *      operationId="getUserGeofences",
-     *      tags={"Users"},
-     *      summary="Get geofences of user.",
-     *      description="Returns the geofences of user paginated by a default quantity, payload includes pagination links and stats.",
+     *      path="/{resource}/{uuid}/geofences",
+     *      operationId="getResourceGeofences",
+     *      tags={"Resources"},
+     *      summary="Get geofences of resource.",
+     *      description="Returns the geofences paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="user",
-     *          description="Unique identifier of user",
+     *          name="uuid",
+     *          description="Unique identifier of resource",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Geofences retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Get(
-     *      path="/devices/{device}/geofences",
-     *      operationId="getDeviceGeofences",
-     *      tags={"Devices"},
-     *      summary="Get geofences of device.",
-     *      description="Returns the geofences of device paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="device",
-     *          description="Unique identifier of device",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Geofences retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Get(
-     *      path="/groups/{group}/geofences",
-     *      operationId="getUserGeofences",
-     *      tags={"Groups"},
-     *      summary="Get geofences of group.",
-     *      description="Returns the geofences of group paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Geofences retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Get(
-     *      path="/pets/{pet}/geofences",
-     *      operationId="getPetGeofences",
-     *      tags={"Pets"},
-     *      summary="Get geofences of pet.",
-     *      description="Returns the geofences of pet paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="pet",
-     *          description="Unique identifier of pet",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
+     *     @OA\Parameter(
+     *         name="resource",
+     *         in="path",
+     *         description="Resource type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"devices", "users", "groups", "pets"},
+     *               default="devices"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Geofences retrieved successfully"

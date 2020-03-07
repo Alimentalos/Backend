@@ -8,15 +8,15 @@ use App\Photo;
 class ResourcePhotosRepository
 {
     /**
-     * Create resource photo via request.
+     * Create resource photo.
      *
      * @param Resource $resource
      * @return Photo
      */
-    public function createViaRequest(Resource $resource)
+    public function create(Resource $resource)
     {
-        $photo = photos()->createViaRequest();
-        $resource = resourceLocations()->update($resource);
+        $photo = photos()->create();
+        $resource = resourceLocations()->updateLocation($resource);
         $resource->photos()->attach($photo->uuid);
         $photo->load('comment');
         return $photo;

@@ -11,80 +11,34 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/pets/{pet}/geofences/{geofence}/accesses",
-     *      operationId="getPetGeofenceAccesses",
-     *      tags={"Pets"},
-     *      summary="Get accesses of pet related to geofence.",
+     *      path="/{resource}/{uuid}/geofences/{geofence}/accesses",
+     *      operationId="getResourceGeofenceAccesses",
+     *      tags={"Resources"},
+     *      summary="Get accesses of resource related to geofence.",
      *      description="Returns the accesses paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="pet",
-     *          description="Unique identifier of pet",
+     *          name="uuid",
+     *          description="Unique identifier of resource",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
-     *      @OA\Parameter(
-     *          name="geofence",
-     *          description="Unique identifier of geofence",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Accesses retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Get(
-     *      path="/devices/{device}/geofences/{geofence}/accesses",
-     *      operationId="getDeviceGeofenceAccesses",
-     *      tags={"Devices"},
-     *      summary="Get accesses of device related to geofence.",
-     *      description="Returns the accesses paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="device",
-     *          description="Unique identifier of device",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          name="geofence",
-     *          description="Unique identifier of geofence",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Accesses retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Get(
-     *      path="/users/{user}/geofences/{geofence}/accesses",
-     *      operationId="getUserGeofenceAccesses",
-     *      tags={"Users"},
-     *      summary="Get accesses of user related to geofence.",
-     *      description="Returns the accesses paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="user",
-     *          description="Unique identifier of user",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
+     *     @OA\Parameter(
+     *         name="resource",
+     *         in="path",
+     *         description="Resource type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"devices", "users", "pets"},
+     *               default="devices"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Parameter(
      *          name="geofence",
      *          description="Unique identifier of geofence",

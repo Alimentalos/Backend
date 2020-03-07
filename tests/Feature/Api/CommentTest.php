@@ -123,7 +123,7 @@ class CommentTest extends TestCase
         $comment->user_uuid = $user->uuid;
         $comment->save();
         $comment->comments()->create([
-            'uuid' => UniqueNameRepository::createIdentifier(),
+            'uuid' => uuid(),
             'body' => $sampleCommentBody,
             'user_uuid' => $user->uuid,
         ]);
