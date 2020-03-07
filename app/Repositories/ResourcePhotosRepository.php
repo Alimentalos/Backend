@@ -13,9 +13,9 @@ class ResourcePhotosRepository
      * @param Resource $resource
      * @return Photo
      */
-    public function createViaRequest(Resource $resource)
+    public function create(Resource $resource)
     {
-        $photo = photos()->createViaRequest();
+        $photo = photos()->create();
         $resource = resourceLocations()->update($resource);
         $resource->photos()->attach($photo->uuid);
         $photo->load('comment');

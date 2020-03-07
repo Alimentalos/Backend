@@ -42,13 +42,27 @@ class AlertsRepository
     }
 
     /**
+     * Get available alert types.
+     *
+     * @return array
+     */
+    public function alertTypes()
+    {
+        return [
+            'App\\User',
+            'App\\Device',
+            'App\\Pet',
+        ];
+    }
+
+    /**
      * Create alert via request.
      *
      * @return Alert
      */
-    public function createViaRequest()
+    public function create()
     {
-        $photo = photos()->createViaRequest();
+        $photo = photos()->create();
         $related = finder()->findInstance(input('alert_type'), input('alert_id'));
         $alert = Alert::create($this->parameters($photo, $related, input('alert_type')));
         $photo->alerts()->attach($alert->uuid);
@@ -62,26 +76,11 @@ class AlertsRepository
      * @param Alert $alert
      * @return Alert
      */
-    public function updateViaRequest(Alert $alert)
+    public function update(Alert $alert)
     {
         upload()->check($alert);
         $alert->update(parameters()->fill(['type', 'status', 'title', 'body'], $alert));
         $alert->load('photo', 'user', 'alert');
         return $alert;
-    }
-
-
-    /**
-     * Get available alert types.
-     *
-     * @return array
-     */
-    public function alert_types()
-    {
-        return [
-            'App\\User',
-            'App\\Device',
-            'App\\Pet',
-        ];
     }
 }

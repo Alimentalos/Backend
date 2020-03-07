@@ -16,7 +16,7 @@ trait UserResource
      */
     public function updateViaRequest()
     {
-        return users()->updateUserViaRequest($this);
+        return users()->update($this);
     }
 
     /**
@@ -26,7 +26,7 @@ trait UserResource
      */
     public function createViaRequest()
     {
-        return users()->createUserViaRequest();
+        return users()->create();
     }
 
     /**
@@ -89,9 +89,9 @@ trait UserResource
     public function getInstances()
     {
         if (authenticated()->is_admin)
-            return users()->getUsers();
+            return users()->all();
 
-        return users()->getScopedUsers();
+        return users()->index();
     }
 
     /**

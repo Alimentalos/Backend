@@ -15,7 +15,7 @@ class UsersRepository
      *
      * @return LengthAwarePaginator
      */
-    public function getUsers()
+    public function all()
     {
         return User::with('photo', 'user')
             ->latest()
@@ -27,7 +27,7 @@ class UsersRepository
      *
      * @return LengthAwarePaginator
      */
-    public function getScopedUsers()
+    public function index()
     {
         $uuid = authenticated()->is_child ? authenticated()->uuid : authenticated()->user_uuid;
         return User::with('photo', 'user')
@@ -38,11 +38,11 @@ class UsersRepository
     }
 
     /**
-     * Register user via request.
+     * Register user.
      *
      * @return mixed
      */
-    public function registerViaRequest()
+    public function register()
     {
         return User::create(array_merge([
             'password' => bcrypt(input('password')),
@@ -50,12 +50,12 @@ class UsersRepository
     }
 
     /**
-     * Update user via request.
+     * Update user.
      *
      * @param User $user
      * @return User
      */
-    public function updateUserViaRequest(User $user)
+    public function update(User $user)
     {
         upload()->check($user);
         $user->load('user', 'photo');
@@ -64,13 +64,13 @@ class UsersRepository
     }
 
     /**
-     * Create user via request.
+     * Create user.
      *
      * @return User
      */
-    public function createUserViaRequest()
+    public function create()
     {
-        $photo = photos()->createViaRequest();
+        $photo = photos()->create();
         $user = User::create(array_merge([
             'user_uuid' => authenticated()->uuid,
             'photo_uuid' => $photo->uuid,

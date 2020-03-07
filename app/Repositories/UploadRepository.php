@@ -16,7 +16,7 @@ class UploadRepository
     public function check(Resource $model)
     {
         if (request()->has('photo')) {
-            $photo = photos()->createViaRequest();
+            $photo = photos()->create();
             $model->update([
                 'photo_uuid' => $photo->uuid,
                 'photo_url' => config('storage.path') . $photo->photo_url,

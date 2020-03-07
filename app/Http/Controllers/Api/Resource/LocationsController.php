@@ -79,7 +79,7 @@ class LocationsController extends Controller
      */
     public function __invoke(AuthorizedRequest $request)
     {
-        $locations = resourceLocations()->createViaRequest();
+        $locations = resourceLocations()->create();
         return response()->json($locations,201);
     }
 }

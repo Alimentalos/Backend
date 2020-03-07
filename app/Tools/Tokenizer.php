@@ -1,12 +1,13 @@
 <?php
 
 
-namespace App\Repositories;
+namespace App\Tools;
+
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
-class TokenRepository
+class Tokenizer
 {
     /**
      * Handle token retrieve attempt.

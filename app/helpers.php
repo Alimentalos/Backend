@@ -31,6 +31,8 @@ use App\Tools\Measurer;
 use App\Tools\Parameterizer;
 use App\Tools\Parser;
 use App\Tools\Reporter;
+use App\Tools\Subscriber;
+use App\Tools\Tokenizer;
 use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -106,11 +108,11 @@ if (! function_exists('resourceLocations')) {
 
 if (! function_exists('subscriptions')) {
     /**
-     * @return SubscriptionsRepository
+     * @return Subscriber
      */
     function subscriptions()
     {
-        return new SubscriptionsRepository();
+        return new Subscriber();
     }
 }
 
@@ -136,11 +138,11 @@ if (! function_exists('reactions')) {
 
 if (! function_exists('token')) {
     /**
-     * @return TokenRepository
+     * @return Tokenizer
      */
     function token()
     {
-        return new TokenRepository();
+        return new Tokenizer();
     }
 }
 
@@ -371,7 +373,7 @@ if (! function_exists('resource')) {
      */
     function resource()
     {
-        return (new ResourceRepository())->currentResource();
+        return (new ResourceRepository())->current();
     }
 }
 

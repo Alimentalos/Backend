@@ -10,7 +10,7 @@ class GroupsRepository
 {
     use GroupAssert;
 
-    public function getUserGroups()
+    public function index()
     {
         return Group::with('user', 'photo')
             ->where('user_uuid', authenticated()->uuid)
@@ -25,7 +25,7 @@ class GroupsRepository
      *
      * @return LengthAwarePaginator
      */
-    public function getAdministratorGroups()
+    public function all()
     {
         return Group::with('user', 'photo')
             ->latest()
@@ -38,7 +38,7 @@ class GroupsRepository
      * @param Group $group
      * @return Group
      */
-    public static function updateGroupViaRequest(Group $group)
+    public function update(Group $group)
     {
         upload()->check($group);
         $group->update(parameters()->fill(['name', 'is_public'], $group));
@@ -51,9 +51,9 @@ class GroupsRepository
      *
      * @return Group
      */
-    public static function createGroupViaRequest()
+    public function create()
     {
-        $photo = photos()->createViaRequest();
+        $photo = photos()->create();
         $group = Group::create([
             'name' => input('name'),
             'user_uuid' => authenticated()->uuid,

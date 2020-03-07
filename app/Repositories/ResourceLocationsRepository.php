@@ -19,7 +19,7 @@ class ResourceLocationsRepository
      *
      * @return LocationResource
      */
-    public function createViaRequest()
+    public function create()
     {
         $model = $this->resolveLocationModel();
         $location = $this->createLocation($model, request()->all());

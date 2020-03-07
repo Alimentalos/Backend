@@ -16,7 +16,7 @@ trait GroupResource
      */
     public function updateViaRequest()
     {
-        return groups()->updateGroupViaRequest($this);
+        return groups()->update($this);
     }
 
     /**
@@ -26,7 +26,7 @@ trait GroupResource
      */
     public function createViaRequest()
     {
-        return groups()->createGroupViaRequest();
+        return groups()->create();
     }
 
     /**
@@ -88,6 +88,6 @@ trait GroupResource
      */
     public function getInstances()
     {
-        return authenticated()->is_admin ? groups()->getAdministratorGroups() : groups()->getUserGroups();
+        return authenticated()->is_admin ? groups()->all() : groups()->index();
     }
 }

@@ -10,6 +10,7 @@ use App\Geofence;
 use App\Repositories\UniqueNameRepository;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 
@@ -167,5 +168,42 @@ trait GeofenceProcedure
             new Point(5, 0),
             new Point(0, 0)
         ])];
+    }
+
+    /**
+     * Create photo geofence.
+     *
+     * @return Geofence
+     */
+    public function createInstance()
+    {
+        $photo = photos()->create();
+        $geofence = new Geofence();
+        $geofence->uuid = uuid();
+        $geofence->photo_uuid = $photo->uuid;
+        $geofence->name = input('name');
+        $geofence->user_uuid = authenticated()->uuid;
+        $geofence->photo_url = config('storage.path') . $photo->photo_url;
+
+        $shape = $this->createPointsFromShape(input('shape'));
+        $geofence->shape = new Polygon([new LineString($shape)]);
+        $geofence->is_public = input('is_public');
+        $geofence->save();
+        $geofence->load('photo', 'user');
+        $photo->geofences()->attach($geofence->uuid);
+        return $geofence;
+    }
+
+    public function updateInstance(Geofence $geofence)
+    {
+        $geofence->name = fill('name', $geofence->name);
+        $shape = array_map(function ($element) {
+            return new Point($element['latitude'], $element['longitude']);
+        }, input('shape'));
+        $geofence->shape = new Polygon([new LineString($shape)]);
+        $geofence->is_public = fill('is_public', $geofence->is_public);
+        $geofence->save();
+        $geofence->load('photo', 'user');
+        return $geofence;
     }
 }

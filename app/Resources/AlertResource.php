@@ -17,7 +17,7 @@ trait AlertResource
      */
     public function updateViaRequest()
     {
-        return alerts()->updateViaRequest($this);
+        return alerts()->update($this);
     }
 
     /**
@@ -27,7 +27,7 @@ trait AlertResource
      */
     public function createViaRequest()
     {
-        return alerts()->createViaRequest();
+        return alerts()->create();
     }
 
     /**

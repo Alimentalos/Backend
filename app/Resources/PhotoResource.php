@@ -15,7 +15,7 @@ trait PhotoResource
      */
     public function updateViaRequest()
     {
-        return photos()->updateViaRequest($this);
+        return photos()->update($this);
     }
 
     /**

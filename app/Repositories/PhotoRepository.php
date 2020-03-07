@@ -25,7 +25,7 @@ class PhotoRepository
      * @param Photo $photo
      * @return Photo
      */
-    public function updateViaRequest(Photo $photo)
+    public function update(Photo $photo)
     {
         $photo->update(parameters()->fill(['title', 'description', 'is_public'], $photo));
         $photo->load('user');
@@ -37,7 +37,7 @@ class PhotoRepository
      *
      * @return Photo
      */
-    public function createViaRequest()
+    public function create()
     {
         $photo = $this->createInstance();
         $this->createComment($photo);

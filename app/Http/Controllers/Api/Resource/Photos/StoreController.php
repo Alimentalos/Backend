@@ -101,7 +101,7 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        $photo = resourcePhotos()->createViaRequest($resource);
+        $photo = resourcePhotos()->create($resource);
         return response()->json($photo,200);
     }
 }

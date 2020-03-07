@@ -38,7 +38,7 @@ class ResourceRepository
     /**
      * @return Resource
      */
-    public function currentResource()
+    public function current()
     {
         return finder()->findClass(finder()->currentResource());
     }

@@ -50,7 +50,7 @@ class InviteController extends Controller
      */
     public function __invoke(InviteRequest $request, User $user, Group $group)
     {
-        userGroups()->inviteViaRequest($user, $group);
+        userGroups()->invite($user, $group);
         return response()->json([], 200);
     }
 }
