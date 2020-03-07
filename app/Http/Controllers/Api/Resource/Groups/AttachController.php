@@ -11,20 +11,34 @@ class AttachController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/users/{user}/groups/{group}/attach",
-     *      operationId="attachUserGroup",
-     *      tags={"Users"},
-     *      summary="Attach group of user.",
+     *      path="/{resource}/{uuid}/groups/{group}/attach",
+     *      operationId="attachResourceGroup",
+     *      tags={"Resources"},
+     *      summary="Attach group of resource.",
      *      description="Returns empty array as JSON response.",
      *      @OA\Parameter(
-     *          name="user",
-     *          description="Unique identifier of user",
+     *          name="uuid",
+     *          description="Unique identifier of resource",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
+     *     @OA\Parameter(
+     *         name="resource",
+     *         in="path",
+     *         description="Resource type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"users", "pets", "devices"},
+     *               default="devices"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Parameter(
      *          name="group",
      *          description="Unique identifier of group",
@@ -36,67 +50,7 @@ class AttachController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="User attached to group successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/pets/{pet}/groups/{group}/attach",
-     *      operationId="attachPetGroup",
-     *      tags={"Pets"},
-     *      summary="Attach group of pet.",
-     *      description="Returns empty array as JSON response.",
-     *      @OA\Parameter(
-     *          name="pet",
-     *          description="Unique identifier of pet",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Pet attached to group successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/devices/{device}/groups/{group}/attach",
-     *      operationId="attachPetGroup",
-     *      tags={"Devices"},
-     *      summary="Attach group of device.",
-     *      description="Returns empty array as JSON response.",
-     *      @OA\Parameter(
-     *          name="device",
-     *          description="Unique identifier of device",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Device attached to group successfully"
+     *          description="Resource attached to group successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request")
      * )

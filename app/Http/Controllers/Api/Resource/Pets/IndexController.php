@@ -10,41 +10,34 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/groups/{group}/pets",
-     *      operationId="getGroupPets",
-     *      tags={"Groups"},
-     *      summary="Get pets of group.",
-     *      description="Returns the pets of group paginated by a default quantity, payload includes pagination links and stats.",
+     *      path="/{resource}/{uuid}/pets",
+     *      operationId="getResourcePets",
+     *      tags={"Resources"},
+     *      summary="Get pets of resource.",
+     *      description="Returns the pets paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
+     *          name="uuid",
+     *          description="Unique identifier of resource",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Pets retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Get(
-     *      path="/users/{user}/pets",
-     *      operationId="getUserPets",
-     *      tags={"Users"},
-     *      summary="Get pets of user.",
-     *      description="Returns the pets of user paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="user",
-     *          description="Unique identifier of user",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
+     *     @OA\Parameter(
+     *         name="resource",
+     *         in="path",
+     *         description="Resource type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"groups", "users"},
+     *               default="users"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Pets retrieved successfully"

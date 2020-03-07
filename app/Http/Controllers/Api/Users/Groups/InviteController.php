@@ -13,7 +13,7 @@ class InviteController extends Controller
     /**
      * @OA\Post(
      *      path="/users/{user}/groups/{group}/invite",
-     *      operationId="inviteUserGroupInstance",
+     *      operationId="inviteUserGroup",
      *      tags={"Users"},
      *      summary="Invite user to group.",
      *      description="Create a relationship between the group and user marked as PENDING. Only the owner group and administrators can submit a new applications.",

@@ -10,44 +10,37 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/geofences/{geofence}/users",
-     *      operationId="getGeofenceUsers",
-     *      tags={"Geofences"},
-     *      summary="Get users of geofence.",
-     *      description="Returns the geofence users instances paginated by a default quantity, payload includes pagination links and stats.",
+     *      path="/{resource}/{uuid}/users",
+     *      operationId="getResourceUsers",
+     *      tags={"Resources"},
+     *      summary="Get users of resource.",
+     *      description="Returns the users paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="geofence",
-     *          description="Unique identifier of geofence",
+     *          name="uuid",
+     *          description="Unique identifier of resource",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
+     *     @OA\Parameter(
+     *         name="resource",
+     *         in="path",
+     *         description="Resource type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"geofences", "groups"},
+     *               default="users"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=200,
-     *          description="Geofence users retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     * )
-     * @OA\Get(
-     *      path="/groups/{group}/users",
-     *      operationId="getGroupUsers",
-     *      tags={"Groups"},
-     *      summary="Get users of group.",
-     *      description="Returns the group users instances paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Group users retrieved successfully"
+     *          description="Users retrieved successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      * )

@@ -11,7 +11,7 @@ class TokenController extends Controller
     /**
      * @OA\Get(
      *  path="/token",
-     *  operationId="getUserToken",
+     *  operationId="getToken",
      *  tags={"Authentication"},
      *  summary="Get authentication token based on user credentials.",
      *  description="Returns the user personal access token.",

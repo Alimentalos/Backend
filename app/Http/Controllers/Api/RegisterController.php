@@ -13,7 +13,7 @@ class RegisterController extends Controller
      *  path="/register",
      *  operationId="registerUser",
      *  tags={"Authentication"},
-     *  summary="Crea user via register.",
+     *  summary="Register user.",
      *  description="Returns the registered user as JSON Object.",
      *  @OA\Response(
      *      response=200,

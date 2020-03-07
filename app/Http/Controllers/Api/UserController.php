@@ -11,7 +11,7 @@ class UserController extends Controller
     /**
      * @OA\Get(
      *  path="/user",
-     *  operationId="getUser",
+     *  operationId="user",
      *  tags={"Authentication"},
      *  summary="Get authenticated user.",
      *  description="Returns the user as JSON Object.",
