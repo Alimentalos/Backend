@@ -33,6 +33,7 @@ use App\Tools\Parser;
 use App\Tools\Reporter;
 use App\Tools\Subscriber;
 use App\Tools\Tokenizer;
+use App\Tools\Uploader;
 use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -360,10 +361,10 @@ if (! function_exists('admin')) {
 
 if (! function_exists('upload')) {
     /**
-     * @return UploadRepository
+     * @return Uploader
      */
     function upload() {
-        return new UploadRepository();
+        return new Uploader();
     }
 }
 

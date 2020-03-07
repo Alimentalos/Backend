@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Repositories;
+namespace App\Tools;
 
 
 use App\Contracts\Resource;
 
-class UploadRepository
+class Uploader
 {
     /**
      * Check if request has a model photo pending to upload.
