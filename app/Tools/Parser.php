@@ -4,7 +4,6 @@
 namespace App\Tools;
 
 
-use App\Repositories\LocationsRepository;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 
