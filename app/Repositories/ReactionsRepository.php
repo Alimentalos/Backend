@@ -12,7 +12,7 @@ class ReactionsRepository
      * @param Resource $resource
      * @return array
      */
-    public function fetchViaRequest(Resource $resource)
+    public function index(Resource $resource)
     {
         return $resource->getAvailableReactions() == 'Follow' ?
             likes()->followStats($resource->getLoveReactant(), authenticated()->getLoveReacter()) :

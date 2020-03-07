@@ -36,6 +36,8 @@ class ResourceRepository
     }
 
     /**
+     * Get current resource instance.
+     *
      * @return Resource
      */
     public function current()

@@ -7,12 +7,12 @@ use App\Contracts\Resource;
 class ResourceCommentsRepository
 {
     /**
-     * Create resource comment via request.
+     * Create resource comment.
      *
      * @param Resource $resource
      * @return mixed
      */
-    public function createViaRequest(Resource $resource)
+    public function create(Resource $resource)
     {
         return $resource->comments()->create([
             'uuid' => uuid(),

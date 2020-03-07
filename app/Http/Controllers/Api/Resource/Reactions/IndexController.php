@@ -122,7 +122,7 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        $reactions = reactions()->fetchViaRequest($resource);
+        $reactions = reactions()->index($resource);
         return response()->json($reactions,200);
     }
 }

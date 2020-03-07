@@ -4,6 +4,7 @@
 namespace App\Procedures;
 
 
+use App\Alert;
 use App\Photo;
 
 trait AlertProcedure
@@ -26,5 +27,20 @@ trait AlertProcedure
             'photo_url' => config('storage.path') . $photo->photo_url,
             'location' => parser()->pointFromCoordinates(input('coordinates')),
         ], only('name', 'title', 'body', 'type', 'status'));
+    }
+
+    /**
+     * Create alert.
+     *
+     * @return Alert
+     */
+    public function createInstance()
+    {
+        $photo = photos()->create();
+        $related = finder()->findInstance(input('alert_type'), input('alert_id'));
+        $alert = Alert::create($this->parameters($photo, $related, input('alert_type')));
+        $photo->alerts()->attach($alert->uuid);
+        $alert->load('photo', 'user');
+        return $alert;
     }
 }

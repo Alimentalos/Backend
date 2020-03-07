@@ -79,7 +79,7 @@ class FindController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        $locations = locations()->fetchLastLocationsViaRequest();
+        $locations = locations()->find();
         return response()->json($locations,200);
     }
 }

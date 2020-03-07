@@ -34,8 +34,8 @@ class Parser
     {
         $array = explode(',', $coordinates);
         return (new Point(
-            floatval($array[LocationsRepository::LATITUDE]),
-            floatval($array[LocationsRepository::LONGITUDE])
+            floatval($array[locations()->latitude]),
+            floatval($array[locations()->longitude])
         ));
     }
 

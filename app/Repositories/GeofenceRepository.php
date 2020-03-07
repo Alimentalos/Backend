@@ -15,19 +15,14 @@ class GeofenceRepository
     use GeofenceList;
 
     /**
-     * In status.
+     * Create geofence.
+     *
+     * @return Geofence
      */
-    public const IN_STATUS = 1;
-
-    /**
-     * Still status.
-     */
-    public const STILL_STATUS = 2;
-
-    /**
-     * Out status.
-     */
-    public const OUT_STATUS = 3;
+    public function create()
+    {
+        return $this->createInstance();
+    }
 
     /**
      * Update geofence.
@@ -37,17 +32,6 @@ class GeofenceRepository
      */
     public function update(Geofence $geofence)
     {
-        upload()->check($geofence);
         return $this->updateInstance($geofence);
-    }
-
-    /**
-     * Create geofence.
-     *
-     * @return Geofence
-     */
-    public function create()
-    {
-        return $this->createInstance();
     }
 }

@@ -7,7 +7,6 @@ namespace App\Procedures;
 use App\Events\GeofenceIn;
 use App\Events\GeofenceOut;
 use App\Geofence;
-use App\Repositories\UniqueNameRepository;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
@@ -16,6 +15,21 @@ use Illuminate\Database\Query\Builder;
 
 trait GeofenceProcedure
 {
+    /**
+     * In status.
+     */
+    public int $in_status = 1;
+
+    /**
+     * Still status.
+     */
+    public int $still_status = 2;
+
+    /**
+     * Out status.
+     */
+    public int $out_status = 3;
+
     /**
      * Check if location is using model geofence.
      *
@@ -53,7 +67,7 @@ trait GeofenceProcedure
             'geofence_uuid' => $geofence->uuid,
             'first_location_uuid' => $location->uuid,
             'last_location_uuid' => $location->uuid,
-            'status' => static::IN_STATUS,
+            'status' => $this->in_status,
         ]);
         event(new GeofenceIn($location, $geofence, $model));
     }
@@ -71,12 +85,12 @@ trait GeofenceProcedure
             ['accessible_id', $model->uuid],
             ['accessible_type', get_class($model)],
             ['geofence_uuid', $geofence->uuid],
-            ['status', static::STILL_STATUS],
+            ['status', $this->still_status],
         ])->orWhere([
             ['accessible_id', $model->uuid],
             ['accessible_type', get_class($model)],
             ['geofence_uuid', $geofence->uuid],
-            ['status', static::IN_STATUS],
+            ['status', $this->in_status],
         ]);
     }
 
@@ -91,7 +105,7 @@ trait GeofenceProcedure
     {
         $this->inAndStillAccessQuery($model, $geofence)->update([
             'last_location_uuid' => $location->uuid,
-            'status' => self::STILL_STATUS,
+            'status' => $this->still_status,
         ]);
     }
 
@@ -106,7 +120,7 @@ trait GeofenceProcedure
     {
         $this->inAndStillAccessQuery($model, $geofence)->update([
             'last_location_uuid' => $location->uuid,
-            'status' => self::OUT_STATUS,
+            'status' => $this->out_status,
         ]);
         event(new GeofenceOut($location, $geofence, $model));
     }
@@ -171,7 +185,7 @@ trait GeofenceProcedure
     }
 
     /**
-     * Create photo geofence.
+     * Create geofence instance.
      *
      * @return Geofence
      */
@@ -194,8 +208,15 @@ trait GeofenceProcedure
         return $geofence;
     }
 
+    /**
+     * Update geofence instance.
+     *
+     * @param Geofence $geofence
+     * @return Geofence
+     */
     public function updateInstance(Geofence $geofence)
     {
+        upload()->check($geofence);
         $geofence->name = fill('name', $geofence->name);
         $shape = array_map(function ($element) {
             return new Point($element['latitude'], $element['longitude']);

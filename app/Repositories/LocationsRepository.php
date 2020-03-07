@@ -11,14 +11,4 @@ class LocationsRepository
     use LocationQuery;
     use LocationProcedure;
     use LocationList;
-
-    /**
-     * Longitude position.
-     */
-    public const LATITUDE = 0;
-
-    /**
-     * Latitude position.
-     */
-    public const LONGITUDE = 1;
 }
