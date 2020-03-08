@@ -82,6 +82,6 @@
  * )
  * @OA\ExternalDocumentation(
  *     description="Source code",
- *     url="https://github.com/demency/alimentalos-backend"
+ *     url="https://github.com/alimentalos/backend"
  * )
  */

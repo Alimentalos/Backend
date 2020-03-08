@@ -6,12 +6,12 @@
         @foreach($firstLevel as $secondLevelKey => $secondLevel)
             @if(is_array($secondLevel))
                 <div class="row justify-content-center">
-                    <div class="col-md-8 mt-4">
+                    <div class="col-md-8 col-sm-12 mt-4">
                         <div class="card">
                             @if (!is_numeric($secondLevelKey))
                                 <div class="card-header h3">{{ __($secondLevelKey) }}</div>
                             @endif
-                            <div class="card-body pl-5 pr-5">
+                            <div class="card-body pl-5 pr-5 pt-5">
                                 @foreach($secondLevel as $key=> $thirdLevel)
                                     @if(is_array($thirdLevel))
                                         @if (!is_numeric($key))
@@ -52,9 +52,9 @@
                 </div>
             @else
                 <div class="row justify-content-center">
-                    <div class="col-md-8 mt-4">
+                    <div class="col-md-8 col-sm-12 mt-4">
                         <div class="card">
-                            <div class="card-body pl-5 pr-5 pt-4">
+                            <div class="card-body pl-5 pr-5 pt-5">
                                 @markdown($secondLevel)
                             </div>
                         </div>

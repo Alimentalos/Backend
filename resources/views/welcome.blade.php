@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/c0a3e57ca3.js" crossorigin="anonymous"></script>
 
         <!-- Styles -->
         <style>
@@ -61,8 +62,21 @@
                 text-decoration: none;
             }
 
+            .fal, .fab {
+                font-size: 20px;
+                margin-right: 10px;
+                margin-left: 5px;
+                padding-top: 10px;
+            }
+
             .m-b-md {
                 margin-bottom: 30px;
+            }
+
+            .body > a {
+                border-radius: 5px;
+                border: 1px solid #cccccc;
+                padding: 15px 7px 10px 7px;
             }
         </style>
     </head>
@@ -70,14 +84,15 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    <a href="https://www.alimentalos.cl/about">About</a>
+                    <a href="https://github.com/alimentalos"><i class="fab fa-github"></i> {{ __('GitHub') }}</a>
+                    <a href="{{ url('/about') }}"><i class="fal fa-book-alt"></i> About</a>
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}"><i class="fal fa-sign-in"></i> Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}"><i class="fal fa-user-plus"></i> Register</a>
                         @endif
                     @endauth
                 </div>
@@ -89,12 +104,12 @@
                 </div>
 
                 <div class="links body">
-                    <a href="https://app.alimentalos.cl/geofences">Geofences</a>
-                    <a href="https://app.alimentalos.cl/pets">Pets</a>
-                    <a href="https://app.alimentalos.cl/users">Users</a>
-                    <a href="https://app.alimentalos.cl/groups">Groups</a>
-                    <a href="https://app.alimentalos.cl/photos">Photos</a>
-                    <a href="https://app.alimentalos.cl/devices">Devices</a>
+                    <a href="https://app.alimentalos.cl/geofences"><i class="fal fa-draw-polygon"></i> Geofences</a>
+                    <a href="https://app.alimentalos.cl/pets"><i class="fal fa-paw"></i> Pets</a>
+                    <a href="https://app.alimentalos.cl/users"><i class="fal fa-users"></i> Users</a>
+                    <a href="https://app.alimentalos.cl/groups"><i class="fal fa-users-class"></i> Groups</a>
+                    <a href="https://app.alimentalos.cl/photos"><i class="fal fa-image-polaroid"></i> Photos</a>
+                    <a href="https://app.alimentalos.cl/devices"><i class="fal fa-mobile"></i> Devices</a>
                 </div>
             </div>
         </div>

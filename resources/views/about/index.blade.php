@@ -27,7 +27,7 @@
                         <p>Obtain information related to the design of the solution, its components and patterns. If you are a developer this section can be quite useful.</p>
                         <a href="/about/developer-guide" class="btn btn-md btn-light" role="button" aria-pressed="true"><i class="fal fa-book-alt"></i> Read more</a>
                         <hr>
-                        <a href="https://github.com/demency/alimentalos-backend" class="btn btn-md btn-light" role="button" aria-pressed="true"><i class="fab fa-github"></i> Backend repository</a>
+                        <a href="https://github.com/alimentalos/backend" class="btn btn-md btn-light" role="button" aria-pressed="true"><i class="fab fa-github"></i> Backend repository</a>
                         <a href="https://github.com/demency/alimentalos-frontend" class="btn btn-md btn-light" role="button" aria-pressed="true"><i class="fab fa-github"></i> Frontend repository</a>
                     </div>
                 </div>
