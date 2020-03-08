@@ -2,7 +2,7 @@
 
 /**
  * @OA\Info(
- *      version="v.1.2",
+ *      version="v.1.3",
  *      title="Alimentalos API",
  *      description="Official Alimentalos API Documentation",
  *      @OA\Contact(
@@ -82,6 +82,6 @@
  * )
  * @OA\ExternalDocumentation(
  *     description="Source code",
- *     url="https://github.com/demency/alimentalos-backend"
+ *     url="https://github.com/alimentalos/backend"
  * )
  */

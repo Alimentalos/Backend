@@ -3,7 +3,8 @@ name: Codeclimate
 on: [push]
 
 jobs:
-  laravel-tests:
+  codeclimate:
+    name: "Codeclimate pipeline"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1

@@ -5,9 +5,6 @@ namespace App\Repositories;
 use App\Geofence;
 use App\Lists\GeofenceList;
 use App\Procedures\GeofenceProcedure;
-use Grimzy\LaravelMysqlSpatial\Types\LineString;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 
 class GeofenceRepository
 {
