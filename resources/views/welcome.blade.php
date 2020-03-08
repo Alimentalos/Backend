@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Alimentalos - {{ __('Help us to save ours animals.') }}</title>
+        <title>Alimentalos - {{ __('Bring care and love to abandoned pets.') }}</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
         <script src="https://kit.fontawesome.com/c0a3e57ca3.js" crossorigin="anonymous"></script>
 
         <!-- Styles -->
@@ -15,7 +15,7 @@
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Nunito', sans-serif;
+                font-family: 'Rubik', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -38,7 +38,7 @@
             .top-right {
                 position: absolute;
                 right: 20px;
-                top: 30px;
+                top: 10px;
             }
 
             .content {
@@ -55,9 +55,12 @@
 
             .links > a {
                 color: #636b6f;
-                padding: 0 25px;
+                padding: 15px 7px 10px 7px;
+                margin: 10px 10px;
+                display: block;
+                float: left;
                 font-size: 13px;
-                font-weight: 600;
+                font-weight: 200;
                 letter-spacing: .1rem;
                 text-decoration: none;
             }
@@ -74,9 +77,9 @@
             }
 
             .body > a {
-                border-radius: 5px;
-                border: 1px solid #cccccc;
-                padding: 15px 7px 10px 7px;
+                margin: 0px 15px;
+                display: block;
+                float: left;
             }
         </style>
     </head>
@@ -85,14 +88,14 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     <a href="https://github.com/alimentalos"><i class="fab fa-github"></i> {{ __('GitHub') }}</a>
-                    <a href="{{ url('/about') }}"><i class="fal fa-book-alt"></i> About</a>
+                    <a href="{{ url('/about') }}"><i class="fal fa-book-alt"></i> {{ __('About') }}</a>
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">{{ __('Home') }}</a>
                     @else
-                        <a href="{{ route('login') }}"><i class="fal fa-sign-in"></i> Login</a>
+                        <a href="{{ route('login') }}"><i class="fal fa-sign-in"></i> {{ __('Login') }}</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}"><i class="fal fa-user-plus"></i> Register</a>
+                            <a href="{{ route('register') }}"><i class="fal fa-user-plus"></i> {{ __('Register') }}</a>
                         @endif
                     @endauth
                 </div>
@@ -104,12 +107,7 @@
                 </div>
 
                 <div class="links body">
-                    <a href="https://app.alimentalos.cl/geofences"><i class="fal fa-draw-polygon"></i> Geofences</a>
-                    <a href="https://app.alimentalos.cl/pets"><i class="fal fa-paw"></i> Pets</a>
-                    <a href="https://app.alimentalos.cl/users"><i class="fal fa-users"></i> Users</a>
-                    <a href="https://app.alimentalos.cl/groups"><i class="fal fa-users-class"></i> Groups</a>
-                    <a href="https://app.alimentalos.cl/photos"><i class="fal fa-image-polaroid"></i> Photos</a>
-                    <a href="https://app.alimentalos.cl/devices"><i class="fal fa-mobile"></i> Devices</a>
+                    @markdown(__('Bring care and love to *abandoned pets*.'))
                 </div>
             </div>
         </div>

@@ -4,12 +4,12 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mt-4">
-                <h1>About</h1>
-                <p>Browse our information center to receive guidance on our projects, documentation or guides.</p>
+                <h1 class="text-white">About</h1>
+                <p class="text-white">Browse our knowledge center to receive guidance on our documentation, guides or specifications.</p>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 mt-4">
+            <div class="col-md-8">
                 <div class="card text-white bg-primary">
                     <div class="card-header h4">{{ __('Documentation') }}</div>
                     <div class="card-body">

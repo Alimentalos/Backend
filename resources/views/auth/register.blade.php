@@ -3,10 +3,14 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col-md-8 mt-4">
+            <h1 class="text-white">Register</h1>
+            <p class="text-white">Creates a new account on our open sourced platform.</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf

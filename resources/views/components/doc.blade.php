@@ -1,15 +1,19 @@
 @foreach($data as $firstLevelKey => $firstLevel)
     @if (!is_numeric($firstLevelKey))
-        <h3 class="text-center mt-4">{{ __($firstLevelKey) }}</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-sm-12 mt-4">
+                <h3 class="text-left mt-4 text-white">{{ __($firstLevelKey) }}</h3>
+            </div>
+        </div>
     @endif
     @if(is_array($firstLevel))
         @foreach($firstLevel as $secondLevelKey => $secondLevel)
             @if(is_array($secondLevel))
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-sm-12 mt-4">
-                        <div class="card">
+                        <div class="card bg-light">
                             @if (!is_numeric($secondLevelKey))
-                                <div class="card-header h3">{{ __($secondLevelKey) }}</div>
+                                <div class="card-header text-white h3">{{ __($secondLevelKey) }}</div>
                             @endif
                             <div class="card-body pl-5 pr-5 pt-5">
                                 @foreach($secondLevel as $key=> $thirdLevel)
