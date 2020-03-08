@@ -5,6 +5,7 @@ on: [push]
 jobs:
   codecov:
     name: "Codecov pipeline"
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - name: Shutdown Ubuntu MySQL (SUDO)
