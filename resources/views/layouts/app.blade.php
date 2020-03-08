@@ -15,6 +15,13 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c0a3e57ca3.js" crossorigin="anonymous"></script>
+
+    <style>
+        p {
+            text-align: justify;
+        }
+    </style>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
