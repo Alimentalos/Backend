@@ -928,6 +928,7 @@ class UserTest extends TestCase
             ->json('POST', '/api/users/' . $userB->uuid . '/groups/' . $group->uuid . '/attach', [
                 'is_admin' => false,
             ]);
+        dd($response->getContent());
         $response->assertOk();
 
         $this->assertDatabaseHas('groupables', [
