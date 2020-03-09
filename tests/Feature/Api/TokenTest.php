@@ -16,7 +16,7 @@ class TokenTest extends TestCase
     public function testInvalidRefreshedToken()
     {
         $user = factory(User::class)->create();
-        $token = \JWTAuth::fromUser( $user );
+        $token = app('Tymon\JWTAuth\JWT')->fromUser( $user )->get();
         $response = $this->json('GET', '/api/refresh?token=' . $token);
         $response->assertOk();
         $refreshed = json_decode($response->getContent())->access_token;
@@ -51,7 +51,7 @@ class TokenTest extends TestCase
     public function testUserRetrieveToken()
     {
         $user = factory(User::class)->create();
-        $token = \JWTAuth::fromUser( $user );
+        $token = app('Tymon\JWTAuth\JWT')->fromUser( $user )->get();
         $response = $this->json('GET', '/api/user?token=' . $token);
         $response->assertOk();
         $response->assertJsonFragment([

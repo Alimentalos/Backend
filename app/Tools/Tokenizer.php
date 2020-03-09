@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\JWT;
 
 class Tokenizer
 {
@@ -23,11 +24,11 @@ class Tokenizer
             return response()->json(['message' => 'Unauthenticated.'], 401);
         }
 
-        $token = \JWTAuth::fromUser( User::where('email', input('email'))->first() );
+        $token = app('Tymon\JWTAuth\JWT')->fromUser( User::where('email', input('email'))->first() )->get();
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'expires_in' =>  app('Tymon\JWTAuth\JWT')->getTTL() * 60
         ]);
     }
 
@@ -41,9 +42,9 @@ class Tokenizer
         try {
             $token = auth('api')->refresh();
             return response()->json([
-                'access_token' => $token,
+                'access_token' => $token->get(),
                 'token_type' => 'bearer',
-                'expires_in' => auth('api')->factory()->getTTL() * 60
+                'expires_in' => app('Tymon\JWTAuth\JWT')->getTTL() * 60
             ]);
         } catch (TokenExpiredException $e) {
             return response()->json(['message' => 'Token expired.'], 401);
@@ -59,6 +60,7 @@ class Tokenizer
      */
     public function logout()
     {
+        auth('api')->logout();
         auth('api')->invalidate();
     }
 }
