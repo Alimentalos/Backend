@@ -68,7 +68,7 @@ class Token extends PassportToken
      */
     public function client()
     {
-        return $this->belongsTo(Passport::clientModel(), 'client_uuid', 'uuid');
+        return $this->belongsTo(Passport::clientModel(), 'client_id', 'uuid');
     }
 
     /**
@@ -80,7 +80,7 @@ class Token extends PassportToken
     {
         $provider = config('auth.guards.api.provider');
 
-        return $this->belongsTo(config('auth.providers.'.$provider.'.model'), 'user_uuid', 'uuid');
+        return $this->belongsTo(config('auth.providers.'.$provider.'.model'), 'user_id', 'uuid');
     }
 
     /**

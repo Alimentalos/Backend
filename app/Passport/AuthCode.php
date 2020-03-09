@@ -67,6 +67,6 @@ class AuthCode extends PassportAuthCode
      */
     public function client()
     {
-        return $this->belongsTo(Passport::clientModel(), 'client_uuid', 'uuid');
+        return $this->belongsTo(Passport::clientModel(), 'client_id', 'uuid');
     }
 }

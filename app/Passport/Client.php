@@ -51,7 +51,7 @@ class Client extends PassportClient
     {
         return $this->belongsTo(
             config('auth.providers.'.config('auth.guards.api.provider').'.model'),
-            'user_uuid',
+            'user_id',
             'uuid'
         );
     }
@@ -63,7 +63,7 @@ class Client extends PassportClient
      */
     public function authCodes()
     {
-        return $this->hasMany(Passport::authCodeModel(), 'client_uuid', 'uuid');
+        return $this->hasMany(Passport::authCodeModel(), 'client_id', 'uuid');
     }
 
     /**

@@ -374,7 +374,7 @@ class GeofenceTest extends TestCase
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $secondPayload);
         $response->assertCreated();
-        
+
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -479,7 +479,7 @@ class GeofenceTest extends TestCase
             'trackable_type' => 'App\\Device',
             'accuracy' => $thirdPayload['location']['coords']['accuracy'],
         ]);
-        
+
 
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($device, $response) {
             return $e->model->uuid === $device->uuid &&
@@ -546,7 +546,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
@@ -564,7 +564,7 @@ class GeofenceTest extends TestCase
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $fourPayload);
         $response->assertCreated();
 
-        
+
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -584,7 +584,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
@@ -621,7 +621,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
@@ -639,7 +639,7 @@ class GeofenceTest extends TestCase
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $fourPayload);
         $response->assertCreated();
 
-        
+
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -659,7 +659,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
@@ -676,7 +676,7 @@ class GeofenceTest extends TestCase
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $fivePayload);
         $response->assertCreated();
-        
+
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -696,7 +696,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
@@ -733,14 +733,14 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
             'trackable_type' => 'App\\User',
             'accuracy' => $fivePayload['location']['coords']['accuracy'],
         ]);
-        
+
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($user, $response) {
             return $e->model->uuid === $user->uuid &&
                 $e->location->trackable_type === 'App\\User' &&
@@ -770,14 +770,14 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
             'trackable_type' => 'App\\Pet',
             'accuracy' => $fivePayload['location']['coords']['accuracy'],
         ]);
-        
+
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($pet, $response) {
             return $e->model->uuid === $pet->uuid &&
                 $e->location->trackable_type === 'App\\Pet' &&
@@ -812,7 +812,7 @@ class GeofenceTest extends TestCase
                     'first_location',
                     'last_location',
                     'status'
-                ]   
+                ]
             ]
         ]);
         $response->assertJsonCount(2, 'data');
@@ -999,7 +999,7 @@ class GeofenceTest extends TestCase
                     'shape' => [
                         'type',
                         'coordinates',
-                    ]                    
+                    ]
                 ],
             ],
             'first_page_url',
@@ -1209,7 +1209,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
@@ -1218,6 +1218,7 @@ class GeofenceTest extends TestCase
         ]);
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $firstPayload);
+        dd($response->getContent());
         $response->assertCreated();
         $response->assertJsonStructure([
             'uuid',
@@ -1238,7 +1239,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
@@ -1267,7 +1268,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
@@ -1296,7 +1297,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
@@ -1325,7 +1326,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
@@ -1354,13 +1355,13 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
             'trackable_type' => 'App\\Pet',
             'accuracy' => $secondPayload['location']['coords']['accuracy'],
-        ]);        
+        ]);
 
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $thirdPayload);
         $response->assertCreated();
@@ -1383,13 +1384,13 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
             'trackable_type' => 'App\\Device',
             'accuracy' => $thirdPayload['location']['coords']['accuracy'],
-        ]);  
+        ]);
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $thirdPayload);
         $response->assertCreated();
@@ -1412,13 +1413,13 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
             'trackable_type' => 'App\\User',
             'accuracy' => $thirdPayload['location']['coords']['accuracy'],
-        ]);          
+        ]);
 
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $thirdPayload);
         $response->assertCreated();
@@ -1441,7 +1442,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
@@ -1470,7 +1471,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
@@ -1499,7 +1500,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
@@ -1528,7 +1529,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
@@ -1557,7 +1558,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
@@ -1586,7 +1587,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
@@ -1615,7 +1616,7 @@ class GeofenceTest extends TestCase
             'event',
             'generated_at',
             'created_at',
-        ]); 
+        ]);
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,

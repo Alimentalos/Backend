@@ -2,6 +2,7 @@
 
 namespace App\Passport;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Passport\Passport;
 use Laravel\Passport\PersonalAccessClient as PassportPersonalAccessClient;
 
@@ -24,10 +25,10 @@ class PersonalAccessClient extends PassportPersonalAccessClient
     /**
      * Get all of the authentication codes for the client.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function client()
     {
-        return $this->belongsTo(Passport::clientModel(), 'client_uuid', 'uuid');
+        return $this->belongsTo(Passport::clientModel(), 'client_uuid', 'id');
     }
 }
