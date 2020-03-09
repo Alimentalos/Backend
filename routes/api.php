@@ -29,7 +29,7 @@ Route::middleware(['auth:pets'])->group(function () {
  */
 Route::middleware(['api'])->group(function () {
 
-    Route::get('/token', 'Api\TokenController')
+    Route::post('/token', 'Api\TokenController')
         ->middleware(['throttle:10']);
 
     Route::post('/register', 'Api\RegisterController')
@@ -37,6 +37,9 @@ Route::middleware(['api'])->group(function () {
 
     Route::post('/password-recovery', 'Api\PasswordRecoveryController')
         ->middleware('throttle:5');
+
+    Route::get('/refresh', 'Api\RefreshTokenController')
+        ->middleware(['throttle:10']);
 });
 
 
@@ -46,8 +49,7 @@ Route::middleware(['api'])->group(function () {
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
     Route::get('/logout', 'Api\LogoutController')
-        ->middleware(['throttle:5']);
-
+        ->middleware(['throttle:10']);
     foreach([
         'groups', 'locations', 'actions', 'geofences', 'pets', 'devices', 'users', 'photos', 'comments', 'alerts'
             ] as $resource) {

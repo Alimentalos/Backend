@@ -6,28 +6,29 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class LogoutController extends Controller
+class RefreshTokenController extends Controller
 {
     /**
-     * @OA\Get(
-     *  path="/logout",
-     *  operationId="getLogout",
+     * @OA\Post(
+     *  path="/refresh",
+     *  operationId="getFreshToken",
      *  tags={"Authentication"},
-     *  summary="Invalidates user access token.",
-     *  description="Returns message JSON Object response.",
+     *  summary="Get fresh authentication token.",
+     *  description="Returns the user personal access token.",
      *  @OA\Response(
      *      response=200,
-     *      description="Token invalidated successfully"
+     *      description="Token retrieved successfully"
      *  ),
      *  @OA\Response(response=401, description="Unauthenticated.")
      *  )
+     *
+     * Show the user api token.
      *
      * @param Request $request
      * @return JsonResponse
      */
     public function __invoke(Request $request)
     {
-        token()->logout();
-        return response()->json(['message' => 'Token invalidated successfully']);
+        return token()->refresh();
     }
 }
