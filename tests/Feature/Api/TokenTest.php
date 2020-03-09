@@ -19,7 +19,6 @@ class TokenTest extends TestCase
         $token = \JWTAuth::fromUser( $user );
         $response = $this->json('GET', '/api/refresh?token=' . $token);
         $response->assertOk();
-
         $refreshed = json_decode($response->getContent())->access_token;
         $response = $this->get('/api/logout?token='. $token); // Invalidate first token
         $response->assertOk();
@@ -98,7 +97,8 @@ class TokenTest extends TestCase
 
         $token = json_decode($response->getContent())->access_token;
 
-        $response = $this->get('/api/refresh');
+        $response = $this->get('/api/refresh?token=' . $token);
+
         $response->assertOk();
 
         $response = $this->json('POST', '/api/token', [

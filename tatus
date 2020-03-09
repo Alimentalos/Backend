@@ -1,0 +1,93 @@
+[1mdiff --git a/app/Tools/Tokenizer.php b/app/Tools/Tokenizer.php[m
+[1mindex 1323851..9629d5c 100644[m
+[1m--- a/app/Tools/Tokenizer.php[m
+[1m+++ b/app/Tools/Tokenizer.php[m
+[36m@@ -6,6 +6,7 @@[m [mnamespace App\Tools;[m
+ [m
+ use App\User;[m
+ use Illuminate\Http\JsonResponse;[m
+[32m+[m[32muse Illuminate\Support\Facades\Auth;[m
+ use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;[m
+ use Tymon\JWTAuth\Exceptions\TokenExpiredException;[m
+ [m
+[36m@@ -46,17 +47,11 @@[m [mclass Tokenizer[m
+                 'expires_in' => auth('api')->factory()->getTTL() * 60[m
+             ]);[m
+         } catch (TokenExpiredException $e) {[m
+[31m-            // TODO Handle token expired exception[m
+[31m-            //Do something[m
+[31m-            //return $e->getMessage();[m
+[32m+[m[32m            return response()->json(['message' => 'Token expired.'], 401);[m
+         } catch (TokenBlacklistedException $e) {[m
+[31m-            // TODO Handle token blacklisted exception[m
+[31m-            //Do something[m
+[31m-            //return $e->getMessage();[m
+[32m+[m[32m            return response()->json(['message' => 'Token blacklisted.'], 401);[m
+         } catch (\Exception $e) {[m
+[31m-            // TODO Handle others exceptions[m
+[31m-            //Do something[m
+[31m-            //return $e->getMessage();[m
+[32m+[m[32m            return response()->json(['message' => 'Token not found.'], 404);[m
+         }[m
+     }[m
+ [m
+[1mdiff --git a/config/auth.php b/config/auth.php[m
+[1mindex 25d718f..f55d1af 100644[m
+[1m--- a/config/auth.php[m
+[1m+++ b/config/auth.php[m
+[36m@@ -44,6 +44,7 @@[m [mreturn [[m
+         'api' => [[m
+             'driver' => 'jwt',[m
+             'provider' => 'users',[m
+[32m+[m[32m            'hash' => true,[m
+         ],[m
+ [m
+         'users' => [[m
+[1mdiff --git a/config/cache.php b/config/cache.php[m
+[1mindex 46751e6..93adfa0 100644[m
+[1m--- a/config/cache.php[m
+[1m+++ b/config/cache.php[m
+[36m@@ -18,7 +18,7 @@[m [mreturn [[m
+     |[m
+     */[m
+ [m
+[31m-    'default' => env('CACHE_DRIVER', 'file'),[m
+[32m+[m[32m    'default' => env('CACHE_DRIVER', 'redis'),[m
+ [m
+     /*[m
+     |--------------------------------------------------------------------------[m
+[1mdiff --git a/config/jwt.php b/config/jwt.php[m
+[1mindex 8b7843b..8e8c5e0 100644[m
+[1m--- a/config/jwt.php[m
+[1m+++ b/config/jwt.php[m
+[36m@@ -101,7 +101,7 @@[m [mreturn [[m
+     |[m
+     */[m
+ [m
+[31m-    'ttl' => env('JWT_TTL', 60),[m
+[32m+[m[32m    'ttl' => env('JWT_TTL', 3600),[m
+ [m
+     /*[m
+     |--------------------------------------------------------------------------[m
+[1mdiff --git a/tests/Feature/Api/TokenTest.php b/tests/Feature/Api/TokenTest.php[m
+[1mindex 0cbaa8b..e2beac2 100644[m
+[1m--- a/tests/Feature/Api/TokenTest.php[m
+[1m+++ b/tests/Feature/Api/TokenTest.php[m
+[36m@@ -19,7 +19,6 @@[m [mclass TokenTest extends TestCase[m
+         $token = \JWTAuth::fromUser( $user );[m
+         $response = $this->json('GET', '/api/refresh?token=' . $token);[m
+         $response->assertOk();[m
+[31m-[m
+         $refreshed = json_decode($response->getContent())->access_token;[m
+         $response = $this->get('/api/logout?token='. $token); // Invalidate first token[m
+         $response->assertOk();[m
+[36m@@ -98,7 +97,8 @@[m [mclass TokenTest extends TestCase[m
+ [m
+         $token = json_decode($response->getContent())->access_token;[m
+ [m
+[31m-        $response = $this->get('/api/refresh');[m
+[32m+[m[32m        $response = $this->get('/api/refresh?token=' . $token);[m
+[32m+[m
+         $response->assertOk();[m
+ [m
+         $response = $this->json('POST', '/api/token', [[m

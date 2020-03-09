@@ -46,17 +46,11 @@ class Tokenizer
                 'expires_in' => auth('api')->factory()->getTTL() * 60
             ]);
         } catch (TokenExpiredException $e) {
-            // TODO Handle token expired exception
-            //Do something
-            //return $e->getMessage();
+            return response()->json(['message' => 'Token expired.'], 401);
         } catch (TokenBlacklistedException $e) {
-            // TODO Handle token blacklisted exception
-            //Do something
-            //return $e->getMessage();
+            return response()->json(['message' => 'Token blacklisted.'], 401);
         } catch (\Exception $e) {
-            // TODO Handle others exceptions
-            //Do something
-            //return $e->getMessage();
+            return response()->json(['message' => 'Token not found.'], 404);
         }
     }
 
