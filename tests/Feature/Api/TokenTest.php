@@ -12,25 +12,87 @@ class TokenTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * @test testUserTokenRequest
+     * @test testUnauthorizedToken
      */
-    public function testUserTokenRequest()
+    public function testUnauthorizedToken()
+    {
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer invalid api token",
+        ])->json('GET', '/api/user');
+
+        $response->assertUnauthorized();
+    }
+
+    /**
+     * @test testUserRetrieveToken
+     */
+    public function testUserRetrieveToken()
     {
         $user = factory(User::class)->create();
-        $response = $this->json('GET', '/api/token', [
+        $token = \JWTAuth::fromUser( $user );
+        $response = $this->json('GET', '/api/user?token=' . $token);
+        $response->assertOk();
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid,
+            'name' => $user->name,
+            'email' => $user->email,
+        ]);
+    }
+
+    /**
+     * @test testAuthorizedToken
+     */
+    public function testAuthorizedToken()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->json('POST', '/api/token', [
             'email' => $user->email,
             'password' => 'password'
+        ]);
+        $response->assertJsonStructure([
+            'access_token',
+            'token_type',
+            'expires_in',
         ]);
         $response->assertOk();
     }
 
     /**
-     * @test testUnauthenticatedTokenRequest
+     * @test testAuthorizedToken
      */
-    public function testUnauthenticatedTokenRequest()
+    public function testInvalidateToken()
     {
         $user = factory(User::class)->create();
-        $response = $this->json('GET', '/api/token', [
+        $response = $this->json('POST', '/api/token', [
+            'email' => $user->email,
+            'password' => 'password'
+        ]);
+        $response->assertJsonStructure([
+            'access_token',
+            'token_type',
+            'expires_in',
+        ]);
+
+        $token = json_decode($response->getContent())->acess_token;
+
+        $response = $this->get('/api/logout');
+        $response->assertOk();
+        $response->assertExactJson([
+            'message' => 'Token invalidated successfully'
+        ]);
+
+        $response = $this->json('GET', '/api/user');
+
+        $response->assertUnauthorized();
+    }
+
+    /**
+     * @test testUnauthenticatedToken
+     */
+    public function testUnauthenticatedToken()
+    {
+        $user = factory(User::class)->create();
+        $response = $this->json('POST', '/api/token', [
             'email' => $user->email,
             'password' => 'password-1'
         ]);

@@ -545,7 +545,7 @@
                     "Resources"
                 ],
                 "summary": "Delete specific resource.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Returns message JSON Object response.",
                 "operationId": "destroyResource",
                 "parameters": [
                     {
@@ -700,7 +700,7 @@
                     "Resources"
                 ],
                 "summary": "Attach geofence to resource.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Returns message JSON Object response.",
                 "operationId": "attachResourceGeofence",
                 "parameters": [
                     {
@@ -757,7 +757,7 @@
                     "Resources"
                 ],
                 "summary": "Detach geofence of resource.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Returns message JSON Object response.",
                 "operationId": "detachResourceGeofence",
                 "parameters": [
                     {
@@ -862,7 +862,7 @@
                     "Resources"
                 ],
                 "summary": "Attach group of resource.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Returns message JSON Object response.",
                 "operationId": "attachResourceGroup",
                 "parameters": [
                     {
@@ -918,7 +918,7 @@
                     "Resources"
                 ],
                 "summary": "Detach group of user.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Returns message JSON Object response.",
                 "operationId": "detachResourceGroup",
                 "parameters": [
                     {

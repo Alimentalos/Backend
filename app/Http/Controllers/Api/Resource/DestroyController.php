@@ -15,7 +15,7 @@ class DestroyController extends Controller
      *      operationId="destroyResource",
      *      tags={"Resources"},
      *      summary="Delete specific resource.",
-     *      description="Returns empty array as JSON response.",
+     *      description="Returns message JSON Object response.",
      *      @OA\Parameter(
      *          name="uuid",
      *          description="Unique identifier of resource",
@@ -56,7 +56,7 @@ class DestroyController extends Controller
         try {
             $resource->delete();
 
-            return response()->json(['message' => 'Deleted successfully.'],200);
+            return response()->json(['message' => 'Resource deleted successfully'],200);
             // @codeCoverageIgnoreStart
         } catch (Exception $exception) {
             return response()->json(

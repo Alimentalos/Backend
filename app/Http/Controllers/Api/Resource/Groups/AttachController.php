@@ -15,7 +15,7 @@ class AttachController extends Controller
      *      operationId="attachResourceGroup",
      *      tags={"Resources"},
      *      summary="Attach group of resource.",
-     *      description="Returns empty array as JSON response.",
+     *      description="Returns message JSON Object response.",
      *      @OA\Parameter(
      *          name="uuid",
      *          description="Unique identifier of resource",
@@ -68,6 +68,6 @@ class AttachController extends Controller
                 'status' => Group::ATTACHED_STATUS,
                 'is_admin' => fill( 'is_admin', false)
             ]);
-        return response()->json([], 200);
+        return response()->json(['message' => 'Resource attached to group successfully'], 200);
     }
 }

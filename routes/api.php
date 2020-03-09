@@ -45,6 +45,9 @@ Route::middleware(['api'])->group(function () {
  */
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
+    Route::get('/logout', 'Api\LogoutController')
+        ->middleware(['throttle:5']);
+
     foreach([
         'groups', 'locations', 'actions', 'geofences', 'pets', 'devices', 'users', 'photos', 'comments', 'alerts'
             ] as $resource) {

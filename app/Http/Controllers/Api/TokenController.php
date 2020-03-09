@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class TokenController extends Controller
 {
     /**
-     * @OA\Get(
+     * @OA\Post(
      *  path="/token",
      *  operationId="getToken",
      *  tags={"Authentication"},

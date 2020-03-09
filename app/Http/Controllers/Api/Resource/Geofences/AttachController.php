@@ -15,7 +15,7 @@ class AttachController extends Controller
      *      operationId="attachResourceGeofence",
      *      tags={"Resources"},
      *      summary="Attach geofence to resource.",
-     *      description="Returns empty array as JSON response.",
+     *      description="Returns message JSON Object response.",
      *      @OA\Parameter(
      *          name="uuid",
      *          description="Unique identifier of resource",
@@ -64,6 +64,6 @@ class AttachController extends Controller
     public function __invoke(AttachRequest $request, $resource, Geofence $geofence)
     {
         $resource->geofences()->attach($geofence->uuid);
-        return response()->json([], 200);
+        return response()->json(['message' => 'Resource attached to geofence successfully'], 200);
     }
 }
