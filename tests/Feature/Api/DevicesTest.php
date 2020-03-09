@@ -305,7 +305,7 @@ class DevicesTest extends TestCase
             '/api/devices/' . $device->uuid . '/groups/' . $group->uuid . '/detach',
             []
         );
-        $response->assertExactJson([]);
+        $response->assertExactJson(['message' => 'Resource detached to group successfully']);
         $this->assertDeleted('groupables', [
             'groupable_type' => 'App\\Device',
             'groupable_id' => $device->uuid,
