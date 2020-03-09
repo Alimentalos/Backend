@@ -22,6 +22,8 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
     - name: Generate key
       run: php artisan key:generate
+    - name: Generate passport keys
+      run: php artisan passport:keys
     - name: Generate swagger docs
       run: php artisan l5-swagger:generate
     - name: Generate jwt-auth secret
