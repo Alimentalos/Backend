@@ -134,16 +134,6 @@ if (! function_exists('reactions')) {
     }
 }
 
-if (! function_exists('token')) {
-    /**
-     * @return Tokenizer
-     */
-    function token()
-    {
-        return new Tokenizer();
-    }
-}
-
 if (! function_exists('geofences')) {
     /**
      * @return GeofenceRepository
