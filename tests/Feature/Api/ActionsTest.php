@@ -27,7 +27,6 @@ class ActionsTest extends TestCase
         $response = $this->actingAs($child, 'api')->json('GET', '/api/devices');
         $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/actions');
-        dd($response->getContent());
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [

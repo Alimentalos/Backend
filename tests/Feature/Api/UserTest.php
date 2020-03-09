@@ -702,6 +702,7 @@ class UserTest extends TestCase
             'coordinates' => $coordinates,
         ]);
         $response->assertJsonStructure([
+            'user_uuid',
             'photo_uuid',
             'photo_url',
             'email',
@@ -928,7 +929,6 @@ class UserTest extends TestCase
             ->json('POST', '/api/users/' . $userB->uuid . '/groups/' . $group->uuid . '/attach', [
                 'is_admin' => false,
             ]);
-        dd($response->getContent());
         $response->assertOk();
 
         $this->assertDatabaseHas('groupables', [

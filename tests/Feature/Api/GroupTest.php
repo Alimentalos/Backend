@@ -833,7 +833,6 @@ class GroupTest extends TestCase
             'is_public' => 'false',
             'coordinates' => '10.1,50.5'
         ]);
-        dd($response->getContent());
         $response->assertCreated();
         $content = $response->getContent();
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);

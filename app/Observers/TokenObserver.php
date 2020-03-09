@@ -11,6 +11,7 @@ class TokenObserver
      *
      * @param Token $token
      * @return void
+     * @codeCoverageIgnore
      */
     public function creating(Token $token)
     {
