@@ -43,6 +43,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
 
+        Passport::enableImplicitGrant();
         // Binding models
         Passport::useTokenModel(Token::class);
         Passport::useClientModel(Client::class);

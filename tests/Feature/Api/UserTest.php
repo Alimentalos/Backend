@@ -702,7 +702,6 @@ class UserTest extends TestCase
             'coordinates' => $coordinates,
         ]);
         $response->assertJsonStructure([
-            'user_uuid',
             'photo_uuid',
             'photo_url',
             'email',
