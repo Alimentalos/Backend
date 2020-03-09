@@ -7,11 +7,13 @@ use App\Comment;
 use App\Device;
 use App\Group;
 use App\Observers\AlertObserver;
+use App\Observers\ClientObserver;
 use App\Observers\CommentObserver;
 use App\Observers\DeviceObserver;
 use App\Observers\GroupObserver;
 use App\Observers\PetObserver;
 use App\Observers\UserObserver;
+use App\Passport\Client;
 use App\Pet;
 use App\User;
 use Illuminate\Support\ServiceProvider;
@@ -36,11 +38,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Solution observers
         User::observe(UserObserver::class);
         Comment::observe(CommentObserver::class);
         Device::observe(DeviceObserver::class);
         Group::observe(GroupObserver::class);
         Pet::observe(PetObserver::class);
         Alert::observe(AlertObserver::class);
+
+        // Passport observers
+        Client::observe(ClientObserver::class);
     }
 }

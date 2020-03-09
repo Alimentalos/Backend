@@ -2,6 +2,7 @@
 
 namespace App\Passport;
 
+use App\User;
 use Laravel\Passport\Passport;
 use Laravel\Passport\Token as PassportToken;
 
@@ -68,7 +69,7 @@ class Token extends PassportToken
      */
     public function client()
     {
-        return $this->belongsTo(Passport::clientModel(), 'client_id', 'uuid');
+        return $this->belongsTo(Client::class, 'client_id', 'uuid');
     }
 
     /**
@@ -80,7 +81,7 @@ class Token extends PassportToken
     {
         $provider = config('auth.guards.api.provider');
 
-        return $this->belongsTo(config('auth.providers.'.$provider.'.model'), 'user_id', 'uuid');
+        return $this->belongsTo(User::class, 'user_id', 'uuid');
     }
 
     /**
@@ -156,5 +157,20 @@ class Token extends PassportToken
     public function transient()
     {
         return false;
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
+    public function getKeyName()
+    {
+        return 'uuid';
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Passport;
 
+use App\User;
 use Laravel\Passport\Client as PassportClient;
 use Laravel\Passport\Passport;
 
@@ -30,6 +31,14 @@ class Client extends PassportClient
         'secret',
     ];
 
+
+    /**
+     * Disable find by id.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -41,40 +50,6 @@ class Client extends PassportClient
         'password_client' => 'bool',
         'revoked' => 'bool',
     ];
-
-    /**
-     * Get the user that the client belongs to.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(
-            config('auth.providers.'.config('auth.guards.api.provider').'.model'),
-            'user_id',
-            'uuid'
-        );
-    }
-
-    /**
-     * Get all of the authentication codes for the client.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function authCodes()
-    {
-        return $this->hasMany(Passport::authCodeModel(), 'client_id', 'uuid');
-    }
-
-    /**
-     * Get all of the tokens that belong to the client.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function tokens()
-    {
-        return $this->hasMany(Passport::tokenModel(), 'client_id', 'uuid');
-    }
 
     /**
      * Determine if the client is a "first party" client.
@@ -104,5 +79,15 @@ class Client extends PassportClient
     public function confidential()
     {
         return ! empty($this->secret);
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 }

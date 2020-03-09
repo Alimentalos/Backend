@@ -29,6 +29,23 @@ class PersonalAccessClient extends PassportPersonalAccessClient
      */
     public function client()
     {
-        return $this->belongsTo(Passport::clientModel(), 'client_uuid', 'id');
+        return $this->belongsTo(Client::class, 'client_uuid', 'id');
     }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
+    /**
+     * Disable find by id.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
 }

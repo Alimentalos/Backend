@@ -37,6 +37,14 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     use Photoable;
     use HasApiTokens;
 
+
+    /**
+     * Disable find by id.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
     /**
      * The default location field of user.
      *
@@ -136,6 +144,16 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      * @return string
      */
     public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getKeyName()
     {
         return 'uuid';
     }

@@ -53,6 +53,7 @@ class AuthCode extends PassportAuthCode
      */
     public $timestamps = false;
 
+
     /**
      * The "type" of the primary key ID.
      *
@@ -67,6 +68,16 @@ class AuthCode extends PassportAuthCode
      */
     public function client()
     {
-        return $this->belongsTo(Passport::clientModel(), 'client_id', 'uuid');
+        return $this->belongsTo(Client::class, 'client_id', 'uuid');
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 }
