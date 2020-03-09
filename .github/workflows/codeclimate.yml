@@ -24,7 +24,9 @@ jobs:
         run: php artisan key:generate
       - name: Generate swagger docs
         run: php artisan l5-swagger:generate
-      - name: Execute tests (Unit and Feature tests) via PHPUnit
+      - name: Generate jwt-auth secret
+        run: php artisan jwt:secret
+      - name: Execute tests for codeclimate
         uses: paambaati/codeclimate-action@v2.5.3
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}

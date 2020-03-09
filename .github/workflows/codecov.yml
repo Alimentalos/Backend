@@ -24,7 +24,9 @@ jobs:
       run: php artisan key:generate
     - name: Generate swagger docs
       run: php artisan l5-swagger:generate
-    - name: Execute tests for Codecov
+    - name: Generate jwt-auth secret
+      run: php artisan jwt:secret
+    - name: Execute tests for codecov
       run: vendor/bin/phpunit --coverage-clover=coverage.xml
     - name: Upload coverage report
       run: bash <(curl -s https://codecov.io/bash)
