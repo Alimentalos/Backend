@@ -1218,7 +1218,6 @@ class GeofenceTest extends TestCase
         ]);
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $firstPayload);
-        dd($response->getContent());
         $response->assertCreated();
         $response->assertJsonStructure([
             'uuid',
