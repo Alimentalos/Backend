@@ -10,7 +10,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.1.2"
+        "version": "v.2.0"
     },
     "servers": [
         {
@@ -220,6 +220,24 @@
                 }
             }
         },
+        "/logout": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Invalidates user access token.",
+                "description": "Returns message JSON Object response.",
+                "operationId": "getLogout",
+                "responses": {
+                    "200": {
+                        "description": "Token invalidated successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    }
+                }
+            }
+        },
         "/near/{type}": {
             "get": {
                 "tags": [
@@ -263,6 +281,24 @@
                     },
                     "400": {
                         "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/refresh": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Get fresh authentication token.",
+                "description": "Returns the user personal access token.",
+                "operationId": "getFreshToken",
+                "responses": {
+                    "200": {
+                        "description": "Token retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
                     }
                 }
             }
@@ -1428,7 +1464,7 @@
             }
         },
         "/token": {
-            "get": {
+            "post": {
                 "tags": [
                     "Authentication"
                 ],
