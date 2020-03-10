@@ -37,6 +37,9 @@ Route::middleware(['api'])->group(function () {
     Route::post('/token', 'Api\TokenController')
         ->middleware('throttle:10');
 
+    Route::post('/refresh', 'Api\RefreshController')
+        ->middleware('throttle:10');
+
 });
 
 

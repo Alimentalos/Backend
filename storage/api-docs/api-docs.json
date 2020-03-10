@@ -267,6 +267,35 @@
                 }
             }
         },
+        "/refresh": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Refresh authentication token.",
+                "description": "Returns the user personal access token.",
+                "operationId": "refreshAccessToken",
+                "parameters": [
+                    {
+                        "name": "refresh_token",
+                        "in": "query",
+                        "description": "The refresh token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Token refreshed successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
+                    }
+                }
+            }
+        },
         "/register": {
             "post": {
                 "tags": [
@@ -1432,7 +1461,7 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "Get authentication token based on user credentials.",
+                "summary": "Get authentication token using user credentials.",
                 "description": "Returns the user personal access token.",
                 "operationId": "createAccessToken",
                 "parameters": [

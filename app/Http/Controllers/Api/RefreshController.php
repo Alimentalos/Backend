@@ -3,31 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\TokenRequest;
+use App\Http\Requests\Api\RefreshRequest;
 use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 
-class TokenController extends Controller
+class RefreshController extends Controller
 {
     /**
      * @OA\Post(
-     *  path="/token",
-     *  operationId="createAccessToken",
+     *  path="/refresh",
+     *  operationId="refreshAccessToken",
      *  tags={"Authentication"},
-     *  summary="Get authentication token using user credentials.",
+     *  summary="Refresh authentication token.",
      *  description="Returns the user personal access token.",
      *  @OA\Parameter(
-     *    name="username",
-     *    description="Registered user email address",
-     *    required=true,
-     *    in="query",
-     *    @OA\Schema(
-     *    type="string"
-     *    )
-     *  ),
-     *  @OA\Parameter(
-     *    name="password",
-     *    description="Current user password",
+     *    name="refresh_token",
+     *    description="The refresh token",
      *    required=true,
      *    in="query",
      *    @OA\Schema(
@@ -36,29 +27,28 @@ class TokenController extends Controller
      *  ),
      *  @OA\Response(
      *      response=200,
-     *      description="Token retrieved successfully"
+     *      description="Token refreshed successfully"
      *  ),
      *  @OA\Response(response=401, description="Unauthenticated.")
      *  )
      *
-     * Show the user access token.
+     * Refresh the user access token.
      *
-     * @param TokenRequest $request
+     * @param RefreshRequest $request
      * @return JsonResponse
      * @codeCoverageIgnore
      */
-    public function __invoke(TokenRequest $request)
+    public function __invoke(RefreshRequest $request)
     {
         $http = new Client;
 
         $response = $http->post('https://www.alimentalos.cl/oauth/token', [
             'form_params' => [
 
-                'grant_type' => 'password',
+                'grant_type' => 'refresh_token',
                 'client_id' => env('PASSPORT_PASSWORD_CLIENT_ID'),
                 'client_secret' => env('PASSPORT_PASSWORD_CLIENT_SECRET'),
-                'username' => $request->input('email'),
-                'password' => $request->input('password'),
+                'refresh_token' => $request->input('refresh_token'),
                 'scope' => '*',
             ],
         ]);
