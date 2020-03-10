@@ -59,7 +59,6 @@ class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
                 'user_uuid',
                 'photo_uuid',
                 'name',
-                'free',
                 'photo_url',
                 'location' => [
                     'type',
