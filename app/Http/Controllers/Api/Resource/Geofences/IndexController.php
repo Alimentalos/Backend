@@ -52,7 +52,8 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        $geofences = $resource->geofences()->latest()->with('user', 'photo')->paginate(20);
+        $geofences = $resource->geofences()->latest()->paginate(20);
+        $geofences->load('user', 'photo');
         return response()->json($geofences,200);
     }
 }
