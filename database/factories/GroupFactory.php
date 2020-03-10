@@ -10,8 +10,8 @@ use Faker\Generator as Faker;
 $factory->define(Group::class, function (Faker $faker) {
     return [
         'name' => $faker->text(6),
-        'user_uuid' => factory(User::class)->create()->uuid,
-        'photo_uuid' => factory(Photo::class)->create()->uuid,
+//        'user_uuid' => factory(User::class)->create()->uuid,
+//        'photo_uuid' => factory(Photo::class)->create()->uuid,
         'uuid' => (string) $faker->unique()->uuid,
         'is_public' => true,
     ];
