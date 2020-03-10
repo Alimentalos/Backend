@@ -65,6 +65,7 @@ class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
                     'coordinates',
                 ],
                 'is_public',
+                'free',
                 'created_at',
                 'updated_at',
                 'love_reactant_id',
