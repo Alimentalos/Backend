@@ -86,4 +86,7 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     {
         return 'uuid';
     }
+
+
+    protected $with = ['user', 'photo'];
 }
