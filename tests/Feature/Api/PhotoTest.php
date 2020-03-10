@@ -499,54 +499,10 @@ class PhotoTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'user_uuid',
-            'uuid',
-            'photo_url',
-            'ext',
-            'is_public',
-            'location' =>[
-                'type',
-                'coordinates',
-            ],
-            'comment_uuid',
-            'updated_at',
-            'created_at',
-            'love_reactant_id',
-            'user' =>[
-                'uuid',
-                'user_uuid',
-                'photo_uuid',
-                'name',
-                'email',
-                'email_verified_at',
-                'free',
-                'photo_url',
-                'location' =>[
-                    'type',
-                    'coordinates',
-                ],
-                'is_public',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-                'love_reacter_id',
-                'is_admin',
-                'is_child',
-            ],
-            'comment' => [
-                'uuid',
-                'user_uuid',
-                'title',
-                'body',
-                'commentable_type',
-                'commentable_id',
-                'created_at',
-                'updated_at',
-                'love_reactant_id'
-            ],
+            'message'
         ]);
         $response->assertJsonFragment([
-            'user_uuid' => $photo->uuid
+           'message' => 'Resource deleted successfully'
         ]);
     }
 
