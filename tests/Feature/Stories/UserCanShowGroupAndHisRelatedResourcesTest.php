@@ -25,7 +25,7 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         $group = factory(Group::class)->create();
         
         $photo = factory(Photo::class)->create();
-        $photo->user_id = $user->uuid;
+        $photo->user_uuid = $user->uuid;
         $comment = factory(Comment::class)->create();
         $photo->comment_id = $comment->uuid;
         $pet = factory(Pet::class)->create();
