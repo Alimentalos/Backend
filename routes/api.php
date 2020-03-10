@@ -34,23 +34,8 @@ Route::middleware(['api'])->group(function () {
     Route::post('/password-recovery', 'Api\PasswordRecoveryController')
         ->middleware('throttle:5');
 
-    Route::post('/token', function (Request $request) {
-
-        $http = new GuzzleHttp\Client;
-
-        $response = $http->post('https://www.alimentalos.cl/api/token', [
-            'form_params' => [
-
-                'grant_type' => 'password',
-                'client_id' => env('PASSPORT_PASSWORD_CLIENT_ID'),
-                'client_secret' => env('PASSPORT_PASSWORD_CLIENT_SECRET'),
-                'username' => $request->input('email'),
-                'password' => $request->input('password'),
-                'scope' => '*',
-            ],
-        ]);
-        return json_decode((string) $response->getBody(), true);
-    });
+    Route::post('/token', 'Api\TokenController')
+        ->middleware('throttle:10');
 
 });
 
