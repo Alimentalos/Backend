@@ -22,8 +22,10 @@ class CommentTest extends TestCase
         $pet = factory(Pet::class)->create();
         $photo = factory(Photo::class)->create();
         $photo->user_uuid = $user->uuid;
+        $pet->user_uuid = $user->uuid;
         $photo->comment_uuid = factory(Comment::class)->create()->uuid;
         $photo->save();
+        $pet->save();
         $pet->photos()->attach($photo);
         $comment = factory(Comment::class)->make();
         $commentBody = 'Awesome new text';
@@ -127,10 +129,10 @@ class CommentTest extends TestCase
         $response->assertJsonFragment([
             'photoable_id' => $pet->uuid
         ]);
-        
+
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . (json_decode($content))->uuid);
         $response->assertOk();
-        
+
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',
@@ -146,7 +148,7 @@ class CommentTest extends TestCase
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid
         ]);
-        
+
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/comments/' . (json_decode($content))->uuid, [
             'body' => $commentBody,
             'is_public' => true,
@@ -167,7 +169,7 @@ class CommentTest extends TestCase
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid
         ]);
-        
+
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/comments/' . (json_decode($content))->uuid);
         $response->assertOk();
 
@@ -177,7 +179,7 @@ class CommentTest extends TestCase
         $response->assertJsonFragment([
            'message' => 'Resource deleted successfully'
         ]);
-    
+
 
         $this->assertDeleted('comments', [
             'uuid' => (json_decode($content))->uuid,
