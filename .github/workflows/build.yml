@@ -1,10 +1,10 @@
-name: Codeclimate
+name: Build
 
 on: [push]
 
 jobs:
-  codeclimate:
-    name: "Codeclimate pipeline"
+  build:
+    name: "Instance build"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -24,14 +24,11 @@ jobs:
         run: php artisan key:generate
       - name: Generate passport keys
         run: php artisan passport:keys
+      - name: Migrate databases
+        run: php artisan migrate
+      - name: Generate default passport client
+        run: php artisan passport:client --password --no-interaction
       - name: Generate swagger docs
         run: php artisan l5-swagger:generate
-      - name: Execute tests for codeclimate
-        uses: paambaati/codeclimate-action@v2.5.3
-        env:
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-        with:
-          coverageCommand: vendor/bin/phpunit --coverage-clover=coverage.xml
-          coverageLocations:
-            "./coverage.xml:clover"
-          prefix: "${{github.workspace}}"
+      - name: Execute tests for codecov
+        run: vendor/bin/phpunit
