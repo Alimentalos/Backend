@@ -4,7 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
+use App\Comment;
 use App\Group;
+use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -22,9 +24,14 @@ class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
     {
         Storage::fake('gcs');
         $user = factory(User::class)->create();
+        $photo = factory(Photo::class)->create();
+        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
+        $photo->user_uuid = $user->uuid;
+        $photo->save();
         $userB = factory(User::class)->create();
         $group = factory(Group::class)->create();
         $group->user_uuid = $userB->uuid;
+        $group->photo_uuid = $photo->uuid;
         $group->save();
         $user->groups()->attach($group, [
             'is_admin' => true,
