@@ -21,15 +21,20 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
         $group = factory(Group::class)->create();
+        $group->user_uuid = $user->uuid;
         $device = factory(Device::class)->create();
         $device->user_uuid = $userB->uuid;
         $device->save();
+        $group->save();
 
         $user->groups()->attach($group, [
             'status' => Group::ATTACHED_STATUS,
             'is_admin' => true
         ]);
-        $device->groups()->attach($group);
+        $device->groups()->attach($group, [
+            'status' => Group::ATTACHED_STATUS,
+            'is_admin' => false
+        ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/devices');
         $response->assertJsonCount(1, 'data');
         $response->assertOk();
