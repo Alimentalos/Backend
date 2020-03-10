@@ -4,18 +4,16 @@ namespace Tests\Feature\Api;
 
 use App\Geofence;
 use App\Pet;
-use App\Repositories\UniqueNameRepository;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
-use OpenApi\Annotations\Get;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 
 class NearTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     /**
      * @test testNearGeofences

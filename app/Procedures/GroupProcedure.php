@@ -44,7 +44,7 @@ trait GroupProcedure
     {
         upload()->check($group);
         $group->update(parameters()->fill(['name', 'is_public'], $group));
-        $group->load('photo', 'user');
+        $group->load(['photo', 'user']);
         return $group;
     }
 }

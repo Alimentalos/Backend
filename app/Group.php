@@ -78,15 +78,6 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     ];
 
     /**
-     * Eager loading properties.
-     *
-     * @var array
-     */
-    protected $with = [
-        'user'
-    ];
-
-    /**
      * Get the route key for the model.
      *
      * @return string

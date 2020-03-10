@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Requests\Api\Token;
+namespace App\Http\Requests\Api;
 
 use App\Http\Requests\RuledRequest;
 
-class IndexRequest extends RuledRequest
+class TokenRequest extends RuledRequest
 {
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function rules()
     {

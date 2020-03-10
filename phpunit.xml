@@ -22,6 +22,9 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./app</directory>
+            <exclude>
+                <directory>./app/Passport</directory>
+            </exclude>
         </whitelist>
     </filter>
     <php>

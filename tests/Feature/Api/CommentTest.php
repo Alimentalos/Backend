@@ -3,20 +3,15 @@
 namespace Tests\Feature\Api;
 
 use App\Comment;
-use App\Geofence;
-use App\Group;
 use App\Pet;
 use App\Photo;
-use App\Repositories\UniqueNameRepository;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 
 class CommentTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     /**
      * @test

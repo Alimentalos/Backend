@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Action::class, function (Faker $faker) {
     return [
-        'uuid' => (string) $faker->uuid,
+        'uuid' => (string) $faker->unique()->uuid,
         'user_uuid' => factory(User::class)->create()->uuid,
         'referenced_uuid' => factory(User::class)->create()->uuid,
         'resource' => 'Sample',

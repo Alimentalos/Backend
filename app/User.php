@@ -20,6 +20,8 @@ use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource, CreateFromRequest, UpdateFromRequest
 {
@@ -34,6 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     use Geofenceable;
     use Trackable;
     use Photoable;
+    use HasApiTokens;
 
     /**
      * The default location field of user.
@@ -98,15 +101,6 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     ];
 
     /**
-     * Eager loading properties
-     *
-     * @var array
-     */
-    protected $with = [
-        'user',
-    ];
-
-    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -137,4 +131,28 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     {
         return 'uuid';
     }
+
+    /**
+     * Get key for the model.
+     *
+     * @return string
+     */
+    public function getKeyName()
+    {
+        return 'uuid';
+    }
+
+    /**
+     * Find user for passport.
+     *
+     * @param $username
+     * @return mixed
+     * @codeCoverageIgnore
+     */
+    public function findForPassport($username)
+    {
+        return $this->where('email', $username)->first();
+    }
+
+    public $incrementing = false;
 }

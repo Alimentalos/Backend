@@ -25,7 +25,7 @@ use Grimzy\LaravelMysqlSpatial\Types\Point;
 $factory->define(Location::class, function (Faker $faker) {
     return [
         'device' => [],
-        'uuid' => $faker->uuid,
+        'uuid' => (string) $faker->unique()->uuid,
         'location' => (new Point($faker->latitude(), $faker->longitude())),
         'accuracy' => $faker->numberBetween(10,50),
         'altitude' => $faker->numberBetween(20,300),

@@ -15,7 +15,7 @@ class DetachController extends Controller
      *      operationId="detachResourceGroup",
      *      tags={"Resources"},
      *      summary="Detach group of user.",
-     *      description="Returns empty array as JSON response.",
+     *      description="Returns message JSON Object response.",
      *      @OA\Parameter(
      *          name="uuid",
      *          description="Unique identifier of resource",
@@ -64,6 +64,6 @@ class DetachController extends Controller
     public function __invoke(DetachRequest $request, $resource, Group $group)
     {
         $resource->groups()->detach($group->uuid);
-        return response()->json([], 200);
+        return response()->json(['message' => 'Resource detached to group successfully'], 200);
     }
 }

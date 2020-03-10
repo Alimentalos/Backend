@@ -52,7 +52,8 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        $devices = $resource->devices()->latest()->with('user')->paginate(20);
+        $devices = $resource->devices()->latest()->paginate(20);
+        $devices->load('user');
         return response()->json($devices,200);
     }
 }

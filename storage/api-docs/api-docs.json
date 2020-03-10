@@ -10,7 +10,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.1.2"
+        "version": "v.2.0"
     },
     "servers": [
         {
@@ -263,6 +263,35 @@
                     },
                     "400": {
                         "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/refresh": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Refresh authentication token.",
+                "description": "Returns the user personal access token.",
+                "operationId": "refreshAccessToken",
+                "parameters": [
+                    {
+                        "name": "refresh_token",
+                        "in": "query",
+                        "description": "The refresh token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Token refreshed successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated."
                     }
                 }
             }
@@ -545,7 +574,7 @@
                     "Resources"
                 ],
                 "summary": "Delete specific resource.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Returns message JSON Object response.",
                 "operationId": "destroyResource",
                 "parameters": [
                     {
@@ -700,7 +729,7 @@
                     "Resources"
                 ],
                 "summary": "Attach geofence to resource.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Returns message JSON Object response.",
                 "operationId": "attachResourceGeofence",
                 "parameters": [
                     {
@@ -757,7 +786,7 @@
                     "Resources"
                 ],
                 "summary": "Detach geofence of resource.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Returns message JSON Object response.",
                 "operationId": "detachResourceGeofence",
                 "parameters": [
                     {
@@ -862,7 +891,7 @@
                     "Resources"
                 ],
                 "summary": "Attach group of resource.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Returns message JSON Object response.",
                 "operationId": "attachResourceGroup",
                 "parameters": [
                     {
@@ -918,7 +947,7 @@
                     "Resources"
                 ],
                 "summary": "Detach group of user.",
-                "description": "Returns empty array as JSON response.",
+                "description": "Returns message JSON Object response.",
                 "operationId": "detachResourceGroup",
                 "parameters": [
                     {
@@ -1428,13 +1457,33 @@
             }
         },
         "/token": {
-            "get": {
+            "post": {
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "Get authentication token based on user credentials.",
+                "summary": "Get authentication token using user credentials.",
                 "description": "Returns the user personal access token.",
-                "operationId": "getToken",
+                "operationId": "createAccessToken",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Registered user email address",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Current user password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Token retrieved successfully"

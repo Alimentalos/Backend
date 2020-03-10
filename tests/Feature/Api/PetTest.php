@@ -10,12 +10,12 @@ use App\Photo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 
 class PetTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     final public function testStorePetsCommentsApi()
     {
@@ -87,49 +87,6 @@ class PetTest extends TestCase
         ]);
         $response->assertJsonCount(1, 'data');
         $response->assertOk();
-    }
-
-    final public function testStorePetsPhotosApi()
-    {
-        Storage::fake('gcs');
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $comment = factory(Comment::class)->make();
-        $response = $this->actingAs($user, 'api')->json('POST', '/api/pets/' . $pet->uuid . '/photos', [
-            'photo' => UploadedFile::fake()->image('photo1.jpg'),
-            'title' => $comment->title,
-            'body' => $comment->body,
-            'is_public' => true,
-            'coordinates' => '5.5,6.5',
-        ]);
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'uuid',
-            'ext',
-            'photo_url',
-            'is_public',
-            'user' => [
-                'name',
-            ],
-            'comment' => [
-                'title',
-                'body',
-            ],
-        ]);
-
-        $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo_url);
-
-        $this->assertDatabaseHas('photos', [
-            'uuid' => (json_decode($content))->uuid,
-            'is_public' => true
-        ]);
-
-        $this->assertDatabaseHas('photoables', [
-            'photo_uuid' => (json_decode($content))->uuid,
-            'photoable_type' => 'App\\Pet',
-            'photoable_id' => $pet->uuid
-        ]);
     }
 
     final public function testIndexPetsPhotosApi()
@@ -362,117 +319,5 @@ class PetTest extends TestCase
         $this->assertDeleted('pets', [
             'uuid' => $pet->uuid,
         ]);
-    }
-
-    final public function testAttachPetsGroupsApi()
-    {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
-        $pet = factory(Pet::class)->create();
-        $pet->user_uuid = $user->uuid;
-        $pet->save();
-        $group->user_uuid = $user->uuid;
-        $group->save();
-        $group->users()->attach($user, [
-            'is_admin' => true,
-            'status' => Group::ACCEPTED_STATUS
-        ]);
-        $response = $this->actingAs($user, 'api')->json(
-            'POST',
-            '/api/pets/' . $pet->uuid . '/groups/' . $group->uuid . '/attach',
-            []
-        );
-        $response->assertOk();
-
-        $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\Pet',
-            'groupable_id' => $pet->uuid,
-            'group_uuid' => $group->uuid,
-        ]);
-    }
-
-    final public function testDetachPetsGroupsApi()
-    {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
-        $pet = factory(Pet::class)->create();
-        $pet->user_uuid = $user->uuid;
-        $pet->save();
-        $group->user_uuid = $user->uuid;
-        $group->save();
-        $group->users()->attach($user, [
-            'is_admin' => true,
-            'status' => Group::ACCEPTED_STATUS
-        ]);
-        $pet->groups()->attach($group, [
-            'status' => Group::ACCEPTED_STATUS
-        ]);
-        $response = $this->actingAs($user, 'api')->json(
-            'POST',
-            '/api/pets/' . $pet->uuid . '/groups/' . $group->uuid . '/detach',
-            []
-        );
-        $response->assertOk();
-
-        $this->assertDeleted('groupables', [
-            'groupable_type' => 'App\\Pet',
-            'groupable_id' => $pet->uuid,
-            'group_uuid' => $group->uuid,
-        ]);
-    }
-
-    /**
-     * @test testUserCanViewThePetGroups
-     */
-    final public function testUserCanViewThePetGroups()
-    {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $group = factory(Group::class)->create();
-        $group->user_uuid = $user->uuid;
-        $group->save();
-        $group->users()->attach($user, [
-            'is_admin' => true,
-            'status' => Group::ACCEPTED_STATUS
-        ]);
-        $pet->user_uuid = $user->uuid;
-        $pet->save();
-        $pet->groups()->attach($group, [
-            'status' => Group::ACCEPTED_STATUS
-        ]);
-        $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\Pet',
-            'groupable_id' => $pet->uuid,
-            'group_uuid' => $group->uuid,
-        ]);
-        $response = $this->actingAs($user, 'api')->json(
-            'GET',
-            '/api/pets/' . $pet->uuid . '/groups',
-            []
-        );
-        $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
-                    'user',
-                    'photo',
-                    'description',
-                    'is_public'
-                ]
-            ]
-        ]);
-        // Assert User UUID
-        $response->assertJsonFragment([
-            'uuid' => $user->uuid,
-        ]);
-        // Assert Group UUID
-        $response->assertJsonFragment([
-            'uuid' => $group->uuid,
-        ]);
-        // Assert Photo UUID
-        $response->assertJsonFragment([
-            'uuid' => json_decode($response->getContent())->data[0]->photo->uuid,
-        ]);
-        $response->assertOk();
     }
 }

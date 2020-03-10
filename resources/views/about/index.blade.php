@@ -28,7 +28,7 @@
                         <a href="/about/developer-guide" class="btn btn-md btn-light" role="button" aria-pressed="true"><i class="fal fa-book-alt"></i> Read more</a>
                         <hr>
                         <a href="https://github.com/alimentalos/backend" class="btn btn-md btn-light" role="button" aria-pressed="true"><i class="fab fa-github"></i> Backend repository</a>
-                        <a href="https://github.com/demency/alimentalos-frontend" class="btn btn-md btn-light" role="button" aria-pressed="true"><i class="fab fa-github"></i> Frontend repository</a>
+                        <a href="https://github.com/alimentalos/frontend" class="btn btn-md btn-light" role="button" aria-pressed="true"><i class="fab fa-github"></i> Frontend repository</a>
                     </div>
                 </div>
             </div>

@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 Route::get('/', 'WelcomeController');
 
 Route::get('/home', 'HomeController@index')->name('home');
