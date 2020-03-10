@@ -33,7 +33,7 @@ class DevicesTest extends TestCase
                 'user_uuid',
                 'location' => [
                     'type',
-                    'coordinates' 
+                    'coordinates'
                 ],
                 'uuid',
                 'name',
@@ -70,14 +70,14 @@ class DevicesTest extends TestCase
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
-        
+
         $response->assertJsonStructure([
             'current_page',
             'data' => [[
                 'user_uuid',
                 'location' => [
                     'type',
-                    'coordinates' 
+                    'coordinates'
                 ],
                 'uuid',
                 'name',
@@ -138,7 +138,7 @@ class DevicesTest extends TestCase
                 'user_uuid',
                 'location' => [
                     'type',
-                    'coordinates' 
+                    'coordinates'
                 ],
                 'uuid',
                 'name',
@@ -165,60 +165,6 @@ class DevicesTest extends TestCase
     }
 
     /**
-     * @test testUserCanViewOnGroupDevice
-     */
-    final public function testUserCanViewOnGroupDevice()
-    {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $device->user_uuid = $user->uuid;
-        $device->save();
-        $group = factory(Group::class)->create();
-        $group->devices()->attach($device->uuid);
-        $group->users()->attach($user->uuid);
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);
-        $response->assertOk();
-
-        $response->assertJsonStructure([
-            'user_uuid',
-            'location' => [
-                'type',
-                'coordinates' 
-            ],
-            'uuid',
-            'name',
-            'description',
-            'is_public',
-            'created_at',
-            'updated_at',
-            'user' => [
-                'uuid',
-                'user_uuid',
-                'photo_uuid',
-                'name',
-                'email',
-                'email_verified_at',
-                'free',
-                'photo_url',
-                'location' => [
-                    'type',
-                    'coordinates' 
-                ], 
-                'is_public',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-                'love_reacter_id',
-                'is_admin',
-                'is_child',
-            ],
-        ]);
-        $response->assertJsonFragment([
-            'uuid' => $device->uuid,
-        ]);
-    }
-
-    /**
      * @test testUserCanShowNonPublicDevices
      */
     final public function testUserCanShowNonPublicDevices()
@@ -239,7 +185,7 @@ class DevicesTest extends TestCase
             'user_uuid',
             'location' => [
                 'type',
-                'coordinates' 
+                'coordinates'
             ],
             'uuid',
             'name',
@@ -258,21 +204,21 @@ class DevicesTest extends TestCase
                 'photo_url',
                 'location' => [
                     'type',
-                    'coordinates' 
-                ], 
+                    'coordinates'
+                ],
                 'is_public',
                 'created_at',
                 'updated_at',
                 'love_reactant_id',
                 'love_reacter_id',
                 'is_admin',
-                'is_child',         
+                'is_child',
             ],
 
         ]);
         $response->assertJsonFragment([
             'uuid' => $device->uuid,
-        ]);       
+        ]);
     }
 
     /**
@@ -370,8 +316,8 @@ class DevicesTest extends TestCase
                 'photo_url',
                 'location' => [
                     'type',
-                    'coordinates' 
-                ], 
+                    'coordinates'
+                ],
                 'is_public',
                 'created_at',
                 'updated_at',
@@ -474,7 +420,7 @@ class DevicesTest extends TestCase
         ]);
         $response->assertOk();
     }
-  
+
     /**
      * @test testUserCanViewTheDeviceGroups
      */
@@ -572,7 +518,7 @@ class DevicesTest extends TestCase
                 'photo_url',
                 'is_public',
                 'created_at',
-                'love_reactant_id'                    
+                'love_reactant_id'
                 ],
                 'pivot' => [
                     'groupable_id',
