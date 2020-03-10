@@ -31,6 +31,9 @@ class PhotoTest extends TestCase
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
         $photo->user_uuid = $user->uuid;
+        $user->photo_uuid = $photo->uuid;
+        $user->save();
+        $photo->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid);
         $response->assertOk();
         

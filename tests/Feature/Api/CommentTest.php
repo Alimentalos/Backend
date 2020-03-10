@@ -21,6 +21,9 @@ class CommentTest extends TestCase
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $photo = factory(Photo::class)->create();
+        $photo->user_uuid = $user->uuid;
+        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
+        $photo->save();
         $pet->photos()->attach($photo);
         $comment = factory(Comment::class)->make();
         $commentBody = 'Awesome new text';
@@ -374,7 +377,7 @@ class CommentTest extends TestCase
         ]);
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid,
-            'body' => $parentComment->body,
+            'body' => $childComment->body,
         ]);
 
         $childContent = $response->getContent();
@@ -384,21 +387,6 @@ class CommentTest extends TestCase
             'commentable_type' => 'App\\Comment',
             'commentable_id' => (json_decode($parentContent))->uuid,
             'body' => $childComment->body,
-        ]);
-        $response->assertJsonStructure([
-            'uuid',
-            'commentable_type',
-            'commentable_id',
-            'uuid',
-            'body',
-            'user_uuid',
-            'love_reactant_id',
-            'created_at',
-            'updated_at',
-        ]);
-        $response->assertJsonFragment([
-            'body' => $childComment->body,
-            'user_uuid' => $user->uuid,
         ]);
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . (json_decode($parentContent))->uuid . '/comments');
@@ -450,7 +438,8 @@ class CommentTest extends TestCase
             'total'
         ]);
         $response->assertJsonFragment([
-            'user_uuid' => $user->uuid
+            'user_uuid' => $user->uuid,
+            'body' => $childComment->body,
         ]);
     }
 
