@@ -34,7 +34,7 @@ $factory->define(User::class, function (Faker $faker) {
         'api_token' => $faker->uuid,
         'remember_token' => Str::random(10),
         'created_at' => $now,
-        'free' => true,
+        'free' => false,
         'is_public' => true,
     ];
 });
