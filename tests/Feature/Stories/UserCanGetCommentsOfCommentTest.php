@@ -9,7 +9,7 @@ use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
-class CommentsOfCommentTest extends TestCase
+class UserCanGetCommentsOfCommentTest extends TestCase
 {
     use DatabaseMigrations;
 
