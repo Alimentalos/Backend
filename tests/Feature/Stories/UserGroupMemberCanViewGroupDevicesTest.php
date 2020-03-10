@@ -19,8 +19,12 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
     final public function testGroupMemberUserCanViewRelatedGroupDevices()
     {
         $user = factory(User::class)->create();
+        $userB = factory(User::class)->create();
         $group = factory(Group::class)->create();
         $device = factory(Device::class)->create();
+        $device->user_uuid = $userB->uuid;
+        $device->save();
+
         $user->groups()->attach($group, ['is_admin' => true]);
         $device->groups()->attach($group);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/devices');

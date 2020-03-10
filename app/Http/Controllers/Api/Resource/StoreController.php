@@ -44,6 +44,7 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request, $resource)
     {
         $resource = $request->route('resource')->createViaRequest();
+        $resource->load($resource->lazy_relationships);
         return response()->json($resource,201);
     }
 }

@@ -94,6 +94,8 @@ class PetTest extends TestCase
         Storage::fake('gcs');
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
+        $pet->user_uuid = $user->uuid;
+        $pet->save();
         $comment = factory(Comment::class)->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets/' . $pet->uuid . '/photos', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
