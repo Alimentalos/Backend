@@ -313,7 +313,6 @@ class AlertsTest extends TestCase
                         'love_reacter_id',
                         'is_admin',
                         'is_child',
-                        'user',
                     ] ,
                 ],
             ],
@@ -330,8 +329,11 @@ class AlertsTest extends TestCase
         ]);
 
         $response->assertJsonFragment([
-            'uuid' => $user->uuid,
             'user_uuid' => $user->uuid,
+        ]);
+
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid,
         ]);
 
         $response->assertJsonStructure([
@@ -395,7 +397,6 @@ class AlertsTest extends TestCase
                         'love_reacter_id',
                         'is_admin',
                         'is_child',
-                        'user',
                     ] ,
                 ],
             ],
@@ -412,8 +413,12 @@ class AlertsTest extends TestCase
         ]);
 
         $response->assertJsonFragment([
-            'uuid' => $user->uuid,
             'user_uuid' => $user->uuid,
         ]);
+
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid,
+        ]);
+
     }
 }

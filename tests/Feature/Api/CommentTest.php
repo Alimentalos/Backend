@@ -92,7 +92,6 @@ class CommentTest extends TestCase
                     'love_reacter_id',
                     'is_admin',
                     'is_child',
-                    'user',
                 ],
                 'comment' => [
                     'uuid',
@@ -233,7 +232,6 @@ class CommentTest extends TestCase
                     'love_reacter_id',
                     'is_admin',
                     'is_child',
-                    'user',
                 ],
             ]],
             'first_page_url',
@@ -302,7 +300,6 @@ class CommentTest extends TestCase
                     'love_reacter_id',
                     'is_admin',
                     'is_child',
-                    'user',
                 ],
             ]],
             'first_page_url',
@@ -317,7 +314,8 @@ class CommentTest extends TestCase
             'total'
         ]);
         $response->assertJsonFragment([
-            'user_uuid' => $user->uuid
+            'user_uuid' => $user->uuid,
+            'body' => $sampleCommentBody,
         ]);
     }
 
@@ -375,7 +373,8 @@ class CommentTest extends TestCase
             'love_reactant_id',
         ]);
         $response->assertJsonFragment([
-            'user_uuid' => $user->uuid
+            'user_uuid' => $user->uuid,
+            'body' => $parentComment->body,
         ]);
 
         $childContent = $response->getContent();
@@ -437,7 +436,6 @@ class CommentTest extends TestCase
                     'love_reacter_id',
                     'is_admin',
                     'is_child',
-                    'user',
                 ],
             ]],
             'first_page_url',

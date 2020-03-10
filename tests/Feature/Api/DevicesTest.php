@@ -244,49 +244,6 @@ class DevicesTest extends TestCase
             'is_public',
             'created_at',
             'updated_at',
-            'groups' => [[
-                'uuid',
-                'user_uuid',
-                'photo_uuid',
-                'name',
-                'description',
-                'is_public',
-                'photo_url',
-                'created_at',
-                'updated_at',
-                'pivot' => [
-                    'groupable_id',
-                    'group_uuid',
-                    'groupable_type',
-                    'is_admin',
-                    'status',
-                    'sender_uuid',
-                    'created_at',
-                    'updated_at'
-                ],
-                'user' => [
-                    'uuid',
-                    'user_uuid',
-                    'photo_uuid',
-                    'name',
-                    'email',
-                    'email_verified_at',
-                    'free',
-                    'photo_url',
-                    'location' => [
-                        'type',
-                        'coordinates' 
-                    ], 
-                    'is_public',
-                    'created_at',
-                    'updated_at',
-                    'love_reactant_id',
-                    'love_reacter_id',
-                    'is_admin',
-                    'is_child',
-                    'user',                
-                ],
-            ]],
             'user' => [
                 'uuid',
                 'user_uuid',
@@ -306,8 +263,7 @@ class DevicesTest extends TestCase
                 'love_reactant_id',
                 'love_reacter_id',
                 'is_admin',
-                'is_child',
-                'user',                
+                'is_child',         
             ],
 
         ]);
@@ -420,7 +376,6 @@ class DevicesTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
             'uuid',
             'api_token',
@@ -601,7 +556,6 @@ class DevicesTest extends TestCase
                     'love_reacter_id',
                     'is_admin',
                     'is_child',
-                    'user',
                 ],
                 'photo' => [
                     'location' =>[

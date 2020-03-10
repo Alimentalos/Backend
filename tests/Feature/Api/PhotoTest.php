@@ -69,7 +69,6 @@ class PhotoTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
             'comment' => [
                 'uuid',
@@ -147,7 +146,6 @@ class PhotoTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
         ]);
 
@@ -192,7 +190,6 @@ class PhotoTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
             'comment' => [
                 'uuid',
@@ -276,7 +273,6 @@ class PhotoTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
             'comment' => [
                 'uuid',
@@ -340,7 +336,6 @@ class PhotoTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
             'comment' => [
                 'uuid',
@@ -404,7 +399,6 @@ class PhotoTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
             'comment' => [
                 'uuid',
@@ -467,7 +461,6 @@ class PhotoTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
             'comment' => [
                 'uuid',
@@ -535,7 +528,6 @@ class PhotoTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
             'comment' => [
                 'uuid',
