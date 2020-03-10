@@ -28,9 +28,8 @@ class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
         $photo->comment_uuid = factory(Comment::class)->create()->uuid;
         $photo->user_uuid = $user->uuid;
         $photo->save();
-        $userB = factory(User::class)->create();
         $group = factory(Group::class)->create();
-        $group->user_uuid = $userB->uuid;
+        $group->user_uuid = $user->uuid;
         $group->photo_uuid = $photo->uuid;
         $group->save();
         $user->groups()->attach($group, [
