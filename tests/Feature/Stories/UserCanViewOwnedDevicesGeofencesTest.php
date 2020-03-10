@@ -4,8 +4,10 @@
 namespace Tests\Feature\Stories;
 
 
+use App\Comment;
 use App\Device;
 use App\Geofence;
+use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,7 +24,12 @@ class UserCanViewOwnedDevicesGeofencesTest extends TestCase
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $geofence = factory(Geofence::class)->create();
+        $photo = factory(Photo::class)->create();
+        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
+        $photo->user_uuid = $user->uuid;
+        $photo->save();
         $geofence->user_uuid = $user->uuid;
+        $geofence->photo_uuid = $photo->uuid;
         $geofence->save();
         $device->user_uuid = $user->uuid;
         $device->save();

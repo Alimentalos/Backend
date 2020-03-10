@@ -18,7 +18,7 @@ class ResourcePhotosRepository
         $photo = photos()->create();
         $resource = resourceLocations()->updateLocation($resource);
         $resource->photos()->attach($photo->uuid);
-        $photo->load('comment');
+        $photo->load('comment', 'user');
         return $photo;
     }
 }
