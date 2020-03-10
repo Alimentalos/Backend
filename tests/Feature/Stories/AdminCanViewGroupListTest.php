@@ -28,7 +28,10 @@ class AdminCanViewGroupListTest extends TestCase
         $photo->save();
         $group->photo_uuid = $photo->uuid;
         $group->user_uuid = $user->uuid;
-        $user->groups()->attach($group);
+        $user->groups()->attach($group, [
+            'status' => Group::ATTACHED_STATUS,
+            'is_admin' => false,
+        ]);
         $user->email = 'iantorres@outlook.com';
         $group->save();
         $user->save();
