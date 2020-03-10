@@ -4,8 +4,10 @@
 namespace Tests\Feature\Stories;
 
 
+use App\Comment;
 use App\Group;
 use App\Pet;
+use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,6 +24,11 @@ class UserCanViewGroupOfPetTest extends TestCase
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $group = factory(Group::class)->create();
+        $photo = factory(Photo::class)->create();
+        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
+        $photo->user_uuid = $user->uuid;
+        $photo->save();
+        $group->photo_uuid = $photo->uuid;
         $pet->user_uuid = $user->uuid;
         $pet->save();
         $group->user_uuid = $user->uuid;

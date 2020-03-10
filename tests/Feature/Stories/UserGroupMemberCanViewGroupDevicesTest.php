@@ -25,7 +25,10 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
         $device->user_uuid = $userB->uuid;
         $device->save();
 
-        $user->groups()->attach($group, ['is_admin' => true]);
+        $user->groups()->attach($group, [
+            'status' => Group::ATTACHED_STATUS,
+            'is_admin' => true
+        ]);
         $device->groups()->attach($group);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/devices');
         $response->assertJsonCount(1, 'data');
