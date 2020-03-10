@@ -3,7 +3,7 @@
 
 namespace App\Tools;
 
-
+use Exception;
 use Ramsey\Uuid\Uuid;
 
 class Identifier
@@ -19,7 +19,11 @@ class Identifier
             return (string) Uuid::uuid4();
             // @codeCoverageIgnoreStart
         } catch (Exception $exception) {
-            // TODO - Uuid exception unhandled
+            try {
+                return (string) Uuid::uuid4();
+            } catch (Exception $exception) {
+                // Why uuid will be fail a twice?
+            }
         }
     }
     // @codeCoverageIgnoreEnd

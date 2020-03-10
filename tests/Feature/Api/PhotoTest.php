@@ -37,8 +37,8 @@ class PhotoTest extends TestCase
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
+        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
         $photo->user_uuid = $user->uuid;
-        $photo->save();
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/photos/' . $photo->uuid, [
             'title' => 'New title',
@@ -60,7 +60,6 @@ class PhotoTest extends TestCase
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $pet->user_uuid = $user->uuid;
-        $pet->save();
         $group = factory(Group::class)->create();
         $group->user_uuid = $user->uuid;
         $group->save();
@@ -68,7 +67,12 @@ class PhotoTest extends TestCase
         $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $photo = factory(Photo::class)->create();
+        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
         $photo->user_uuid = $user->uuid;
+        $user->photo_uuid = $photo->uuid;
+        $pet->photo_uuid = $photo->uuid;
+        $pet->save();
+        $user->save();
         $photo->save();
 
         // User

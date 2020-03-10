@@ -12,9 +12,11 @@ use App\Observers\CommentObserver;
 use App\Observers\DeviceObserver;
 use App\Observers\GroupObserver;
 use App\Observers\PetObserver;
+use App\Observers\PhotoObserver;
 use App\Observers\UserObserver;
 use App\Passport\Client;
 use App\Pet;
+use App\Photo;
 use App\User;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
@@ -46,5 +48,6 @@ class AppServiceProvider extends ServiceProvider
         Pet::observe(PetObserver::class);
         Alert::observe(AlertObserver::class);
         Client::observe(ClientObserver::class);
+        Photo::observe(PhotoObserver::class);
     }
 }

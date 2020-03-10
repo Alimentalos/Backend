@@ -24,9 +24,9 @@ $factory->define(User::class, function (Faker $faker) {
     $now = Date::now();
     return [
         'name' => $faker->name,
-        'uuid' => (string) $faker->uuid,
+        'uuid' => (string) $faker->unique()->uuid,
         'photo_url' => config('storage.path') . (string) $faker->uuid . '.png',
-//        'photo_uuid' => factory(Photo::class)->create()->uuid,
+        'photo_uuid' => factory(Photo::class)->create()->uuid,
         'email' => $faker->unique()->safeEmail,
         'location' => (new Point($faker->latitude(), $faker->longitude())),
         'email_verified_at' => $now,

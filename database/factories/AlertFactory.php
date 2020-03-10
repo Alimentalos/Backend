@@ -21,7 +21,7 @@ $factory->define(Alert::class, function (Faker $faker) {
             )
     );
     return [
-        'uuid' => (string) $faker->uuid,
+        'uuid' => (string) $faker->unique()->uuid,
         'user_uuid' => factory(User::class)->create()->uuid,
         'photo_uuid' => factory(Photo::class)->create()->uuid,
         'photo_url' => config('storage.path') . 'example.png',
