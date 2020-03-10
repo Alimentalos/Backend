@@ -9,23 +9,23 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewGroups extends TestCase
+class AdminCanViewGroupListTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * @test testUserCanViewGroups
+     * @test testAdminWatchingGroupsList
      */
-    final public function testUserCanViewGroups()
+    final public function testAdminWatchingGroupsList()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
-        $user->groups()->attach($group->uuid, [
-            'status' => Group::ATTACHED_STATUS,
-            'is_admin' => true,
-        ]);
+        $user->groups()->attach($group);
+        $user->email = 'iantorres@outlook.com';
+        $user->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups');
         $response->assertOk();
+//        dd(json_decode($response->getContent()));
         $response->assertJsonStructure([
             'current_page',
             'data' => [

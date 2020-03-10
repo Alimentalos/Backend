@@ -10,9 +10,10 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class GeofenceTest extends TestCase
+class UserCanViewOwnedDevicesGeofencesTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @test testDevicesGeofencesApi
      */
