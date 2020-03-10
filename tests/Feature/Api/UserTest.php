@@ -480,7 +480,7 @@ class UserTest extends TestCase
         $group = factory(Group::class)->create();
         $group->user_uuid = $user->uuid;
         $group->save();
-        $group->users()->attach($user, ['is_admin' => true]);
+        $group->users()->attach($user, ['is_admin' => true, 'status' => Group::ATTACHED_STATUS]);
         $userB->user_uuid = $user->uuid;
         $userB->save();
 
