@@ -65,4 +65,7 @@ class Alert extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     protected $spatialFields = [
         'location',
     ];
+
+
+    public $with = ['photo', 'user', 'alert'];
 }

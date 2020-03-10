@@ -53,7 +53,6 @@ class IndexController extends Controller
     public function __invoke(IndexRequest $request, $resource)
     {
         $photos = $resource->photos()->latest()->paginate(20);
-        $photos->load(['user', 'comment']);
         return response()->json($photos,200);
     }
 }

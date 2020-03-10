@@ -53,7 +53,6 @@ class IndexController extends Controller
     public function __invoke(IndexRequest $request, $resource)
     {
         $comments = $resource->comments()->latest()->paginate(20);
-        $comments->load(['user']);
         return response()->json($comments,200);
     }
 }

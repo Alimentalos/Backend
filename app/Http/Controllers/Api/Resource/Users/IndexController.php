@@ -55,7 +55,6 @@ class IndexController extends Controller
         $users = $resource
             ->users()
             ->latest()
-            ->with('photo', 'user')
             ->paginate(20);
         return response()->json($users,200);
     }
