@@ -5,6 +5,7 @@ namespace Tests\Feature\Stories;
 
 
 use App\Comment;
+use App\Photo;
 use App\Group;
 use App\Pet;
 use App\User;
@@ -22,14 +23,24 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
+        
+        $photo = factory(Photo::class)->create();
+        $photo->user_id = $user->uuid;
+        $photo->comment_id = factory(Comment::class)->create()->uuid;
         $pet = factory(Pet::class)->create();
         $sample = factory(Comment::class)->make();
         $group->is_public = false;
         $user->groups()->attach($group);
         $pet->groups()->attach($group);
+        $group->comments()->attach($comment->uuid);
         $pet->user_uuid = $user->uuid;
+        $pet->photo_uuid = $photo->uuid;
+        $user->photo_uuid = $photo->uuid;
         $group->user_uuid = $user->uuid;
+        $group->photo_uuid = $photo->uuid;
         $pet->save();
+        $photo->save();
+        $user->save();
         $group->comments()->create([
             'user_uuid' => $user->uuid,
             'body' => $sample->body
@@ -54,7 +65,6 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
                 'user_uuid',
                 'photo_uuid',
                 'name',
-                'email_verified_at',
                 'free',
                 'photo_url',
                 'location' => [
