@@ -203,7 +203,6 @@ trait GeofenceProcedure
         $geofence->shape = new Polygon([new LineString($shape)]);
         $geofence->is_public = input('is_public');
         $geofence->save();
-        $geofence->load('photo', 'user');
         $photo->geofences()->attach($geofence->uuid);
         return $geofence;
     }
@@ -224,7 +223,6 @@ trait GeofenceProcedure
         $geofence->shape = new Polygon([new LineString($shape)]);
         $geofence->is_public = fill('is_public', $geofence->is_public);
         $geofence->save();
-        $geofence->load('photo', 'user');
         return $geofence;
     }
 }

@@ -16,8 +16,7 @@ trait ActionList
      */
     public function getOwnerActions()
     {
-        return Action::with('user')
-            ->whereIn('user_uuid', authenticated()
+        return Action::whereIn('user_uuid', authenticated()
                 ->users
                 ->pluck('uuid')
                 ->push(authenticated()->uuid)
@@ -32,8 +31,7 @@ trait ActionList
      */
     public function getChildActions()
     {
-        return Action::with('user')
-            ->where('user_uuid', authenticated()->uuid)
+        return Action::where('user_uuid', authenticated()->uuid)
             ->paginate(25);
     }
 }

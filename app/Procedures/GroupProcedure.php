@@ -30,7 +30,6 @@ trait GroupProcedure
                 ]
             );
         $group->photos()->attach($photo->uuid);
-        $group->load('photo', 'user');
         return $group;
     }
 
@@ -44,7 +43,6 @@ trait GroupProcedure
     {
         upload()->check($group);
         $group->update(parameters()->fill(['name', 'is_public'], $group));
-        $group->load(['photo', 'user']);
         return $group;
     }
 }

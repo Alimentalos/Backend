@@ -16,8 +16,7 @@ trait GroupList
      */
     public function index()
     {
-        return Group::with('user', 'photo')
-            ->where('user_uuid', authenticated()->uuid)
+        return Group::where('user_uuid', authenticated()->uuid)
             ->orWhere('is_public', true)
             ->orWhereIn('uuid', authenticated()->groups->pluck('uuid')->toArray())
             ->latest()
@@ -31,8 +30,7 @@ trait GroupList
      */
     public function all()
     {
-        return Group::with('user', 'photo')
-            ->latest()
+        return Group::latest()
             ->paginate(25);
     }
 }

@@ -25,7 +25,6 @@ trait PhotoProcedure
             'is_public' => fill('is_public', true),
             'location' => parser()->pointFromCoordinates(input('coordinates'))
         ]);
-        $photo->load('user');
         return $photo;
     }
 

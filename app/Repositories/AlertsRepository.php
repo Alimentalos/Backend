@@ -34,7 +34,6 @@ class AlertsRepository
     {
         upload()->check($alert);
         $alert->update(parameters()->fill(['type', 'status', 'title', 'body'], $alert));
-        $alert->load('photo', 'user', 'alert');
         return $alert;
     }
 }
