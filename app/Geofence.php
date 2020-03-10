@@ -81,4 +81,7 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
     {
         return 'uuid';
     }
+
+
+    protected $with = ['user', 'photo'];
 }
