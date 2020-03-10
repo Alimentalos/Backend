@@ -155,4 +155,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     }
 
     public $incrementing = false;
+
+
+    public $with = ['user'];
 }

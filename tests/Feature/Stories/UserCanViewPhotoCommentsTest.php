@@ -23,7 +23,7 @@ class UserCanViewPhotoCommentsTest extends TestCase
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->user_id = $user->uuid;
+        $photo->user_uuid = $user->uuid;
         $photo->pets()->attach($pet);
         $photo->save();
         $comment = factory(Comment::class)->make();
