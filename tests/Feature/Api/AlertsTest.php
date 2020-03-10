@@ -223,7 +223,6 @@ class AlertsTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
         ]);
 
@@ -257,7 +256,7 @@ class AlertsTest extends TestCase
             'message'
         ]);
         $response->assertJsonFragment([
-           'message' => 'Deleted successfully.'
+           'message' => 'Resource deleted successfully'
         ]);
     
         

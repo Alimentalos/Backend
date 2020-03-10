@@ -40,9 +40,6 @@ class ActionsTest extends TestCase
             'total',
         ]);
 
-        $response->assertJsonFragment([
-            'user_uuid' => $user->uuid
-        ]);
         $response = $this->actingAs($child, 'api')->json('GET', '/api/devices');
         $response->assertOk();
         $response->assertJsonStructure([
