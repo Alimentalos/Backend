@@ -66,7 +66,6 @@ class GroupTest extends TestCase
                         'love_reacter_id',
                         'is_admin',
                         'is_child',
-                        'user',
                     ] ,
                 ],
             ],
@@ -153,7 +152,10 @@ class GroupTest extends TestCase
     {
         Storage::fake('gcs');
         $user = factory(User::class)->create();
+        $userB = factory(User::class)->create();
         $group = factory(Group::class)->create();
+        $group->user_uuid = $userB->uuid;
+        $group->save();
         $user->groups()->attach($group, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS
@@ -195,8 +197,6 @@ class GroupTest extends TestCase
                 'love_reactant_id',
                 'love_reacter_id',
                 'is_admin',
-                'is_child',
-                'user',
             ] ,
             'photo' => [
                 'location' => [
@@ -268,7 +268,6 @@ class GroupTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ] ,
             'photo' => [
                 'location' => [
@@ -338,7 +337,6 @@ class GroupTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ] ,
             'photo' => [
                 'location' => [
@@ -373,6 +371,8 @@ class GroupTest extends TestCase
         $group->is_public = false;
         $user->groups()->attach($group);
         $pet->groups()->attach($group);
+        $pet->user_uuid = $user->uuid;
+        $pet->save();
         $group->comments()->create([
             'user_uuid' => $user->uuid,
             'body' => $sample->body
@@ -380,6 +380,8 @@ class GroupTest extends TestCase
         $group->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid);
         //
+//        dd($response->getContent());
+        $response->assertOk();
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',
@@ -410,7 +412,6 @@ class GroupTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ] ,
             'photo' => [
                 'location' => [
@@ -470,8 +471,6 @@ class GroupTest extends TestCase
                         'love_reactant_id',
                         'love_reacter_id',
                         'is_admin',
-                        'is_child',
-                        'user',
                     ] ,
                     'photo' => [
                         'location' => [
@@ -638,7 +637,6 @@ class GroupTest extends TestCase
                         'love_reacter_id',
                         'is_admin',
                         'is_child',
-                        'user',
                     ] ,
                     'photo' => [
                         'location' => [
@@ -720,7 +718,6 @@ class GroupTest extends TestCase
                         'love_reacter_id',
                         'is_admin',
                         'is_child',
-                        'user',
                     ] ,
                     'photo' => [
                         'location' => [

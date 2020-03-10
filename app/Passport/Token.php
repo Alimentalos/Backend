@@ -69,7 +69,7 @@ class Token extends PassportToken
      */
     public function client()
     {
-        return $this->belongsTo(Client::class, 'client_id', 'uuid');
+        return $this->belongsTo(Client::class, 'client_id', 'id');
     }
 
     /**

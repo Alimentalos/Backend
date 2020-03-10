@@ -12,10 +12,8 @@ use App\Observers\CommentObserver;
 use App\Observers\DeviceObserver;
 use App\Observers\GroupObserver;
 use App\Observers\PetObserver;
-use App\Observers\TokenObserver;
 use App\Observers\UserObserver;
 use App\Passport\Client;
-use App\Passport\Token;
 use App\Pet;
 use App\User;
 use Illuminate\Support\ServiceProvider;
@@ -48,6 +46,5 @@ class AppServiceProvider extends ServiceProvider
         Pet::observe(PetObserver::class);
         Alert::observe(AlertObserver::class);
         Client::observe(ClientObserver::class);
-        Token::observe(TokenObserver::class);
     }
 }

@@ -974,7 +974,6 @@ class GeofenceTest extends TestCase
                         'love_reacter_id',
                         'is_admin',
                         'is_child',
-                        'user',
                     ] ,
                     'photo' => [
                         'location' => [

@@ -90,4 +90,39 @@ class Client extends PassportClient
     {
         return 'uuid';
     }
+
+    /**
+     * Get the user that the client belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(
+            User::class,
+            'user_id',
+            'uuid'
+        );
+    }
+
+    /**
+     * Get all of the authentication codes for the client.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function authCodes()
+    {
+        return $this->hasMany(AuthCode::class, 'client_id',
+            'id');
+    }
+
+    /**
+     * Get all of the tokens that belong to the client.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tokens()
+    {
+        return $this->hasMany(Token::class, 'client_id', 'id');
+    }
 }

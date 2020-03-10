@@ -64,7 +64,6 @@ class UserTest extends TestCase
                         'love_reacter_id',
                         'is_admin',
                         'is_child',
-                        'user',
                     ] ,
                 ],
             ],
@@ -102,6 +101,7 @@ class UserTest extends TestCase
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/groups');
         $response->assertOk();
+//        dd($response->getContent());
 
         $response->assertJsonStructure([
             'current_page',
@@ -136,7 +136,6 @@ class UserTest extends TestCase
                         'love_reacter_id',
                         'is_admin',
                         'is_child',
-                        'user',
                     ] ,
                     'photo' => [
                         'location' => [
@@ -440,7 +439,6 @@ class UserTest extends TestCase
                 'love_reacter_id',
                 'is_admin',
                 'is_child',
-                'user',
             ],
             'uuid',
             'user_uuid',
@@ -752,7 +750,6 @@ class UserTest extends TestCase
                 'created_at',
                 'is_admin',
                 'is_child',
-                'user',
             ]
         ]);
         $response->assertJsonFragment([
