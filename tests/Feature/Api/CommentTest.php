@@ -175,7 +175,7 @@ class CommentTest extends TestCase
             'message'
         ]);
         $response->assertJsonFragment([
-           'message' => 'Deleted successfully.'
+           'message' => 'Resource deleted successfully'
         ]);
     
 

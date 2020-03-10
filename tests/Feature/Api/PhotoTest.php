@@ -31,6 +31,7 @@ class PhotoTest extends TestCase
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
         $photo->user_uuid = $user->uuid;
+        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
         $user->photo_uuid = $photo->uuid;
         $user->save();
         $photo->save();

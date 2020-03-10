@@ -1265,34 +1265,6 @@ class GeofenceTest extends TestCase
             ]
         ]);
         $response->assertJsonCount(2, 'data');
-
-        $response = $this->actingAs($user, 'api')
-            ->get('/api/pets/' . $pet->uuid . '/geofences/' . $geofence->uuid . '/accesses');
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'data' => [
-                [
-                    'accessible',
-                    'first_location',
-                    'last_location',
-                    'status'
-                ]
-            ]
-        ]);
-
-        $response = $this->actingAs($user, 'api')
-            ->get('/api/pets/' . $pet->uuid . '/accesses');
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'data' => [
-                [
-                    'accessible',
-                    'first_location',
-                    'last_location',
-                    'status'
-                ]
-            ]
-        ]);
     }
 
     /**
