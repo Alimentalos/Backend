@@ -11,7 +11,7 @@ use Grimzy\LaravelMysqlSpatial\Types\Point;
 $factory->define(Pet::class, function (Faker $faker) {
     return [
         'name' => $faker->text(6),
-        'uuid' => (string) $faker->uuid,
+        'uuid' => uuid(),
         'location' => (new Point($faker->latitude(), $faker->longitude())),
         'user_uuid' => factory(User::class)->create()->uuid,
         'photo_uuid' => factory(Photo::class)->create()->uuid,

@@ -220,7 +220,7 @@ if (! function_exists('uuid')) {
      */
     function uuid()
     {
-        return (new Identifier())->create();
+        return Identifier::create();
     }
 }
 

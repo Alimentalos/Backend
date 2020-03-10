@@ -24,7 +24,7 @@ $factory->define(Device::class, function (Faker $faker) {
         'user_uuid' => factory(User::class)->create()->uuid,
         'location' => (new Point($faker->latitude(), $faker->longitude())),
         'description' => $faker->text(200),
-        'uuid' => (string) $faker->uuid,
+        'uuid' => uuid(),
         'is_public' => true,
         'api_token' => (string) $faker->uuid,
     ];

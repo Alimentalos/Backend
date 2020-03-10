@@ -13,7 +13,7 @@ class Identifier
      *
      * @return string
      */
-    public function create()
+    public static function create()
     {
         try {
             return (string) Uuid::uuid4();
