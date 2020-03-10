@@ -27,7 +27,6 @@ class UserCanViewOwnedDevicesGeofencesTest extends TestCase
         $device->user_uuid = $user->uuid;
         $device->save();
         $device->geofences()->attach($geofence);
-        $geofence->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid . '/geofences');
         $response->assertOk();
 

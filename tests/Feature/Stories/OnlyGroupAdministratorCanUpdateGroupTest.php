@@ -19,6 +19,8 @@ class OnlyGroupAdministratorCanUpdateGroupTest extends TestCase
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
+        $group->user_uuid = $user->uuid;
+        $group->save();
         $user->groups()->attach($group, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS

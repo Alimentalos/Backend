@@ -10,7 +10,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DevicesGeofencesApiTest extends TestCase
+class UserCanCreateGroupCommentTest extends TestCase
 {
     use RefreshDatabase;
 
