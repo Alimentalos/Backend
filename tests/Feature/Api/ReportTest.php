@@ -67,6 +67,70 @@ class ReportTest extends TestCase
             'type' => 'activity',
         ]);
         $response->assertOk();
+        
+        $response->assertJsonStructure([[
+            'device' => [
+                'uuid',
+                'name',
+                'description',
+            ],
+            'data' => [[
+                'summary'=> [
+                    'status',
+                    'from',
+                    'to',
+                    'in_moving_time',
+                    'stopped_time',
+                    'distance',
+                    'altitude'
+                ],
+                'start_point' =>[
+                    'time',
+                    'latitude',
+                    'longitude',
+                    'altitude',
+                    'street'
+                ],
+                'end_point' => [
+                    'time',
+                    'latitude',
+                    'longitude',
+                    'altitude',
+                    'street'
+                ],
+                'ranges' => [[
+                    'summary' => [
+                        'status',
+                        'time',
+                        'distance',
+                        'altitude',
+                    ],
+                    'from' => [
+                        'time',
+                        'latitude',
+                        'longitude',
+                        'altitude',
+                        'street'
+                    ],
+                    'to' => [
+                        'time',
+                        'latitude',
+                        'longitude',
+                        'altitude',
+                        'street'
+                    ],
+                    'battery' => [
+                        'start',
+                        'end',
+                        'usage'
+                    ],
+                ]],
+            ]],            
+        ]]);
+        
+        $response->assertJsonFragment([
+            'uuid' => $device->uuid
+        ]);
     }
 
     public function testUserCanGetReportWithoutDeviceParameter()
@@ -137,5 +201,80 @@ class ReportTest extends TestCase
             'type' => 'activity',
         ]);
         $response->assertOk();
+
+        $response->assertJsonStructure([[
+            'device' => [
+                'uuid',
+                'name',
+                'description',
+            ],
+            'data' => [[
+                'summary'=> [
+                    'status',
+                    'from',
+                    'to',
+                    'in_moving_time',
+                    'stopped_time',
+                    'distance',
+                    'altitude'
+                ],
+                'start_point' =>[
+                    'time',
+                    'latitude',
+                    'longitude',
+                    'altitude',
+                    'street'
+                ],
+                'end_point' => [
+                    'time',
+                    'latitude',
+                    'longitude',
+                    'altitude',
+                    'street'
+                ],
+                'ranges' => [[
+                    'summary' => [
+                        'status',
+                        'time',
+                        'distance',
+                        'altitude',
+                    ],
+                    'from' => [
+                        'time',
+                        'latitude',
+                        'longitude',
+                        'altitude',
+                        'street'
+                    ],
+                    'to' => [
+                        'time',
+                        'latitude',
+                        'longitude',
+                        'altitude',
+                        'street'
+                    ],
+                    'battery' => [
+                        'start',
+                        'end',
+                        'usage'
+                    ],
+                ]],
+                'summary' => [
+                    'status',
+                    'from',
+                    'to'
+                ],
+                'summary' => [
+                    'status',
+                    'from',
+                    'to'
+                ],                
+            ]],            
+        ]]);
+        
+        $response->assertJsonFragment([
+            'uuid' => $device->uuid
+        ]);
+
     }
 }

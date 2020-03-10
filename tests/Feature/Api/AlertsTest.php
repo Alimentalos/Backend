@@ -58,7 +58,6 @@ class AlertsTest extends TestCase
             'coordinates' => '5,5',
         ]);
         $response->assertCreated();
-
         $content = $response->getContent();
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
@@ -172,6 +171,66 @@ class AlertsTest extends TestCase
         ]);
         $response->assertOk();
 
+        $response->assertJsonStructure([
+            'user_uuid',
+            'photo_uuid',
+            'alert_id',
+            'alert_type',
+            'photo_url',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
+            'title',
+            'body',
+            'type',
+            'status',
+            'uuid',
+            'updated_at',
+            'created_at',
+            'photo' => [
+                'location' => [
+                    'type',
+                    'coordinates',
+                ],
+                'uuid',
+                'user_uuid',
+                'comment_uuid',
+                'ext',
+                'photo_url',
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id'
+            ],
+            'user' => [
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' => [
+                    'type',
+                    'coordinates',
+                ],
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
+        ]);
+
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid,
+        ]);
+
         $content = $response->getContent();
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
@@ -193,6 +252,15 @@ class AlertsTest extends TestCase
         $alert->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/alerts/' . $alert->uuid);
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'message'
+        ]);
+        $response->assertJsonFragment([
+           'message' => 'Deleted successfully.'
+        ]);
+    
+        
         $this->assertDeleted('alerts', [
             'uuid' => $alert->uuid,
         ]);
@@ -212,6 +280,60 @@ class AlertsTest extends TestCase
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/alerts/' . $alert->uuid . '/comments');
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [
+                [
+                    'uuid',
+                    'user_uuid',
+                    'title',
+                    'body',
+                    'commentable_type',
+                    'commentable_id',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id',
+                    'user' => [
+                        'uuid',
+                        'user_uuid',
+                        'photo_uuid',
+                        'name',
+                        'email',
+                        'email_verified_at',
+                        'free',
+                        'photo_url',
+                        'location' => [
+                            'type',
+                            'coordinates',
+                        ],
+                        'is_public',
+                        'created_at',
+                        'updated_at',
+                        'love_reactant_id',
+                        'love_reacter_id',
+                        'is_admin',
+                        'is_child',
+                        'user',
+                    ] ,
+                ],
+            ],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+        ]);
+
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid,
+            'user_uuid' => $user->uuid,
+        ]);
 
         $response->assertJsonStructure([
             'data' => [
@@ -240,5 +362,59 @@ class AlertsTest extends TestCase
         ]);
         $response->assertJsonCount(1, 'data');
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [
+                [
+                    'uuid',
+                    'user_uuid',
+                    'title',
+                    'body',
+                    'commentable_type',
+                    'commentable_id',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id',
+                    'user' => [
+                        'uuid',
+                        'user_uuid',
+                        'photo_uuid',
+                        'name',
+                        'email',
+                        'email_verified_at',
+                        'free',
+                        'photo_url',
+                        'location' => [
+                            'type',
+                            'coordinates',
+                        ],
+                        'is_public',
+                        'created_at',
+                        'updated_at',
+                        'love_reactant_id',
+                        'love_reacter_id',
+                        'is_admin',
+                        'is_child',
+                        'user',
+                    ] ,
+                ],
+            ],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+        ]);
+
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid,
+            'user_uuid' => $user->uuid,
+        ]);
     }
 }

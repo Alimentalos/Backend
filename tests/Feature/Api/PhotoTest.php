@@ -21,14 +21,70 @@ class PhotoTest extends TestCase
         $photo = factory(Photo::class)->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/');
         $response->assertOk();
+
     }
 
     public function testShowPhotosApi()
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
+        $photo->user_uuid = $user->uuid;
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid);
         $response->assertOk();
+        
+        
+        $response->assertJsonStructure([
+            'location' =>[
+                'type',
+                'coordinates',
+            ],
+            'uuid',
+            'user_uuid',
+            'comment_uuid',
+            'ext',
+            'photo_url',
+            'is_public',
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+            'user' =>[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' =>[
+                    'type',
+                    'coordinates',
+                ],
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
+            'comment' => [
+                'uuid',
+                'user_uuid',
+                'title',
+                'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id'
+            ],
+        ]);
+
+        $response->assertJsonFragment([
+            'uuid' => $photo->uuid
+        ]);
     }
 
     public function testUpdatePhotosApi()
@@ -43,12 +99,114 @@ class PhotoTest extends TestCase
             'body' => 'New body added'
         ]);
         $response->assertOk();
+        
+        $response->assertJsonStructure([
+            'location' =>[
+                'type',
+                'coordinates',
+            ],
+            'uuid',
+            'user_uuid',
+            'comment_uuid',
+            'ext',
+            'photo_url',
+            'is_public',
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+            'comment' => [
+                'uuid',
+                'user_uuid',
+                'title',
+                'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id'
+            ],
+            'user' =>[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' =>[
+                    'type',
+                    'coordinates',
+                ],
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
+        ]);
+
+        $response->assertJsonFragment([
+            'uuid' => $photo->uuid
+        ]);
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid);
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'location' =>[
+                'type',
+                'coordinates',
+            ],
+            'uuid',
+            'user_uuid',
+            'comment_uuid',
+            'ext',
+            'photo_url',
+            'is_public',
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+            'user' =>[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' =>[
+                    'type',
+                    'coordinates',
+                ],
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
+            'comment' => [
+                'uuid',
+                'user_uuid',
+                'title',
+                'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id'
+            ],
+        ]);
+
         $response->assertJsonFragment([
-            'title' => 'New title',
-            'body' => 'New body added'
+            'uuid' => $photo->uuid
         ]);
     }
 
@@ -79,20 +237,55 @@ class PhotoTest extends TestCase
         ]);
         $response->assertOk();
         $response->assertJsonStructure([
-            'user_uuid',
             'uuid',
-            'photo_url',
+            'user_uuid',
+            'comment_uuid',
             'ext',
+            'photo_url',
             'is_public',
+            'location' =>[
+                'type',
+                'coordinates',
+            ],
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+            'user' =>[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' =>[
+                    'type',
+                    'coordinates',
+                ],
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
             'comment' => [
                 'uuid',
+                'user_uuid',
                 'title',
                 'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id'
             ],
-            'user' => [
-                'name',
-                'email'
-            ]
+        ]);
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid
         ]);
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
 
@@ -106,21 +299,57 @@ class PhotoTest extends TestCase
             'coordinates' => '60.1,25.5'
         ]);
         $response->assertOk();
+        $response->assertOk();
         $response->assertJsonStructure([
-            'user_uuid',
             'uuid',
-            'photo_url',
+            'user_uuid',
+            'comment_uuid',
             'ext',
+            'photo_url',
             'is_public',
+            'location' =>[
+                'type',
+                'coordinates',
+            ],
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+            'user' =>[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' =>[
+                    'type',
+                    'coordinates',
+                ],
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
             'comment' => [
                 'uuid',
+                'user_uuid',
                 'title',
                 'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id'
             ],
-            'user' => [
-                'name',
-                'email'
-            ]
+        ]);
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid
         ]);
 
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
@@ -134,21 +363,57 @@ class PhotoTest extends TestCase
             'coordinates' => '60.1,25.5'
         ]);
         $response->assertOk();
+        $response->assertOk();
         $response->assertJsonStructure([
-            'user_uuid',
             'uuid',
-            'photo_url',
+            'user_uuid',
+            'comment_uuid',
             'ext',
+            'photo_url',
             'is_public',
+            'location' =>[
+                'type',
+                'coordinates',
+            ],
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+            'user' =>[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' =>[
+                    'type',
+                    'coordinates',
+                ],
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
             'comment' => [
                 'uuid',
+                'user_uuid',
                 'title',
                 'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id'
             ],
-            'user' => [
-                'name',
-                'email'
-            ]
+        ]);
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid
         ]);
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
 
@@ -161,21 +426,57 @@ class PhotoTest extends TestCase
             'coordinates' => '60.1,25.5'
         ]);
         $response->assertOk();
+        $response->assertOk();
         $response->assertJsonStructure([
-            'user_uuid',
             'uuid',
-            'photo_url',
+            'user_uuid',
+            'comment_uuid',
             'ext',
+            'photo_url',
             'is_public',
+            'location' =>[
+                'type',
+                'coordinates',
+            ],
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+            'user' =>[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' =>[
+                    'type',
+                    'coordinates',
+                ],
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
             'comment' => [
                 'uuid',
+                'user_uuid',
                 'title',
                 'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id'
             ],
-            'user' => [
-                'name',
-                'email'
-            ]
+        ]);
+        $response->assertJsonFragment([
+            'uuid' => $user->uuid
         ]);
         Storage::disk('gcs')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
     }
@@ -194,6 +495,57 @@ class PhotoTest extends TestCase
             'uuid' => $photo->uuid,
         ]);
         $response->assertOk();
+        $response->assertJsonStructure([
+            'user_uuid',
+            'uuid',
+            'photo_url',
+            'ext',
+            'is_public',
+            'location' =>[
+                'type',
+                'coordinates',
+            ],
+            'comment_uuid',
+            'updated_at',
+            'created_at',
+            'love_reactant_id',
+            'user' =>[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' =>[
+                    'type',
+                    'coordinates',
+                ],
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
+            'comment' => [
+                'uuid',
+                'user_uuid',
+                'title',
+                'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id'
+            ],
+        ]);
+        $response->assertJsonFragment([
+            'user_uuid' => $photo->uuid
+        ]);
     }
 
     /**

@@ -26,6 +26,7 @@ class CommentTest extends TestCase
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $photo = factory(Photo::class)->create();
+        $pet->photos()->attach($photo);
         $comment = factory(Comment::class)->make();
         $commentBody = 'Awesome new text';
 
@@ -34,6 +35,21 @@ class CommentTest extends TestCase
             'is_public' => true,
         ]);
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'uuid',
+            'body',
+            'user_uuid',
+            'commentable_id',
+            'commentable_type',
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+        ]);
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid
+        ]);
+
         $content = $response->getContent();
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($content))->uuid,
@@ -46,32 +62,126 @@ class CommentTest extends TestCase
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/photos');
         $response->assertOk();
 
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [[
+                'location' =>[
+                    'type',
+                    'coordinates',
+                ],
+                'uuid',
+                'user_uuid',
+                'ext',
+                'photo_url',
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'user' =>[
+                    'uuid',
+                    'user_uuid',
+                    'photo_uuid',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'free',
+                    'photo_url',
+                    'location' =>[
+                        'type',
+                        'coordinates',
+                    ],
+                    'is_public',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id',
+                    'love_reacter_id',
+                    'is_admin',
+                    'is_child',
+                    'user',
+                ],
+                'comment' => [
+                    'uuid',
+                    'user_uuid',
+                    'title',
+                    'body',
+                    'commentable_type',
+                    'commentable_id',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id'
+                ],
+                'pivot' => [
+                    'photoable_id',
+                    'photo_uuid',
+                    'photoable_type'
+                ],
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
+        ]);
+        $response->assertJsonFragment([
+            'photoable_id' => $pet->uuid
+        ]);
+        
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . (json_decode($content))->uuid);
         $response->assertOk();
+        
         $response->assertJsonStructure([
             'uuid',
+            'user_uuid',
+            'title',
+            'body',
             'commentable_type',
             'commentable_id',
-            'uuid',
-            'body',
-            'user_uuid',
-            'love_reactant_id',
             'created_at',
             'updated_at',
+            'love_reactant_id',
+            'commentable',
         ]);
-
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid
+        ]);
+        
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/comments/' . (json_decode($content))->uuid, [
             'body' => $commentBody,
             'is_public' => true,
         ]);
         $response->assertOk();
-        $response->assertJsonFragment([
-            'user_uuid' => $user->uuid,
-            'body' => $commentBody,
-        ]);
 
+        $response->assertJsonStructure([
+            'uuid',
+            'user_uuid',
+            'title',
+            'body',
+            'commentable_type',
+            'commentable_id',
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+        ]);
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid
+        ]);
+        
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/comments/' . (json_decode($content))->uuid);
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'message'
+        ]);
+        $response->assertJsonFragment([
+           'message' => 'Deleted successfully.'
+        ]);
+    
+
         $this->assertDeleted('comments', [
             'uuid' => (json_decode($content))->uuid,
         ]);
@@ -95,20 +205,55 @@ class CommentTest extends TestCase
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid . '/comments');
         $response->assertOk();
+
         $response->assertJsonStructure([
-            'data' => [
-                [
+            'current_page',
+            'data' => [[
+                'uuid',
+                'user_uuid',
+                'title',
+                'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'user' =>[
                     'uuid',
                     'user_uuid',
-                    'body',
+                    'photo_uuid',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'free',
+                    'photo_url',
+                    'location' =>[
+                        'type',
+                        'coordinates',
+                    ],
+                    'is_public',
                     'created_at',
-                    'updated_at'
-                ]
-            ]
+                    'updated_at',
+                    'love_reactant_id',
+                    'love_reacter_id',
+                    'is_admin',
+                    'is_child',
+                    'user',
+                ],
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
         ]);
         $response->assertJsonFragment([
-            'user_uuid' => $user->uuid,
-            'body' => $comment->body,
+            'user_uuid' => $user->uuid
         ]);
     }
 
@@ -131,20 +276,53 @@ class CommentTest extends TestCase
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . $comment->uuid . '/comments');
         $response->assertOk();
         $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
+            'current_page',
+            'data' => [[
+                'uuid',
+                'user_uuid',
+                'title',
+                'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'user' =>[
                     'uuid',
                     'user_uuid',
-                    'body',
+                    'photo_uuid',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'free',
+                    'photo_url',
+                    'location' =>[
+                        'type',
+                        'coordinates',
+                    ],
+                    'is_public',
                     'created_at',
-                    'updated_at'
-                ]
-            ]
+                    'updated_at',
+                    'love_reactant_id',
+                    'love_reacter_id',
+                    'is_admin',
+                    'is_child',
+                    'user',
+                ],
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
         ]);
         $response->assertJsonFragment([
-            'body' => $sampleCommentBody,
-            'user_uuid' => $user->uuid,
+            'user_uuid' => $user->uuid
         ]);
     }
 
@@ -162,21 +340,21 @@ class CommentTest extends TestCase
             'body' => $parentComment->body,
         ]);
         $response->assertOk();
+
         $response->assertJsonStructure([
-            'uuid',
-            'commentable_type',
-            'commentable_id',
             'uuid',
             'body',
             'user_uuid',
-            'love_reactant_id',
-            'created_at',
+            'commentable_id',
+            'commentable_type',
             'updated_at',
+            'created_at',
+            'love_reactant_id',
         ]);
         $response->assertJsonFragment([
-            'user_uuid' => $user->uuid,
-            'body' => $parentComment->body,
+            'user_uuid' => $user->uuid
         ]);
+
         $parentContent = $response->getContent();
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($parentContent))->uuid,
@@ -190,6 +368,21 @@ class CommentTest extends TestCase
             'body' => $childComment->body,
         ]);
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'uuid',
+            'body',
+            'user_uuid',
+            'commentable_id',
+            'commentable_type',
+            'updated_at',
+            'created_at',
+            'love_reactant_id',
+        ]);
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid
+        ]);
+
         $childContent = $response->getContent();
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($childContent))->uuid,
@@ -216,21 +409,55 @@ class CommentTest extends TestCase
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . (json_decode($parentContent))->uuid . '/comments');
         $response->assertOk();
+
         $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
+            'current_page',
+            'data' => [[
+                'uuid',
+                'user_uuid',
+                'title',
+                'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'user' =>[
                     'uuid',
                     'user_uuid',
-                    'body',
+                    'photo_uuid',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'free',
+                    'photo_url',
+                    'location' =>[
+                        'type',
+                        'coordinates',
+                    ],
+                    'is_public',
                     'created_at',
-                    'updated_at'
-                ]
-            ]
+                    'updated_at',
+                    'love_reactant_id',
+                    'love_reacter_id',
+                    'is_admin',
+                    'is_child',
+                    'user',
+                ],
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
         ]);
         $response->assertJsonFragment([
-            'body' => $childComment->body,
-            'user_uuid' => $user->uuid,
+            'user_uuid' => $user->uuid
         ]);
     }
 

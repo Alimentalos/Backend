@@ -26,21 +26,36 @@ class DevicesTest extends TestCase
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
+
         $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
-                    'user_uuid',
-                    'uuid',
-                    'api_token',
-                    'name',
-                    'description',
-                    'created_at',
-                    'updated_at'
-                ]
-            ]
+            'current_page',
+            'data' => [[
+                'user_uuid',
+                'location' => [
+                    'type',
+                    'coordinates' 
+                ],
+                'uuid',
+                'name',
+                'description',
+                'is_public',
+                'created_at',
+                'updated_at',
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
         ]);
-        $response->assertOk();
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid
+        ]);
     }
 
     /**
@@ -55,21 +70,36 @@ class DevicesTest extends TestCase
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
+        
         $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
-                    'user_uuid',
-                    'uuid',
-                    'api_token',
-                    'name',
-                    'description',
-                    'created_at',
-                    'updated_at'
-                ]
-            ]
+            'current_page',
+            'data' => [[
+                'user_uuid',
+                'location' => [
+                    'type',
+                    'coordinates' 
+                ],
+                'uuid',
+                'name',
+                'description',
+                'is_public',
+                'created_at',
+                'updated_at',
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
         ]);
-        $response->assertOk();
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid
+        ]);
     }
 
     /**
@@ -100,21 +130,38 @@ class DevicesTest extends TestCase
         $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
+
+
         $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
-                    'user_uuid',
-                    'uuid',
-                    'api_token',
-                    'name',
-                    'description',
-                    'created_at',
-                    'updated_at'
-                ]
-            ]
+            'current_page',
+            'data' => [[
+                'user_uuid',
+                'location' => [
+                    'type',
+                    'coordinates' 
+                ],
+                'uuid',
+                'name',
+                'description',
+                'is_public',
+                'created_at',
+                'updated_at',
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
         ]);
-        $response->assertOk();
+        $response->assertJsonFragment([
+            'uuid' => $device->uuid,
+        ]);
+
     }
 
     /**
@@ -128,17 +175,46 @@ class DevicesTest extends TestCase
         $group->devices()->attach($device->uuid);
         $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);
+        $response->assertOk();
+
         $response->assertJsonStructure([
-            'uuid',
             'user_uuid',
+            'location' => [
+                'type',
+                'coordinates' 
+            ],
             'uuid',
-            'api_token',
             'name',
             'description',
+            'is_public',
             'created_at',
-            'updated_at'
+            'updated_at',
+            'user' => [
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' => [
+                    'type',
+                    'coordinates' 
+                ], 
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
         ]);
-        $response->assertOk();
+        $response->assertJsonFragment([
+            'uuid' => $device->uuid,
+        ]);
     }
 
     /**
@@ -155,6 +231,89 @@ class DevicesTest extends TestCase
         $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'user_uuid',
+            'location' => [
+                'type',
+                'coordinates' 
+            ],
+            'uuid',
+            'name',
+            'description',
+            'is_public',
+            'created_at',
+            'updated_at',
+            'groups' => [[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'description',
+                'is_public',
+                'photo_url',
+                'created_at',
+                'updated_at',
+                'pivot' => [
+                    'groupable_id',
+                    'group_uuid',
+                    'groupable_type',
+                    'is_admin',
+                    'status',
+                    'sender_uuid',
+                    'created_at',
+                    'updated_at'
+                ],
+                'user' => [
+                    'uuid',
+                    'user_uuid',
+                    'photo_uuid',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'free',
+                    'photo_url',
+                    'location' => [
+                        'type',
+                        'coordinates' 
+                    ], 
+                    'is_public',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id',
+                    'love_reacter_id',
+                    'is_admin',
+                    'is_child',
+                    'user',                
+                ],
+            ]],
+            'user' => [
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' => [
+                    'type',
+                    'coordinates' 
+                ], 
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',                
+            ],
+
+        ]);
+        $response->assertJsonFragment([
+            'uuid' => $device->uuid,
+        ]);       
     }
 
     /**
@@ -237,6 +396,42 @@ class DevicesTest extends TestCase
             'is_public' => false,
         ]);
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'id',
+            'user_uuid',
+            'user' => [
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'email',
+                'email_verified_at',
+                'free',
+                'photo_url',
+                'location' => [
+                    'type',
+                    'coordinates' 
+                ], 
+                'is_public',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'love_reacter_id',
+                'is_admin',
+                'is_child',
+                'user',
+            ],
+            'uuid',
+            'api_token',
+            'name',
+            'description',
+            'created_at',
+            'updated_at'
+        ]);
+        $response->assertJsonFragment([
+            'uuid' => $device->uuid,
+        ]);
     }
 
     /**
@@ -250,6 +445,14 @@ class DevicesTest extends TestCase
         $device->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/devices/' . $device->uuid);
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'message'
+        ]);
+        $response->assertJsonFragment([
+           'message' => 'Deleted successfully.'
+        ]);
+
     }
 
     /**
@@ -366,6 +569,78 @@ class DevicesTest extends TestCase
         $response->assertJsonFragment([
             'uuid' => json_decode($response->getContent())->data[0]->photo->uuid,
         ]);
-        $response->assertOk();
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'description',
+                'is_public',
+                'photo_url',
+                'created_at',
+                'updated_at',
+                'user' =>[
+                    'uuid',
+                    'user_uuid',
+                    'photo_uuid',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'free',
+                    'photo_url',
+                    'location' =>[
+                        'type',
+                        'coordinates',
+                    ],
+                    'is_public',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id',
+                    'love_reacter_id',
+                    'is_admin',
+                    'is_child',
+                    'user',
+                ],
+                'photo' => [
+                    'location' =>[
+                        'type',
+                        'coordinates',
+                    ],
+                'uuid',
+                'user_uuid',
+                'comment_uuid',
+                'ext',
+                'photo_url',
+                'is_public',
+                'created_at',
+                'love_reactant_id'                    
+                ],
+                'pivot' => [
+                    'groupable_id',
+                    'group_uuid',
+                    'groupable_type',
+                    'is_admin',
+                    'status',
+                    'sender_uuid',
+                    'created_at',
+                    'updated_at'
+                ],
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
+        ]);
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid
+        ]);
     }
 }
