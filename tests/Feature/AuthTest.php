@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function test_register_route()
     {

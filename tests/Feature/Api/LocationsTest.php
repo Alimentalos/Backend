@@ -7,12 +7,12 @@ use App\Location;
 use App\Pet;
 use Carbon\Carbon;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 
 class LocationsTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function test_device_locations_api()
     {

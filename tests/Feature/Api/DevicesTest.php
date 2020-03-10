@@ -7,12 +7,12 @@ use App\Group;
 use App\Location;
 use Carbon\Carbon;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 
 class DevicesTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     /**
      * @test testUserCanViewOwnedPublicDevices

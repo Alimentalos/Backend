@@ -9,7 +9,6 @@ use App\Geofence;
 use App\Group;
 use App\Location;
 use App\Pet;
-use App\Repositories\UniqueNameRepository;
 use Illuminate\Support\Facades\Event;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
@@ -17,12 +16,12 @@ use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 
 class GeofenceTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
 
     /**
