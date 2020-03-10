@@ -119,7 +119,8 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     protected $appends = [
         'is_admin',
-        'is_child'
+        'is_child',
+        'free'
     ];
 
     /**
