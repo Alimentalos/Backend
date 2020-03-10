@@ -23,7 +23,7 @@ use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 
 $factory->define(Geofence::class, function (Faker $faker) {
     return [
-        'uuid' => uuid(),
+        'uuid' => (string) $faker->uuid,
         'user_uuid' => factory(User::class)->create()->uuid,
         'photo_uuid' => factory(Photo::class)->create()->uuid,
         'name' => $faker->name,
