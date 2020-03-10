@@ -171,6 +171,8 @@ class DevicesTest extends TestCase
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
+        $device->user_uuid = $user->uuid;
+        $device->save();
         $group = factory(Group::class)->create();
         $group->devices()->attach($device->uuid);
         $group->users()->attach($user->uuid);
@@ -225,6 +227,8 @@ class DevicesTest extends TestCase
         $device = factory(Device::class)->create();
         $group = factory(Group::class)->create();
         $device->is_public = false;
+        $device->user_uuid = $user->uuid;
+
         $device->save();
         $group->devices()->attach($device->uuid);
         $group->users()->attach($user->uuid);
