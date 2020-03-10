@@ -6,12 +6,15 @@ namespace Tests\Feature\Stories;
 
 use App\Group;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test testUserCanUpdateAnOwnedGroupWithPhoto
      */

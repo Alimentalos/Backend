@@ -7,10 +7,12 @@ namespace Tests\Feature\Stories;
 use App\Group;
 use App\Photo;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanViewGroupPhotosTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * @test testIndexGroupsPhotosApi
      */

@@ -28,6 +28,7 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         $user->groups()->attach($group);
         $pet->groups()->attach($group);
         $pet->user_uuid = $user->uuid;
+        $group->user_uuid = $user->uuid;
         $pet->save();
         $group->comments()->create([
             'user_uuid' => $user->uuid,
@@ -53,7 +54,6 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
                 'user_uuid',
                 'photo_uuid',
                 'name',
-                'email',
                 'email_verified_at',
                 'free',
                 'photo_url',

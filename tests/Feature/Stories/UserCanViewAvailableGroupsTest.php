@@ -9,25 +9,28 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class AdminCanViewGroupListTest extends TestCase
+class UserCanViewAvailableGroupsTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * @test testAdminWatchingGroupsList
+     * @test testUserCanViewUserAvailableGroups
      */
-    final public function testAdminWatchingGroupsList()
+    final public function testUserCanViewUserAvailableGroups()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
         $group->user_uuid = $user->uuid;
-        $user->groups()->attach($group);
-        $user->email = 'iantorres@outlook.com';
         $group->save();
-        $user->save();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/groups');
+        $user->groups()->attach($group->uuid, [
+            'status' => Group::ACCEPTED_STATUS,
+            'is_admin' => false,
+        ]);
+
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/groups');
         $response->assertOk();
-//        dd(json_decode($response->getContent()));
+//        dd($response->getContent());
+
         $response->assertJsonStructure([
             'current_page',
             'data' => [
@@ -46,7 +49,6 @@ class AdminCanViewGroupListTest extends TestCase
                         'user_uuid',
                         'photo_uuid',
                         'name',
-                        'email',
                         'email_verified_at',
                         'free',
                         'photo_url',
@@ -76,6 +78,16 @@ class AdminCanViewGroupListTest extends TestCase
                         'created_at',
                         'updated_at',
                         'love_reactant_id',
+                    ],
+                    'pivot' => [
+                        'groupable_id',
+                        'group_uuid',
+                        'groupable_type',
+                        'is_admin',
+                        'status',
+                        'sender_uuid',
+                        'created_at',
+                        'updated_at',
                     ]
                 ],
             ],
@@ -93,6 +105,7 @@ class AdminCanViewGroupListTest extends TestCase
         // Assert contains the group uuid and user uuid.
         $response->assertJsonFragment([
             'uuid' => $group->uuid,
+            'user_uuid' => $user->uuid,
         ]);
     }
 }

@@ -7,10 +7,12 @@ namespace Tests\Feature\Stories;
 use App\Device;
 use App\Group;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserGroupMemberCanViewGroupDevicesTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * @test testGroupMemberUserCanViewRelatedGroupDevices
      */

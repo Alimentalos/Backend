@@ -233,7 +233,9 @@ return [
             ],
             // TODO Add JWT documentation explanation and reference
             'Authentication' => [
-                'Currently the authentication method is given by the `api_token` column in the resource table, in version 2.0 this will be replaced by JWT.'
+                'To obtain an access token you must first create a user using the user registration API.',
+                'To perform operations on the system you must log in by sending your credentials to the Token API. You will get two codes, one to access the system and another to refresh the access token.',
+                'Sending `Bearer ACCESS_TOKEN` on `Authorization` header of `HTTP` request, header `Accept` with value `application/json` is required.'
             ],
             'Contracts' => [
                 '`Resource`' => [
@@ -345,9 +347,6 @@ return [
                 '`resource()`' => [
                     'Retrieve `current resource` class or instance.',
                 ],
-                '`token()`' => [
-                    'Creates `Tokenizer` tool instance.',
-                ],
                 '`authenticated($guard = "api")`' => [
                     'Wrapper of `auth()->user()`.',
                 ],
@@ -437,9 +436,6 @@ return [
                 ],
                 '`Subscriber`' => [
                     'Responsible for `checking the limits of user quota`. This tool is `under construction`.',
-                ],
-                '`Tokenizer`' => [
-                    'Responsible for `user authentication`.',
                 ],
                 '`Uploader`' => [
                     'Responsible of `photo uploads`.',
