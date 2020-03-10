@@ -15,6 +15,8 @@ use App\User;
 
 class PhotoTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testIndexPhotosApi()
     {
         $user = factory(User::class)->create();

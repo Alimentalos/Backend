@@ -28,7 +28,6 @@ class UserTest extends TestCase
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/devices');
         $response->assertOk();
-
         $response->assertJsonStructure([
             'current_page',
             'data' => [

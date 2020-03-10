@@ -356,7 +356,7 @@ class DevicesTest extends TestCase
         ]);
         // Assert User UUID
         $response->assertJsonFragment([
-            'uuid' => $user->uuid,
+            'user_uuid' => $user->uuid,
         ]);
         // Assert Group UUID
         $response->assertJsonFragment([
