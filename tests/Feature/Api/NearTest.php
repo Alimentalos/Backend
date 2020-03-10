@@ -4,18 +4,16 @@ namespace Tests\Feature\Api;
 
 use App\Geofence;
 use App\Pet;
-use App\Repositories\UniqueNameRepository;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
-use OpenApi\Annotations\Get;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 
 class NearTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     /**
      * @test testNearGeofences
@@ -24,7 +22,7 @@ class NearTest extends TestCase
     {
         $user = factory(User::class)->create();
         $nearGeofence = new Geofence();
-        $nearGeofence->uuid = UniqueNameRepository::createIdentifier();
+        $nearGeofence->uuid = uuid();
         $nearGeofence->name = "Near Geofence";
         $nearGeofence->user_uuid = $user->uuid;
         $nearGeofence->shape = new Polygon([new LineString([
@@ -37,7 +35,7 @@ class NearTest extends TestCase
         $nearGeofence->save();
 
         $farGeofence = new Geofence();
-        $farGeofence->uuid = UniqueNameRepository::createIdentifier();
+        $farGeofence->uuid = uuid();
         $farGeofence->name = "Far Geofence";
         $farGeofence->user_uuid = $user->uuid;
         $farGeofence->shape = new Polygon([new LineString([

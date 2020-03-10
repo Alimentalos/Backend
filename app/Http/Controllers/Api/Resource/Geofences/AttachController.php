@@ -11,50 +11,34 @@ class AttachController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/devices/{device}/geofences/{geofence}/attach",
-     *      operationId="attachDeviceGeofence",
-     *      tags={"Devices"},
-     *      summary="Attach geofence to device.",
-     *      description="Returns empty array as JSON response.",
+     *      path="/{resource}/{uuid}/geofences/{geofence}/attach",
+     *      operationId="attachResourceGeofence",
+     *      tags={"Resources"},
+     *      summary="Attach geofence to resource.",
+     *      description="Returns message JSON Object response.",
      *      @OA\Parameter(
-     *          name="device",
-     *          description="Unique identifier of device",
+     *          name="uuid",
+     *          description="Unique identifier of resource",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
-     *      @OA\Parameter(
-     *          name="geofence",
-     *          description="Unique identifier of geofence",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Device attached to geofence successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/users/{user}/geofences/{geofence}/attach",
-     *      operationId="attachUserGeofence",
-     *      tags={"Users"},
-     *      summary="Attach geofence to user.",
-     *      description="Returns empty array as JSON response.",
-     *      @OA\Parameter(
-     *          name="user",
-     *          description="Unique identifier of user",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
+     *     @OA\Parameter(
+     *         name="resource",
+     *         in="path",
+     *         description="Resource type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"devices", "users", "groups", "pets"},
+     *               default="devices"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Parameter(
      *          name="geofence",
      *          description="Unique identifier of geofence",
@@ -66,67 +50,7 @@ class AttachController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="User attached to geofence successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/groups/{group}/geofences/{geofence}/attach",
-     *      operationId="attachGroupGeofence",
-     *      tags={"Groups"},
-     *      summary="Attach geofence to group.",
-     *      description="Returns empty array as JSON response.",
-     *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          name="geofence",
-     *          description="Unique identifier of geofence",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Group attached to geofence successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/pets/{pet}/geofences/{geofence}/attach",
-     *      operationId="attachPetGeofence",
-     *      tags={"Pets"},
-     *      summary="Attach geofence to pet.",
-     *      description="Returns empty array as JSON response.",
-     *      @OA\Parameter(
-     *          name="pet",
-     *          description="Unique identifier of pet",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          name="geofence",
-     *          description="Unique identifier of geofence",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Pet attached to geofence successfully"
+     *          description="Resource attached to geofence successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request")
      * )
@@ -140,6 +64,6 @@ class AttachController extends Controller
     public function __invoke(AttachRequest $request, $resource, Geofence $geofence)
     {
         $resource->geofences()->attach($geofence->uuid);
-        return response()->json([], 200);
+        return response()->json(['message' => 'Resource attached to geofence successfully'], 200);
     }
 }

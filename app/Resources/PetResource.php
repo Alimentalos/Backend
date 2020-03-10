@@ -16,7 +16,7 @@ trait PetResource
      */
     public function updateViaRequest()
     {
-        return pets()->updatePetViaRequest($this);
+        return pets()->update($this);
     }
 
     /**
@@ -26,7 +26,7 @@ trait PetResource
      */
     public static function createViaRequest()
     {
-        return pets()->createPetViaRequest();
+        return pets()->create();
     }
 
     /**
@@ -70,11 +70,11 @@ trait PetResource
             'right_eye_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'size' => [
                 Rule::in([
-                    pets()::SIZE_EXTRA_SMALL,
-                    pets()::SIZE_SMALL,
-                    pets()::SIZE_MEDIUM,
-                    pets()::SIZE_LARGE,
-                    pets()::SIZE_EXTRA_LARGE
+                    pets()->size_extra_small,
+                    pets()->size_small,
+                    pets()->size_medium,
+                    pets()->size_large,
+                    pets()->size_extra_large,
                 ])
             ],
             'born_at' => 'required',

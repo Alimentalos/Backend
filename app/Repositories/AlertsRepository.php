@@ -4,6 +4,7 @@
 namespace App\Repositories;
 
 use App\Alert;
+use App\Attributes\AlertAttribute;
 use App\Lists\AlertList;
 use App\Procedures\AlertProcedure;
 
@@ -11,48 +12,29 @@ class AlertsRepository
 {
     use AlertList;
     use AlertProcedure;
+    use AlertAttribute;
 
     /**
-     * Create alert via request.
+     * Create alert.
      *
      * @return Alert
      */
-    public function createViaRequest()
+    public function create()
     {
-        $photo = photos()->createViaRequest();
-        $related = finder()->findInstance(input('alert_type'), input('alert_id'));
-        $alert = Alert::create($this->parameters($photo, $related, input('alert_type')));
-        $photo->alerts()->attach($alert->uuid);
-        $alert->load('photo', 'user');
-        return $alert;
+        return $this->createInstance();
     }
 
     /**
-     * Update alert via request.
+     * Update alert.
      *
      * @param Alert $alert
      * @return Alert
      */
-    public function updateViaRequest(Alert $alert)
+    public function update(Alert $alert)
     {
         upload()->check($alert);
         $alert->update(parameters()->fill(['type', 'status', 'title', 'body'], $alert));
         $alert->load('photo', 'user', 'alert');
         return $alert;
-    }
-
-
-    /**
-     * Get available alert types.
-     *
-     * @return array
-     */
-    public function types()
-    {
-        return [
-            'App\\User',
-            'App\\Device',
-            'App\\Pet',
-        ];
     }
 }

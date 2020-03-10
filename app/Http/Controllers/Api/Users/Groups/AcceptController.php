@@ -13,7 +13,7 @@ class AcceptController extends Controller
     /**
      * @OA\Post(
      *      path="/users/{user}/groups/{group}/accept",
-     *      operationId="acceptUserGroupInstance",
+     *      operationId="acceptUserGroup",
      *      tags={"Users"},
      *      summary="Accept invitation to join group of user.",
      *      description="Update the user relationship status of group by setting as ACCEPTED only when user is the authenticated and has one PENDING invitation.",

@@ -15,7 +15,7 @@ trait CommentResource
      */
     public function updateViaRequest()
     {
-        return comments()->updateCommentViaRequest($this);
+        return comments()->update($this);
     }
 
     /**

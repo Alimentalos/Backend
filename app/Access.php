@@ -35,18 +35,6 @@ class Access extends Model implements Resource
     ];
 
     /**
-     * Eager loading properties.
-     *
-     * @var array
-     */
-    protected $with = [
-        'accessible',
-        'geofence',
-        'first_location',
-        'last_location',
-    ];
-
-    /**
      * The properties which are hidden.
      *
      * @var array

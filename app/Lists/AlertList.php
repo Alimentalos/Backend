@@ -17,7 +17,7 @@ trait AlertList
     {
         return Alert::with('user', 'photo', 'alert')
             ->whereIn('status',rhas('whereInStatus') ?
-                einput(',','whereInStatus') : status()->values()
+                einput(',','whereInStatus') : cataloger()->types()
             )->latest('created_at')
             ->paginate(25);
     }

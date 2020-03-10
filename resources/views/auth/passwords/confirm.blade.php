@@ -3,10 +3,14 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col-md-8 mt-4">
+            <h1 class="text-white">{{ __('Confirm password') }}</h1>
+            <p class="text-white">{{ __('Please confirm your password before continuing.') }}</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
-
                 <div class="card-body">
                     {{ __('Please confirm your password before continuing.') }}
 

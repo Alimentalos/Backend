@@ -10,83 +10,34 @@ class IndexController extends Controller
 {
     /**
      * @OA\Get(
-     *      path="/pets/{pet}/photos",
-     *      operationId="getPetPhotos",
-     *      tags={"Pets"},
-     *      summary="Get photos of user.",
-     *      description="Returns the pet photos paginated by a default quantity, payload includes pagination links and stats.",
+     *      path="/{resource}/{uuid}/photos",
+     *      operationId="getResourcePhotos",
+     *      tags={"Resources"},
+     *      summary="Get photos of resource.",
+     *      description="Returns the photos paginated by a default quantity, payload includes pagination links and stats.",
      *      @OA\Parameter(
-     *          name="pet",
-     *          description="Unique identifier of pet",
+     *          name="uuid",
+     *          description="Unique identifier of resource",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Photos retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Get(
-     *      path="/geofences/{geofence}/photos",
-     *      operationId="getGeofencePhotos",
-     *      tags={"Geofences"},
-     *      summary="Get photos of geofence.",
-     *      description="Returns the geofence photos paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="geofence",
-     *          description="Unique identifier of geofence",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Photos retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Get(
-     *      path="/users/{user}/photos",
-     *      operationId="getUserPhotos",
-     *      tags={"Users"},
-     *      summary="Get photos of user.",
-     *      description="Returns the user photos paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="user",
-     *          description="Unique identifier of user",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Photos retrieved successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Get(
-     *      path="/groups/{group}/photos",
-     *      operationId="getGroupPhotos",
-     *      tags={"Groups"},
-     *      summary="Get photos of group.",
-     *      description="Returns the group photos paginated by a default quantity, payload includes pagination links and stats.",
-     *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
+     *     @OA\Parameter(
+     *         name="resource",
+     *         in="path",
+     *         description="Resource type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"pets", "users", "geofences", "groups"},
+     *               default="users"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Photos retrieved successfully"
@@ -101,7 +52,8 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        $photos = $resource->photos()->latest()->with('user', 'comment')->paginate(20);
+        $photos = $resource->photos()->latest()->paginate(20);
+        $photos->load(['user', 'comment']);
         return response()->json($photos,200);
     }
 }

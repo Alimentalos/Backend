@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 Route::get('/', 'WelcomeController');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -19,6 +21,5 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/about', 'AboutController@index')->name('about');
+Route::get('/about/{name}', 'AboutController@show')->name('about.show');

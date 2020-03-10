@@ -3,7 +3,8 @@ name: Codecov
 on: [push]
 
 jobs:
-  laravel-tests:
+  codecov:
+    name: "Codecov pipeline"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -21,7 +22,11 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
     - name: Generate key
       run: php artisan key:generate
-    - name: Execute tests for Codecov
+    - name: Generate passport keys
+      run: php artisan passport:keys
+    - name: Generate swagger docs
+      run: php artisan l5-swagger:generate
+    - name: Execute tests for codecov
       run: vendor/bin/phpunit --coverage-clover=coverage.xml
     - name: Upload coverage report
       run: bash <(curl -s https://codecov.io/bash)

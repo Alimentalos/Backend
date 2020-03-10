@@ -12,7 +12,7 @@ $factory->define(Group::class, function (Faker $faker) {
         'name' => $faker->text(6),
         'user_uuid' => factory(User::class)->create()->uuid,
         'photo_uuid' => factory(Photo::class)->create()->uuid,
-        'uuid' => $faker->uuid,
+        'uuid' => (string) $faker->unique()->uuid,
         'is_public' => true,
     ];
 });

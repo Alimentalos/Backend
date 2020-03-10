@@ -7,12 +7,12 @@ use App\Group;
 use App\Location;
 use Carbon\Carbon;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 
 class DevicesTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     /**
      * @test testUserCanViewOwnedPublicDevices
@@ -508,7 +508,7 @@ class DevicesTest extends TestCase
             '/api/devices/' . $device->uuid . '/groups/' . $group->uuid . '/detach',
             []
         );
-        $response->assertExactJson([]);
+        $response->assertExactJson(['message' => 'Resource detached to group successfully']);
         $this->assertDeleted('groupables', [
             'groupable_type' => 'App\\Device',
             'groupable_id' => $device->uuid,
@@ -516,7 +516,7 @@ class DevicesTest extends TestCase
         ]);
         $response->assertOk();
     }
-
+  
     /**
      * @test testUserCanViewTheDeviceGroups
      */

@@ -1,8 +1,8 @@
 ## Alimentalos Backend
 
-[![GitHub release](https://img.shields.io/github/release/demency/alimentalos-backend.svg)](https://github.com/demency/alimentalos-backend/releases/) [![Actions Status](https://github.com/demency/alimentalos-backend/workflows/Testing/badge.svg)](https://github.com/demency/alimentalos-backend/actions) [![codecov](https://codecov.io/gh/demency/alimentalos-backend/branch/master/graph/badge.svg)](https://codecov.io/gh/demency/alimentalos-backend) [![Maintainability](https://api.codeclimate.com/v1/badges/ccd2e2ff7f49a0ee6c6f/maintainability)](https://codeclimate.com/github/demency/alimentalos-backend/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ccd2e2ff7f49a0ee6c6f/test_coverage)](https://codeclimate.com/github/demency/alimentalos-backend/test_coverage)
+[![GitHub release](https://img.shields.io/github/release/alimentalos/backend.svg)](https://github.com/alimentalos/backend/releases/) [![Actions Status](https://github.com/alimentalos/backend/workflows/Testing/badge.svg)](https://github.com/alimentalos/backend/actions) [![codecov](https://codecov.io/gh/alimentalos/backend/branch/master/graph/badge.svg)](https://codecov.io/gh/alimentalos/backend) [![Maintainability](https://api.codeclimate.com/v1/badges/ccd2e2ff7f49a0ee6c6f/maintainability)](https://codeclimate.com/github/alimentalos/backend/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ccd2e2ff7f49a0ee6c6f/test_coverage)](https://codeclimate.com/github/alimentalos/backend/test_coverage)
 
-[**Official website**](https://www.alimentalos.cl) — [**About**](https://www.alimentalos.cl/about) — [**Developer guide**](https://www.alimentalos.cl/developers) — [**OpenApi Specification**](https://www.alimentalos.cl/api/documentation)
+[**Official website**](https://www.alimentalos.cl) — [**About**](https://www.alimentalos.cl/about) — [**Developer guide**](https://www.alimentalos.cl/about/developer-guide) — [**OpenApi Specification**](https://www.alimentalos.cl/api/documentation)
 
 ### Brief
 
@@ -47,3 +47,4 @@ The following list are detailed those of software features what are in developme
 #### Alerts
 
 Our system allows users to create georeferenced alerts. In the event that a user loses his pet, he could send a close alert to all connected users and get help finding his friend.
+

@@ -17,7 +17,7 @@ trait GeofenceResource
      */
     public function updateViaRequest()
     {
-        return geofences()->updateViaRequest($this);
+        return geofences()->update($this);
     }
 
     /**
@@ -27,7 +27,7 @@ trait GeofenceResource
      */
     public function createViaRequest()
     {
-        return geofences()->createViaRequest();
+        return geofences()->create();
     }
 
     /**

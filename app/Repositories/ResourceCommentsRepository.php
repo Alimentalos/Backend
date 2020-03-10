@@ -2,9 +2,17 @@
 
 namespace App\Repositories;
 
+use App\Contracts\Resource;
+
 class ResourceCommentsRepository
 {
-    public function createCommentViaRequest($resource)
+    /**
+     * Create resource comment.
+     *
+     * @param Resource $resource
+     * @return mixed
+     */
+    public function create(Resource $resource)
     {
         return $resource->comments()->create([
             'uuid' => uuid(),

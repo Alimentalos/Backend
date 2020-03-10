@@ -17,7 +17,7 @@ class FindController extends Controller
      *      description="Returns resource locations.",
      *      @OA\Parameter(
      *          name="identifiers",
-     *          description="Array with identifiers",
+     *          description="Array with unique identifiers",
      *          required=true,
      *          in="query",
      *          @OA\Schema(
@@ -28,7 +28,7 @@ class FindController extends Controller
      *     @OA\Parameter(
      *         name="type",
      *         in="query",
-     *         description="Resource type that need to be considered for filter",
+     *         description="Resource type that need to be considered",
      *         required=true,
      *         @OA\Schema(
      *         type="string",
@@ -41,7 +41,7 @@ class FindController extends Controller
      *     ),
      *      @OA\Parameter(
      *          name="start_date",
-     *          description="Start date that need to be considered filter, only dates with format Y-m-d H:i:s are accepted.",
+     *          description="Start date that need to be considered filter, only dates with format Y-m-d H:i:s are accepted",
      *          required=true,
      *          in="query",
      *          @OA\Schema(
@@ -50,7 +50,7 @@ class FindController extends Controller
      *      ),
      *     @OA\Parameter(
      *          name="end_date",
-     *          description="End date that need to be considered filter, only dates with format Y-m-d H:i:s are accepted.",
+     *          description="End date that need to be considered filter, only dates with format Y-m-d H:i:s are accepted",
      *          required=true,
      *          in="query",
      *          @OA\Schema(
@@ -79,7 +79,7 @@ class FindController extends Controller
      */
     public function __invoke(IndexRequest $request)
     {
-        $locations = locations()->fetchLastLocationsViaRequest();
+        $locations = locations()->find();
         return response()->json($locations,200);
     }
 }

@@ -10,83 +10,34 @@ class StoreController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/users/{user}/photos",
-     *      operationId="createUserPhoto",
-     *      tags={"Users"},
-     *      summary="Create photo of user.",
+     *      path="/{resource}/{uuid}/photos",
+     *      operationId="createResourcePhoto",
+     *      tags={"Resources"},
+     *      summary="Create photo of resource.",
      *      description="Returns the recently created photo as JSON Object.",
      *      @OA\Parameter(
-     *          name="user",
-     *          description="Unique identifier of user",
+     *          name="uuid",
+     *          description="Unique identifier of resource",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
      *              type="string"
      *          )
      *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Photo created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/groups/{group}/photos",
-     *      operationId="createGroupPhoto",
-     *      tags={"Groups"},
-     *      summary="Create photo of group.",
-     *      description="Returns the recently created photo as JSON Object.",
-     *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Photo created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/geofences/{geofence}/photos",
-     *      operationId="createGeofencePhoto",
-     *      tags={"Groups"},
-     *      summary="Create photo of geofence.",
-     *      description="Returns the recently created photo as JSON Object.",
-     *      @OA\Parameter(
-     *          name="geofence",
-     *          description="Unique identifier of geofence",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Photo created successfully"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request")
-     * )
-     * @OA\Post(
-     *      path="/pets/{pet}/photos",
-     *      operationId="createPetPhoto",
-     *      tags={"Pets"},
-     *      summary="Create photo of pet.",
-     *      description="Returns the recently created photo as JSON Object.",
-     *      @OA\Parameter(
-     *          name="pet",
-     *          description="Unique identifier of pet",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
+     *     @OA\Parameter(
+     *         name="resource",
+     *         in="path",
+     *         description="Resource type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"pets", "users", "geofences", "groups"},
+     *               default="users"
+     *           ),
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Photo created successfully"
@@ -101,7 +52,7 @@ class StoreController extends Controller
      */
     public function __invoke(StoreRequest $request, $resource)
     {
-        $photo = resourcePhotos()->createViaRequest($resource);
+        $photo = resourcePhotos()->create($resource);
         return response()->json($photo,200);
     }
 }

@@ -4,7 +4,6 @@
 namespace App\Resources;
 
 use App\Alert;
-use App\Repositories\TypeRepository;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
@@ -18,7 +17,7 @@ trait AlertResource
      */
     public function updateViaRequest()
     {
-        return alerts()->updateViaRequest($this);
+        return alerts()->update($this);
     }
 
     /**
@@ -28,7 +27,7 @@ trait AlertResource
      */
     public function createViaRequest()
     {
-        return alerts()->createViaRequest();
+        return alerts()->create();
     }
 
     /**
@@ -72,11 +71,11 @@ trait AlertResource
             ],
             'type' => [
                 'required',
-                Rule::in(TypeRepository::values())
+                Rule::in(alerts()->types())
             ],
             'status' => [
                 'required',
-                Rule::in(status()->values())
+                Rule::in(cataloger()->types())
             ],
             'photo' => 'required',
             'coordinates' => ['required', new Coordinate()],

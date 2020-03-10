@@ -13,7 +13,7 @@ class RejectController extends Controller
     /**
      * @OA\Post(
      *      path="/users/{user}/groups/{group}/reject",
-     *      operationId="rejectUserGroupInstance",
+     *      operationId="rejectUserGroup",
      *      tags={"Users"},
      *      summary="Reject user invitation to join group.",
      *      description="Update the user relationship status of group by setting as REJECTED only when user is the authenticated and has one PENDING invitation.",

@@ -6,16 +6,13 @@ use App\Alert;
 use App\Device;
 use App\Pet;
 use App\Photo;
-use App\Repositories\AlertsRepository;
-use App\Repositories\StatusRepository;
-use App\Repositories\TypeRepository;
 use App\User;
 use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Alert::class, function (Faker $faker) {
-    $class = $faker->randomElement(alerts()->types());
+    $class = $faker->randomElement(alerts()->alertTypes());
     $alert_id = (
         $class === 'App\\User' ?
             factory(User::class)->create()->uuid :
@@ -24,7 +21,7 @@ $factory->define(Alert::class, function (Faker $faker) {
             )
     );
     return [
-        'uuid' => (string) $faker->uuid,
+        'uuid' => (string) $faker->unique()->uuid,
         'user_uuid' => factory(User::class)->create()->uuid,
         'photo_uuid' => factory(Photo::class)->create()->uuid,
         'photo_url' => config('storage.path') . 'example.png',
@@ -33,7 +30,7 @@ $factory->define(Alert::class, function (Faker $faker) {
         'alert_id' => $alert_id,
         'title' => $faker->sentence($faker->numberBetween(5, 10)),
         'body' => $faker->sentence($faker->numberBetween(50, 200)),
-        'status' => $faker->randomElement(status()->values()),
-        'type' => $faker->randomElement(TypeRepository::values()),
+        'status' => $faker->randomElement(cataloger()->types()),
+        'type' => $faker->randomElement(alerts()->types()),
     ];
 });

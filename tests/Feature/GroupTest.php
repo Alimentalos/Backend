@@ -3,13 +3,13 @@
 namespace Tests\Feature;
 
 use App\Group;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
 use Tests\TestCase;
 
 class GroupTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function testUsersSaveMethodOnGroupClass()
     {
