@@ -16,8 +16,6 @@ trait GroupAssert
      */
     public function hasAdministrator(Group $group, User $user)
     {
-        return $user->uuid === $group->user_uuid || $user->groups()->whereIn('status', [
-                Group::ACCEPTED_STATUS, Group::ATTACHED_STATUS
-            ])->where('is_admin', true)->exists();
+        return $user->uuid === $group->user_uuid || $user->groups()->whereIn('status', [Group::ACCEPTED_STATUS, Group::ATTACHED_STATUS])->where('is_admin', true)->exists();
     }
 }
