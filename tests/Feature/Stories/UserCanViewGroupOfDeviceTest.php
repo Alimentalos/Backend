@@ -13,7 +13,7 @@ use Tests\TestCase;
 class UserCanViewGroupOfDeviceTest extends TestCase
 {
     use DatabaseMigrations;
-    
+
     /**
      * @test testUserCanViewTheDeviceGroups
      */
