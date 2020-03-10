@@ -24,6 +24,8 @@ jobs:
       run: php artisan key:generate
     - name: Generate passport keys
       run: php artisan passport:keys
+    - name: Generate default passport client
+      run: php artisan passport:client --password --no-interaction
     - name: Generate swagger docs
       run: php artisan l5-swagger:generate
     - name: Execute tests for codecov
