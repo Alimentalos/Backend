@@ -33,7 +33,7 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         $group->is_public = false;
         $user->groups()->attach($group);
         $pet->groups()->attach($group);
-        $group->comments()->attach($comment->uuid);
+        $group->comments()->save($comment->uuid);
         $pet->user_uuid = $user->uuid;
         $pet->photo_uuid = $photo->uuid;
         $user->photo_uuid = $photo->uuid;
