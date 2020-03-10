@@ -8,12 +8,12 @@ use App\Comment;
 use App\Group;
 use App\Pet;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     /**
      * @test testUserCanShowGroupAndHisRelatedResources

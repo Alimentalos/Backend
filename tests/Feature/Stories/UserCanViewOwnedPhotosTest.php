@@ -7,7 +7,6 @@ namespace Tests\Feature\Stories;
 use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanViewOwnedPhotosTest extends TestCase

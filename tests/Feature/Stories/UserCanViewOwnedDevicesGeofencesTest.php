@@ -9,12 +9,12 @@ use App\Device;
 use App\Geofence;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class UserCanViewOwnedDevicesGeofencesTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     /**
      * @test testDevicesGeofencesApi
