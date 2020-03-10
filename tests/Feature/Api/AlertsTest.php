@@ -208,8 +208,6 @@ class AlertsTest extends TestCase
                 'user_uuid',
                 'photo_uuid',
                 'name',
-                'email',
-                'email_verified_at',
                 'free',
                 'photo_url',
                 'location' => [
