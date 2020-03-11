@@ -42,7 +42,7 @@ trait ReportProcedure
      */
     public function retrieve($devices, $start_date, $end_date)
     {
-        if ($devices == '') { $devices = devices()->fetchInDatabase($devices); }
+        if ($devices == '') { $devices = devices()->fetchInDatabase($devices)->get(); }
         return (new Report($devices, $start_date, $end_date, $this->retrieveParameters()))->fetchData();
     }
 

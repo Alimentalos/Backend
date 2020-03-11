@@ -8,18 +8,18 @@ use App\Comment;
 use App\Pet;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserCanCreatePetWithPhotoTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     final public function testStorePetsPhotosApi()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $photo = factory(Photo::class)->create();
@@ -43,17 +43,10 @@ class UserCanCreatePetWithPhotoTest extends TestCase
             'ext',
             'photo_url',
             'is_public',
-            'user' => [
-                'name',
-            ],
-            'comment' => [
-                'title',
-                'body',
-            ],
         ]);
 
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo_url);
 
         $this->assertDatabaseHas('photos', [
             'uuid' => (json_decode($content))->uuid,

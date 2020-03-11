@@ -15,7 +15,7 @@ class DevicesRepository
     /**
      * Create device.
      *
-     * @return DeviceResource
+     * @return Device
      */
     public function create()
     {
@@ -26,7 +26,7 @@ class DevicesRepository
      * Update device via request.
      *
      * @param Device $device
-     * @return DeviceResource
+     * @return Device
      */
     public function update(Device $device)
     {

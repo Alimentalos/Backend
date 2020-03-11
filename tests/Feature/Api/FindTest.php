@@ -7,12 +7,12 @@ use App\Location;
 use App\Group;
 use App\Pet;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 
 class FindTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testFindDeviceApi

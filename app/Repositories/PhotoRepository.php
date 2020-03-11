@@ -17,7 +17,7 @@ class PhotoRepository
     /**
      * Default disk.
      */
-    public const DEFAULT_DISK = 'gcs';
+    public const DEFAULT_DISK = 'public';
 
     /**
      * Update photo via request.
@@ -32,7 +32,6 @@ class PhotoRepository
             parameters()->fill(['title', 'is_public'], $photo->comment),
             ['body' => fill('body', $photo->comment->body)]
         ));
-        $photo->load('user');
         return $photo;
     }
 

@@ -51,7 +51,7 @@ trait AccessResource
      */
     public function getLazyRelationshipsAttribute()
     {
-        return ['user'];
+        return ['accessible', 'first_location', 'last_location', 'geofence'];
     }
 
     /**

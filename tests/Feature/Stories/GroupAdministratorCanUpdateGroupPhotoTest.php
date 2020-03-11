@@ -8,21 +8,21 @@ use App\Comment;
 use App\Group;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanUpdateAnOwnedGroupWithPhoto
      */
     final public function testUserCanUpdateAnOwnedGroupWithPhoto()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
         $photo->comment_uuid = factory(Comment::class)->create()->uuid;
@@ -44,7 +44,7 @@ class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
         ]);
         $response->assertOk();
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $response->assertJsonStructure([
             'uuid',
@@ -54,39 +54,6 @@ class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
             'photo_url',
             'created_at',
             'updated_at',
-            'user' => [
-                'uuid',
-                'user_uuid',
-                'photo_uuid',
-                'name',
-                'photo_url',
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
-                'is_public',
-                'free',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-                'love_reacter_id',
-                'is_admin',
-            ] ,
-            'photo' => [
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
-                'uuid',
-                'user_uuid',
-                'comment_uuid',
-                'ext',
-                'photo_url',
-                'is_public',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-            ]
         ]);
         $response->assertJsonFragment([
             'uuid' => $group->uuid,

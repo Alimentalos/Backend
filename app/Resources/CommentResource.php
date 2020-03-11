@@ -57,7 +57,7 @@ trait CommentResource
      */
     public function getLazyRelationshipsAttribute()
     {
-        return ['commentable'];
+        return ['commentable', 'user'];
     }
 
     /**
@@ -68,6 +68,6 @@ trait CommentResource
      */
     public function getInstances()
     {
-        return Comment::with('user')->latest()->paginate(20);
+        return Comment::latest()->paginate(20);
     }
 }

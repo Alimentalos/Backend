@@ -6,13 +6,15 @@ namespace Tests\Feature\Stories;
 
 use App\Device;
 use App\Group;
+use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserGroupMemberCanViewGroupDevicesTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
+
     /**
      * @test testGroupMemberUserCanViewRelatedGroupDevices
      */
@@ -20,16 +22,23 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
     {
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
+        $userB->photo_uuid = factory(Photo::class)->create()->uuid;
+        $userB->save();
         $group = factory(Group::class)->create();
+        $group->user_uuid = $user->uuid;
         $device = factory(Device::class)->create();
         $device->user_uuid = $userB->uuid;
         $device->save();
+        $group->save();
 
         $user->groups()->attach($group, [
             'status' => Group::ATTACHED_STATUS,
             'is_admin' => true
         ]);
-        $device->groups()->attach($group);
+        $device->groups()->attach($group, [
+            'status' => Group::ATTACHED_STATUS,
+            'is_admin' => false
+        ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/devices');
         $response->assertJsonCount(1, 'data');
         $response->assertOk();
@@ -48,27 +57,6 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
                     'is_public',
                     'created_at',
                     'updated_at',
-                    'user' => [
-                        'uuid',
-                        'user_uuid',
-                        'photo_uuid',
-                        'name',
-                        'email',
-                        'email_verified_at',
-                        'free',
-                        'photo_url',
-                        'location' => [
-                            'type',
-                            'coordinates',
-                        ],
-                        'is_public',
-                        'created_at',
-                        'updated_at',
-                        'love_reactant_id',
-                        'love_reacter_id',
-                        'is_admin',
-                        'is_child',
-                    ] ,
                 ],
             ],
             'first_page_url',

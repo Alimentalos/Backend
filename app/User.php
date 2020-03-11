@@ -123,6 +123,13 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     ];
 
     /**
+     * This model doesn't uses increments.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * Get the route key for the model.
      *
      * @return string
@@ -153,6 +160,4 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     {
         return $this->where('email', $username)->first();
     }
-
-    public $incrementing = false;
 }

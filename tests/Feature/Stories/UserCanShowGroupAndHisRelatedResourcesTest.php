@@ -5,15 +5,16 @@ namespace Tests\Feature\Stories;
 
 
 use App\Comment;
+use App\Photo;
 use App\Group;
 use App\Pet;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanShowGroupAndHisRelatedResources
@@ -22,14 +23,25 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
+
+        $photo = factory(Photo::class)->create();
+        $photo->user_uuid = $user->uuid;
+        $comment = factory(Comment::class)->create();
+        $photo->comment_uuid = $comment->uuid;
         $pet = factory(Pet::class)->create();
         $sample = factory(Comment::class)->make();
         $group->is_public = false;
         $user->groups()->attach($group);
         $pet->groups()->attach($group);
+        $group->comments()->save($comment);
         $pet->user_uuid = $user->uuid;
+        $pet->photo_uuid = $photo->uuid;
+        $user->photo_uuid = $photo->uuid;
         $group->user_uuid = $user->uuid;
+        $group->photo_uuid = $photo->uuid;
         $pet->save();
+        $photo->save();
+        $user->save();
         $group->comments()->create([
             'user_uuid' => $user->uuid,
             'body' => $sample->body
@@ -49,41 +61,6 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
             'photo_url',
             'created_at',
             'updated_at',
-            'user' => [
-                'uuid',
-                'user_uuid',
-                'photo_uuid',
-                'name',
-                'email_verified_at',
-                'free',
-                'photo_url',
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
-                'is_public',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-                'love_reacter_id',
-                'is_admin',
-                'is_child',
-            ] ,
-            'photo' => [
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
-                'uuid',
-                'user_uuid',
-                'comment_uuid',
-                'ext',
-                'photo_url',
-                'is_public',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-            ]
         ]);
         $response->assertJsonFragment([
             'uuid' => $group->uuid,
@@ -113,8 +90,6 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
                         'user_uuid',
                         'photo_uuid',
                         'name',
-                        'email',
-                        'email_verified_at',
                         'free',
                         'photo_url',
                         'location' => [
@@ -189,8 +164,6 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
                     'user_uuid',
                     'photo_uuid',
                     'name',
-                    'email',
-                    'email_verified_at',
                     'free',
                     'photo_url',
                     'location'=>[

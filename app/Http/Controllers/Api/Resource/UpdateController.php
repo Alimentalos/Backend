@@ -55,6 +55,7 @@ class UpdateController extends Controller
     public function __invoke(UpdateRequest $request, $resource)
     {
         $payload = $resource->updateViaRequest();
+        $payload->load($payload->lazy_relationships);
         return response()->json($payload, 200);
     }
 }

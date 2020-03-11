@@ -14,8 +14,6 @@ $factory->define(Photo::class, function (Faker $faker) {
         'ext' => '.png',
         'photo_url' => config('storage.path') . (string) $faker->uuid . '.png',
         'location' => (new Point($faker->latitude(), $faker->longitude())),
-//        'user_uuid' => factory(User::class)->create()->uuid,
-//        'comment_uuid' => factory(Comment::class)->create()->uuid,
         'is_public' => true,
     ];
 });

@@ -4,47 +4,12 @@ namespace Tests\Feature\Api;
 
 use App\Action;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 
 class ActionsTest extends TestCase
 {
-    use DatabaseMigrations;
-
-    /**
-     * @test testUserCanViewActionsAsList
-     */
-    final public function testUserCanViewActionsAsList()
-    {
-        $user = factory(User::class)->create();
-        $child = factory(User::class)->create();
-        $user->user_uuid = null;
-        $child->user_uuid = $user->uuid;
-        $child->save();
-        $user->save();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
-        $response->assertOk();
-        $response = $this->actingAs($child, 'api')->json('GET', '/api/devices');
-        $response->assertOk();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/actions');
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
-                    'user_uuid',
-                    'referenced_uuid',
-                    'type',
-                    'resource',
-                    'parameters',
-                    'created_at',
-                    'updated_at',
-                ]
-            ]
-        ]);
-        $response->assertJsonCount(3, 'data');
-        $response->assertOk();
-    }
+    use RefreshDatabase;
 
     /**
      * @test testChildUserCanViewActionsAsList

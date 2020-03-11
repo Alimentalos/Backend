@@ -11,19 +11,19 @@ use App\Photo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 
 class GroupTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testChildUserCanStoreGroup
      */
     public function testChildUserCanStoreGroup()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
         $userB->user_uuid = $user->uuid;
@@ -37,7 +37,7 @@ class GroupTest extends TestCase
         ]);
         $response->assertCreated();
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
 
     /**

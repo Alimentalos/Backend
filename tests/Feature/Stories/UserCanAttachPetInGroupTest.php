@@ -7,12 +7,12 @@ namespace Tests\Feature\Stories;
 use App\Group;
 use App\Pet;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanAttachPetInGroupTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     final public function testAttachPetsGroupsApi()
     {

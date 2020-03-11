@@ -10,16 +10,16 @@ use App\Photo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 
 class PetTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     final public function testStorePetsCommentsApi()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $comment = factory(Comment::class)->make();
@@ -182,7 +182,7 @@ class PetTest extends TestCase
 
     final public function testStorePetsApi()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets', [
@@ -200,7 +200,7 @@ class PetTest extends TestCase
         $response->assertCreated();
 
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . (json_decode($content))->uuid . '/photos');
         $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/pets');
@@ -220,7 +220,7 @@ class PetTest extends TestCase
 
     final public function testFailedStoredPetsApi()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets', [
@@ -259,7 +259,7 @@ class PetTest extends TestCase
 
     final public function testUpdateNameWithPhotoPetsApi()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $pet->user_uuid = $user->uuid;
@@ -280,7 +280,7 @@ class PetTest extends TestCase
         ]);
         $content = $response->getContent();
 
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
 
     final public function testUpdateDescriptionPetsApi()

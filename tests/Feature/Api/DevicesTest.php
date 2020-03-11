@@ -7,12 +7,12 @@ use App\Group;
 use App\Location;
 use Carbon\Carbon;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 
 class DevicesTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanViewOwnedPublicDevices
@@ -26,21 +26,36 @@ class DevicesTest extends TestCase
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
+
         $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
-                    'user_uuid',
-                    'uuid',
-                    'api_token',
-                    'name',
-                    'description',
-                    'created_at',
-                    'updated_at'
-                ]
-            ]
+            'current_page',
+            'data' => [[
+                'user_uuid',
+                'location' => [
+                    'type',
+                    'coordinates'
+                ],
+                'uuid',
+                'name',
+                'description',
+                'is_public',
+                'created_at',
+                'updated_at',
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
         ]);
-        $response->assertOk();
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid
+        ]);
     }
 
     /**
@@ -55,21 +70,36 @@ class DevicesTest extends TestCase
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
+
         $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
-                    'user_uuid',
-                    'uuid',
-                    'api_token',
-                    'name',
-                    'description',
-                    'created_at',
-                    'updated_at'
-                ]
-            ]
+            'current_page',
+            'data' => [[
+                'user_uuid',
+                'location' => [
+                    'type',
+                    'coordinates'
+                ],
+                'uuid',
+                'name',
+                'description',
+                'is_public',
+                'created_at',
+                'updated_at',
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
         ]);
-        $response->assertOk();
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid
+        ]);
     }
 
     /**
@@ -100,61 +130,38 @@ class DevicesTest extends TestCase
         $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
-        $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
-                    'user_uuid',
-                    'uuid',
-                    'api_token',
-                    'name',
-                    'description',
-                    'created_at',
-                    'updated_at'
-                ]
-            ]
-        ]);
-        $response->assertOk();
-    }
 
-    /**
-     * @test testUserCanViewOnGroupDevice
-     */
-    final public function testUserCanViewOnGroupDevice()
-    {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $group = factory(Group::class)->create();
-        $group->devices()->attach($device->uuid);
-        $group->users()->attach($user->uuid);
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);
-        $response->assertJsonStructure([
-            'uuid',
-            'user_uuid',
-            'uuid',
-            'api_token',
-            'name',
-            'description',
-            'created_at',
-            'updated_at'
-        ]);
-        $response->assertOk();
-    }
 
-    /**
-     * @test testUserCanShowNonPublicDevices
-     */
-    final public function testUserCanShowNonPublicDevices()
-    {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $group = factory(Group::class)->create();
-        $device->is_public = false;
-        $device->save();
-        $group->devices()->attach($device->uuid);
-        $group->users()->attach($user->uuid);
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);
-        $response->assertOk();
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [[
+                'user_uuid',
+                'location' => [
+                    'type',
+                    'coordinates'
+                ],
+                'uuid',
+                'name',
+                'description',
+                'is_public',
+                'created_at',
+                'updated_at',
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
+        ]);
+        $response->assertJsonFragment([
+            'uuid' => $device->uuid,
+        ]);
+
     }
 
     /**
@@ -224,22 +231,6 @@ class DevicesTest extends TestCase
     }
 
     /**
-     * @test testUserCanUpdateOwnedDevices
-     */
-    final public function testUserCanUpdateOwnedDevices()
-    {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $device->user_uuid = $user->uuid;
-        $device->save();
-        $response = $this->actingAs($user, 'api')->json('PUT', '/api/devices/' . $device->uuid, [
-            'name' => 'New name',
-            'is_public' => false,
-        ]);
-        $response->assertOk();
-    }
-
-    /**
      * @test testUserCanDestroyOwnedDevices
      */
     final public function testUserCanDestroyOwnedDevices()
@@ -250,6 +241,14 @@ class DevicesTest extends TestCase
         $device->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/devices/' . $device->uuid);
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'message'
+        ]);
+        $response->assertJsonFragment([
+           'message' => 'Resource deleted successfully'
+        ]);
+
     }
 
     /**

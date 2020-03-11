@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Pets;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
+use App\Pet;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -52,7 +53,8 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        $pets = $resource->pets()->latest()->with('photo', 'user')->paginate(20);
+        $pets = $resource->pets()->latest()->paginate(20);
+        $pets->load((new Pet())->getLazyRelationshipsAttribute());
         return response()->json($pets,200);
     }
 }

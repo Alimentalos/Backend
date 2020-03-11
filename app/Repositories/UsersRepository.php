@@ -17,8 +17,7 @@ class UsersRepository
      */
     public function all()
     {
-        return User::with('photo', 'user')
-            ->latest()
+        return User::latest()
             ->paginate(20);
     }
 
@@ -30,8 +29,7 @@ class UsersRepository
     public function index()
     {
         $uuid = authenticated()->is_child ? authenticated()->uuid : authenticated()->user_uuid;
-        return User::with('photo', 'user')
-            ->latest()
+        return User::latest()
             ->where('user_uuid', $uuid)
             ->orWhere('uuid', $uuid)
             ->orWhere('is_public', true)->paginate(20);
@@ -58,7 +56,6 @@ class UsersRepository
     public function update(User $user)
     {
         upload()->check($user);
-        $user->load('user', 'photo');
         $user->update(parameters()->fill(['email', 'name', 'is_public'], $user));
         return $user;
     }
@@ -79,7 +76,6 @@ class UsersRepository
             'location' => parser()->pointFromCoordinates(input('coordinates')),
         ], only('name', 'email', 'is_public')));
         $user->photos()->attach($photo->uuid);
-        $user->load('photo', 'user');
         return $user;
     }
 }

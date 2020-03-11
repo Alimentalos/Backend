@@ -10,11 +10,11 @@ use App\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AlertsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanViewAlerts
@@ -42,7 +42,7 @@ class AlertsTest extends TestCase
      */
     public function testUserCanCreateDeviceAlert()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->make();
         $device = factory(Device::class)->create();
@@ -58,9 +58,8 @@ class AlertsTest extends TestCase
             'coordinates' => '5,5',
         ]);
         $response->assertCreated();
-
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $this->assertDatabaseHas('alerts', [
             'uuid' => (json_decode($content))->uuid,
@@ -76,7 +75,7 @@ class AlertsTest extends TestCase
      */
     public function testUserCanCreatePetAlert()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->make();
         $pet = factory(Pet::class)->create();
@@ -94,7 +93,7 @@ class AlertsTest extends TestCase
         $response->assertCreated();
 
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $this->assertDatabaseHas('alerts', [
             'uuid' => (json_decode($content))->uuid,
@@ -110,7 +109,7 @@ class AlertsTest extends TestCase
      */
     public function testUserCanCreateUserAlert()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->make();
         $device = factory(Device::class)->create();
@@ -128,7 +127,7 @@ class AlertsTest extends TestCase
         $response->assertCreated();
 
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $this->assertDatabaseHas('alerts', [
             'uuid' => (json_decode($content))->uuid,
@@ -153,46 +152,24 @@ class AlertsTest extends TestCase
         ]);
     }
 
-    public function testUserCanUpdateOwnedAlert()
-    {
-        Storage::fake('gcs');
-        $user = factory(User::class)->create();
-        $alert = factory(Alert::class)->create();
-        $alert->user_uuid = $user->uuid;
-        $alert->save();
-        $modified = factory(Alert::class)->make();
-        $response = $this->actingAs($user, 'api')->json('PUT', '/api/alerts/' . $alert->uuid, [
-            'photo' => UploadedFile::fake()->image('photo1.jpg'),
-            'title' => $modified->title,
-            'body' => $modified->body,
-            'type' => $modified->type,
-            'status' => $modified->status,
-            'is_public' => true,
-            'coordinates' => '5,5',
-        ]);
-        $response->assertOk();
-
-        $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
-
-        $this->assertDatabaseHas('alerts', [
-            'uuid' => (json_decode($content))->uuid,
-            'title' => $modified->title,
-            'body' => $modified->body,
-            'type' => $modified->type,
-            'status' => $modified->status,
-        ]);
-    }
-
     public function testUserCanDeleteOwnedAlert()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->create();
         $alert->user_uuid = $user->uuid;
         $alert->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/alerts/' . $alert->uuid);
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'message'
+        ]);
+        $response->assertJsonFragment([
+           'message' => 'Resource deleted successfully'
+        ]);
+
+
         $this->assertDeleted('alerts', [
             'uuid' => $alert->uuid,
         ]);
@@ -212,6 +189,36 @@ class AlertsTest extends TestCase
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/alerts/' . $alert->uuid . '/comments');
         $response->assertOk();
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [
+                [
+                    'uuid',
+                    'user_uuid',
+                    'title',
+                    'body',
+                    'commentable_type',
+                    'commentable_id',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id',
+                ],
+            ],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+        ]);
+
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid,
+        ]);
 
         $response->assertJsonStructure([
             'data' => [
@@ -240,5 +247,37 @@ class AlertsTest extends TestCase
         ]);
         $response->assertJsonCount(1, 'data');
         $response->assertOk();
+
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [
+                [
+                    'uuid',
+                    'user_uuid',
+                    'title',
+                    'body',
+                    'commentable_type',
+                    'commentable_id',
+                    'created_at',
+                    'updated_at',
+                    'love_reactant_id',
+                ],
+            ],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+        ]);
+
+        $response->assertJsonFragment([
+            'user_uuid' => $user->uuid,
+        ]);
+
     }
 }

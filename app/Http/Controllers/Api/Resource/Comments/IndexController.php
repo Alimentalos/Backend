@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api\Resource\Comments;
 
+use App\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
+use App\Resources\CommentResource;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -52,7 +54,8 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        $comments = $resource->comments()->with('user')->latest()->paginate(20);
+        $comments = $resource->comments()->latest()->paginate(20);
+        $comments->load((new Comment)->getLazyRelationshipsAttribute());
         return response()->json($comments,200);
     }
 }

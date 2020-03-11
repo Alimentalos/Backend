@@ -77,7 +77,7 @@ class Type
      */
     public function setParameters($devices, $start_date, $end_date, $parameters)
     {
-        $this->devices = devices()->fetchInDatabase($devices);
+        $this->devices = devices()->fetchInDatabase($devices)->get();
         $this->start_date = $start_date;
         $this->start_day = explode(" ", $start_date)[0];
         $this->end_date = $end_date;

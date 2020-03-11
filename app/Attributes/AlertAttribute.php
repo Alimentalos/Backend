@@ -34,18 +34,4 @@ trait AlertAttribute
             $this->found,
         ];
     }
-
-    /**
-     * Get available alert types.
-     *
-     * @return array
-     */
-    public function alertTypes()
-    {
-        return [
-            'App\\User',
-            'App\\Device',
-            'App\\Pet',
-        ];
-    }
 }

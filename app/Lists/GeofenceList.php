@@ -16,8 +16,7 @@ trait GeofenceList
      */
     public function getOwnerGeofences()
     {
-        return Geofence::with('user', 'photo')
-            ->where('user_uuid', authenticated()->uuid)
+        return Geofence::where('user_uuid', authenticated()->uuid)
             ->orWhere('is_public', true)
             ->latest()
             ->paginate(20);
@@ -30,8 +29,7 @@ trait GeofenceList
      */
     public function getChildGeofences()
     {
-        return Geofence::with('user', 'photo')
-            ->where('user_uuid', authenticated()->user_uuid)
+        return Geofence::where('user_uuid', authenticated()->user_uuid)
             ->orWhere('is_public', true)
             ->latest()
             ->paginate(20);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Geofences;
 
+use App\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;
@@ -52,7 +53,8 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        $geofences = $resource->geofences()->latest()->with('user', 'photo')->paginate(20);
+        $geofences = $resource->geofences()->latest()->paginate(20);
+        $geofences->load((new Geofence())->getLazyRelationshipsAttribute());
         return response()->json($geofences,200);
     }
 }

@@ -40,7 +40,6 @@ trait AlertProcedure
         $related = finder()->findInstance(input('alert_type'), input('alert_id'));
         $alert = Alert::create($this->parameters($photo, $related, input('alert_type')));
         $photo->alerts()->attach($alert->uuid);
-        $alert->load('photo', 'user');
         return $alert;
     }
 }

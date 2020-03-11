@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Geofences\Accesses;
 
+use App\Access;
 use App\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Geofences\Accesses\IndexRequest;
@@ -65,10 +66,11 @@ class IndexController extends Controller
     {
         $accesses = $resource
             ->accesses()
-            ->with(['accessible', 'geofence', 'first_location', 'last_location'])
             ->where([['geofence_uuid', $geofence->uuid]])
             ->latest()
             ->paginate(20);
+
+        $accesses->load((new Access())->getLazyRelationshipsAttribute());
         return response()->json($accesses,200);
     }
 }

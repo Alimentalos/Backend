@@ -6,13 +6,14 @@ namespace Tests\Feature\Stories;
 
 use App\Device;
 use App\Group;
+use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanViewGroupOfDeviceTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanViewTheDeviceGroups
@@ -23,6 +24,7 @@ class UserCanViewGroupOfDeviceTest extends TestCase
         $device = factory(Device::class)->create();
         $group = factory(Group::class)->create();
         $group->user_uuid = $user->uuid;
+        $group->photo_uuid = factory(Photo::class)->create()->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,
@@ -60,12 +62,45 @@ class UserCanViewGroupOfDeviceTest extends TestCase
         ]);
         // Assert Group UUID
         $response->assertJsonFragment([
-            'uuid' => $group->uuid,
+            'group_uuid' => $group->uuid,
         ]);
         // Assert Photo UUID
         $response->assertJsonFragment([
-            'uuid' => json_decode($response->getContent())->data[0]->photo->uuid,
+            'photo_uuid' => json_decode($response->getContent())->data[0]->photo->uuid,
         ]);
-        $response->assertOk();
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'description',
+                'is_public',
+                'photo_url',
+                'created_at',
+                'updated_at',
+                'pivot' => [
+                    'groupable_id',
+                    'group_uuid',
+                    'groupable_type',
+                    'is_admin',
+                    'status',
+                    'sender_uuid',
+                    'created_at',
+                    'updated_at'
+                ],
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
+        ]);
     }
 }

@@ -7,12 +7,12 @@ namespace Tests\Feature\Stories;
 use App\Comment;
 use App\Group;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanCreateGroupCommentTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanCreateGroupComments
