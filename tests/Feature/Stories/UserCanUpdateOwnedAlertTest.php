@@ -26,7 +26,6 @@ class UserCanUpdateOwnedAlertTest extends TestCase
         $photo = factory(Photo::class)->create();
         $comment->user_uuid = $user->uuid;
         $photo->user_uuid = $user->uuid;
-        $alert->photo_uuid = $photo->uuid;
         $comment->save();
         $photo->save();
         $alert->photo_uuid = $photo->uuid;
