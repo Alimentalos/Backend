@@ -7,12 +7,12 @@ namespace Tests\Feature\Stories;
 use App\Comment;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class UserCanViewPhotosTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     public function testShowPhotosApi()
     {

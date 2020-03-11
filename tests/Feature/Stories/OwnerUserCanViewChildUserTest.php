@@ -5,12 +5,12 @@ namespace Tests\Feature\Stories;
 
 
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class OwnerUserCanViewChildUserTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     /**
      * @test testOwnerUserWatchingSpecificUser

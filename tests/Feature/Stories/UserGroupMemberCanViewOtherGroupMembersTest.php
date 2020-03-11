@@ -6,12 +6,12 @@ namespace Tests\Feature\Stories;
 
 use App\Group;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class UserGroupMemberCanViewOtherGroupMembersTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     /**
      * @test testGroupMemberUserCanViewRelatedGroupUsers
      */

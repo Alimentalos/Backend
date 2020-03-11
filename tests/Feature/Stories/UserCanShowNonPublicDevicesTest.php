@@ -7,12 +7,12 @@ namespace Tests\Feature\Stories;
 use App\Device;
 use App\Group;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class UserCanShowNonPublicDevicesTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     /**
      * @test testUserCanShowNonPublicDevices
      */

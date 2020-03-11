@@ -7,12 +7,12 @@ namespace Tests\Feature\Stories;
 use App\Group;
 use App\Pet;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class UserCanDetachPetOfGroupTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
 
     final public function testDetachPetsGroupsApi()
     {
