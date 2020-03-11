@@ -42,6 +42,7 @@ trait DeviceList
             return $this->fetchInDatabaseDevices();
         }
         return Device::whereIn('uuid', explode(',', $devices))
-            ->where('user_uuid', authenticated()->uuid);
+            ->orWhere('user_uuid', authenticated()->uuid)
+            ->orWhere('is_public', true);
     }
 }

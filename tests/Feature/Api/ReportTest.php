@@ -58,6 +58,8 @@ class ReportTest extends TestCase
             'device_uuid' => $device->uuid,
             'is_moving' => 0
         ]);
+
+
         $response = $this->actingAs($user, 'api')->json('GET', '/api/reports', [
             'api_token' => $user->api_token,
             'devices' => $device->uuid,
@@ -67,8 +69,6 @@ class ReportTest extends TestCase
             'type' => 'activity',
         ]);
         $response->assertOk();
-
-        dd($response->getContent());
 
         $response->assertJsonStructure([[
             'device' => [
@@ -141,6 +141,10 @@ class ReportTest extends TestCase
         $device = factory(Device::class)->create();
         $device->user_uuid = $user->uuid;
         $device->save();
+        $group = factory(Group::class)->create();
+        $device->save();
+        $user->groups()->save($group);
+        $group->devices()->save($device);
         $location1 = $device->locations()->create(
             factory(Location::class)->make()->toArray()
         );
@@ -149,19 +153,37 @@ class ReportTest extends TestCase
         $group->devices()->save($device);
         $location1->update([
             'generated_at' => Carbon::now()->format('Y-m-d 11:00:00'),
-            'is_moving' => 1
+            'is_moving' => 1,
+            'device_uuid' => $device->uuid,
         ]);
         $location2 = $device->locations()->create(
             factory(Location::class)->make()->toArray()
         );
         $location2->update([
             'generated_at' => Carbon::now()->format('Y-m-d 13:00:00'),
-            'is_moving' => 0
+            'is_moving' => 0,
+            'device_uuid' => $device->uuid,
+        ]);
+        $location3 = $device->locations()->create(
+            factory(Location::class)->make()->toArray()
+        );
+        $location3->update([
+            'generated_at' => Carbon::now()->format('Y-m-d 14:00:00'),
+            'is_moving' => 1,
+            'device_uuid' => $device->uuid,
+        ]);
+        $location4 = $device->locations()->create(
+            factory(Location::class)->make()->toArray()
+        );
+        $location4->update([
+            'generated_at' => Carbon::now()->format('Y-m-d 14:00:00'),
+            'is_moving' => 1,
+            'device_uuid' => $device->uuid,
         ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/reports', [
             'api_token' => $user->api_token,
             'devices' => '',
-            'accuracy' => 100,
+            'accuracy' => 300,
             'start_date' => Carbon::now()->format('Y-m-d 00:00:00'),
             'end_date' => Carbon::now()->format('Y-m-d 23:59:59'),
             'type' => 'activity',
