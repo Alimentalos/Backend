@@ -60,11 +60,6 @@ class UserTest extends TestCase
             'email_verified_at',
             'free',
             'photo_url',
-            'photo' => [
-                'uuid',
-                'ext',
-                'is_public'
-            ]
         ]);
         $content = $response->getContent();
         $this->assertTrue((json_decode($content))->photo_url !== $user->photo_url);
