@@ -46,6 +46,6 @@ class Access extends Model implements Resource
      *
      * @var array
      */
-    public $with = ['accessible', 'first_location', 'last_location', 'geofence'];
+    protected $with = ['accessible', 'first_location', 'last_location', 'geofence'];
 
 }

@@ -67,5 +67,5 @@ class Alert extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     ];
 
 
-    public $with = ['photo', 'user', 'alert'];
+    protected $with = ['photo', 'user', 'alert'];
 }

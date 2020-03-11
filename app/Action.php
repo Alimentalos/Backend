@@ -43,5 +43,5 @@ class Action extends Model implements Resource
     protected $hidden = ['id'];
 
 
-    public $with = ['user'];
+    protected $with = ['user'];
 }
