@@ -66,6 +66,10 @@ class Alert extends Model implements Resource, CreateFromRequest, UpdateFromRequ
         'location',
     ];
 
-
+    /**
+     * The properties which are loaded.
+     *
+     * @var array
+     */
     protected $with = ['photo', 'user', 'alert'];
 }

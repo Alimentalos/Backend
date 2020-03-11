@@ -91,6 +91,10 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
     public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
 
 
-
+    /**
+     * The properties which are loaded.
+     *
+     * @var array
+     */
     protected $with = ['user'];
 }

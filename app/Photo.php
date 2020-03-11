@@ -63,5 +63,10 @@ class Photo extends Model implements ReactableContract, Resource, UpdateFromRequ
      */
     protected $hidden = ['id'];
 
+    /**
+     * The properties which are loaded.
+     *
+     * @var array
+     */
     protected $with = ['user', 'comment'];
 }

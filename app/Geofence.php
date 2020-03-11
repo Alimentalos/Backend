@@ -73,6 +73,13 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
     ];
 
     /**
+     * The properties which are loaded.
+     *
+     * @var array
+     */
+    protected $with = ['user', 'photo'];
+
+    /**
      * Get the route key for the model.
      *
      * @return string
@@ -81,7 +88,4 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
     {
         return 'uuid';
     }
-
-
-    protected $with = ['user', 'photo'];
 }

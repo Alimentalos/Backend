@@ -39,6 +39,10 @@ class Comment extends Model implements ReactableContract, Resource, UpdateFromRe
      */
     protected $hidden = ['id'];
 
-
+    /**
+     * The properties which are loaded.
+     *
+     * @var array
+     */
     protected $with = ['user'];
 }
