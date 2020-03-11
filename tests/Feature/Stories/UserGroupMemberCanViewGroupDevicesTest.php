@@ -13,6 +13,7 @@ use Tests\TestCase;
 class UserGroupMemberCanViewGroupDevicesTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @test testGroupMemberUserCanViewRelatedGroupDevices
      */
