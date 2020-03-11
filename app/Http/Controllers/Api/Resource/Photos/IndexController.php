@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Photos;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
+use App\Photo;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -53,6 +54,7 @@ class IndexController extends Controller
     public function __invoke(IndexRequest $request, $resource)
     {
         $photos = $resource->photos()->latest()->paginate(20);
+        $photos->load((new Photo())->getLazyRelationshipsAttribute());
         return response()->json($photos,200);
     }
 }

@@ -23,6 +23,7 @@ class CommentTest extends TestCase
         $photo = factory(Photo::class)->create();
         $photo->user_uuid = $user->uuid;
         $pet->user_uuid = $user->uuid;
+        $pet->photo_uuid = $photo->uuid;
         $photo->comment_uuid = factory(Comment::class)->create()->uuid;
         $photo->save();
         $pet->save();
