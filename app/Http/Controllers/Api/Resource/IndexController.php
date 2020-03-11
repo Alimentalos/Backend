@@ -43,7 +43,7 @@ class IndexController extends Controller
     public function __invoke(IndexRequest $request)
     {
         $instances = resource()->getInstances();
-        $instances->with(resource()->getLazyRelationshipsAttribute());
+        $instances->load(resource()->getLazyRelationshipsAttribute());
         return response()->json($instances, 200);
     }
 }

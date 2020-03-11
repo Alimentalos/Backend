@@ -23,18 +23,18 @@ trait DeviceList
 
     /**
      * Fetch in database devices
-     * @return Device[]|Collection
+     * @return Builder
      */
     public function fetchInDatabaseDevices()
     {
-        return $this->fetchInDatabaseDevicesQuery()->get();
+        return $this->fetchInDatabaseDevicesQuery();
     }
 
     /**
      * Fetch in database devices by comma separated string of devices uuid
      *
      * @param $devices
-     * @return Collection
+     * @return Builder
      */
     public function fetchInDatabase($devices)
     {
@@ -42,7 +42,6 @@ trait DeviceList
             return $this->fetchInDatabaseDevices();
         }
         return Device::whereIn('uuid', explode(',', $devices))
-            ->where('user_uuid', authenticated()->uuid)
-            ->get();
+            ->where('user_uuid', authenticated()->uuid);
     }
 }

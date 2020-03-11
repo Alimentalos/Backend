@@ -57,7 +57,7 @@ trait CommentResource
      */
     public function getLazyRelationshipsAttribute()
     {
-        return ['commentable'];
+        return ['commentable', 'user'];
     }
 
     /**

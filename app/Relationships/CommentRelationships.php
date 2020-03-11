@@ -9,6 +9,11 @@ trait CommentRelationships
      */
     public function commentable()
     {
-        return $this->morphTo();
+        return $this->morphTo(
+            'commentable',
+            'commentable_type',
+            'commentable_id',
+            'uuid'
+        );
     }
 }
