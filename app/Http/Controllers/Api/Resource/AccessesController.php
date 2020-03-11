@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource;
 
+use App\Access;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\AccessesRequest;
 use Illuminate\Http\JsonResponse;
@@ -54,9 +55,10 @@ class AccessesController extends Controller
     {
         $accesses = $resource
             ->accesses()
-            ->with(['accessible', 'geofence', 'first_location', 'last_location'])
             ->latest()
             ->paginate(20);
+
+        $accesses->load((new Access())->getLazyRelationshipsAttribute());
         return response()->json($accesses, 200);
     }
 }

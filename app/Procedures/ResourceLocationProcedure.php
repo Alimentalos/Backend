@@ -44,7 +44,7 @@ trait ResourceLocationProcedure
                 $this->queryRangeOfDates(
                     $this->maxAccuracy(
                         $this->trackableQuery(
-                            $models,
+                            $models->get(),
                             $type
                         ),
                         $parameters['accuracy']

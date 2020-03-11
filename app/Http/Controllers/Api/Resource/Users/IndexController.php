@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Users;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
+use App\User;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -56,6 +57,8 @@ class IndexController extends Controller
             ->users()
             ->latest()
             ->paginate(20);
+
+        $users->load((new User())->getLazyRelationshipsAttribute());
         return response()->json($users,200);
     }
 }

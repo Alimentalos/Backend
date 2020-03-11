@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Geofences\Resource;
 
+use App\Access;
 use App\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Geofences\Resource\AccessesRequest;
@@ -55,6 +56,7 @@ class AccessesController extends Controller
     public function __invoke(AccessesRequest $request, Geofence $geofence, $resource)
     {
         $accesses = geofencesAccesses()->index($geofence, $resource);
+        $accesses->load((new Access())->getLazyRelationshipsAttribute());
         return response()->json($accesses,200);
     }
 }
