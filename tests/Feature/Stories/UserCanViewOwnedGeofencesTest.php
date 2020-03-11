@@ -6,12 +6,12 @@ namespace Tests\Feature\Stories;
 
 use App\Geofence;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanViewOwnedGeofencesTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUsersGeofencesApi

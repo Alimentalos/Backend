@@ -9,11 +9,11 @@ use App\Photo;
 use App\User;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LikesTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     public function testUserCanLikePets()
     {

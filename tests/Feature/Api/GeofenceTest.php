@@ -17,12 +17,12 @@ use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 
 class GeofenceTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
 
     /**

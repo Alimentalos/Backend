@@ -10,12 +10,12 @@ use App\Photo;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 
 class PetTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     final public function testStorePetsCommentsApi()
     {

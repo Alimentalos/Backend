@@ -7,14 +7,14 @@ namespace Tests\Feature\Stories;
 use App\Geofence;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserCanUpdateOwnedGeofenceWithPhotoTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testGeofencesUpdateWithPhotoApi
