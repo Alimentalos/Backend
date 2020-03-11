@@ -43,13 +43,6 @@ class UserCanCreatePetWithPhotoTest extends TestCase
             'ext',
             'photo_url',
             'is_public',
-            'user' => [
-                'name',
-            ],
-            'comment' => [
-                'title',
-                'body',
-            ],
         ]);
 
         $content = $response->getContent();

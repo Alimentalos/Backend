@@ -60,40 +60,6 @@ class UserCanUpdateOwnedAlertTest extends TestCase
             'uuid',
             'updated_at',
             'created_at',
-            'photo' => [
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
-                'uuid',
-                'user_uuid',
-                'comment_uuid',
-                'ext',
-                'photo_url',
-                'is_public',
-                'created_at',
-                'updated_at',
-                'love_reactant_id'
-            ],
-            'user' => [
-                'uuid',
-                'user_uuid',
-                'photo_uuid',
-                'name',
-                'free',
-                'photo_url',
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
-                'is_public',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-                'love_reacter_id',
-                'is_admin',
-                'is_child',
-            ],
         ]);
 
         $response->assertJsonFragment([

@@ -39,40 +39,6 @@ class UserCanCreateGroupsTest extends TestCase
             'photo_url',
             'created_at',
             'updated_at',
-            'user' => [
-                'uuid',
-                'user_uuid',
-                'photo_uuid',
-                'name',
-                'free',
-                'photo_url',
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
-                'is_public',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-                'love_reacter_id',
-                'is_admin',
-                'is_child',
-            ] ,
-            'photo' => [
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
-                'uuid',
-                'user_uuid',
-                'comment_uuid',
-                'ext',
-                'photo_url',
-                'is_public',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-            ]
         ]);
         $response->assertJsonFragment([
             'uuid' => (json_decode($content))->uuid,

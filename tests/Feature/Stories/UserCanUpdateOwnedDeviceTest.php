@@ -40,10 +40,6 @@ class UserCanUpdateOwnedDeviceTest extends TestCase
                 'email_verified_at',
                 'free',
                 'photo_url',
-                'location' => [
-                    'type',
-                    'coordinates'
-                ],
                 'is_public',
                 'created_at',
                 'updated_at',

@@ -41,10 +41,6 @@ class UserCanCreateChildUsersTest extends TestCase
             'email',
             'name',
             'is_public',
-            'location' => [
-                'type',
-                'coordinates'
-            ],
             'uuid',
             'updated_at',
             'created_at',
@@ -52,40 +48,6 @@ class UserCanCreateChildUsersTest extends TestCase
             'love_reactant_id',
             'is_admin',
             'is_child',
-            'photo' => [
-                'location' => [
-                    'type',
-                    'coordinates'
-                ],
-                'uuid',
-                'user_uuid',
-                'comment_uuid',
-                'ext',
-                'photo_url',
-                'is_public',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-            ],
-            'user' => [
-                'uuid',
-                'user_uuid',
-                'photo_uuid',
-                'photo_url',
-                'name',
-                'email',
-                'is_public',
-                'location' => [
-                    'type',
-                    'coordinates'
-                ],
-                'love_reacter_id',
-                'love_reactant_id',
-                'updated_at',
-                'created_at',
-                'is_admin',
-                'is_child',
-            ]
         ]);
         $response->assertJsonFragment([
             'name' => $userB->name,

@@ -29,10 +29,6 @@ class OwnerUserCanViewChildUserTest extends TestCase
             'email',
             'name',
             'is_public',
-            'location' => [
-                'type',
-                'coordinates'
-            ],
             'uuid',
             'updated_at',
             'created_at',
