@@ -48,3 +48,4 @@ The following list are detailed those of software features what are in developme
 
 Our system allows users to create georeferenced alerts. In the event that a user loses his pet, he could send a close alert to all connected users and get help finding his friend.
 
+
