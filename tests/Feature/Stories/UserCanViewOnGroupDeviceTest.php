@@ -22,9 +22,9 @@ class UserCanViewOnGroupDeviceTest extends TestCase
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
-        $user->photo_uuid = factory(Photo::class)->create()->uuid;
-        $device->user_uuid = $user->uuid;
+        $device->is_public = false;
         $device->save();
+        $user->photo_uuid = factory(Photo::class)->create()->uuid;
         $group = factory(Group::class)->create();
         $group->devices()->attach($device->uuid);
         $group->users()->attach($user->uuid);
