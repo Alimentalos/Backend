@@ -76,7 +76,7 @@ class UserCanUpdatePhotoTest extends TestCase
         ]);
 
         $response->assertJsonFragment([
-            'uuid' => $photo->uuid
+            'photo_uuid' => $photo->uuid
         ]);
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid);

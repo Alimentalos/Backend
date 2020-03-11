@@ -41,7 +41,7 @@ class UserCanCreateGroupsTest extends TestCase
             'updated_at',
         ]);
         $response->assertJsonFragment([
-            'uuid' => (json_decode($content))->uuid,
+            'photo_uuid' => (json_decode($content))->uuid,
         ]);
     }
 }

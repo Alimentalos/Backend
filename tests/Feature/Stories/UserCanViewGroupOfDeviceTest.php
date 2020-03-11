@@ -58,15 +58,15 @@ class UserCanViewGroupOfDeviceTest extends TestCase
         ]);
         // Assert User UUID
         $response->assertJsonFragment([
-            'uuid' => $user->uuid,
+            'user_uuid' => $user->uuid,
         ]);
         // Assert Group UUID
         $response->assertJsonFragment([
-            'uuid' => $group->uuid,
+            'group_uuid' => $group->uuid,
         ]);
         // Assert Photo UUID
         $response->assertJsonFragment([
-            'uuid' => json_decode($response->getContent())->data[0]->photo->uuid,
+            'photo_uuid' => json_decode($response->getContent())->data[0]->photo->uuid,
         ]);
         $response->assertJsonStructure([
             'current_page',
@@ -101,9 +101,6 @@ class UserCanViewGroupOfDeviceTest extends TestCase
             'prev_page_url',
             'to',
             'total'
-        ]);
-        $response->assertJsonFragment([
-            'user_uuid' => $user->uuid
         ]);
     }
 }

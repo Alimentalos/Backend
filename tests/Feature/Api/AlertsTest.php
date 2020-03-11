@@ -220,10 +220,6 @@ class AlertsTest extends TestCase
             'user_uuid' => $user->uuid,
         ]);
 
-        $response->assertJsonFragment([
-            'uuid' => $user->uuid,
-        ]);
-
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -281,10 +277,6 @@ class AlertsTest extends TestCase
 
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid,
-        ]);
-
-        $response->assertJsonFragment([
-            'uuid' => $user->uuid,
         ]);
 
     }

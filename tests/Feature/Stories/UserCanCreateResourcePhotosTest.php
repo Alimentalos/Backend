@@ -65,7 +65,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
             'love_reactant_id',
         ]);
         $response->assertJsonFragment([
-            'uuid' => $user->uuid
+            'user_uuid' => $user->uuid
         ]);
         Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
 
