@@ -129,14 +129,6 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public $incrementing = false;
 
-
-    /**
-     * The properties which are loaded.
-     *
-     * @var array
-     */
-    protected $with = ['user', 'photo'];
-
     /**
      * Get the route key for the model.
      *

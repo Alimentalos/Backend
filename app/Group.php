@@ -78,13 +78,6 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     ];
 
     /**
-     * The properties which are loaded.
-     *
-     * @var array
-     */
-    protected $with = ['user', 'photo'];
-
-    /**
      * Get the route key for the model.
      *
      * @return string

@@ -40,12 +40,4 @@ class Access extends Model implements Resource
      * @var array
      */
     protected $hidden = ['id'];
-
-    /**
-     * The properties which are loaded.
-     *
-     * @var array
-     */
-    protected $with = ['accessible', 'first_location', 'last_location', 'geofence'];
-
 }

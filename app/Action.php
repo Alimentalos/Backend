@@ -41,11 +41,4 @@ class Action extends Model implements Resource
      * @var array
      */
     protected $hidden = ['id'];
-
-    /**
-     * The properties which are loaded.
-     *
-     * @var array
-     */
-    protected $with = ['user'];
 }

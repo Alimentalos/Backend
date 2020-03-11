@@ -24,7 +24,7 @@ class UserCanViewPhotosTest extends TestCase
         $user->save();
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid);
-        dd($response->getContent());
+//        dd($response->getContent());
         $response->assertOk();
 
 

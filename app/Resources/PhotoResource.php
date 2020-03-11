@@ -69,6 +69,6 @@ trait PhotoResource
      */
     public function getInstances()
     {
-        return Photo::with('user', 'photoable')->latest()->paginate(20);
+        return Photo::latest()->paginate(20);
     }
 }
