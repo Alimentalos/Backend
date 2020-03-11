@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Photos;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Photos\StoreRequest;
+use App\Photo;
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller
@@ -53,6 +54,7 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request, $resource)
     {
         $photo = resourcePhotos()->create($resource);
+        $photo->load((new Photo())->getLazyRelationshipsAttribute());
         return response()->json($photo,200);
     }
 }

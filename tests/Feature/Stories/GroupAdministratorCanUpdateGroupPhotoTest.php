@@ -60,10 +60,6 @@ class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
                 'photo_uuid',
                 'name',
                 'photo_url',
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
                 'is_public',
                 'free',
                 'created_at',
@@ -73,10 +69,6 @@ class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
                 'is_admin',
             ] ,
             'photo' => [
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
                 'uuid',
                 'user_uuid',
                 'comment_uuid',

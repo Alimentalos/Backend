@@ -188,7 +188,6 @@ class ReportTest extends TestCase
             'end_date' => Carbon::now()->format('Y-m-d 23:59:59'),
             'type' => 'activity',
         ]);
-        dd($response->getContent());
         $response->assertOk();
     }
 
@@ -284,16 +283,6 @@ class ReportTest extends TestCase
                         'usage'
                     ],
                 ]],
-                'summary' => [
-                    'status',
-                    'from',
-                    'to'
-                ],
-                'summary' => [
-                    'status',
-                    'from',
-                    'to'
-                ],
             ]],
         ]]);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Comments;
 
+use App\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Comments\StoreRequest;
 use Illuminate\Http\JsonResponse;
@@ -53,6 +54,7 @@ class StoreController extends Controller
     public function __invoke(StoreRequest $request, $resource)
     {
         $comment = resourceComments()->create($resource);
+        $comment->load((new Comment())->getLazyRelationshipsAttribute());
         return response()->json($comment,200);
     }
 }

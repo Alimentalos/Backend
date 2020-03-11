@@ -5,6 +5,7 @@ namespace Tests\Feature\Stories;
 
 
 use App\Group;
+use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -16,10 +17,11 @@ class UserCanViewAvailableGroupsTest extends TestCase
     /**
      * @test testUserCanViewUserAvailableGroups
      */
-    final public function testUserCanViewUserAvailableGroups()
+    final public function testUserCanViewAvailableGroupsTest()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
+        $group->photo_uuid = factory(Photo::class)->create()->uuid;
         $group->user_uuid = $user->uuid;
         $group->save();
         $user->groups()->attach($group->uuid, [
@@ -29,7 +31,6 @@ class UserCanViewAvailableGroupsTest extends TestCase
 
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/groups');
         $response->assertOk();
-//        dd($response->getContent());
 
         $response->assertJsonStructure([
             'current_page',
@@ -61,10 +62,6 @@ class UserCanViewAvailableGroupsTest extends TestCase
                         'is_child',
                     ] ,
                     'photo' => [
-                        'location' => [
-                            'type',
-                            'coordinates',
-                        ],
                         'uuid',
                         'user_uuid',
                         'comment_uuid',

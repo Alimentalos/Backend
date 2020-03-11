@@ -6,6 +6,7 @@ namespace Tests\Feature\Stories;
 
 use App\Device;
 use App\Group;
+use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -21,6 +22,8 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
     {
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
+        $userB->photo_uuid = factory(Photo::class)->create()->uuid;
+        $userB->save();
         $group = factory(Group::class)->create();
         $group->user_uuid = $user->uuid;
         $device = factory(Device::class)->create();

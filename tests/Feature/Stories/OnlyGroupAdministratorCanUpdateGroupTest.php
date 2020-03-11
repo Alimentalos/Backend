@@ -4,7 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
+use App\Comment;
 use App\Group;
+use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -19,7 +21,12 @@ class OnlyGroupAdministratorCanUpdateGroupTest extends TestCase
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
+        $photo = factory(Photo::class)->create();
+        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
+        $photo->user_uuid = $user->uuid;
+        $photo->save();
         $group->user_uuid = $user->uuid;
+        $group->photo_uuid = $photo->uuid;
         $group->save();
         $user->groups()->attach($group, [
             'is_admin' => true,
@@ -50,10 +57,6 @@ class OnlyGroupAdministratorCanUpdateGroupTest extends TestCase
                 'email_verified_at',
                 'free',
                 'photo_url',
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
                 'is_public',
                 'created_at',
                 'updated_at',
@@ -63,10 +66,6 @@ class OnlyGroupAdministratorCanUpdateGroupTest extends TestCase
                 'is_child',
             ] ,
             'photo' => [
-                'location' => [
-                    'type',
-                    'coordinates',
-                ],
                 'uuid',
                 'user_uuid',
                 'comment_uuid',

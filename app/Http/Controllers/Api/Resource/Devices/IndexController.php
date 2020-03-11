@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Devices;
 
+use App\Device;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;
@@ -53,6 +54,7 @@ class IndexController extends Controller
     public function __invoke(IndexRequest $request, $resource)
     {
         $devices = $resource->devices()->latest()->paginate(20);
+        $devices->load((new Device())->getLazyRelationshipsAttribute());
         return response()->json($devices,200);
     }
 }
