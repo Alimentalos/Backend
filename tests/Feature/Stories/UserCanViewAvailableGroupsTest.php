@@ -6,12 +6,12 @@ namespace Tests\Feature\Stories;
 
 use App\Group;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanViewAvailableGroupsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanViewUserAvailableGroups
@@ -52,10 +52,6 @@ class UserCanViewAvailableGroupsTest extends TestCase
                         'email_verified_at',
                         'free',
                         'photo_url',
-                        'location' => [
-                            'type',
-                            'coordinates',
-                        ],
                         'is_public',
                         'created_at',
                         'updated_at',

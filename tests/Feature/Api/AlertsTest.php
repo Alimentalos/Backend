@@ -10,11 +10,11 @@ use App\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AlertsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanViewAlerts
@@ -42,7 +42,7 @@ class AlertsTest extends TestCase
      */
     public function testUserCanCreateDeviceAlert()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->make();
         $device = factory(Device::class)->create();
@@ -59,7 +59,7 @@ class AlertsTest extends TestCase
         ]);
         $response->assertCreated();
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $this->assertDatabaseHas('alerts', [
             'uuid' => (json_decode($content))->uuid,
@@ -75,7 +75,7 @@ class AlertsTest extends TestCase
      */
     public function testUserCanCreatePetAlert()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->make();
         $pet = factory(Pet::class)->create();
@@ -93,7 +93,7 @@ class AlertsTest extends TestCase
         $response->assertCreated();
 
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $this->assertDatabaseHas('alerts', [
             'uuid' => (json_decode($content))->uuid,
@@ -109,7 +109,7 @@ class AlertsTest extends TestCase
      */
     public function testUserCanCreateUserAlert()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->make();
         $device = factory(Device::class)->create();
@@ -127,7 +127,7 @@ class AlertsTest extends TestCase
         $response->assertCreated();
 
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $this->assertDatabaseHas('alerts', [
             'uuid' => (json_decode($content))->uuid,
@@ -154,7 +154,7 @@ class AlertsTest extends TestCase
 
     public function testUserCanDeleteOwnedAlert()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->create();
         $alert->user_uuid = $user->uuid;

@@ -7,12 +7,12 @@ namespace Tests\Feature\Stories;
 use App\Pet;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanViewPetPhotosTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
     /**
      * @test testIndexPetsPhotosApi
      */

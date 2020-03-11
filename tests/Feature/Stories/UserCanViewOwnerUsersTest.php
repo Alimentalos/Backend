@@ -6,12 +6,12 @@ namespace Tests\Feature\Stories;
 
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanViewOwnerUsersTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserWatchingOtherUserWithSameOwner
@@ -28,6 +28,7 @@ class UserCanViewOwnerUsersTest extends TestCase
         $userC->is_public = false;
         $userC->save();
         $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userC->uuid);
+        dd($response->getContent());
         $response->assertOk();
         $response->assertJsonStructure([
             'photo_url',

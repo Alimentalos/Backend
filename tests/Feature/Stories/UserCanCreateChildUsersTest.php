@@ -5,21 +5,21 @@ namespace Tests\Feature\Stories;
 
 
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserCanCreateChildUsersTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanStoreUser
      */
     final public function testUserCanStoreUser()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $userB = factory(User::class)->make();
         $latitude = rand(1,5);
@@ -100,6 +100,6 @@ class UserCanCreateChildUsersTest extends TestCase
         ]);
         $response->assertCreated();
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
 }

@@ -7,12 +7,12 @@ namespace Tests\Feature\Stories;
 use App\Geofence;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanGetGeofencesPhotosTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testIndexGeofencesPhotosApi

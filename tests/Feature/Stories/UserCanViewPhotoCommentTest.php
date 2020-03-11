@@ -8,12 +8,12 @@ use App\Comment;
 use App\Pet;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanViewPhotoCommentTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
     /**
      * @test testUserCanViewPhotoComments
      */

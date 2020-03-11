@@ -8,21 +8,21 @@ use App\Comment;
 use App\Group;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanUpdateAnOwnedGroupWithPhoto
      */
     final public function testUserCanUpdateAnOwnedGroupWithPhoto()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
         $photo->comment_uuid = factory(Comment::class)->create()->uuid;
@@ -44,7 +44,7 @@ class GroupAdministratorCanUpdateGroupPhotoTest extends TestCase
         ]);
         $response->assertOk();
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
 
         $response->assertJsonStructure([
             'uuid',

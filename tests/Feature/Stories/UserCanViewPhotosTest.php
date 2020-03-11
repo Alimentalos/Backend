@@ -7,12 +7,12 @@ namespace Tests\Feature\Stories;
 use App\Comment;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanViewPhotosTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     public function testShowPhotosApi()
     {
@@ -24,6 +24,7 @@ class UserCanViewPhotosTest extends TestCase
         $user->save();
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid);
+        dd($response->getContent());
         $response->assertOk();
 
 

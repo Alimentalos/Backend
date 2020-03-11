@@ -10,18 +10,18 @@ use App\Group;
 use App\Pet;
 use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserCanCreateResourcePhotosTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     final public function testUserCanCreateResourcePhotos()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $pet->user_uuid = $user->uuid;
@@ -99,7 +99,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonFragment([
             'uuid' => $user->uuid
         ]);
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
 
 
         // Pet
@@ -163,7 +163,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
             'uuid' => $user->uuid
         ]);
 
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
 
         // Geofence
 
@@ -225,7 +225,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonFragment([
             'uuid' => $user->uuid
         ]);
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
 
         // Group
 
@@ -287,6 +287,6 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonFragment([
             'uuid' => $user->uuid
         ]);
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
     }
 }

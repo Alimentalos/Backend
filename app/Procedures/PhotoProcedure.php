@@ -20,7 +20,7 @@ trait PhotoProcedure
         $photo = Photo::create([
             'user_uuid' => authenticated()->uuid,
             'uuid' => $photo_uuid,
-            'photo_url' => $photo_uuid . uploaded('photo')->extension(),
+            'photo_url' => $photo_uuid . '.' . uploaded('photo')->extension(),
             'ext' => uploaded('photo')->extension(),
             'is_public' => fill('is_public', true),
             'location' => parser()->pointFromCoordinates(input('coordinates'))
@@ -55,7 +55,7 @@ trait PhotoProcedure
             ->putFileAs(
                 static::DEFAULT_PHOTOS_DISK_PATH,
                 $fileContent,
-                ($uniqueName . $fileContent->extension())
+                ($uniqueName . '.' . $fileContent->extension())
             );
     }
 }

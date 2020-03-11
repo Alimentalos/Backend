@@ -10,12 +10,12 @@ use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 
 class UserTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanDeleteOwnedDevice
@@ -41,7 +41,7 @@ class UserTest extends TestCase
      */
     final public function testUpdateUserWithPhotoApi()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
@@ -68,7 +68,7 @@ class UserTest extends TestCase
         ]);
         $content = $response->getContent();
         $this->assertTrue((json_decode($content))->photo_url !== $user->photo_url);
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
 
     /**

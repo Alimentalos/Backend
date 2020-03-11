@@ -17,7 +17,7 @@ class PhotoRepository
     /**
      * Default disk.
      */
-    public const DEFAULT_DISK = 'gcs';
+    public const DEFAULT_DISK = 'public';
 
     /**
      * Update photo via request.

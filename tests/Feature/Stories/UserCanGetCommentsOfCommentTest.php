@@ -6,12 +6,12 @@ namespace Tests\Feature\Stories;
 
 use App\Comment;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanGetCommentsOfCommentTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testCommentsOfComments

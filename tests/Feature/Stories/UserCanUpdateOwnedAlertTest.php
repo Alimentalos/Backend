@@ -5,26 +5,36 @@ namespace Tests\Feature\Stories;
 
 
 use App\Alert;
+use App\Comment;
+use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserCanUpdateOwnedAlertTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     public function testUserCanUpdateOwnedAlert()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->create();
+        $comment = factory(Comment::class)->create();
+        $photo = factory(Photo::class)->create();
+        $comment->user_uuid = $user->uuid;
+        $photo->user_uuid = $user->uuid;
+        $alert->photo_uuid = $photo->uuid;
+        $comment->save();
+        $photo->save();
+        $alert->photo_uuid = $photo->uuid;
         $alert->user_uuid = $user->uuid;
         $alert->save();
         $modified = factory(Alert::class)->make();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/alerts/' . $alert->uuid, [
-            'photo' => UploadedFile::fake()->image('photo1.jpg'),
+            'photo' => UploadedFile::fake()->image('photo.png'),
             'title' => $modified->title,
             'body' => $modified->body,
             'type' => $modified->type,
@@ -91,11 +101,11 @@ class UserCanUpdateOwnedAlertTest extends TestCase
             'user_uuid' => $user->uuid,
         ]);
 
-        $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        $content = json_decode($response->getContent());
+        Storage::disk('public')->assertExists('photos/' . $content->photo->uuid . $content->photo->ext);
 
         $this->assertDatabaseHas('alerts', [
-            'uuid' => (json_decode($content))->uuid,
+            'uuid' => $content->uuid,
             'title' => $modified->title,
             'body' => $modified->body,
             'type' => $modified->type,

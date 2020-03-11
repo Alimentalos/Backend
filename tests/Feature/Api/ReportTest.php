@@ -7,12 +7,12 @@ use App\Group;
 use App\Location;
 use Carbon\Carbon;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 
 class ReportTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     public function testUserCanGetSpeedReport()
     {
@@ -67,7 +67,7 @@ class ReportTest extends TestCase
             'type' => 'activity',
         ]);
         $response->assertOk();
-        
+
         $response->assertJsonStructure([[
             'device' => [
                 'uuid',
@@ -125,9 +125,9 @@ class ReportTest extends TestCase
                         'usage'
                     ],
                 ]],
-            ]],            
+            ]],
         ]]);
-        
+
         $response->assertJsonFragment([
             'uuid' => $device->uuid
         ]);
@@ -268,10 +268,10 @@ class ReportTest extends TestCase
                     'status',
                     'from',
                     'to'
-                ],                
-            ]],            
+                ],
+            ]],
         ]]);
-        
+
         $response->assertJsonFragment([
             'uuid' => $device->uuid
         ]);

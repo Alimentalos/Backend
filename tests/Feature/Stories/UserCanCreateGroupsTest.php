@@ -6,20 +6,20 @@ namespace Tests\Feature\Stories;
 
 use App\Group;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserCanCreateGroupsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
     /**
      * @test testUserCanStoreGroup
      */
     final public function testUserCanStoreGroup()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $group = factory(Group::class)->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/groups', [
@@ -30,7 +30,7 @@ class UserCanCreateGroupsTest extends TestCase
         ]);
         $response->assertCreated();
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',

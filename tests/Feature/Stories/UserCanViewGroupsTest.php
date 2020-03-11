@@ -5,13 +5,14 @@ namespace Tests\Feature\Stories;
 
 
 use App\Group;
+use App\Photo;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanViewGroupsTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanViewGroups
@@ -20,6 +21,10 @@ class UserCanViewGroupsTest extends TestCase
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
+        $group->user_uuid = $user->uuid;
+        $photo = factory(Photo::class)->create();
+        $group->photo_uuid = $photo->uuid;
+        $group->save();
         $user->groups()->attach($group->uuid, [
             'status' => Group::ATTACHED_STATUS,
             'is_admin' => true,

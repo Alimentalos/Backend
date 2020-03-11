@@ -9,12 +9,12 @@ use App\Photo;
 use App\Group;
 use App\Pet;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * @test testUserCanShowGroupAndHisRelatedResources
@@ -23,7 +23,7 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
-        
+
         $photo = factory(Photo::class)->create();
         $photo->user_uuid = $user->uuid;
         $comment = factory(Comment::class)->create();

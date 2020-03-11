@@ -16,12 +16,12 @@ use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 
 class GeofenceTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
 
     /**
@@ -2080,7 +2080,7 @@ class GeofenceTest extends TestCase
      */
     final public function testGeofencesUpdateWithPhotoApi()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
         $geofence->user_uuid = $user->uuid;
@@ -2124,7 +2124,7 @@ class GeofenceTest extends TestCase
         ]);
         $response->assertOk();
         $this->assertFalse($content->photo->uuid === $old_uuid);
-        Storage::disk('gcs')->assertExists('photos/' . $content->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . $content->photo->photo_url);
     }
 
     /**
@@ -2210,7 +2210,7 @@ class GeofenceTest extends TestCase
      */
     public function testGeofencesStoreApi()
     {
-        Storage::fake('gcs');
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $user->save();
         $response = $this->actingAs($user, 'api')->post('/api/geofences', [
@@ -2244,7 +2244,7 @@ class GeofenceTest extends TestCase
         ]);
         $response->assertCreated();
         $content = $response->getContent();
-        Storage::disk('gcs')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
 
     /**
