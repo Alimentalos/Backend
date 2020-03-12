@@ -9,7 +9,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanGetCommentsOfCommentTest extends TestCase
+class UserCanViewCommentsOfCommentTest extends TestCase
 {
     use RefreshDatabase;
 

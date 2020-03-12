@@ -4,25 +4,24 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Device;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanDeleteOwnedDeviceTest extends TestCase
+class UserCanDeleteOwnedUserTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * @test testUserCanDeleteOwnedDevice
+     * @test testUserCanDeleteOwnedUser
      */
-    final public function testUserCanDeleteOwnedDevice()
+    final public function testUserCanDeleteOwnedUser()
     {
         $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $device->user_uuid = $user->uuid;
-        $device->save();
-        $response = $this->actingAs($user, 'api')->json('DELETE', '/api/devices/' . $device->uuid);
+        $userB = factory(User::class)->create();
+        $userB->user_uuid = $user->uuid;
+        $userB->save();
+        $response = $this->actingAs($user, 'api')->json('DELETE', '/api/users/' . $userB->uuid);
         $response->assertOk();
 
         $response->assertJsonStructure([
@@ -31,6 +30,5 @@ class UserCanDeleteOwnedDeviceTest extends TestCase
         $response->assertJsonFragment([
             'message' => 'Resource deleted successfully'
         ]);
-
     }
 }

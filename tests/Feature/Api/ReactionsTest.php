@@ -11,7 +11,7 @@ use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class LikesTest extends TestCase
+class ReactionsTest extends TestCase
 {
     use RefreshDatabase;
 

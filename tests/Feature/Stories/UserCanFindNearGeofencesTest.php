@@ -1,24 +1,25 @@
 <?php
 
-namespace Tests\Feature\Api;
+
+namespace Tests\Feature\Stories;
+
 
 use App\Geofence;
-use App\Pet;
+use App\User;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\User;
+use Tests\TestCase;
 
-class NearTest extends TestCase
+class UserCanFindNearGeofencesTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * @test testNearGeofences
+     * @test testUserCanFindNearGeofences
      */
-    public function testNearGeofences()
+    public function testUserCanFindNearGeofences()
     {
         $user = factory(User::class)->create();
         $nearGeofence = new Geofence();
@@ -65,53 +66,4 @@ class NearTest extends TestCase
         ]);
     }
 
-    /**
-     * @test testNearPets
-     */
-    public function testNearPets()
-    {
-        $user = factory(User::class)->create();
-        $pets = factory(Pet::class, 50)->create();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/near/pets', [
-            'coordinates' => '5.1,5.3'
-        ]);
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
-                    'location',
-                    'name',
-                    'is_public',
-                    'description',
-                    'created_at',
-                    'updated_at',
-                ]
-            ]
-        ]);
-    }
-
-    /**
-     * @test testNearPets
-     */
-    public function testNearUsers()
-    {
-        $user = factory(User::class)->create();
-        $users = factory(User::class, 50)->create();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/near/users', [
-            'coordinates' => '5.1,5.3'
-        ]);
-        $response->assertOk();
-        $response->assertJsonStructure([
-            'data' => [
-                [
-                    'uuid',
-                    'name',
-                    'is_public',
-                    'created_at',
-                    'updated_at',
-                ]
-            ]
-        ]);
-    }
 }
