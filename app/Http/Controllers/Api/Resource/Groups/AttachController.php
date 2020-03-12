@@ -34,7 +34,7 @@ class AttachController extends Controller
      *         type="string",
      *           @OA\Items(
      *               type="string",
-     *               enum={"users", "pets", "devices"},
+     *               enum={"geofences", "pets", "devices", "users"},
      *               default="devices"
      *           ),
      *         )

@@ -10,7 +10,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.2.0"
+        "version": "v.4.1"
     },
     "servers": [
         {
@@ -251,7 +251,9 @@
                                 "enum": [
                                     "users",
                                     "devices",
-                                    "pets"
+                                    "pets",
+                                    "alerts",
+                                    "photos"
                                 ]
                             }
                         }
@@ -914,9 +916,10 @@
                                 "type": "string",
                                 "default": "devices",
                                 "enum": [
-                                    "users",
+                                    "geofences",
                                     "pets",
-                                    "devices"
+                                    "devices",
+                                    "users"
                                 ]
                             }
                         }
@@ -970,9 +973,10 @@
                                 "type": "string",
                                 "default": "devices",
                                 "enum": [
-                                    "users",
+                                    "geofences",
                                     "pets",
-                                    "devices"
+                                    "devices",
+                                    "users"
                                 ]
                             }
                         }
