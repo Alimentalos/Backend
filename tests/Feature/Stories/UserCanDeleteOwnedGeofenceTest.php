@@ -6,10 +6,13 @@ namespace Tests\Feature\Stories;
 
 use App\Geofence;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanDeleteOwnedGeofenceTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test testUserCanDeleteOwnedGeofence
      */

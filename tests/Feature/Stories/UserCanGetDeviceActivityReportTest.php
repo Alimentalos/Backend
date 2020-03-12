@@ -17,25 +17,17 @@ class UserCanGetDeviceActivityReportTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * testUserCanGetDeviceActivityReportWithData
+     * testUserCanGetDeviceActivityReport
      */
-    public function testUserCanGetDeviceActivityReportWithData()
+    public function testUserCanGetDeviceActivityReport()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
         $device->user_uuid = $user->uuid;
         $device->save();
-        $location1 = $device->locations()->create(
-            factory(Location::class)->make()->toArray()
-        );
         $group = factory(Group::class)->create();
         $user->groups()->save($group);
         $group->devices()->save($device);
-        $location1->update([
-            'generated_at' => Carbon::now()->format('Y-m-d 11:00:00'),
-            'device_uuid' => $device->uuid,
-            'is_moving' => 1
-        ]);
         $location2 = $device->locations()->create(
             factory(Location::class)->make()->toArray()
         );
@@ -76,11 +68,10 @@ class UserCanGetDeviceActivityReportTest extends TestCase
             'devices' => $device->uuid,
             'accuracy' => 100,
             'start_date' => Carbon::now()->format('Y-m-d 00:00:00'),
-            'end_date' => Carbon::now()->addDays(2)->format('Y-m-d 23:59:59'),
+            'end_date' => Carbon::now()->format('Y-m-d 23:59:59'),
             'type' => 'activity',
         ]);
         $response->assertOk();
-
         $response->assertJsonStructure([[
             'device' => [
                 'uuid',

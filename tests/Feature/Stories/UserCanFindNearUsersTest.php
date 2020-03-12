@@ -5,10 +5,13 @@ namespace Tests\Feature\Stories;
 
 
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanFindNearUsersTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test testUserCanFindNearUsers
      */

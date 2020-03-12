@@ -6,10 +6,13 @@ namespace Tests\Feature\Stories;
 
 use App\Pet;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserCanDeleteOwnedPetTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * testUserCanDeleteOwnedPet
      */

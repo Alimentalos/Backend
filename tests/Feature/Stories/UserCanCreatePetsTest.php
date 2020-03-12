@@ -6,12 +6,15 @@ namespace Tests\Feature\Stories;
 
 use App\Pet;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserCanCreatePetsTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * testUserCanCreatePets
      */

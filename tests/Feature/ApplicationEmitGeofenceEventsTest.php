@@ -12,10 +12,13 @@ use App\User;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ApplicationEmitGeofenceEventsTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test testGeofenceFeaturesWithEvents
      */
