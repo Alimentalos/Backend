@@ -12,7 +12,7 @@ class NonVerifiedUserCannotResetPasswordTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function NonVerifiedUserCannotResetPasswordTest()
+    public function testNonVerifiedUserCannotResetPassword()
     {
         $user = factory(User::class)->make();
         $response = $this->post('/password/reset', [

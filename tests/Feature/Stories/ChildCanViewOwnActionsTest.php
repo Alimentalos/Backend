@@ -12,7 +12,7 @@ class ChildCanViewOwnActionsTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function ChildCanViewOwnActionsTest()
+    final public function testChildCanViewOwnActions()
     {
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();

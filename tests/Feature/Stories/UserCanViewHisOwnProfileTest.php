@@ -12,7 +12,7 @@ class UserCanViewHisOwnProfileTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanViewHisOwnProfileTest()
+    final public function testUserCanViewHisOwnProfile()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid);

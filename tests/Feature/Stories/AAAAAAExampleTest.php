@@ -1,17 +1,18 @@
 <?php
 
-namespace Tests\Feature;
+
+namespace Tests\Feature\Stories;
+
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ConsoleTest extends TestCase
+class AAAAAAExampleTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_schedule_run()
+    final public function testAAAAAAExample()
     {
-        $this->artisan('schedule:run');
         $this->assertTrue(true);
     }
 }

@@ -8,11 +8,11 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class VerifiedUserViewDashboardTest extends TestCase
+class VerifiedUserCanViewDashboardTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function VerifiedUserViewDashboardTest()
+    public function testVerifiedUserCanViewDashboard()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)

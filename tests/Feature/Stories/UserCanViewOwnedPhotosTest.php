@@ -13,7 +13,7 @@ class UserCanViewOwnedPhotosTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanViewOwnedPhotosTest()
+    final public function testUserCanViewOwnedPhotos()
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();

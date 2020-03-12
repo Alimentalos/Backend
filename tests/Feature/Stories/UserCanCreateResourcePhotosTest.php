@@ -19,7 +19,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanCreateResourcePhotosTest()
+    final public function testUserCanCreateResourcePhotos()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

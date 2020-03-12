@@ -12,7 +12,7 @@ class GuestCanRegisterViaApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function GuestCanRegisterViaApiTest()
+    public function testGuestCanRegisterViaApi()
     {
         $user = factory(User::class)->make();
         $response = $this->json('POST', '/api/register', [

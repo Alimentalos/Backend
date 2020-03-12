@@ -14,7 +14,7 @@ class UserCanAttachOwnedPetInOwnedGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanAttachOwnedPetInOwnedGroupTest()
+    final public function testUserCanAttachOwnedPetInOwnedGroup()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

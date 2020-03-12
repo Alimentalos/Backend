@@ -13,7 +13,7 @@ class UserCanDeleteOwnedCommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanDeleteOwnedCommentTest()
+    final public function testUserCanDeleteOwnedComment()
     {
         $user = factory(User::class)->create();
         $comment = factory(Comment::class)->create();

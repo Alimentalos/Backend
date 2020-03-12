@@ -12,7 +12,7 @@ class UserCanRecoveryPasswordViaApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function UserCanRecoveryPasswordViaApiTest()
+    public function testUserCanRecoveryPasswordViaApi()
     {
         $user = factory(User::class)->create();
         $response = $this->json('POST', '/api/password-recovery', [

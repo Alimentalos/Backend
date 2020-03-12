@@ -13,7 +13,7 @@ class UserCanDeleteOwnedPetTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanDeleteOwnedPetTest()
+    final public function testUserCanDeleteOwnedPet()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

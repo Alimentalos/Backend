@@ -13,7 +13,7 @@ class UserCanViewPhotoListTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function UserCanViewPhotoListTest()
+    public function testUserCanViewPhotoList()
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();

@@ -13,7 +13,7 @@ class UserCanDeleteOwnedGeofenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanDeleteOwnedGeofenceTest()
+    final public function testUserCanDeleteOwnedGeofence()
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();

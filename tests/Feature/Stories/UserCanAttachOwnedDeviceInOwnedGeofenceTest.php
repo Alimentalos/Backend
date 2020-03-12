@@ -14,7 +14,7 @@ class UserCanAttachOwnedDeviceInOwnedGeofenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanAttachOwnedDeviceInOwnedGeofenceTest()
+    final public function testUserCanAttachOwnedDeviceInOwnedGeofence()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

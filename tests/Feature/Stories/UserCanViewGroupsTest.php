@@ -14,7 +14,7 @@ class UserCanViewGroupsTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanViewGroupsTest()
+    final public function testUserCanViewGroups()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

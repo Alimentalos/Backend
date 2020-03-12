@@ -11,7 +11,7 @@ class GuestCanViewAboutDeveloperGuideTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function GuestCanViewAboutDeveloperGuideTest()
+    public function testGuestCanViewAboutDeveloperGuide()
     {
         $response = $this->get('/about/developer-guide');
         $response->assertOk();

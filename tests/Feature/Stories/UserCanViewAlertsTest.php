@@ -13,7 +13,7 @@ class UserCanViewAlertsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function UserCanViewAlertsTest()
+    public function testUserCanViewAlerts()
     {
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->create();

@@ -12,7 +12,7 @@ class UserCanDeleteOwnedUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanDeleteOwnedUserTest()
+    final public function testUserCanDeleteOwnedUser()
     {
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();

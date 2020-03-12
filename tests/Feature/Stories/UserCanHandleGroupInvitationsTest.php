@@ -13,7 +13,7 @@ class UserCanHandleGroupInvitationsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function UserCanHandleGroupInvitationsTest()
+    public function testUserCanHandleGroupInvitations()
     {
         $user = factory(User::class)->create();
         $acceptedUser = factory(User::class)->create();

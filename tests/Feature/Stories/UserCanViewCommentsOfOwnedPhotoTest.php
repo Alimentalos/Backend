@@ -15,7 +15,7 @@ class UserCanViewCommentsOfOwnedPhotoTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanViewCommentsOfOwnedPhotoTest()
+    final public function testUserCanViewCommentsOfOwnedPhoto()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

@@ -15,7 +15,7 @@ class AdministratorCanViewGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function AdministratorCanViewGroupTest()
+    final public function testAdministratorCanViewGroup()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

@@ -12,7 +12,7 @@ class AdministratorCanViewUsersTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function AdministratorCanViewUsersTest()
+    final public function testAdministratorCanViewUsers()
     {
         $user = factory(User::class)->create();
         $user->email = 'iantorres@outlook.com';

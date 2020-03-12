@@ -14,7 +14,7 @@ class UserCanAttachOwnedGeofenceInOwnedGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function UserCanAttachOwnedGeofenceInOwnedGroupTest()
+    public function testUserCanAttachOwnedGeofenceInOwnedGroup()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

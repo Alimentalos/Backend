@@ -11,7 +11,7 @@ class GuestCannotConfirmPasswordTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function GuestCannotConfirmPasswordTest()
+    public function testGuestCannotConfirmPassword()
     {
         $response = $this->get('/password/confirm');
         $response->assertRedirect('login');

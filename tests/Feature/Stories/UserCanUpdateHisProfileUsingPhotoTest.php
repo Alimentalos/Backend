@@ -14,7 +14,7 @@ class UserCanUpdateHisProfileUsingPhotoTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanUpdateHisProfileUsingPhotoTest()
+    final public function testUserCanUpdateHisProfileUsingPhoto()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

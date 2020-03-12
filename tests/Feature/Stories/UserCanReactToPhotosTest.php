@@ -13,7 +13,7 @@ class UserCanReactToPhotosTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function UserCanReactToPhotosTest()
+    public function testUserCanReactToPhotos()
     {
         $this->artisan('love:reaction-type-add --name=Hate --mass=-4')
             ->assertExitCode(0);

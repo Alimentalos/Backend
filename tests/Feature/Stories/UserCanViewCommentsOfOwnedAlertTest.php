@@ -14,7 +14,7 @@ class UserCanViewCommentsOfOwnedAlertTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanViewCommentsOfOwnedAlertTest()
+    final public function testUserCanViewCommentsOfOwnedAlert()
     {
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->create();

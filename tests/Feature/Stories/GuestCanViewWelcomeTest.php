@@ -1,20 +1,17 @@
 <?php
 
-namespace Tests\Feature;
+
+namespace Tests\Feature\Stories;
+
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class GuestCanViewWelcomeTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testBasicTest()
+    public function testGuestCanViewWelcome()
     {
         $response = $this->get('/');
 

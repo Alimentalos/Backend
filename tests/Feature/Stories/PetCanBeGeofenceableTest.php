@@ -22,7 +22,7 @@ class PetCanBeGeofenceableTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function PetCanBeGeofenceableTest()
+    final public function testPetCanBeGeofenceable()
     {
         Event::fake();
         $device = factory(Device::class)->create();

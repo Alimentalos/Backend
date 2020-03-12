@@ -12,7 +12,7 @@ class GuestCanRegisterTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function GuestCanRegisterTest()
+    public function testGuestCanRegister()
     {
         $user = factory(User::class)->make();
         $password = substr(md5(mt_rand()), 0, 8);

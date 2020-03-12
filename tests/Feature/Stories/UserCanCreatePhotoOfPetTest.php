@@ -17,7 +17,7 @@ class UserCanCreatePhotoOfPetTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanCreatePhotoOfPetTest()
+    final public function testUserCanCreatePhotoOfPet()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

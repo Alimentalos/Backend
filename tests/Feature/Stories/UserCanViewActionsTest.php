@@ -13,7 +13,7 @@ class UserCanViewActionsTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanViewActionsTest()
+    final public function testUserCanViewActions()
     {
         $user = factory(User::class)->create();
         $action = factory(Action::class)->create();

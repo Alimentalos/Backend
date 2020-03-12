@@ -5,11 +5,11 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class IconGenerationTest extends TestCase
+class GenerateIconsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_icon_generation()
+    public function testGenerateIcons()
     {
         $this->artisan('generate:icons')
             ->assertExitCode(0);

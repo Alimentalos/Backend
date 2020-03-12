@@ -11,7 +11,7 @@ class GuestCanBeRedirectedIfAccessToAuthenticatedRouteTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function GuestCanBeRedirectedIfAccessToAuthenticatedRouteTest()
+    public function testGuestCanBeRedirectedIfAccessToAuthenticatedRoute()
     {
         $response = $this->get('/api/user');
         $response->assertRedirect('login');

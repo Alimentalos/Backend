@@ -16,7 +16,7 @@ class UserCanGetDeviceActivityReportWithoutParameterTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function UserCanGetDeviceActivityReportWithoutParameterTest()
+    public function testUserCanGetDeviceActivityReportWithoutParameter()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

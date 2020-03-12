@@ -19,7 +19,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function ApplicationEmitGeofenceEventsTest()
+    final public function testApplicationEmitGeofenceEvents()
     {
         $device = factory(Device::class)->create();
         $user = factory(User::class)->create();

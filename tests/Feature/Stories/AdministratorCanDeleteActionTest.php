@@ -13,7 +13,7 @@ class AdministratorCanDeleteActionTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function AdministratorCanDeleteActionTest()
+    final public function testAdministratorCanDeleteAction()
     {
         $user = factory(User::class)->create();
         $user->email = 'iantorres@outlook.com';

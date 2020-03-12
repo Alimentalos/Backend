@@ -13,7 +13,7 @@ class UserCanBeAttachedInOwnedGeofenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanBeAttachedInOwnedGeofenceTest()
+    final public function testUserCanBeAttachedInOwnedGeofence()
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();

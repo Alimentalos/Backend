@@ -15,7 +15,7 @@ class UserCanCreatePhotoCommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanCreatePhotoCommentTest()
+    final public function testUserCanCreatePhotoComment()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

@@ -16,7 +16,7 @@ class UserCanGetDeviceActivityReportTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function UserCanGetDeviceActivityReportTest()
+    public function testUserCanGetDeviceActivityReport()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

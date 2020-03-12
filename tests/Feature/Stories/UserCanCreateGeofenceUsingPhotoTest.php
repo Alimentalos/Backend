@@ -14,7 +14,7 @@ class UserCanCreateGeofenceUsingPhotoTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function UserCanCreateGeofenceUsingPhotoTest()
+    public function testUserCanCreateGeofenceUsingPhoto()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

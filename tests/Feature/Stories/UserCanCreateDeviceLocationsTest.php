@@ -13,7 +13,7 @@ class UserCanCreateDeviceLocationsTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanCreateDeviceLocationsTest()
+    final public function testUserCanCreateDeviceLocations()
     {
         $device = factory(Device::class)->create();
         $location = factory(Location::class)->make();

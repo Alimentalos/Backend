@@ -11,7 +11,7 @@ class GuestCanViewAboutDocumentationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function GuestCanViewAboutDocumentationTest()
+    public function testGuestCanViewAboutDocumentation()
     {
         $response = $this->get('/about/documentation');
         $response->assertOk();

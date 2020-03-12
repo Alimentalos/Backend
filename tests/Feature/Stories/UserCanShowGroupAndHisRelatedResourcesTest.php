@@ -16,7 +16,7 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanShowGroupAndHisRelatedResourcesTest()
+    final public function testUserCanShowGroupAndHisRelatedResources()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

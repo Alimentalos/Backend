@@ -14,7 +14,7 @@ class UserCanCreateGroupCommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanCreateGroupCommentTest()
+    final public function testUserCanCreateGroupComment()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

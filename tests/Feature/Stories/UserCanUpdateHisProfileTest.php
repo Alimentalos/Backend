@@ -12,7 +12,7 @@ class UserCanUpdateHisProfileTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanUpdateHisProfileTest()
+    final public function testUserCanUpdateHisProfile()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [

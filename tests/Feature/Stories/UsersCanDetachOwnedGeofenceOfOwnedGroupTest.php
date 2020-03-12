@@ -14,7 +14,7 @@ class UsersCanDetachOwnedGeofenceOfOwnedGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function UsersCanDetachOwnedGeofenceOfOwnedGroupTest()
+    public function testUsersCanDetachOwnedGeofenceOfOwnedGroup()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

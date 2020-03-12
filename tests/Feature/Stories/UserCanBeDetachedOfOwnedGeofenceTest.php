@@ -13,7 +13,7 @@ class UserCanBeDetachedOfOwnedGeofenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function UserCanBeDetachedOfOwnedGeofenceTest()
+    final public function testUserCanBeDetachedOfOwnedGeofence()
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
