@@ -19,6 +19,7 @@ class UserCanViewOwnGeofencesTest extends TestCase
         $geofence = factory(Geofence::class)->create();
         $user->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/geofences');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -42,7 +43,6 @@ class UserCanViewOwnGeofencesTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 
 }

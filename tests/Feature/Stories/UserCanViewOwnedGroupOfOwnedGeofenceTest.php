@@ -31,6 +31,7 @@ class UserCanViewOwnedGroupOfOwnedGeofenceTest extends TestCase
             '/api/geofences/' . $geofence->uuid . '/groups/',
             []
         );
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -50,6 +51,5 @@ class UserCanViewOwnedGroupOfOwnedGeofenceTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 }
