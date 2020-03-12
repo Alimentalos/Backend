@@ -12,7 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanGetDeviceActivityReport extends TestCase
+class UserCanGetDeviceActivityReportTest extends TestCase
 {
     use RefreshDatabase;
 
