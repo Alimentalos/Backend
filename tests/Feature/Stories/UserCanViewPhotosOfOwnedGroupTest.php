@@ -10,14 +10,16 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewGroupPhotosTest extends TestCase
+class UserCanViewPhotosOfOwnedGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanViewGroupPhotos()
+    final public function testUserCanViewPhotosOfOwnedGroup()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
+        $group->user_uuid = $user->uuid;
+        $group->save();
         $photo = factory(Photo::class)->create();
         $photo->groups()->attach($group->uuid);
         $photo->save();

@@ -4,42 +4,44 @@
 namespace Tests\Feature\Stories;
 
 
+use App\Device;
+use App\Geofence;
 use App\Group;
-use App\Pet;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanDetachPetOfGroupTest extends TestCase
+class UserCanDetachOwnedGeofenceOfOwnedGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanDetachPetOfGroup()
+    final public function testUserCanDetachOwnedGeofenceOfOwnedGroup()
     {
         $user = factory(User::class)->create();
+        $geofence = factory(Geofence::class)->create();
         $group = factory(Group::class)->create();
-        $pet = factory(Pet::class)->create();
-        $pet->user_uuid = $user->uuid;
-        $pet->save();
         $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS
         ]);
-        $pet->groups()->attach($group, [
+        $geofence->user_uuid = $user->uuid;
+        $geofence->save();
+        $geofence->groups()->attach($group, [
             'status' => Group::ACCEPTED_STATUS
         ]);
         $response = $this->actingAs($user, 'api')->json(
             'POST',
-            '/api/pets/' . $pet->uuid . '/groups/' . $group->uuid . '/detach',
+            '/api/geofences/' . $geofence->uuid . '/groups/' . $group->uuid . '/detach',
             []
         );
-        $response->assertOk();
+        $response->assertExactJson(['message' => 'Resource detached to group successfully']);
         $this->assertDeleted('groupables', [
-            'groupable_type' => 'App\\Pet',
-            'groupable_id' => $pet->uuid,
+            'groupable_type' => 'App\\Geofence',
+            'groupable_id' => $geofence->uuid,
             'group_uuid' => $group->uuid,
         ]);
+        $response->assertOk();
     }
 }
