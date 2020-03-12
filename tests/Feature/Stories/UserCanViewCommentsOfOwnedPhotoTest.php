@@ -11,14 +11,14 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewPhotoCommentsTest extends TestCase
+class UserCanViewCommentsOfOwnedPhotoTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * @test testIndexPhotosCommentsApi
+     * @test testUserCanViewCommentsOfOwnedPhoto
      */
-    final public function testIndexPhotosCommentsApi()
+    final public function testUserCanViewCommentsOfOwnedPhoto()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

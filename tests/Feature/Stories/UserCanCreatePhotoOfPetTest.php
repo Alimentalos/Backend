@@ -13,11 +13,14 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class UserCanCreatePetWithPhotoTest extends TestCase
+class UserCanCreatePhotoOfPetTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testStorePetsPhotosApi()
+    /**
+     * testUserCanCreatePhotoOfPet
+     */
+    final public function testUserCanCreatePhotoOfPet()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

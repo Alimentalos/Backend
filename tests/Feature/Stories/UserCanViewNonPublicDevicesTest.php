@@ -10,7 +10,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanShowNonPublicDevicesTest extends TestCase
+class UserCanViewNonPublicDevicesTest extends TestCase
 {
     use RefreshDatabase;
     /**

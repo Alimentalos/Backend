@@ -9,14 +9,14 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanDestroyOwnedPhotoTest extends TestCase
+class UserCanDeleteOwnedPhotoTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
      * @test testUserCanDestroyOwnedPhoto
      */
-    public function testUserCanDestroyOwnedPhoto()
+    public function testUserCanDeleteOwnedPhoto()
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();

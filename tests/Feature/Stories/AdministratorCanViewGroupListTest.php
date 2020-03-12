@@ -11,7 +11,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class AdminCanViewGroupListTest extends TestCase
+class AdministratorCanViewGroupListTest extends TestCase
 {
     use RefreshDatabase;
 

@@ -8,27 +8,31 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class OwnerUserCanViewChildUserTest extends TestCase
+class UserCanUpdateHisProfileTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * @test testOwnerUserWatchingSpecificUser
+     * @test testUserCanUpdateUser
      */
-    final public function testOwnerUserWatchingSpecificUser()
+    final public function testUserCanUpdateUser()
     {
         $user = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $userB->is_public = false;
-        $userB->user_uuid = $user->uuid;
-        $userB->save();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $userB->uuid);
+        $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
+            'name' => 'New name',
+            'coordinates' => '5.5,6.5',
+        ]);
+
         $response->assertOk();
         $response->assertJsonStructure([
             'photo_url',
             'email',
             'name',
             'is_public',
+            'location' => [
+                'type',
+                'coordinates'
+            ],
             'uuid',
             'updated_at',
             'created_at',
@@ -38,8 +42,8 @@ class OwnerUserCanViewChildUserTest extends TestCase
             'is_child'
         ]);
         $response->assertJsonFragment([
-            'name' => $userB->name,
-            'email' => $userB->email,
+            'name' => 'New name',
+            'email' => $user->email,
         ]);
     }
 }

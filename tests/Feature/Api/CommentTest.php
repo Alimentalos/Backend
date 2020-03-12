@@ -148,8 +148,6 @@ class CommentTest extends TestCase
         $response->assertJsonFragment([
            'message' => 'Resource deleted successfully'
         ]);
-
-
         $this->assertDeleted('comments', [
             'uuid' => (json_decode($content))->uuid,
         ]);

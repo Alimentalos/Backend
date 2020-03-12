@@ -14,7 +14,10 @@ class UserCanViewPhotosTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testShowPhotosApi()
+    /**
+     * testUserCanViewPhotos
+     */
+    public function testUserCanViewPhotos()
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
