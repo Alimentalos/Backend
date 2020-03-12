@@ -25,7 +25,7 @@ class Alert extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     use Photoable;
 
     /**
-     * The default location field of pet.
+     * The default location field of alert.
      *
      * @var string
      */
