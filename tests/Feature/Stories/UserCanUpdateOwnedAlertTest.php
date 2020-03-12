@@ -17,7 +17,7 @@ class UserCanUpdateOwnedAlertTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCanUpdateOwnedAlert()
+    public function UserCanUpdateOwnedAlertTest()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

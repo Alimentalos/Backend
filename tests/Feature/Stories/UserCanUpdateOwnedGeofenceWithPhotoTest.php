@@ -16,10 +16,7 @@ class UserCanUpdateOwnedGeofenceWithPhotoTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testGeofencesUpdateWithPhotoApi
-     */
-    final public function testGeofencesUpdateWithPhotoApi()
+    final public function UserCanUpdateOwnedGeofenceWithPhotoTest()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

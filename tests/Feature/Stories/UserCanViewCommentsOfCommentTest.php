@@ -13,10 +13,7 @@ class UserCanViewCommentsOfCommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testCommentsOfComments
-     */
-    final public function testCommentsOfComments()
+    final public function UserCanViewCommentsOfCommentTest()
     {
         $sampleCommentBody = 'Sample comment';
         $user = factory(User::class)->create();

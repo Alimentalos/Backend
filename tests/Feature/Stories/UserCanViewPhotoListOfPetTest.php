@@ -15,10 +15,7 @@ class UserCanViewPhotoListOfPetTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     */
-    final public function testStorePhotosCommentsApi()
+    final public function UserCanViewPhotoListOfPetTest()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

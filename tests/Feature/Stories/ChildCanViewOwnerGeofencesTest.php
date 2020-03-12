@@ -16,10 +16,7 @@ class ChildCanViewOwnerGeofencesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testChildCanViewOwnerGeofences
-     */
-    public function testChildCanViewOwnerGeofences()
+    public function ChildCanViewOwnerGeofencesTest()
     {
         $user = factory(User::class)->create();
         $owner = factory(User::class)->create();

@@ -11,10 +11,7 @@ class GuestCanGetNotFoundTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * testGuestCanGetNotFound
-     */
-    public function testGuestCanGetNotFound()
+    public function GuestCanGetNotFoundTest()
     {
         $response = $this->get('/about/fakeUrl');
         $response->assertNotFound();

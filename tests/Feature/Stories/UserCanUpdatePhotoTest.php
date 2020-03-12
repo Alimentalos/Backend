@@ -14,7 +14,7 @@ class UserCanUpdatePhotoTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUpdatePhotosApi()
+    public function UserCanUpdatePhotoTest()
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();

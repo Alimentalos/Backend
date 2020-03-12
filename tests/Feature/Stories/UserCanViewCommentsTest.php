@@ -15,10 +15,7 @@ class UserCanViewCommentsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * testUserCanViewComments
-     */
-    final public function testUserCanViewComments()
+    final public function UserCanViewCommentsTest()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

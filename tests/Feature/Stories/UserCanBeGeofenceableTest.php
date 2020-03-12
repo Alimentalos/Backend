@@ -22,10 +22,7 @@ class UserCanBeGeofenceableTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanBeGeofenceable
-     */
-    final public function testUserCanBeGeofenceable()
+    final public function UserCanBeGeofenceableTest()
     {
         Event::fake();
         $device = factory(Device::class)->create();

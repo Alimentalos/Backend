@@ -16,10 +16,7 @@ class UserCanViewGeofenceListTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanViewGeofenceList
-     */
-    final public function testUserCanViewGeofenceList()
+    final public function UserCanViewGeofenceListTest()
     {
         $user = factory(User::class)->create();
         $geofence = new Geofence();

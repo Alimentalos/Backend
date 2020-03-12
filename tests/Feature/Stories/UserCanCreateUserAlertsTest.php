@@ -16,10 +16,7 @@ class UserCanCreateUserAlertsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanCreateUserAlerts
-     */
-    public function testUserCanCreateUserAlerts()
+    public function UserCanCreateUserAlertsTest()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

@@ -12,10 +12,7 @@ class UserCanFindNearUsersTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanFindNearUsers
-     */
-    public function testUserCanFindNearUsers()
+    public function UserCanFindNearUsersTest()
     {
         $user = factory(User::class)->create();
         $users = factory(User::class, 50)->create();

@@ -12,7 +12,7 @@ class NonVerifiedUserCannotViewHomeTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testNonVerifiedUserCannotViewHome()
+    public function NonVerifiedUserCannotViewHomeTest()
     {
         $user = factory(User::class)->create();
         $user->email_verified_at = null;

@@ -13,10 +13,7 @@ class OwnerCanDetachChildUserOfGroupsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testOwnerCanDetachChildUserOfOwnedGroup
-     */
-    public function testOwnerCanDetachChildUserOfOwnedGroup()
+    public function OwnerCanDetachChildUserOfGroupsTest()
     {
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();

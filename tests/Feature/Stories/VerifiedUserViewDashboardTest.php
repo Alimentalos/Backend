@@ -12,10 +12,7 @@ class VerifiedUserViewDashboardTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * testVerifiedUserViewDashboard
-     */
-    public function testVerifiedUserViewDashboard()
+    public function VerifiedUserViewDashboardTest()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)

@@ -11,14 +11,11 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class AdministratorCanViewGroupListTest extends TestCase
+class AdministratorCanViewGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testAdminWatchingGroupsList
-     */
-    final public function testAdminWatchingGroupsList()
+    final public function AdministratorCanViewGroupTest()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

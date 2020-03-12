@@ -13,10 +13,8 @@ use Tests\TestCase;
 class UserCanViewGroupPhotosTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * @test testIndexGroupsPhotosApi
-     */
-    final public function testIndexGroupsPhotosApi()
+
+    final public function UserCanViewGroupPhotosTest()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

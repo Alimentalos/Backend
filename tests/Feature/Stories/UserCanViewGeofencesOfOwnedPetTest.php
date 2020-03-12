@@ -14,10 +14,7 @@ class UserCanViewGeofencesOfOwnedPetTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanViewGeofencesOfOwnedPet
-     */
-    public function testUserCanViewGeofencesOfOwnedPet()
+    public function UserCanViewGeofencesOfOwnedPetTest()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

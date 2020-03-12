@@ -13,10 +13,8 @@ use Tests\TestCase;
 class UserCanViewPetPhotosTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * @test testIndexPetsPhotosApi
-     */
-    final public function testIndexPetsPhotosApi()
+
+    final public function UserCanViewPetPhotosTest()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

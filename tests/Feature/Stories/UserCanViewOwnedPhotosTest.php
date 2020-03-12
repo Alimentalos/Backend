@@ -13,10 +13,7 @@ class UserCanViewOwnedPhotosTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testIndexUsersPhotosApi
-     */
-    final public function testIndexUsersPhotosApi()
+    final public function UserCanViewOwnedPhotosTest()
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();

@@ -15,10 +15,7 @@ class UserCanCreateCommentOfPhotoTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * testUserCanCreateCommentOfPhoto
-     */
-    final public function testUserCanCreateCommentOfPhoto()
+    final public function UserCanCreateCommentOfPhotoTest()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
@@ -31,7 +28,6 @@ class UserCanCreateCommentOfPhotoTest extends TestCase
         $pet->save();
         $pet->photos()->attach($photo);
         $comment = factory(Comment::class)->make();
-        $commentBody = 'Awesome new text';
 
         $response = $this->actingAs($user, 'api')->json('POST', '/api/photos/' . $photo->uuid . '/comments', [
             'body' => $comment->body,

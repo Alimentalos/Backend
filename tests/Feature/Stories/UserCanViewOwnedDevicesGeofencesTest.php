@@ -16,10 +16,7 @@ class UserCanViewOwnedDevicesGeofencesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testDevicesGeofencesApi
-     */
-    final public function testDevicesGeofencesApi()
+    final public function UserCanViewOwnedDevicesGeofencesTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

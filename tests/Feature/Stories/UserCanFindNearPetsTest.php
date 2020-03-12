@@ -13,10 +13,7 @@ class UserCanFindNearPetsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanFindNearPets
-     */
-    public function testUserCanFindNearPets()
+    public function UserCanFindNearPetsTest()
     {
         $user = factory(User::class)->create();
         $pets = factory(Pet::class, 50)->create();

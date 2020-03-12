@@ -13,10 +13,7 @@ class UserCanFindUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanFindUser
-     */
-    final public function testUserCanFindUser()
+    final public function UserCanFindUserTest()
     {
         $user = factory(User::class)->create();
         $user->locations()->saveMany(

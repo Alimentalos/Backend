@@ -14,7 +14,7 @@ class UserCanDetachPetOfGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testDetachPetsGroupsApi()
+    final public function UserCanDetachPetOfGroupTest()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

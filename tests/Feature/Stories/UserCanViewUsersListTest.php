@@ -12,10 +12,7 @@ class UserCanViewUsersListTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanViewUsersList
-     */
-    final public function testUserCanViewUsersList()
+    final public function UserCanViewUsersListTest()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users');

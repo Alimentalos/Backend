@@ -13,10 +13,7 @@ class UserCanDeleteOwnedPhotoTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanDestroyOwnedPhoto
-     */
-    public function testUserCanDeleteOwnedPhoto()
+    public function UserCanDeleteOwnedPhotoTest()
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();

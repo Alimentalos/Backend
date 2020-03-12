@@ -14,7 +14,7 @@ class UserCanViewLocationsOfDeviceTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCanViewDeviceLocationsList()
+    public function UserCanViewLocationsOfDeviceTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

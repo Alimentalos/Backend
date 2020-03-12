@@ -13,10 +13,7 @@ class OwnerCanAttachChildUserInGroupsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testOwnerCanAttachChildUserInOwnedGroup
-     */
-    public function testOwnerCanAttachChildUserInOwnedGroup()
+    public function OwnerCanAttachChildUserInGroupsTest()
     {
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();

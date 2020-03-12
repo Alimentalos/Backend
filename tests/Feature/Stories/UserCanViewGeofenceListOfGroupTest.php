@@ -14,10 +14,7 @@ class UserCanViewGeofenceListOfGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * testUserCanViewGeofenceListOfGroup
-     */
-    public function testUserCanViewGeofenceListOfGroup()
+    public function UserCanViewGeofenceListOfGroupTest()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

@@ -14,10 +14,7 @@ class UserCanGetDeviceSpeedReportTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * testUserCanGetDeviceSpeedReport
-     */
-    public function testUserCanGetDeviceSpeedReport()
+    public function UserCanGetDeviceSpeedReportTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

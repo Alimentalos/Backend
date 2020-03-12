@@ -14,10 +14,8 @@ use Tests\TestCase;
 class GroupAdministratorCanUpdateGroupTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * @test testUserGroupAdministratorCanUpdateGroup
-     */
-    final public function testUserGroupAdministratorCanUpdateGroup()
+
+    final public function GroupAdministratorCanUpdateGroupTest()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

@@ -12,7 +12,7 @@ class UserCantViewLoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCantViewLogin()
+    public function UserCantViewLoginTest()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)

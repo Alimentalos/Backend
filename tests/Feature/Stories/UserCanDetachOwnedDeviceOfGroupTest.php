@@ -17,7 +17,7 @@ class UserCanDetachOwnedDeviceOfGroupTest extends TestCase
     /**
      * @test testUserCanDetachOwnedDeviceOfGroup
      */
-    final public function testUserCanDetachOwnedDeviceOfGroup()
+    final public function UserCanDetachOwnedDeviceOfGroupTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

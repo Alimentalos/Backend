@@ -13,10 +13,7 @@ class UserCanUpdateOwnedGeofenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanUpdateOwnedGeofence
-     */
-    final public function testUserCanUpdateOwnedGeofence()
+    final public function UserCanUpdateOwnedGeofenceTest()
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();

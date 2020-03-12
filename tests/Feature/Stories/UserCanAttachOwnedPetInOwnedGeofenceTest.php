@@ -14,10 +14,7 @@ class UserCanAttachOwnedPetInOwnedGeofenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testAttachPetsGeofencesApi
-     */
-    public function testAttachPetsGeofencesApi()
+    public function UserCanAttachOwnedPetInOwnedGeofenceTest()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

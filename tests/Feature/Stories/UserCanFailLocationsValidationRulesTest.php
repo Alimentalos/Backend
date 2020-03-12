@@ -13,7 +13,7 @@ class UserCanFailLocationsValidationRulesTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCanFailLocationsValidationRules()
+    public function UserCanFailLocationsValidationRulesTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

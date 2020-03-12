@@ -13,10 +13,7 @@ class UserCanDeleteOwnedDeviceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanDeleteOwnedDevice
-     */
-    final public function testUserCanDeleteOwnedDevice()
+    final public function UserCanDeleteOwnedDeviceTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

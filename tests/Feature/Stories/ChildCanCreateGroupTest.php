@@ -15,10 +15,7 @@ class ChildCanCreateGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testChildUserCanStoreGroup
-     */
-    public function testChildUserCanStoreGroup()
+    public function ChildCanCreateGroupTest()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

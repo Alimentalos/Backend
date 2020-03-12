@@ -15,10 +15,7 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testGroupMemberUserCanViewRelatedGroupDevices
-     */
-    final public function testGroupMemberUserCanViewRelatedGroupDevices()
+    final public function UserGroupMemberCanViewGroupDevicesTest()
     {
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();

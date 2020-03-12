@@ -16,10 +16,7 @@ class UserCanFindNearGeofencesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanFindNearGeofences
-     */
-    public function testUserCanFindNearGeofences()
+    public function UserCanFindNearGeofencesTest()
     {
         $user = factory(User::class)->create();
         $nearGeofence = new Geofence();

@@ -4,35 +4,35 @@
 namespace Tests\Feature\Stories;
 
 
+use App\Device;
 use App\Geofence;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanBeDetachedOfGeofenceTest extends TestCase
+class UserCanAttachOwnedDeviceInOwnedGeofenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * testUserCanBeDetachedOfGeofence
-     */
-    final public function testUserCanBeDetachedOfGeofence()
+    final public function UserCanAttachOwnedDeviceInOwnedGeofenceTest()
     {
         $user = factory(User::class)->create();
+        $device = factory(Device::class)->create();
         $geofence = factory(Geofence::class)->create();
         $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $user->geofences()->attach($geofence);
+        $device->user_uuid = $user->uuid;
+        $device->save();
         $response = $this->actingAs($user, 'api')->json(
             'POST',
-            '/api/users/' . $user->uuid . '/geofences/' . $geofence->uuid . '/detach',
+            '/api/devices/' . $device->uuid . '/geofences/' . $geofence->uuid . '/attach',
             []
         );
         $response->assertOk();
-        $this->assertDeleted('geofenceables', [
+        $this->assertDatabaseHas('geofenceables', [
+            'geofenceable_type' => 'App\\Device',
+            'geofenceable_id' => $device->uuid,
             'geofence_uuid' => $geofence->uuid,
-            'geofenceable_type' => 'App\\User',
-            'geofenceable_id' => $user->uuid,
         ]);
     }
 }

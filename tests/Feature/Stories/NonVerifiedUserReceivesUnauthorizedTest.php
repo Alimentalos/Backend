@@ -14,10 +14,7 @@ class NonVerifiedUserReceivesUnauthorizedTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testNonVerifiedUserReceivesUnauthorized
-     */
-    final public function testNonVerifiedUserReceivesUnauthorized()
+    final public function NonVerifiedUserReceivesUnauthorizedTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

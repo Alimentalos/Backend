@@ -11,10 +11,7 @@ class GuestCanViewResetPasswordFormTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * testGuestCanViewResetPasswordForm
-     */
-    public function testGuestCanViewResetPasswordForm()
+    public function GuestCanViewResetPasswordFormTest()
     {
         $response = $this->get('/password/reset');
         $response->assertOk();

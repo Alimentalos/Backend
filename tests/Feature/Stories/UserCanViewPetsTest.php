@@ -13,10 +13,7 @@ class UserCanViewPetsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * testUserCanViewPets
-     */
-    final public function testUserCanViewPets()
+    final public function UserCanViewPetsTest()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

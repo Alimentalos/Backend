@@ -17,7 +17,7 @@ class UserCanDetachOwnedPetOfOwnedGeofenceTest extends TestCase
     /**
      * @test testDetachPetsGeofencesApi
      */
-    public function testDetachPetsGeofencesApi()
+    public function UserCanDetachOwnedPetOfOwnedGeofenceTest()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

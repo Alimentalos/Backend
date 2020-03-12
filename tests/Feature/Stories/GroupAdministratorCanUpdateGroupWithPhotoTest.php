@@ -17,10 +17,7 @@ class GroupAdministratorCanUpdateGroupWithPhotoTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanUpdateAnOwnedGroupWithPhoto
-     */
-    final public function testUserCanUpdateAnOwnedGroupWithPhoto()
+    final public function GroupAdministratorCanUpdateGroupWithPhotoTest()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

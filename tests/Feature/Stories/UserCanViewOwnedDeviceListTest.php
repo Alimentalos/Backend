@@ -13,10 +13,7 @@ class UserCanViewOwnedDeviceListTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanViewOwnedDeviceList
-     */
-    final public function testUserCanViewOwnedDeviceList()
+    final public function UserCanViewOwnedDeviceListTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

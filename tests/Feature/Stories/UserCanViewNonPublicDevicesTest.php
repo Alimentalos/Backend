@@ -13,10 +13,8 @@ use Tests\TestCase;
 class UserCanViewNonPublicDevicesTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * @test testUserCanShowNonPublicDevices
-     */
-    final public function testUserCanShowNonPublicDevices()
+
+    final public function UserCanViewNonPublicDevicesTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

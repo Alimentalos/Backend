@@ -13,10 +13,7 @@ class UserCanUpdateOwnedDeviceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanUpdateOwnedDevices
-     */
-    final public function testUserCanUpdateOwnedDevices()
+    final public function UserCanUpdateOwnedDeviceTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

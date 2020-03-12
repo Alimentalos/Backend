@@ -14,10 +14,8 @@ use Tests\TestCase;
 class UserCanCreateGroupsTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * @test testUserCanStoreGroup
-     */
-    final public function testUserCanStoreGroup()
+
+    final public function UserCanCreateGroupsTest()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

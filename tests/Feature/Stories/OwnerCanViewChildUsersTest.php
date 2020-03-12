@@ -8,17 +8,15 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class AdministratorCanViewUsersListTest extends TestCase
+class OwnerCanViewChildUsersTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testAdministratorCanViewUsersList
-     */
-    final public function testAdministratorCanViewUsersList()
+    final public function OwnerCanViewChildUsersTest()
     {
         $user = factory(User::class)->create();
-        $user->email = 'iantorres@outlook.com';
+        $userB = factory(User::class)->create();
+        $user->user_uuid = $userB->uuid;
         $user->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
         $response->assertOk();

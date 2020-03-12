@@ -13,10 +13,7 @@ class UserCanDeleteOwnedGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanDeleteOwnedGroup
-     */
-    public function testUserCanDeleteOwnedGroup()
+    public function UserCanDeleteOwnedGroupTest()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

@@ -12,10 +12,7 @@ class ChildCanViewOwnerUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserWatchingOwner
-     */
-    final public function testUserWatchingOwner()
+    final public function ChildCanViewOwnerUserTest()
     {
         $userA = factory(User::class)->create();
         $userB = factory(User::class)->create();

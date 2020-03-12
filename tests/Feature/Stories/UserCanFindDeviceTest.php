@@ -15,10 +15,7 @@ class UserCanFindDeviceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanFindDevice
-     */
-    final public function testUserCanFindDevice()
+    final public function UserCanFindDeviceTest()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

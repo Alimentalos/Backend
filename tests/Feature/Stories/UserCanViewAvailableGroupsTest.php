@@ -14,10 +14,7 @@ class UserCanViewAvailableGroupsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanViewUserAvailableGroups
-     */
-    final public function testUserCanViewAvailableGroupsTest()
+    final public function UserCanViewAvailableGroupsTest()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

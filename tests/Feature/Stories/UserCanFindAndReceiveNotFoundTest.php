@@ -13,10 +13,7 @@ class UserCanFindAndReceiveNotFoundTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanFindAndReceiveNotFound
-     */
-    final public function testUserCanFindAndReceiveNotFound()
+    final public function UserCanFindAndReceiveNotFoundTest()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

@@ -13,7 +13,7 @@ class UserCanViewLocationsOfUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCanViewLocationsOfUser()
+    public function UserCanViewLocationsOfUserTest()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/locations', [
