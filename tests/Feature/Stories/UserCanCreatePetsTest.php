@@ -33,14 +33,12 @@ class UserCanCreatePetsTest extends TestCase
             'coordinates' => '5.5,6.5',
         ]);
         $response->assertCreated();
-
         $content = $response->getContent();
         Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . (json_decode($content))->uuid . '/photos');
         $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/pets');
         $response->assertOk();
-
         $this->assertDatabaseHas('pets', [
             'uuid' => (json_decode($content))->uuid,
             'name' => $pet->name,

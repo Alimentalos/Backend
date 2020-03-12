@@ -44,7 +44,6 @@ class UserCanCreatePhotoOfPetTest extends TestCase
             'photo_url',
             'is_public',
         ]);
-
         $content = $response->getContent();
         Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo_url);
 
@@ -52,7 +51,6 @@ class UserCanCreatePhotoOfPetTest extends TestCase
             'uuid' => (json_decode($content))->uuid,
             'is_public' => true
         ]);
-
         $this->assertDatabaseHas('photoables', [
             'photo_uuid' => (json_decode($content))->uuid,
             'photoable_type' => 'App\\Pet',

@@ -30,48 +30,35 @@ class UserCanReactToUsersTest extends TestCase
             ->assertExitCode(0);
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
-
-        // Users
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/users/' . $userB->uuid . '/reactions', [
                 'type' => 'Follow',
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/users/' . $userB->uuid . '/reactions');
-
+        $response->assertOk();
         $response->assertJsonStructure([
             'reactable' => [
                 'follow',
             ]
         ]);
-
         $response->assertJsonFragment([
             'follow' => true
         ]);
-
-        $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/users/' . $userB->uuid . '/reactions', [
                 'type' => 'Follow',
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/users/' . $userB->uuid . '/reactions');
-
         $response->assertOk();
-
         $response->assertJsonStructure([
             'reactable' => [
                 'follow',
             ]
         ]);
-
         $response->assertJsonFragment([
             'follow' => false
         ]);

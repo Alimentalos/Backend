@@ -10,11 +10,11 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanGetGeofencesPhotosTest extends TestCase
+class UserCanViewPhotosOfGeofenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanGetGeofencesPhotos()
+    final public function testUserCanViewPhotosOfGeofence()
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();

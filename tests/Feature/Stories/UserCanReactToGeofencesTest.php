@@ -31,48 +31,35 @@ class UserCanReactToGeofencesTest extends TestCase
             ->assertExitCode(0);
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
-
-        // Geofences
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/geofences/' . $geofence->uuid . '/reactions', [
                 'type' => 'Follow',
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/geofences/' . $geofence->uuid . '/reactions');
-
+        $response->assertOk();
         $response->assertJsonStructure([
             'reactable' => [
                 'follow',
             ]
         ]);
-
         $response->assertJsonFragment([
             'follow' => true
         ]);
-
-        $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/geofences/' . $geofence->uuid . '/reactions', [
                 'type' => 'Follow',
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/geofences/' . $geofence->uuid . '/reactions');
-
         $response->assertOk();
-
         $response->assertJsonStructure([
             'reactable' => [
                 'follow',
             ]
         ]);
-
         $response->assertJsonFragment([
             'follow' => false
         ]);

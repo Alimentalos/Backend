@@ -25,6 +25,7 @@ class UserCanViewOwnedGeofenceOfOwnedGroupTest extends TestCase
         $geofence->save();
         $group->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/geofences');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -48,6 +49,5 @@ class UserCanViewOwnedGeofenceOfOwnedGroupTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 }

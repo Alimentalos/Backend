@@ -42,7 +42,6 @@ class GroupAdministratorCanUpdateGroupWithPhotoTest extends TestCase
         $response->assertOk();
         $content = $response->getContent();
         Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
-
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',

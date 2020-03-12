@@ -29,7 +29,6 @@ class UserCanViewPhotoListOfPetTest extends TestCase
         $pet->photos()->attach($photo);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/photos');
         $response->assertOk();
-
         $response->assertJsonStructure([
             'current_page',
             'data' => [[

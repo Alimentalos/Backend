@@ -37,7 +37,6 @@ class GroupAdministratorCanUpdateGroupTest extends TestCase
             'resource' => 'App\\Http\\Controllers\\Api\\Resource\\UpdateController',
             'referenced_uuid' => $group->uuid,
         ]);
-
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',

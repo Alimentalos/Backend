@@ -21,7 +21,6 @@ class UserCanDeleteOwnedDeviceTest extends TestCase
         $device->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/devices/' . $device->uuid);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'message'
         ]);

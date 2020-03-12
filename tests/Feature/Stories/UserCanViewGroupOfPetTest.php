@@ -49,6 +49,7 @@ class UserCanViewGroupOfPetTest extends TestCase
             '/api/pets/' . $pet->uuid . '/groups',
             []
         );
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -72,6 +73,5 @@ class UserCanViewGroupOfPetTest extends TestCase
         $response->assertJsonFragment([
             'photo_uuid' => json_decode($response->getContent())->data[0]->photo->uuid,
         ]);
-        $response->assertOk();
     }
 }

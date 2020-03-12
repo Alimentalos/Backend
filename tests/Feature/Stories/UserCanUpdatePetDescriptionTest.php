@@ -24,12 +24,11 @@ class UserCanUpdatePetDescriptionTest extends TestCase
             'description' => 'New description',
             'coordinates' => '5.5,6.5',
         ]);
+        $response->assertOk();
         $response->assertJsonFragment([
             'name' => 'New name',
             'description' => 'New description',
         ]);
-        $response->assertOk();
-
         $this->assertDatabaseHas('pets', [
             'uuid' => $pet->uuid,
             'name' => 'New name',

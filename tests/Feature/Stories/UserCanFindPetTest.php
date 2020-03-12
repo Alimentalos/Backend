@@ -27,6 +27,7 @@ class UserCanFindPetTest extends TestCase
             'identifiers' => [$pet->uuid],
             'accuracy' => 100,
         ]);
+        $responsePets->assertOk();
         $responsePets->assertJsonStructure([
             [
                 'trackable_id',
@@ -38,6 +39,5 @@ class UserCanFindPetTest extends TestCase
                 'created_at'
             ]
         ]);
-        $responsePets->assertOk();
     }
 }

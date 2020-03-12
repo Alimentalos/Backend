@@ -26,7 +26,6 @@ class UserCanUpdatePhotoTest extends TestCase
             'body' => 'New body added'
         ]);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'location' =>[
                 'type',
@@ -42,14 +41,11 @@ class UserCanUpdatePhotoTest extends TestCase
             'updated_at',
             'love_reactant_id',
         ]);
-
         $response->assertJsonFragment([
             'uuid' => $photo->uuid
         ]);
-
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'location' =>[
                 'type',
@@ -65,7 +61,6 @@ class UserCanUpdatePhotoTest extends TestCase
             'updated_at',
             'love_reactant_id',
         ]);
-
         $response->assertJsonFragment([
             'uuid' => $photo->uuid
         ]);

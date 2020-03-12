@@ -29,6 +29,7 @@ class UserCanUpdateOwnedGeofenceTest extends TestCase
                 ['latitude' => 0, 'longitude' => 0],
             ]
         ]);
+        $response->assertOk();
         $response->assertJsonFragment([
             'uuid' => $geofence->uuid,
             'user_uuid' => $user->uuid,
@@ -55,6 +56,5 @@ class UserCanUpdateOwnedGeofenceTest extends TestCase
             'user',
             'photo'
         ]);
-        $response->assertOk();
     }
 }

@@ -21,13 +21,11 @@ class UserCanViewNonPublicDevicesTest extends TestCase
         $group = factory(Group::class)->create();
         $device->is_public = false;
         $device->user_uuid = $user->uuid;
-
         $device->save();
         $group->devices()->attach($device->uuid);
         $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'user_uuid',
             'location' => [

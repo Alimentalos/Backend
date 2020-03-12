@@ -25,9 +25,7 @@ class UserCanCreateCommentOfPetTest extends TestCase
             'body' => $comment->body
         ]);
         $response->assertOk();
-
         $content = $response->getContent();
-
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($content))->uuid,
             'user_uuid' => $user->uuid,

@@ -27,9 +27,7 @@ class UserCanCreateGroupCommentTest extends TestCase
             'is_public' => true,
         ]);
         $response->assertOk();
-
         $content = $response->getContent();
-
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($content))->uuid,
             'user_uuid' => $user->uuid,

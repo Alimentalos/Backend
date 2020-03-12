@@ -19,10 +19,8 @@ class UserCanDeleteOwnedCommentTest extends TestCase
         $comment = factory(Comment::class)->create();
         $comment->user_uuid = $user->uuid;
         $comment->save();
-
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/comments/' . $comment->uuid);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'message'
         ]);

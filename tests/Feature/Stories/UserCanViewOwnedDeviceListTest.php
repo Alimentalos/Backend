@@ -22,7 +22,6 @@ class UserCanViewOwnedDeviceListTest extends TestCase
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
-
         $response->assertJsonStructure([
             'current_page',
             'data' => [[

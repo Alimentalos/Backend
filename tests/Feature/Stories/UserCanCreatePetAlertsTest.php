@@ -34,10 +34,8 @@ class UserCanCreatePetAlertsTest extends TestCase
             'coordinates' => '5,5',
         ]);
         $response->assertCreated();
-
         $content = $response->getContent();
         Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
-
         $this->assertDatabaseHas('alerts', [
             'uuid' => (json_decode($content))->uuid,
             'title' => $alert->title,

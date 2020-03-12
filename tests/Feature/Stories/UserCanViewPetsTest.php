@@ -19,7 +19,6 @@ class UserCanViewPetsTest extends TestCase
         $pet = factory(Pet::class)->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',

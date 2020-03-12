@@ -23,13 +23,11 @@ class OwnerCanAttachChildUserInGroupsTest extends TestCase
         $group->users()->attach($user, ['is_admin' => true, 'status' => Group::ATTACHED_STATUS]);
         $userB->user_uuid = $user->uuid;
         $userB->save();
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/users/' . $userB->uuid . '/groups/' . $group->uuid . '/attach', [
                 'is_admin' => false,
             ]);
         $response->assertOk();
-
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
             'groupable_id' => $userB->uuid,
@@ -37,6 +35,5 @@ class OwnerCanAttachChildUserInGroupsTest extends TestCase
             'status' => Group::ATTACHED_STATUS,
             'is_admin' => false
         ]);
-        $response->assertOk();
     }
 }

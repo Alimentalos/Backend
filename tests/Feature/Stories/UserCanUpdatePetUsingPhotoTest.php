@@ -27,17 +27,16 @@ class UserCanUpdatePetUsingPhotoTest extends TestCase
             'name' => 'New name',
             'coordinates' => '5.5,6.5',
         ]);
+        $response->assertOk();
         $response->assertJsonFragment([
             "name" => "New name"
         ]);
         $response->assertOk();
-
         $this->assertDatabaseHas('pets', [
             'uuid' => $pet->uuid,
             'name' => 'New name'
         ]);
         $content = $response->getContent();
-
         Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
 }

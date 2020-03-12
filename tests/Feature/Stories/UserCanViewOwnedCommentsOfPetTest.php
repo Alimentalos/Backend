@@ -55,6 +55,5 @@ class UserCanViewOwnedCommentsOfPetTest extends TestCase
             'body' => $comment->body,
         ]);
         $response->assertJsonCount(1, 'data');
-        $response->assertOk();
     }
 }

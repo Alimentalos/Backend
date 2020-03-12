@@ -19,7 +19,6 @@ class UserCanUpdateHisProfileTest extends TestCase
             'name' => 'New name',
             'coordinates' => '5.5,6.5',
         ]);
-
         $response->assertOk();
         $response->assertJsonStructure([
             'photo_url',

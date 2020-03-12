@@ -23,7 +23,6 @@ class UserCanViewDevicesOfGroupTest extends TestCase
         $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/devices');
         $response->assertOk();
-
         $response->assertJsonStructure([
             'current_page',
             'data' => [[
@@ -53,6 +52,5 @@ class UserCanViewDevicesOfGroupTest extends TestCase
         $response->assertJsonFragment([
             'uuid' => $device->uuid,
         ]);
-
     }
 }

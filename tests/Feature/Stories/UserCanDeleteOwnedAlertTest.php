@@ -23,15 +23,12 @@ class UserCanDeleteOwnedAlertTest extends TestCase
         $alert->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/alerts/' . $alert->uuid);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'message'
         ]);
         $response->assertJsonFragment([
             'message' => 'Resource deleted successfully'
         ]);
-
-
         $this->assertDeleted('alerts', [
             'uuid' => $alert->uuid,
         ]);

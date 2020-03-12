@@ -25,6 +25,7 @@ class UserCanViewGeofencesOfOwnedPetTest extends TestCase
         $pet->save();
         $pet->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/geofences');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -48,6 +49,5 @@ class UserCanViewGeofencesOfOwnedPetTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 }

@@ -20,12 +20,10 @@ class UserCanCreateCommentsOfCommentTest extends TestCase
         $photo = factory(Photo::class)->create();
         $parentComment = factory(Comment::class)->make();
         $childComment = factory(Comment::class)->make();
-
         $response = $this->actingAs($user, 'api')->json('POST', '/api/photos/' . $photo->uuid . '/comments', [
             'body' => $parentComment->body,
         ]);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'uuid',
             'body',
@@ -39,7 +37,6 @@ class UserCanCreateCommentsOfCommentTest extends TestCase
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid
         ]);
-
         $parentContent = $response->getContent();
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($parentContent))->uuid,
@@ -48,12 +45,10 @@ class UserCanCreateCommentsOfCommentTest extends TestCase
             'commentable_id' => $photo->uuid,
             'body' => $parentComment->body,
         ]);
-
         $response = $this->actingAs($user, 'api')->json('POST', '/api/comments/' . (json_decode($parentContent))->uuid . '/comments', [
             'body' => $childComment->body,
         ]);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'uuid',
             'body',
@@ -68,7 +63,6 @@ class UserCanCreateCommentsOfCommentTest extends TestCase
             'user_uuid' => $user->uuid,
             'body' => $childComment->body,
         ]);
-
         $childContent = $response->getContent();
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($childContent))->uuid,
@@ -77,10 +71,8 @@ class UserCanCreateCommentsOfCommentTest extends TestCase
             'commentable_id' => (json_decode($parentContent))->uuid,
             'body' => $childComment->body,
         ]);
-
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . (json_decode($parentContent))->uuid . '/comments');
         $response->assertOk();
-
         $response->assertJsonStructure([
             'current_page',
             'data' => [[

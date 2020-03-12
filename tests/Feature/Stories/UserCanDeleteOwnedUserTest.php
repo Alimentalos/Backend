@@ -20,7 +20,6 @@ class UserCanDeleteOwnedUserTest extends TestCase
         $userB->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/users/' . $userB->uuid);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'message'
         ]);

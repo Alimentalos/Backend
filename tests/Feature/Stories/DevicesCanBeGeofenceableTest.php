@@ -52,8 +52,6 @@ class DevicesCanBeGeofenceableTest extends TestCase
         $location3 = factory(Location::class)->make();
         $location4 = factory(Location::class)->make();
         $location5 = factory(Location::class)->make();
-
-        // data
         $firstPayload = [
             'device' => '{}',
             'location' => [
@@ -80,7 +78,6 @@ class DevicesCanBeGeofenceableTest extends TestCase
                 'timestamp' => time(),
             ],
         ];
-
         $secondPayload = [
             'device' => '{}',
             'location' => [
@@ -107,7 +104,6 @@ class DevicesCanBeGeofenceableTest extends TestCase
                 'timestamp' => time(),
             ],
         ];
-
         $thirdPayload = [
             'device' => '{}',
             'location' => [
@@ -134,7 +130,6 @@ class DevicesCanBeGeofenceableTest extends TestCase
                 'timestamp' => time(),
             ],
         ];
-
         $fourPayload = [
             'device' => '{}',
             'location' => [
@@ -161,7 +156,6 @@ class DevicesCanBeGeofenceableTest extends TestCase
                 'timestamp' => time(),
             ],
         ];
-
         $fivePayload = [
             'device' => '{}',
             'location' => [
@@ -188,10 +182,8 @@ class DevicesCanBeGeofenceableTest extends TestCase
                 'timestamp' => time(),
             ],
         ];
-
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $firstPayload);
         $response->assertCreated();
-
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -220,7 +212,6 @@ class DevicesCanBeGeofenceableTest extends TestCase
             'latitude' => $firstPayload['location']['coords']['latitude'],
             'longitude' => $firstPayload['location']['coords']['longitude'],
         ]);
-
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $secondPayload);
         $response->assertCreated();
         $response->assertJsonStructure([
@@ -251,18 +242,15 @@ class DevicesCanBeGeofenceableTest extends TestCase
             'latitude' => $secondPayload['location']['coords']['latitude'],
             'longitude' => $secondPayload['location']['coords']['longitude'],
         ]);
-
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($device, $response) {
             return $e->model->uuid === $device->uuid &&
                 $e->location->trackable_type === 'App\\Device' &&
                 $e->location->trackable_id === $device->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/locations/' . json_decode($response->getContent())->uuid);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'trackable_type',
             'trackable_id',
@@ -302,10 +290,8 @@ class DevicesCanBeGeofenceableTest extends TestCase
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
         ]);
-
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $thirdPayload);
         $response->assertCreated();
-
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -331,19 +317,14 @@ class DevicesCanBeGeofenceableTest extends TestCase
             'trackable_type' => 'App\\Device',
             'accuracy' => $thirdPayload['location']['coords']['accuracy'],
         ]);
-
-
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($device, $response) {
             return $e->model->uuid === $device->uuid &&
                 $e->location->trackable_type === 'App\\Device' &&
                 $e->location->trackable_id === $device->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
-
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $fourPayload);
         $response->assertCreated();
-
-
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -364,23 +345,19 @@ class DevicesCanBeGeofenceableTest extends TestCase
             'generated_at',
             'created_at',
         ]);
-
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
             'trackable_type' => 'App\\Device',
             'accuracy' => $fourPayload['location']['coords']['accuracy'],
         ]);
-
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($device, $response) {
             return $e->model->uuid === $device->uuid &&
                 $e->location->trackable_type === 'App\\Device' &&
                 $e->location->trackable_id === $device->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
-
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', $fivePayload);
         $response->assertCreated();
-
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -401,21 +378,17 @@ class DevicesCanBeGeofenceableTest extends TestCase
             'generated_at',
             'created_at',
         ]);
-
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
             'trackable_type' => 'App\\Device',
             'accuracy' => $fivePayload['location']['coords']['accuracy'],
         ]);
-
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($device, $response) {
             return $e->model->uuid === $device->uuid &&
                 $e->location->trackable_type === 'App\\Device' &&
                 $e->location->trackable_id === $device->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
-
-        // Devices tests
         $response = $this->actingAs($user, 'api')
             ->get('/api/devices/' . $device->uuid . '/accesses');
         $response->assertOk();
@@ -430,7 +403,6 @@ class DevicesCanBeGeofenceableTest extends TestCase
             ]
         ]);
         $response->assertJsonCount(2, 'data');
-
         $response = $this->actingAs($user, 'api')
             ->get('/api/devices/' . $device->uuid . '/geofences/' . $geofence->uuid . '/accesses');
         $response->assertOk();
@@ -445,7 +417,6 @@ class DevicesCanBeGeofenceableTest extends TestCase
             ]
         ]);
         $response->assertJsonCount(2, 'data');
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/geofences/' . $geofence->uuid . '/devices/accesses');
         $response->assertOk();

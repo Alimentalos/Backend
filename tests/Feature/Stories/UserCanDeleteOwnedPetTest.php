@@ -21,7 +21,6 @@ class UserCanDeleteOwnedPetTest extends TestCase
         $pet->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/pets/' . $pet->uuid);
         $response->assertOk();
-
         $this->assertDeleted('pets', [
             'uuid' => $pet->uuid,
         ]);

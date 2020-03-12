@@ -29,11 +29,11 @@ class UsersCanDetachOwnedGeofenceOfOwnedGroupTest extends TestCase
             '/api/groups/' . $group->uuid . '/geofences/' . $geofence->uuid . '/detach',
             []
         );
+        $response->assertOk();
         $this->assertDeleted('groupables', [
             'groupable_id' => $geofence->uuid,
             'groupable_type' => 'App\\Geofence',
             'group_uuid' => $group->uuid,
         ]);
-        $response->assertOk();
     }
 }

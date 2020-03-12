@@ -23,7 +23,7 @@ class UserCanFindAndReceiveNotFoundTest extends TestCase
             'identifiers' => [$pet->uuid],
             'accuracy' => 100,
         ]);
-        $responsePets->assertExactJson([]);
         $responsePets->assertOk();
+        $responsePets->assertExactJson([]);
     }
 }

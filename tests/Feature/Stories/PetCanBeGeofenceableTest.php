@@ -52,8 +52,6 @@ class PetCanBeGeofenceableTest extends TestCase
         $location3 = factory(Location::class)->make();
         $location4 = factory(Location::class)->make();
         $location5 = factory(Location::class)->make();
-
-        // data
         $firstPayload = [
             'device' => '{}',
             'location' => [
@@ -80,7 +78,6 @@ class PetCanBeGeofenceableTest extends TestCase
                 'timestamp' => time(),
             ],
         ];
-
         $secondPayload = [
             'device' => '{}',
             'location' => [
@@ -107,7 +104,6 @@ class PetCanBeGeofenceableTest extends TestCase
                 'timestamp' => time(),
             ],
         ];
-
         $thirdPayload = [
             'device' => '{}',
             'location' => [
@@ -134,7 +130,6 @@ class PetCanBeGeofenceableTest extends TestCase
                 'timestamp' => time(),
             ],
         ];
-
         $fourPayload = [
             'device' => '{}',
             'location' => [
@@ -161,7 +156,6 @@ class PetCanBeGeofenceableTest extends TestCase
                 'timestamp' => time(),
             ],
         ];
-
         $fivePayload = [
             'device' => '{}',
             'location' => [
@@ -188,10 +182,8 @@ class PetCanBeGeofenceableTest extends TestCase
                 'timestamp' => time(),
             ],
         ];
-
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $firstPayload);
         $response->assertCreated();
-
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -219,10 +211,8 @@ class PetCanBeGeofenceableTest extends TestCase
             'latitude' => $firstPayload['location']['coords']['latitude'],
             'longitude' => $firstPayload['location']['coords']['longitude'],
         ]);
-
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $secondPayload);
         $response->assertCreated();
-
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -248,18 +238,14 @@ class PetCanBeGeofenceableTest extends TestCase
             'trackable_type' => 'App\\Pet',
             'accuracy' => $secondPayload['location']['coords']['accuracy'],
         ]);
-
-
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($pet, $response) {
             return $e->model->uuid === $pet->uuid &&
                 $e->location->trackable_type === 'App\\Pet' &&
                 $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
-
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $thirdPayload);
         $response->assertCreated();
-
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -280,24 +266,19 @@ class PetCanBeGeofenceableTest extends TestCase
             'generated_at',
             'created_at',
         ]);
-
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
             'trackable_type' => 'App\\Pet',
             'accuracy' => $thirdPayload['location']['coords']['accuracy'],
         ]);
-
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($pet, $response) {
             return $e->model->uuid === $pet->uuid &&
                 $e->location->trackable_type === 'App\\Pet' &&
                 $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
-
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $fourPayload);
         $response->assertCreated();
-
-
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -318,23 +299,19 @@ class PetCanBeGeofenceableTest extends TestCase
             'generated_at',
             'created_at',
         ]);
-
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
             'trackable_type' => 'App\\Pet',
             'accuracy' => $fourPayload['location']['coords']['accuracy'],
         ]);
-
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($pet, $response) {
             return $e->model->uuid === $pet->uuid &&
                 $e->location->trackable_type === 'App\\Pet' &&
                 $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
-
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $fivePayload);
         $response->assertCreated();
-
         $response->assertJsonStructure([
             'uuid',
             'trackable_id',
@@ -355,21 +332,17 @@ class PetCanBeGeofenceableTest extends TestCase
             'generated_at',
             'created_at',
         ]);
-
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
             'trackable_type' => 'App\\Pet',
             'accuracy' => $fivePayload['location']['coords']['accuracy'],
         ]);
-
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($pet, $response) {
             return $e->model->uuid === $pet->uuid &&
                 $e->location->trackable_type === 'App\\Pet' &&
                 $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
-
-        // Pets tests
         $response = $this->actingAs($user, 'api')
             ->get('/api/geofences/' . $geofence->uuid . '/pets/accesses');
         $response->assertOk();
@@ -384,7 +357,6 @@ class PetCanBeGeofenceableTest extends TestCase
             ]
         ]);
         $response->assertJsonCount(2, 'data');
-
         $response = $this->actingAs($user, 'api')
             ->get('/api/pets/' . $pet->uuid . '/geofences/' . $geofence->uuid . '/accesses');
         $response->assertOk();
@@ -398,7 +370,6 @@ class PetCanBeGeofenceableTest extends TestCase
                 ]
             ]
         ]);
-
         $response = $this->actingAs($user, 'api')
             ->get('/api/pets/' . $pet->uuid . '/accesses');
         $response->assertOk();

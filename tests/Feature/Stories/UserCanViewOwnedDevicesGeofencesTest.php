@@ -33,7 +33,6 @@ class UserCanViewOwnedDevicesGeofencesTest extends TestCase
         $device->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid . '/geofences');
         $response->assertOk();
-
         $response->assertJsonStructure([
             'current_page',
             'data' => [

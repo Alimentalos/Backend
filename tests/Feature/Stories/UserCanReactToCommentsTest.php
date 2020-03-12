@@ -31,20 +31,14 @@ class UserCanReactToCommentsTest extends TestCase
             ->assertExitCode(0);
         $user = factory(User::class)->create();
         $comment = factory(Comment::class)->create();
-
-        // Comments
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/comments/' . $comment->uuid . '/reactions', [
                 'type' => 'Like',
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/comments/' . $comment->uuid . '/reactions');
-
         $response->assertOk();
-
         $response->assertJsonStructure([
             'reactable' => [
                 'like',
@@ -55,25 +49,17 @@ class UserCanReactToCommentsTest extends TestCase
                 'sad',
             ]
         ]);
-
         $response->assertJsonFragment([
             'like' => true
         ]);
-
-        $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/comments/' . $comment->uuid . '/reactions', [
                 'type' => 'Like',
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/comments/' . $comment->uuid . '/reactions');
-
         $response->assertOk();
-
         $response->assertJsonStructure([
             'reactable' => [
                 'like',
@@ -84,7 +70,6 @@ class UserCanReactToCommentsTest extends TestCase
                 'sad',
             ]
         ]);
-
         $response->assertJsonFragment([
             'like' => false
         ]);

@@ -49,7 +49,6 @@ class UserCanViewOwnDeviceListTest extends TestCase
             'to',
             'total',
         ]);
-
         $response->assertJsonFragment([
             'uuid' => $device->uuid,
             'user_uuid' => $user->uuid,

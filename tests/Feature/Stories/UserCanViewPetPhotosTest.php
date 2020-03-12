@@ -21,6 +21,7 @@ class UserCanViewPetPhotosTest extends TestCase
         $photo = factory(Photo::class)->create();
         $photo->pets()->attach($pet->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/photos');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -36,6 +37,5 @@ class UserCanViewPetPhotosTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 }

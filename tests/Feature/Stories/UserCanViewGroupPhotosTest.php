@@ -22,6 +22,7 @@ class UserCanViewGroupPhotosTest extends TestCase
         $photo->groups()->attach($group->uuid);
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/photos');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -37,6 +38,5 @@ class UserCanViewGroupPhotosTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 }

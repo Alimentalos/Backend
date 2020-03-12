@@ -17,6 +17,6 @@ class VerifiedUserCanViewDashboardTest extends TestCase
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)
             ->get('/home');
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 }

@@ -45,8 +45,6 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         ]);
         $group->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid);
-        //
-//        dd($response->getContent());
         $response->assertOk();
         $response->assertJsonStructure([
             'uuid',
@@ -62,8 +60,8 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         $response->assertJsonFragment([
             'uuid' => $group->uuid,
         ]);
-        $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/pets');
+        $response->assertOk();
         $response->assertJsonStructure([
             'current_page',
             'data' => [
@@ -108,8 +106,8 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         $response->assertJsonFragment([
             'uuid' => $pet->uuid,
         ]);
-        $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/users');
+        $response->assertOk();
         $response -> assertJsonStructure([
             'current_page',
             'first_page_url',
@@ -151,8 +149,8 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
             'name' => $user->name,
             'email' => $user->email,
         ]);
-        $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/comments');
+        $response->assertOk();
         $response -> assertJsonStructure([
             'current_page',
             'first_page_url',
@@ -182,6 +180,5 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
             'name' => $user->name,
             'email' => $user->email,
         ]);
-        $response->assertOk();
     }
 }

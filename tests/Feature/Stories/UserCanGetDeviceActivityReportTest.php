@@ -33,7 +33,6 @@ class UserCanGetDeviceActivityReportTest extends TestCase
             'device_uuid' => $device->uuid,
             'is_moving' => 0
         ]);
-
         $location3 = $device->locations()->create(
             factory(Location::class)->make()->toArray()
         );
@@ -42,7 +41,6 @@ class UserCanGetDeviceActivityReportTest extends TestCase
             'device_uuid' => $device->uuid,
             'is_moving' => 1
         ]);
-
         $location4 = $device->locations()->create(
             factory(Location::class)->make()->toArray()
         );
@@ -51,7 +49,6 @@ class UserCanGetDeviceActivityReportTest extends TestCase
             'device_uuid' => $device->uuid,
             'is_moving' => 1
         ]);
-
         $location5 = $device->locations()->create(
             factory(Location::class)->make()->toArray()
         );
@@ -128,10 +125,8 @@ class UserCanGetDeviceActivityReportTest extends TestCase
                 ]],
             ]],
         ]]);
-
         $response->assertJsonFragment([
             'uuid' => $device->uuid
         ]);
-
     }
 }

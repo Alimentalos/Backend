@@ -36,7 +36,6 @@ class UserCanDetachPetOfGroupTest extends TestCase
             []
         );
         $response->assertOk();
-
         $this->assertDeleted('groupables', [
             'groupable_type' => 'App\\Pet',
             'groupable_id' => $pet->uuid,

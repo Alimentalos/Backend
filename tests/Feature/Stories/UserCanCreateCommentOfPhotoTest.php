@@ -28,13 +28,11 @@ class UserCanCreateCommentOfPhotoTest extends TestCase
         $pet->save();
         $pet->photos()->attach($photo);
         $comment = factory(Comment::class)->make();
-
         $response = $this->actingAs($user, 'api')->json('POST', '/api/photos/' . $photo->uuid . '/comments', [
             'body' => $comment->body,
             'is_public' => true,
         ]);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'uuid',
             'body',
@@ -48,7 +46,6 @@ class UserCanCreateCommentOfPhotoTest extends TestCase
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid
         ]);
-
         $content = $response->getContent();
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($content))->uuid,

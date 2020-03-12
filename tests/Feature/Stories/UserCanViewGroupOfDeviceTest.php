@@ -42,6 +42,7 @@ class UserCanViewGroupOfDeviceTest extends TestCase
             '/api/devices/' . $device->uuid . '/groups',
             []
         );
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [

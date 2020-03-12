@@ -39,9 +39,6 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $pet->save();
         $user->save();
         $photo->save();
-
-        // User
-
         $response = $this->actingAs($user, 'api')->json('POST', '/api/users/' . $user->uuid . '/photos/', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'title' => 'New title',
@@ -68,10 +65,6 @@ class UserCanCreateResourcePhotosTest extends TestCase
             'user_uuid' => $user->uuid
         ]);
         Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
-
-
-        // Pet
-
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets/' . $pet->uuid . '/photos/', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'title' => 'New title',
@@ -98,11 +91,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid
         ]);
-
         Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
-
-        // Geofence
-
         $response = $this->actingAs($user, 'api')->json('POST', '/api/geofences/' . $geofence->uuid . '/photos/', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'title' => 'New title',
@@ -130,9 +119,6 @@ class UserCanCreateResourcePhotosTest extends TestCase
             'user_uuid' => $user->uuid
         ]);
         Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
-
-        // Group
-
         $response = $this->actingAs($user, 'api')->json('POST', '/api/groups/' . $group->uuid . '/photos/', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'title' => 'New title',

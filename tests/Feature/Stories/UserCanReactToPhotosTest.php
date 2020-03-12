@@ -31,18 +31,14 @@ class UserCanReactToPhotosTest extends TestCase
             ->assertExitCode(0);
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
-
-        // Photos
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/photos/' . $photo->uuid . '/reactions', [
                 'type' => 'Love',
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/photos/' . $photo->uuid . '/reactions');
-
+        $response->assertOk();
         $response->assertJsonStructure([
             'reactable' => [
                 'like',
@@ -53,25 +49,17 @@ class UserCanReactToPhotosTest extends TestCase
                 'sad',
             ]
         ]);
-
         $response->assertJsonFragment([
             'love' => true
         ]);
-
-        $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/photos/' . $photo->uuid . '/reactions', [
                 'type' => 'Love',
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/photos/' . $photo->uuid . '/reactions');
-
         $response->assertOk();
-
         $response->assertJsonStructure([
             'reactable' => [
                 'like',
@@ -82,7 +70,6 @@ class UserCanReactToPhotosTest extends TestCase
                 'sad',
             ]
         ]);
-
         $response->assertJsonFragment([
             'love' => false
         ]);

@@ -21,8 +21,8 @@ class UserGroupMemberCanViewOtherGroupMembersTest extends TestCase
         $user->groups()->attach($group, ['is_admin' => true]);
         $member->groups()->attach($group, ['is_admin' => false]);
         $response = $this->actingAs($member, 'api')->json('GET', '/api/groups/' . $group->uuid . '/users');
+        $response->assertOk();
         $response->assertJsonCount(2, 'data');
-
         $response -> assertJsonStructure([
             'current_page',
             'first_page_url',
@@ -66,6 +66,5 @@ class UserGroupMemberCanViewOtherGroupMembersTest extends TestCase
             'name' => $user->name,
             'email' => $user->email,
         ]);
-        $response->assertOk();
     }
 }

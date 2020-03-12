@@ -31,18 +31,14 @@ class UserCanReactToPetsTest extends TestCase
             ->assertExitCode(0);
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
-
-        // Pets
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/pets/' . $pet->uuid . '/reactions', [
                 'type' => 'Love',
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/pets/' . $pet->uuid . '/reactions');
-
+        $response->assertOk();
         $response->assertJsonStructure([
             'reactable' => [
                 'like',
@@ -53,25 +49,17 @@ class UserCanReactToPetsTest extends TestCase
                 'sad',
             ]
         ]);
-
         $response->assertJsonFragment([
             'love' => true
         ]);
-
-        $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/pets/' . $pet->uuid . '/reactions', [
                 'type' => 'Love',
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($user, 'api')
             ->json('GET', '/api/pets/' . $pet->uuid . '/reactions');
-
         $response->assertOk();
-
         $response->assertJsonStructure([
             'reactable' => [
                 'like',
@@ -82,7 +70,6 @@ class UserCanReactToPetsTest extends TestCase
                 'sad',
             ]
         ]);
-
         $response->assertJsonFragment([
             'love' => false
         ]);

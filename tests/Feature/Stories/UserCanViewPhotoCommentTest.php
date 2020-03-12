@@ -28,6 +28,7 @@ class UserCanViewPhotoCommentTest extends TestCase
             'body' => $comment->body,
         ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid . '/comments');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -39,6 +40,5 @@ class UserCanViewPhotoCommentTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 }

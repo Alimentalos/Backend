@@ -29,123 +29,95 @@ class UserCanHandleGroupInvitationsTest extends TestCase
         $acceptedUser->save();
         $rejectedUser->save();
         $blockedUser->save();
-
         // Accepted user case
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/users/' . $acceptedUser->uuid  . '/groups/' . $group->uuid . '/invite', [
                 'is_admin' => true,
             ]);
-
         $response->assertOk();
-
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
             'groupable_id' => $acceptedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::PENDING_STATUS
         ]);
-
         $response = $this->actingAs($acceptedUser, 'api')
             ->json('POST', '/api/users/' . $acceptedUser->uuid . '/groups/' . $group->uuid . '/accept', [
                 'is_admin' => true,
             ]);
-
         $response->assertOk();
-
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
             'groupable_id' => $acceptedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::ACCEPTED_STATUS
         ]);
-
         // Rejected user case
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/users/' . $rejectedUser->uuid . '/groups/' . $group->uuid . '/invite', [
                 'is_admin' => true,
             ]);
-
         $response->assertOk();
-
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
             'groupable_id' => $rejectedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::PENDING_STATUS
         ]);
-
         $response = $this->actingAs($rejectedUser, 'api')
             ->json('POST', '/api/users/' . $rejectedUser->uuid . '/groups/' . $group->uuid . '/reject', [
                 'is_admin' => true,
             ]);
-
         $response->assertOk();
-
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
             'groupable_id' => $rejectedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::REJECTED_STATUS
         ]);
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/users/' . $rejectedUser->uuid . '/groups/' . $group->uuid . '/invite', [
                 'is_admin' => true,
             ]);
-
         $response->assertOk();
-
         $response = $this->actingAs($rejectedUser, 'api')
             ->json('POST', '/api/users/' . $rejectedUser->uuid  . '/groups/' . $group->uuid . '/accept', [
                 'is_admin' => true,
             ]);
-
         $response->assertOk();
-
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
             'groupable_id' => $rejectedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::ACCEPTED_STATUS
         ]);
-
         // Blocked user case
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/users/' . $blockedUser->uuid . '/groups/' . $group->uuid . '/invite', [
                 'is_admin' => true,
             ]);
-
         $response->assertOk();
-
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
             'groupable_id' => $blockedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::PENDING_STATUS
         ]);
-
         $response = $this->actingAs($blockedUser, 'api')
             ->json('POST', '/api/users/' . $blockedUser->uuid . '/groups/' . $group->uuid . '/block', [
                 'is_admin' => true,
             ]);
-
         $response->assertOk();
-
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\User',
             'groupable_id' => $blockedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::BLOCKED_STATUS
         ]);
-
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/users/' . $blockedUser->uuid . '/groups/' . $group->uuid . '/invite', [
                 'is_admin' => true,
             ]);
-
         $response->assertStatus(403);
     }
 }

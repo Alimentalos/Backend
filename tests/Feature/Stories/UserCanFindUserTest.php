@@ -25,6 +25,7 @@ class UserCanFindUserTest extends TestCase
             'identifiers' => [$user->uuid],
             'accuracy' => 100,
         ]);
+        $responseUsers->assertOk();
         $responseUsers->assertJsonStructure([
             [
                 'trackable_id',
@@ -39,6 +40,5 @@ class UserCanFindUserTest extends TestCase
                 'created_at'
             ]
         ]);
-        $responseUsers->assertOk();
     }
 }

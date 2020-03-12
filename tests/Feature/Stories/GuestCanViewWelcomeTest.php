@@ -14,7 +14,6 @@ class GuestCanViewWelcomeTest extends TestCase
     public function testGuestCanViewWelcome()
     {
         $response = $this->get('/');
-
         $response->assertStatus(200);
     }
 }

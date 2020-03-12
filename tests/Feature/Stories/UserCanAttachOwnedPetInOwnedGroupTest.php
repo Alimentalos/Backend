@@ -33,7 +33,6 @@ class UserCanAttachOwnedPetInOwnedGroupTest extends TestCase
             []
         );
         $response->assertOk();
-
         $this->assertDatabaseHas('groupables', [
             'groupable_type' => 'App\\Pet',
             'groupable_id' => $pet->uuid,

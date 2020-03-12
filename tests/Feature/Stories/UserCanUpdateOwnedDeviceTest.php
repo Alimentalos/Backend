@@ -24,7 +24,6 @@ class UserCanUpdateOwnedDeviceTest extends TestCase
             'is_public' => false,
         ]);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',

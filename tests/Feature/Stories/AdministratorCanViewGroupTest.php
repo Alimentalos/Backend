@@ -34,7 +34,6 @@ class AdministratorCanViewGroupTest extends TestCase
         $user->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups');
         $response->assertOk();
-//        dd(json_decode($response->getContent()));
         $response->assertJsonStructure([
             'current_page',
             'data' => [
@@ -61,7 +60,6 @@ class AdministratorCanViewGroupTest extends TestCase
             'to',
             'total',
         ]);
-        // Assert contains the group uuid and user uuid.
         $response->assertJsonFragment([
             'uuid' => $group->uuid,
         ]);
