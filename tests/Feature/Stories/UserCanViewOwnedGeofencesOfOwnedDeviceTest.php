@@ -10,11 +10,11 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewGeofencesOfDeviceTest extends TestCase
+class UserCanViewOwnedGeofencesOfOwnedDeviceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanViewGeofencesOfDevice()
+    final public function testUserCanViewOwnedGeofencesOfOwnedDevice()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

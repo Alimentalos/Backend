@@ -10,22 +10,20 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewCommentsOfOwnedAlertTest extends TestCase
+class UserCanViewOwnedCommentsOfAlertTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanViewCommentsOfOwnedAlert()
+    final public function testUserCanViewOwnedCommentsOfAlert()
     {
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->create();
         $comment = factory(Comment::class)->make();
-
         $alert->comments()->create([
             'user_uuid' => $user->uuid,
             'title' => $comment->title,
             'body' => $comment->body,
         ]);
-
         $response = $this->actingAs($user, 'api')->json('GET', '/api/alerts/' . $alert->uuid . '/comments');
         $response->assertOk();
         $response->assertJsonStructure([
@@ -54,20 +52,17 @@ class UserCanViewCommentsOfOwnedAlertTest extends TestCase
             'to',
             'total',
         ]);
-
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid,
             'body' => $comment->body,
             'title' => $comment->title,
         ]);
-
         $this->assertDatabaseHas('comments', [
             'user_uuid' => $user->uuid,
             'commentable_type' => 'App\\Alert',
             'commentable_id' => $alert->uuid,
             'body' => $comment->body,
         ]);
-
         $response->assertJsonCount(1, 'data');
     }
 }

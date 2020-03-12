@@ -17,13 +17,17 @@ class UserCanViewAlertsTest extends TestCase
     {
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->create();
-        $response = $this->actingAs($user, 'api')->get('/api/alerts/' . $alert->uuid);
+        $response = $this->actingAs($user, 'api')->get('/api/alerts');
         $response->assertJsonStructure([
-            'uuid',
-            'location',
-            'user',
-            'photo',
-            'alert'
+            'data' => [
+                [
+                    'uuid',
+                    'location',
+                    'user',
+                    'photo',
+                    'alert'
+                ]
+            ]
         ]);
     }
 }

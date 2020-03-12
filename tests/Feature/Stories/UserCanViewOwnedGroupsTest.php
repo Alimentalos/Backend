@@ -10,11 +10,11 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewAvailableGroupsTest extends TestCase
+class UserCanViewOwnedGroupsTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanViewAvailableGroups()
+    final public function testUserCanViewOwnedGroups()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
@@ -25,10 +25,8 @@ class UserCanViewAvailableGroupsTest extends TestCase
             'status' => Group::ACCEPTED_STATUS,
             'is_admin' => false,
         ]);
-
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/groups');
         $response->assertOk();
-
         $response->assertJsonStructure([
             'current_page',
             'data' => [
@@ -65,7 +63,6 @@ class UserCanViewAvailableGroupsTest extends TestCase
             'to',
             'total',
         ]);
-        // Assert contains the group uuid and user uuid.
         $response->assertJsonFragment([
             'uuid' => $group->uuid,
             'user_uuid' => $user->uuid,

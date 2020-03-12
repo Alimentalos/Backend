@@ -10,11 +10,11 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewGeofenceListOfGroupTest extends TestCase
+class UserCanViewOwnedGeofenceOfOwnedGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCanViewGeofenceListOfGroup()
+    public function testUserCanViewOwnedGeofenceOfOwnedGroup()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();

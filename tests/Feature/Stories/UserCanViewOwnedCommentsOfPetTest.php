@@ -11,31 +11,25 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewCommentsOfPetTest extends TestCase
+class UserCanViewOwnedCommentsOfPetTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanViewCommentsOfPet()
+    final public function testUserCanViewOwnedCommentsOfPet()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
         $photo = factory(Photo::class)->create();
         $comment = factory(Comment::class)->make();
-
         $pet->comments()->create([
             'user_uuid' => $user->uuid,
             'title' => $comment->title,
             'body' => $comment->body,
         ]);
-
         $photo->pets()->attach($pet);
         $photo->save();
-
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/comments');
-
         $response->assertOk();
-
-
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -49,7 +43,6 @@ class UserCanViewCommentsOfPetTest extends TestCase
                 ]
             ]
         ]);
-        // Forma de comprobar
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid,
             'body' => $comment->body,

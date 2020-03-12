@@ -6,6 +6,9 @@ namespace Tests\Feature\Stories;
 
 use App\Geofence;
 use App\User;
+use Grimzy\LaravelMysqlSpatial\Types\LineString;
+use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,38 +16,35 @@ class UserCanViewOwnedGeofencesTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCanViewOwnedGeofences()
+    final public function testUserCanViewGeofences()
     {
         $user = factory(User::class)->create();
-        $geofence = factory(Geofence::class)->create();
+        $geofence = new Geofence();
+        $geofence->name = "Geofence";
         $geofence->user_uuid = $user->uuid;
+        $geofence->uuid = uuid();
+        $geofence->shape = new Polygon([new LineString([
+            new Point(0, 0),
+            new Point(0, 5),
+            new Point(5, 5),
+            new Point(5, 0),
+            new Point(0, 0)
+        ])]);
         $geofence->save();
-        $user->geofences()->attach($geofence);
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/geofences');
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/geofences');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
                     'uuid',
-                    'user_uuid',
-                    'photo_uuid',
+                    'user',
+                    'photo',
                     'name',
                     'description',
-                    'shape' => [
-                        'type',
-                        'coordinates'
-                    ],
+                    'shape',
                     'is_public',
-                    'created_at',
-                    'updated_at',
-                    'pivot' => [
-                        'geofenceable_id',
-                        'geofenceable_type',
-                        'geofence_uuid',
-                    ]
                 ]
             ]
         ]);
-        $response->assertOk();
     }
-
 }

@@ -5,34 +5,28 @@ namespace Tests\Feature\Stories;
 
 
 use App\Comment;
-use App\Pet;
-use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewCommentsOfOwnedPhotoTest extends TestCase
+class UserCanViewOwnedCommentsOfOwnedCommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanViewCommentsOfOwnedPhoto()
+    final public function testUserCanViewOwnedCommentsOfOwnedComment()
     {
+        $sampleCommentBody = 'Sample comment';
         $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $photo = factory(Photo::class)->create();
-        $photo->user_uuid = $user->uuid;
-        $photo->pets()->attach($pet);
-        $photo->save();
-        $comment = factory(Comment::class)->make();
-        $photo->comments()->create([
+        $comment = factory(Comment::class)->create();
+        $comment->user_uuid = $user->uuid;
+        $comment->save();
+        $comment->comments()->create([
             'uuid' => uuid(),
+            'body' => $sampleCommentBody,
             'user_uuid' => $user->uuid,
-            'body' => $comment->body,
         ]);
-
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid . '/comments');
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . $comment->uuid . '/comments');
         $response->assertOk();
-
         $response->assertJsonStructure([
             'current_page',
             'data' => [[
@@ -58,7 +52,8 @@ class UserCanViewCommentsOfOwnedPhotoTest extends TestCase
             'total'
         ]);
         $response->assertJsonFragment([
-            'user_uuid' => $user->uuid
+            'user_uuid' => $user->uuid,
+            'body' => $sampleCommentBody,
         ]);
     }
 }
