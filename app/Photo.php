@@ -23,7 +23,7 @@ class Photo extends Model implements ReactableContract, Resource, UpdateFromRequ
     use Commentable;
 
     /**
-     * The default location field of alert.
+     * The default location field of photo.
      *
      * @var string
      */
