@@ -14,7 +14,7 @@ class UserCanCreateChildUsersTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testtestUserCanCreateChildUsers()
+    final public function testUserCanCreateChildUsers()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();

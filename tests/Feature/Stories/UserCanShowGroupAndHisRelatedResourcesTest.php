@@ -20,7 +20,6 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
-
         $photo = factory(Photo::class)->create();
         $photo->user_uuid = $user->uuid;
         $comment = factory(Comment::class)->create();
@@ -174,11 +173,6 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
                     'user',
                 ]
             ],
-        ]);
-        $response->assertJsonFragment([
-            'uuid' => $user->uuid,
-            'name' => $user->name,
-            'email' => $user->email,
         ]);
     }
 }

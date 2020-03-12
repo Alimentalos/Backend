@@ -14,9 +14,6 @@ class UserCanDetachOwnedDeviceOfGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanDetachOwnedDeviceOfGroup
-     */
     final public function testUserCanDetachOwnedDeviceOfGroup()
     {
         $user = factory(User::class)->create();

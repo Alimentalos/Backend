@@ -14,9 +14,6 @@ class UserCanDetachOwnedDeviceOfGeofenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * testUserCanDetachOwnedDeviceOfGeofence
-     */
     final public function testUserCanDetachOwnedDeviceOfGeofence()
     {
         $user = factory(User::class)->create();
