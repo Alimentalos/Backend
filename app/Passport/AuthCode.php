@@ -3,7 +3,6 @@
 namespace App\Passport;
 
 use Laravel\Passport\AuthCode as PassportAuthCode;
-use Laravel\Passport\Passport;
 
 class AuthCode extends PassportAuthCode
 {

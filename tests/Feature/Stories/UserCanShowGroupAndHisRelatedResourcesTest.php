@@ -5,9 +5,9 @@ namespace Tests\Feature\Stories;
 
 
 use App\Comment;
-use App\Photo;
 use App\Group;
 use App\Pet;
+use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

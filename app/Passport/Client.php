@@ -4,7 +4,6 @@ namespace App\Passport;
 
 use App\User;
 use Laravel\Passport\Client as PassportClient;
-use Laravel\Passport\Passport;
 
 class Client extends PassportClient
 {

@@ -6,7 +6,6 @@ namespace App\Lists;
 
 use App\Device;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 
 trait DeviceList
 {

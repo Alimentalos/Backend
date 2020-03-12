@@ -1,16 +1,18 @@
 <?php
 
-namespace Tests\Feature;
+
+namespace Tests\Feature\Stories;
+
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class AuthTest extends TestCase
+class UserCantViewLoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_redirect_if_authenticated()
+    public function testUserCantViewLogin()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)

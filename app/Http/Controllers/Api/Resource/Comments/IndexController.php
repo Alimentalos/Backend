@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Resource\Comments;
 use App\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
-use App\Resources\CommentResource;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller

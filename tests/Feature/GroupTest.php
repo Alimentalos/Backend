@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Group;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class GroupTest extends TestCase
