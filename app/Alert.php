@@ -25,6 +25,27 @@ class Alert extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     use Photoable;
 
     /**
+     * The default location field of alert.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_FIELD = 'location';
+
+    /**
+     * The default location date column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_DATE_COLUMN = 'created_at';
+
+    /**
+     * The default location group by column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
+
+    /**
      * The table name of alert.
      *
      * @var string

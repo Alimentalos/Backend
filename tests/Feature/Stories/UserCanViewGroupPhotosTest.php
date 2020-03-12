@@ -13,10 +13,8 @@ use Tests\TestCase;
 class UserCanViewGroupPhotosTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * @test testIndexGroupsPhotosApi
-     */
-    final public function testIndexGroupsPhotosApi()
+
+    final public function testUserCanViewGroupPhotos()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
@@ -24,6 +22,7 @@ class UserCanViewGroupPhotosTest extends TestCase
         $photo->groups()->attach($group->uuid);
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/photos');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -39,6 +38,5 @@ class UserCanViewGroupPhotosTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 }

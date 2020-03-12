@@ -12,9 +12,6 @@ class UserCanViewNonOwnedUsersTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanViewNonOwnedUsers
-     */
     final public function testUserCanViewNonOwnedUsers()
     {
         $user = factory(User::class)->create();

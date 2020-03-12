@@ -13,10 +13,7 @@ class UserCanViewOwnDeviceListTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanViewUserAvailableDevices
-     */
-    final public function testUserCanViewUserAvailableDevices()
+    final public function testUserCanViewOwnDeviceList()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
@@ -52,7 +49,6 @@ class UserCanViewOwnDeviceListTest extends TestCase
             'to',
             'total',
         ]);
-
         $response->assertJsonFragment([
             'uuid' => $device->uuid,
             'user_uuid' => $user->uuid,

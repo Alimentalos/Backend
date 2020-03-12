@@ -13,10 +13,7 @@ class UserCanUpdateOwnedDeviceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanUpdateOwnedDevices
-     */
-    final public function testUserCanUpdateOwnedDevices()
+    final public function testUserCanUpdateOwnedDevice()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
@@ -27,7 +24,6 @@ class UserCanUpdateOwnedDeviceTest extends TestCase
             'is_public' => false,
         ]);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',

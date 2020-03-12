@@ -42,7 +42,6 @@ class UserCanUpdateOwnedAlertTest extends TestCase
             'coordinates' => '5,5',
         ]);
         $response->assertOk();
-
         $response->assertJsonStructure([
             'user_uuid',
             'photo_uuid',
@@ -61,14 +60,11 @@ class UserCanUpdateOwnedAlertTest extends TestCase
             'updated_at',
             'created_at',
         ]);
-
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid,
         ]);
-
         $content = json_decode($response->getContent());
         Storage::disk('public')->assertExists('photos/' . $content->photo->photo_url);
-
         $this->assertDatabaseHas('alerts', [
             'uuid' => $content->uuid,
             'title' => $modified->title,

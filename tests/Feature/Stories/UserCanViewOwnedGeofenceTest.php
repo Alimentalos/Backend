@@ -13,10 +13,7 @@ class UserCanViewOwnedGeofenceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testGeofencesShowApi
-     */
-    public function testGeofencesShowApi()
+    public function testUserCanViewOwnedGeofence()
     {
         $user = factory(User::class)->create();
         $geofence = factory(Geofence::class)->create();
@@ -40,6 +37,7 @@ class UserCanViewOwnedGeofenceTest extends TestCase
         ]);
         $response->assertOk();
         $response = $this->actingAs($user, 'api')->get('/api/geofences/' . $geofence->uuid . '/users');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -61,6 +59,5 @@ class UserCanViewOwnedGeofenceTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 }

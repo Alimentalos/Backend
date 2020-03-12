@@ -3,7 +3,6 @@
 namespace App\Passport;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Laravel\Passport\Passport;
 use Laravel\Passport\PersonalAccessClient as PassportPersonalAccessClient;
 
 class PersonalAccessClient extends PassportPersonalAccessClient

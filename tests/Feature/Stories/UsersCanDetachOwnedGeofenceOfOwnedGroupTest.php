@@ -14,10 +14,7 @@ class UsersCanDetachOwnedGeofenceOfOwnedGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testDetachPetsGeofencesApi
-     */
-    public function testDetachGroupsGeofencesApi()
+    public function testUsersCanDetachOwnedGeofenceOfOwnedGroup()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
@@ -32,11 +29,11 @@ class UsersCanDetachOwnedGeofenceOfOwnedGroupTest extends TestCase
             '/api/groups/' . $group->uuid . '/geofences/' . $geofence->uuid . '/detach',
             []
         );
+        $response->assertOk();
         $this->assertDeleted('groupables', [
             'groupable_id' => $geofence->uuid,
             'groupable_type' => 'App\\Geofence',
             'group_uuid' => $group->uuid,
         ]);
-        $response->assertOk();
     }
 }

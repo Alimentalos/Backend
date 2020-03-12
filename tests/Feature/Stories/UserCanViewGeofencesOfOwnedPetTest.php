@@ -14,10 +14,7 @@ class UserCanViewGeofencesOfOwnedPetTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testPetsGeofencesApi
-     */
-    public function testPetsGeofencesApi()
+    public function testUserCanViewGeofencesOfOwnedPet()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
@@ -28,6 +25,7 @@ class UserCanViewGeofencesOfOwnedPetTest extends TestCase
         $pet->save();
         $pet->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/geofences');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -51,6 +49,5 @@ class UserCanViewGeofencesOfOwnedPetTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 }

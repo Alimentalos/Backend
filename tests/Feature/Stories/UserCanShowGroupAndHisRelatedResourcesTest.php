@@ -5,9 +5,9 @@ namespace Tests\Feature\Stories;
 
 
 use App\Comment;
-use App\Photo;
 use App\Group;
 use App\Pet;
+use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -16,14 +16,10 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanShowGroupAndHisRelatedResources
-     */
     final public function testUserCanShowGroupAndHisRelatedResources()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
-
         $photo = factory(Photo::class)->create();
         $photo->user_uuid = $user->uuid;
         $comment = factory(Comment::class)->create();
@@ -48,8 +44,6 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         ]);
         $group->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid);
-        //
-//        dd($response->getContent());
         $response->assertOk();
         $response->assertJsonStructure([
             'uuid',
@@ -65,8 +59,8 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         $response->assertJsonFragment([
             'uuid' => $group->uuid,
         ]);
-        $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/pets');
+        $response->assertOk();
         $response->assertJsonStructure([
             'current_page',
             'data' => [
@@ -111,8 +105,8 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         $response->assertJsonFragment([
             'uuid' => $pet->uuid,
         ]);
-        $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/users');
+        $response->assertOk();
         $response -> assertJsonStructure([
             'current_page',
             'first_page_url',
@@ -154,8 +148,8 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
             'name' => $user->name,
             'email' => $user->email,
         ]);
-        $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/comments');
+        $response->assertOk();
         $response -> assertJsonStructure([
             'current_page',
             'first_page_url',
@@ -180,11 +174,5 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
                 ]
             ],
         ]);
-        $response->assertJsonFragment([
-            'uuid' => $user->uuid,
-            'name' => $user->name,
-            'email' => $user->email,
-        ]);
-        $response->assertOk();
     }
 }

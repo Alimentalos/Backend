@@ -14,7 +14,7 @@ class UserCanViewPhotosTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testShowPhotosApi()
+    public function testUserCanViewPhotos()
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
@@ -25,8 +25,6 @@ class UserCanViewPhotosTest extends TestCase
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid);
         $response->assertOk();
-
-
         $response->assertJsonStructure([
             'location' =>[
                 'type',
@@ -42,7 +40,6 @@ class UserCanViewPhotosTest extends TestCase
             'updated_at',
             'love_reactant_id',
         ]);
-
         $response->assertJsonFragment([
             'uuid' => $photo->uuid
         ]);

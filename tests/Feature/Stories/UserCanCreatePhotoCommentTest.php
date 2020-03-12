@@ -15,10 +15,7 @@ class UserCanCreatePhotoCommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanCreatePhotoComments
-     */
-    final public function testUserCanCreatePhotoComments()
+    final public function testUserCanCreatePhotoComment()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
@@ -29,9 +26,7 @@ class UserCanCreatePhotoCommentTest extends TestCase
             'is_public' => true,
         ]);
         $response->assertOk();
-
         $content = $response->getContent();
-
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($content))->uuid,
             'user_uuid' => $user->uuid,
@@ -39,7 +34,6 @@ class UserCanCreatePhotoCommentTest extends TestCase
             'commentable_id' => $photo->uuid,
             'body' => $comment->body,
         ]);
-
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/photos');
         $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . (json_decode($content))->uuid);

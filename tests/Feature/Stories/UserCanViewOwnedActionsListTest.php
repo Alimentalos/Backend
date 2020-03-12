@@ -12,10 +12,7 @@ class UserCanViewOwnedActionsListTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanViewActionsAsList
-     */
-    final public function testUserCanViewActionsAsList()
+    final public function testUserCanViewOwnedActionsList()
     {
         $user = factory(User::class)->create();
         $child = factory(User::class)->create();
@@ -25,7 +22,6 @@ class UserCanViewOwnedActionsListTest extends TestCase
         $user->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
-
         $response->assertJsonStructure([
             'current_page',
             'data',
@@ -77,6 +73,5 @@ class UserCanViewOwnedActionsListTest extends TestCase
             'user_uuid' => $user->uuid
         ]);
         $response->assertJsonCount(3, 'data');
-        $response->assertOk();
     }
 }

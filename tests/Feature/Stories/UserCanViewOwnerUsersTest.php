@@ -13,10 +13,7 @@ class UserCanViewOwnerUsersTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserWatchingOtherUserWithSameOwner
-     */
-    final public function testUserWatchingOtherUserWithSameOwner()
+    final public function testUserCanViewOwnerUsers()
     {
         $owner = factory(User::class)->create();
         $userB = factory(User::class)->create();

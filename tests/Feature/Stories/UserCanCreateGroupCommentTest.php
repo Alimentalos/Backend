@@ -14,10 +14,7 @@ class UserCanCreateGroupCommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanCreateGroupComments
-     */
-    final public function testUserCanCreateGroupComments()
+    final public function testUserCanCreateGroupComment()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
@@ -30,9 +27,7 @@ class UserCanCreateGroupCommentTest extends TestCase
             'is_public' => true,
         ]);
         $response->assertOk();
-
         $content = $response->getContent();
-
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($content))->uuid,
             'user_uuid' => $user->uuid,

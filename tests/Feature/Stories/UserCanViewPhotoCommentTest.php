@@ -14,10 +14,8 @@ use Tests\TestCase;
 class UserCanViewPhotoCommentTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * @test testUserCanViewPhotoComments
-     */
-    final public function testUserCanViewPhotoComments()
+
+    final public function testUserCanViewPhotoComment()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();
@@ -30,6 +28,7 @@ class UserCanViewPhotoCommentTest extends TestCase
             'body' => $comment->body,
         ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid . '/comments');
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [
@@ -41,6 +40,5 @@ class UserCanViewPhotoCommentTest extends TestCase
                 ]
             ]
         ]);
-        $response->assertOk();
     }
 }

@@ -15,10 +15,7 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testGroupMemberUserCanViewRelatedGroupDevices
-     */
-    final public function testGroupMemberUserCanViewRelatedGroupDevices()
+    final public function testUserGroupMemberCanViewGroupDevices()
     {
         $user = factory(User::class)->create();
         $userB = factory(User::class)->create();
@@ -40,8 +37,8 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
             'is_admin' => false
         ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/devices');
-        $response->assertJsonCount(1, 'data');
         $response->assertOk();
+        $response->assertJsonCount(1, 'data');
         $response->assertJsonStructure([
             'current_page',
             'data' => [
@@ -70,7 +67,6 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
             'to',
             'total',
         ]);
-
         $response->assertJsonFragment([
             'uuid' => $device->uuid,
         ]);

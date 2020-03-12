@@ -15,10 +15,7 @@ class UserCanViewGroupOfDeviceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testUserCanViewTheDeviceGroups
-     */
-    final public function testUserCanViewTheDeviceGroups()
+    final public function testUserCanViewGroupOfDevice()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
@@ -45,6 +42,7 @@ class UserCanViewGroupOfDeviceTest extends TestCase
             '/api/devices/' . $device->uuid . '/groups',
             []
         );
+        $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
                 [

@@ -14,7 +14,7 @@ class UserCanDetachPetOfGroupTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testDetachPetsGroupsApi()
+    final public function testUserCanDetachPetOfGroup()
     {
         $user = factory(User::class)->create();
         $group = factory(Group::class)->create();
@@ -36,7 +36,6 @@ class UserCanDetachPetOfGroupTest extends TestCase
             []
         );
         $response->assertOk();
-
         $this->assertDeleted('groupables', [
             'groupable_type' => 'App\\Pet',
             'groupable_id' => $pet->uuid,

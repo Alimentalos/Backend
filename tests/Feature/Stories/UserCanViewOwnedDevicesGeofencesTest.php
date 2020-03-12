@@ -16,10 +16,7 @@ class UserCanViewOwnedDevicesGeofencesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test testDevicesGeofencesApi
-     */
-    final public function testDevicesGeofencesApi()
+    final public function testUserCanViewOwnedDevicesGeofences()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
@@ -36,7 +33,6 @@ class UserCanViewOwnedDevicesGeofencesTest extends TestCase
         $device->geofences()->attach($geofence);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid . '/geofences');
         $response->assertOk();
-
         $response->assertJsonStructure([
             'current_page',
             'data' => [

@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Device;
-use App\Http\Resources\Device as DeviceResource;
 use App\Lists\DeviceList;
 use App\Procedures\DeviceProcedure;
 
