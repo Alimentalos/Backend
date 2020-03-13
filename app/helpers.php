@@ -12,6 +12,7 @@ use App\Repositories\GroupsRepository;
 use App\Repositories\LocationsRepository;
 use App\Repositories\PetsRepository;
 use App\Repositories\PhotoRepository;
+use App\Repositories\PlacesRepository;
 use App\Repositories\ReactionsRepository;
 use App\Repositories\ResourceCommentsRepository;
 use App\Repositories\ResourceLocationsRepository;
@@ -29,7 +30,6 @@ use App\Tools\Parameterizer;
 use App\Tools\Parser;
 use App\Tools\Reporter;
 use App\Tools\Subscriber;
-use App\Tools\Tokenizer;
 use App\Tools\Uploader;
 use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -51,6 +51,16 @@ if (! function_exists('pets')) {
     function pets()
     {
         return new PetsRepository();
+    }
+}
+
+if (! function_exists('places')) {
+    /**
+     * @return PlacesRepository
+     */
+    function places()
+    {
+        return new PlacesRepository();
     }
 }
 

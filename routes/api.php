@@ -50,7 +50,7 @@ Route::middleware(['api'])->group(function () {
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
     foreach([
-                'users', 'groups', 'geofences', 'pets', 'devices', 'photos', 'actions', 'alerts'
+                'places', 'users', 'groups', 'geofences', 'pets', 'devices', 'photos', 'actions', 'alerts'
             ] as $resource) {
         Route::get("/{$resource}", 'Api\Resource\IndexController')
             ->name("{$resource}.index");
@@ -61,27 +61,27 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("{$resource}.token");
     }
 
-    foreach(['users', 'pets', 'groups', 'geofences', 'devices', 'alerts'] as $resource) {
+    foreach(['places', 'users', 'pets', 'groups', 'geofences', 'devices', 'alerts'] as $resource) {
         Route::post("/{resource}", 'Api\Resource\StoreController')
             ->name("{$resource}.store");
     }
 
     foreach([
-                'groups', 'locations', 'actions', 'geofences', 'pets', 'devices', 'users', 'photos', 'comments', 'alerts'
+                'places', 'groups', 'locations', 'actions', 'geofences', 'pets', 'devices', 'users', 'photos', 'comments', 'alerts'
             ] as $resource) {
         Route::get("/{$resource}/{resource}", 'Api\Resource\ShowController')
             ->name("{$resource}.show");
     }
 
     foreach([
-                'alerts', 'comments', 'photos', 'users', 'devices', 'pets', 'groups', 'geofences'
+                'places', 'alerts', 'comments', 'photos', 'users', 'devices', 'pets', 'groups', 'geofences'
             ] as $resource) {
         Route::put("/{$resource}/{resource}", 'Api\Resource\UpdateController')
             ->name("{$resource}.update");
     }
 
     foreach([
-                'photos', 'users', 'comments', 'actions', 'devices', 'pets', 'geofences', 'groups', 'alerts'
+                'places', 'photos', 'users', 'comments', 'actions', 'devices', 'pets', 'geofences', 'groups', 'alerts'
             ] as $resource) {
         Route::delete("/{$resource}/{resource}", 'Api\Resource\DestroyController')
             ->name("{$resource}.destroy");
@@ -93,6 +93,11 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     foreach (['geofences', 'groups'] as $resource) {
         Route::get("/{$resource}/{resource}/users", 'Api\Resource\Users\IndexController')
             ->name("{$resource}.users.index");
+    }
+
+    foreach (['users'] as $resource) {
+        Route::get("/{$resource}/{resource}/places", 'Api\Resource\Places\IndexController')
+            ->name("{$resource}.places.index");
     }
 
     foreach(['groups', 'users'] as $resource) {
@@ -111,7 +116,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("{$resource}.geofences.accesses.index");
     }
 
-    foreach (['pets', 'geofences', 'users', 'groups'] as $resource) {
+    foreach (['places', 'pets', 'geofences', 'users', 'groups'] as $resource) {
         Route::get("/{$resource}/{resource}/photos", 'Api\Resource\Photos\IndexController')
             ->name("{$resource}.photos.index");
         Route::post("/{$resource}/{resource}/photos", 'Api\Resource\Photos\StoreController')
@@ -129,7 +134,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("{$resource}.geofences.detach");
     }
 
-    foreach(['pets', 'photos', 'comments', 'alerts', 'groups'] as $resource) {
+    foreach(['places', 'pets', 'photos', 'comments', 'alerts', 'groups'] as $resource) {
         Route::get("/{$resource}/{resource}/comments", 'Api\Resource\Comments\IndexController')
             ->name("{$resource}.comments.index");
         Route::post("/{$resource}/{resource}/comments", 'Api\Resource\Comments\StoreController')
@@ -154,7 +159,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
         Route::post("/users/{user}/groups/{group}/{$method}", "Api\Users\Groups\\" . Str::ucfirst($method) . "Controller");
     }
 
-    foreach (['geofences', 'pets', 'users', 'photos', 'comments'] as $resource) {
+    foreach (['geofences', 'pets', 'users', 'photos', 'comments', 'places'] as $resource) {
         Route::get("/{$resource}/{resource}/reactions", 'Api\Resource\Reactions\IndexController')
             ->name("{$resource}.reactions.index");
         Route::post("/{$resource}/{resource}/reactions", 'Api\Resource\Reactions\StoreController')

@@ -18,6 +18,9 @@ return [
         'groups' => [
             'create' => 3
         ],
+        'places' => [
+            'create' => 10
+        ],
         'photos' => [
             'create' => 500
         ],
@@ -53,6 +56,9 @@ return [
         ],
         'groups' => [
             'create' => 3
+        ],
+        'places' => [
+            'create' => 50
         ],
         'photos' => [
             'create' => 500
