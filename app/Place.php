@@ -94,16 +94,6 @@ class Place extends Model implements ReactableContract, Resource
     public $incrementing = false;
 
     /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'uuid';
-    }
-
-    /**
      * Get key for the model.
      *
      * @return string
