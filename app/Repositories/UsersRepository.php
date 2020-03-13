@@ -44,7 +44,7 @@ class UsersRepository
     {
         return User::create(array_merge([
             'password' => bcrypt(input('password')),
-        ], only('email', 'name', 'is_public')));
+        ], only('email', 'name', 'is_public', 'country', 'region', 'city')));
     }
 
     /**
@@ -56,7 +56,7 @@ class UsersRepository
     public function update(User $user)
     {
         upload()->check($user);
-        $user->update(parameters()->fill(['email', 'name', 'is_public'], $user));
+        $user->update(parameters()->fill(['email', 'name', 'is_public', 'country', 'region', 'city'], $user));
         return $user;
     }
 
