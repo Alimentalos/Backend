@@ -28,7 +28,6 @@ class UserCanUpdateOwnedDeviceTest extends TestCase
             'uuid',
             'user_uuid',
             'uuid',
-            'api_token',
             'name',
             'description',
             'created_at',

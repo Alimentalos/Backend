@@ -24,5 +24,18 @@ class UserCanCreateDevicesTest extends TestCase
             'is_public' => true,
         ]);
         $response->assertCreated();
+        $response->assertJsonStructure([
+            'name',
+            'description',
+            'user_uuid',
+            'is_public',
+            'uuid',
+            'updated_at',
+            'created_at',
+        ]);
+        $response->assertJsonFragment([
+            'name' => $device->name,
+            'is_public' => true,
+        ]);
     }
 }
