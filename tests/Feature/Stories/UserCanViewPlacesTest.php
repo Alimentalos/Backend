@@ -18,27 +18,28 @@ class UserCanViewPlacesTest extends TestCase
 
     final public function testUserCanCreatePlaces()
     {
-        Storage::fake('public');
         $user = factory(User::class)->create();
         $place = factory(Place::class)->create();
         $place->is_public = true;
         $place->save();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/places/' . $place->uuid);
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/places/');
         $response->assertOk();
         $response->assertJsonStructure([
-           'uuid',
-           'location',
-           'user_uuid',
-           'photo_uuid',
-           'photo_url',
-           'is_public',
-           'name',
-           'description',
-           'created_at',
-           'updated_at',
-           'love_reactant_id',
-           'photo',
-           'user'
+            'data' => [[
+                'uuid',
+                'location',
+                'user_uuid',
+                'photo_uuid',
+                'photo_url',
+                'is_public',
+                'name',
+                'description',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
+                'photo',
+                'user'
+            ]]
         ]);
     }
 }
