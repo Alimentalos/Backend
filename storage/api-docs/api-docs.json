@@ -10,7 +10,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.4.1"
+        "version": "v.4.2"
     },
     "servers": [
         {
@@ -253,7 +253,8 @@
                                     "devices",
                                     "pets",
                                     "alerts",
-                                    "photos"
+                                    "photos",
+                                    "places"
                                 ]
                             }
                         }
@@ -1311,6 +1312,51 @@
                 "responses": {
                     "200": {
                         "description": "Photo created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/{resource}/{uuid}/places": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get places of resource.",
+                "description": "Returns the places paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getResourcePlaces",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique identifier of resource",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource type that need to be considered",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "users",
+                                "enum": [
+                                    "users"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Places retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
