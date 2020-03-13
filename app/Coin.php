@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Coin extends Model
 {
@@ -21,6 +22,19 @@ class Coin extends Model
      */
     protected $casts = [
         'used' => 'boolean'
+    ];
+
+    /**
+     * The mass assignment fields of the comment
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'uuid',
+        'amount',
+        'used',
+        'received_operation_uuid',
+        'used_operation_uuid',
     ];
 
     /**
