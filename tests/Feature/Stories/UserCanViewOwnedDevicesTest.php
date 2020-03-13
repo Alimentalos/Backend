@@ -9,11 +9,11 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewOwnedDeviceListTest extends TestCase
+class UserCanViewOwnedDevicesTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanViewOwnedDeviceList()
+    final public function testUserCanViewOwnedDevices()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();

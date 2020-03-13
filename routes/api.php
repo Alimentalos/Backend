@@ -56,6 +56,11 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("{$resource}.index");
     }
 
+    foreach(['pets', 'devices'] as $resource) {
+        Route::get("/{$resource}/{resource}/token", 'Api\Resource\TokenController')
+            ->name("{$resource}.token");
+    }
+
     foreach(['users', 'pets', 'groups', 'geofences', 'devices', 'alerts'] as $resource) {
         Route::post("/{resource}", 'Api\Resource\StoreController')
             ->name("{$resource}.store");
