@@ -19,7 +19,7 @@ class DeviceObserver
             $device->api_token = bin2hex(random_bytes(16));
             // @codeCoverageIgnoreStart
         } catch (Exception $exception) {
-            // TODO - Handle random bytes exception.
+            abort(500);
         }
         // @codeCoverageIgnoreEnd
         $device->uuid = uuid();

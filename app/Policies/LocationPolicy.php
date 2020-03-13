@@ -19,7 +19,6 @@ class LocationPolicy
      */
     public function view(User $user, Location $location)
     {
-        // TODO - Add safe logic to allow user view the location, like asking if localizable is public or w/e
-        return true;
+        return $user->can('view', $location->trackable);
     }
 }

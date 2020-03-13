@@ -21,7 +21,7 @@ class UserObserver
             $user->uuid = uuid();
             // @codeCoverageIgnoreStart
         } catch (Exception $exception) {
-            // TODO - Handle random bytes exception.
+            abort(500);
         }
     }
     // @codeCoverageIgnoreEnd
