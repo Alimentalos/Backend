@@ -23,6 +23,16 @@ trait ResourceLocation
         $model->update([
             'location' => parser()->pointFromCoordinates(input('coordinates')),
         ]);
+        if ($model instanceof Pet or $model instanceof User) {
+            $model->locations()->create([
+                "uuid" => uuid(),
+                "location" => parser()->pointFromCoordinates(input('coordinates')),
+                "accuracy" => 20,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'generated_at' => now(),
+            ]);
+        }
         return $model;
     }
 
