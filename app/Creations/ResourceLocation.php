@@ -6,6 +6,8 @@ namespace App\Creations;
 
 use App\Contracts\Resource;
 use App\Device;
+use App\Events\Location as LocationEvent;
+use App\Http\Resources\Location as LocationResource;
 use App\Pet;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +26,7 @@ trait ResourceLocation
             'location' => parser()->pointFromCoordinates(input('coordinates')),
         ]);
         if ($model instanceof Pet or $model instanceof User) {
-            $model->locations()->create([
+            $location = $model->locations()->create([
                 "uuid" => uuid(),
                 "location" => parser()->pointFromCoordinates(input('coordinates')),
                 "accuracy" => 20,
@@ -32,6 +34,9 @@ trait ResourceLocation
                 'updated_at' => now(),
                 'generated_at' => now(),
             ]);
+
+            geofences()->checkLocationUsingModelGeofences($model, $location);
+            event(new LocationEvent(new LocationResource($location), $model));
         }
         return $model;
     }
