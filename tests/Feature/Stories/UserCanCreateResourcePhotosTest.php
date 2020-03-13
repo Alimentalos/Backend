@@ -39,6 +39,11 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $pet->save();
         $user->save();
         $photo->save();
+        $this->assertDatabaseMissing('locations', [
+            'trackable_type' => 'App\\User',
+            'trackable_id' => $user->uuid,
+        ]);
+
         $response = $this->actingAs($user, 'api')->json('POST', '/api/users/' . $user->uuid . '/photos/', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'title' => 'New title',
@@ -64,6 +69,17 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid
         ]);
+
+        $this->assertDatabaseHas('locations', [
+            'trackable_type' => 'App\\User',
+            'trackable_id' => $user->uuid,
+        ]);
+
+        $this->assertDatabaseMissing('locations', [
+            'trackable_type' => 'App\\Pet',
+            'trackable_id' => $pet->uuid,
+        ]);
+
         Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets/' . $pet->uuid . '/photos/', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
@@ -71,7 +87,6 @@ class UserCanCreateResourcePhotosTest extends TestCase
             'is_public' => true,
             'coordinates' => '60.1,25.5'
         ]);
-        $response->assertOk();
         $response->assertOk();
         $response->assertJsonStructure([
             'uuid',
@@ -91,6 +106,12 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid
         ]);
+
+        $this->assertDatabaseHas('locations', [
+            'trackable_type' => 'App\\Pet',
+            'trackable_id' => $pet->uuid,
+        ]);
+
         Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
         $response = $this->actingAs($user, 'api')->json('POST', '/api/geofences/' . $geofence->uuid . '/photos/', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),

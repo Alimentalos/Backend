@@ -4,22 +4,22 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Device;
+use App\Place;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanUpdateOwnedDeviceTest extends TestCase
+class UserCanUpdateOwnedPlaceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanUpdateOwnedDevice()
+    final public function testUserCanUpdateOwnedPlace()
     {
         $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $device->user_uuid = $user->uuid;
-        $device->save();
-        $response = $this->actingAs($user, 'api')->json('PUT', '/api/devices/' . $device->uuid, [
+        $place = factory(Place::class)->create();
+        $place->user_uuid = $user->uuid;
+        $place->save();
+        $response = $this->actingAs($user, 'api')->json('PUT', '/api/places/' . $place->uuid, [
             'name' => 'New name',
             'is_public' => false,
         ]);
@@ -34,7 +34,7 @@ class UserCanUpdateOwnedDeviceTest extends TestCase
             'updated_at'
         ]);
         $response->assertJsonFragment([
-            'uuid' => $device->uuid,
+            'uuid' => $place->uuid,
         ]);
     }
 }

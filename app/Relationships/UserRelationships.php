@@ -7,6 +7,7 @@ namespace App\Relationships;
 use App\Device;
 use App\Pet;
 use App\Photo;
+use App\Place;
 use App\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -31,6 +32,16 @@ trait UserRelationships
     public function pets()
     {
         return $this->hasMany(Pet::class,'user_uuid','uuid');
+    }
+
+    /**
+     * The user places.
+     *
+     * @return HasMany
+     */
+    public function places()
+    {
+        return $this->hasMany(Place::class,'user_uuid','uuid');
     }
 
     /**

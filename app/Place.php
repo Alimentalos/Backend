@@ -5,29 +5,23 @@ namespace App;
 use App\Contracts\Resource;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Commentable;
-use App\Relationships\Commons\Geofenceable;
-use App\Relationships\Commons\Groupable;
 use App\Relationships\Commons\HasPhoto;
 use App\Relationships\Commons\Photoable;
-use App\Relationships\Commons\Trackable;
-use App\Resources\PetResource;
-use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
+use App\Resources\PlaceResource;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Pet extends Authenticatable implements ReactableContract, Resource
+class Place extends Model implements ReactableContract, Resource
 {
+    use PlaceResource;
     use SpatialTrait;
-    use Reactable;
-    use PetResource;
     use BelongsToUser;
+    use Reactable;
     use HasPhoto;
-    use Trackable;
     use Photoable;
     use Commentable;
-    use Geofenceable;
-    use Groupable;
 
     /**
      * The default location field of pet.
@@ -58,18 +52,21 @@ class Pet extends Authenticatable implements ReactableContract, Resource
     protected $fillable = [
         'user_uuid',
         'photo_uuid',
-        'api_token',
         'photo_url',
         'uuid',
         'name',
-        'description',
-        'hair_color',
-        'left_eye_color',
-        'right_eye_color',
-        'size',
-        'born_at',
         'is_public',
+        'description',
         'location',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_public' => 'boolean',
     ];
 
     /**
@@ -82,19 +79,27 @@ class Pet extends Authenticatable implements ReactableContract, Resource
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'is_public' => 'boolean',
-        'born_at' => 'datetime',
-    ];
-
-    /**
      * The properties which are hidden.
      *
      * @var array
      */
-    protected $hidden = ['id', 'api_token'];
+    protected $hidden = ['id'];
+
+
+    /**
+     * This model doesn't uses increments.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * Get key for the model.
+     *
+     * @return string
+     */
+    public function getKeyName()
+    {
+        return 'uuid';
+    }
 }

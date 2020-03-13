@@ -4,24 +4,24 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Group;
 use App\Photo;
+use App\Place;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewGroupPhotosTest extends TestCase
+class UserCanViewPhotosOfPlaceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanViewGroupPhotos()
+    final public function testUserCanViewPhotosOfPlace()
     {
         $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $place = factory(Place::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->groups()->attach($group->uuid);
+        $photo->places()->attach($place);
         $photo->save();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/photos');
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/places/' . $place->uuid . '/photos');
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
@@ -39,4 +39,5 @@ class UserCanViewGroupPhotosTest extends TestCase
             ]
         ]);
     }
+
 }

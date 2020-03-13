@@ -4,49 +4,42 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Comment;
+use App\Device;
 use App\Group;
-use App\Pet;
 use App\Photo;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewGroupOfPetTest extends TestCase
+class UserCanViewGroupsOfOwnedDeviceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanViewGroupOfPet()
+    final public function testUserCanViewGroupOfDevice()
     {
         $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
+        $device = factory(Device::class)->create();
         $group = factory(Group::class)->create();
-        $photo = factory(Photo::class)->create();
-        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
-        $photo->user_uuid = $user->uuid;
-        $photo->save();
-        $group->photo_uuid = $photo->uuid;
-        $pet->user_uuid = $user->uuid;
-        $pet->save();
         $group->user_uuid = $user->uuid;
+        $group->photo_uuid = factory(Photo::class)->create()->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS
         ]);
-        $pet->user_uuid = $user->uuid;
-        $pet->save();
-        $pet->groups()->attach($group, [
+        $device->user_uuid = $user->uuid;
+        $device->save();
+        $device->groups()->attach($group, [
             'status' => Group::ACCEPTED_STATUS
         ]);
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\Pet',
-            'groupable_id' => $pet->uuid,
+            'groupable_type' => 'App\\Device',
+            'groupable_id' => $device->uuid,
             'group_uuid' => $group->uuid,
         ]);
         $response = $this->actingAs($user, 'api')->json(
             'GET',
-            '/api/pets/' . $pet->uuid . '/groups',
+            '/api/devices/' . $device->uuid . '/groups',
             []
         );
         $response->assertOk();
@@ -72,6 +65,40 @@ class UserCanViewGroupOfPetTest extends TestCase
         // Assert Photo UUID
         $response->assertJsonFragment([
             'photo_uuid' => json_decode($response->getContent())->data[0]->photo->uuid,
+        ]);
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [[
+                'uuid',
+                'user_uuid',
+                'photo_uuid',
+                'name',
+                'description',
+                'is_public',
+                'photo_url',
+                'created_at',
+                'updated_at',
+                'pivot' => [
+                    'groupable_id',
+                    'group_uuid',
+                    'groupable_type',
+                    'is_admin',
+                    'status',
+                    'sender_uuid',
+                    'created_at',
+                    'updated_at'
+                ],
+            ]],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total'
         ]);
     }
 }

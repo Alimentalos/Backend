@@ -19,6 +19,7 @@ class CreatePetsTable extends Migration
             $table->point('location')->nullable(); // Latitude, Longitude
             $table->string('user_uuid')->index();
             $table->string('photo_uuid')->index();
+            $table->text('photo_url')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->string('hair_color')->nullable();
@@ -28,7 +29,6 @@ class CreatePetsTable extends Migration
             $table->timestamp('born_at')->nullable();
             $table->string('api_token')->unique();
             $table->boolean('is_public')->default(true);
-            $table->text('photo_url')->nullable();
             $table->timestamps();
         });
     }

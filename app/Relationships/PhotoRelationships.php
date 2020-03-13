@@ -7,6 +7,7 @@ use App\Comment;
 use App\Geofence;
 use App\Group;
 use App\Pet;
+use App\Place;
 use App\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -61,6 +62,15 @@ trait PhotoRelationships
         return $this->morphedByMany(Alert::class,'photoable','photoables','photo_uuid','photoable_id','uuid','uuid');
     }
 
+    /**
+     * The alerts that belong to the place.
+     *
+     * @return BelongsToMany
+     */
+    public function places()
+    {
+        return $this->morphedByMany(Place::class,'photoable','photoables','photo_uuid','photoable_id','uuid','uuid');
+    }
 
     /**
      * The geofences that belong to the photo.

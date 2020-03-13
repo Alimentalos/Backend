@@ -67,7 +67,7 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
      *
      * @var array
      */
-    protected $hidden = ['id'];
+    protected $hidden = ['id', 'api_token'];
 
     /**
      * The default location field of device.

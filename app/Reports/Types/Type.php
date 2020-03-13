@@ -176,7 +176,6 @@ class Type
      */
     public function generateStreet($latitude, $longitude)
     {
-        // TODO - Implement a way to retrieve the street based on latitude and longitude
         return "$latitude,$longitude";
     }
 }

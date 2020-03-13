@@ -5,20 +5,20 @@ namespace Tests\Feature\Stories;
 
 
 use App\Device;
+use App\Group;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserCanViewOwnedDeviceListTest extends TestCase
+class UserCanViewDevicesTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanViewOwnedDeviceList()
+    final public function testUserCanViewDevicesOfGroup()
     {
         $user = factory(User::class)->create();
         $device = factory(Device::class)->create();
-        $device->is_public = false;
-        $device->user_uuid = $user->uuid;
+        $device->is_public = true;
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $response->assertOk();
@@ -49,7 +49,7 @@ class UserCanViewOwnedDeviceListTest extends TestCase
             'total'
         ]);
         $response->assertJsonFragment([
-            'user_uuid' => $user->uuid
+            'uuid' => $device->uuid,
         ]);
     }
 }

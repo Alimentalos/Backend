@@ -2,7 +2,9 @@
 
 namespace App\Policies;
 
+use App\Device;
 use App\Geofence;
+use App\Group;
 use App\Photo;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -68,6 +70,42 @@ class GeofencePolicy
     {
         return $user->can('create', Photo::class) &&
             ($user->is_admin || $geofence->user_uuid === $user->uuid || $geofence->is_public);
+    }
+
+    /**
+     * Determine whether the user can attach group the geofence.
+     *
+     * @param User $user
+     * @param Geofence $geofence
+     * @param Group $group
+     * @return mixed
+     */
+    public function attachGroup(User $user, Geofence $geofence, Group $group)
+    {
+        return $user->is_admin ||
+            (
+                users()->isProperty($geofence, $user) &&
+                groups()->hasAdministrator($group, $user) &&
+                !resources()->hasGroup($geofence, $group)
+            );
+    }
+
+    /**
+     * Determine whether the user can detach group the geofence.
+     *
+     * @param User $user
+     * @param Geofence $geofence
+     * @param Group $group
+     * @return mixed
+     */
+    public function detachGroup(User $user, Geofence $geofence, Group $group)
+    {
+        return $user->is_admin ||
+            (
+                users()->isProperty($geofence, $user) &&
+                groups()->hasAdministrator($group, $user) &&
+                resources()->hasGroup($geofence, $group)
+            );
     }
 
     /**

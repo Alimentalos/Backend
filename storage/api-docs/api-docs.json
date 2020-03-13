@@ -10,7 +10,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.2.0"
+        "version": "v.4.1"
     },
     "servers": [
         {
@@ -251,7 +251,9 @@
                                 "enum": [
                                     "users",
                                     "devices",
-                                    "pets"
+                                    "pets",
+                                    "alerts",
+                                    "photos"
                                 ]
                             }
                         }
@@ -914,9 +916,10 @@
                                 "type": "string",
                                 "default": "devices",
                                 "enum": [
-                                    "users",
+                                    "geofences",
                                     "pets",
-                                    "devices"
+                                    "devices",
+                                    "users"
                                 ]
                             }
                         }
@@ -970,9 +973,10 @@
                                 "type": "string",
                                 "default": "devices",
                                 "enum": [
-                                    "users",
+                                    "geofences",
                                     "pets",
-                                    "devices"
+                                    "devices",
+                                    "users"
                                 ]
                             }
                         }
@@ -1403,6 +1407,52 @@
                 "responses": {
                     "200": {
                         "description": "Resource reaction created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/{resource}/{uuid}/token": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get specific resource token.",
+                "description": "Returns the specified resource token as JSON Object.",
+                "operationId": "getResourceToken",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique identifier of resource",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource type that need to be considered",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "devices",
+                                "enum": [
+                                    "devices",
+                                    "pets"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Token retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
