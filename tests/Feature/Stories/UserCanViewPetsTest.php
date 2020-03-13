@@ -29,7 +29,6 @@ class UserCanViewPetsTest extends TestCase
             'left_eye_color',
             'size',
             'born_at',
-            'api_token',
             'is_public',
             'created_at',
             'updated_at',

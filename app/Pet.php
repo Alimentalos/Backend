@@ -96,5 +96,5 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      *
      * @var array
      */
-    protected $hidden = ['id'];
+    protected $hidden = ['id', 'api_token'];
 }
