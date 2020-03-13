@@ -1414,6 +1414,52 @@
                 }
             }
         },
+        "/{resource}/{uuid}/token": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Get specific resource token.",
+                "description": "Returns the specified resource token as JSON Object.",
+                "operationId": "getResourceToken",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique identifier of resource",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource type that need to be considered",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "devices",
+                                "enum": [
+                                    "devices",
+                                    "pets"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Token retrieved successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
         "/{resource}/{uuid}/users": {
             "get": {
                 "tags": [
