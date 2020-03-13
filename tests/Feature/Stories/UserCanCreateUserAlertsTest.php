@@ -21,7 +21,6 @@ class UserCanCreateUserAlertsTest extends TestCase
         Storage::fake('public');
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->make();
-        $device = factory(Device::class)->create();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/alerts', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
             'alert_type' => 'App\\User',
