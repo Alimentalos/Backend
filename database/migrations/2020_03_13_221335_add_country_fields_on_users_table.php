@@ -14,9 +14,12 @@ class AddCountryFieldsOnUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('country')->nullable();
-            $table->string('region')->nullable();
-            $table->string('city')->nullable();
+            $table->unsignedInteger('country')->nullable();
+            $table->string('country_name')->nullable();
+            $table->unsignedInteger('region')->nullable();
+            $table->string('region_name')->nullable();
+            $table->unsignedInteger('city')->nullable();
+            $table->string('city_name')->nullable();
         });
     }
 
@@ -28,7 +31,7 @@ class AddCountryFieldsOnUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['country', 'region', 'city']);
+            $table->dropColumn(['country', 'region', 'city', 'country_name', 'region_name', 'city_name']);
         });
     }
 }

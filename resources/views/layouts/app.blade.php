@@ -47,18 +47,18 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="https://github.com/alimentalos"><i class="fab fa-github"></i> {{ __('GitHub') }}</a>
+                            <a class="nav-link" href="https://github.com/alimentalos"><i class="fab fa-github mr-3 ml-2"></i> {{ __('GitHub') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/about') }}"><i class="fal fa-book-alt"></i>  {{ __('About') }}</a>
+                            <a class="nav-link" href="{{ url('/about') }}"><i class="fal fa-book-alt mr-3 ml-2"></i>  {{ __('About') }}</a>
                         </li>
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}"><i class="fal fa-sign-in"></i> {{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}"><i class="fal fa-sign-in mr-3 ml-2"></i> {{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}"><i class="fal fa-user-plus"></i> {{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}"><i class="fal fa-user-plus mr-3 ml-2"></i> {{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else

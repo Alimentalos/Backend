@@ -21,6 +21,12 @@ class GuestCanRegisterViaApiTest extends TestCase
             'password' => $user->password,
             'password_confirmation' => $user->password,
             'is_public' => true,
+            'country_name' => 'Maipú',
+            'region_name' => 'Región metropolitana',
+            'city_name' => 'Provincia de santiago',
+            'city' => 10000,
+            'region' => 20000,
+            'country' => 30000,
         ]);
         $response->assertCreated();
     }

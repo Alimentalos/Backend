@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 mt-4">
-            <h1 class="text-white">{{ __('Confirm password') }}</h1>
-            <p class="text-white">{{ __('Please confirm your password before continuing.') }}</p>
+            <h1>{{ __('Confirm password') }}</h1>
+            <p>{{ __('Please confirm your password before continuing.') }}</p>
         </div>
     </div>
     <div class="row justify-content-center">

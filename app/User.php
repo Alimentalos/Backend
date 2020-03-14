@@ -78,6 +78,12 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
         'free',
         'is_public',
         'location',
+        'country',
+        'country_name',
+        'region',
+        'region_name',
+        'city',
+        'city_name',
     ];
 
     /**
