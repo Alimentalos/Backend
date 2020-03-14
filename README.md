@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/alimentalos/backend.svg)](https://github.com/alimentalos/backend/releases/) [![Actions Status](https://github.com/alimentalos/backend/workflows/Testing/badge.svg)](https://github.com/alimentalos/backend/actions) [![codecov](https://codecov.io/gh/alimentalos/backend/branch/master/graph/badge.svg)](https://codecov.io/gh/alimentalos/backend) [![Maintainability](https://api.codeclimate.com/v1/badges/ccd2e2ff7f49a0ee6c6f/maintainability)](https://codeclimate.com/github/alimentalos/backend/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ccd2e2ff7f49a0ee6c6f/test_coverage)](https://codeclimate.com/github/alimentalos/backend/test_coverage)
 
-[**Official website**](https://www.alimentalos.cl) — [**About**](https://www.alimentalos.cl/about) — [**Developer guide**](https://www.alimentalos.cl/about/developer-guide) — [**OpenApi Specification**](https://www.alimentalos.cl/api/documentation)
+[**Official website**](https://www.alimentalos.cl) — [**About**](https://www.alimentalos.cl/about) — [**Developer handbook**](https://www.alimentalos.cl/about/developer-handbook) — [**OpenApi Specification**](https://www.alimentalos.cl/api/documentation)
 
 ### Brief
 
@@ -19,6 +19,14 @@ The following list are detailed those of software features developed and tested:
 #### Authentication
 
 We have a specific API to handle new user registrations as well as password recovery using registered mail.
+
+#### Users
+
+@TODO Users docs
+
+#### Pets
+
+@TODO Pets docs
 
 #### Tracker
 
@@ -40,12 +48,32 @@ The system has an access control system related to the geofences, each time a us
 
 The platform every time it receives a new location, it is retransmitted by a channel to all users who have access to the resource. So from an application it could be easy to receive information and update in real time.
 
-### Planned
-
-The following list are detailed those of software features what are in development:
-
 #### Alerts
 
 Our system allows users to create georeferenced alerts. In the event that a user loses his pet, he could send a close alert to all connected users and get help finding his friend.
+
+#### Places
+
+@TODO Places docs
+
+#### Coins
+
+@TODO Coins docs
+
+#### Comments
+
+@TODO Comments docs
+
+#### Near
+
+@TODO Near docs
+
+#### Find
+
+@TODO Find docs
+
+### Planned
+
+The following list are detailed those of software features what are in development:
 
 
