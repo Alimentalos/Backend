@@ -7,13 +7,13 @@ namespace Tests\Feature\Stories;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class GuestCanViewAboutDeveloperGuideTest extends TestCase
+class GuestCanViewAboutDeveloperHandbookTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testGuestCanViewAboutDeveloperGuide()
+    public function testGuestCanViewAboutDeveloperHandbook()
     {
-        $response = $this->get('/about/developer-guide');
+        $response = $this->get('/about/developer-handbook');
         $response->assertOk();
     }
 }

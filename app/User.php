@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Contracts\CreateFromRequest;
+use App\Contracts\Monetizer;
 use App\Contracts\Resource;
 use App\Contracts\UpdateFromRequest;
 use App\Relationships\Commons\BelongsToUser;
@@ -18,11 +19,12 @@ use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource, CreateFromRequest, UpdateFromRequest
+class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource, CreateFromRequest, UpdateFromRequest, Monetizer
 {
     use SpatialTrait;
     use Notifiable;
@@ -76,6 +78,12 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
         'free',
         'is_public',
         'location',
+        'country',
+        'country_name',
+        'region',
+        'region_name',
+        'city',
+        'city_name',
     ];
 
     /**
@@ -146,6 +154,16 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public function getKeyName()
     {
         return 'uuid';
+    }
+
+    /**
+     * Get user coins.
+     *
+     * @return MorphMany
+     */
+    public function coins()
+    {
+        return $this->morphMany(Coin::class,'monetizer','monetizer_type','monetizer_id','uuid');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Contracts\CreateFromRequest;
+use App\Contracts\Monetizer;
 use App\Contracts\Resource;
 use App\Contracts\UpdateFromRequest;
 use App\Relationships\Commons\BelongsToUser;
@@ -12,8 +13,9 @@ use App\Relationships\Commons\Photoable;
 use App\Relationships\GroupRelationships;
 use App\Resources\GroupResource;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequest
+class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequest, Monetizer
 {
     use GroupResource;
     use GroupRelationships;
@@ -76,6 +78,16 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     protected $casts = [
         'is_public' => 'boolean',
     ];
+
+    /**
+     * Get group coins.
+     *
+     * @return MorphMany
+     */
+    public function coins()
+    {
+        return $this->morphMany(Coin::class,'monetizer','monetizer_type','monetizer_id','uuid');
+    }
 
     /**
      * Get the route key for the model.

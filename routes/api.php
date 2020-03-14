@@ -173,3 +173,5 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('/near/{resource}', 'Api\Near\Resource\IndexController');
 
 });
+
+\Igaster\LaravelCities\Geo::ApiRoutes();

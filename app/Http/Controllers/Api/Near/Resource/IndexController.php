@@ -33,7 +33,7 @@ class IndexController extends Controller
      *         type="string",
      *           @OA\Items(
      *               type="string",
-     *               enum={"users", "devices", "pets", "alerts", "photos"},
+     *               enum={"users", "devices", "pets", "alerts", "photos", "places"},
      *               default="pets"
      *           ),
      *         )
