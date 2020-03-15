@@ -1,8 +1,8 @@
 @foreach($data as $firstLevelKey => $firstLevel)
     @if (!is_numeric($firstLevelKey))
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-4">
             <div class="col-md-8 col-sm-12 mt-4">
-                <h2 class="text-left mt-4">{{ __($firstLevelKey) }}</h2>
+                <h2 class="text-left pt-4" id="{{strtolower($firstLevelKey)}}">{{ __($firstLevelKey) }}</h2>
             </div>
         </div>
     @endif
@@ -72,9 +72,6 @@
             @endif
         @endforeach
     @else
-        @if (!is_numeric($firstLevelKey))
-            @markdown($firstLevelKey)
-        @endif
         @markdown($firstLevel)
     @endif
 @endforeach
