@@ -15,7 +15,7 @@ class GroupPolicy
     /**
      * Determine whether the user can view any alerts.
      *
-     * @param  \App\User  $user
+     * @param User $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -26,8 +26,8 @@ class GroupPolicy
     /**
      * Determine whether the user can view the group.
      *
-     * @param  \App\User  $user
-     * @param  \App\Group  $group
+     * @param User $user
+     * @param Group $group
      * @return mixed
      */
     public function view(User $user, Group $group)
@@ -38,7 +38,7 @@ class GroupPolicy
     /**
      * Determine whether the user can create groups.
      *
-     * @param  \App\User  $user
+     * @param User $user
      * @return mixed
      */
     public function create(User $user)
@@ -49,8 +49,8 @@ class GroupPolicy
     /**
      * Determine whether the user can update the group.
      *
-     * @param  \App\User  $user
-     * @param  \App\Group  $group
+     * @param User $user
+     * @param Group $group
      * @return mixed
      */
     public function update(User $user, Group $group)
@@ -61,8 +61,8 @@ class GroupPolicy
     /**
      * Determine whether the user can create photo in the group.
      *
-     * @param  \App\User  $user
-     * @param  \App\Group  $group
+     * @param User $user
+     * @param Group $group
      * @return mixed
      */
     public function createPhoto(User $user, Group $group)
@@ -74,8 +74,8 @@ class GroupPolicy
     /**
      * Determine whether the user can delete the group.
      *
-     * @param  \App\User  $user
-     * @param  \App\Group  $group
+     * @param User $user
+     * @param Group $group
      * @return mixed
      */
     public function delete(User $user, Group $group)
@@ -93,7 +93,7 @@ class GroupPolicy
      */
     public function attachGeofence(User $user, Group $group, Geofence $geofence)
     {
-        return true || $user->is_admin ||
+        return $user->is_admin ||
             (
                 groups()->hasAdministrator($group, $user) &&
                 !in_array($group->uuid, $geofence->groups->pluck('uuid')->toArray())
@@ -110,7 +110,7 @@ class GroupPolicy
      */
     public function detachGeofence(User $user, Group $group, Geofence $geofence)
     {
-        return true || $user->is_admin ||
+        return $user->is_admin ||
             (
                 groups()->hasAdministrator($group, $user) &&
                 in_array($group->uuid, $geofence->groups->pluck('uuid')->toArray())
