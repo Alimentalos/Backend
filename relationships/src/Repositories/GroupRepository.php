@@ -1,11 +1,11 @@
 <?php
 
-namespace Demency\Groupable\Repositories;
+namespace Demency\Relationships\Repositories;
 
-use Demency\Groupable\Models\Group;
-use Demency\Groupable\Lists\GroupList;
-use Demency\Groupable\Procedures\GroupProcedure;
-use Demency\Groupable\Asserts\GroupAssert;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Lists\GroupList;
+use Demency\Relationships\Procedures\GroupProcedure;
+use Demency\Relationships\Asserts\GroupAssert;
 
 class GroupRepository
 {

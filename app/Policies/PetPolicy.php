@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Geofence;
-use Demency\Groupable\Models\Group;
+use Demency\Relationships\Models\Group;
 use App\Pet;
 use App\Photo;
 use App\User;

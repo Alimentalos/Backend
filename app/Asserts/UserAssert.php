@@ -4,7 +4,7 @@
 namespace App\Asserts;
 
 
-use Demency\Groupable\Models\Group;
+use Demency\Relationships\Models\Group;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 

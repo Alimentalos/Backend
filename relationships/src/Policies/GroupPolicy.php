@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Groupable\Policies;
+namespace Demency\Relationships\Policies;
 
 use App\Geofence;
-use Demency\Groupable\Models\Group;
+use Demency\Relationships\Models\Group;
 use App\Photo;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;

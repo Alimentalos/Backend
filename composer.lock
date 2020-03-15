@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b34b04549b8a066c7ad6b93e9d9f985",
+    "content-hash": "8f2198a1f171b6a3e5e2f02d38ae3354",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -376,27 +376,28 @@
             ]
         },
         {
-            "name": "demency/laravel-groupable",
+            "name": "demency/laravel-relationships",
             "version": "4.4.x-dev",
             "dist": {
                 "type": "path",
-                "url": "./groupable",
-                "reference": "112ac56396d0d232f6fb6c880b86c19c14745210"
+                "url": "./relationships",
+                "reference": "db716c5550017efe00572aca1a141b258af586ef"
             },
             "require": {
+                "demency/laravel-contracts": "*",
                 "php": "^7.3"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Demency\\Groupable\\GroupableServiceProvider"
+                        "Demency\\Relationships\\RelationshipsServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Demency\\Groupable\\": "src/"
+                    "Demency\\Relationships\\": "src/"
                 }
             },
             "license": [
@@ -408,11 +409,12 @@
                     "email": "iantorres@outlook.com"
                 }
             ],
-            "description": "Laravel package for groupable relationships.",
+            "description": "Laravel package for common relationships.",
             "keywords": [
-                "groups",
+                "common",
                 "laravel",
-                "package"
+                "package",
+                "relationships"
             ]
         },
         {

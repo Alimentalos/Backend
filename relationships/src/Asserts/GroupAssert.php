@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Groupable\Asserts;
+namespace Demency\Relationships\Asserts;
 
-use Demency\Groupable\Models\Group;
+use Demency\Relationships\Models\Group;
 use App\User;
 
 trait GroupAssert

@@ -3,7 +3,7 @@
 namespace App;
 
 use Demency\Contracts\Resource;
-use App\Relationships\Commons\BelongsToUser;
+use Demency\Relationships\BelongsToUser;
 use App\Resources\ActionResource;
 use Illuminate\Database\Eloquent\Model;
 

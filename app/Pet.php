@@ -3,13 +3,13 @@
 namespace App;
 
 use Demency\Contracts\Resource;
-use App\Relationships\Commons\BelongsToUser;
-use App\Relationships\Commons\Commentable;
-use App\Relationships\Commons\Geofenceable;
-use App\Relationships\Commons\Groupable;
-use App\Relationships\Commons\HasPhoto;
-use App\Relationships\Commons\Photoable;
-use App\Relationships\Commons\Trackable;
+use Demency\Relationships\BelongsToUser;
+use Demency\Relationships\Commentable;
+use Demency\Relationships\Geofenceable;
+use Demency\Relationships\Groupable;
+use Demency\Relationships\HasPhoto;
+use Demency\Relationships\Photoable;
+use Demency\Relationships\Trackable;
 use App\Resources\PetResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;

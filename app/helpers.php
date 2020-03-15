@@ -31,7 +31,7 @@ use App\Tools\Reporter;
 use App\Tools\Subscriber;
 use App\Tools\Uploader;
 use App\User;
-use Demency\Groupable\Repositories\GroupRepository;
+use Demency\Relationships\Repositories\GroupRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 if (! function_exists('actions')) {

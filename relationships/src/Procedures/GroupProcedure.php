@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Demency\Groupable\Procedures;
+namespace Demency\Relationships\Procedures;
 
-use Demency\Groupable\Models\Group;
+use Demency\Relationships\Models\Group;
 
 trait GroupProcedure
 {

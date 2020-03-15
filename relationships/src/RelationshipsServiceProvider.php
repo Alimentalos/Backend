@@ -1,13 +1,13 @@
 <?php
 
-namespace Demency\Groupable;
+namespace Demency\Relationships;
 
 use Illuminate\Support\ServiceProvider;
 
-class GroupableServiceProvider extends ServiceProvider
+class RelationshipsServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any Groupable services.
+     * Bootstrap any Relations services.
      *
      * @return void
      */
@@ -16,7 +16,7 @@ class GroupableServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register any Groupable services.
+     * Register any Relations services.
      *
      * @return void
      */

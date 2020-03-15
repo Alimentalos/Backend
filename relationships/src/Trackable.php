@@ -1,7 +1,6 @@
 <?php
 
-
-namespace App\Relationships\Commons;
+namespace Demency\Relationships;
 
 use App\Access;
 use App\Location;

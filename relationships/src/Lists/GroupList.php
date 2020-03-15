@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Groupable\Lists;
+namespace Demency\Relationships\Lists;
 
-use Demency\Groupable\Models\Group;
+use Demency\Relationships\Models\Group;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait GroupList

@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Groupable\Observers;
+namespace Demency\Relationships\Observers;
 
-use Demency\Groupable\Models\Group;
+use Demency\Relationships\Models\Group;
 
 class GroupObserver
 {

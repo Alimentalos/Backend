@@ -1,7 +1,6 @@
 <?php
 
-
-namespace App\Relationships\Commons;
+namespace Demency\Relationships;
 
 use App\Photo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

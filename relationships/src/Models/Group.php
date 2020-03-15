@@ -1,20 +1,19 @@
 <?php
 
-namespace Demency\Groupable\Models;
+namespace Demency\Relationships\Models;
 
-use App\Coin;
 use Demency\Contracts\CreateFromRequest;
 use Demency\Contracts\Monetizer;
 use Demency\Contracts\Resource;
 use Demency\Contracts\UpdateFromRequest;
-use App\Relationships\Commons\BelongsToUser;
-use App\Relationships\Commons\Commentable;
-use App\Relationships\Commons\HasPhoto;
-use App\Relationships\Commons\Photoable;
-use Demency\Groupable\Relationships\GroupRelationships;
-use Demency\Groupable\Resources\GroupResource;
+use Demency\Relationships\BelongsToUser;
+use Demency\Relationships\Commentable;
+use Demency\Relationships\HasCoin;
+use Demency\Relationships\HasPhoto;
+use Demency\Relationships\Photoable;
+use Demency\Relationships\Relationships\GroupRelationships;
+use Demency\Relationships\Resources\GroupResource;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequest, Monetizer
 {
@@ -24,6 +23,7 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     use Photoable;
     use Commentable;
     use HasPhoto;
+    use HasCoin;
 
     /**
      * Pending status
@@ -88,15 +88,5 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     public function getRouteKeyName()
     {
         return 'uuid';
-    }
-
-    /**
-     * Get group coins.
-     *
-     * @return MorphMany
-     */
-    public function coins()
-    {
-        return $this->morphMany(Coin::class,'monetizer','monetizer_type','monetizer_id','uuid');
     }
 }

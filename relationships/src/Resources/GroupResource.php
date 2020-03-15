@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Groupable\Resources;
+namespace Demency\Relationships\Resources;
 
-use Demency\Groupable\Models\Group;
+use Demency\Relationships\Models\Group;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;

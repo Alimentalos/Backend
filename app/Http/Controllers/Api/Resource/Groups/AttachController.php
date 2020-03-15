@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Groups;
 
-use Demency\Groupable\Models\Group;
+use Demency\Relationships\Models\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Groups\AttachRequest;
 use Illuminate\Http\JsonResponse;

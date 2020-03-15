@@ -1,9 +1,10 @@
 {
-    "name": "demency/laravel-groupable",
-    "description": "Laravel package for groupable relationships.",
+    "name": "demency/laravel-relationships",
+    "description": "Laravel package for common relationships.",
     "keywords": [
         "laravel",
-        "groups",
+        "common",
+        "relationships",
         "package"
     ],
     "authors": [
@@ -19,13 +20,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Demency\\Groupable\\": "src/"
+            "Demency\\Relationships\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Demency\\Groupable\\GroupableServiceProvider"
+                "Demency\\Relationships\\RelationshipsServiceProvider"
             ]
         }
     },

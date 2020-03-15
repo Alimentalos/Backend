@@ -10,11 +10,11 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./groupable"
+            "url": "./contracts"
         },
         {
             "type": "path",
-            "url": "./contracts"
+            "url": "./relationships"
         }
     ],
     "require": {
@@ -32,8 +32,8 @@
         "laravel/tinker": "^2.0",
         "pusher/pusher-php-server": "~4.0",
         "webpatser/laravel-uuid": "^3.0",
-        "demency/laravel-groupable": "*",
-        "demency/laravel-contracts": "*"
+        "demency/laravel-contracts": "*",
+        "demency/laravel-relationships": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

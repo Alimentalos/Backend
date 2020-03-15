@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Demency\Groupable\Relationships;
+namespace Demency\Relationships\Relationships;
 
 use App\Device;
 use App\Geofence;

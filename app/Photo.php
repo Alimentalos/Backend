@@ -4,8 +4,8 @@ namespace App;
 
 use Demency\Contracts\Resource;
 use Demency\Contracts\UpdateFromRequest;
-use App\Relationships\Commons\BelongsToUser;
-use App\Relationships\Commons\Commentable;
+use Demency\Relationships\BelongsToUser;
+use Demency\Relationships\Commentable;
 use App\Relationships\PhotoRelationships;
 use App\Resources\PhotoResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;

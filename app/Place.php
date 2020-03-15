@@ -3,10 +3,10 @@
 namespace App;
 
 use Demency\Contracts\Resource;
-use App\Relationships\Commons\BelongsToUser;
-use App\Relationships\Commons\Commentable;
-use App\Relationships\Commons\HasPhoto;
-use App\Relationships\Commons\Photoable;
+use Demency\Relationships\BelongsToUser;
+use Demency\Relationships\Commentable;
+use Demency\Relationships\HasPhoto;
+use Demency\Relationships\Photoable;
 use App\Resources\PlaceResource;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
