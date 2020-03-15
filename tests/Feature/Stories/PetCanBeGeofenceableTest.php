@@ -5,8 +5,8 @@ namespace Tests\Feature\Stories;
 
 
 use App\Device;
-use App\Events\GeofenceIn;
-use App\Events\GeofenceOut;
+use Demency\Relationships\Events\GeofenceIn;
+use Demency\Relationships\Events\GeofenceOut;
 use App\Geofence;
 use App\Location;
 use App\Pet;

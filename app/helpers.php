@@ -1,24 +1,21 @@
 <?php
 
 use Demency\Contracts\Resource;
-use App\Repositories\ActionsRepository;
+use Demency\Relationships\Repositories\ActionsRepository;
 use App\Repositories\AdminRepository;
-use App\Repositories\AlertsRepository;
-use App\Repositories\CommentsRepository;
-use App\Repositories\DevicesRepository;
-use App\Repositories\GeofenceAccessesRepository;
-use App\Repositories\GeofenceRepository;
-use App\Repositories\LocationsRepository;
-use App\Repositories\PetsRepository;
-use App\Repositories\PhotoRepository;
-use App\Repositories\PlacesRepository;
+use Demency\Relationships\Repositories\AlertsRepository;
+use Demency\Relationships\Repositories\CommentsRepository;
+use Demency\Relationships\Repositories\DevicesRepository;
+use Demency\Relationships\Repositories\GeofenceAccessesRepository;
+use Demency\Relationships\Repositories\LocationsRepository;
+use Demency\Relationships\Repositories\PlacesRepository;
 use App\Repositories\ReactionsRepository;
-use App\Repositories\ResourceCommentsRepository;
-use App\Repositories\ResourceLocationsRepository;
-use App\Repositories\ResourcePhotosRepository;
-use App\Repositories\ResourceRepository;
-use App\Repositories\UserGroupsRepository;
-use App\Repositories\UsersRepository;
+use Demency\Relationships\Repositories\ResourceCommentsRepository;
+use Demency\Relationships\Repositories\ResourceLocationsRepository;
+use Demency\Relationships\Repositories\ResourcePhotosRepository;
+use Demency\Relationships\Repositories\ResourceRepository;
+use Demency\Relationships\Repositories\UserGroupsRepository;
+use Demency\Relationships\Repositories\UsersRepository;
 use App\Tools\Cataloger;
 use App\Tools\Filler;
 use App\Tools\Finder;
@@ -31,7 +28,10 @@ use App\Tools\Reporter;
 use App\Tools\Subscriber;
 use App\Tools\Uploader;
 use App\User;
+use Demency\Relationships\Repositories\GeofenceRepository;
 use Demency\Relationships\Repositories\GroupRepository;
+use Demency\Relationships\Repositories\PhotoRepository;
+use Demency\Relationships\Repositories\PetRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 if (! function_exists('actions')) {
@@ -46,11 +46,11 @@ if (! function_exists('actions')) {
 
 if (! function_exists('pets')) {
     /**
-     * @return PetsRepository
+     * @return PetRepository
      */
     function pets()
     {
-        return new PetsRepository();
+        return new PetRepository();
     }
 }
 

@@ -3,7 +3,7 @@
 namespace App\Resources;
 
 use App\Http\Resources\Device;
-use App\Repositories\DevicesRepository;
+use Demency\Relationships\Repositories\DevicesRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait DeviceResource

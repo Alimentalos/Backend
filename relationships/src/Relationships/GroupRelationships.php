@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Demency\Relationships\Relationships;
 
 use App\Device;
