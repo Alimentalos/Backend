@@ -23,3 +23,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/about/{name}', 'AboutController@show')->name('about.show');
+Route::get('/about/{name}/{page}', 'AboutController@view')->name('about.view');

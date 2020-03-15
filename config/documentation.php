@@ -7,18 +7,21 @@ return [
             'Alimentalos is a open source project created to bring care and love to abandoned pets.'
         ],
         'Problem and solution' => [
-            'Every day humans abandon or lose pets in the corners of the earth. Many people are worried daily about the care of these animals. We create a space to make visible these animals in a state of abandonment and allow their insertion in the community.'
+            'Introduction' => 'Every day humans abandon or lose pets in the corners of the earth. Many people are worried daily about the care of these animals. We create a space to make visible these animals in a state of abandonment and allow their insertion in the community.'
         ],
         'Actors and resources' => [
-            'You and others can be part of the change of consciousness. Find the grain of divinity in the gaze of its creation. The resources required are only food and time. Today there are specialized groups which are organized to provide care for these creatures. Participate and join a group, meet people and discover people with your same interests.'
+            'Introduction' => 'You and others can be part of the change of consciousness. Find the grain of divinity in the gaze of its creation. The resources required are only food and time. Today there are specialized groups which are organized to provide care for these creatures. Participate and join a group, meet people and discover people with your same interests.'
         ],
         'Terms' => [
-            'Pet' => 'Animal cared by humans.',
-            'User' => 'Human who has system access granted by credentials.',
-            'Group' => 'System entity that allows you to link other resources.',
-            'Location' => 'Physical space represented by a coordinate.',
-            'Geofence' => 'Point composed polygon that frame a physical space.',
-            'Resource' => 'Is everything that can be systematically registered, listed, edited or deleted.'
+            'Introduction' => '...',
+            'Meanings' => [
+                'Pet' => 'Animal cared by humans.',
+                'User' => 'Human who has system access granted by credentials.',
+                'Group' => 'System entity that allows you to link other resources.',
+                'Location' => 'Physical space represented by a coordinate.',
+                'Geofence' => 'Point composed polygon that frame a physical space.',
+                'Resource' => 'Is everything that can be systematically registered, listed, edited or deleted.'
+            ]
         ],
     ],
     'Developer handbook' => [
