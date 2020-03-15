@@ -4,7 +4,7 @@
 namespace App\Asserts;
 
 
-use App\Group;
+use Demency\Groupable\Models\Group;
 use Illuminate\Database\Eloquent\Model;
 
 trait ResourceGroupAssert

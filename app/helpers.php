@@ -8,7 +8,6 @@ use App\Repositories\CommentsRepository;
 use App\Repositories\DevicesRepository;
 use App\Repositories\GeofenceAccessesRepository;
 use App\Repositories\GeofenceRepository;
-use App\Repositories\GroupsRepository;
 use App\Repositories\LocationsRepository;
 use App\Repositories\PetsRepository;
 use App\Repositories\PhotoRepository;
@@ -32,6 +31,7 @@ use App\Tools\Reporter;
 use App\Tools\Subscriber;
 use App\Tools\Uploader;
 use App\User;
+use Demency\Groupable\Repositories\GroupRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 if (! function_exists('actions')) {
@@ -96,11 +96,11 @@ if (! function_exists('alerts')) {
 
 if (! function_exists('groups')) {
     /**
-     * @return GroupsRepository
+     * @return GroupRepository
      */
     function groups()
     {
-        return new GroupsRepository();
+        return new GroupRepository();
     }
 }
 

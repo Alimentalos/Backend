@@ -1,8 +1,7 @@
 <?php
 
 
-namespace App\Procedures;
-
+namespace Demency\Groupable\Procedures;
 
 use Demency\Groupable\Models\Group;
 

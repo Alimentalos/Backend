@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Asserts;
+namespace Demency\Groupable\Asserts;
 
 use Demency\Groupable\Models\Group;
 use App\User;

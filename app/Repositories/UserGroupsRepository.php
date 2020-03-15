@@ -4,7 +4,7 @@
 namespace App\Repositories;
 
 use App\Asserts\UserGroupAssert;
-use App\Group;
+use Demency\Groupable\Models\Group;
 use App\User;
 
 class UserGroupsRepository

@@ -3,7 +3,7 @@
 
 namespace App\Relationships\Commons;
 
-use App\Group;
+use Demency\Groupable\Models\Group;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait Groupable

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace Demency\Groupable\Observers;
 
 use Demency\Groupable\Models\Group;
 

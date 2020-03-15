@@ -1,8 +1,6 @@
 <?php
 
-
-namespace App\Lists;
-
+namespace Demency\Groupable\Lists;
 
 use Demency\Groupable\Models\Group;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;

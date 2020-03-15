@@ -54,6 +54,9 @@ class Finder
      * @return Builder
      */
     public function findModel($class) {
+        if ($class == 'groups') {
+            return $this->findQuery('Demency\\Groupable\\Models\\' . Str::camel(Str::singular($class)));
+        }
         return $this->findQuery('App\\' . Str::camel(Str::singular($class)));
     }
 
@@ -64,6 +67,9 @@ class Finder
      * @return mixed
      */
     public function findClass($class) {
+        if ($class == 'groups') {
+            return $this->find('Demency\\Groupable\\Models\\' . Str::camel(Str::singular($class)));
+        }
         return $this->find('App\\' . Str::camel(Str::singular($class)));
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Resources;
+namespace Demency\Groupable\Resources;
 
 use Demency\Groupable\Models\Group;
 use App\Rules\Coordinate;

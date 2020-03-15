@@ -150,6 +150,7 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/comments');
         $response->assertOk();
+        dd(json_decode($response->getContent()));
         $response -> assertJsonStructure([
             'current_page',
             'first_page_url',

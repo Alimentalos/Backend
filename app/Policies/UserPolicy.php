@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Device;
 use App\Geofence;
-use App\Group;
+use Demency\Groupable\Models\Group;
 use App\Photo;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;

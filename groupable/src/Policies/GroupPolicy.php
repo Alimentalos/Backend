@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies;
+namespace Demency\Groupable\Policies;
 
 use App\Geofence;
 use Demency\Groupable\Models\Group;
@@ -27,7 +27,7 @@ class GroupPolicy
      * Determine whether the user can view the group.
      *
      * @param  \App\User  $user
-     * @param  \Demency\Groupable\Models\Group  $group
+     * @param  \App\Group  $group
      * @return mixed
      */
     public function view(User $user, Group $group)
@@ -50,7 +50,7 @@ class GroupPolicy
      * Determine whether the user can update the group.
      *
      * @param  \App\User  $user
-     * @param  \Demency\Groupable\Models\Group  $group
+     * @param  \App\Group  $group
      * @return mixed
      */
     public function update(User $user, Group $group)
@@ -62,7 +62,7 @@ class GroupPolicy
      * Determine whether the user can create photo in the group.
      *
      * @param  \App\User  $user
-     * @param  \Demency\Groupable\Models\Group  $group
+     * @param  \App\Group  $group
      * @return mixed
      */
     public function createPhoto(User $user, Group $group)
@@ -75,7 +75,7 @@ class GroupPolicy
      * Determine whether the user can delete the group.
      *
      * @param  \App\User  $user
-     * @param  \Demency\Groupable\Models\Group  $group
+     * @param  \App\Group  $group
      * @return mixed
      */
     public function delete(User $user, Group $group)

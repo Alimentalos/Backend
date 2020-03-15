@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Groups;
 
-use App\Group;
+use Demency\Groupable\Models\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Groups\DetachRequest;
 use Illuminate\Http\JsonResponse;
