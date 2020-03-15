@@ -1,77 +1,62 @@
 @foreach($data as $firstLevelKey => $firstLevel)
     @if (!is_numeric($firstLevelKey))
-        <div class="row justify-content-center mb-4">
-            <div class="col-md-8 col-sm-12 mt-4">
-                <h2 class="text-left pt-4" id="{{strtolower($firstLevelKey)}}">{{ __($firstLevelKey) }}</h2>
-            </div>
-        </div>
+        <h3 class="text-left pt-3 mb-4" id="{{strtolower($firstLevelKey)}}">{{ __($firstLevelKey) }}</h3>
     @endif
     @if(is_array($firstLevel))
         @foreach($firstLevel as $secondLevelKey => $secondLevel)
             @if(is_array($secondLevel))
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-sm-12 mt-4">
 
-                        @if (!is_numeric($secondLevelKey))
+                @if (!is_numeric($secondLevelKey))
 
-                            <div class="mt-5"></div>
-                            <div class="h3 mb-5 pb-4">{{ __($secondLevelKey) }}</div>
+                    <div class="mt-5"></div>
+                    <div class="h4 mb-4">@markdown(__($secondLevelKey))</div>
+                @endif
+
+                @foreach($secondLevel as $key=> $thirdLevel)
+                    @if(is_array($thirdLevel))
+                        @if (!is_numeric($key))
+                            <div class="h4 mb-4 pb-2 pt-4">@markdown($key)</div>
                         @endif
-
-                        <div class="card">
-                            <div class="card-body pl-5 pr-5 pt-5">
-
-                                @foreach($secondLevel as $key=> $thirdLevel)
-                                    @if(is_array($thirdLevel))
+                        <ul>
+                        @foreach($thirdLevel as $key=> $fourLevel)
+                            @if(is_array($fourLevel))
+                                @if (!is_numeric($key))
+                                    <div class="h6">@markdown($key)</div>
+                                @endif
+                                <ul>
+                                    @foreach($fourLevel as $key=> $fiveLevel)
                                         @if (!is_numeric($key))
-                                                <div class="h4 mb-4 pb-4 pt-4">@markdown($key)</div>
+                                            <strong>@markdown($key)</strong>
                                         @endif
-                                        <ul class="pb-2">
-                                            @foreach($thirdLevel as $key=> $fourLevel)
-                                                @if(is_array($fourLevel))
-                                                    @if (!is_numeric($key))
-                                                        <div class="h5">@markdown($key)</div>
-                                                    @endif
-                                                    <ul>
-                                                        @foreach($fourLevel as $key=> $fiveLevel)
-                                                            @if (!is_numeric($key))
-                                                                <strong>@markdown($key)</strong>
-                                                            @endif
-                                                            @markdown($fiveLevel)
-                                                        @endforeach
-                                                    </ul>
-                                                @else
-                                                    @if (!is_numeric($key))
-                                                        <strong>@markdown($key)</strong>
-                                                    @endif
-                                                    @markdown($fourLevel)
-                                                @endif
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        @if (!is_numeric($key))
-                                            <div class="h5 mb-4 pt-4">@markdown($key)</div>
-                                        @endif
-                                        @markdown($thirdLevel)
-                                    @endif
-                                @endforeach
-                            </div>
+                                        @markdown($fiveLevel)
+                                    @endforeach
+                                </ul>
+                            @else
+                                @if (!is_numeric($key))
+                                    <strong>@markdown($key)</strong>
+                                @endif
+                                <div class="mb-3">
+                                    @markdown($fourLevel)
+                                </div>
+                            @endif
+                        @endforeach
+                        </ul>
+                    @else
+                        @if (!is_numeric($key))
+                            <div class="h4 mb-4 pt-4">@markdown($key)</div>
+                        @endif
+                        <div class="pt-2 pl-3">
+                            @markdown($thirdLevel)
                         </div>
-                    </div>
-                </div>
+                    @endif
+                @endforeach
             @else
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-sm-12 mt-4">
-                        <div class="card">
-                            <div class="card-body pl-5 pr-5 pt-5">
-                                @markdown($secondLevel)
-                            </div>
-                        </div>
-                    </div>
+                <div class="pt-2 pl-3">
+                    @markdown($secondLevel)
                 </div>
             @endif
         @endforeach
     @else
-        @markdown($firstLevel)
+        2@markdown($firstLevel)
     @endif
 @endforeach

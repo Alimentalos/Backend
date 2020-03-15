@@ -2,7 +2,7 @@
 
 return [
 
-    'Documentation' => [
+    'Project' => [
         'Introduction' => [
             'Alimentalos is a open source project created to bring care and love to abandoned pets.'
         ],
@@ -70,9 +70,9 @@ return [
         'Project structure' => [
             'Patterns' => [
                 'This software was not built from premeditated design. Its structure was built from elaborate patterns along the way.',
-                'But it is true that `we respect the existing structures and patterns developed and recommended by the Laravel community`.',
+                'But it is true that `we respect the existing structures and patterns` developed and recommended by the Laravel community.',
                 'The application is built entirely on the app directory. In that directory you will find folders with patterns found and defined in the `master` branch.',
-                [
+                'Directories' => [
                     '`app` directory at its root includes the application models and a file with helper methods to simplify code development.',
                     '`app/Annotations` directory has the base definition from which the documentation of the API specification is generated.',
                     '`app/Asserts` directory contains traits with logical statements of comparison or verification of models or relationships between models.',
@@ -96,17 +96,17 @@ return [
                 ]
             ],
             'Models' => [
-                'Location' => 'It is an entity that represents a `geographical point`, you can have extra data such as `speed`, `odometer`, and `altitude` if applicable.',
-                'Pet' => 'It is the main `discrete unit` of the system. It corresponds to the logical entity of a living being listed as an animal. Has a direct relationship with who made the registration.',
-                'Photo' => 'It is the representation of `image` type file. It is directly related to the user who uploaded it and to a photoable resource.',
-                'User' => 'It is the representation of `discrete entity` that can perform operations on the platform.',
-                'Group' => 'It is a logical representation of an entity that allows us to `relate resources`.',
-                'Geofence' => 'Is the logical representation of a `polygon` composed of geo-referenced points. It is related to animal, devices and users. It can also belong to a group.',
-                'Device' => 'Is a logical representation of a traceable element, it can be a cell phone or a specialized device. It belongs to a user and can be `public` or `private`. Its scope can be reduced to the owner user or to the users belonging to a group in common with the device.',
-                'Comment' => 'Is the written presentation of an `idea`, `thought` or `emotion` of a user in the community. It may be related to a resource or another comment. It has an optional title and a mandatory body.',
-                'Access' => 'Is a logical representation of an `in` or `out` of resource in a geofence. Access is directly related to a resource through the accessible relationship. It also belongs to a geofence and has a double relationship with the location model to represent the beginning and end.',
-                'Alert' => 'Is quite similar to a comment, the difference eradicated in the connotation of `urgency` between a simple comment and an announcement or `request for help` addressed to the entire community. It is directly related to a resource and user.',
-                'Action' => 'It represents an `operation executed` in the system. Action has a direct relationship with a user, has parameters and resources referenced.',
+                'Location' => ['It is an entity that represents a `geographical point`, you can have extra data such as `speed`, `odometer`, and `altitude` if applicable.'],
+                'Pet' => ['It is the main `discrete unit` of the system. It corresponds to the logical entity of a living being listed as an animal. Has a direct relationship with who made the registration.'],
+                'Photo' => ['It is the representation of `image` type file. It is directly related to the user who uploaded it and to a photoable resource.'],
+                'User' => ['It is the representation of `discrete entity` that can perform operations on the platform.'],
+                'Group' => ['It is a logical representation of an entity that allows us to `relate resources`.'],
+                'Geofence' => ['Is the logical representation of a `polygon` composed of geo-referenced points. It is related to animal, devices and users. It can also belong to a group.'],
+                'Device' => ['Is a logical representation of a traceable element, it can be a cell phone or a specialized device. It belongs to a user and can be `public` or `private`. Its scope can be reduced to the owner user or to the users belonging to a group in common with the device.'],
+                'Comment' => ['Is the written presentation of an `idea`, `thought` or `emotion` of a user in the community. It may be related to a resource or another comment. It has an optional title and a mandatory body.'],
+                'Access' => ['Is a logical representation of an `in` or `out` of resource in a geofence. Access is directly related to a resource through the accessible relationship. It also belongs to a geofence and has a double relationship with the location model to represent the beginning and end.'],
+                'Alert' => ['Is quite similar to a comment, the difference eradicated in the connotation of `urgency` between a simple comment and an announcement or `request for help` addressed to the entire community. It is directly related to a resource and user.'],
+                'Action' => ['It represents an `operation executed` in the system. Action has a direct relationship with a user, has parameters and resources referenced.'],
             ],
             'Events' => [
                 'Location' => 'The event is triggered when a system-locatable resource creates a new location. It is transmitted on the own resource channel. Inside it has details of the location and the related resource.',
@@ -114,60 +114,60 @@ return [
                 'GeofenceOut' => 'The event is triggered when it is detected that the resource has came out of a geo-fence. Inside it has details about the geo-fence, the resource and the location.',
             ],
             'Relationships' => [
-                '#### Commons' => [
+                'Commons' => [
                 ],
-                '##### BelongsToUser' => [
+                ' BelongsToUser' => [
                     'This trait allows to relate a `resource` to a `user`.',
                     'Making a relationship of `belongs to user`.'
                 ],
-                '##### Commentable' => [
+                ' Commentable' => [
                     'This trait allows to create `comments` of a `resource`.',
                     'Making a relationship of `morph many comments`.'
                 ],
-                '##### Geofenceable' => [
+                ' Geofenceable' => [
                     'This trait allows to create relationships between a `resource` and a `geofence`.',
                     'Making a relationship of `morph to many geofences`.'
                 ],
-                '##### Groupable' => [
+                ' Groupable' => [
                     'This trait allows to create relationships between a `resource` and a `group`.',
                     'Making a relationship of `morph to many groups`.'
                 ],
-                '##### HasPhoto' => [
+                ' HasPhoto' => [
                     'This trait allows a `resource` to have one `photo`.',
                     'Making a relationship of `belong to photo`.'
                 ],
-                '##### Photoable' => [
+                ' Photoable' => [
                     'This trait allows a `photo` to be related to `resource`.',
                     'Making a relationship of `morph to many photos`.'
                 ],
-                '##### Trackable' => [
+                ' Trackable' => [
                     'This trait allows a `resource` to be traceable.',
                     'Making a relationship of `morph many locations and accesses`.'
                 ],
-                '#### Specified' => [
+                'Specified' => [
                 ],
-                '##### AccessRelationships' => [
+                ' AccessRelationships' => [
                     'Related to Access, contains `accessible`, `first location` and `last location` relationships. The first of them is the resource with which access is related, it can be user, pet or device.'
                 ],
-                '##### AlertRelationships' => [
+                ' AlertRelationships' => [
                     'Related to Alert, contains `alert`, the method which must resolve the type of resource with which the alert is associated.'
                 ],
-                '##### CommentRelationships' => [
+                ' CommentRelationships' => [
                     'Related to Comment, contains `commentable`, the method which must resolve the type of resource with which the comment is associated.'
                 ],
-                '##### GeofenceRelationships' => [
+                ' GeofenceRelationships' => [
                     'Related to Geofence, contains `geofenceable`, the method which must resolve the type of resource with which the geofence is associated. It also have the relationships `pets`, `devices` and `users`, which define the inverse relationship of those resources. `accesses` relationship allows to obtain all the ingress or egress of the resources with respect to the geo-fence.'
                 ],
-                '##### GroupRelationships' => [
+                ' GroupRelationships' => [
                     'Related to Group, contains `groupable`, the method which must resolve the type of resource with which the group is associated. It also have the relationships `pets`, `devices`, `geofences` and `users`, which define the inverse relationship of those resources.'
                 ],
-                '##### LocationRelationships' => [
+                ' LocationRelationships' => [
                     'Related to Location, contains `trackable`, the method which must resolve the type of resource with which the location is associated.'
                 ],
-                '##### PhotoRelationships' => [
+                ' PhotoRelationships' => [
                     'Related to Photo, contains `photoable`, the method which must resolve the type of resource with which the group is associated. It also have the relationships `groups`, `users`, `alerts`, `geofences` and `pets`, which define the inverse relationship of those resources. `comment` method resolve the comment associated with the photo.'
                 ],
-                '##### UserRelationships' => [
+                ' UserRelationships' => [
                     'Related to Photo, contains `photoable`, the method which must resolve the type of resource with which the group is associated. It also have the relationships `groups`, `users`, `alerts`, `geofences` and `pets`, which define the inverse relationship of those resources. `comment` method resolve the comment associated with the photo.'
                 ],
             ],
@@ -242,13 +242,13 @@ return [
                 ],
             ],
             'Lists' => [
-                'ActionList' => 'Contains the methods which resolves the `actions` list depending if is a `child user`.',
-                'AlertList' => 'Contain the method which resolves the list of `alerts`.',
-                'DeviceList' => 'Contains the methods which resolves the `devices` list scoped for `authenticated user`.',
-                'GeofenceAccessesList' => 'Contains the method which retrieve the `accesses` of a specific `geofence`.',
-                'GeofenceList' => 'Contains the two methods which resolves the `geofences` list depending if is a `child user`.',
-                'GroupList' => 'Contains the two methods which resolves the `groups` list depending if is a `admin user`.',
-                'LocationList' => 'Contains the two methods which retrieves `locations` depending if user is `finding` or `indexing`.',
+                'ActionList' => ['Contains the methods which resolves the `actions` list depending if is a `child user`.'],
+                'AlertList' => ['Contain the method which resolves the list of `alerts`.'],
+                'DeviceList' => ['Contains the methods which resolves the `devices` list scoped for `authenticated user`.'],
+                'GeofenceAccessesList' => ['Contains the method which retrieve the `accesses` of a specific `geofence`.'],
+                'GeofenceList' => ['Contains the two methods which resolves the `geofences` list depending if is a `child user`.'],
+                'GroupList' => ['Contains the two methods which resolves the `groups` list depending if is a `admin user`.'],
+                'LocationList' => ['Contains the two methods which retrieves `locations` depending if user is `finding` or `indexing`.'],
             ],
             // TODO Add JWT documentation explanation and reference
             'Authentication' => [
@@ -318,145 +318,147 @@ return [
             ],
             'Helpers' => [
                 'Helpers are global scoped functions, to make code simple and readable.',
-                '###### `admin()`' => [
-                    'Creates `AdminRepository` instance.',
-                ],
-                '###### `actions()`' => [
-                    'Creates `ActionsRepository` instance.',
-                ],
-                '###### `devices()`' => [
-                    'Creates `DevicesRepository` instance.',
-                ],
-                '###### `users()`' => [
-                    'Creates `UsersRepository` instance.',
-                ],
-                '###### `pets()`' => [
-                    'Creates `PetsRepository` instance.',
-                ],
-                '###### `comments()`' => [
-                    'Creates `CommentsRepository` instance.',
-                ],
-                '###### `resources()`' => [
-                    'Creates `ResourcesRepository` instance.',
-                ],
-                '###### `alerts()`' => [
-                    'Creates `AlertsRepository` instance.',
-                ],
-                '###### `groups()`' => [
-                    'Creates `GroupsRepository` instance.',
-                ],
-                '###### `geofences()`' => [
-                    'Creates `GeofenceRepository` instance.',
-                ],
-                '###### `geofencesAccesses()`' => [
-                    'Creates `GeofenceAccessesRepository` instance.',
-                ],
-                '###### `resourceComments()`' => [
-                    'Creates `ResourceCommentsRepository` instance.',
-                ],
-                '###### `resourceLocations()`' => [
-                    'Creates `ResourceLocationsRepository` instance.',
-                ],
-                '###### `resourcePhotos()`' => [
-                    'Creates `ResourcePhotosRepository` instance.',
-                ],
-                '###### `reactions()`' => [
-                    'Creates `ReactionsRepository` instance.',
-                ],
-                '###### `resource()`' => [
-                    'Retrieve `current resource` class or instance.',
-                ],
-                '###### `authenticated($guard = "api")`' => [
-                    'Wrapper of `auth()->user()`.',
-                ],
-                '###### `subscriptions()`' => [
-                    'Creates `Subscriber` tool instance.',
-                ],
-                '###### `parameters()`' => [
-                    'Creates `Parameterizer` tool instance.',
-                ],
-                '###### `photos()`' => [
-                    'Creates `PhotoRepository` instance.',
-                ],
-                '###### `locations()`' => [
-                    'Creates `LocationsRepository` instance.',
-                ],
-                '###### `rhas($key)`' => [
-                    'Wrapper of `request()->has($key)`.',
-                ],
-                '###### `einput($delimiter, $key)`' => [
-                    'Wrapper of `explode($delimiter, request()->input($key))`.',
-                ],
-                '###### `uuid()`' => [
-                    'Creates unique identifier.',
-                ],
-                '###### `likes()`' => [
-                    'Creates `Liker` tool instance.',
-                ],
-                '###### `finder()`' => [
-                    'Creates `Finder` tool instance.',
-                ],
-                '###### `cataloger()`' => [
-                    'Creates `Cataloger` tool instance.',
-                ],
-                '###### `upload()`' => [
-                    'Creates `Uploader` tool instance.',
-                ],
-                '###### `reports()`' => [
-                    'Creates `Reporter` tool instance.',
-                ],
-                '###### `measurer()`' => [
-                    'Creates `Measurer` tool instance.',
-                ],
-                '###### `input($key)`' => [
-                    'Wrapper of `request()->input($key)`.',
-                ],
-                '###### `uploaded($key)`' => [
-                    'Wrapper of `request()->file($key)`.',
-                ],
-                '###### `fill($key, $value)`' => [
-                    'Checks if request input has key using default value if doesnt exists.',
-                ],
-                '###### `only($keys)`' => [
-                    'Wrapper of `request()->only(func_get_args())`.',
-                ],
-                '###### `parser()`' => [
-                    'Creates `Parser` tool instance.',
-                ],
+                [
+                    '`admin()`' => [
+                        'Creates `AdminRepository` instance.',
+                    ],
+                    '`actions()`' => [
+                        'Creates `ActionsRepository` instance.',
+                    ],
+                    '`devices()`' => [
+                        'Creates `DevicesRepository` instance.',
+                    ],
+                    '`users()`' => [
+                        'Creates `UsersRepository` instance.',
+                    ],
+                    '`pets()`' => [
+                        'Creates `PetsRepository` instance.',
+                    ],
+                    '`comments()`' => [
+                        'Creates `CommentsRepository` instance.',
+                    ],
+                    '`resources()`' => [
+                        'Creates `ResourcesRepository` instance.',
+                    ],
+                    '`alerts()`' => [
+                        'Creates `AlertsRepository` instance.',
+                    ],
+                    '`groups()`' => [
+                        'Creates `GroupsRepository` instance.',
+                    ],
+                    '`geofences()`' => [
+                        'Creates `GeofenceRepository` instance.',
+                    ],
+                    '`geofencesAccesses()`' => [
+                        'Creates `GeofenceAccessesRepository` instance.',
+                    ],
+                    '`resourceComments()`' => [
+                        'Creates `ResourceCommentsRepository` instance.',
+                    ],
+                    '`resourceLocations()`' => [
+                        'Creates `ResourceLocationsRepository` instance.',
+                    ],
+                    '`resourcePhotos()`' => [
+                        'Creates `ResourcePhotosRepository` instance.',
+                    ],
+                    '`reactions()`' => [
+                        'Creates `ReactionsRepository` instance.',
+                    ],
+                    '`resource()`' => [
+                        'Retrieve `current resource` class or instance.',
+                    ],
+                    '`authenticated($guard = "api")`' => [
+                        'Wrapper of `auth()->user()`.',
+                    ],
+                    '`subscriptions()`' => [
+                        'Creates `Subscriber` tool instance.',
+                    ],
+                    '`parameters()`' => [
+                        'Creates `Parameterizer` tool instance.',
+                    ],
+                    '`photos()`' => [
+                        'Creates `PhotoRepository` instance.',
+                    ],
+                    '`locations()`' => [
+                        'Creates `LocationsRepository` instance.',
+                    ],
+                    '`rhas($key)`' => [
+                        'Wrapper of `request()->has($key)`.',
+                    ],
+                    '`einput($delimiter, $key)`' => [
+                        'Wrapper of `explode($delimiter, request()->input($key))`.',
+                    ],
+                    '`uuid()`' => [
+                        'Creates unique identifier.',
+                    ],
+                    '`likes()`' => [
+                        'Creates `Liker` tool instance.',
+                    ],
+                    '`finder()`' => [
+                        'Creates `Finder` tool instance.',
+                    ],
+                    '`cataloger()`' => [
+                        'Creates `Cataloger` tool instance.',
+                    ],
+                    '`upload()`' => [
+                        'Creates `Uploader` tool instance.',
+                    ],
+                    '`reports()`' => [
+                        'Creates `Reporter` tool instance.',
+                    ],
+                    '`measurer()`' => [
+                        'Creates `Measurer` tool instance.',
+                    ],
+                    '`input($key)`' => [
+                        'Wrapper of `request()->input($key)`.',
+                    ],
+                    '`uploaded($key)`' => [
+                        'Wrapper of `request()->file($key)`.',
+                    ],
+                    '`fill($key, $value)`' => [
+                        'Checks if request input has key using default value if doesnt exists.',
+                    ],
+                    '`only($keys)`' => [
+                        'Wrapper of `request()->only(func_get_args())`.',
+                    ],
+                    '`parser()`' => [
+                        'Creates `Parser` tool instance.',
+                    ],
+                ]
             ],
             'Tools' => [
                 'Tools are classes with a specific responsibility such as measuring distances or uploading files:',
-                '#### Cataloger' => [
+                'Cataloger' => [
                     'Class with the available alert statuses.',
                 ],
-                '#### Filler' => [
+                'Filler' => [
                     'Fast function to use request input if has value or apply default value.',
                 ],
-                '#### Finder' => [
+                'Finder' => [
                     'Resolves `/{resource}/{uuid}` instance or `/{resource}` class.',
                 ],
-                '#### Identifier' => [
+                'Identifier' => [
                     'Generates unique identifiers of resources.',
                 ],
-                '#### Liker' => [
+                'Liker' => [
                     'Implements `laravel-love` reactions of resources.',
                 ],
-                '#### Measurer' => [
+                'Measurer' => [
                     'Performs distance calculations.',
                 ],
-                '#### Parameterizer' => [
+                'Parameterizer' => [
                     'Implements a simple method to use `Filler` over an array of attributes.',
                 ],
-                '#### Parser' => [
+                'Parser' => [
                     'Transform raw data into system readable information, such as converting coordinates into `geo-spatial points`.',
                 ],
-                '#### Reporter' => [
+                'Reporter' => [
                     'Responsible for the generation of reports. This tool is `under construction`.',
                 ],
-                '#### Subscriber' => [
+                'Subscriber' => [
                     'Responsible for `checking the limits of user quota`. This tool is `under construction`.',
                 ],
-                '#### Uploader' => [
+                'Uploader' => [
                     'Responsible of `photo uploads`.',
                 ],
             ],
