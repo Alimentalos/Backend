@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Reports\Types;
+namespace Demency\Tools\Reports\Types;
 
 use App\Device;
 use App\Http\Resources\Location;

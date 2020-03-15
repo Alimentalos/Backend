@@ -136,6 +136,7 @@
       <path value="$PROJECT_DIR$/vendor/pusher/pusher-php-server" />
       <path value="$PROJECT_DIR$/vendor/demency/laravel-contracts" />
       <path value="$PROJECT_DIR$/vendor/demency/laravel-relationships" />
+      <path value="$PROJECT_DIR$/vendor/demency/laravel-tools" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

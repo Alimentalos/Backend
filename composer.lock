@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f2198a1f171b6a3e5e2f02d38ae3354",
+    "content-hash": "0822799c7fffaff7ff8570df91a42b23",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -415,6 +415,47 @@
                 "laravel",
                 "package",
                 "relationships"
+            ]
+        },
+        {
+            "name": "demency/laravel-tools",
+            "version": "4.4.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./tools",
+                "reference": "7f422e4d47afab30057e5b870452598d76f274b4"
+            },
+            "require": {
+                "demency/laravel-relationships": "*",
+                "php": "^7.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Demency\\Tools\\ToolsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Demency\\Tools\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ian Torres",
+                    "email": "iantorres@outlook.com"
+                }
+            ],
+            "description": "Laravel package with tools.",
+            "keywords": [
+                "laravel",
+                "package",
+                "tools"
             ]
         },
         {

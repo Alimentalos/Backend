@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Tools;
+namespace Demency\Tools;
 
 
 class Filler

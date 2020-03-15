@@ -14,8 +14,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/darkaonline/l5-swagger" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/defuse/php-encryption" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/demency/laravel-contracts" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/demency/laravel-groupable" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/demency/laravel-relationships" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/demency/laravel-tools" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dnoegel/php-xdg-base-dir" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />

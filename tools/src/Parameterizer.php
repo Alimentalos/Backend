@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Tools;
+namespace Demency\Tools;
 
 
 use Illuminate\Database\Eloquent\Model;

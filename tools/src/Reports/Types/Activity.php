@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Reports\Types;
+namespace Demency\Tools\Reports\Types;
 
 use App\Http\Resources\Location;
 use App\Http\Resources\LocationCollection;
-use App\Reports\Helpers\RangesHelper;
+use Demency\Tools\Reports\Helpers\RangesHelper;
 use Carbon\Carbon;
 
 class Activity extends Type

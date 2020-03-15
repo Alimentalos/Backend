@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Reports;
+namespace Demency\Tools\Reports;
 
-use App\Reports\Types\Activity;
-use App\Reports\Types\Speed;
-use App\Reports\Types\Type;
+use Demency\Tools\Reports\Types\Activity;
+use Demency\Tools\Reports\Types\Speed;
+use Demency\Tools\Reports\Types\Type;
 
 class Report
 {

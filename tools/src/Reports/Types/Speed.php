@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Reports\Types;
+namespace Demency\Tools\Reports\Types;
 
 use App\Http\Resources\LocationCollection;
-use App\Repositories\SpeedRepository;
 
 class Speed extends Type
 {

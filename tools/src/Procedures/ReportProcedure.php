@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Procedures;
+namespace Demency\Tools\Procedures;
 
 
-use App\Reports\Report;
+use Demency\Tools\Reports\Report;
 
 trait ReportProcedure
 {

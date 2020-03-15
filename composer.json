@@ -15,6 +15,10 @@
         {
             "type": "path",
             "url": "./relationships"
+        },
+        {
+            "type": "path",
+            "url": "./tools"
         }
     ],
     "require": {
@@ -33,7 +37,8 @@
         "pusher/pusher-php-server": "~4.0",
         "webpatser/laravel-uuid": "^3.0",
         "demency/laravel-contracts": "*",
-        "demency/laravel-relationships": "*"
+        "demency/laravel-relationships": "*",
+        "demency/laravel-tools": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Tools;
+namespace Demency\Tools;
 
 
 use App\Contracts\CanGenerateReports;
-use App\Procedures\ReportProcedure;
+use Demency\Tools\Procedures\ReportProcedure;
 
 class Reporter implements CanGenerateReports
 {
