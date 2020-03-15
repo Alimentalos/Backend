@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Resources;
+namespace Demency\Relationships\Resources;
 
 use App\Http\Resources\Device;
 use Demency\Relationships\Repositories\DevicesRepository;

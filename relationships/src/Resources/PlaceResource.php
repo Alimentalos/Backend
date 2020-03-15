@@ -1,32 +1,33 @@
 <?php
 
-namespace App\Resources;
+namespace Demency\Relationships\Resources;
 
 use App\Pet;
+use App\Place;
 use App\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 
-trait PetResource
+trait PlaceResource
 {
     /**
      * Update pet via request.
      *
-     * @return Pet
+     * @return Place
      */
     public function updateViaRequest()
     {
-        return pets()->update($this);
+        return places()->update($this);
     }
 
     /**
      * Create pet via request.
      *
-     * @return Pet
+     * @return Place
      */
     public static function createViaRequest()
     {
-        return pets()->create();
+        return places()->create();
     }
 
     /**
@@ -65,19 +66,6 @@ trait PetResource
             'name' => 'required',
             'photo' => 'required',
             'is_public' => 'required|boolean',
-            'hair_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'left_eye_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'right_eye_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'size' => [
-                Rule::in([
-                    pets()->size_extra_small,
-                    pets()->size_small,
-                    pets()->size_medium,
-                    pets()->size_large,
-                    pets()->size_extra_large,
-                ])
-            ],
-            'born_at' => 'required',
             'coordinates' => ['required', new Coordinate()],
         ];
     }
@@ -99,6 +87,6 @@ trait PetResource
      */
     public function getInstances()
     {
-        return Pet::latest()->paginate(20);
+        return Place::latest()->paginate(20);
     }
 }

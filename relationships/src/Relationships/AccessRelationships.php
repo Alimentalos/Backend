@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Relationships;
+namespace Demency\Relationships\Relationships;
 
 use App\Geofence;
 use App\Location;

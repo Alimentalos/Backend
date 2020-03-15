@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Relationships;
+namespace Demency\Relationships\Relationships;
 
 trait CommentRelationships
 {

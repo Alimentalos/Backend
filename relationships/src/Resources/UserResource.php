@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Resources;
+namespace Demency\Relationships\Resources;
 
 use App\Rules\Coordinate;
 use App\User;

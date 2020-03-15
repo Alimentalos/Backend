@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Resources;
+namespace Demency\Relationships\Resources;
 
 trait AccessResource
 {
