@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Contracts\Resource;
+use Demency\Contracts\Resource;
 use App\Relationships\AccessRelationships;
 use App\Resources\AccessResource;
 use Illuminate\Database\Eloquent\Model;

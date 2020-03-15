@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts;
+namespace Demency\Contracts;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 

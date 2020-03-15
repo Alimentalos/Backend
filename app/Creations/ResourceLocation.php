@@ -4,7 +4,7 @@
 namespace App\Creations;
 
 
-use App\Contracts\Resource;
+use Demency\Contracts\Resource;
 use App\Device;
 use App\Events\Location as LocationEvent;
 use App\Http\Resources\Location as LocationResource;

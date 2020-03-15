@@ -5,7 +5,7 @@ namespace App\Repositories;
 
 
 use App\Coin;
-use App\Contracts\Monetizer;
+use Demency\Contracts\Monetizer;
 use App\Operation;
 use Exception;
 

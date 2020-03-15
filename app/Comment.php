@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Contracts\Resource;
-use App\Contracts\UpdateFromRequest;
+use Demency\Contracts\Resource;
+use Demency\Contracts\UpdateFromRequest;
 use App\Relationships\CommentRelationships;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Commentable;

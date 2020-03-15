@@ -31,7 +31,7 @@ class UserCanCreateGroupCommentTest extends TestCase
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($content))->uuid,
             'user_uuid' => $user->uuid,
-            'commentable_type' => 'Demency\\Groupable\\Models\\Group',
+            'commentable_type' => 'App\\Group',
             'commentable_id' => $group->uuid,
             'body' => $comment->body,
         ]);

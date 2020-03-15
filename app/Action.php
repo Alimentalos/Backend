@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Contracts\Resource;
+use Demency\Contracts\Resource;
 use App\Relationships\Commons\BelongsToUser;
 use App\Resources\ActionResource;
 use Illuminate\Database\Eloquent\Model;

@@ -4,7 +4,7 @@
 namespace App\Tools;
 
 
-use App\Contracts\Resource;
+use Demency\Contracts\Resource;
 
 class Uploader
 {

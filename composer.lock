@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d04814086c7f8d9b7eba2b405bb6566",
+    "content-hash": "5b34b04549b8a066c7ad6b93e9d9f985",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -334,6 +334,46 @@
                 "symmetric key cryptography"
             ],
             "time": "2018-07-24T23:27:56+00:00"
+        },
+        {
+            "name": "demency/laravel-contracts",
+            "version": "4.4.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./contracts",
+                "reference": "269ebc22c8ccb463086c308cf1a083ad0f2ac2d7"
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Demency\\Contracts\\ContractsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Demency\\Contracts\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ian Torres",
+                    "email": "iantorres@outlook.com"
+                }
+            ],
+            "description": "Laravel collection of contracts.",
+            "keywords": [
+                "contracts",
+                "laravel",
+                "package"
+            ]
         },
         {
             "name": "demency/laravel-groupable",

@@ -1,6 +1,6 @@
 <?php
 
-use App\Contracts\Resource;
+use Demency\Contracts\Resource;
 use App\Repositories\ActionsRepository;
 use App\Repositories\AdminRepository;
 use App\Repositories\AlertsRepository;

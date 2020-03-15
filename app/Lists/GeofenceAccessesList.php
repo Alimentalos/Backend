@@ -4,7 +4,7 @@
 namespace App\Lists;
 
 
-use App\Contracts\Resource;
+use Demency\Contracts\Resource;
 use App\Geofence;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Contracts\Resource;
+use Demency\Contracts\Resource;
 use App\Relationships\LocationRelationships;
 use App\Resources\LocationResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;

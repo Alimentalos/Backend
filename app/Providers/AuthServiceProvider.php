@@ -20,7 +20,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Device' => 'App\Policies\DevicePolicy',
         'App\Geofence' => 'App\Policies\GeofencePolicy',
         'App\Pet' => 'App\Policies\PetPolicy',
-        'Demency\Groupable\Models\Group' => 'Demency\Groupable\Policies\GroupPolicy',
+        'App\Group' => 'Demency\Groupable\Policies\GroupPolicy',
         'App\Photo' => 'App\Policies\PhotoPolicy',
         'App\Comment' => 'App\Policies\CommentPolicy',
         'App\Action' => 'App\Policies\ActionPolicy',

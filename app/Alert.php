@@ -2,9 +2,9 @@
 
 namespace App;
 
-use App\Contracts\CreateFromRequest;
-use App\Contracts\Resource;
-use App\Contracts\UpdateFromRequest;
+use Demency\Contracts\CreateFromRequest;
+use Demency\Contracts\Resource;
+use Demency\Contracts\UpdateFromRequest;
 use App\Relationships\AlertRelationships;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Commentable;

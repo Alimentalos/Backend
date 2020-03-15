@@ -4,7 +4,7 @@
 namespace App\Repositories;
 
 use App\Asserts\ResourceGroupAssert;
-use App\Contracts\Resource;
+use Demency\Contracts\Resource;
 
 class ResourceRepository
 {

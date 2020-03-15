@@ -3,7 +3,6 @@
 
 namespace App\Relationships\Commons;
 
-
 use App\Photo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

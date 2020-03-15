@@ -3,10 +3,10 @@
 namespace Demency\Groupable\Models;
 
 use App\Coin;
-use App\Contracts\CreateFromRequest;
-use App\Contracts\Monetizer;
-use App\Contracts\Resource;
-use App\Contracts\UpdateFromRequest;
+use Demency\Contracts\CreateFromRequest;
+use Demency\Contracts\Monetizer;
+use Demency\Contracts\Resource;
+use Demency\Contracts\UpdateFromRequest;
 use App\Relationships\Commons\BelongsToUser;
 use App\Relationships\Commons\Commentable;
 use App\Relationships\Commons\HasPhoto;

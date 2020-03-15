@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Relationships;
-
 
 use App\Device;
 use App\Pet;

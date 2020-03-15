@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Contracts\Resource;
+use Demency\Contracts\Resource;
 use App\Photo;
 
 class ResourcePhotosRepository

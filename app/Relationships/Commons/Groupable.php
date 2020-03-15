@@ -1,9 +1,8 @@
 <?php
 
-
 namespace App\Relationships\Commons;
 
-use Demency\Groupable\Models\Group;
+use App\Group;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait Groupable

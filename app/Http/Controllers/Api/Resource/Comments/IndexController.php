@@ -53,7 +53,6 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, $resource)
     {
-        dd($resource->comments);
         $comments = $resource->comments()->latest()->paginate(20);
         $comments->load((new Comment)->getLazyRelationshipsAttribute());
         return response()->json($comments,200);

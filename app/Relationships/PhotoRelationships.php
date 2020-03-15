@@ -5,7 +5,7 @@ namespace App\Relationships;
 use App\Alert;
 use App\Comment;
 use App\Geofence;
-use Demency\Groupable\Models\Group;
+use App\Group;
 use App\Pet;
 use App\Place;
 use App\User;

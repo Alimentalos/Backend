@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Relationships\Commons;
 
 use App\Comment;

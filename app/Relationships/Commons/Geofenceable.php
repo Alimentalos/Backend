@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Relationships\Commons;
-
 
 use App\Geofence;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
