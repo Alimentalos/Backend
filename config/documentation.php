@@ -11,7 +11,7 @@ return [
             'Every day humans abandon or lose pets in the corners of the earth. Many people are worried daily about the care of these animals. We create a space to make visible these animals in a state of abandonment and allow their insertion in the community.'
         ],
         'Actors and resources' => [
-            '<div class="text-center"><img style="max-width: 100%; max-height: 200px;" src="/svg/johnny_automatic_a_dog_and_a_cat_with_an_umbrella.svg"></div>',
+            '<div class="text-center"><img style="max-width: 100%; max-height: 300px;" src="/svg/1555470896.png"></div>',
             'You and others can be part of the change of consciousness. Find the grain of divinity in the gaze of its creation. The resources required are only food and time. Today there are specialized groups which are organized to provide care for these creatures. Participate and join a group, meet people and discover people with your same interests.'
         ],
         'Terms' => [
