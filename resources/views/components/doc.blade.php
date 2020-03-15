@@ -57,12 +57,12 @@
                                 @endforeach
                             @else
                                 <div class="pt-2 pl-3">
-                                    @markdown($secondLevel)
+                                    {!! __($secondLevel) !!}
                                 </div>
                             @endif
                         @endforeach
                     @else
-                        @markdown($firstLevel)
+                        {!! __($firstLevel) !!}
                     @endif
                 </div>
             </div>

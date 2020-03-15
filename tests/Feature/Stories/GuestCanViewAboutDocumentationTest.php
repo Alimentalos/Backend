@@ -22,4 +22,13 @@ class GuestCanViewAboutDocumentationTest extends TestCase
         $response = $this->get('/about/project/problem-and-solution');
         $response->assertOk();
     }
+
+    public function testGuestCanViewAbout404()
+    {
+        $response = $this->get('/about/project/problem-and-solution2');
+        $response->assertNotFound();
+
+        $response = $this->get('/about/project2/problem-and-solution');
+        $response->assertNotFound();
+    }
 }
