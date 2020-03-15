@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 mt-4">
-            <h1 class="text-white">Dashboard</h1>
+            <h1>Dashboard</h1>
         </div>
     </div>
     <div class="row justify-content-center">

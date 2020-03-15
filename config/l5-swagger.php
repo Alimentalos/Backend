@@ -98,7 +98,7 @@ return [
         |--------------------------------------------------------------------------
         */
 
-        'base' => env('L5_SWAGGER_BASE_PATH', null),
+        'base' => env('L5_SWAGGER_BASE_PATH', 'https://www.alimentalos.cl/api'),
 
         /*
         |--------------------------------------------------------------------------
@@ -148,7 +148,6 @@ return [
         ],
         */
 
-        /* Open API 3.0 support
         'passport' => [ // Unique name of security
             'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
             'description' => 'Laravel passport oauth2 security.',
@@ -156,14 +155,13 @@ return [
             'scheme' => 'https',
             'flows' => [
                 "password" => [
-                    "authorizationUrl" => config('app.url') . '/oauth/authorize',
-                    "tokenUrl" => config('app.url') . '/oauth/token',
-                    "refreshUrl" => config('app.url') . '/token/refresh',
+//                    "authorizationUrl" => config('app.url') . '/oauth/authorize',
+                    "tokenUrl" => config('app.url') . '/api/token',
+                    "refreshUrl" => config('app.url') . '/api/refresh',
                     "scopes" => []
                 ],
             ],
         ],
-        */
     ],
 
     /*
