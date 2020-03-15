@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mt-4">
-                <h1>{{__('About')}}</h1>
+                <h2><i class="fal fa-book-alt mr-3"></i> {{__('About')}}</h2>
                 <p class="mt-4">{{ __('Explore the knowledge center of Alimentalos') }}.</p>
             </div>
         </div>

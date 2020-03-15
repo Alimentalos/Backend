@@ -7,21 +7,18 @@ return [
             'Alimentalos is a open source project created to bring care and love to abandoned pets.'
         ],
         'Problem and solution' => [
-            'Introduction' => 'Every day humans abandon or lose pets in the corners of the earth. Many people are worried daily about the care of these animals. We create a space to make visible these animals in a state of abandonment and allow their insertion in the community.'
+            'Every day humans abandon or lose pets in the corners of the earth. Many people are worried daily about the care of these animals. We create a space to make visible these animals in a state of abandonment and allow their insertion in the community.'
         ],
         'Actors and resources' => [
-            'Introduction' => 'You and others can be part of the change of consciousness. Find the grain of divinity in the gaze of its creation. The resources required are only food and time. Today there are specialized groups which are organized to provide care for these creatures. Participate and join a group, meet people and discover people with your same interests.'
+            'You and others can be part of the change of consciousness. Find the grain of divinity in the gaze of its creation. The resources required are only food and time. Today there are specialized groups which are organized to provide care for these creatures. Participate and join a group, meet people and discover people with your same interests.'
         ],
         'Terms' => [
-            'Introduction' => '...',
-            'Meanings' => [
-                'Pet' => 'Animal cared by humans.',
-                'User' => 'Human who has system access granted by credentials.',
-                'Group' => 'System entity that allows you to link other resources.',
-                'Location' => 'Physical space represented by a coordinate.',
-                'Geofence' => 'Point composed polygon that frame a physical space.',
-                'Resource' => 'Is everything that can be systematically registered, listed, edited or deleted.'
-            ]
+            'Pet' => 'Animal cared by humans.',
+            'User' => 'Human who has system access granted by credentials.',
+            'Group' => 'System entity that allows you to link other resources.',
+            'Location' => 'Physical space represented by a coordinate.',
+            'Geofence' => 'Point composed polygon that frame a physical space.',
+            'Resource' => 'Is everything that can be systematically registered, listed, edited or deleted.'
         ],
     ],
     'Developer handbook' => [
@@ -72,28 +69,28 @@ return [
                 'This software was not built from premeditated design. Its structure was built from elaborate patterns along the way.',
                 'But it is true that `we respect the existing structures and patterns` developed and recommended by the Laravel community.',
                 'The application is built entirely on the app directory. In that directory you will find folders with patterns found and defined in the `master` branch.',
-                'Directories' => [
-                    '`app` directory at its root includes the application models and a file with helper methods to simplify code development.',
-                    '`app/Annotations` directory has the base definition from which the documentation of the API specification is generated.',
-                    '`app/Asserts` directory contains traits with logical statements of comparison or verification of models or relationships between models.',
-                    '`app/Attributes` directory contains traits with model related attributes of solution.',
-                    '`app/Console` directory contains artisan command definitions.',
-                    '`app/Contracts` directory contains interfaces of classes.',
-                    '`app/Creations` directory contains traits with resource instance creation definitions.',
-                    '`app/Events` directory contains solution related events.',
-                    '`app/Http` directory contains all logic related to the HTTP layer.',
-                    '`app/Lists` directory contains traits with model related indexing logic of solution.',
-                    '`app/Observers` directory contains model observers.',
-                    '`app/Policies` directory contains model policies.',
-                    '`app/Procedures` directory contains model procedures.',
-                    '`app/Procedures` directory contains model queries.',
-                    '`app/Providers` directory contains the service providers of the application.',
-                    '`app/Relationships` directory contains model relationships.',
-                    '`app/Reports` directory contains logic responsible for generating reports.',
-                    '`app/Repositories` directory contains libraries to easily access and interact with system resources.',
-                    '`app/Rules` directory contains custom validation rules for HTTP requests.',
-                    '`app/Tools` directory contains custom classes of helpers.',
-                ]
+            ],
+            'Directories' => [
+                '`app` directory at its root includes the application models and a file with helper methods to simplify code development.',
+                '`app/Annotations` directory has the base definition from which the documentation of the API specification is generated.',
+                '`app/Asserts` directory contains traits with logical statements of comparison or verification of models or relationships between models.',
+                '`app/Attributes` directory contains traits with model related attributes of solution.',
+                '`app/Console` directory contains artisan command definitions.',
+                '`app/Contracts` directory contains interfaces of classes.',
+                '`app/Creations` directory contains traits with resource instance creation definitions.',
+                '`app/Events` directory contains solution related events.',
+                '`app/Http` directory contains all logic related to the HTTP layer.',
+                '`app/Lists` directory contains traits with model related indexing logic of solution.',
+                '`app/Observers` directory contains model observers.',
+                '`app/Policies` directory contains model policies.',
+                '`app/Procedures` directory contains model procedures.',
+                '`app/Procedures` directory contains model queries.',
+                '`app/Providers` directory contains the service providers of the application.',
+                '`app/Relationships` directory contains model relationships.',
+                '`app/Reports` directory contains logic responsible for generating reports.',
+                '`app/Repositories` directory contains libraries to easily access and interact with system resources.',
+                '`app/Rules` directory contains custom validation rules for HTTP requests.',
+                '`app/Tools` directory contains custom classes of helpers.',
             ],
             'Models' => [
                 'Location' => ['It is an entity that represents a `geographical point`, you can have extra data such as `speed`, `odometer`, and `altitude` if applicable.'],
@@ -109,13 +106,11 @@ return [
                 'Action' => ['It represents an `operation executed` in the system. Action has a direct relationship with a user, has parameters and resources referenced.'],
             ],
             'Events' => [
-                'Location' => 'The event is triggered when a system-locatable resource creates a new location. It is transmitted on the own resource channel. Inside it has details of the location and the related resource.',
-                'GeofenceIn' => 'The event is triggered when it is detected that the resource has just entered in a geo-fence. Inside it has details about the geo-fence, the resource and the location.',
-                'GeofenceOut' => 'The event is triggered when it is detected that the resource has came out of a geo-fence. Inside it has details about the geo-fence, the resource and the location.',
+                'NewLocation' => ['The event is triggered when a system-locatable resource creates a new location. It is transmitted on the own resource channel. Inside it has details of the location and the related resource.'],
+                'GeofenceIn' => ['The event is triggered when it is detected that the resource has just entered in a geo-fence. Inside it has details about the geo-fence, the resource and the location.'],
+                'GeofenceOut' => ['The event is triggered when it is detected that the resource has came out of a geo-fence. Inside it has details about the geo-fence, the resource and the location.'],
             ],
-            'Relationships' => [
-                'Commons' => [
-                ],
+            'Common relationships' => [
                 ' BelongsToUser' => [
                     'This trait allows to relate a `resource` to a `user`.',
                     'Making a relationship of `belongs to user`.'
@@ -144,8 +139,8 @@ return [
                     'This trait allows a `resource` to be traceable.',
                     'Making a relationship of `morph many locations and accesses`.'
                 ],
-                'Specified' => [
-                ],
+            ],
+            'Specific' => [
                 ' AccessRelationships' => [
                     'Related to Access, contains `accessible`, `first location` and `last location` relationships. The first of them is the resource with which access is related, it can be user, pet or device.'
                 ],
