@@ -7,20 +7,6 @@
         "laravel"
     ],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "./contracts"
-        },
-        {
-            "type": "path",
-            "url": "./relationships"
-        },
-        {
-            "type": "path",
-            "url": "./tools"
-        }
-    ],
     "require": {
         "php": "^7.4",
         "ext-json": "*",
