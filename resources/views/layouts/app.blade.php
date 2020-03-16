@@ -86,6 +86,16 @@
         </nav>
 
         <main class="py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 mt-1">
+                        <div class="text-right">
+                            <a href="/lang/es">Español</a> &mdash; <a href="/lang/en">English</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @yield('content')
         </main>
     </div>

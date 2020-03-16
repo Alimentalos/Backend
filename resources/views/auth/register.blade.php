@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mt-4">
-                <h1>Register</h1>
-                <p>{{ __('Creates a new account in our community') }}.</p>
+                <h1>{{ __('Register') }}</h1>
+                <p>{{ __('Creates a new account in our community.') }}</p>
             </div>
         </div>
         <div class="row justify-content-center">

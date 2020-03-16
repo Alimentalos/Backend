@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 mt-4">
-            <h1>Reset password</h1>
-            <p>Complete the following form and receive a reset link.</p>
+            <h1>{{ __('Reset password') }}</h1>
+            <p>{{ __('Complete the following form and receive a reset link.') }}</p>
         </div>
     </div>
     <div class="row justify-content-center">
