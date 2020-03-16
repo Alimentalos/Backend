@@ -2,7 +2,6 @@
 
 namespace Demency\Relationships\Resources;
 
-use App\Http\Resources\Device;
 use Demency\Relationships\Repositories\DevicesRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

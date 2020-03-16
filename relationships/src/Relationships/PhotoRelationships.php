@@ -2,13 +2,13 @@
 
 namespace Demency\Relationships\Relationships;
 
-use App\Alert;
-use App\Comment;
-use App\Geofence;
-use App\Group;
-use App\Pet;
-use App\Place;
-use App\User;
+use Demency\Relationships\Models\Alert;
+use Demency\Relationships\Models\Comment;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\Place;
+use Demency\Relationships\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 

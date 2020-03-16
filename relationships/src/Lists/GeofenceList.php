@@ -4,7 +4,7 @@
 namespace Demency\Relationships\Lists;
 
 
-use App\Geofence;
+use Demency\Relationships\Models\Geofence;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait GeofenceList

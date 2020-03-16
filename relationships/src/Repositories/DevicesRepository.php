@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Repositories;
 
-use App\Device;
+use Demency\Relationships\Models\Device;
 use Demency\Relationships\Lists\DeviceList;
 use Demency\Relationships\Procedures\DeviceProcedure;
 

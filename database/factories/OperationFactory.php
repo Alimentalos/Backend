@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Operation;
+use Demency\Relationships\Models\Operation;
 use Faker\Generator as Faker;
 
 $factory->define(Operation::class, function (Faker $faker) {

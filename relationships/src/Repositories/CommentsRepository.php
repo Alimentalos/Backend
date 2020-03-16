@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Repositories;
 
-use App\Comment;
+use Demency\Relationships\Models\Comment;
 
 class CommentsRepository
 {

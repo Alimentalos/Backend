@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Repositories;
 
-use App\Photo;
+use Demency\Relationships\Models\Photo;
 use Demency\Relationships\Procedures\PhotoProcedure;
 
 class PhotoRepository

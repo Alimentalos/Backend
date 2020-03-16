@@ -4,7 +4,7 @@
 namespace Demency\Tools;
 
 
-use App\User;
+use Demency\Relationships\Models\User;
 use Illuminate\Support\Str;
 
 class Subscriber
@@ -33,7 +33,7 @@ class Subscriber
      */
     public function getUserResourcesQuota($resource, $user)
     {
-        return resolve('App\\' . Str::camel(Str::singular($resource)))->where('user_uuid', $user->uuid)->count();
+        return resolve('Demency\\Relationships\\Models\\' . Str::camel(Str::singular($resource)))->where('user_uuid', $user->uuid)->count();
     }
 
     /**

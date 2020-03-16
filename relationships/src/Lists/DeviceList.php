@@ -4,7 +4,7 @@
 namespace Demency\Relationships\Lists;
 
 
-use App\Device;
+use Demency\Relationships\Models\Device;
 use Illuminate\Database\Eloquent\Builder;
 
 trait DeviceList

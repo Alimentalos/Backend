@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Procedures;
 
-use App\Photo;
+use Demency\Relationships\Models\Photo;
 use Illuminate\Support\Facades\Storage;
 
 trait PhotoProcedure

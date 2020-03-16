@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Events;
 
-use App\Geofence;
+use Demency\Relationships\Models\Geofence;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;

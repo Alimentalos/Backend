@@ -6,7 +6,7 @@ namespace Demency\Relationships\Procedures;
 
 use Demency\Relationships\Events\GeofenceIn;
 use Demency\Relationships\Events\GeofenceOut;
-use App\Geofence;
+use Demency\Relationships\Models\Geofence;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
@@ -40,7 +40,6 @@ trait GeofenceProcedure
     public function checkLocationUsingModelGeofences(Model $model, Model $location)
     {
         $intersected_geofences = $model->geofences()->intersects('shape', $location->location)->get();
-
         foreach ($intersected_geofences as $geofence) {
             $this->checkIntersectedGeofence($model, $geofence, $location);
         }

@@ -4,11 +4,11 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Comment;
-use App\Device;
-use App\Geofence;
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\Comment;
+use Demency\Relationships\Models\Device;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Photo;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

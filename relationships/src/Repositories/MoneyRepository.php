@@ -4,9 +4,9 @@
 namespace Demency\Relationships\Repositories;
 
 
-use App\Coin;
+use Demency\Relationships\Models\Coin;
 use Demency\Contracts\Monetizer;
-use App\Operation;
+use Demency\Relationships\Models\Operation;
 use Exception;
 
 class MoneyRepository

@@ -5,7 +5,7 @@ namespace Demency\Relationships\Repositories;
 
 use Demency\Relationships\Asserts\UserGroupAssert;
 use Demency\Relationships\Models\Group;
-use App\User;
+use Demency\Relationships\Models\User;
 
 class UserGroupsRepository
 {

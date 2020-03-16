@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Procedures;
 
-use App\Pet;
+use Demency\Relationships\Models\Pet;
 
 trait PetProcedure
 {

@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Repositories;
 
-use App\Action;
+use Demency\Relationships\Models\Action;
 use Demency\Relationships\Lists\ActionList;
 use Demency\Relationships\Procedures\ActionProcedure;
 use Illuminate\Http\Request;

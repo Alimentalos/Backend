@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\Resource\Groups;
 
-use Demency\Relationships\Models\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Groups\AttachRequest;
+use Demency\Relationships\Models\Group;
 use Illuminate\Http\JsonResponse;
 
 class AttachController extends Controller

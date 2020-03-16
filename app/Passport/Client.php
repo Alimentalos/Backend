@@ -2,7 +2,7 @@
 
 namespace App\Passport;
 
-use App\User;
+use Demency\Relationships\Models\User;
 use Laravel\Passport\Client as PassportClient;
 
 class Client extends PassportClient

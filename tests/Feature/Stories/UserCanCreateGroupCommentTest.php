@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Comment;
-use App\Group;
-use App\User;
+use Demency\Relationships\Models\Comment;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -31,7 +31,7 @@ class UserCanCreateGroupCommentTest extends TestCase
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($content))->uuid,
             'user_uuid' => $user->uuid,
-            'commentable_type' => 'App\\Group',
+            'commentable_type' => 'Demency\\Relationships\\Models\\Group',
             'commentable_id' => $group->uuid,
             'body' => $comment->body,
         ]);

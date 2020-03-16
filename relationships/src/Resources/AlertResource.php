@@ -3,8 +3,8 @@
 
 namespace Demency\Relationships\Resources;
 
-use App\Alert;
-use App\Rules\Coordinate;
+use Demency\Relationships\Models\Alert;
+use Demency\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 

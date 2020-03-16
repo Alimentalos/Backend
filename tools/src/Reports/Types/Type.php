@@ -2,7 +2,7 @@
 
 namespace Demency\Tools\Reports\Types;
 
-use App\Device;
+use Demency\Relationships\Models\Device;
 use App\Http\Resources\Location;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;

@@ -2,8 +2,8 @@
 
 namespace Demency\Relationships\Relationships;
 
-use App\Geofence;
-use App\Location;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Location;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait AccessRelationships

@@ -5,7 +5,7 @@ namespace Demency\Relationships\Lists;
 
 
 use Demency\Contracts\Resource;
-use App\Geofence;
+use Demency\Relationships\Models\Geofence;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait GeofenceAccessesList

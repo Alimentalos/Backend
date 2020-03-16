@@ -2,8 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Str;

@@ -2,8 +2,8 @@
 
 namespace Demency\Relationships;
 
-use App\Access;
-use App\Location;
+use Demency\Relationships\Models\Access;
+use Demency\Relationships\Models\Location;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait Trackable

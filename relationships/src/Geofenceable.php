@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships;
 
-use App\Geofence;
+use Demency\Relationships\Models\Geofence;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait Geofenceable

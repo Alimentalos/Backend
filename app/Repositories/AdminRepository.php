@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\User;
+use Demency\Relationships\Models\User;
 
 class AdminRepository
 {

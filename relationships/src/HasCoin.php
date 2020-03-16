@@ -3,7 +3,7 @@
 
 namespace Demency\Relationships;
 
-use App\Coin;
+use Demency\Relationships\Models\Coin;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasCoin

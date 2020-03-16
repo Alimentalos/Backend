@@ -4,7 +4,7 @@
 namespace Demency\Relationships\Lists;
 
 
-use App\Action;
+use Demency\Relationships\Models\Action;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait ActionList

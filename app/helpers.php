@@ -1,15 +1,20 @@
 <?php
 
-use Demency\Contracts\Resource;
-use Demency\Relationships\Repositories\ActionsRepository;
 use App\Repositories\AdminRepository;
+use Demency\Contracts\Resource;
+use Demency\Relationships\Models\User;
+use Demency\Relationships\Repositories\ReactionsRepository;
+use Demency\Relationships\Repositories\ActionsRepository;
 use Demency\Relationships\Repositories\AlertsRepository;
 use Demency\Relationships\Repositories\CommentsRepository;
 use Demency\Relationships\Repositories\DevicesRepository;
 use Demency\Relationships\Repositories\GeofenceAccessesRepository;
+use Demency\Relationships\Repositories\GeofenceRepository;
+use Demency\Relationships\Repositories\GroupRepository;
 use Demency\Relationships\Repositories\LocationsRepository;
+use Demency\Relationships\Repositories\PetRepository;
+use Demency\Relationships\Repositories\PhotoRepository;
 use Demency\Relationships\Repositories\PlacesRepository;
-use App\Repositories\ReactionsRepository;
 use Demency\Relationships\Repositories\ResourceCommentsRepository;
 use Demency\Relationships\Repositories\ResourceLocationsRepository;
 use Demency\Relationships\Repositories\ResourcePhotosRepository;
@@ -27,11 +32,6 @@ use Demency\Tools\Parser;
 use Demency\Tools\Reporter;
 use Demency\Tools\Subscriber;
 use Demency\Tools\Uploader;
-use App\User;
-use Demency\Relationships\Repositories\GeofenceRepository;
-use Demency\Relationships\Repositories\GroupRepository;
-use Demency\Relationships\Repositories\PhotoRepository;
-use Demency\Relationships\Repositories\PetRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 if (! function_exists('actions')) {

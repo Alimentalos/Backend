@@ -3,7 +3,7 @@
 
 namespace Demency\Relationships\Repositories;
 
-use App\Alert;
+use Demency\Relationships\Models\Alert;
 use Demency\Relationships\Attributes\AlertAttribute;
 use Demency\Relationships\Lists\AlertList;
 use Demency\Relationships\Procedures\AlertProcedure;

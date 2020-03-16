@@ -4,7 +4,7 @@
 namespace Demency\Relationships\Procedures;
 
 
-use App\Device;
+use Demency\Relationships\Models\Device;
 
 trait DeviceProcedure
 {

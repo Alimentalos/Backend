@@ -3,7 +3,7 @@
 
 namespace Demency\Relationships\Resources;
 
-use App\Comment;
+use Demency\Relationships\Models\Comment;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait CommentResource

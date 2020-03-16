@@ -11,10 +11,10 @@
 |
 */
 
-use App\Device;
-use App\Geofence;
-use App\Pet;
-use App\User;
+use Demency\Relationships\Models\Device;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\User;
 
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;

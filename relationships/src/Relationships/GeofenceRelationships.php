@@ -2,10 +2,10 @@
 
 namespace Demency\Relationships\Relationships;
 
-use App\Access;
-use App\Device;
-use App\Pet;
-use App\User;
+use Demency\Relationships\Models\Access;
+use Demency\Relationships\Models\Device;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

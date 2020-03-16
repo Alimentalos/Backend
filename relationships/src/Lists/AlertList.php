@@ -3,7 +3,7 @@
 
 namespace Demency\Relationships\Lists;
 
-use App\Alert;
+use Demency\Relationships\Models\Alert;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait AlertList

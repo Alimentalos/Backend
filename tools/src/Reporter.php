@@ -4,7 +4,7 @@
 namespace Demency\Tools;
 
 
-use App\Contracts\CanGenerateReports;
+use Demency\Tools\Contracts\CanGenerateReports;
 use Demency\Tools\Procedures\ReportProcedure;
 
 class Reporter implements CanGenerateReports

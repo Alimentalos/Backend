@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Queries;
 
-use App\Location;
+use Demency\Relationships\Models\Location;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Illuminate\Support\Collection;

@@ -2,8 +2,8 @@
 
 namespace Demency\Relationships\Resources;
 
-use App\Rules\Coordinate;
-use App\User;
+use Demency\Relationships\Rules\Coordinate;
+use Demency\Relationships\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 

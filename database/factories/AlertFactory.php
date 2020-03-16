@@ -2,11 +2,7 @@
 
 /** @var Factory $factory */
 
-use App\Alert;
-use App\Device;
-use App\Pet;
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\Alert;
 use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Factory;

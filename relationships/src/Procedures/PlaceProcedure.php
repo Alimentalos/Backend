@@ -4,7 +4,7 @@
 namespace Demency\Relationships\Procedures;
 
 
-use App\Place;
+use Demency\Relationships\Models\Place;
 
 trait PlaceProcedure
 {

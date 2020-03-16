@@ -2,12 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Geofence;
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\Geofence;
 use Faker\Generator as Faker;
-use Grimzy\LaravelMysqlSpatial\Types\LineString;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 
 /*

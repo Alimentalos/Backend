@@ -2,8 +2,8 @@
 
 namespace Demency\Relationships\Resources;
 
-use App\Photo;
-use App\Rules\Coordinate;
+use Demency\Relationships\Models\Photo;
+use Demency\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait PhotoResource

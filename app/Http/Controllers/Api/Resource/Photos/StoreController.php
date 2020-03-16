@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Photos;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Photos\StoreRequest;
-use App\Photo;
+use Demency\Relationships\Models\Photo;
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller

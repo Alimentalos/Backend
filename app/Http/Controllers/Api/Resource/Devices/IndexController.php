@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Devices;
 
-use App\Device;
+use Demency\Relationships\Models\Device;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;

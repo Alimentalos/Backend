@@ -3,7 +3,6 @@
 
 namespace Demency\Relationships\Procedures;
 
-
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 
 trait ResourceLocationProcedure

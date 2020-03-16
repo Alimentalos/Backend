@@ -3,7 +3,7 @@
 namespace Demency\Relationships\Repositories;
 
 use Demency\Contracts\Resource;
-use App\Photo;
+use Demency\Relationships\Models\Photo;
 
 class ResourcePhotosRepository
 {

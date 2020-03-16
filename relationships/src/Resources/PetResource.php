@@ -2,8 +2,8 @@
 
 namespace Demency\Relationships\Resources;
 
-use App\Pet;
-use App\Rules\Coordinate;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 

@@ -3,7 +3,7 @@
 namespace Demency\Relationships\Resources;
 
 use Demency\Relationships\Models\Group;
-use App\Rules\Coordinate;
+use Demency\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 

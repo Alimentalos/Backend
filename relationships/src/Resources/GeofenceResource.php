@@ -3,8 +3,8 @@
 
 namespace Demency\Relationships\Resources;
 
-use App\Geofence;
-use App\Rules\Coordinate;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 

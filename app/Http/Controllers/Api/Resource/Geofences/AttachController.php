@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Geofences;
 
-use App\Geofence;
+use Demency\Relationships\Models\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Geofences\AttachRequest;
 use Illuminate\Http\JsonResponse;

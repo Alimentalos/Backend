@@ -5,11 +5,11 @@ namespace Demency\Relationships\Creations;
 
 
 use Demency\Contracts\Resource;
-use App\Device;
+use Demency\Relationships\Models\Device;
 use Demency\Relationships\Events\Location as LocationEvent;
 use App\Http\Resources\Location as LocationResource;
-use App\Pet;
-use App\User;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 trait ResourceLocation

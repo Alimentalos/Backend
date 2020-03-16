@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Repositories;
 
-use App\Place;
+use Demency\Relationships\Models\Place;
 use Demency\Relationships\Procedures\PlaceProcedure;
 
 class PlacesRepository

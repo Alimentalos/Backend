@@ -2,10 +2,10 @@
 
 namespace Demency\Relationships\Relationships;
 
-use App\Device;
-use App\Geofence;
-use App\Pet;
-use App\User;
+use Demency\Relationships\Models\Device;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\User;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait GroupRelationships

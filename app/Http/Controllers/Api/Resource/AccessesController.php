@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource;
 
-use App\Access;
+use Demency\Relationships\Models\Access;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\AccessesRequest;
 use Illuminate\Http\JsonResponse;

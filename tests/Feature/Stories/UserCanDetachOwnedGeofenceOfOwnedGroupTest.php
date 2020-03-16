@@ -4,10 +4,10 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Device;
-use App\Geofence;
-use App\Group;
-use App\User;
+use Demency\Relationships\Models\Device;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -38,7 +38,7 @@ class UserCanDetachOwnedGeofenceOfOwnedGroupTest extends TestCase
         );
         $response->assertExactJson(['message' => 'Resource detached to group successfully']);
         $this->assertDeleted('groupables', [
-            'groupable_type' => 'App\\Geofence',
+            'groupable_type' => 'Demency\\Relationships\\Models\\Geofence',
             'groupable_id' => $geofence->uuid,
             'group_uuid' => $group->uuid,
         ]);

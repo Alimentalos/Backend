@@ -4,10 +4,10 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Comment;
-use App\Pet;
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\Comment;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\Photo;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -53,7 +53,7 @@ class UserCanCreatePhotoOfPetTest extends TestCase
         ]);
         $this->assertDatabaseHas('photoables', [
             'photo_uuid' => (json_decode($content))->uuid,
-            'photoable_type' => 'App\\Pet',
+            'photoable_type' => 'Demency\\Relationships\\Models\\Pet',
             'photoable_id' => $pet->uuid
         ]);
     }

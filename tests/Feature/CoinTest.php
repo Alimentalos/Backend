@@ -4,11 +4,11 @@
 namespace Tests\Feature;
 
 
-use App\Coin;
-use App\Group;
-use App\Operation;
-use App\Repositories\MoneyRepository;
-use App\User;
+use Demency\Relationships\Models\Coin;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\Operation;
+use Demency\Relationships\Repositories\MoneyRepository;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

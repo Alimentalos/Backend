@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Alert;
-use App\Pet;
-use App\User;
+use Demency\Relationships\Models\Alert;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +24,7 @@ class UserCanCreatePetAlertsTest extends TestCase
         $pet = factory(Pet::class)->create();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/alerts', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
-            'alert_type' => 'App\\Pet',
+            'alert_type' => 'Demency\\Relationships\\Models\\Pet',
             'alert_id' => $pet->uuid,
             'title' => $alert->title,
             'body' => $alert->body,

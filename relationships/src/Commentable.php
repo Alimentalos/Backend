@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships;
 
-use App\Comment;
+use Demency\Relationships\Models\Comment;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait Commentable

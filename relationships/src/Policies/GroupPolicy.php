@@ -2,10 +2,10 @@
 
 namespace Demency\Relationships\Policies;
 
-use App\Geofence;
+use Demency\Relationships\Models\Geofence;
 use Demency\Relationships\Models\Group;
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\Photo;
+use Demency\Relationships\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class GroupPolicy

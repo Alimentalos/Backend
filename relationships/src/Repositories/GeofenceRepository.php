@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Repositories;
 
-use App\Geofence;
+use Demency\Relationships\Models\Geofence;
 use Demency\Relationships\Lists\GeofenceList;
 use Demency\Relationships\Procedures\GeofenceProcedure;
 

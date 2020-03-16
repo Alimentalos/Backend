@@ -5,7 +5,7 @@ namespace Demency\Relationships\Asserts;
 
 
 use Demency\Relationships\Models\Group;
-use App\User;
+use Demency\Relationships\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 trait UserAssert

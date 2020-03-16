@@ -13,17 +13,32 @@ class ResourceRepository
     /**
      * User resource.
      */
-    public const USER = 'App\\User';
+    public const USER = 'Demency\\Relationships\\Models\\User';
 
     /**
      * Device resource.
      */
-    public const DEVICE = 'App\\Device';
+    public const DEVICE = 'Demency\\Relationships\\Models\\Device';
 
     /**
      * Pet resource.
      */
-    public const PET = 'App\\Pet';
+    public const PET = 'Demency\\Relationships\\Models\\Pet';
+
+    /**
+     * Group resource.
+     */
+    public const GROUP = 'Demency\\Relationships\\Models\\Group';
+
+    /**
+     * Photo resource.
+     */
+    public const PHOTO = 'Demency\\Relationships\\Models\\Photo';
+
+    /**
+     * Comment resource.
+     */
+    public const COMMENT = 'Demency\\Relationships\\Models\\Comment';
 
     /**
      * Available resources.
@@ -32,7 +47,7 @@ class ResourceRepository
      */
     public function values()
     {
-        return [ self::USER, self::DEVICE, self::PET ];
+        return [ self::USER, self::DEVICE, self::PET, self::GROUP, self::PHOTO, self::COMMENT ];
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace Demency\Relationships\Repositories;
 
 use Demency\Relationships\Asserts\UserAssert;
-use App\User;
+use Demency\Relationships\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class UsersRepository

@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships;
 
-use App\User;
+use Demency\Relationships\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait BelongsToUser

@@ -4,7 +4,7 @@
 namespace Tests\Feature\Stories;
 
 
-use App\User;
+use Demency\Relationships\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

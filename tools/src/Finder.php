@@ -54,7 +54,7 @@ class Finder
      * @return Builder
      */
     public function findModel($class) {
-        return $this->findQuery('App\\' . Str::camel(Str::singular($class)));
+        return $this->findQuery('Demency\\Relationships\\Models\\' . Str::camel(Str::singular($class)));
     }
 
     /**
@@ -64,7 +64,7 @@ class Finder
      * @return mixed
      */
     public function findClass($class) {
-        return $this->find('App\\' . Str::camel(Str::singular($class)));
+        return $this->find('Demency\\Relationships\\Models\\' . Str::camel(Str::singular($class)));
     }
 
     /**

@@ -4,11 +4,11 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Device;
-use App\Geofence;
-use App\Group;
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\Device;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\Photo;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -34,7 +34,7 @@ class UserCanViewGroupsOfOwnedGeofenceTest extends TestCase
             'status' => Group::ACCEPTED_STATUS
         ]);
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\Geofence',
+            'groupable_type' => 'Demency\\Relationships\\Models\\Geofence',
             'groupable_id' => $geofence->uuid,
             'group_uuid' => $group->uuid,
         ]);

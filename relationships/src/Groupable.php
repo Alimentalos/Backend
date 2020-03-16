@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships;
 
-use App\Group;
+use Demency\Relationships\Models\Group;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait Groupable

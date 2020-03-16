@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Resources;
 
-use App\Location;
+use Demency\Relationships\Models\Location;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait LocationResource

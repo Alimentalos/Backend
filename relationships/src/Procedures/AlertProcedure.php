@@ -4,8 +4,8 @@
 namespace Demency\Relationships\Procedures;
 
 
-use App\Alert;
-use App\Photo;
+use Demency\Relationships\Models\Alert;
+use Demency\Relationships\Models\Photo;
 
 trait AlertProcedure
 {

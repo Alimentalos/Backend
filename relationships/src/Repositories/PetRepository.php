@@ -2,7 +2,7 @@
 
 namespace Demency\Relationships\Repositories;
 
-use App\Pet;
+use Demency\Relationships\Models\Pet;
 use Demency\Relationships\Attributes\PetAttribute;
 use Demency\Relationships\Procedures\PetProcedure;
 
