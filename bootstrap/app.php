@@ -12,7 +12,7 @@
 */
 
 $app = new Illuminate\Foundation\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
+    realpath(__DIR__ . '/../')
 );
 
 /*
@@ -51,5 +51,7 @@ $app->singleton(
 | from the actual running of the application and sending responses.
 |
 */
+
+$app->useStoragePath(env('APP_STORAGE', base_path() . '/storage'));
 
 return $app;
