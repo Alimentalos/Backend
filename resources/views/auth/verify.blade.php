@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8 mt-4">
             <h1>{{ __('Verify your account') }}</h1>
-            <p>Please, check in your inbox our email confirmation.</p>
+            <p>{{ __('Please, check in your inbox our email confirmation.') }}</p>
         </div>
     </div>
     <div class="row justify-content-center">
