@@ -1825,22 +1825,5 @@
     "externalDocs": {
         "description": "Source code",
         "url": "https://github.com/alimentalos/backend"
-    },
-    "components": {
-        "securitySchemes": {
-            "passport": {
-                "type": "oauth2",
-                "description": "Laravel passport oauth2 security.",
-                "in": "header",
-                "scheme": "https",
-                "flows": {
-                    "password": {
-                        "tokenUrl": "https://www.alimentalos.cl/api/token",
-                        "refreshUrl": "https://www.alimentalos.cl/api/refresh",
-                        "scopes": []
-                    }
-                }
-            }
-        }
     }
 }
