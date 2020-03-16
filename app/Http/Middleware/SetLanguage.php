@@ -14,6 +14,7 @@ class SetLanguage
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
+     * @codeCoverageIgnore
      */
     public function handle($request, Closure $next)
     {
