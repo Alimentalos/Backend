@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 mt-4">
-            <h1>Dashboard</h1>
+            <h1>{{ __('Dashboard') }}</h1>
         </div>
     </div>
     <div class="row justify-content-center">
@@ -17,7 +17,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>

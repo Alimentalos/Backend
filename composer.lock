@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "854a148af306481e73fbc1e0fac30441",
+    "content-hash": "faa1c874092d5822eecb549d8937d69e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -321,12 +321,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/demency/laravel-relationships.git",
-                "reference": "4e30952adcd90ff66eb173ebb7f70dea350d70f1"
+                "reference": "f8470f74efae2f2f63244ae4d3fd40d2cb501b6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/demency/laravel-relationships/zipball/4e30952adcd90ff66eb173ebb7f70dea350d70f1",
-                "reference": "4e30952adcd90ff66eb173ebb7f70dea350d70f1",
+                "url": "https://api.github.com/repos/demency/laravel-relationships/zipball/f8470f74efae2f2f63244ae4d3fd40d2cb501b6e",
+                "reference": "f8470f74efae2f2f63244ae4d3fd40d2cb501b6e",
                 "shasum": ""
             },
             "require": {
@@ -364,7 +364,7 @@
                 "laravel",
                 "package"
             ],
-            "time": "2020-03-16T02:31:33+00:00"
+            "time": "2020-03-16T11:02:02+00:00"
         },
         {
             "name": "demency/laravel-tools",
@@ -372,12 +372,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/demency/laravel-tools.git",
-                "reference": "40c8e401904d47e8461e788e3f2998005c2518fe"
+                "reference": "1147025709f997cc2dc4a1fadef97c5b7517cde7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/demency/laravel-tools/zipball/40c8e401904d47e8461e788e3f2998005c2518fe",
-                "reference": "40c8e401904d47e8461e788e3f2998005c2518fe",
+                "url": "https://api.github.com/repos/demency/laravel-tools/zipball/1147025709f997cc2dc4a1fadef97c5b7517cde7",
+                "reference": "1147025709f997cc2dc4a1fadef97c5b7517cde7",
                 "shasum": ""
             },
             "require": {
@@ -414,7 +414,7 @@
                 "package",
                 "tools"
             ],
-            "time": "2020-03-16T02:33:17+00:00"
+            "time": "2020-03-16T11:07:45+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3447,6 +3447,66 @@
                 "uuid"
             ],
             "time": "2020-02-21T04:36:14+00:00"
+        },
+        {
+            "name": "spatie/laravel-cors",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-cors.git",
+                "reference": "d74099d57821d5a72ae21416c0be0dcd58779355"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-cors/zipball/d74099d57821d5a72ae21416c0be0dcd58779355",
+                "reference": "d74099d57821d5a72ae21416c0be0dcd58779355",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.5.*|3.6.*|3.7.*|3.8.*|^4.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Cors\\CorsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Cors\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Send CORS headers in a Laravel or Lumen application",
+            "homepage": "https://github.com/spatie/laravel-cors",
+            "keywords": [
+                "ajax",
+                "api",
+                "cors",
+                "laravel-cors",
+                "request",
+                "spatie"
+            ],
+            "abandoned": "laravel/framework",
+            "time": "2019-09-04T06:55:15+00:00"
         },
         {
             "name": "swagger-api/swagger-ui",
@@ -8212,7 +8272,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4",
+        "php": "^7.3",
         "ext-json": "*"
     },
     "platform-dev": []
