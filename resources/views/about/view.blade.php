@@ -19,7 +19,7 @@
 
         <div class="row justify-content-center mb-4">
             <div class="col-md-4 col-sm-6 mt-4">
-                <small>Página anterior</small>
+                <small>{{ __('Before page') }}</small>
                 <br>
                 @if(\App\Repositories\DocumentationRepository::before($name, $page) !== 'Nothing')
                 <a href="/about/{{ $base }}/{{ strtolower(str_replace(' ', '-', \App\Repositories\DocumentationRepository::before($name, $page))) }}">{{ __(\App\Repositories\DocumentationRepository::before($name, $page)) }}</a>
@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-4 col-sm-6 mt-4 text-right">
                 @if(\App\Repositories\DocumentationRepository::next($name, $page) !== 'Nothing')
-                    <small>Siguiente página</small>
+                    <small>{{ __('Next page') }}</small>
                     <br>
                     <a href="/about/{{ $base }}/{{ strtolower(str_replace(' ', '-', \App\Repositories\DocumentationRepository::next($name, $page))) }}">{{ __(\App\Repositories\DocumentationRepository::next($name, $page)) }}</a>
                 @else

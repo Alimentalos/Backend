@@ -42,8 +42,8 @@ return [
     ],
     'Developer handbook' => [
         'Introduction' => [
-            'This documentation is aimed at providing notions to introduce a PHP code writer to the work of adding new improvements or maintaining existing code.',
-            'If you felt identified by the description mentioned above then you have the ability to incorporate new lines of code into our humble book. To collaborate in the construction or improvement of the solution you do not need to have great knowledge in object-oriented programming or mathematics, in most cases the code is prepared in such a way that anyone can add their grain of sand knowing the rules of language of programming and proper English.',
+            'This documentation is focus to provide notions to introduce a PHP code writer to the mission of add new features or maintaining existing code.',
+            'If you felt identified by the description of PHP code writer then you have the ability to incorporate new lines of code into our humble book. To collaborate in the construction or improvement of the solution you do not need to have great knowledge in object-oriented programming or mathematics, in most cases the code is prepared in such a way that anyone can add their grain of sand knowing the rules of language of programming and proper English.',
         ],
         'Conventions' => [
             'Resume' => [
@@ -83,404 +83,6 @@ return [
                 '4. Run local server by running <code>php artisan serve</code> or <code>vendor/bin/phpunit</code> to run the suit of tests.',
             ]
         ],
-        'Project structure' => [
-            'Patterns' => [
-                'This software was not built from premeditated design. Its structure was built from elaborate patterns along the way.',
-                'But it is true that we respect the existing structures and patterns developed and recommended by the Laravel community.',
-                'The application is built entirely on the app directory. In that directory you will find folders with patterns found and defined in the master branch.',
-            ],
-            'Directories' => [
-                '<code>app</code>' => ['at its root includes the application models and a file with helper methods to simplify code development.'],
-                '<code>app/Annotations</code>' => ['has the base definition from which the documentation of the API specification is generated.'],
-                '<code>app/Asserts</code>' => ['contains traits with logical statements of comparison or verification of models or relationships between models.'],
-                '<code>app/Attributes</code>' => ['contains traits with model related attributes of solution.'],
-                '<code>app/Console</code>' => ['contains artisan command definitions.'],
-                '<code>app/Contracts</code>' => ['contains interfaces of classes.'],
-                '<code>app/Creations</code>' => ['contains traits with resource instance creation definitions.'],
-                '<code>app/Events</code>' => ['contains solution related events.'],
-                '<code>app/Http</code>' => ['contains all logic related to the HTTP layer.'],
-                '<code>app/Lists</code>' => ['contains traits with model related indexing logic of solution.'],
-                '<code>app/Observers</code>' => ['contains model observers.'],
-                '<code>app/Policies</code>' => ['contains model policies.'],
-                '<code>app/Procedures</code>' => ['contains model procedures.'],
-                '<code>app/Queries</code>' => ['contains model queries.'],
-                '<code>app/Providers</code>' => ['contains the service providers of the application.'],
-                '<code>app/Relationships</code>' => ['contains model relationships.'],
-                '<code>app/Reports</code>' => ['contains logic responsible for generating reports.'],
-                '<code>app/Repositories</code>' => ['contains libraries to easily access and interact with system resources.'],
-                '<code>app/Rules</code>' => ['contains custom validation rules for HTTP requests.'],
-                '<code>app/Tools</code>' => ['contains custom classes of helpers.'],
-            ],
-            'Models' => [
-                'Location' => ['It is an entity that represents a geographical point, you can have extra data such as speed, odometer, and altitude if applicable.'],
-                'Pet' => ['It is the main discrete unit of the system. It corresponds to the logical entity of a living being listed as an animal. Has a direct relationship with who made the registration.'],
-                'Photo' => ['It is the representation of image type file. It is directly related to the user who uploaded it and to a photoable resource.'],
-                'User' => ['It is the representation of discrete entity that can perform operations on the platform.'],
-                'Group' => ['It is a logical representation of an entity that allows us to relate resources.'],
-                'Geofence' => ['Is the logical representation of a polygon composed of geo-referenced points. It is related to animal, devices and users. It can also belong to a group.'],
-                'Device' => ['Is a logical representation of a traceable element, it can be a cell phone or a specialized device. It belongs to a user and can be public or private. Its scope can be reduced to the owner user or to the users belonging to a group in common with the device.'],
-                'Comment' => ['Is the written presentation of an idea, thought or emotion of a user in the community. It may be related to a resource or another comment. It has an optional title and a mandatory body.'],
-                'Access' => ['Is a logical representation of an in or out of resource in a geofence. Access is directly related to a resource through the accessible relationship. It also belongs to a geofence and has a double relationship with the location model to represent the beginning and end.'],
-                'Alert' => ['Is quite similar to a comment, the difference eradicated in the connotation of urgency between a simple comment and an announcement or request for help addressed to the entire community. It is directly related to a resource and user.'],
-                'Action' => ['It represents an operation executed in the system. Action has a direct relationship with a user, has parameters and resources referenced.'],
-            ],
-            'Events' => [
-                'NewLocation' => ['The event is triggered when a system-locatable resource creates a new location. It is transmitted on the own resource channel. Inside it has details of the location and the related resource.'],
-                'GeofenceIn' => ['The event is triggered when it is detected that the resource has just entered in a geo-fence. Inside it has details about the geo-fence, the resource and the location.'],
-                'GeofenceOut' => ['The event is triggered when it is detected that the resource has came out of a geo-fence. Inside it has details about the geo-fence, the resource and the location.'],
-            ],
-            'Common relationships' => [
-                ' BelongsToUser' => [
-                    'This trait allows to relate a resource to a user.',
-                    'Making a relationship of belongs to user.'
-                ],
-                ' Commentable' => [
-                    'This trait allows to create comments of a resource.',
-                    'Making a relationship of morph many comments.'
-                ],
-                ' Geofenceable' => [
-                    'This trait allows to create relationships between a resource and a geofence.',
-                    'Making a relationship of morph to many geofences.'
-                ],
-                ' Groupable' => [
-                    'This trait allows to create relationships between a resource and a group.',
-                    'Making a relationship of morph to many groups.'
-                ],
-                ' HasPhoto' => [
-                    'This trait allows a resource to have one photo.',
-                    'Making a relationship of belong to photo.'
-                ],
-                ' Photoable' => [
-                    'This trait allows a photo to be related to resource.',
-                    'Making a relationship of morph to many photos.'
-                ],
-                ' Trackable' => [
-                    'This trait allows a resource to be traceable.',
-                    'Making a relationship of morph many locations and accesses.'
-                ],
-            ],
-            'Specific' => [
-                ' AccessRelationships' => [
-                    'Related to Access, contains accessible, first location and last location relationships. The first of them is the resource with which access is related, it can be user, pet or device.'
-                ],
-                ' AlertRelationships' => [
-                    'Related to Alert, contains alert, the method which must resolve the type of resource with which the alert is associated.'
-                ],
-                ' CommentRelationships' => [
-                    'Related to Comment, contains commentable, the method which must resolve the type of resource with which the comment is associated.'
-                ],
-                ' GeofenceRelationships' => [
-                    'Related to Geofence, contains geofenceable, the method which must resolve the type of resource with which the geofence is associated. It also have the relationships pets, devices and users, which define the inverse relationship of those resources. accesses relationship allows to obtain all the ingress or egress of the resources with respect to the geo-fence.'
-                ],
-                ' GroupRelationships' => [
-                    'Related to Group, contains groupable, the method which must resolve the type of resource with which the group is associated. It also have the relationships pets, devices, geofences and users, which define the inverse relationship of those resources.'
-                ],
-                ' LocationRelationships' => [
-                    'Related to Location, contains trackable, the method which must resolve the type of resource with which the location is associated.'
-                ],
-                ' PhotoRelationships' => [
-                    'Related to Photo, contains photoable, the method which must resolve the type of resource with which the group is associated. It also have the relationships groups, users, alerts, geofences and pets, which define the inverse relationship of those resources. comment method resolve the comment associated with the photo.'
-                ],
-                ' UserRelationships' => [
-                    'Related to Photo, contains photoable, the method which must resolve the type of resource with which the group is associated. It also have the relationships groups, users, alerts, geofences and pets, which define the inverse relationship of those resources. comment method resolve the comment associated with the photo.'
-                ],
-            ],
-            'Repositories' => [
-                'ActionsRepository' => [
-                    'Responsible of all operations related to actions such as resolution or insertion.',
-                    '> This repository is available using actions() function.'
-                ],
-                'AdminRepository' => [
-                    'Responsible to list the authorized administrators in production, as well as for resolving whether a user has administrator permissions.',
-                    '> This repository is available using admin() function.'
-                ],
-                'AlertsRepository' => [
-                    'Responsible of all operations related to system alerts.',
-                    '> This repository is available using alerts() function.'
-                ],
-                'CommentRepository' => [
-                    'Responsible of all operations related to comments.',
-                    '> This repository is available using comments() function.'
-                ],
-                'DevicesRepository' => [
-                    'Responsible of all operations related to devices.',
-                    '> This repository is available using devices() function.'
-                ],
-                'GeofenceRepository' => [
-                    'Responsible of all operations related to geofences.',
-                    '> This repository is available using geofences() function.'
-                ],
-                'GroupsRepository' => [
-                    'Responsible of all operations related to groups.',
-                    '> This repository is available using groups() function.'
-                ],
-                'LocationsRepository' => [
-                    'Responsible of all operations related to locations.',
-                    '> This repository is available using locations() function.'
-                ],
-                'PetsRepository' => [
-                    'Responsible of all operations related to pets.',
-                    '> This repository is available using pets() function.'
-                ],
-                'PhotoRepository' => [
-                    'Responsible of all operations related to photos.',
-                    '> This repository is available using photos() function.'
-                ],
-                'ReactionsRepository' => [
-                    'Responsible of all operations related to reactions.',
-                    '> This repository is available using reactions() function.'
-                ],
-                'ResourceCommentsRepository' => [
-                    'Responsible of all operations related to resource comments.',
-                    '> This repository is available using resourceComments() function.'
-                ],
-                'ResourceLocationsRepository' => [
-                    'Responsible of all operations related to resource locations.',
-                    '> This repository is available using resourceLocations() function.'
-                ],
-                'ResourcePhotosRepository' => [
-                    'Responsible of all operations related to resource photos.',
-                    '> This repository is available using resourcePhotos() function.'
-                ],
-                'ResourceRepository' => [
-                    'Responsible of all operations related to resources.',
-                    '> This repository is available using resources() function.'
-                ],
-                'UsersRepository' => [
-                    'Responsible of all operations related to users.',
-                    '> This repository is available using users() function.'
-                ],
-                'UserGroupsRepository' => [
-                    'Responsible of all operations related to user groups.',
-                    '> This repository is available using userGroups() function.'
-                ],
-            ],
-            'Lists' => [
-                'ActionList' => ['Contains the methods which resolves the actions list depending if is a child user.'],
-                'AlertList' => ['Contain the method which resolves the list of alerts.'],
-                'DeviceList' => ['Contains the methods which resolves the devices list scoped for authenticated user.'],
-                'GeofenceAccessesList' => ['Contains the method which retrieve the accesses of a specific geofence.'],
-                'GeofenceList' => ['Contains the two methods which resolves the geofences list depending if is a child user.'],
-                'GroupList' => ['Contains the two methods which resolves the groups list depending if is a admin user.'],
-                'LocationList' => ['Contains the two methods which retrieves locations depending if user is finding or indexing.'],
-            ],
-            // TODO Add JWT documentation explanation and reference
-            'Authentication' => [
-                'To obtain an access token you must first create a user using the user registration API.',
-                'To perform operations on the system you must log in by sending your credentials to the Token API. You will get two codes, one to access the system and another to refresh the access token.',
-                'Sending Bearer ACCESS_TOKEN on Authorization header of HTTP request, header Accept with value application/json is required.'
-            ],
-            'Contracts' => [
-                'Resource' => [
-                    'Ensures the implementation of getLazyRelationshipsAttribute, getInstances, getAvailableReactions, storeRules and updateRules methods.',
-                ],
-                'CreateFromRequest' => [
-                    'Ensures the implementation of the createViaRequest methods.',
-                ],
-                'UpdateFromRequest' => [
-                    'Ensures the implementation of the updateViaRequest methods.',
-                ],
-                'CanCreateReports' => [
-                    'Ensures the implementation of retrieve and retrieveRequiredParameters methods.',
-                ],
-            ],
-            'Attributes' => [
-                'AlertAttribute' => [
-                    'Contains types and alertTypes methods, including constant types as attributes.',
-                ],
-                'PetAttribute' => [
-                    'Contains constant pet sizes as attributes.',
-                ],
-            ],
-            'Procedures' => [
-                'Procedures are traits of resource related repositories. Describes common or exclusive resource type behaviors.'
-            ],
-            'Policies' => [
-                'Policies are gates to authorize actions over resources.',
-                'Read more in official [docs](https://laravel.com/docs/6.x/authorization#creating-policies).'
-            ],
-            'Observers' => [
-                'Observers are lifecycle object events handlers of resources.',
-                'Read more in official [docs](https://laravel.com/docs/6.x/eloquent#observers).'
-            ],
-            'Asserts' => [
-                'Asserts are common or exclusive logical checks of resources.',
-                'This pattern reduces code complexity of big files.',
-                'This is project exclusive pattern.'
-            ],
-            'Queries' => [
-                'Queries are exclusive query builder filter of resources.',
-                'This pattern reduces code complexity of big files.',
-                'This is project exclusive pattern.'
-            ],
-            'Creations' => [
-                'Creations are exclusive instance creation implementations of resources.',
-                'This pattern reduces code complexity of big files.',
-                'This is project exclusive pattern.'
-            ],
-            'Reports' => [
-                'This feature is under construction since different types of trackable resources were incorporated.',
-                'This is project exclusive feature.'
-            ],
-            'HTTP' => [
-                'This folder has common laravel Http application structure. Controllers, Requests and Resources of http layer are available there.',
-                'Code is completely refactored to handle the index, create, update or delete of resources and also their relations with other resources.'
-            ],
-            'Annotations' => [
-                'The documentation of our API is constructed from the existing OpenApi notations in the doc blocks of the application controllers.',
-                'In this directory is the base notation from which the documentation is constructed.'
-            ],
-            'Helpers' => [
-                'Helpers are global scoped functions, to make code simple and readable.',
-                [
-                    'admin()' => [
-                        'Creates AdminRepository instance.',
-                    ],
-                    'actions()' => [
-                        'Creates ActionsRepository instance.',
-                    ],
-                    'devices()' => [
-                        'Creates DevicesRepository instance.',
-                    ],
-                    'users()' => [
-                        'Creates UsersRepository instance.',
-                    ],
-                    'pets()' => [
-                        'Creates PetsRepository instance.',
-                    ],
-                    'comments()' => [
-                        'Creates CommentsRepository instance.',
-                    ],
-                    'resources()' => [
-                        'Creates ResourcesRepository instance.',
-                    ],
-                    'alerts()' => [
-                        'Creates AlertsRepository instance.',
-                    ],
-                    'groups()' => [
-                        'Creates GroupsRepository instance.',
-                    ],
-                    'geofences()' => [
-                        'Creates GeofenceRepository instance.',
-                    ],
-                    'geofencesAccesses()' => [
-                        'Creates GeofenceAccessesRepository instance.',
-                    ],
-                    'resourceComments()' => [
-                        'Creates ResourceCommentsRepository instance.',
-                    ],
-                    'resourceLocations()' => [
-                        'Creates ResourceLocationsRepository instance.',
-                    ],
-                    'resourcePhotos()' => [
-                        'Creates ResourcePhotosRepository instance.',
-                    ],
-                    'reactions()' => [
-                        'Creates ReactionsRepository instance.',
-                    ],
-                    'resource()' => [
-                        'Retrieve current resource class or instance.',
-                    ],
-                    'authenticated($guard = "api")' => [
-                        'Wrapper of auth()->user().',
-                    ],
-                    'subscriptions()' => [
-                        'Creates Subscriber tool instance.',
-                    ],
-                    'parameters()' => [
-                        'Creates Parameterizer tool instance.',
-                    ],
-                    'photos()' => [
-                        'Creates PhotoRepository instance.',
-                    ],
-                    'locations()' => [
-                        'Creates LocationsRepository instance.',
-                    ],
-                    'rhas($key)' => [
-                        'Wrapper of request()->has($key).',
-                    ],
-                    'einput($delimiter, $key)' => [
-                        'Wrapper of explode($delimiter, request()->input($key)).',
-                    ],
-                    'uuid()' => [
-                        'Creates unique identifier.',
-                    ],
-                    'likes()' => [
-                        'Creates Liker tool instance.',
-                    ],
-                    'finder()' => [
-                        'Creates Finder tool instance.',
-                    ],
-                    'cataloger()' => [
-                        'Creates Cataloger tool instance.',
-                    ],
-                    'upload()' => [
-                        'Creates Uploader tool instance.',
-                    ],
-                    'reports()' => [
-                        'Creates Reporter tool instance.',
-                    ],
-                    'measurer()' => [
-                        'Creates Measurer tool instance.',
-                    ],
-                    'input($key)' => [
-                        'Wrapper of request()->input($key).',
-                    ],
-                    'uploaded($key)' => [
-                        'Wrapper of request()->file($key).',
-                    ],
-                    'fill($key, $value)' => [
-                        'Checks if request input has key using default value if doesnt exists.',
-                    ],
-                    'only($keys)' => [
-                        'Wrapper of request()->only(func_get_args()).',
-                    ],
-                    'parser()' => [
-                        'Creates Parser tool instance.',
-                    ],
-                ]
-            ],
-            'Tools' => [
-                'Tools are classes with a specific responsibility such as measuring distances or uploading files:',
-                'Cataloger' => [
-                    'Class with the available alert statuses.',
-                ],
-                'Filler' => [
-                    'Fast function to use request input if has value or apply default value.',
-                ],
-                'Finder' => [
-                    'Resolves /{resource}/{uuid} instance or /{resource} class.',
-                ],
-                'Identifier' => [
-                    'Generates unique identifiers of resources.',
-                ],
-                'Liker' => [
-                    'Implements laravel-love reactions of resources.',
-                ],
-                'Measurer' => [
-                    'Performs distance calculations.',
-                ],
-                'Parameterizer' => [
-                    'Implements a simple method to use Filler over an array of attributes.',
-                ],
-                'Parser' => [
-                    'Transform raw data into system readable information, such as converting coordinates into geo-spatial points.',
-                ],
-                'Reporter' => [
-                    'Responsible for the generation of reports. This tool is under construction.',
-                ],
-                'Subscriber' => [
-                    'Responsible for checking the limits of user quota. This tool is under construction.',
-                ],
-                'Uploader' => [
-                    'Responsible of photo uploads.',
-                ],
-            ],
-            'Rules' => [
-                'Rules are custom validation rules.',
-                'Read more in official [docs](https://laravel.com/docs/6.x/validation#custom-validation-rules).'
-            ],
-        ],
         'Collaboration' => [
             [
                 'This project aims to have an open collaboration with the community.',
@@ -509,5 +111,403 @@ return [
                 'Our code is built with the highest standards we handle, however, we depend on third-party libraries in which we cannot guarantee the security or origin of the files. In spite of this, the repositories have the definition of each one of their dependencies with the digital signatures that correspond to the provider of the code.'
             ]
         ]
+    ],
+    'Relationships' => [
+        'Patterns' => [
+            'This software was not built from premeditated design. Its structure was built from elaborate patterns along the way.',
+            'But it is true that we respect the existing structures and patterns developed and recommended by the Laravel community.',
+            'The application is built entirely on the app directory. In that directory you will find folders with patterns found and defined in the master branch.',
+        ],
+        'Directories' => [
+            'app' => ['at its root includes the application models and a file with helper methods to simplify code development.'],
+            'app/Annotations' => ['has the base definition from which the documentation of the API specification is generated.'],
+            'app/Asserts' => ['contains traits with logical statements of comparison or verification of models or relationships between models.'],
+            'app/Attributes' => ['contains traits with model related attributes of solution.'],
+            'app/Console' => ['contains artisan command definitions.'],
+            'app/Contracts' => ['contains interfaces of classes.'],
+            'app/Creations' => ['contains traits with resource instance creation definitions.'],
+            'app/Events' => ['contains solution related events.'],
+            'app/Http' => ['contains all logic related to the HTTP layer.'],
+            'app/Lists' => ['contains traits with model related indexing logic of solution.'],
+            'app/Observers' => ['contains model observers.'],
+            'app/Policies' => ['contains model policies.'],
+            'app/Procedures' => ['contains model procedures.'],
+            'app/Queries' => ['contains model queries.'],
+            'app/Providers' => ['contains the service providers of the application.'],
+            'app/Relationships' => ['contains model relationships.'],
+            'app/Reports' => ['contains logic responsible for generating reports.'],
+            'app/Repositories' => ['contains libraries to easily access and interact with system resources.'],
+            'app/Rules' => ['contains custom validation rules for HTTP requests.'],
+            'app/Tools' => ['contains custom classes of helpers.'],
+        ],
+        'Models' => [
+            'Location' => ['It is an entity that represents a geographical point, you can have extra data such as speed, odometer, and altitude if applicable.'],
+            'Pet' => ['It is the main discrete unit of the system. It corresponds to the logical entity of a living being listed as an animal. Has a direct relationship with who made the registration.'],
+            'Photo' => ['It is the representation of image type file. It is directly related to the user who uploaded it and to a photoable resource.'],
+            'User' => ['It is the representation of discrete entity that can perform operations on the platform.'],
+            'Group' => ['It is a logical representation of an entity that allows us to relate resources.'],
+            'Geofence' => ['Is the logical representation of a polygon composed of geo-referenced points. It is related to animal, devices and users. It can also belong to a group.'],
+            'Device' => ['Is a logical representation of a traceable element, it can be a cell phone or a specialized device. It belongs to a user and can be public or private. Its scope can be reduced to the owner user or to the users belonging to a group in common with the device.'],
+            'Comment' => ['Is the written presentation of an idea, thought or emotion of a user in the community. It may be related to a resource or another comment. It has an optional title and a mandatory body.'],
+            'Access' => ['Is a logical representation of an in or out of resource in a geofence. Access is directly related to a resource through the accessible relationship. It also belongs to a geofence and has a double relationship with the location model to represent the beginning and end.'],
+            'Alert' => ['Is quite similar to a comment, the difference eradicated in the connotation of urgency between a simple comment and an announcement or request for help addressed to the entire community. It is directly related to a resource and user.'],
+            'Action' => ['It represents an operation executed in the system. Action has a direct relationship with a user, has parameters and resources referenced.'],
+        ],
+        'Events' => [
+            'NewLocation' => ['The event is triggered when a system-locatable resource creates a new location. It is transmitted on the own resource channel. Inside it has details of the location and the related resource.'],
+            'GeofenceIn' => ['The event is triggered when it is detected that the resource has just entered in a geo-fence. Inside it has details about the geo-fence, the resource and the location.'],
+            'GeofenceOut' => ['The event is triggered when it is detected that the resource has came out of a geo-fence. Inside it has details about the geo-fence, the resource and the location.'],
+        ],
+        'Common relationships' => [
+            ' BelongsToUser' => [
+                'This trait allows to relate a resource to a user.',
+                'Making a relationship of belongs to user.'
+            ],
+            ' Commentable' => [
+                'This trait allows to create comments of a resource.',
+                'Making a relationship of morph many comments.'
+            ],
+            ' Geofenceable' => [
+                'This trait allows to create relationships between a resource and a geofence.',
+                'Making a relationship of morph to many geofences.'
+            ],
+            ' Groupable' => [
+                'This trait allows to create relationships between a resource and a group.',
+                'Making a relationship of morph to many groups.'
+            ],
+            ' HasPhoto' => [
+                'This trait allows a resource to have one photo.',
+                'Making a relationship of belong to photo.'
+            ],
+            ' Photoable' => [
+                'This trait allows a photo to be related to resource.',
+                'Making a relationship of morph to many photos.'
+            ],
+            ' Trackable' => [
+                'This trait allows a resource to be traceable.',
+                'Making a relationship of morph many locations and accesses.'
+            ],
+        ],
+        'Specific' => [
+            ' AccessRelationships' => [
+                'Related to Access, contains accessible, first location and last location relationships. The first of them is the resource with which access is related, it can be user, pet or device.'
+            ],
+            ' AlertRelationships' => [
+                'Related to Alert, contains alert, the method which must resolve the type of resource with which the alert is associated.'
+            ],
+            ' CommentRelationships' => [
+                'Related to Comment, contains commentable, the method which must resolve the type of resource with which the comment is associated.'
+            ],
+            ' GeofenceRelationships' => [
+                'Related to Geofence, contains geofenceable, the method which must resolve the type of resource with which the geofence is associated. It also have the relationships pets, devices and users, which define the inverse relationship of those resources. accesses relationship allows to obtain all the ingress or egress of the resources with respect to the geo-fence.'
+            ],
+            ' GroupRelationships' => [
+                'Related to Group, contains groupable, the method which must resolve the type of resource with which the group is associated. It also have the relationships pets, devices, geofences and users, which define the inverse relationship of those resources.'
+            ],
+            ' LocationRelationships' => [
+                'Related to Location, contains trackable, the method which must resolve the type of resource with which the location is associated.'
+            ],
+            ' PhotoRelationships' => [
+                'Related to Photo, contains photoable, the method which must resolve the type of resource with which the group is associated. It also have the relationships groups, users, alerts, geofences and pets, which define the inverse relationship of those resources. comment method resolve the comment associated with the photo.'
+            ],
+            ' UserRelationships' => [
+                'Related to Photo, contains photoable, the method which must resolve the type of resource with which the group is associated. It also have the relationships groups, users, alerts, geofences and pets, which define the inverse relationship of those resources. comment method resolve the comment associated with the photo.'
+            ],
+        ],
+        'Repositories' => [
+            'ActionsRepository' => [
+                'Responsible of all operations related to actions such as resolution or insertion.',
+                '> This repository is available using actions() function.'
+            ],
+            'AdminRepository' => [
+                'Responsible to list the authorized administrators in production, as well as for resolving whether a user has administrator permissions.',
+                '> This repository is available using admin() function.'
+            ],
+            'AlertsRepository' => [
+                'Responsible of all operations related to system alerts.',
+                '> This repository is available using alerts() function.'
+            ],
+            'CommentRepository' => [
+                'Responsible of all operations related to comments.',
+                '> This repository is available using comments() function.'
+            ],
+            'DevicesRepository' => [
+                'Responsible of all operations related to devices.',
+                '> This repository is available using devices() function.'
+            ],
+            'GeofenceRepository' => [
+                'Responsible of all operations related to geofences.',
+                '> This repository is available using geofences() function.'
+            ],
+            'GroupsRepository' => [
+                'Responsible of all operations related to groups.',
+                '> This repository is available using groups() function.'
+            ],
+            'LocationsRepository' => [
+                'Responsible of all operations related to locations.',
+                '> This repository is available using locations() function.'
+            ],
+            'PetsRepository' => [
+                'Responsible of all operations related to pets.',
+                '> This repository is available using pets() function.'
+            ],
+            'PhotoRepository' => [
+                'Responsible of all operations related to photos.',
+                '> This repository is available using photos() function.'
+            ],
+            'ReactionsRepository' => [
+                'Responsible of all operations related to reactions.',
+                '> This repository is available using reactions() function.'
+            ],
+            'ResourceCommentsRepository' => [
+                'Responsible of all operations related to resource comments.',
+                '> This repository is available using resourceComments() function.'
+            ],
+            'ResourceLocationsRepository' => [
+                'Responsible of all operations related to resource locations.',
+                '> This repository is available using resourceLocations() function.'
+            ],
+            'ResourcePhotosRepository' => [
+                'Responsible of all operations related to resource photos.',
+                '> This repository is available using resourcePhotos() function.'
+            ],
+            'ResourceRepository' => [
+                'Responsible of all operations related to resources.',
+                '> This repository is available using resources() function.'
+            ],
+            'UsersRepository' => [
+                'Responsible of all operations related to users.',
+                '> This repository is available using users() function.'
+            ],
+            'UserGroupsRepository' => [
+                'Responsible of all operations related to user groups.',
+                '> This repository is available using userGroups() function.'
+            ],
+        ],
+        'Lists' => [
+            'ActionList' => ['Contains the methods which resolves the actions list depending if is a child user.'],
+            'AlertList' => ['Contain the method which resolves the list of alerts.'],
+            'DeviceList' => ['Contains the methods which resolves the devices list scoped for authenticated user.'],
+            'GeofenceAccessesList' => ['Contains the method which retrieve the accesses of a specific geofence.'],
+            'GeofenceList' => ['Contains the two methods which resolves the geofences list depending if is a child user.'],
+            'GroupList' => ['Contains the two methods which resolves the groups list depending if is a admin user.'],
+            'LocationList' => ['Contains the two methods which retrieves locations depending if user is finding or indexing.'],
+        ],
+        // TODO Add JWT documentation explanation and reference
+        'Authentication' => [
+            'To obtain an access token you must first create a user using the user registration API.',
+            'To perform operations on the system you must log in by sending your credentials to the Token API. You will get two codes, one to access the system and another to refresh the access token.',
+            'Sending Bearer ACCESS_TOKEN on Authorization header of HTTP request, header Accept with value application/json is required.'
+        ],
+        'Contracts' => [
+            'Resource' => [
+                'Ensures the implementation of getLazyRelationshipsAttribute, getInstances, getAvailableReactions, storeRules and updateRules methods.',
+            ],
+            'CreateFromRequest' => [
+                'Ensures the implementation of the createViaRequest methods.',
+            ],
+            'UpdateFromRequest' => [
+                'Ensures the implementation of the updateViaRequest methods.',
+            ],
+            'CanCreateReports' => [
+                'Ensures the implementation of retrieve and retrieveRequiredParameters methods.',
+            ],
+        ],
+        'Attributes' => [
+            'AlertAttribute' => [
+                'Contains types and alertTypes methods, including constant types as attributes.',
+            ],
+            'PetAttribute' => [
+                'Contains constant pet sizes as attributes.',
+            ],
+        ],
+        'Procedures' => [
+            'Procedures are traits of resource related repositories. Describes common or exclusive resource type behaviors.'
+        ],
+        'Policies' => [
+            'Policies are gates to authorize actions over resources.',
+            'Read more in official [docs](https://laravel.com/docs/6.x/authorization#creating-policies).'
+        ],
+        'Observers' => [
+            'Observers are lifecycle object events handlers of resources.',
+            'Read more in official [docs](https://laravel.com/docs/6.x/eloquent#observers).'
+        ],
+        'Asserts' => [
+            'Asserts are common or exclusive logical checks of resources.',
+            'This pattern reduces code complexity of big files.',
+            'This is project exclusive pattern.'
+        ],
+        'Queries' => [
+            'Queries are exclusive query builder filter of resources.',
+            'This pattern reduces code complexity of big files.',
+            'This is project exclusive pattern.'
+        ],
+        'Creations' => [
+            'Creations are exclusive instance creation implementations of resources.',
+            'This pattern reduces code complexity of big files.',
+            'This is project exclusive pattern.'
+        ],
+        'Reports' => [
+            'This feature is under construction since different types of trackable resources were incorporated.',
+            'This is project exclusive feature.'
+        ],
+        'HTTP' => [
+            'This folder has common laravel Http application structure. Controllers, Requests and Resources of http layer are available there.',
+            'Code is completely refactored to handle the index, create, update or delete of resources and also their relations with other resources.'
+        ],
+        'Annotations' => [
+            'The documentation of our API is constructed from the existing OpenApi notations in the doc blocks of the application controllers.',
+            'In this directory is the base notation from which the documentation is constructed.'
+        ],
+        'Helpers' => [
+            'Helpers are global scoped functions, to make code simple and readable.',
+            [
+                'admin()' => [
+                    'Creates AdminRepository instance.',
+                ],
+                'actions()' => [
+                    'Creates ActionsRepository instance.',
+                ],
+                'devices()' => [
+                    'Creates DevicesRepository instance.',
+                ],
+                'users()' => [
+                    'Creates UsersRepository instance.',
+                ],
+                'pets()' => [
+                    'Creates PetsRepository instance.',
+                ],
+                'comments()' => [
+                    'Creates CommentsRepository instance.',
+                ],
+                'resources()' => [
+                    'Creates ResourcesRepository instance.',
+                ],
+                'alerts()' => [
+                    'Creates AlertsRepository instance.',
+                ],
+                'groups()' => [
+                    'Creates GroupsRepository instance.',
+                ],
+                'geofences()' => [
+                    'Creates GeofenceRepository instance.',
+                ],
+                'geofencesAccesses()' => [
+                    'Creates GeofenceAccessesRepository instance.',
+                ],
+                'resourceComments()' => [
+                    'Creates ResourceCommentsRepository instance.',
+                ],
+                'resourceLocations()' => [
+                    'Creates ResourceLocationsRepository instance.',
+                ],
+                'resourcePhotos()' => [
+                    'Creates ResourcePhotosRepository instance.',
+                ],
+                'reactions()' => [
+                    'Creates ReactionsRepository instance.',
+                ],
+                'resource()' => [
+                    'Retrieve current resource class or instance.',
+                ],
+                'authenticated($guard = "api")' => [
+                    'Wrapper of auth()->user().',
+                ],
+                'subscriptions()' => [
+                    'Creates Subscriber tool instance.',
+                ],
+                'parameters()' => [
+                    'Creates Parameterizer tool instance.',
+                ],
+                'photos()' => [
+                    'Creates PhotoRepository instance.',
+                ],
+                'locations()' => [
+                    'Creates LocationsRepository instance.',
+                ],
+                'rhas($key)' => [
+                    'Wrapper of request()->has($key).',
+                ],
+                'einput($delimiter, $key)' => [
+                    'Wrapper of explode($delimiter, request()->input($key)).',
+                ],
+                'uuid()' => [
+                    'Creates unique identifier.',
+                ],
+                'likes()' => [
+                    'Creates Liker tool instance.',
+                ],
+                'finder()' => [
+                    'Creates Finder tool instance.',
+                ],
+                'cataloger()' => [
+                    'Creates Cataloger tool instance.',
+                ],
+                'upload()' => [
+                    'Creates Uploader tool instance.',
+                ],
+                'reports()' => [
+                    'Creates Reporter tool instance.',
+                ],
+                'measurer()' => [
+                    'Creates Measurer tool instance.',
+                ],
+                'input($key)' => [
+                    'Wrapper of request()->input($key).',
+                ],
+                'uploaded($key)' => [
+                    'Wrapper of request()->file($key).',
+                ],
+                'fill($key, $value)' => [
+                    'Checks if request input has key using default value if doesnt exists.',
+                ],
+                'only($keys)' => [
+                    'Wrapper of request()->only(func_get_args()).',
+                ],
+                'parser()' => [
+                    'Creates Parser tool instance.',
+                ],
+            ]
+        ],
+        'Tools' => [
+            'Tools are classes with a specific responsibility such as measuring distances or uploading files:',
+            'Cataloger' => [
+                'Class with the available alert statuses.',
+            ],
+            'Filler' => [
+                'Fast function to use request input if has value or apply default value.',
+            ],
+            'Finder' => [
+                'Resolves /{resource}/{uuid} instance or /{resource} class.',
+            ],
+            'Identifier' => [
+                'Generates unique identifiers of resources.',
+            ],
+            'Liker' => [
+                'Implements laravel-love reactions of resources.',
+            ],
+            'Measurer' => [
+                'Performs distance calculations.',
+            ],
+            'Parameterizer' => [
+                'Implements a simple method to use Filler over an array of attributes.',
+            ],
+            'Parser' => [
+                'Transform raw data into system readable information, such as converting coordinates into geo-spatial points.',
+            ],
+            'Reporter' => [
+                'Responsible for the generation of reports. This tool is under construction.',
+            ],
+            'Subscriber' => [
+                'Responsible for checking the limits of user quota. This tool is under construction.',
+            ],
+            'Uploader' => [
+                'Responsible of photo uploads.',
+            ],
+        ],
+        'Rules' => [
+            'Rules are custom validation rules.',
+            'Read more in official [docs](https://laravel.com/docs/6.x/validation#custom-validation-rules).'
+        ],
     ]
 ];

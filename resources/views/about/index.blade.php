@@ -41,9 +41,21 @@
                         <a href="/about/developer-handbook/conventions" class="btn btn-md btn-light mb-1" role="button" aria-pressed="true">{{__('Conventions')}}</a>
                         <a href="/about/developer-handbook/language-and-tools" class="btn btn-md btn-light mb-1" role="button" aria-pressed="true">{{__('Language and tools')}}</a>
                         <a href="/about/developer-handbook/installation" class="btn btn-md btn-light mb-1" role="button" aria-pressed="true">{{__('Installation')}}</a>
-                        <a href="/about/developer-handbook/project-structure" class="btn btn-md btn-light mb-1" role="button" aria-pressed="true">{{__('Project structure')}}</a>
                         <a href="/about/developer-handbook/collaboration" class="btn btn-md btn-light mb-1" role="button" aria-pressed="true">{{__('Collaboration')}}</a>
                         <a href="/about/developer-handbook/criteria-of-acceptance" class="btn btn-md btn-light mb-1" role="button" aria-pressed="true">{{__('Criteria of acceptance')}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8 mt-4">
+                <div class="h5 mb-5 mt-4">{{ __('License') }}</div>
+                <div class="card">
+                    <div class="card-body p-4">
+                        @component('components.image', ['src' => '/svg/Springbok.svg'])
+                        @endcomponent
+                        <p>{{__('Learn about software license and code usage disclaimer')}}</p>
+                        <a href="/about/license" class="btn btn-md btn-primary" role="button" aria-pressed="true">{{__('Read more') }}</a>
                     </div>
                 </div>
             </div>

@@ -20,20 +20,20 @@
                                 @foreach($secondLevel as $key=> $thirdLevel)
                                     @if(is_array($thirdLevel))
                                         @if (!is_numeric($key))
-                                            <div class="h4 mb-4 pb-2 pt-4">@markdown($key)</div>
+                                            <div class="h4 mb-4 pb-2 pt-4">@markdown(__($key))</div>
                                         @endif
                                         <ul>
                                             @foreach($thirdLevel as $key=> $fourLevel)
                                                 @if(is_array($fourLevel))
                                                     @if (!is_numeric($key))
-                                                        <div class="h6">@markdown($key)</div>
+                                                        <div class="h6">@markdown(__($key))</div>
                                                     @endif
                                                     <ul>
                                                         @foreach($fourLevel as $key=> $fiveLevel)
                                                             @if (!is_numeric($key))
-                                                                <strong>@markdown($key)</strong>
+                                                                <strong>@markdown(__($key))</strong>
                                                             @endif
-                                                            @markdown($fiveLevel)
+                                                            @markdown(__($fiveLevel))
                                                         @endforeach
                                                     </ul>
                                                 @else
@@ -48,10 +48,10 @@
                                         </ul>
                                     @else
                                         @if (!is_numeric($key))
-                                            <div class="h4 mb-4 pt-4">@markdown($key)</div>
+                                            <div class="h4 mb-4 pt-4">@markdown(__($key))</div>
                                         @endif
                                         <div class="pt-2 pl-3">
-                                            @markdown($thirdLevel)
+                                            @markdown(__($thirdLevel))
                                         </div>
                                     @endif
                                 @endforeach

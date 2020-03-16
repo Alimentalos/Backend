@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 mt-4">
-            <h1>Login</h1>
-            <p>Connect to our open source platform using your credentials.</p>
+            <h1>{{ __('Login') }}</h1>
+            <p>{{ __('Connect to our community using your credentials.') }}</p>
         </div>
     </div>
     <div class="row justify-content-center">
