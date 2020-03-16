@@ -125,13 +125,24 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     // Resource Geofences
 
-    foreach (['devices', 'users', 'groups', 'pets'] as $resource) {
-        Route::get("/{$resource}/{resource}/geofences", 'Api\Resource\Geofences\IndexController')
-            ->name("{$resource}.geofences.index");
-        Route::post("/{$resource}/{resource}/geofences/{geofence}/attach", 'Api\Resource\Geofences\AttachController')
-            ->name("{$resource}.geofences.attach");
-        Route::post("/{$resource}/{resource}/geofences/{geofence}/detach", 'Api\Resource\Geofences\DetachController')
-            ->name("{$resource}.geofences.detach");
+    foreach (['devices', 'users', 'pets'] as $resource) {
+        Route::get("/{$resource}/{resource}/geofences", 'Api\Resource\Geofences\IndexController')->name("{$resource}.geofences.index");
+        Route::post("/{$resource}/{resource}/geofences/{geofence}/attach", 'Api\Resource\Geofences\AttachController')->name("{$resource}.geofences.attach");
+        Route::post("/{$resource}/{resource}/geofences/{geofence}/detach", 'Api\Resource\Geofences\DetachController')->name("{$resource}.geofences.detach");
+        Route::get("/{$resource}/{resource}/groups", 'Api\Resource\Groups\IndexController')->name("{$resource}.groups.index");
+        Route::post("/{$resource}/{resource}/groups/{group}/attach", 'Api\Resource\Groups\AttachController')->name("{$resource}.groups.attach");
+        Route::post("/{$resource}/{resource}/groups/{group}/detach", 'Api\Resource\Groups\DetachController')->name("{$resource}.groups.detach");
+    }
+
+    foreach(['groups', 'geofences'] as $resource) {
+        if ($resource === 'geofences') {
+            $str = 'groups';
+        } else {
+            $str = 'geofences';
+        }
+        Route::get("/{$resource}/{resource}/{$str}", 'Api\Resource\\' . Str::ucfirst($str) . '\IndexController')->name("{$resource}.{$str}.index");
+        Route::post("/{$resource}/{resource}/{$str}/". '{' . Str::singular($str) . '}' ."/attach", 'Api\Resource\\' . Str::ucfirst($str) . '\AttachController')->name("{$resource}.{$str}.attach");
+        Route::post("/{$resource}/{resource}/{$str}/". '{' . Str::singular($str) . '}' ."/detach", 'Api\Resource\\' . Str::ucfirst($str) . '\DetachController')->name("{$resource}.{$str}.detach");
     }
 
     foreach(['places', 'pets', 'photos', 'comments', 'alerts', 'groups'] as $resource) {
@@ -139,15 +150,6 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("{$resource}.comments.index");
         Route::post("/{$resource}/{resource}/comments", 'Api\Resource\Comments\StoreController')
             ->name("{$resource}.comments.store");
-    }
-
-    foreach(['pets', 'devices', 'users', 'geofences'] as $resource) {
-        Route::get("/{$resource}/{resource}/groups", 'Api\Resource\Groups\IndexController')
-            ->name("{$resource}.groups.index");
-        Route::post("/{$resource}/{resource}/groups/{group}/attach", 'Api\Resource\Groups\AttachController')
-            ->name("{$resource}.groups.attach");
-        Route::post("/{$resource}/{resource}/groups/{group}/detach", 'Api\Resource\Groups\DetachController')
-            ->name("{$resource}.groups.detach");
     }
 
 
