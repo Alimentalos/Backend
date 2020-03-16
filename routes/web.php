@@ -26,11 +26,7 @@ Route::get('/lang/{lang}', function(Request $request) {
     return redirect()->back();
 })->name('lang');
 
-Auth::routes();
-Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-Route::get('email/verify/{id?}', 'Auth\VerificationController@verify')->name('verification.verify');
-Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 

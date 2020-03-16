@@ -12,5 +12,6 @@ npm-debug.log
 yarn-error.log
 .idea/workspace.xml
 /idea/*.xml
+app.yaml
 /report
 /public/icons/*.svg

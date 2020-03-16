@@ -90,7 +90,7 @@
                     <a href="https://github.com/alimentalos"><i class="fab fa-github"></i> {{ __('GitHub') }}</a>
                     <a href="{{ url('/about') }}"><i class="fal fa-book-alt"></i> {{ __('About') }}</a>
                     @auth
-                        <a href="{{ url('/home') }}"><i class="fal fa-sign-in"></i> {{ __('Home') }}</a>
+                        <a href="{{ url('/home') }}"><i class="fal fa-sign-in"></i> {{ __('Dashboard') }}</a>
                     @else
                         <a href="{{ route('login') }}"><i class="fal fa-sign-in"></i> {{ __('Login') }}</a>
 
