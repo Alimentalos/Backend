@@ -10,7 +10,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.5.0"
+        "version": "v.5.1"
     },
     "servers": [
         {
@@ -1835,8 +1835,8 @@
                 "scheme": "https",
                 "flows": {
                     "password": {
-                        "tokenUrl": "https://www.alimentalos.cl/api/token",
-                        "refreshUrl": "https://www.alimentalos.cl/api/refresh",
+                        "tokenUrl": "http://localhost/api/token",
+                        "refreshUrl": "http://localhost/api/refresh",
                         "scopes": []
                     }
                 }
