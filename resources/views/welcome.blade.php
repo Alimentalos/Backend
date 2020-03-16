@@ -7,15 +7,15 @@
         <title>Alimentalos - {{ __('Bring care and love to abandoned pets.') }}</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
         <script src="https://kit.fontawesome.com/c0a3e57ca3.js" crossorigin="anonymous"></script>
 
         <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
-                font-family: 'Rubik', sans-serif;
+                color: #000000;
+                font-family: 'Delius', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -54,7 +54,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #000000;
                 padding: 15px 7px 10px 7px;
                 margin: 10px 10px;
                 display: block;
@@ -73,7 +73,7 @@
             }
 
             .m-b-md {
-                margin-bottom: 30px;
+                margin-bottom: 80px;
             }
 
             .body > a {
@@ -90,7 +90,7 @@
                     <a href="https://github.com/alimentalos"><i class="fab fa-github"></i> {{ __('GitHub') }}</a>
                     <a href="{{ url('/about') }}"><i class="fal fa-book-alt"></i> {{ __('About') }}</a>
                     @auth
-                        <a href="{{ url('/home') }}">{{ __('Home') }}</a>
+                        <a href="{{ url('/home') }}"><i class="fal fa-sign-in"></i> {{ __('Home') }}</a>
                     @else
                         <a href="{{ route('login') }}"><i class="fal fa-sign-in"></i> {{ __('Login') }}</a>
 
@@ -105,6 +105,8 @@
                 <div class="title m-b-md">
                     Alimentalos
                 </div>
+
+                <img style="max-width: 300px; max-height: 240px;" src="/svg/{{ config('gallery.welcome')[array_rand(config('gallery.welcome'))] }}" alt="">
 
                 <div class="links body">
                     @markdown(__('Bring care and love to *abandoned pets*.'))

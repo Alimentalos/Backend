@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\Resource\Photos;
 
-use App\Photo;
+use Demency\Relationships\Models\Photo;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest

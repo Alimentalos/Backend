@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Group;
-use App\User;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -29,8 +29,8 @@ class ChildCanCreateGroupTest extends TestCase
             'is_public' => 'false',
             'coordinates' => '10.1,50.5'
         ]);
-        $response->assertCreated();
         $content = $response->getContent();
+        $response->assertCreated();
         Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }
 }

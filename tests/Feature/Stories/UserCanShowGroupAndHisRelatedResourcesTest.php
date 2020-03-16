@@ -4,11 +4,11 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Comment;
-use App\Group;
-use App\Pet;
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\Comment;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\Photo;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

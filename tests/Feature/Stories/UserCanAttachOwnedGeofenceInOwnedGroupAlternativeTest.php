@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Geofence;
-use App\Group;
-use App\User;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -30,7 +30,7 @@ class UserCanAttachOwnedGeofenceInOwnedGroupAlternativeTest extends TestCase
         );
         $this->assertDatabaseHas('groupables', [
             'groupable_id' => $geofence->uuid,
-            'groupable_type' => 'App\\Geofence',
+            'groupable_type' => 'Demency\\Relationships\\Models\\Geofence',
             'group_uuid' => $group->uuid,
         ]);
         $response->assertOk();

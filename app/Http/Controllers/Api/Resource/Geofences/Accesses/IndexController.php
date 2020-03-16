@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\Resource\Geofences\Accesses;
 
-use App\Access;
-use App\Geofence;
+use Demency\Relationships\Models\Access;
+use Demency\Relationships\Models\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Geofences\Accesses\IndexRequest;
 use Illuminate\Http\JsonResponse;

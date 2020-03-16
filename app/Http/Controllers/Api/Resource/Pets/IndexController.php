@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Pets;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
-use App\Pet;
+use Demency\Relationships\Models\Pet;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller

@@ -10,12 +10,15 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.4.3"
+        "version": "v.4.4"
     },
     "servers": [
         {
             "url": "https://www.alimentalos.cl/api",
             "description": "Backend production server"
+        },
+        {
+            "url": "https://www.alimentalos.cl/api"
         }
     ],
     "paths": {
@@ -1822,5 +1825,22 @@
     "externalDocs": {
         "description": "Source code",
         "url": "https://github.com/alimentalos/backend"
+    },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "tokenUrl": "http://localhost/api/token",
+                        "refreshUrl": "http://localhost/api/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\Resource\Groups;
 
-use App\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
+use Demency\Relationships\Models\Group;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller

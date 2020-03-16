@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Users\Groups;
 
-use App\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Users\Groups\InviteRequest;
-use App\User;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class InviteController extends Controller

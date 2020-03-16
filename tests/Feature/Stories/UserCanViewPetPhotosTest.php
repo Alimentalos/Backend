@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Pet;
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\Photo;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

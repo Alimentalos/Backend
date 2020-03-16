@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Group;
-use App\User;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -36,7 +36,7 @@ class UserCanHandleGroupInvitationsTest extends TestCase
             ]);
         $response->assertOk();
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\User',
+            'groupable_type' => 'Demency\\Relationships\\Models\\User',
             'groupable_id' => $acceptedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::PENDING_STATUS
@@ -47,7 +47,7 @@ class UserCanHandleGroupInvitationsTest extends TestCase
             ]);
         $response->assertOk();
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\User',
+            'groupable_type' => 'Demency\\Relationships\\Models\\User',
             'groupable_id' => $acceptedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::ACCEPTED_STATUS
@@ -59,7 +59,7 @@ class UserCanHandleGroupInvitationsTest extends TestCase
             ]);
         $response->assertOk();
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\User',
+            'groupable_type' => 'Demency\\Relationships\\Models\\User',
             'groupable_id' => $rejectedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::PENDING_STATUS
@@ -70,7 +70,7 @@ class UserCanHandleGroupInvitationsTest extends TestCase
             ]);
         $response->assertOk();
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\User',
+            'groupable_type' => 'Demency\\Relationships\\Models\\User',
             'groupable_id' => $rejectedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::REJECTED_STATUS
@@ -86,7 +86,7 @@ class UserCanHandleGroupInvitationsTest extends TestCase
             ]);
         $response->assertOk();
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\User',
+            'groupable_type' => 'Demency\\Relationships\\Models\\User',
             'groupable_id' => $rejectedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::ACCEPTED_STATUS
@@ -98,7 +98,7 @@ class UserCanHandleGroupInvitationsTest extends TestCase
             ]);
         $response->assertOk();
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\User',
+            'groupable_type' => 'Demency\\Relationships\\Models\\User',
             'groupable_id' => $blockedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::PENDING_STATUS
@@ -109,7 +109,7 @@ class UserCanHandleGroupInvitationsTest extends TestCase
             ]);
         $response->assertOk();
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\User',
+            'groupable_type' => 'Demency\\Relationships\\Models\\User',
             'groupable_id' => $blockedUser->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::BLOCKED_STATUS

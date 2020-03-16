@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Group;
-use App\User;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -34,7 +34,7 @@ class OwnerCanDetachChildUserOfGroupsTest extends TestCase
             ->json('POST', '/api/users/' . $userB->uuid . '/groups/' . $group->uuid . '/detach', []);
         $response->assertOk();
         $this->assertDeleted('groupables', [
-            'groupable_type' => 'App\\User',
+            'groupable_type' => 'Demency\\Relationships\\Models\\User',
             'groupable_id' => $userB->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::ATTACHED_STATUS

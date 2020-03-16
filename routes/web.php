@@ -17,9 +17,14 @@ Route::get('/', 'WelcomeController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes(['verify' => true]);
+Auth::routes();
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id?}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/about/{name}', 'AboutController@show')->name('about.show');
+Route::get('/about/{name}/{page}', 'AboutController@view')->name('about.view');

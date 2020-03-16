@@ -4,12 +4,12 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Comment;
-use App\Geofence;
-use App\Group;
-use App\Pet;
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\Comment;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\Photo;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -40,7 +40,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $user->save();
         $photo->save();
         $this->assertDatabaseMissing('locations', [
-            'trackable_type' => 'App\\User',
+            'trackable_type' => 'Demency\\Relationships\\Models\\User',
             'trackable_id' => $user->uuid,
         ]);
 
@@ -71,12 +71,12 @@ class UserCanCreateResourcePhotosTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('locations', [
-            'trackable_type' => 'App\\User',
+            'trackable_type' => 'Demency\\Relationships\\Models\\User',
             'trackable_id' => $user->uuid,
         ]);
 
         $this->assertDatabaseMissing('locations', [
-            'trackable_type' => 'App\\Pet',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
             'trackable_id' => $pet->uuid,
         ]);
 
@@ -108,7 +108,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('locations', [
-            'trackable_type' => 'App\\Pet',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
             'trackable_id' => $pet->uuid,
         ]);
 

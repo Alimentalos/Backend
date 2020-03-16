@@ -4,11 +4,11 @@
 namespace Tests\Feature;
 
 
-use App\Device;
-use App\Geofence;
-use App\Location;
-use App\Pet;
-use App\User;
+use Demency\Relationships\Models\Device;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Location;
+use Demency\Relationships\Models\Pet;
+use Demency\Relationships\Models\User;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
@@ -55,8 +55,8 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
             'location' => [
                 'uuid' => $location->uuid,
                 'coords' => [
-                    'latitude' => 40,
-                    'longitude' => 40,
+                    'latitude' => 1,
+                    'longitude' => 1,
                     'accuracy' => $location->accuracy,
                     'altitude' => $location->altitude,
                     'speed' => $location->speed,
@@ -210,7 +210,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
-            'trackable_type' => 'App\\Device',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Device',
             'accuracy' => $firstPayload['location']['coords']['accuracy'],
         ]);
 
@@ -239,7 +239,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
-            'trackable_type' => 'App\\User',
+            'trackable_type' => 'Demency\\Relationships\\Models\\User',
             'accuracy' => $firstPayload['location']['coords']['accuracy'],
         ]);
 
@@ -268,7 +268,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
-            'trackable_type' => 'App\\Pet',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
             'accuracy' => $firstPayload['location']['coords']['accuracy'],
         ]);
 
@@ -297,7 +297,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
-            'trackable_type' => 'App\\Device',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Device',
             'accuracy' => $secondPayload['location']['coords']['accuracy'],
         ]);
 
@@ -326,7 +326,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
-            'trackable_type' => 'App\\User',
+            'trackable_type' => 'Demency\\Relationships\\Models\\User',
             'accuracy' => $secondPayload['location']['coords']['accuracy'],
         ]);
 
@@ -355,7 +355,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
-            'trackable_type' => 'App\\Pet',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
             'accuracy' => $secondPayload['location']['coords']['accuracy'],
         ]);
 
@@ -384,7 +384,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
-            'trackable_type' => 'App\\Device',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Device',
             'accuracy' => $thirdPayload['location']['coords']['accuracy'],
         ]);
 
@@ -413,7 +413,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
-            'trackable_type' => 'App\\User',
+            'trackable_type' => 'Demency\\Relationships\\Models\\User',
             'accuracy' => $thirdPayload['location']['coords']['accuracy'],
         ]);
 
@@ -442,7 +442,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
-            'trackable_type' => 'App\\Pet',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
             'accuracy' => $thirdPayload['location']['coords']['accuracy'],
         ]);
 
@@ -471,7 +471,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
-            'trackable_type' => 'App\\Device',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Device',
             'accuracy' => $fourPayload['location']['coords']['accuracy'],
         ]);
 
@@ -500,7 +500,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
-            'trackable_type' => 'App\\User',
+            'trackable_type' => 'Demency\\Relationships\\Models\\User',
             'accuracy' => $fourPayload['location']['coords']['accuracy'],
         ]);
 
@@ -529,7 +529,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
-            'trackable_type' => 'App\\Pet',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
             'accuracy' => $fourPayload['location']['coords']['accuracy'],
         ]);
 
@@ -558,7 +558,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $device->uuid,
-            'trackable_type' => 'App\\Device',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Device',
             'accuracy' => $fivePayload['location']['coords']['accuracy'],
         ]);
 
@@ -587,7 +587,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $user->uuid,
-            'trackable_type' => 'App\\User',
+            'trackable_type' => 'Demency\\Relationships\\Models\\User',
             'accuracy' => $fivePayload['location']['coords']['accuracy'],
         ]);
 
@@ -616,7 +616,7 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
-            'trackable_type' => 'App\\Pet',
+            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
             'accuracy' => $fivePayload['location']['coords']['accuracy'],
         ]);
 
@@ -624,6 +624,9 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
         $response = $this->actingAs($user, 'api')
             ->get('/api/users/' . $user->uuid . '/accesses');
         $response->assertOk();
+        $this->assertDatabaseHas('accesses', [
+            'accessible_id' => $user->uuid
+        ]);
         $response->assertJsonStructure([
             'data' => [
                 [

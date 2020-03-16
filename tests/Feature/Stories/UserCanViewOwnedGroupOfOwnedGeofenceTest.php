@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Geofence;
-use App\Group;
-use App\User;
+use Demency\Relationships\Models\Geofence;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

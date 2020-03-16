@@ -2,12 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Device;
-use App\Location;
-use App\Pet;
-use App\PetLocation;
-use App\User;
-use App\UserLocation;
+use Demency\Relationships\Models\Location;
 use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 

@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Device;
-use App\Group;
-use App\User;
+use Demency\Relationships\Models\Device;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -37,7 +37,7 @@ class UserCanDetachOwnedDeviceOfOwnedGroupTest extends TestCase
         );
         $response->assertExactJson(['message' => 'Resource detached to group successfully']);
         $this->assertDeleted('groupables', [
-            'groupable_type' => 'App\\Device',
+            'groupable_type' => 'Demency\\Relationships\\Models\\Device',
             'groupable_id' => $device->uuid,
             'group_uuid' => $group->uuid,
         ]);

@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Group;
-use App\User;
+use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -29,7 +29,7 @@ class OwnerCanAttachChildUserInGroupsTest extends TestCase
             ]);
         $response->assertOk();
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'App\\User',
+            'groupable_type' => 'Demency\\Relationships\\Models\\User',
             'groupable_id' => $userB->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::ATTACHED_STATUS,

@@ -4,10 +4,10 @@
 namespace Tests\Feature\Stories;
 
 
-use App\Alert;
-use App\Comment;
-use App\Photo;
-use App\User;
+use Demency\Relationships\Models\Alert;
+use Demency\Relationships\Models\Comment;
+use Demency\Relationships\Models\Photo;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
