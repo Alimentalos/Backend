@@ -14,7 +14,7 @@ class ConfirmPasswordController extends Controller
      *
      * @var string
      */
-    protected string $redirectTo = '/home';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller.
