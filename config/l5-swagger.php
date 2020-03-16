@@ -148,20 +148,20 @@ return [
         ],
         */
 
-        'passport' => [ // Unique name of security
-            'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
-            'description' => 'Laravel passport oauth2 security.',
-            'in' => 'header',
-            'scheme' => 'https',
-            'flows' => [
-                "password" => [
+//        'passport' => [ // Unique name of security
+//            'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+//            'description' => 'Laravel passport oauth2 security.',
+//            'in' => 'header',
+//            'scheme' => 'https',
+//            'flows' => [
+//                "password" => [
 //                    "authorizationUrl" => config('app.url') . '/oauth/authorize',
-                    "tokenUrl" => config('app.url') . '/api/token',
-                    "refreshUrl" => config('app.url') . '/api/refresh',
-                    "scopes" => []
-                ],
-            ],
-        ],
+//                    "tokenUrl" => config('app.url') . '/api/token',
+//                    "refreshUrl" => config('app.url') . '/api/refresh',
+//                    "scopes" => []
+//                ],
+//            ],
+//        ],
     ],
 
     /*
