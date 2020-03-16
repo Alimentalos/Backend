@@ -55,8 +55,8 @@
 
             .links > a {
                 color: #000000;
-                padding: 15px 7px 10px 7px;
-                margin: 10px 10px;
+                padding: 10px 7px 5px 7px;
+                margin: 5px 5px;
                 display: block;
                 float: left;
                 font-size: 13px;
@@ -110,6 +110,11 @@
 
                 <div class="links body">
                     @markdown(__('Bring care and love to *abandoned pets*.'))
+
+
+                    <p class="links" style="text-align: center; overflow: hidden">
+                        <a style="float:left;" href="/lang/es">Español</a> <a style="float: right;" href="/lang/en">English</a>
+                    </p>
                 </div>
             </div>
         </div>

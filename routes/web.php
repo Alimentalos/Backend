@@ -17,6 +17,15 @@ Route::get('/', 'WelcomeController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+Route::get('/lang/{lang}', function(Request $request) {
+    if (!in_array($request->route('lang'), ['es', 'en'])) {
+        throw new Exception('Unsupported language');
+    }
+    \Illuminate\Support\Facades\Session::put('lang', $request->route('lang'));
+    return redirect()->back();
+})->name('lang');
+
 Auth::routes();
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id?}', 'Auth\VerificationController@verify')->name('verification.verify');
