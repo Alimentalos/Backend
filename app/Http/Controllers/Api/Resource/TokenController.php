@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\TokenRequest;
+use Demency\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 
 class TokenController extends Controller
@@ -50,7 +51,7 @@ class TokenController extends Controller
      * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(TokenRequest $request, $resource)
+    public function __invoke(TokenRequest $request, Resource $resource)
     {
         return response()->json([
             'message' => 'Token retrieved successfully',

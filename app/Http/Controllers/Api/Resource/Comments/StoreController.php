@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Comments;
 
+use Demency\Contracts\Resource;
 use Demency\Relationships\Models\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Comments\StoreRequest;
@@ -51,7 +52,7 @@ class StoreController extends Controller
      * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(StoreRequest $request, $resource)
+    public function __invoke(StoreRequest $request, Resource $resource)
     {
         $comment = resourceComments()->create($resource);
         $comment->load((new Comment())->getLazyRelationshipsAttribute());

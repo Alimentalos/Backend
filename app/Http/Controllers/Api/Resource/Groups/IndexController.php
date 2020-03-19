@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Groups;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
+use Demency\Contracts\Resource;
 use Demency\Relationships\Models\Group;
 use Illuminate\Http\JsonResponse;
 
@@ -51,7 +52,7 @@ class IndexController extends Controller
      * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(IndexRequest $request, $resource)
+    public function __invoke(IndexRequest $request, Resource $resource)
     {
         $groups = $resource->groups()->latest()->paginate(20);
         $groups->load((new Group())->getLazyRelationshipsAttribute());

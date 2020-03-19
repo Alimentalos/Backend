@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Photos;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
+use Demency\Contracts\Resource;
 use Demency\Relationships\Models\Photo;
 use Illuminate\Http\JsonResponse;
 
@@ -51,7 +52,7 @@ class IndexController extends Controller
      * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(IndexRequest $request, $resource)
+    public function __invoke(IndexRequest $request, Resource $resource)
     {
         $photos = $resource->photos()->latest()->paginate(20);
         $photos->load((new Photo())->getLazyRelationshipsAttribute());

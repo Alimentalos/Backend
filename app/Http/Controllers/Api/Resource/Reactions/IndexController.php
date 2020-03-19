@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Reactions;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
+use Demency\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -50,7 +51,7 @@ class IndexController extends Controller
      * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(IndexRequest $request, $resource)
+    public function __invoke(IndexRequest $request, Resource $resource)
     {
         $reactions = reactions()->index($resource);
         return response()->json($reactions,200);

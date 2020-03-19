@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Comments;
 
+use Demency\Contracts\Resource;
 use Demency\Relationships\Models\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
@@ -51,7 +52,7 @@ class IndexController extends Controller
      * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(IndexRequest $request, $resource)
+    public function __invoke(IndexRequest $request, Resource $resource)
     {
         $comments = $resource->comments()->latest()->paginate(20);
         $comments->load((new Comment)->getLazyRelationshipsAttribute());

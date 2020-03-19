@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\StoreRequest;
+use Demency\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller
@@ -41,7 +42,7 @@ class StoreController extends Controller
      * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(StoreRequest $request, $resource)
+    public function __invoke(StoreRequest $request, Resource $resource)
     {
         $resource = $request->route('resource')->createViaRequest();
         $resource->load($resource->lazy_relationships);

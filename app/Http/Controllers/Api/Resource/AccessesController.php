@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource;
 
+use Demency\Contracts\Resource;
 use Demency\Relationships\Models\Access;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\AccessesRequest;
@@ -51,7 +52,7 @@ class AccessesController extends Controller
      * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(AccessesRequest $request, $resource)
+    public function __invoke(AccessesRequest $request, Resource $resource)
     {
         $accesses = $resource
             ->accesses()
