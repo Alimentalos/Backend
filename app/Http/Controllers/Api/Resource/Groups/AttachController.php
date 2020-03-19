@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Groups;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Groups\AttachRequest;
+use Demency\Contracts\Resource;
 use Demency\Relationships\Models\Group;
 use Illuminate\Http\JsonResponse;
 
@@ -61,7 +62,7 @@ class AttachController extends Controller
      * @param Group $group
      * @return JsonResponse
      */
-    public function __invoke(AttachRequest $request, $resource, Group $group)
+    public function __invoke(AttachRequest $request, Resource $resource, Group $group)
     {
         $resource->groups()
             ->attach($group->uuid,[

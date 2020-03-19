@@ -9,11 +9,11 @@ use Demency\Relationships\{Models\User,
     Repositories\CommentsRepository,
     Repositories\DevicesRepository,
     Repositories\GeofenceAccessesRepository,
-    Repositories\GeofenceRepository,
-    Repositories\GroupRepository,
+    Repositories\GeofencesRepository,
+    Repositories\GroupsRepository,
     Repositories\LocationsRepository,
-    Repositories\PetRepository,
-    Repositories\PhotoRepository,
+    Repositories\PetsRepository,
+    Repositories\PhotosRepository,
     Repositories\PlacesRepository,
     Repositories\ResourceCommentsRepository,
     Repositories\ResourceLocationsRepository,
@@ -36,11 +36,11 @@ if (! function_exists('actions')) {
 
 if (! function_exists('pets')) {
     /**
-     * @return PetRepository
+     * @return PetsRepository
      */
     function pets()
     {
-        return new PetRepository();
+        return new PetsRepository();
     }
 }
 
@@ -86,11 +86,11 @@ if (! function_exists('alerts')) {
 
 if (! function_exists('groups')) {
     /**
-     * @return GroupRepository
+     * @return GroupsRepository
      */
     function groups()
     {
-        return new GroupRepository();
+        return new GroupsRepository();
     }
 }
 
@@ -136,11 +136,11 @@ if (! function_exists('reactions')) {
 
 if (! function_exists('geofences')) {
     /**
-     * @return GeofenceRepository
+     * @return GeofencesRepository
      */
     function geofences()
     {
-        return new GeofenceRepository();
+        return new GeofencesRepository();
     }
 }
 
@@ -167,11 +167,11 @@ if (! function_exists('parameters')) {
 
 if (! function_exists('photos')) {
     /**
-     * @return PhotoRepository
+     * @return PhotosRepository
      */
     function photos()
     {
-        return new PhotoRepository();
+        return new PhotosRepository();
     }
 }
 

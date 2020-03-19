@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Resource\Groups;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Groups\DetachRequest;
+use Demency\Contracts\Resource;
 use Demency\Relationships\Models\Group;
 use Illuminate\Http\JsonResponse;
 
@@ -61,7 +62,7 @@ class DetachController extends Controller
      * @param Group $group
      * @return JsonResponse
      */
-    public function __invoke(DetachRequest $request, $resource, Group $group)
+    public function __invoke(DetachRequest $request, Resource $resource, Group $group)
     {
         $resource->groups()->detach($group->uuid);
         return response()->json(['message' => 'Resource detached to group successfully'], 200);

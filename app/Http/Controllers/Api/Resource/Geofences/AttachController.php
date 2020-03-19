@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Geofences;
 
+use Demency\Contracts\Resource;
 use Demency\Relationships\Models\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Geofences\AttachRequest;
@@ -61,7 +62,7 @@ class AttachController extends Controller
      * @param Geofence $geofence
      * @return JsonResponse
      */
-    public function __invoke(AttachRequest $request, $resource, Geofence $geofence)
+    public function __invoke(AttachRequest $request, Resource $resource, Geofence $geofence)
     {
         $resource->geofences()->attach($geofence->uuid);
         return response()->json(['message' => 'Resource attached to geofence successfully'], 200);

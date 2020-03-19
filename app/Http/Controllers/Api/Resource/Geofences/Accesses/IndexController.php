@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Resource\Geofences\Accesses;
 
+use Demency\Contracts\Resource;
 use Demency\Relationships\Models\Access;
 use Demency\Relationships\Models\Geofence;
 use App\Http\Controllers\Controller;
@@ -62,7 +63,7 @@ class IndexController extends Controller
      * @param Geofence $geofence
      * @return JsonResponse
      */
-    public function __invoke(IndexRequest $request, $resource, Geofence $geofence)
+    public function __invoke(IndexRequest $request, Resource $resource, Geofence $geofence)
     {
         $accesses = $resource
             ->accesses()
