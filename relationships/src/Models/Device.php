@@ -12,6 +12,7 @@ use Demency\Relationships\Trackable;
 use Demency\Relationships\Resources\DeviceResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Scout\Searchable;
 
 /**
  * Class Device
@@ -22,6 +23,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class Device extends Authenticatable implements Resource, CreateFromRequest, UpdateFromRequest
 {
+    use Searchable;
     use SpatialTrait;
     use DeviceResource;
     use Groupable;

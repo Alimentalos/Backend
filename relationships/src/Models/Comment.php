@@ -11,9 +11,11 @@ use Demency\Relationships\Resources\CommentResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Comment extends Model implements ReactableContract, Resource, UpdateFromRequest
 {
+    use Searchable;
     use Reactable;
     use CommentResource;
     use CommentRelationships;

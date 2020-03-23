@@ -18,7 +18,6 @@ trait GeofenceList
     {
         return Geofence::where('user_uuid', authenticated()->uuid)
             ->orWhere('is_public', true)
-            ->where('name', 'like', "%" . input('q') . "%")
             ->latest()
             ->paginate(20);
     }
@@ -32,7 +31,6 @@ trait GeofenceList
     {
         return Geofence::where('user_uuid', authenticated()->user_uuid)
             ->orWhere('is_public', true)
-            ->where('name', 'like', "%" . input('q') . "%")
             ->latest()
             ->paginate(20);
     }

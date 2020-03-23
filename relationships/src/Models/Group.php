@@ -14,9 +14,11 @@ use Demency\Relationships\Photoable;
 use Demency\Relationships\Relationships\GroupRelationships;
 use Demency\Relationships\Resources\GroupResource;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequest, Monetizer
 {
+    use Searchable;
     use GroupResource;
     use GroupRelationships;
     use BelongsToUser;

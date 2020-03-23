@@ -15,9 +15,11 @@ use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Geofence extends Model implements ReactableContract, Resource, CreateFromRequest, UpdateFromRequest
 {
+    use Searchable;
     use SpatialTrait;
     use Reactable;
     use GeofenceResource;

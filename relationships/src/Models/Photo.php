@@ -12,9 +12,11 @@ use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Photo extends Model implements ReactableContract, Resource, UpdateFromRequest
 {
+    use Searchable;
     use SpatialTrait;
     use Reactable;
     use PhotoResource;

@@ -12,9 +12,11 @@ use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Place extends Model implements ReactableContract, Resource
 {
+    use Searchable;
     use PlaceResource;
     use SpatialTrait;
     use BelongsToUser;

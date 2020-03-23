@@ -13,9 +13,11 @@ use Demency\Relationships\Photoable;
 use Demency\Relationships\Resources\AlertResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Alert extends Model implements Resource, CreateFromRequest, UpdateFromRequest
 {
+    use Searchable;
     use SpatialTrait;
     use AlertResource;
     use AlertRelationships;

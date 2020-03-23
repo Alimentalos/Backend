@@ -15,9 +15,11 @@ use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Scout\Searchable;
 
 class Pet extends Authenticatable implements ReactableContract, Resource
 {
+    use Searchable;
     use SpatialTrait;
     use Reactable;
     use PetResource;
