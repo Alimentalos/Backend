@@ -12,7 +12,7 @@ class DetachController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/{resource}/{uuid}/photo/{photo}/detach",
+     *      path="/{resource}/{uuid}/photos/{photo}/detach",
      *      operationId="detachResourcePhoto",
      *      tags={"Resources"},
      *      summary="Detach photo of resource.",
@@ -41,8 +41,8 @@ class DetachController extends Controller
      *         )
      *     ),
      *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
+     *          name="photo",
+     *          description="Unique identifier of photo",
      *          required=true,
      *          in="path",
      *          @OA\Schema(

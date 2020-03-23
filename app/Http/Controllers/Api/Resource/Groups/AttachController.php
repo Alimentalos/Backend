@@ -15,7 +15,7 @@ class AttachController extends Controller
      *      path="/{resource}/{uuid}/groups/{group}/attach",
      *      operationId="attachResourceGroup",
      *      tags={"Resources"},
-     *      summary="Attach group of resource.",
+     *      summary="Attach group to resource.",
      *      description="Returns message JSON Object response.",
      *      @OA\Parameter(
      *          name="uuid",

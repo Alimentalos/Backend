@@ -896,7 +896,7 @@
                 "tags": [
                     "Resources"
                 ],
-                "summary": "Attach group of resource.",
+                "summary": "Attach group to resource.",
                 "description": "Returns message JSON Object response.",
                 "operationId": "attachResourceGroup",
                 "parameters": [
@@ -953,7 +953,7 @@
                 "tags": [
                     "Resources"
                 ],
-                "summary": "Detach group of user.",
+                "summary": "Detach group of resource.",
                 "description": "Returns message JSON Object response.",
                 "operationId": "detachResourceGroup",
                 "parameters": [
@@ -1228,6 +1228,122 @@
                 }
             }
         },
+        "/{resource}/{uuid}/photos/{photo}/attach": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Attach photo to resource.",
+                "description": "Returns message JSON Object response.",
+                "operationId": "attachResourcePhoto",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique identifier of resource",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource type that need to be considered",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "pets",
+                                "enum": [
+                                    "pets",
+                                    "users",
+                                    "geofences",
+                                    "groups",
+                                    "places"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "photo",
+                        "in": "path",
+                        "description": "Unique identifier of photo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource attached to photo successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/{resource}/{uuid}/photos/{photo}/detach": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Detach photo of resource.",
+                "description": "Returns message JSON Object response.",
+                "operationId": "detachResourcePhoto",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique identifier of resource",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource type that need to be considered",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "pets",
+                                "enum": [
+                                    "pets",
+                                    "users",
+                                    "geofences",
+                                    "groups",
+                                    "places"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "photo",
+                        "in": "path",
+                        "description": "Unique identifier of photo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource detached to photo successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
         "/{resource}/{uuid}/photos": {
             "get": {
                 "tags": [
@@ -1255,12 +1371,13 @@
                             "type": "string",
                             "items": {
                                 "type": "string",
-                                "default": "users",
+                                "default": "pets",
                                 "enum": [
                                     "pets",
                                     "users",
                                     "geofences",
-                                    "groups"
+                                    "groups",
+                                    "places"
                                 ]
                             }
                         }
@@ -1301,12 +1418,13 @@
                             "type": "string",
                             "items": {
                                 "type": "string",
-                                "default": "users",
+                                "default": "pets",
                                 "enum": [
                                     "pets",
                                     "users",
                                     "geofences",
-                                    "groups"
+                                    "groups",
+                                    "places"
                                 ]
                             }
                         }
@@ -1473,15 +1591,6 @@
                 "operationId": "searchResources",
                 "parameters": [
                     {
-                        "name": "q",
-                        "in": "query",
-                        "description": "The query concept",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "name": "resource",
                         "in": "path",
                         "description": "Resource type that need to be considered",
@@ -1502,6 +1611,15 @@
                                     "photos"
                                 ]
                             }
+                        }
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "The query concept",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],

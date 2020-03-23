@@ -12,10 +12,10 @@ class AttachController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/{resource}/{uuid}/groups/{group}/attach",
+     *      path="/{resource}/{uuid}/photos/{photo}/attach",
      *      operationId="attachResourcePhoto",
      *      tags={"Resources"},
-     *      summary="Attach photo of resource.",
+     *      summary="Attach photo to resource.",
      *      description="Returns message JSON Object response.",
      *      @OA\Parameter(
      *          name="uuid",
@@ -41,8 +41,8 @@ class AttachController extends Controller
      *         )
      *     ),
      *      @OA\Parameter(
-     *          name="group",
-     *          description="Unique identifier of group",
+     *          name="photo",
+     *          description="Unique identifier of photo",
      *          required=true,
      *          in="path",
      *          @OA\Schema(

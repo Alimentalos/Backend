@@ -16,15 +16,6 @@ class SearchController extends Controller
      *      summary="Search resources.",
      *      description="Returns the searched resources paginated by a default quantity, payload includes pagination links and stats.",
      *     @OA\Parameter(
-         *    name="q",
-         *    description="The query concept",
-         *    required=false,
-         *    in="query",
-         *    @OA\Schema(
-         *    type="string"
-         *    )
-         *  ),
-     *     @OA\Parameter(
      *         name="resource",
      *         in="path",
      *         description="Resource type that need to be considered",
@@ -37,6 +28,15 @@ class SearchController extends Controller
      *               default="devices"
      *           ),
      *         )
+     *     ),
+     *     @OA\Parameter(
+     *      name="q",
+     *      description="The query concept",
+     *      required=false,
+     *      in="query",
+     *      @OA\Schema(
+     *        type="string"
+     *      )
      *     ),
      *      @OA\Response(
      *          response=200,
