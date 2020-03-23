@@ -23,7 +23,7 @@ class UserCanCreateGeofenceUsingPhotoTest extends TestCase
             'photo' => UploadedFile::fake()->image('photo5.jpg'),
             'name' => 'Awesome geofence!',
             'is_public' => true,
-            'shape' => '0,0|0,5|5,5|5,0|0.0',
+            'shape' => '0,0|0,5|5,5|5,0|0,0',
             'coordinates' => '20.1,25.5'
         ]);
         $response->assertJsonStructure([
