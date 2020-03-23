@@ -10,7 +10,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.5.4.4"
+        "version": "v.6.0"
     },
     "servers": [
         {
@@ -1456,6 +1456,58 @@
                 "responses": {
                     "200": {
                         "description": "Resource reaction created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/{resource}/search": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Search resources.",
+                "description": "Returns the searched resources paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "searchResources",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "The query concept",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource type that need to be considered",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "devices",
+                                "enum": [
+                                    "users",
+                                    "groups",
+                                    "alerts",
+                                    "devices",
+                                    "geofences",
+                                    "pets",
+                                    "actions",
+                                    "photos"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resources retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
