@@ -48,7 +48,11 @@ trait ResourceLocationProcedure
                         ),
                         $parameters['accuracy']
                     ),
-                    array_merge($parameters, $filters)
+                    [
+                        'start_date' => $parameters['start_date'],
+                        'end_date' => $parameters['end_date'],
+                        'column' => $filters['dateColumn']
+                    ]
                 ),
                 $filters['dateColumn']
             ),
