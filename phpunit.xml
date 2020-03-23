@@ -27,7 +27,7 @@
             <directory suffix=".php">./tools/src</directory>
             <exclude>
                 <directory>./app/Passport</directory>
-                <directory>./app/Http/Controller/Auth</directory>
+                <directory>./app/Http/Controllers/Auth</directory>
                 <file>./app/Repositories/DocumentationRepository.php</file>
                 <file>./app/Http/Controllers/Api/RefreshController.php</file>
                 <file>./app/Http/Controllers/Api/TokenController.php</file>
