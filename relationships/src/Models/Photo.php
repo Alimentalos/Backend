@@ -84,4 +84,21 @@ class Photo extends Model implements ReactableContract, Resource, UpdateFromRequ
      * @var array
      */
     protected $hidden = ['id'];
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        $array['location'] = [
+            'latitude' => $array['location']->getLat(),
+            'longitude' => $array['location']->getLng(),
+        ];
+
+        return $array;
+    }
 }

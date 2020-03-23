@@ -83,4 +83,18 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
     {
         return 'uuid';
     }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        $array['shape'] = $array['shape']->getLineStrings();
+
+        return $array;
+    }
 }
