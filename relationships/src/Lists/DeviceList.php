@@ -17,7 +17,9 @@ trait DeviceList
         $userGroups = authenticated()->groups->pluck('uuid')->toArray();
         return Device::where('user_uuid', authenticated()->uuid)
             ->orWhere('is_public', true)
-            ->OrWhereHas('groups', function(Builder $query) use ($userGroups) { return $query->whereIn('uuid', $userGroups); });
+            ->orWhereHas('groups', function(Builder $query) use ($userGroups) { return $query->whereIn('uuid', $userGroups); })
+            ->where('name', 'like', "%" . input('q') . "%")
+            ->where('description', 'like', "%" . input('d') . "%");
     }
 
     /**
@@ -42,6 +44,8 @@ trait DeviceList
         }
         return Device::whereIn('uuid', explode(',', $devices))
             ->orWhere('user_uuid', authenticated()->uuid)
-            ->orWhere('is_public', true);
+            ->orWhere('is_public', true)
+            ->where('name', 'like', "%" . input('q') . "%")
+            ->where('description', 'like', "%" . input('d') . "%");
     }
 }

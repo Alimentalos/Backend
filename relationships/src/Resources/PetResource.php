@@ -101,6 +101,6 @@ trait PetResource
      */
     public function getInstances()
     {
-        return Pet::latest()->paginate(20);
+        return Pet::latest()->where('name', 'like', "%" . input('q') . "%")->where('description', 'like', "%" . input('d') . "%")->paginate(20);
     }
 }

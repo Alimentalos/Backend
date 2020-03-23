@@ -88,6 +88,6 @@ trait PlaceResource
      */
     public function getInstances()
     {
-        return Place::latest()->paginate(20);
+        return Place::latest()->where('name', 'like', "%" . input('q') . "%")->where('description', 'like', "%" . input('d') . "%")->paginate(20);
     }
 }

@@ -16,6 +16,7 @@ trait UserList
     public function all()
     {
         return User::latest()
+            ->where('name', 'like', "%" . input('q') . "%")
             ->paginate(20);
     }
 
@@ -30,7 +31,9 @@ trait UserList
         return User::latest()
             ->where('user_uuid', $uuid)
             ->orWhere('uuid', $uuid)
-            ->orWhere('is_public', true)->paginate(20);
+            ->orWhere('is_public', true)
+            ->where('name', 'like', "%" . input('q') . "%")
+            ->paginate(20);
     }
 
 }

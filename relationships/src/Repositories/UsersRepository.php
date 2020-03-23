@@ -16,7 +16,7 @@ class UsersRepository
     /**
      * Create geofence.
      *
-     * @return Geofence
+     * @return User
      */
     public function create()
     {
