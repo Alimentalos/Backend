@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Device;
-use Demency\Relationships\Models\Geofence;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Device;
+use Alimentalos\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

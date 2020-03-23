@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Demency\Relationships\Models\Coin;
+use Alimentalos\Relationships\Models\Coin;
 use Faker\Generator as Faker;
 
 $factory->define(Coin::class, function (Faker $faker) {

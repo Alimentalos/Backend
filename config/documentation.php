@@ -98,6 +98,50 @@ return [
             ]
         ],
     ],
+    'Authentication' => [
+        'Introduction' => [
+            'This project uses <code>laravel-passport</code> to support the authentication based on access tokens. These <i>tokens</i> are encrypted codes that encapsulate information such as the issuing entity, the scope, its creation date and duration.',
+            'That´s reduces the risks associated with password manipulation. This authentication system allows advanced control over user access to system services while maintaining an opening layer.'
+        ],
+        'Flow' => [
+            'First, you must request the issuance of a token by sending your email and password to the <code>createAccessToken</code> service.',
+            'The service will respond to you with validation errors if the favorable conditions of the service are not met. Otherwise you will receive a payload with the information related to the token, the access code, the refresh code, its expiration and the type of code.',
+            'The access code will be requested in the <code>Authentication</code> HTTP header with the Bearer prefix. Example: <code>Bearer MY_ACESS_TOKEN</code>. The refresh code will be requested in the <code>refreshAccessToken</code> service as a parameter in the <code>query</code>. This is necessary to generate a new access code and allow user access to the platform.',
+            'As a relevant detail, the expiration contains the duration of the token\'s validity. So the current date must be stored to then check the expiration date and thus be able to perform the update operation. The implementation of this method is already available in the application project.'
+        ],
+        'Throttle' => [
+            'First, you must request the issuance of a token by sending your email and password to the <code>createAccessToken</code> service.',
+            'We have permissive concepts related to throttle. But there are limits per system, 60 per minute. Which may be less depending on the exposed service.'
+        ],
+    ],
+    'Resources' => [
+        'Geofences' => ['WIP'],
+        'Accesses' => ['WIP'],
+        'Pets' => ['WIP'],
+        'Users' => ['WIP'],
+        'Groups' => ['WIP'],
+        'Photos' => ['WIP'],
+        'Comments' => ['WIP'],
+        'Devices' => ['WIP'],
+        'Locations' => ['WIP'],
+        'Actions' => ['WIP'],
+    ],
+    'Near' => [
+        'Introduction' => [
+            'We have a service to locate resources according to an input parameter that comes to be a geographical point made up of latitude and longitude.'
+        ],
+        'Available resources' => [
+            'The resources that currently have this capacity are: <code>Users</code>, <code>Pets</code>, <code>Devices</code>, <code>Geofences</code>, <code>Photos</code> and <code>Places</code>.'
+        ]
+    ],
+    'Find' => [
+        'Introduction' => [
+            'We have a service to locate resources. It works quite similar to the near service but in this case you must identify what resource you are looking for.'
+        ],
+        'Available resources' => [
+            'The resources that currently have this capacity are: <code>Users</code>, <code>Pets</code>, <code>Devices</code>.'
+        ]
+    ],
     'License' => [
         'About our license concept' => [
             [

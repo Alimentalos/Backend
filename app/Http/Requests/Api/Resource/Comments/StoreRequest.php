@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\Resource\Comments;
 
-use Demency\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\Comment;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest

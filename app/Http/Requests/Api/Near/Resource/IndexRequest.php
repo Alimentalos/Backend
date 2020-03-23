@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\Near\Resource;
 
 use App\Http\Requests\RuledRequest;
-use Demency\Relationships\Rules\Coordinate;
+use Alimentalos\Relationships\Rules\Coordinate;
 
 class IndexRequest extends RuledRequest
 {

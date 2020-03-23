@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Geofence;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -28,7 +28,7 @@ class UserCanBeDetachedOfOwnedGeofenceTest extends TestCase
         $response->assertOk();
         $this->assertDeleted('geofenceables', [
             'geofence_uuid' => $geofence->uuid,
-            'geofenceable_type' => 'Demency\\Relationships\\Models\\User',
+            'geofenceable_type' => 'Alimentalos\\Relationships\\Models\\User',
             'geofenceable_id' => $user->uuid,
         ]);
     }

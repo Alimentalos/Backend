@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Resource\Geofences;
 
-use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Models\Geofence;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller

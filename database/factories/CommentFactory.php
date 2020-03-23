@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Demency\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\Comment;
 use Faker\Generator as Faker;
 
 $factory->define(Comment::class, function (Faker $faker) {

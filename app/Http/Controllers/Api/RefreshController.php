@@ -36,7 +36,6 @@ class RefreshController extends Controller
      *
      * @param RefreshRequest $request
      * @return JsonResponse
-     * @codeCoverageIgnore
      */
     public function __invoke(RefreshRequest $request)
     {

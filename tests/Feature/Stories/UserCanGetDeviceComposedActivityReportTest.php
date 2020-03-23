@@ -4,10 +4,10 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Device;
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\Location;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Device;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\Location;
+use Alimentalos\Relationships\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

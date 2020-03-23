@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api\Geofences\Resource;
 
-use Demency\Relationships\Models\Access;
-use Demency\Relationships\Models\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Geofences\Resource\AccessesRequest;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Models\Access;
+use Alimentalos\Relationships\Models\Geofence;
 use Illuminate\Http\JsonResponse;
 
 class AccessesController extends Controller
@@ -53,7 +54,7 @@ class AccessesController extends Controller
      * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(AccessesRequest $request, Geofence $geofence, $resource)
+    public function __invoke(AccessesRequest $request, Geofence $geofence, Resource $resource)
     {
         $accesses = geofencesAccesses()->index($geofence, $resource);
         $accesses->load((new Access())->getLazyRelationshipsAttribute());

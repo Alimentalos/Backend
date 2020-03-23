@@ -86,17 +86,17 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Demency\Relationships\Models\User::class,
+            'model' => Alimentalos\Relationships\Models\User::class,
         ],
 
         'devices' => [
             'driver' => 'eloquent',
-            'model' => Demency\Relationships\Models\Device::class,
+            'model' => Alimentalos\Relationships\Models\Device::class,
         ],
 
         'pets' => [
             'driver' => 'eloquent',
-            'model' => Demency\Relationships\Models\Pet::class,
+            'model' => Alimentalos\Relationships\Models\Pet::class,
         ],
 
         // 'users' => [

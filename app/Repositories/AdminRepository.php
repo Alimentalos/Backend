@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\User;
 
 class AdminRepository
 {

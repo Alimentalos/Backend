@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Demency\Relationships\Models\Location;
+use Alimentalos\Relationships\Models\Location;
 use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 

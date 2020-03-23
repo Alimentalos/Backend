@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;

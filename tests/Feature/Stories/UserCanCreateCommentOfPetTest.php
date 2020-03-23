@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Comment;
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -29,7 +29,7 @@ class UserCanCreateCommentOfPetTest extends TestCase
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($content))->uuid,
             'user_uuid' => $user->uuid,
-            'commentable_type' => 'Demency\\Relationships\\Models\\Pet',
+            'commentable_type' => 'Alimentalos\\Relationships\\Models\\Pet',
             'commentable_id' => $pet->uuid,
             'body' => $comment->body
         ]);

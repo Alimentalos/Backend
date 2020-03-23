@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Location;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Location;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

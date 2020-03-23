@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Resource;
 
-use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Access;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\AccessesRequest;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Models\Access;
 use Illuminate\Http\JsonResponse;
 
 class AccessesController extends Controller

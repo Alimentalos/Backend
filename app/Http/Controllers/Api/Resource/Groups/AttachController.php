@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\Resource\Groups;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Groups\AttachRequest;
-use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Group;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Models\Group;
 use Illuminate\Http\JsonResponse;
 
 class AttachController extends Controller
@@ -15,7 +15,7 @@ class AttachController extends Controller
      *      path="/{resource}/{uuid}/groups/{group}/attach",
      *      operationId="attachResourceGroup",
      *      tags={"Resources"},
-     *      summary="Attach group of resource.",
+     *      summary="Attach group to resource.",
      *      description="Returns message JSON Object response.",
      *      @OA\Parameter(
      *          name="uuid",

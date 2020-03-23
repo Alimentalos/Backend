@@ -54,6 +54,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ] as $resource) {
         Route::get("/{$resource}", 'Api\Resource\IndexController')
             ->name("{$resource}.index");
+        Route::get("/{resource}/search", 'Api\Resource\SearchController')
+            ->name("{$resource}.search");
     }
 
     foreach(['pets', 'devices'] as $resource) {
@@ -121,6 +123,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("{$resource}.photos.index");
         Route::post("/{$resource}/{resource}/photos", 'Api\Resource\Photos\StoreController')
             ->name("{$resource}.photos.store");
+        Route::post("/{$resource}/{resource}/photos/{photo}/attach", 'Api\Resource\Photos\AttachController')
+            ->name("{$resource}.photos.attach");
+        Route::post("/{$resource}/{resource}/photos/{photo}/detach", 'Api\Resource\Photos\DetachController')
+            ->name("{$resource}.photos.detach");
     }
 
     // Resource Geofences

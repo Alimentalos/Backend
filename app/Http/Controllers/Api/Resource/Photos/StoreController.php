@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\Resource\Photos;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Photos\StoreRequest;
-use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Photo;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Models\Photo;
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller
@@ -35,8 +35,8 @@ class StoreController extends Controller
      *         type="string",
      *           @OA\Items(
      *               type="string",
-     *               enum={"pets", "users", "geofences", "groups"},
-     *               default="users"
+     *               enum={"pets", "users", "geofences", "groups", "places"},
+     *               default="pets"
      *           ),
      *         )
      *     ),

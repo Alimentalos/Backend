@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Api\Resource;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\DestroyRequest;
-use Demency\Contracts\Resource;
-use Exception;
+use Alimentalos\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 
 class DestroyController extends Controller
@@ -54,17 +53,7 @@ class DestroyController extends Controller
      */
     public function __invoke(DestroyRequest $request, Resource $resource)
     {
-        try {
-            $resource->delete();
-
-            return response()->json(['message' => 'Resource deleted successfully'],200);
-            // @codeCoverageIgnoreStart
-        } catch (Exception $exception) {
-            return response()->json(
-                ['message' => 'Resource cannot be deleted.'],
-                500
-            );
-        }
-        // @codeCoverageIgnoreEnd
+        $resource->delete();
+        return response()->json(['message' => 'Resource deleted successfully'],200);
     }
 }

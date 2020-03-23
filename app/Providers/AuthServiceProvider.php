@@ -17,17 +17,17 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Demency\Relationships\Models\Device' => 'Demency\Relationships\Policies\DevicePolicy',
-        'Demency\Relationships\Models\Geofence' => 'Demency\Relationships\Policies\GeofencePolicy',
-        'Demency\Relationships\Models\Pet' => 'Demency\Relationships\Policies\PetPolicy',
-        'Demency\Relationships\Models\Group' => 'Demency\Relationships\Policies\GroupPolicy',
-        'Demency\Relationships\Models\Photo' => 'Demency\Relationships\Policies\PhotoPolicy',
-        'Demency\Relationships\Models\Comment' => 'Demency\Relationships\Policies\CommentPolicy',
-        'Demency\Relationships\Models\Action' => 'Demency\Relationships\Policies\ActionPolicy',
-        'Demency\Relationships\Models\Alert' => 'Demency\Relationships\Policies\AlertPolicy',
-        'Demency\Relationships\Models\Location' => 'Demency\Relationships\Policies\LocationPolicy',
-        'Demency\Relationships\Models\Place' => 'Demency\Relationships\Policies\PlacePolicy',
-        'Demency\Relationships\Models\User' => 'Demency\Relationships\Policies\UserPolicy',
+        'Alimentalos\Relationships\Models\Device' => 'Alimentalos\Relationships\Policies\DevicePolicy',
+        'Alimentalos\Relationships\Models\Geofence' => 'Alimentalos\Relationships\Policies\GeofencePolicy',
+        'Alimentalos\Relationships\Models\Pet' => 'Alimentalos\Relationships\Policies\PetPolicy',
+        'Alimentalos\Relationships\Models\Group' => 'Alimentalos\Relationships\Policies\GroupPolicy',
+        'Alimentalos\Relationships\Models\Photo' => 'Alimentalos\Relationships\Policies\PhotoPolicy',
+        'Alimentalos\Relationships\Models\Comment' => 'Alimentalos\Relationships\Policies\CommentPolicy',
+        'Alimentalos\Relationships\Models\Action' => 'Alimentalos\Relationships\Policies\ActionPolicy',
+        'Alimentalos\Relationships\Models\Alert' => 'Alimentalos\Relationships\Policies\AlertPolicy',
+        'Alimentalos\Relationships\Models\Location' => 'Alimentalos\Relationships\Policies\LocationPolicy',
+        'Alimentalos\Relationships\Models\Place' => 'Alimentalos\Relationships\Policies\PlacePolicy',
+        'Alimentalos\Relationships\Models\User' => 'Alimentalos\Relationships\Policies\UserPolicy',
     ];
 
     /**

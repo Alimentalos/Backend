@@ -10,7 +10,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.5.4.4"
+        "version": "v.6.0"
     },
     "servers": [
         {
@@ -257,6 +257,7 @@
                                     "pets",
                                     "alerts",
                                     "photos",
+                                    "geofences",
                                     "places"
                                 ]
                             }
@@ -896,7 +897,7 @@
                 "tags": [
                     "Resources"
                 ],
-                "summary": "Attach group of resource.",
+                "summary": "Attach group to resource.",
                 "description": "Returns message JSON Object response.",
                 "operationId": "attachResourceGroup",
                 "parameters": [
@@ -953,7 +954,7 @@
                 "tags": [
                     "Resources"
                 ],
-                "summary": "Detach group of user.",
+                "summary": "Detach group of resource.",
                 "description": "Returns message JSON Object response.",
                 "operationId": "detachResourceGroup",
                 "parameters": [
@@ -1228,6 +1229,122 @@
                 }
             }
         },
+        "/{resource}/{uuid}/photos/{photo}/attach": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Attach photo to resource.",
+                "description": "Returns message JSON Object response.",
+                "operationId": "attachResourcePhoto",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique identifier of resource",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource type that need to be considered",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "pets",
+                                "enum": [
+                                    "pets",
+                                    "users",
+                                    "geofences",
+                                    "groups",
+                                    "places"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "photo",
+                        "in": "path",
+                        "description": "Unique identifier of photo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource attached to photo successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/{resource}/{uuid}/photos/{photo}/detach": {
+            "post": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Detach photo of resource.",
+                "description": "Returns message JSON Object response.",
+                "operationId": "detachResourcePhoto",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Unique identifier of resource",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource type that need to be considered",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "pets",
+                                "enum": [
+                                    "pets",
+                                    "users",
+                                    "geofences",
+                                    "groups",
+                                    "places"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "photo",
+                        "in": "path",
+                        "description": "Unique identifier of photo",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resource detached to photo successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
         "/{resource}/{uuid}/photos": {
             "get": {
                 "tags": [
@@ -1255,12 +1372,13 @@
                             "type": "string",
                             "items": {
                                 "type": "string",
-                                "default": "users",
+                                "default": "pets",
                                 "enum": [
                                     "pets",
                                     "users",
                                     "geofences",
-                                    "groups"
+                                    "groups",
+                                    "places"
                                 ]
                             }
                         }
@@ -1301,12 +1419,13 @@
                             "type": "string",
                             "items": {
                                 "type": "string",
-                                "default": "users",
+                                "default": "pets",
                                 "enum": [
                                     "pets",
                                     "users",
                                     "geofences",
-                                    "groups"
+                                    "groups",
+                                    "places"
                                 ]
                             }
                         }
@@ -1456,6 +1575,58 @@
                 "responses": {
                     "200": {
                         "description": "Resource reaction created successfully"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/{resource}/search": {
+            "get": {
+                "tags": [
+                    "Resources"
+                ],
+                "summary": "Search resources.",
+                "description": "Returns the searched resources paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "searchResources",
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "in": "path",
+                        "description": "Resource type that need to be considered",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "devices",
+                                "enum": [
+                                    "users",
+                                    "groups",
+                                    "alerts",
+                                    "devices",
+                                    "geofences",
+                                    "pets",
+                                    "actions",
+                                    "photos"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "The query concept",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resources retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
@@ -1794,7 +1965,7 @@
             "description": "Geofences related specifications",
             "externalDocs": {
                 "description": "Read more",
-                "url": "https://www.alimentalos.cl/about/geofences"
+                "url": "https://www.alimentalos.cl/about/resources/geofences"
             }
         },
         {
@@ -1802,7 +1973,7 @@
             "description": "Locations related specifications",
             "externalDocs": {
                 "description": "Read more",
-                "url": "https://www.alimentalos.cl/about/locations"
+                "url": "https://www.alimentalos.cl/about/resources/locations"
             }
         },
         {
@@ -1818,7 +1989,7 @@
             "description": "Users related specifications.",
             "externalDocs": {
                 "description": "Read more",
-                "url": "https://www.alimentalos.cl/about/users"
+                "url": "https://www.alimentalos.cl/about/resources/users"
             }
         }
     ],

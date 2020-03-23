@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Near\Resource;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Near\Resource\IndexRequest;
+use Alimentalos\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller
@@ -33,7 +34,7 @@ class IndexController extends Controller
      *         type="string",
      *           @OA\Items(
      *               type="string",
-     *               enum={"users", "devices", "pets", "alerts", "photos", "places"},
+     *               enum={"users", "devices", "pets", "alerts", "photos", "geofences", "places"},
      *               default="pets"
      *           ),
      *         )
@@ -50,7 +51,7 @@ class IndexController extends Controller
      * @param $resource
      * @return JsonResponse
      */
-    public function __invoke(IndexRequest $request, $resource)
+    public function __invoke(IndexRequest $request, Resource $resource)
     {
         $resources = finder()->findNearResources($resource, input('coordinates'))->paginate(20);
         return response()->json($resources,200);
