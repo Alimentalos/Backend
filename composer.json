@@ -7,14 +7,28 @@
         "laravel"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./laravel-contracts"
+        },
+        {
+            "type": "path",
+            "url": "./laravel-relationships"
+        },
+        {
+            "type": "path",
+            "url": "./laravel-tools"
+        }
+    ],
     "require": {
         "php": "^7.3",
         "ext-json": "*",
         "cybercog/laravel-love": "^8.3",
         "darkaonline/l5-swagger": "^6.0",
-        "demency/laravel-contracts": "*",
-        "demency/laravel-relationships": "*",
-        "demency/laravel-tools": "*",
+        "alimentalos/laravel-contracts": "*",
+        "alimentalos/laravel-relationships": "*",
+        "alimentalos/laravel-tools": "*",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "graham-campbell/markdown": "^12.0",

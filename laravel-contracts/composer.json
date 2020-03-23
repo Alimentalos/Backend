@@ -1,0 +1,36 @@
+{
+    "name": "alimentalos/laravel-contracts",
+    "description": "Laravel collection of contracts.",
+    "keywords": [
+        "laravel",
+        "contracts",
+        "package"
+    ],
+    "authors": [
+        {
+            "name": "Ian Torres",
+            "email": "iantorres@outlook.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Demency\\Contracts\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Demency\\Contracts\\ContractsServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

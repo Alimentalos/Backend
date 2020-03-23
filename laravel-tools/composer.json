@@ -1,0 +1,38 @@
+{
+    "name": "alimentalos/laravel-tools",
+    "description": "Laravel package with tools.",
+    "keywords": [
+        "laravel",
+        "tools",
+        "package"
+    ],
+    "authors": [
+        {
+            "name": "Ian Torres",
+            "email": "iantorres@outlook.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3",
+        "alimentalos/laravel-relationships": "*",
+        "grimzy/laravel-mysql-spatial": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Demency\\Tools\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Demency\\Tools\\ToolsServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

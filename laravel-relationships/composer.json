@@ -1,0 +1,39 @@
+{
+    "name": "alimentalos/laravel-relationships",
+    "description": "Laravel package for common relationships.",
+    "keywords": [
+        "laravel",
+        "common",
+        "relationships",
+        "package"
+    ],
+    "authors": [
+        {
+            "name": "Ian Torres",
+            "email": "iantorres@outlook.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3",
+        "alimentalos/laravel-contracts": "*",
+        "grimzy/laravel-mysql-spatial": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Demency\\Relationships\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Demency\\Relationships\\RelationshipsServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
