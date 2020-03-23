@@ -10,7 +10,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class UserCanCreateGeofenceUsingPhotoTest extends TestCase
+class UserCanCreateGeofenceUsingPhotoAndStringShapeTest extends TestCase
 {
     use RefreshDatabase;
 
