@@ -38,18 +38,16 @@ trait LocationQuery
      * Scope query using range of dates.
      *
      * @param Builder $query
-     * @param $start_date
-     * @param $end_date
-     * @param $column
+     * @param $parameters
      * @param string $order
      * @return Builder
      */
-    public function queryRangeOfDates(Builder $query, $start_date, $end_date, $column, $order = 'desc')
+    public function queryRangeOfDates(Builder $query, $parameters, $order = 'desc')
     {
-        return $query->whereBetween($column, [
-            Carbon::parse($start_date),
-            Carbon::parse($end_date)
-        ])->orderBy($column, $order);
+        return $query->whereBetween($parameters['column'], [
+            Carbon::parse($parameters['start_date']),
+            Carbon::parse($parameters['end_date'])
+        ])->orderBy($parameters['column'], $order);
     }
 
     /**
