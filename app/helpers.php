@@ -43,7 +43,6 @@ if (! function_exists('actions')) {
         return new ActionsRepository();
     }
 }
-
 if (! function_exists('pets')) {
     /**
      * @return PetsRepository
@@ -53,7 +52,6 @@ if (! function_exists('pets')) {
         return new PetsRepository();
     }
 }
-
 if (! function_exists('places')) {
     /**
      * @return PlacesRepository
@@ -63,7 +61,6 @@ if (! function_exists('places')) {
         return new PlacesRepository();
     }
 }
-
 if (! function_exists('comments')) {
     /**
      * @return CommentsRepository
@@ -93,7 +90,6 @@ if (! function_exists('alerts')) {
         return new AlertsRepository();
     }
 }
-
 if (! function_exists('groups')) {
     /**
      * @return GroupsRepository
@@ -103,7 +99,6 @@ if (! function_exists('groups')) {
         return new GroupsRepository();
     }
 }
-
 if (! function_exists('resourceLocations')) {
     /**
      * @return ResourceLocationsRepository
@@ -113,7 +108,6 @@ if (! function_exists('resourceLocations')) {
         return new ResourceLocationsRepository();
     }
 }
-
 if (! function_exists('subscriptions')) {
     /**
      * @return Subscriber
@@ -123,7 +117,6 @@ if (! function_exists('subscriptions')) {
         return new Subscriber();
     }
 }
-
 if (! function_exists('resourcePhotos')) {
     /**
      * @return ResourcePhotosRepository
@@ -133,7 +126,6 @@ if (! function_exists('resourcePhotos')) {
         return new ResourcePhotosRepository();
     }
 }
-
 if (! function_exists('reactions')) {
     /**
      * @return ReactionsRepository
@@ -143,7 +135,6 @@ if (! function_exists('reactions')) {
         return new ReactionsRepository();
     }
 }
-
 if (! function_exists('geofences')) {
     /**
      * @return GeofencesRepository
@@ -153,7 +144,6 @@ if (! function_exists('geofences')) {
         return new GeofencesRepository();
     }
 }
-
 if (! function_exists('authenticated')) {
     /**
      * @param string $guard
@@ -164,7 +154,6 @@ if (! function_exists('authenticated')) {
         return auth($guard)->user();
     }
 }
-
 if (! function_exists('parameters')) {
     /**
      * @return Parameterizer
@@ -184,7 +173,6 @@ if (! function_exists('photos')) {
         return new PhotosRepository();
     }
 }
-
 if (! function_exists('locations')) {
     /**
      * @return LocationsRepository
@@ -194,7 +182,6 @@ if (! function_exists('locations')) {
         return new LocationsRepository();
     }
 }
-
 if (! function_exists('rhas')) {
     /**
      * Check if request has key.
@@ -207,7 +194,6 @@ if (! function_exists('rhas')) {
         return request()->has($key);
     }
 }
-
 if (! function_exists('einput')) {
     /**
      * Extract exploded input.
@@ -221,7 +207,6 @@ if (! function_exists('einput')) {
         return explode($delimiter, request()->input($key));
     }
 }
-
 if (! function_exists('uuid')) {
     /**
      * Get uuid.
@@ -233,7 +218,6 @@ if (! function_exists('uuid')) {
         return Identifier::create();
     }
 }
-
 if (! function_exists('likes')) {
     /**
      * Get LikesRepository instance.
@@ -245,7 +229,6 @@ if (! function_exists('likes')) {
         return new Liker();
     }
 }
-
 if (! function_exists('cataloger')) {
     /**
      * Get Cataloger instance.
@@ -257,7 +240,6 @@ if (! function_exists('cataloger')) {
         return new Cataloger();
     }
 }
-
 if (! function_exists('input')) {
     /**
      * Extract request input.
@@ -270,7 +252,6 @@ if (! function_exists('input')) {
         return request()->input($key);
     }
 }
-
 if (! function_exists('uploaded')) {
     /**
      * Extract request file.
@@ -283,21 +264,18 @@ if (! function_exists('uploaded')) {
         return request()->file($key);
     }
 }
-
 if (! function_exists('fill')) {
     function fill($key, $value)
     {
         return Filler::make( $key, $value);
     }
 }
-
 if (! function_exists('only')) {
     function only($keys)
     {
         return request()->only(func_get_args());
     }
 }
-
 if (! function_exists('parser')) {
     /**
      * @return Parser
@@ -307,7 +285,6 @@ if (! function_exists('parser')) {
         return new Parser();
     }
 }
-
 if (! function_exists('devices')) {
     /**
      * @return DevicesRepository
@@ -317,7 +294,6 @@ if (! function_exists('devices')) {
         return new DevicesRepository();
     }
 }
-
 if (! function_exists('users')) {
     /**
      * @return UsersRepository
@@ -327,7 +303,6 @@ if (! function_exists('users')) {
         return new UsersRepository();
     }
 }
-
 if (! function_exists('geofencesAccesses')) {
     /**
      * @return GeofenceAccessesRepository
@@ -337,7 +312,6 @@ if (! function_exists('geofencesAccesses')) {
         return new GeofenceAccessesRepository();
     }
 }
-
 if (! function_exists('finder')) {
     /**
      * @return Finder
@@ -346,7 +320,6 @@ if (! function_exists('finder')) {
         return new Finder();
     }
 }
-
 if (! function_exists('admin')) {
     /**
      * @return AdminRepository
@@ -355,7 +328,6 @@ if (! function_exists('admin')) {
         return new AdminRepository();
     }
 }
-
 if (! function_exists('upload')) {
     /**
      * @return Uploader
@@ -364,7 +336,6 @@ if (! function_exists('upload')) {
         return new Uploader();
     }
 }
-
 if (! function_exists('resource')) {
     /**
      * @return Resource
@@ -374,7 +345,6 @@ if (! function_exists('resource')) {
         return (new ResourceRepository())->current();
     }
 }
-
 if (! function_exists('userGroups')) {
     /**
      * @return UserGroupsRepository
@@ -384,7 +354,6 @@ if (! function_exists('userGroups')) {
         return new UserGroupsRepository();
     }
 }
-
 if (! function_exists('reports')) {
     /**
      * @return Reporter
@@ -394,7 +363,6 @@ if (! function_exists('reports')) {
         return new Reporter();
     }
 }
-
 if (! function_exists('measurer')) {
     /**
      * @return Measurer
@@ -404,8 +372,6 @@ if (! function_exists('measurer')) {
         return new Measurer();
     }
 }
-
-
 if (! function_exists('resourceComments')) {
     /**
      * @return ResourceCommentsRepository
