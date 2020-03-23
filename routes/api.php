@@ -54,6 +54,8 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ] as $resource) {
         Route::get("/{$resource}", 'Api\Resource\IndexController')
             ->name("{$resource}.index");
+        Route::get("/{resource}/search", 'Api\Resource\SearchController')
+            ->name("{$resource}.search");
     }
 
     foreach(['pets', 'devices'] as $resource) {

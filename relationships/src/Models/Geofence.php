@@ -98,4 +98,15 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
 
         return $array;
     }
+
+    /**
+     * Get the value used to index the model.
+     *
+     * @return mixed
+     * @codeCoverageIgnore
+     */
+    public function getScoutKey()
+    {
+        return $this->uuid;
+    }
 }

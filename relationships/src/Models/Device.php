@@ -102,11 +102,22 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
     {
         $array = $this->toArray();
 
-        $array['location'] = [
+        $array['location'] = !is_null($array['location']) ? [
             'latitude' => $array['location']->getLat(),
             'longitude' => $array['location']->getLng(),
-        ];
+        ] : 'NO_LOCATION';
 
         return $array;
+    }
+
+    /**
+     * Get the value used to index the model.
+     *
+     * @return mixed
+     * @codeCoverageIgnore
+     */
+    public function getScoutKey()
+    {
+        return $this->uuid;
     }
 }

@@ -91,4 +91,15 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     {
         return 'uuid';
     }
+
+    /**
+     * Get the value used to index the model.
+     *
+     * @return mixed
+     * @codeCoverageIgnore
+     */
+    public function getScoutKey()
+    {
+        return $this->uuid;
+    }
 }
