@@ -96,6 +96,7 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
      * Get the indexable data array for the model.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function toSearchableArray()
     {

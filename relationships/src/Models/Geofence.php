@@ -88,6 +88,7 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
      * Get the indexable data array for the model.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function toSearchableArray()
     {

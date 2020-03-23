@@ -184,6 +184,7 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      * Get the indexable data array for the model.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function toSearchableArray()
     {

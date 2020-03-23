@@ -104,6 +104,7 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      * Get the indexable data array for the model.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function toSearchableArray()
     {
