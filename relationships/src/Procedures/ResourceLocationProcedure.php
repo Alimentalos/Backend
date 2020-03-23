@@ -20,9 +20,11 @@ trait ResourceLocationProcedure
         return $this->resolveLocations(
             $models,
             $parameters,
-            get_class($class),
-            $class::DEFAULT_LOCATION_DATE_COLUMN,
-            $class::DEFAULT_LOCATION_GROUP_BY_COLUMN
+            [
+                'type' => get_class($class),
+                'dateColumn' => $class::DEFAULT_LOCATION_DATE_COLUMN,
+                'groupedBy' => $class::DEFAULT_LOCATION_GROUP_BY_COLUMN
+            ]
         );
     }
 
@@ -31,12 +33,10 @@ trait ResourceLocationProcedure
      *
      * @param $models
      * @param $parameters
-     * @param $type
-     * @param $dateColumn
-     * @param $groupedBy
+     * @param $filters
      * @return Builder
      */
-    public function resolveLocations($models, $parameters, $type, $dateColumn, $groupedBy)
+    public function resolveLocations($models, $parameters, $filters)
     {
         return $this->groupByColumn(
             $this->orderByColumn(
@@ -44,17 +44,17 @@ trait ResourceLocationProcedure
                     $this->maxAccuracy(
                         $this->trackableQuery(
                             $models,
-                            $type
+                            $filters['type']
                         ),
                         $parameters['accuracy']
                     ),
                     $parameters['start_date'],
                     $parameters['end_date'],
-                    $dateColumn
+                    $filters['dateColumn']
                 ),
-                $dateColumn
+                $filters['dateColumn']
             ),
-            $groupedBy
+            $filters['groupedBy']
         );
     }
 }
