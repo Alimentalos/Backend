@@ -13,18 +13,13 @@ class UserObserver
      *
      * @param User $user
      * @return void
+     * @throws Exception
      */
     public function creating(User $user)
     {
-        try {
-            $user->api_token = bin2hex(random_bytes(16));
-            $user->uuid = uuid();
-            // @codeCoverageIgnoreStart
-        } catch (Exception $exception) {
-            abort(500);
-        }
+        $user->api_token = bin2hex(random_bytes(16));
+        $user->uuid = uuid();
     }
-    // @codeCoverageIgnoreEnd
 
     /**
      * Handle the user "created" event.

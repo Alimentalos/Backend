@@ -13,7 +13,6 @@ class ForgotPasswordController extends Controller
      * Create a new controller.
      *
      * @return void
-     * @codeCoverageIgnore
      */
     public function __construct()
     {

@@ -15,12 +15,6 @@ class PlaceObserver
      */
     public function creating(Place $place)
     {
-        try {
-            $place->uuid = uuid();
-            // @codeCoverageIgnoreStart
-        } catch (Exception $exception) {
-            abort(500);
-        }
+        $place->uuid = uuid();
     }
-    // @codeCoverageIgnoreEnd
 }

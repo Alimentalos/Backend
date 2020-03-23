@@ -54,17 +54,7 @@ class DestroyController extends Controller
      */
     public function __invoke(DestroyRequest $request, Resource $resource)
     {
-        try {
-            $resource->delete();
-
-            return response()->json(['message' => 'Resource deleted successfully'],200);
-            // @codeCoverageIgnoreStart
-        } catch (Exception $exception) {
-            return response()->json(
-                ['message' => 'Resource cannot be deleted.'],
-                500
-            );
-        }
-        // @codeCoverageIgnoreEnd
+        $resource->delete();
+        return response()->json(['message' => 'Resource deleted successfully'],200);
     }
 }

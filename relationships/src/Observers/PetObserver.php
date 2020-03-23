@@ -12,16 +12,11 @@ class PetObserver
      *
      * @param Pet $pet
      * @return void
+     * @throws Exception
      */
     public function creating(Pet $pet)
     {
-        try {
-            $pet->api_token = bin2hex(random_bytes(16));
-            $pet->uuid = uuid();
-            // @codeCoverageIgnoreStart
-        } catch (Exception $exception) {
-            abort(500);
-        }
-        // @codeCoverageIgnoreEnd
+        $pet->api_token = bin2hex(random_bytes(16));
+        $pet->uuid = uuid();
     }
 }

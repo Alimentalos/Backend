@@ -10,7 +10,6 @@ class DocumentationRepository
      * @param $name
      * @param $page
      * @return mixed|string
-     * @codeCoverageIgnore
      */
     public static function next($name, $page)
     {
@@ -29,7 +28,6 @@ class DocumentationRepository
      * @param $name
      * @param $page
      * @return mixed|string
-     * @codeCoverageIgnore
      */
     public static function recommend($name, $page)
     {
@@ -48,7 +46,6 @@ class DocumentationRepository
      * @param $name
      * @param $page
      * @return mixed|string
-     * @codeCoverageIgnore
      */
     public static function before($name, $page)
     {

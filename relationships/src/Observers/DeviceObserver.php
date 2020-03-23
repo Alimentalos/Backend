@@ -12,16 +12,11 @@ class DeviceObserver
      *
      * @param Device $device
      * @return void
+     * @throws Exception
      */
     public function creating(Device $device)
     {
-        try {
-            $device->api_token = bin2hex(random_bytes(16));
-            // @codeCoverageIgnoreStart
-        } catch (Exception $exception) {
-            abort(500);
-        }
-        // @codeCoverageIgnoreEnd
+        $device->api_token = bin2hex(random_bytes(16));
         $device->uuid = uuid();
     }
 }
