@@ -11,6 +11,12 @@ use Exception;
 
 class MoneyRepository
 {
+    /**
+     * Get monetizer balance.
+     *
+     * @param Monetizer $monetizer
+     * @return mixed
+     */
     public static function getMonetizerBalance(Monetizer $monetizer)
     {
         return $monetizer->coins()->where('used', false)->sum('amount');
@@ -27,6 +33,42 @@ class MoneyRepository
      */
     public static function inbound(Monetizer $receiver, $amount, Monetizer $emitter = null)
     {
+        $accepted = static::checkAcceptance($amount, $emitter);
+        if ($accepted) {
+            return static::doOperation($receiver, $amount, $emitter);
+        } else {
+            throw new Exception("Emitter doesn't have founds");
+        }
+    }
+
+    /**
+     * Do inbound operation
+     *
+     * @param Monetizer $receiver
+     * @param $amount
+     * @param Monetizer|null $emitter
+     * @return array
+     */
+    public static function doOperation(Monetizer $receiver, $amount, Monetizer $emitter = null)
+    {
+        $operation = static::createOperation($receiver, $amount, $emitter);
+
+        $coin = static::createCoin($receiver, $amount, $operation, false);
+        return [
+            'coin' => $coin,
+            'operation' => $operation,
+        ];
+    }
+
+    /**
+     * Check acceptance of operation.
+     *
+     * @param $amount
+     * @param Monetizer|null $emitter
+     * @return bool
+     */
+    public static function checkAcceptance($amount, Monetizer $emitter = null)
+    {
         $accepted = false;
 
         if (!is_null($emitter)) {
@@ -39,19 +81,15 @@ class MoneyRepository
             $accepted = true;
         }
 
-        if ($accepted) {
-            $operation = static::createOperation($receiver, $amount, $emitter);
-
-            $coin = static::createCoin($receiver, $amount, $operation, false);
-            return [
-                'coin' => $coin,
-                'operation' => $operation,
-            ];
-        } else {
-            throw new Exception("Emitter doesn't have founds");
-        }
+        return $accepted;
     }
 
+    /**
+     * Merge founds of monetizer.
+     *
+     * @param Monetizer $monetizer
+     * @param $amount
+     */
     public static function mergeFounds(Monetizer $monetizer, $amount)
     {
         // Required amount
@@ -72,6 +110,15 @@ class MoneyRepository
         }
     }
 
+    /**
+     * Create coin instance.
+     *
+     * @param $monetizer
+     * @param $amount
+     * @param $operation
+     * @param $used
+     * @return Coin
+     */
     private static function createCoin($monetizer, $amount, $operation, $used)
     {
         $coin = new Coin();
@@ -87,6 +134,14 @@ class MoneyRepository
         return $coin;
     }
 
+    /**
+     * Create operation instance.
+     *
+     * @param $receiver
+     * @param $amount
+     * @param null $emitter
+     * @return Operation
+     */
     private static function createOperation($receiver, $amount, $emitter = null)
     {
         $operation = new Operation();
