@@ -53,7 +53,7 @@
  *     description="Geofences related specifications",
  *     @OA\ExternalDocumentation(
  *         description="Read more",
- *         url="https://www.alimentalos.cl/about/geofences"
+ *         url="https://www.alimentalos.cl/about/resources/geofences"
  *     )
  * )
  * @OA\Tag(
@@ -61,7 +61,7 @@
  *     description="Locations related specifications",
  *     @OA\ExternalDocumentation(
  *         description="Read more",
- *         url="https://www.alimentalos.cl/about/locations"
+ *         url="https://www.alimentalos.cl/about/resources/locations"
  *     )
  * )
  * @OA\Tag(
@@ -77,7 +77,7 @@
  *     description="Users related specifications.",
  *     @OA\ExternalDocumentation(
  *         description="Read more",
- *         url="https://www.alimentalos.cl/about/users"
+ *         url="https://www.alimentalos.cl/about/resources/users"
  *     )
  * )
  * @OA\ExternalDocumentation(

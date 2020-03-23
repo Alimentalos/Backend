@@ -257,6 +257,7 @@
                                     "pets",
                                     "alerts",
                                     "photos",
+                                    "geofences",
                                     "places"
                                 ]
                             }
@@ -1964,7 +1965,7 @@
             "description": "Geofences related specifications",
             "externalDocs": {
                 "description": "Read more",
-                "url": "https://www.alimentalos.cl/about/geofences"
+                "url": "https://www.alimentalos.cl/about/resources/geofences"
             }
         },
         {
@@ -1972,7 +1973,7 @@
             "description": "Locations related specifications",
             "externalDocs": {
                 "description": "Read more",
-                "url": "https://www.alimentalos.cl/about/locations"
+                "url": "https://www.alimentalos.cl/about/resources/locations"
             }
         },
         {
@@ -1988,7 +1989,7 @@
             "description": "Users related specifications.",
             "externalDocs": {
                 "description": "Read more",
-                "url": "https://www.alimentalos.cl/about/users"
+                "url": "https://www.alimentalos.cl/about/resources/users"
             }
         }
     ],
