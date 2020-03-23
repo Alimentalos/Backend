@@ -1,9 +1,10 @@
 {
-    "name": "alimentalos/laravel-contracts",
-    "description": "Laravel collection of contracts.",
+    "name": "alimentalos/relationships",
+    "description": "Laravel package for common relationships.",
     "keywords": [
         "laravel",
-        "contracts",
+        "common",
+        "relationships",
         "package"
     ],
     "authors": [
@@ -14,17 +15,19 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3"
+        "php": "^7.3",
+        "alimentalos/contracts": "*",
+        "grimzy/laravel-mysql-spatial": "^2.2"
     },
     "autoload": {
         "psr-4": {
-            "Demency\\Contracts\\": "src/"
+            "Demency\\Relationships\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Demency\\Contracts\\ContractsServiceProvider"
+                "Demency\\Relationships\\RelationshipsServiceProvider"
             ]
         }
     },

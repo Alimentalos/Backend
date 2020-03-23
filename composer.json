@@ -10,15 +10,15 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./laravel-contracts"
+            "url": "./contracts"
         },
         {
             "type": "path",
-            "url": "./laravel-relationships"
+            "url": "./relationships"
         },
         {
             "type": "path",
-            "url": "./laravel-tools"
+            "url": "./tools"
         }
     ],
     "require": {
@@ -26,9 +26,9 @@
         "ext-json": "*",
         "cybercog/laravel-love": "^8.3",
         "darkaonline/l5-swagger": "^6.0",
-        "alimentalos/laravel-contracts": "*",
-        "alimentalos/laravel-relationships": "*",
-        "alimentalos/laravel-tools": "*",
+        "alimentalos/contracts": "*",
+        "alimentalos/relationships": "*",
+        "alimentalos/tools": "*",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "graham-campbell/markdown": "^12.0",

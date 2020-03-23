@@ -1,5 +1,5 @@
 {
-    "name": "alimentalos/laravel-tools",
+    "name": "alimentalos/tools",
     "description": "Laravel package with tools.",
     "keywords": [
         "laravel",
@@ -15,7 +15,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "alimentalos/laravel-relationships": "*",
+        "alimentalos/relationships": "*",
         "grimzy/laravel-mysql-spatial": "^2.2"
     },
     "autoload": {
