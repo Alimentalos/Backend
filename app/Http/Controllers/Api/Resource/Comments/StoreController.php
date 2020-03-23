@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Resource\Comments;
 
-use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Comments\StoreRequest;
+use Demency\Contracts\Resource;
+use Demency\Relationships\Models\Comment;
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller

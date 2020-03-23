@@ -116,4 +116,38 @@ class GroupPolicy
                 in_array($group->uuid, $geofence->groups->pluck('uuid')->toArray())
             );
     }
+
+    /**
+     * Determine whether the user can attach photo to the geofence.
+     *
+     * @param User $user
+     * @param Group $group
+     * @param Photo $photo
+     * @return mixed
+     */
+    public function attachPhoto(User $user, Group $group, Photo $photo)
+    {
+        return $user->is_admin ||
+            users()->isProperty($photo, $user) &&
+            $user->can('view', $group) &&
+            $user->can('view', $photo) &&
+            !in_array($group->uuid, $photo->groups->pluck('uuid')->toArray());
+    }
+
+    /**
+     * Determine whether the user can detach photo to the geofence.
+     *
+     * @param User $user
+     * @param Group $group
+     * @param Photo $photo
+     * @return mixed
+     */
+    public function detachPhoto(User $user, Group $group, Photo $photo)
+    {
+        return $user->is_admin ||
+            users()->isProperty($photo, $user) &&
+            $user->can('view', $group) &&
+            $user->can('view', $photo) &&
+            in_array($group->uuid, $photo->groups->pluck('uuid')->toArray());
+    }
 }

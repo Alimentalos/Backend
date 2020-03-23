@@ -71,6 +71,40 @@ class PlacePolicy
     }
 
     /**
+     * Determine whether the user can attach photo to the user.
+     *
+     * @param User $user
+     * @param Place $place
+     * @param Photo $photo
+     * @return mixed
+     */
+    public function attachPhoto(User $user, Place $place, Photo $photo)
+    {
+        return $user->is_admin ||
+            users()->isProperty($photo, $user) &&
+            $user->can('view', $place) &&
+            $user->can('view', $photo) &&
+            !in_array($place->uuid, $photo->places->pluck('uuid')->toArray());
+    }
+
+    /**
+     * Determine whether the user can detach photo to the user.
+     *
+     * @param User $user
+     * @param Place $place
+     * @param Photo $photo
+     * @return mixed
+     */
+    public function detachPhoto(User $user, Place $place, Photo $photo)
+    {
+        return $user->is_admin ||
+            users()->isProperty($photo, $user) &&
+            $user->can('view', $place) &&
+            $user->can('view', $photo) &&
+            in_array($place->uuid, $photo->places->pluck('uuid')->toArray());
+    }
+
+    /**
      * Determine whether the user can delete the pet.
      *
      * @param User $user

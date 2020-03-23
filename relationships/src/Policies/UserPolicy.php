@@ -2,7 +2,6 @@
 
 namespace Demency\Relationships\Policies;
 
-use Demency\Relationships\Models\Device;
 use Demency\Relationships\Models\Geofence;
 use Demency\Relationships\Models\Group;
 use Demency\Relationships\Models\Photo;
@@ -175,7 +174,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can create photo in the pet.
+     * Determine whether the user can create photo in the user.
      *
      * @param User $user
      * @param User $model
@@ -185,6 +184,40 @@ class UserPolicy
     {
         return $user->can('create', Photo::class) &&
             ($user->is_admin || $user->uuid === $model->uuid);
+    }
+
+    /**
+     * Determine whether the user can attach photo to the user.
+     *
+     * @param User $user
+     * @param User $model
+     * @param Photo $photo
+     * @return mixed
+     */
+    public function attachPhoto(User $user, User $model, Photo $photo)
+    {
+        return $user->is_admin ||
+            users()->isProperty($photo, $user) &&
+            $user->can('view', $model) &&
+            $user->can('view', $photo) &&
+            !in_array($model->uuid, $photo->users->pluck('uuid')->toArray());
+    }
+
+    /**
+     * Determine whether the user can detach photo to the user.
+     *
+     * @param User $user
+     * @param User $model
+     * @param Photo $photo
+     * @return mixed
+     */
+    public function detachPhoto(User $user, User $model, Photo $photo)
+    {
+        return $user->is_admin ||
+            users()->isProperty($photo, $user) &&
+            $user->can('view', $model) &&
+            $user->can('view', $photo) &&
+            in_array($model->uuid, $photo->users->pluck('uuid')->toArray());
     }
 
     /**

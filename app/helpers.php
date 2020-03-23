@@ -3,7 +3,6 @@
 use App\Repositories\AdminRepository;
 use Demency\Contracts\Resource;
 use Demency\Relationships\{Models\User,
-    Repositories\ReactionsRepository,
     Repositories\ActionsRepository,
     Repositories\AlertsRepository,
     Repositories\CommentsRepository,
@@ -15,13 +14,24 @@ use Demency\Relationships\{Models\User,
     Repositories\PetsRepository,
     Repositories\PhotosRepository,
     Repositories\PlacesRepository,
+    Repositories\ReactionsRepository,
     Repositories\ResourceCommentsRepository,
     Repositories\ResourceLocationsRepository,
     Repositories\ResourcePhotosRepository,
     Repositories\ResourceRepository,
     Repositories\UserGroupsRepository,
     Repositories\UsersRepository};
-use Demency\Tools\{Cataloger,Filler,Finder,Identifier,Liker,Measurer,Parameterizer,Parser,Reporter,Subscriber,Uploader};
+use Demency\Tools\{Cataloger,
+    Filler,
+    Finder,
+    Identifier,
+    Liker,
+    Measurer,
+    Parameterizer,
+    Parser,
+    Reporter,
+    Subscriber,
+    Uploader};
 use Illuminate\Contracts\Auth\Authenticatable;
 
 if (! function_exists('actions')) {

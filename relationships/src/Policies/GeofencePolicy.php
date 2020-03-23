@@ -108,6 +108,40 @@ class GeofencePolicy
     }
 
     /**
+     * Determine whether the user can attach photo to the geofence.
+     *
+     * @param User $user
+     * @param Geofence $geofence
+     * @param Photo $photo
+     * @return mixed
+     */
+    public function attachPhoto(User $user, Geofence $geofence, Photo $photo)
+    {
+        return $user->is_admin ||
+            users()->isProperty($photo, $user) &&
+            $user->can('view', $geofence) &&
+            $user->can('view', $photo) &&
+            !in_array($geofence->uuid, $photo->geofences->pluck('uuid')->toArray());
+    }
+
+    /**
+     * Determine whether the user can detach photo to the geofence.
+     *
+     * @param User $user
+     * @param Geofence $geofence
+     * @param Photo $photo
+     * @return mixed
+     */
+    public function detachPhoto(User $user, Geofence $geofence, Photo $photo)
+    {
+        return $user->is_admin ||
+            users()->isProperty($photo, $user) &&
+            $user->can('view', $geofence) &&
+            $user->can('view', $photo) &&
+            in_array($geofence->uuid, $photo->geofences->pluck('uuid')->toArray());
+    }
+
+    /**
      * Determine whether the user can delete the geofence.
      *
      * @param User $user

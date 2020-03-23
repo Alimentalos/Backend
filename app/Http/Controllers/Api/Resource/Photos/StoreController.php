@@ -35,8 +35,8 @@ class StoreController extends Controller
      *         type="string",
      *           @OA\Items(
      *               type="string",
-     *               enum={"pets", "users", "geofences", "groups"},
-     *               default="users"
+     *               enum={"pets", "users", "geofences", "groups", "places"},
+     *               default="pets"
      *           ),
      *         )
      *     ),

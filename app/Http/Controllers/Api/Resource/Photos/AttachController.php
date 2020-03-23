@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Api\Resource\Groups;
+namespace App\Http\Controllers\Api\Resource\Photos;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Groups\DetachRequest;
+use App\Http\Requests\Api\Resource\Photos\AttachRequest;
 use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\Photo;
 use Illuminate\Http\JsonResponse;
 
-class DetachController extends Controller
+class AttachController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/{resource}/{uuid}/groups/{group}/detach",
-     *      operationId="detachResourceGroup",
+     *      path="/{resource}/{uuid}/groups/{group}/attach",
+     *      operationId="attachResourcePhoto",
      *      tags={"Resources"},
-     *      summary="Detach group of resource.",
+     *      summary="Attach photo of resource.",
      *      description="Returns message JSON Object response.",
      *      @OA\Parameter(
      *          name="uuid",
@@ -35,8 +35,8 @@ class DetachController extends Controller
      *         type="string",
      *           @OA\Items(
      *               type="string",
-     *               enum={"geofences", "pets", "devices", "users"},
-     *               default="devices"
+     *               enum={"pets", "users", "geofences", "groups", "places"},
+     *               default="pets"
      *           ),
      *         )
      *     ),
@@ -51,20 +51,20 @@ class DetachController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Resource detached to group successfully"
+     *          description="Resource attached to photo successfully"
      *       ),
      *      @OA\Response(response=400, description="Bad request")
      * )
-     * Detach group to resource.
+     * Attach group to resource.
      *
-     * @param DetachRequest $request
-     * @param $resource
-     * @param Group $group
+     * @param AttachRequest $request
+     * @param Resource $resource
+     * @param Photo $photo
      * @return JsonResponse
      */
-    public function __invoke(DetachRequest $request, Resource $resource, Group $group)
+    public function __invoke(AttachRequest $request, Resource $resource, Photo $photo)
     {
-        $resource->groups()->detach($group->uuid);
-        return response()->json(['message' => 'Resource detached to group successfully'], 200);
+        $resource->photos()->attach($photo->uuid);
+        return response()->json(['message' => 'Resource attached to photo successfully'], 200);
     }
 }

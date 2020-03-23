@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Resource;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\DestroyRequest;
 use Demency\Contracts\Resource;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 class DestroyController extends Controller

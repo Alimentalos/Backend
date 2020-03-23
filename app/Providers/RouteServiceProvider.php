@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-use Demency\Relationships\Models\Geofence;
-use Demency\Relationships\Models\User;
 use Demency\Relationships\Models\Group;
+use Demency\Relationships\Models\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
