@@ -11,6 +11,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class GeofencePolicy
 {
     use HandlesAuthorization;
+    use PhotoablesPolicy;
 
     /**
      * Determine whether the user can view any alerts.
@@ -105,40 +106,6 @@ class GeofencePolicy
                 groups()->hasAdministrator($group, $user) &&
                 resources()->hasGroup($geofence, $group)
             );
-    }
-
-    /**
-     * Determine whether the user can attach photo to the geofence.
-     *
-     * @param User $user
-     * @param Geofence $geofence
-     * @param Photo $photo
-     * @return mixed
-     */
-    public function attachPhoto(User $user, Geofence $geofence, Photo $photo)
-    {
-        return $user->is_admin ||
-            users()->isProperty($photo, $user) &&
-            $user->can('view', $geofence) &&
-            $user->can('view', $photo) &&
-            !in_array($geofence->uuid, $photo->geofences->pluck('uuid')->toArray());
-    }
-
-    /**
-     * Determine whether the user can detach photo to the geofence.
-     *
-     * @param User $user
-     * @param Geofence $geofence
-     * @param Photo $photo
-     * @return mixed
-     */
-    public function detachPhoto(User $user, Geofence $geofence, Photo $photo)
-    {
-        return $user->is_admin ||
-            users()->isProperty($photo, $user) &&
-            $user->can('view', $geofence) &&
-            $user->can('view', $photo) &&
-            in_array($geofence->uuid, $photo->geofences->pluck('uuid')->toArray());
     }
 
     /**

@@ -12,6 +12,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class PetPolicy
 {
     use HandlesAuthorization;
+    use PhotoablesPolicy;
 
     /**
      * Determine whether the user can view any alerts.
@@ -152,39 +153,5 @@ class PetPolicy
                 users()->isProperty($pet, $user) &&
                 in_array($pet->uuid, $geofence->pets->pluck('uuid')->toArray())
             );
-    }
-
-    /**
-     * Determine whether the user can attach photo to the pet.
-     *
-     * @param User $user
-     * @param Pet $pet
-     * @param Photo $photo
-     * @return mixed
-     */
-    public function attachPhoto(User $user, Pet $pet, Photo $photo)
-    {
-        return $user->is_admin ||
-            users()->isProperty($photo, $user) &&
-            $user->can('view', $pet) &&
-            $user->can('view', $photo) &&
-            !in_array($pet->uuid, $photo->pets->pluck('uuid')->toArray());
-    }
-
-    /**
-     * Determine whether the user can detach photo to the pet.
-     *
-     * @param User $user
-     * @param Pet $pet
-     * @param Photo $photo
-     * @return mixed
-     */
-    public function detachPhoto(User $user, Pet $pet, Photo $photo)
-    {
-        return $user->is_admin ||
-            users()->isProperty($photo, $user) &&
-            $user->can('view', $pet) &&
-            $user->can('view', $photo) &&
-            in_array($pet->uuid, $photo->pets->pluck('uuid')->toArray());
     }
 }

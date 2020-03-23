@@ -10,6 +10,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class PlacePolicy
 {
     use HandlesAuthorization;
+    use PhotoablesPolicy;
 
     /**
      * Determine whether the user can view any alerts.
@@ -68,40 +69,6 @@ class PlacePolicy
     {
         return $user->can('create', Photo::class) &&
             ($user->is_admin || $place->is_public || $place->user_uuid === $user->uuid);
-    }
-
-    /**
-     * Determine whether the user can attach photo to the user.
-     *
-     * @param User $user
-     * @param Place $place
-     * @param Photo $photo
-     * @return mixed
-     */
-    public function attachPhoto(User $user, Place $place, Photo $photo)
-    {
-        return $user->is_admin ||
-            users()->isProperty($photo, $user) &&
-            $user->can('view', $place) &&
-            $user->can('view', $photo) &&
-            !in_array($place->uuid, $photo->places->pluck('uuid')->toArray());
-    }
-
-    /**
-     * Determine whether the user can detach photo to the user.
-     *
-     * @param User $user
-     * @param Place $place
-     * @param Photo $photo
-     * @return mixed
-     */
-    public function detachPhoto(User $user, Place $place, Photo $photo)
-    {
-        return $user->is_admin ||
-            users()->isProperty($photo, $user) &&
-            $user->can('view', $place) &&
-            $user->can('view', $photo) &&
-            in_array($place->uuid, $photo->places->pluck('uuid')->toArray());
     }
 
     /**
