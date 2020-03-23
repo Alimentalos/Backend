@@ -257,7 +257,7 @@ if (! function_exists('input')) {
      */
     function input($key)
     {
-        return request()->input($key);
+        return request()->input($key) ?? '';
     }
 }
 
