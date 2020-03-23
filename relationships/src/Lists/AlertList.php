@@ -18,7 +18,7 @@ trait AlertList
         return Alert::whereIn('status',rhas('whereInStatus') ?
                 einput(',','whereInStatus') : cataloger()->types()
             )->latest('created_at')
-            ->where('name', 'title', "%" . input('q') . "%")
+            ->where('title', 'title', "%" . input('q') . "%")
             ->where('body', 'like', "%" . input('d') . "%")
             ->paginate(25);
     }
