@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Relationships\Resources;
+namespace Alimentalos\Relationships\Resources;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

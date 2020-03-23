@@ -4,11 +4,11 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Comment;
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Models\Photo;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\Photo;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +31,7 @@ class UserCanAttachPhotoToGroupTest extends TestCase
         $response = $this->actingAs($user, 'api')->json('POST', '/api/groups/' . $group->uuid . '/photos/' . $photo->uuid . '/attach');
         $response->assertOk();
         $this->assertDatabaseHas('photoables', [
-            'photoable_type' => 'Demency\\Relationships\\Models\\Group',
+            'photoable_type' => 'Alimentalos\\Relationships\\Models\\Group',
             'photoable_id' => $group->uuid,
             'photo_uuid' => $photo->uuid,
         ]);

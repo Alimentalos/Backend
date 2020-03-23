@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Lists\GeofenceAccessesList;
+use Alimentalos\Relationships\Lists\GeofenceAccessesList;
 
 class GeofenceAccessesRepository
 {

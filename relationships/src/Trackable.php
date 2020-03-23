@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships;
+namespace Alimentalos\Relationships;
 
-use Demency\Relationships\Models\Access;
-use Demency\Relationships\Models\Location;
+use Alimentalos\Relationships\Models\Access;
+use Alimentalos\Relationships\Models\Location;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait Trackable

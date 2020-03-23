@@ -1,18 +1,18 @@
 <?php
 
-namespace Demency\Relationships\Models;
+namespace Alimentalos\Relationships\Models;
 
-use Demency\Contracts\CreateFromRequest;
-use Demency\Contracts\Monetizer;
-use Demency\Contracts\Resource;
-use Demency\Contracts\UpdateFromRequest;
-use Demency\Relationships\BelongsToUser;
-use Demency\Relationships\Geofenceable;
-use Demency\Relationships\Groupable;
-use Demency\Relationships\Photoable;
-use Demency\Relationships\Trackable;
-use Demency\Relationships\Relationships\UserRelationships;
-use Demency\Relationships\Resources\UserResource;
+use Alimentalos\Contracts\CreateFromRequest;
+use Alimentalos\Contracts\Monetizer;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Contracts\UpdateFromRequest;
+use Alimentalos\Relationships\BelongsToUser;
+use Alimentalos\Relationships\Geofenceable;
+use Alimentalos\Relationships\Groupable;
+use Alimentalos\Relationships\Photoable;
+use Alimentalos\Relationships\Trackable;
+use Alimentalos\Relationships\Relationships\UserRelationships;
+use Alimentalos\Relationships\Resources\UserResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Resources;
+namespace Alimentalos\Relationships\Resources;
 
-use Demency\Relationships\Models\Location;
+use Alimentalos\Relationships\Models\Location;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait LocationResource

@@ -2,7 +2,7 @@
 
 /** @var Factory $factory */
 
-use Demency\Relationships\Models\Alert;
+use Alimentalos\Relationships\Models\Alert;
 use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Factory;

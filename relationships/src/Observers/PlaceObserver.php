@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Observers;
+namespace Alimentalos\Relationships\Observers;
 
-use Demency\Relationships\Models\Place;
+use Alimentalos\Relationships\Models\Place;
 use Exception;
 
 class PlaceObserver

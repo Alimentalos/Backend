@@ -1,10 +1,10 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Models\Device;
-use Demency\Relationships\Lists\DeviceList;
-use Demency\Relationships\Procedures\DeviceProcedure;
+use Alimentalos\Relationships\Models\Device;
+use Alimentalos\Relationships\Lists\DeviceList;
+use Alimentalos\Relationships\Procedures\DeviceProcedure;
 
 class DevicesRepository
 {

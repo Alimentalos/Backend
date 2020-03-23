@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Queries;
+namespace Alimentalos\Relationships\Queries;
 
-use Demency\Relationships\Models\Location;
+use Alimentalos\Relationships\Models\Location;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Illuminate\Support\Collection;

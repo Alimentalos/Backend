@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Demency\Tools;
+namespace Alimentalos\Tools;
 
 
-use Demency\Tools\Contracts\CanGenerateReports;
-use Demency\Tools\Procedures\ReportProcedure;
+use Alimentalos\Tools\Contracts\CanGenerateReports;
+use Alimentalos\Tools\Procedures\ReportProcedure;
 
 class Reporter implements CanGenerateReports
 {

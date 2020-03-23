@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
 
-use Demency\Relationships\Models\Coin;
-use Demency\Contracts\Monetizer;
-use Demency\Relationships\Models\Operation;
+use Alimentalos\Relationships\Models\Coin;
+use Alimentalos\Contracts\Monetizer;
+use Alimentalos\Relationships\Models\Operation;
 use Exception;
 
 class MoneyRepository

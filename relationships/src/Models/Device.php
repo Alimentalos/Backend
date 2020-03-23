@@ -1,15 +1,15 @@
 <?php
 
-namespace Demency\Relationships\Models;
+namespace Alimentalos\Relationships\Models;
 
-use Demency\Contracts\CreateFromRequest;
-use Demency\Contracts\Resource;
-use Demency\Contracts\UpdateFromRequest;
-use Demency\Relationships\BelongsToUser;
-use Demency\Relationships\Geofenceable;
-use Demency\Relationships\Groupable;
-use Demency\Relationships\Trackable;
-use Demency\Relationships\Resources\DeviceResource;
+use Alimentalos\Contracts\CreateFromRequest;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Contracts\UpdateFromRequest;
+use Alimentalos\Relationships\BelongsToUser;
+use Alimentalos\Relationships\Geofenceable;
+use Alimentalos\Relationships\Groupable;
+use Alimentalos\Relationships\Trackable;
+use Alimentalos\Relationships\Resources\DeviceResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;

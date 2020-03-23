@@ -1,10 +1,10 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Attributes\PetAttribute;
-use Demency\Relationships\Procedures\PetProcedure;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Attributes\PetAttribute;
+use Alimentalos\Relationships\Procedures\PetProcedure;
 
 class PetsRepository
 {

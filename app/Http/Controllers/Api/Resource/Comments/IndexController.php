@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\Resource\Comments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
-use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Comment;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Models\Comment;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller

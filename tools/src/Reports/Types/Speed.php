@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Tools\Reports\Types;
+namespace Alimentalos\Tools\Reports\Types;
 
 use App\Http\Resources\LocationCollection;
 

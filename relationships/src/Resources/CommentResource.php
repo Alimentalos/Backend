@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Demency\Relationships\Resources;
+namespace Alimentalos\Relationships\Resources;
 
-use Demency\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\Comment;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait CommentResource

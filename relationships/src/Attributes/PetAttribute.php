@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Relationships\Attributes;
+namespace Alimentalos\Relationships\Attributes;
 
 trait PetAttribute
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Observers;
+namespace Alimentalos\Relationships\Observers;
 
-use Demency\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\Comment;
 
 class CommentObserver
 {

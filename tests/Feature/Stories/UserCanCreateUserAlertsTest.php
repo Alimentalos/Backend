@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Alert;
-use Demency\Relationships\Models\Device;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Alert;
+use Alimentalos\Relationships\Models\Device;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -23,7 +23,7 @@ class UserCanCreateUserAlertsTest extends TestCase
         $alert = factory(Alert::class)->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/alerts', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
-            'alert_type' => 'Demency\\Relationships\\Models\\User',
+            'alert_type' => 'Alimentalos\\Relationships\\Models\\User',
             'alert_id' => $user->uuid,
             'title' => $alert->title,
             'body' => $alert->body,

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Demency\Tools\Contracts;
+namespace Alimentalos\Tools\Contracts;
 
 
 interface CanGenerateReports

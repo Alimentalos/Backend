@@ -18,13 +18,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Demency\\Contracts\\": "src/"
+            "Alimentalos\\Contracts\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Demency\\Contracts\\ContractsServiceProvider"
+                "Alimentalos\\Contracts\\ContractsServiceProvider"
             ]
         }
     },

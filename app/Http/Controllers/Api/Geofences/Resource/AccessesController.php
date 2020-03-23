@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api\Geofences\Resource;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Geofences\Resource\AccessesRequest;
-use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Access;
-use Demency\Relationships\Models\Geofence;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Models\Access;
+use Alimentalos\Relationships\Models\Geofence;
 use Illuminate\Http\JsonResponse;
 
 class AccessesController extends Controller

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Models\Alert;
-use Demency\Relationships\Attributes\AlertAttribute;
-use Demency\Relationships\Lists\AlertList;
-use Demency\Relationships\Procedures\AlertProcedure;
+use Alimentalos\Relationships\Models\Alert;
+use Alimentalos\Relationships\Attributes\AlertAttribute;
+use Alimentalos\Relationships\Lists\AlertList;
+use Alimentalos\Relationships\Procedures\AlertProcedure;
 
 class AlertsRepository
 {

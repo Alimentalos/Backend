@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Observers;
+namespace Alimentalos\Relationships\Observers;
 
-use Demency\Relationships\Models\Device;
+use Alimentalos\Relationships\Models\Device;
 use Exception;
 
 class DeviceObserver

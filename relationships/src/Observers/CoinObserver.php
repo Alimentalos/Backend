@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Observers;
+namespace Alimentalos\Relationships\Observers;
 
-use Demency\Relationships\Models\Coin;
+use Alimentalos\Relationships\Models\Coin;
 
 class CoinObserver
 {

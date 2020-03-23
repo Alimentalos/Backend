@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships\Relationships;
+namespace Alimentalos\Relationships\Relationships;
 
-use Demency\Relationships\Models\Geofence;
-use Demency\Relationships\Models\Location;
+use Alimentalos\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\Location;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait AccessRelationships

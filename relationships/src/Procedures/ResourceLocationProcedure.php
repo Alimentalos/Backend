@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Demency\Relationships\Procedures;
+namespace Alimentalos\Relationships\Procedures;
 
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 

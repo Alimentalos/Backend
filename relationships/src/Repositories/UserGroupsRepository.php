@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Asserts\UserGroupAssert;
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Asserts\UserGroupAssert;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\User;
 
 class UserGroupsRepository
 {

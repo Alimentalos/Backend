@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Tools;
+namespace Alimentalos\Tools;
 
 use Illuminate\Support\ServiceProvider;
 

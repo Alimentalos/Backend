@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Demency\Relationships;
+namespace Alimentalos\Relationships;
 
-use Demency\Relationships\Models\Coin;
+use Alimentalos\Relationships\Models\Coin;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasCoin

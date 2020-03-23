@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Demency\Relationships\Resources;
+namespace Alimentalos\Relationships\Resources;
 
-use Demency\Relationships\Models\Geofence;
-use Demency\Relationships\Rules\Coordinate;
+use Alimentalos\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 

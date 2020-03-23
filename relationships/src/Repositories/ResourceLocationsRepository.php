@@ -1,12 +1,12 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Creations\ResourceLocation as CreatesLocation;
-use Demency\Relationships\Events\Location as LocationEvent;
+use Alimentalos\Relationships\Creations\ResourceLocation as CreatesLocation;
+use Alimentalos\Relationships\Events\Location as LocationEvent;
 use App\Http\Resources\Location as LocationResource;
-use Demency\Relationships\Procedures\ResourceLocationProcedure;
-use Demency\Relationships\Queries\LocationQuery;
+use Alimentalos\Relationships\Procedures\ResourceLocationProcedure;
+use Alimentalos\Relationships\Queries\LocationQuery;
 
 class ResourceLocationsRepository
 {

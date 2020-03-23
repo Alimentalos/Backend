@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships\Resources;
+namespace Alimentalos\Relationships\Resources;
 
-use Demency\Relationships\Models\Photo;
-use Demency\Relationships\Rules\Coordinate;
+use Alimentalos\Relationships\Models\Photo;
+use Alimentalos\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait PhotoResource

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Demency\Relationships\Lists;
+namespace Alimentalos\Relationships\Lists;
 
 
-use Demency\Relationships\Models\Action;
+use Alimentalos\Relationships\Models\Action;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait ActionList

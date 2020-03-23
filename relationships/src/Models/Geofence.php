@@ -1,16 +1,16 @@
 <?php
 
-namespace Demency\Relationships\Models;
+namespace Alimentalos\Relationships\Models;
 
-use Demency\Contracts\CreateFromRequest;
-use Demency\Contracts\Resource;
-use Demency\Contracts\UpdateFromRequest;
-use Demency\Relationships\BelongsToUser;
-use Demency\Relationships\Groupable;
-use Demency\Relationships\HasPhoto;
-use Demency\Relationships\Photoable;
-use Demency\Relationships\Relationships\GeofenceRelationships;
-use Demency\Relationships\Resources\GeofenceResource;
+use Alimentalos\Contracts\CreateFromRequest;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Contracts\UpdateFromRequest;
+use Alimentalos\Relationships\BelongsToUser;
+use Alimentalos\Relationships\Groupable;
+use Alimentalos\Relationships\HasPhoto;
+use Alimentalos\Relationships\Photoable;
+use Alimentalos\Relationships\Relationships\GeofenceRelationships;
+use Alimentalos\Relationships\Resources\GeofenceResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;

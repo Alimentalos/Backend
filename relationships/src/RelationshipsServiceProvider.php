@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Relationships;
+namespace Alimentalos\Relationships;
 
 use Illuminate\Support\ServiceProvider;
 

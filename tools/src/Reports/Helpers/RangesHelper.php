@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Demency\Tools\Reports\Helpers;
+namespace Alimentalos\Tools\Reports\Helpers;
 
 
 class RangesHelper

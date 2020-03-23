@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships;
+namespace Alimentalos\Relationships;
 
-use Demency\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\Geofence;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait Geofenceable

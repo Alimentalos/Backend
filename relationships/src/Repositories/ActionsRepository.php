@@ -1,10 +1,10 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Models\Action;
-use Demency\Relationships\Lists\ActionList;
-use Demency\Relationships\Procedures\ActionProcedure;
+use Alimentalos\Relationships\Models\Action;
+use Alimentalos\Relationships\Lists\ActionList;
+use Alimentalos\Relationships\Procedures\ActionProcedure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

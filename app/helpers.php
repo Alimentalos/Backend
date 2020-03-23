@@ -1,8 +1,8 @@
 <?php
 
 use App\Repositories\AdminRepository;
-use Demency\Contracts\Resource;
-use Demency\Relationships\{Models\User,
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\{Models\User,
     Repositories\ActionsRepository,
     Repositories\AlertsRepository,
     Repositories\CommentsRepository,
@@ -21,7 +21,7 @@ use Demency\Relationships\{Models\User,
     Repositories\ResourceRepository,
     Repositories\UserGroupsRepository,
     Repositories\UsersRepository};
-use Demency\Tools\{Cataloger,
+use Alimentalos\Tools\{Cataloger,
     Filler,
     Finder,
     Identifier,

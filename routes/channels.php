@@ -11,10 +11,10 @@
 |
 */
 
-use Demency\Relationships\Models\Device;
-use Demency\Relationships\Models\Geofence;
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Device;
+use Alimentalos\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\User;
 
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;

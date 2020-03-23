@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Procedures;
+namespace Alimentalos\Relationships\Procedures;
 
-use Demency\Relationships\Models\Photo;
+use Alimentalos\Relationships\Models\Photo;
 use Illuminate\Support\Facades\Storage;
 
 trait PhotoProcedure

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Demency\Relationships\Lists;
+namespace Alimentalos\Relationships\Lists;
 
 
-use Demency\Relationships\Models\Device;
+use Alimentalos\Relationships\Models\Device;
 use Illuminate\Database\Eloquent\Builder;
 
 trait DeviceList

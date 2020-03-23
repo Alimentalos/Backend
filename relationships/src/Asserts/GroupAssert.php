@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships\Asserts;
+namespace Alimentalos\Relationships\Asserts;
 
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\User;
 
 trait GroupAssert
 {

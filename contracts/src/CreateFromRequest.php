@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Contracts;
+namespace Alimentalos\Contracts;
 
 interface CreateFromRequest
 {

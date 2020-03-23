@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 

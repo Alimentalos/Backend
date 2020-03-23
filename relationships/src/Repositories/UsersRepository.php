@@ -1,11 +1,11 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Asserts\UserAssert;
-use Demency\Relationships\Lists\UserList;
-use Demency\Relationships\Models\User;
-use Demency\Relationships\Procedures\UserProcedure;
+use Alimentalos\Relationships\Asserts\UserAssert;
+use Alimentalos\Relationships\Lists\UserList;
+use Alimentalos\Relationships\Models\User;
+use Alimentalos\Relationships\Procedures\UserProcedure;
 
 class UsersRepository
 {

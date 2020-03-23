@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Models\Photo;
-use Demency\Relationships\Procedures\PhotoProcedure;
+use Alimentalos\Relationships\Models\Photo;
+use Alimentalos\Relationships\Procedures\PhotoProcedure;
 
 class PhotosRepository
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Relationships\Models;
+namespace Alimentalos\Relationships\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

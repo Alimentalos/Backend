@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships\Policies;
+namespace Alimentalos\Relationships\Policies;
 
-use Demency\Relationships\Models\Photo;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Photo;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PhotoPolicy

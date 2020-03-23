@@ -21,13 +21,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Demency\\Relationships\\": "src/"
+            "Alimentalos\\Relationships\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Demency\\Relationships\\RelationshipsServiceProvider"
+                "Alimentalos\\Relationships\\RelationshipsServiceProvider"
             ]
         }
     },

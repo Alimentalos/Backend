@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Demency\Tools;
+namespace Alimentalos\Tools;
 
 use Cog\Contracts\Love\Reacterable\Models\Reacterable;
 use Cog\Laravel\Love\Reactant\Models\Reactant;

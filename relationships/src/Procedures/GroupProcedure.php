@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Demency\Relationships\Procedures;
+namespace Alimentalos\Relationships\Procedures;
 
-use Demency\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\Group;
 
 trait GroupProcedure
 {

@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Demency\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\Geofence;
 use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 

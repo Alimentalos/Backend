@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships;
+namespace Alimentalos\Relationships;
 
-use Demency\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\Group;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait Groupable

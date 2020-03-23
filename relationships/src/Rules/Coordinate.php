@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Relationships\Rules;
+namespace Alimentalos\Relationships\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 

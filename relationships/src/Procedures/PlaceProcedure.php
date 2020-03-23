@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Demency\Relationships\Procedures;
+namespace Alimentalos\Relationships\Procedures;
 
 
-use Demency\Relationships\Models\Place;
+use Alimentalos\Relationships\Models\Place;
 
 trait PlaceProcedure
 {

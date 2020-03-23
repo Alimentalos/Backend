@@ -1,10 +1,10 @@
 <?php
 
-namespace Demency\Relationships\Models;
+namespace Alimentalos\Relationships\Models;
 
-use Demency\Contracts\Resource;
-use Demency\Relationships\BelongsToUser;
-use Demency\Relationships\Resources\ActionResource;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\BelongsToUser;
+use Alimentalos\Relationships\Resources\ActionResource;
 use Illuminate\Database\Eloquent\Model;
 
 class Action extends Model implements Resource

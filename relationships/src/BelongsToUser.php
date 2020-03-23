@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships;
+namespace Alimentalos\Relationships;
 
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait BelongsToUser

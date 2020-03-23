@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Observers;
+namespace Alimentalos\Relationships\Observers;
 
-use Demency\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\Pet;
 use Exception;
 
 class PetObserver

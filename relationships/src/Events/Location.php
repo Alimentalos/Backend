@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Relationships\Events;
+namespace Alimentalos\Relationships\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;

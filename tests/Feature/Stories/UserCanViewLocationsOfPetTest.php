@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

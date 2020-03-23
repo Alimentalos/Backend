@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Demency\Relationships\Asserts;
+namespace Alimentalos\Relationships\Asserts;
 
 
-use Demency\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\Group;
 use Illuminate\Database\Eloquent\Model;
 
 trait ResourceGroupAssert

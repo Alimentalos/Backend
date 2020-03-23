@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Events;
+namespace Alimentalos\Relationships\Events;
 
-use Demency\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\Geofence;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;

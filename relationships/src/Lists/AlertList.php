@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Demency\Relationships\Lists;
+namespace Alimentalos\Relationships\Lists;
 
-use Demency\Relationships\Models\Alert;
+use Alimentalos\Relationships\Models\Alert;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait AlertList

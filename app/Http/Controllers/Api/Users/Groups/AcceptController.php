@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\Users\Groups;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Users\Groups\AcceptRequest;
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class AcceptController extends Controller

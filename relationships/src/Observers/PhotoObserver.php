@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Observers;
+namespace Alimentalos\Relationships\Observers;
 
-use Demency\Relationships\Models\Photo;
+use Alimentalos\Relationships\Models\Photo;
 
 class PhotoObserver
 {

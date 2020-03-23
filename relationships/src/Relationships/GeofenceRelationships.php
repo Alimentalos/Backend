@@ -1,11 +1,11 @@
 <?php
 
-namespace Demency\Relationships\Relationships;
+namespace Alimentalos\Relationships\Relationships;
 
-use Demency\Relationships\Models\Access;
-use Demency\Relationships\Models\Device;
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Access;
+use Alimentalos\Relationships\Models\Device;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

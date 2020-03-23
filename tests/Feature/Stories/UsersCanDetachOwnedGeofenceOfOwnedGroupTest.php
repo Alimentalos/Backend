@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Geofence;
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -32,7 +32,7 @@ class UsersCanDetachOwnedGeofenceOfOwnedGroupTest extends TestCase
         $response->assertOk();
         $this->assertDeleted('groupables', [
             'groupable_id' => $geofence->uuid,
-            'groupable_type' => 'Demency\\Relationships\\Models\\Geofence',
+            'groupable_type' => 'Alimentalos\\Relationships\\Models\\Geofence',
             'group_uuid' => $group->uuid,
         ]);
     }

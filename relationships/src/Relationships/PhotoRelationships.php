@@ -1,14 +1,14 @@
 <?php
 
-namespace Demency\Relationships\Relationships;
+namespace Alimentalos\Relationships\Relationships;
 
-use Demency\Relationships\Models\Alert;
-use Demency\Relationships\Models\Comment;
-use Demency\Relationships\Models\Geofence;
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Models\Place;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Alert;
+use Alimentalos\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\Place;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 

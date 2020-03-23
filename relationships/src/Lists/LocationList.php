@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Demency\Relationships\Lists;
+namespace Alimentalos\Relationships\Lists;
 
 
 use App\Http\Resources\LocationCollection;

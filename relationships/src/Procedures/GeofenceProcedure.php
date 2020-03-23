@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Demency\Relationships\Procedures;
+namespace Alimentalos\Relationships\Procedures;
 
 
-use Demency\Relationships\Events\GeofenceIn;
-use Demency\Relationships\Events\GeofenceOut;
-use Demency\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Events\GeofenceIn;
+use Alimentalos\Relationships\Events\GeofenceOut;
+use Alimentalos\Relationships\Models\Geofence;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;

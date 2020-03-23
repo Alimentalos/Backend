@@ -1,18 +1,18 @@
 <?php
 
-namespace Demency\Relationships\Models;
+namespace Alimentalos\Relationships\Models;
 
-use Demency\Contracts\CreateFromRequest;
-use Demency\Contracts\Monetizer;
-use Demency\Contracts\Resource;
-use Demency\Contracts\UpdateFromRequest;
-use Demency\Relationships\BelongsToUser;
-use Demency\Relationships\Commentable;
-use Demency\Relationships\HasCoin;
-use Demency\Relationships\HasPhoto;
-use Demency\Relationships\Photoable;
-use Demency\Relationships\Relationships\GroupRelationships;
-use Demency\Relationships\Resources\GroupResource;
+use Alimentalos\Contracts\CreateFromRequest;
+use Alimentalos\Contracts\Monetizer;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Contracts\UpdateFromRequest;
+use Alimentalos\Relationships\BelongsToUser;
+use Alimentalos\Relationships\Commentable;
+use Alimentalos\Relationships\HasCoin;
+use Alimentalos\Relationships\HasPhoto;
+use Alimentalos\Relationships\Photoable;
+use Alimentalos\Relationships\Relationships\GroupRelationships;
+use Alimentalos\Relationships\Resources\GroupResource;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 

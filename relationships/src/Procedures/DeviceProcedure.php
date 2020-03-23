@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Demency\Relationships\Procedures;
+namespace Alimentalos\Relationships\Procedures;
 
 
-use Demency\Relationships\Models\Device;
+use Alimentalos\Relationships\Models\Device;
 
 trait DeviceProcedure
 {

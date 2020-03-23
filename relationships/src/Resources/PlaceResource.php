@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships\Resources;
+namespace Alimentalos\Relationships\Resources;
 
-use Demency\Relationships\Models\Place;
-use Demency\Relationships\Rules\Coordinate;
+use Alimentalos\Relationships\Models\Place;
+use Alimentalos\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\Rule;
 

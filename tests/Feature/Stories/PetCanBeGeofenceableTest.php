@@ -4,13 +4,13 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Device;
-use Demency\Relationships\Events\GeofenceIn;
-use Demency\Relationships\Events\GeofenceOut;
-use Demency\Relationships\Models\Geofence;
-use Demency\Relationships\Models\Location;
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Device;
+use Alimentalos\Relationships\Events\GeofenceIn;
+use Alimentalos\Relationships\Events\GeofenceOut;
+use Alimentalos\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\Location;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\User;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
@@ -206,7 +206,7 @@ class PetCanBeGeofenceableTest extends TestCase
         ]);
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
-            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
+            'trackable_type' => 'Alimentalos\\Relationships\\Models\\Pet',
             'accuracy' => $firstPayload['location']['coords']['accuracy'],
             'latitude' => $firstPayload['location']['coords']['latitude'],
             'longitude' => $firstPayload['location']['coords']['longitude'],
@@ -235,12 +235,12 @@ class PetCanBeGeofenceableTest extends TestCase
         ]);
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
-            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
+            'trackable_type' => 'Alimentalos\\Relationships\\Models\\Pet',
             'accuracy' => $secondPayload['location']['coords']['accuracy'],
         ]);
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($pet, $response) {
             return $e->model->uuid === $pet->uuid &&
-                $e->location->trackable_type === 'Demency\\Relationships\\Models\\Pet' &&
+                $e->location->trackable_type === 'Alimentalos\\Relationships\\Models\\Pet' &&
                 $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
@@ -268,12 +268,12 @@ class PetCanBeGeofenceableTest extends TestCase
         ]);
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
-            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
+            'trackable_type' => 'Alimentalos\\Relationships\\Models\\Pet',
             'accuracy' => $thirdPayload['location']['coords']['accuracy'],
         ]);
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($pet, $response) {
             return $e->model->uuid === $pet->uuid &&
-                $e->location->trackable_type === 'Demency\\Relationships\\Models\\Pet' &&
+                $e->location->trackable_type === 'Alimentalos\\Relationships\\Models\\Pet' &&
                 $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
@@ -301,12 +301,12 @@ class PetCanBeGeofenceableTest extends TestCase
         ]);
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
-            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
+            'trackable_type' => 'Alimentalos\\Relationships\\Models\\Pet',
             'accuracy' => $fourPayload['location']['coords']['accuracy'],
         ]);
         Event::assertDispatched(GeofenceIn::class, function ($e) use ($pet, $response) {
             return $e->model->uuid === $pet->uuid &&
-                $e->location->trackable_type === 'Demency\\Relationships\\Models\\Pet' &&
+                $e->location->trackable_type === 'Alimentalos\\Relationships\\Models\\Pet' &&
                 $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });
@@ -334,12 +334,12 @@ class PetCanBeGeofenceableTest extends TestCase
         ]);
         $response->assertJsonFragment([
             'trackable_id' => $pet->uuid,
-            'trackable_type' => 'Demency\\Relationships\\Models\\Pet',
+            'trackable_type' => 'Alimentalos\\Relationships\\Models\\Pet',
             'accuracy' => $fivePayload['location']['coords']['accuracy'],
         ]);
         Event::assertDispatched(GeofenceOut::class, function ($e) use ($pet, $response) {
             return $e->model->uuid === $pet->uuid &&
-                $e->location->trackable_type === 'Demency\\Relationships\\Models\\Pet' &&
+                $e->location->trackable_type === 'Alimentalos\\Relationships\\Models\\Pet' &&
                 $e->location->trackable_id === $pet->uuid &&
                 $e->location->uuid === json_decode($response->getContent())->uuid;
         });

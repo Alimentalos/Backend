@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships\Resources;
+namespace Alimentalos\Relationships\Resources;
 
-use Demency\Relationships\Models\Device;
-use Demency\Relationships\Repositories\DevicesRepository;
+use Alimentalos\Relationships\Models\Device;
+use Alimentalos\Relationships\Repositories\DevicesRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait DeviceResource

@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Relationships\Observers;
+namespace Alimentalos\Relationships\Observers;
 
 use App\Passport\Client;
 

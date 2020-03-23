@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Observers;
+namespace Alimentalos\Relationships\Observers;
 
-use Demency\Relationships\Models\Operation;
+use Alimentalos\Relationships\Models\Operation;
 
 class OperationObserver
 {

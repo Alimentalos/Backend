@@ -1,10 +1,10 @@
 <?php
 
-namespace Demency\Tools\Reports;
+namespace Alimentalos\Tools\Reports;
 
-use Demency\Tools\Reports\Types\Activity;
-use Demency\Tools\Reports\Types\Speed;
-use Demency\Tools\Reports\Types\Type;
+use Alimentalos\Tools\Reports\Types\Activity;
+use Alimentalos\Tools\Reports\Types\Speed;
+use Alimentalos\Tools\Reports\Types\Type;
 
 class Report
 {

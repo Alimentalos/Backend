@@ -4,11 +4,11 @@
 namespace Tests\Feature;
 
 
-use Demency\Relationships\Models\Coin;
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\Operation;
-use Demency\Relationships\Repositories\MoneyRepository;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Coin;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\Operation;
+use Alimentalos\Relationships\Repositories\MoneyRepository;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

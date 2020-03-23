@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Demency\Relationships\Lists;
+namespace Alimentalos\Relationships\Lists;
 
 
-use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Geofence;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Models\Geofence;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait GeofenceAccessesList

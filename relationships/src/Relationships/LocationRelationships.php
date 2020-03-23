@@ -1,6 +1,6 @@
 <?php
 
-namespace Demency\Relationships\Relationships;
+namespace Alimentalos\Relationships\Relationships;
 
 trait LocationRelationships
 {

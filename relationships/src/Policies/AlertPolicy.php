@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships\Policies;
+namespace Alimentalos\Relationships\Policies;
 
-use Demency\Relationships\Models\Alert;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Alert;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AlertPolicy

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Demency\Tools;
+namespace Alimentalos\Tools;
 
 
-use Demency\Contracts\Resource;
+use Alimentalos\Contracts\Resource;
 
 class Uploader
 {

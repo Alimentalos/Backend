@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\Resource\Devices;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\Resource\IndexRequest;
-use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Device;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Models\Device;
 use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller

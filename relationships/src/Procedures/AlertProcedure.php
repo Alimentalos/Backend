@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Demency\Relationships\Procedures;
+namespace Alimentalos\Relationships\Procedures;
 
 
-use Demency\Relationships\Models\Alert;
-use Demency\Relationships\Models\Photo;
+use Alimentalos\Relationships\Models\Alert;
+use Alimentalos\Relationships\Models\Photo;
 
 trait AlertProcedure
 {

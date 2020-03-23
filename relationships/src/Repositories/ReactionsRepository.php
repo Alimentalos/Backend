@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Contracts\Resource;
+use Alimentalos\Contracts\Resource;
 
 class ReactionsRepository
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships;
+namespace Alimentalos\Relationships;
 
-use Demency\Relationships\Models\Photo;
+use Alimentalos\Relationships\Models\Photo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait Photoable

@@ -1,11 +1,11 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Lists\GroupList;
-use Demency\Relationships\Procedures\GroupProcedure;
-use Demency\Relationships\Asserts\GroupAssert;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Lists\GroupList;
+use Alimentalos\Relationships\Procedures\GroupProcedure;
+use Alimentalos\Relationships\Asserts\GroupAssert;
 
 class GroupsRepository
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Demency\Relationships\Resources;
+namespace Alimentalos\Relationships\Resources;
 
 trait AccessResource
 {

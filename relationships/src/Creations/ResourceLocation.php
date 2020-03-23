@@ -1,15 +1,15 @@
 <?php
 
 
-namespace Demency\Relationships\Creations;
+namespace Alimentalos\Relationships\Creations;
 
 
-use Demency\Contracts\Resource;
-use Demency\Relationships\Models\Device;
-use Demency\Relationships\Events\Location as LocationEvent;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Models\Device;
+use Alimentalos\Relationships\Events\Location as LocationEvent;
 use App\Http\Resources\Location as LocationResource;
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 trait ResourceLocation

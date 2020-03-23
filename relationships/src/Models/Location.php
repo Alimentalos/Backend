@@ -1,10 +1,10 @@
 <?php
 
-namespace Demency\Relationships\Models;
+namespace Alimentalos\Relationships\Models;
 
-use Demency\Contracts\Resource;
-use Demency\Relationships\Relationships\LocationRelationships;
-use Demency\Relationships\Resources\LocationResource;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Relationships\LocationRelationships;
+use Alimentalos\Relationships\Resources\LocationResource;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 

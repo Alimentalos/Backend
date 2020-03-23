@@ -4,10 +4,10 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Comment;
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Models\Photo;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\Photo;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -30,7 +30,7 @@ class UserCanCreatePhotoCommentTest extends TestCase
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($content))->uuid,
             'user_uuid' => $user->uuid,
-            'commentable_type' => 'Demency\\Relationships\\Models\\Photo',
+            'commentable_type' => 'Alimentalos\\Relationships\\Models\\Photo',
             'commentable_id' => $photo->uuid,
             'body' => $comment->body,
         ]);

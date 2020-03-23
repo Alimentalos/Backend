@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Demency\Relationships\Lists;
+namespace Alimentalos\Relationships\Lists;
 
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait UserList

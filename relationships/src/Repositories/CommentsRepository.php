@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\Comment;
 
 class CommentsRepository
 {

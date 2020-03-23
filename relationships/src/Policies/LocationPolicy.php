@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships\Policies;
+namespace Alimentalos\Relationships\Policies;
 
-use Demency\Relationships\Models\Location;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Location;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class LocationPolicy

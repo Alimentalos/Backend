@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Procedures;
+namespace Alimentalos\Relationships\Procedures;
 
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\User;
 
 trait UserProcedure
 {

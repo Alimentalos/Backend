@@ -1,10 +1,10 @@
 <?php
 
-namespace Demency\Relationships\Models;
+namespace Alimentalos\Relationships\Models;
 
-use Demency\Contracts\Resource;
-use Demency\Relationships\Relationships\AccessRelationships;
-use Demency\Relationships\Resources\AccessResource;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Relationships\Relationships\AccessRelationships;
+use Alimentalos\Relationships\Resources\AccessResource;
 use Illuminate\Database\Eloquent\Model;
 
 class Access extends Model implements Resource

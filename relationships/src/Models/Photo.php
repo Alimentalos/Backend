@@ -1,13 +1,13 @@
 <?php
 
-namespace Demency\Relationships\Models;
+namespace Alimentalos\Relationships\Models;
 
-use Demency\Contracts\Resource;
-use Demency\Contracts\UpdateFromRequest;
-use Demency\Relationships\BelongsToUser;
-use Demency\Relationships\Commentable;
-use Demency\Relationships\Relationships\PhotoRelationships;
-use Demency\Relationships\Resources\PhotoResource;
+use Alimentalos\Contracts\Resource;
+use Alimentalos\Contracts\UpdateFromRequest;
+use Alimentalos\Relationships\BelongsToUser;
+use Alimentalos\Relationships\Commentable;
+use Alimentalos\Relationships\Relationships\PhotoRelationships;
+use Alimentalos\Relationships\Resources\PhotoResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;

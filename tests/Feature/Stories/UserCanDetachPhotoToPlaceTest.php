@@ -4,12 +4,12 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Comment;
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\Pet;
-use Demency\Relationships\Models\Photo;
-use Demency\Relationships\Models\Place;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\Pet;
+use Alimentalos\Relationships\Models\Photo;
+use Alimentalos\Relationships\Models\Place;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -34,7 +34,7 @@ class UserCanDetachPhotoToPlaceTest extends TestCase
         $response->assertOk();
         $response->assertExactJson(['message' => 'Resource detached to photo successfully']);
         $this->assertDeleted('photoables', [
-            'photoable_type' => 'Demency\\Relationships\\Models\\Place',
+            'photoable_type' => 'Alimentalos\\Relationships\\Models\\Place',
             'photoable_id' => $place->uuid,
             'photo_uuid' => $photo->uuid,
         ]);

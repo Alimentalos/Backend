@@ -1,9 +1,9 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Models\Place;
-use Demency\Relationships\Procedures\PlaceProcedure;
+use Alimentalos\Relationships\Models\Place;
+use Alimentalos\Relationships\Procedures\PlaceProcedure;
 
 class PlacesRepository
 {

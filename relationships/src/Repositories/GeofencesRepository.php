@@ -1,10 +1,10 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Models\Geofence;
-use Demency\Relationships\Lists\GeofenceList;
-use Demency\Relationships\Procedures\GeofenceProcedure;
+use Alimentalos\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Lists\GeofenceList;
+use Alimentalos\Relationships\Procedures\GeofenceProcedure;
 
 class GeofencesRepository
 {

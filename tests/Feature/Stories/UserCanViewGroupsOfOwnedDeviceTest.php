@@ -4,10 +4,10 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Device;
-use Demency\Relationships\Models\Group;
-use Demency\Relationships\Models\Photo;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Device;
+use Alimentalos\Relationships\Models\Group;
+use Alimentalos\Relationships\Models\Photo;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -33,7 +33,7 @@ class UserCanViewGroupsOfOwnedDeviceTest extends TestCase
             'status' => Group::ACCEPTED_STATUS
         ]);
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'Demency\\Relationships\\Models\\Device',
+            'groupable_type' => 'Alimentalos\\Relationships\\Models\\Device',
             'groupable_id' => $device->uuid,
             'group_uuid' => $group->uuid,
         ]);

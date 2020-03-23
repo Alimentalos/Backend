@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Demency\Tools\Procedures;
+namespace Alimentalos\Tools\Procedures;
 
 
-use Demency\Tools\Reports\Report;
+use Alimentalos\Tools\Reports\Report;
 
 trait ReportProcedure
 {

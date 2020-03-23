@@ -1,10 +1,10 @@
 <?php
 
-namespace Demency\Tools\Reports\Types;
+namespace Alimentalos\Tools\Reports\Types;
 
 use App\Http\Resources\Location;
 use App\Http\Resources\LocationCollection;
-use Demency\Tools\Reports\Helpers\RangesHelper;
+use Alimentalos\Tools\Reports\Helpers\RangesHelper;
 use Carbon\Carbon;
 
 class Activity extends Type
@@ -58,7 +58,7 @@ class Activity extends Type
     {
         // Filter the specified device locations
         $device_locations = $locations->where('trackable_id', $device->uuid)
-            ->where('trackable_type', 'Demency\\Relationships\\Models\\Device')->reverse()->values();
+            ->where('trackable_type', 'Alimentalos\\Relationships\\Models\\Device')->reverse()->values();
 
         if ($this->start_day == $this->end_day) {
             $this->simpleReport($device, $device_locations);

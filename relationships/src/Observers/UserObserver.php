@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Observers;
+namespace Alimentalos\Relationships\Observers;
 
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\User;
 use Exception;
 use Illuminate\Auth\Events\Registered;
 

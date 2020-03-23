@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Asserts\ResourceGroupAssert;
-use Demency\Contracts\Resource;
+use Alimentalos\Relationships\Asserts\ResourceGroupAssert;
+use Alimentalos\Contracts\Resource;
 
 class ResourceRepository
 {
@@ -13,32 +13,32 @@ class ResourceRepository
     /**
      * User resource.
      */
-    public const USER = 'Demency\\Relationships\\Models\\User';
+    public const USER = 'Alimentalos\\Relationships\\Models\\User';
 
     /**
      * Device resource.
      */
-    public const DEVICE = 'Demency\\Relationships\\Models\\Device';
+    public const DEVICE = 'Alimentalos\\Relationships\\Models\\Device';
 
     /**
      * Pet resource.
      */
-    public const PET = 'Demency\\Relationships\\Models\\Pet';
+    public const PET = 'Alimentalos\\Relationships\\Models\\Pet';
 
     /**
      * Group resource.
      */
-    public const GROUP = 'Demency\\Relationships\\Models\\Group';
+    public const GROUP = 'Alimentalos\\Relationships\\Models\\Group';
 
     /**
      * Photo resource.
      */
-    public const PHOTO = 'Demency\\Relationships\\Models\\Photo';
+    public const PHOTO = 'Alimentalos\\Relationships\\Models\\Photo';
 
     /**
      * Comment resource.
      */
-    public const COMMENT = 'Demency\\Relationships\\Models\\Comment';
+    public const COMMENT = 'Alimentalos\\Relationships\\Models\\Comment';
 
     /**
      * Available resources.

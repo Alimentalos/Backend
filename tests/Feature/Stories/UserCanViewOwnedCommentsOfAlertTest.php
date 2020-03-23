@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Demency\Relationships\Models\Alert;
-use Demency\Relationships\Models\Comment;
-use Demency\Relationships\Models\User;
+use Alimentalos\Relationships\Models\Alert;
+use Alimentalos\Relationships\Models\Comment;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -59,7 +59,7 @@ class UserCanViewOwnedCommentsOfAlertTest extends TestCase
         ]);
         $this->assertDatabaseHas('comments', [
             'user_uuid' => $user->uuid,
-            'commentable_type' => 'Demency\\Relationships\\Models\\Alert',
+            'commentable_type' => 'Alimentalos\\Relationships\\Models\\Alert',
             'commentable_id' => $alert->uuid,
             'body' => $comment->body,
         ]);

@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Relationships\Observers;
+namespace Alimentalos\Relationships\Observers;
 
-use Demency\Relationships\Models\Geofence;
+use Alimentalos\Relationships\Models\Geofence;
 
 class GeofenceObserver
 {

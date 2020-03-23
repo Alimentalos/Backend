@@ -1,10 +1,10 @@
 <?php
 
-namespace Demency\Relationships\Repositories;
+namespace Alimentalos\Relationships\Repositories;
 
-use Demency\Relationships\Lists\LocationList;
-use Demency\Relationships\Procedures\LocationProcedure;
-use Demency\Relationships\Queries\LocationQuery;
+use Alimentalos\Relationships\Lists\LocationList;
+use Alimentalos\Relationships\Procedures\LocationProcedure;
+use Alimentalos\Relationships\Queries\LocationQuery;
 
 class LocationsRepository
 {

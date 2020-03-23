@@ -1,8 +1,8 @@
 <?php
 
-namespace Demency\Tools\Reports\Types;
+namespace Alimentalos\Tools\Reports\Types;
 
-use Demency\Relationships\Models\Device;
+use Alimentalos\Relationships\Models\Device;
 use App\Http\Resources\Location;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
