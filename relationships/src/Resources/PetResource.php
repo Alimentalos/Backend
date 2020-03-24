@@ -71,6 +71,7 @@ trait PetResource
             'left_eye_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'right_eye_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'size' => [
+                'required',
                 Rule::in([
                     pets()->size_extra_small,
                     pets()->size_small,
