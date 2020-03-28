@@ -16,7 +16,6 @@ trait PhotoRelationships
 {
     /**
      * Get the owning photoable model.
-     * @codeCoverageIgnore
      */
     public function photoable()
     {

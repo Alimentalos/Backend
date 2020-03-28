@@ -32,8 +32,6 @@ trait DeviceResource
      * Get available device reactions.
      *
      * @return string
-     * @codeCoverageIgnore TODO Support device reactions
-     * @body Increase code coverage support enabling the device reactions. Just add routes and tests.
      */
     public function getAvailableReactions()
     {

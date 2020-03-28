@@ -104,7 +104,6 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
      * Get the value used to index the model.
      *
      * @return mixed
-     * @codeCoverageIgnore
      */
     public function getScoutKey()
     {

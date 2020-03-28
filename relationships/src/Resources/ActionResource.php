@@ -10,8 +10,6 @@ trait ActionResource
      * Get available action reactions.
      *
      * @return string
-     * @codeCoverageIgnore TODO Support action reactions
-     * @body Increase code coverage support enabling the action reactions. Just add routes and tests.
      */
     public function getAvailableReactions()
     {
@@ -22,8 +20,6 @@ trait ActionResource
      * Update action validation rules.
      *
      * @return array
-     * @codeCoverageIgnore
-     * @reason Actions can't be updated, are system generated.
      */
     public function updateRules()
     {
@@ -34,7 +30,6 @@ trait ActionResource
      * Store action validation rules.
      *
      * @return array
-     * @codeCoverageIgnore
      * @reason Actions can't be created by request, are system generated.
      */
     public function storeRules()

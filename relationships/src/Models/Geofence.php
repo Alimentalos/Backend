@@ -96,7 +96,6 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
      * Get the indexable data array for the model.
      *
      * @return array
-     * @codeCoverageIgnore
      */
     public function toSearchableArray()
     {
@@ -111,7 +110,6 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
      * Get the value used to index the model.
      *
      * @return mixed
-     * @codeCoverageIgnore
      */
     public function getScoutKey()
     {

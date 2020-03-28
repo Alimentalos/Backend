@@ -11,7 +11,6 @@ class ClientObserver
      *
      * @param  \App\Passport\Client  $client
      * @return void
-     * @codeCoverageIgnore
      */
     public function creating(Client $client)
     {

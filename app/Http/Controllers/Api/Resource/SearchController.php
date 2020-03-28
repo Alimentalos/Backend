@@ -48,7 +48,6 @@ class SearchController extends Controller
      *
      * @param IndexRequest $request
      * @return JsonResponse
-     * @codeCoverageIgnore
      */
     public function __invoke(IndexRequest $request)
     {

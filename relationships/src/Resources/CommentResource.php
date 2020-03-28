@@ -42,7 +42,6 @@ trait CommentResource
      * Store comment validation rules.
      *
      * @return array
-     * @codeCoverageIgnore TODO Support store validation rules.
      *
      */
     public function storeRules()
@@ -64,7 +63,6 @@ trait CommentResource
      * Get comment instances.
      *
      * @return LengthAwarePaginator
-     * @codeCoverageIgnore
      */
     public function getInstances()
     {

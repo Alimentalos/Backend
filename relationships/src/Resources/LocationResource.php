@@ -11,8 +11,6 @@ trait LocationResource
      * Get available location reactions.
      *
      * @return string
-     * @codeCoverageIgnore TODO Add location reactions
-     * @body Increase code coverage support enabling the alert reactions. Just add routes and tests.
      */
     public function getAvailableReactions()
     {
@@ -23,8 +21,6 @@ trait LocationResource
      * Update location validation rules.
      *
      * @return array
-     * @codeCoverageIgnore
-     * @reason Locations are device generated, can't be modified by user.
      */
     public function updateRules()
     {
@@ -35,7 +31,6 @@ trait LocationResource
      * Store location validation rules.
      *
      * @return array
-     * @codeCoverageIgnore
      * @reason Locations are device generated, can't be predefined validation rules.
      */
     public function storeRules()
@@ -57,8 +52,6 @@ trait LocationResource
      * Get location instances.
      *
      * @return LengthAwarePaginator
-     * @codeCoverageIgnore
-     * @reason Locations uses custom LocationRepository query.
      */
     public function getInstances()
     {
