@@ -23,16 +23,6 @@ if (! function_exists('subscriptions')) {
         return new Subscriber();
     }
 }
-if (! function_exists('authenticated')) {
-    /**
-     * @param string $guard
-     * @return Authenticatable|User
-     */
-    function authenticated($guard = 'api')
-    {
-        return auth($guard)->user();
-    }
-}
 if (! function_exists('parameters')) {
     /**
      * @return Parameterizer
