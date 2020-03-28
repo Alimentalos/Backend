@@ -50,9 +50,8 @@ class TokenController extends Controller
     {
         $http = new Client;
 
-        $response = $http->post('https://www.alimentalos.cl/oauth/token', [
+        $response = $http->post('https://alimentalos.cl/oauth/token', [
             'form_params' => [
-
                 'grant_type' => 'password',
                 'client_id' => env('PASSPORT_PASSWORD_CLIENT_ID'),
                 'client_secret' => env('PASSPORT_PASSWORD_CLIENT_SECRET'),

@@ -9,7 +9,7 @@ class ClientObserver
     /**
      * Handle the client "creating" event.
      *
-     * @param  \App\Passport\Client  $client
+     * @param Client $client
      * @return void
      */
     public function creating(Client $client)
