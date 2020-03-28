@@ -16,16 +16,11 @@ class CreateGeofencesTable extends Migration
         Schema::create('geofences', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->unique()->index();
+            foreach (['marker', 'color', 'border_color', 'background_color', 'text_color', 'fill_color', 'tag_color', 'flag_color'] as $item) {
+                $table->string($item)->nullable();
+            }
             $table->string('user_uuid')->index();
             $table->string('photo_uuid')->index()->nullable();
-            $table->string('marker')->nullable();
-            $table->string('color')->nullable();
-            $table->string('border_color')->nullable();
-            $table->string('background_color')->nullable();
-            $table->string('text_color')->nullable();
-            $table->string('fill_color')->nullable();
-            $table->string('tag_color')->nullable();
-            $table->string('flag_color')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->polygon('shape')->nullable();

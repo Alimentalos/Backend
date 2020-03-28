@@ -27,15 +27,11 @@ trait GroupProcedure
             'user_color' => fill('user_color', null),
             'owner_color' => fill('owner_color', null)
         ]);
-        authenticated()->groups()
-            ->attach(
-                $group->uuid,
-                [
-                    'is_admin' => true,
-                    'status' => Group::ACCEPTED_STATUS,
-                    'sender_uuid' => authenticated()->uuid,
-                ]
-            );
+        authenticated()->groups()->attach($group->uuid, [
+            'is_admin' => true,
+            'status' => Group::ACCEPTED_STATUS,
+            'sender_uuid' => authenticated()->uuid,
+        ]);
         $group->photos()->attach($photo->uuid);
         return $group;
     }
