@@ -43,18 +43,13 @@ trait UserProcedure
     public function createInstance()
     {
         $photo = photos()->create();
-        $user = User::create(
-            array_merge(
-                [
-                    'user_uuid' => authenticated()->uuid,
-                    'photo_uuid' => $photo->uuid,
-                    'photo_url' => config('storage.path') . $photo->photo_url,
-                    'password' => bcrypt(input('password')),
-                    'location' => parser()->pointFromCoordinates(input('coordinates')),
-                ],
-                only('name', 'email', 'is_public', 'marker', 'color', 'background_color', 'border_color', 'text_color', 'marker_color')
-            )
-        );
+        $user = User::create(array_merge([
+            'user_uuid' => authenticated()->uuid,
+            'photo_uuid' => $photo->uuid,
+            'photo_url' => config('storage.path') . $photo->photo_url,
+            'password' => bcrypt(input('password')),
+            'location' => parser()->pointFromCoordinates(input('coordinates')),
+        ], only('name', 'email', 'is_public', 'marker', 'color', 'background_color', 'border_color', 'text_color', 'marker_color')));
         $user->photos()->attach($photo->uuid);
         return $user;
     }
