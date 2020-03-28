@@ -26,8 +26,6 @@ class CreateGeofencesTable extends Migration
             $table->string('fill_color')->nullable();
             $table->string('tag_color')->nullable();
             $table->string('flag_color')->nullable();
-            $table->string('administrators_color')->nullable();
-            $table->string('owner_color')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->polygon('shape')->nullable();

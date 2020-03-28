@@ -44,6 +44,9 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
         'api_token',
         'is_public',
         'location',
+        'marker_color',
+        'color',
+        'marker'
     ];
 
     /**

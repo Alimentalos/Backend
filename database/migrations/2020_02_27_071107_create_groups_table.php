@@ -23,6 +23,9 @@ class CreateGroupsTable extends Migration
             $table->string('border_color')->nullable();
             $table->string('fill_color')->nullable();
             $table->string('text_color')->nullable();
+            $table->string('user_color')->nullable();
+            $table->string('administrator_color')->nullable();
+            $table->string('owner_color')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->boolean('is_public')->default(true);
