@@ -64,6 +64,14 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
         'name',
         'photo_url',
         'is_public',
+        'color',
+        'background_color',
+        'text_color',
+        'border_color',
+        'fill_color',
+        'administrator_color',
+        'user_color',
+        'owner_color',
     ];
 
     /**

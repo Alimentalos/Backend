@@ -20,6 +20,9 @@ trait DeviceProcedure
             'description' => input('description'),
             'user_uuid' => authenticated()->uuid,
             'is_public' => input('is_public'),
+            'marker_color' => fill('marker_color', null),
+            'color' => fill('color', null),
+            'marker' => fill('marker', null),
         ]);
         return $device;
     }
@@ -32,7 +35,14 @@ trait DeviceProcedure
      */
     public function updateInstance(Device $device)
     {
-        $device->update(parameters()->fill(['name', 'description', 'is_public'], $device));
+        $device->update(parameters()->fill([
+            'name',
+            'description',
+            'is_public',
+            'color',
+            'marker'.
+            'marker_color'
+        ], $device));
 
         return $device;
     }

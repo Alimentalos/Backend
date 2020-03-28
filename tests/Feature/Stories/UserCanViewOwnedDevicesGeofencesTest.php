@@ -22,7 +22,7 @@ class UserCanViewOwnedDevicesGeofencesTest extends TestCase
         $device = factory(Device::class)->create();
         $geofence = factory(Geofence::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
+
         $photo->user_uuid = $user->uuid;
         $photo->save();
         $geofence->user_uuid = $user->uuid;

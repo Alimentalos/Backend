@@ -26,11 +26,10 @@ class UserCanViewCommentsTest extends TestCase
         $photo->user_uuid = $user->uuid;
         $pet->user_uuid = $user->uuid;
         $pet->photo_uuid = $photo->uuid;
-        $photo->comment_uuid = $comment->uuid;
         $photo->save();
         $pet->save();
         $pet->photos()->attach($photo);
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . $photo->comment_uuid);
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/comments/' . $comment->uuid);
         $response->assertOk();
         $response->assertJsonStructure([
             'uuid',

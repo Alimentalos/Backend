@@ -19,13 +19,11 @@ class CreatePetsTable extends Migration
             $table->point('location')->nullable(); // Latitude, Longitude
             $table->string('user_uuid')->index();
             $table->string('photo_uuid')->index();
-            $table->text('photo_url')->nullable();
             $table->string('name');
+            foreach (['hair_color', 'left_eye_color', 'right_eye_color', 'size', 'photo_url'] as $item) {
+                $table->string($item)->nullable();
+            }
             $table->longText('description')->nullable();
-            $table->string('hair_color')->nullable();
-            $table->string('left_eye_color')->nullable();
-            $table->string('right_eye_color')->nullable();
-            $table->string('size')->nullable();
             $table->timestamp('born_at')->nullable();
             $table->string('api_token')->unique();
             $table->boolean('is_public')->default(true);

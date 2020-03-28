@@ -23,7 +23,6 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
         $photo = factory(Photo::class)->create();
         $photo->user_uuid = $user->uuid;
         $comment = factory(Comment::class)->create();
-        $photo->comment_uuid = $comment->uuid;
         $pet = factory(Pet::class)->create();
         $sample = factory(Comment::class)->make();
         $group->is_public = false;

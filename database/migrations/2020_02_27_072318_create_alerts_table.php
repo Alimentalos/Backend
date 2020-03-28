@@ -18,6 +18,7 @@ class CreateAlertsTable extends Migration
             $table->string('uuid')->index()->nullable();
             $table->string('user_uuid')->index();
             $table->string('photo_uuid')->index();
+            $table->string('color')->nullable();
             $table->text('photo_url')->nullable();
             $table->uuidMorphs('alert');
             $table->tinyInteger('type');

@@ -86,6 +86,12 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
         'region_name',
         'city',
         'city_name',
+        'marker',
+        'color',
+        'background_color',
+        'border_color',
+        'text_color',
+        'marker_color'
     ];
 
     /**

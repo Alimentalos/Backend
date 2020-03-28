@@ -18,7 +18,7 @@ class UserCanUpdatePhotoTest extends TestCase
     {
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
+
         $photo->user_uuid = $user->uuid;
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/photos/' . $photo->uuid, [
@@ -33,7 +33,6 @@ class UserCanUpdatePhotoTest extends TestCase
             ],
             'uuid',
             'user_uuid',
-            'comment_uuid',
             'ext',
             'photo_url',
             'is_public',
@@ -53,7 +52,6 @@ class UserCanUpdatePhotoTest extends TestCase
             ],
             'uuid',
             'user_uuid',
-            'comment_uuid',
             'ext',
             'photo_url',
             'is_public',

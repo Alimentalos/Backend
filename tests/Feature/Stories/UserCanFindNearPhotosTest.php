@@ -28,7 +28,6 @@ class UserCanFindNearPhotosTest extends TestCase
                     'uuid',
                     'location',
                     'user_uuid',
-                    'comment_uuid',
                     'ext',
                     'photo_url',
                     'is_public',

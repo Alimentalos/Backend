@@ -15,7 +15,23 @@ trait UserProcedure
     public function updateInstance(User $user)
     {
         upload()->check($user);
-        $user->update(parameters()->fill(['email', 'name', 'is_public', 'country', 'region', 'city', 'city_name', 'region_name', 'country_name'], $user));
+        $user->update(parameters()->fill([
+            'email',
+            'name',
+            'is_public',
+            'country',
+            'region',
+            'city',
+            'city_name',
+            'region_name',
+            'country_name',
+            'marker',
+            'color',
+            'background_color',
+            'border_color',
+            'text_color',
+            'marker_color'
+        ], $user));
         return $user;
     }
 
@@ -33,7 +49,7 @@ trait UserProcedure
             'photo_url' => config('storage.path') . $photo->photo_url,
             'password' => bcrypt(input('password')),
             'location' => parser()->pointFromCoordinates(input('coordinates')),
-        ], only('name', 'email', 'is_public')));
+        ], only('name', 'email', 'is_public', 'marker', 'color', 'background_color', 'border_color', 'text_color', 'marker_color')));
         $user->photos()->attach($photo->uuid);
         return $user;
     }

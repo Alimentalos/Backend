@@ -18,7 +18,8 @@ class CreatePhotosTable extends Migration
             $table->point('location'); // Latitude, Longitude
             $table->string('uuid')->index()->unique();
             $table->string('user_uuid')->index();
-            $table->string('comment_uuid')->index()->nullable();
+            $table->string('title')->nullable();
+            $table->string('body')->nullable();
             $table->string('ext');
             $table->string('photo_url')->nullable();
             $table->boolean('is_public')->default(true);

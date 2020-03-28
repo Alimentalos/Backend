@@ -32,7 +32,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $photo = factory(Photo::class)->create();
-        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
+
         $photo->user_uuid = $user->uuid;
         $user->photo_uuid = $photo->uuid;
         $pet->photo_uuid = $photo->uuid;
@@ -54,7 +54,6 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',
-            'comment_uuid',
             'ext',
             'photo_url',
             'is_public',
@@ -91,7 +90,6 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',
-            'comment_uuid',
             'ext',
             'photo_url',
             'is_public',
@@ -124,7 +122,6 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',
-            'comment_uuid',
             'ext',
             'photo_url',
             'is_public',
@@ -151,7 +148,6 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',
-            'comment_uuid',
             'ext',
             'photo_url',
             'is_public',

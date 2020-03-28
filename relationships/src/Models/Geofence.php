@@ -47,6 +47,14 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
         'uuid',
         'photo_url',
         'is_public',
+        'marker',
+        'text_color',
+        'color',
+        'border_color',
+        'background_color',
+        'fill_color',
+        'tag_color',
+        'flag_color',
     ];
 
     /**
