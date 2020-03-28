@@ -27,11 +27,7 @@ class PhotosRepository
      */
     public function update(Photo $photo)
     {
-        $photo->update(parameters()->fill(['title', 'description', 'is_public'], $photo));
-        $photo->comment->update(array_merge(
-            parameters()->fill(['title', 'is_public'], $photo->comment),
-            ['body' => fill('body', $photo->comment->body)]
-        ));
+        $photo->update(parameters()->fill(['title', 'body', 'is_public'], $photo));
         return $photo;
     }
 
@@ -43,7 +39,6 @@ class PhotosRepository
     public function create()
     {
         $photo = $this->createInstance();
-        $this->createComment($photo);
         $this->storePhoto($photo->uuid, uploaded('photo'));
         return $photo;
     }

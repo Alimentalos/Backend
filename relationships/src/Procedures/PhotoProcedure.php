@@ -21,23 +21,11 @@ trait PhotoProcedure
             'photo_url' => $photo_uuid . '.' . uploaded('photo')->extension(),
             'ext' => uploaded('photo')->extension(),
             'is_public' => fill('is_public', true),
+            'title' => fill('title', null),
+            'body' => fill('body', null),
             'location' => parser()->pointFromCoordinates(input('coordinates'))
         ]);
         return $photo;
-    }
-
-    /**
-     * Create default comment of photo.
-     *
-     * @param Photo $photo
-     */
-    public function createComment(Photo $photo)
-    {
-        $comment = $photo->comments()->create(array_merge([
-            'uuid' => uuid(),
-            'user_uuid' => authenticated()->uuid,
-        ], only('title', 'body', 'is_public')));
-        $photo->comment()->associate($comment);
     }
 
 

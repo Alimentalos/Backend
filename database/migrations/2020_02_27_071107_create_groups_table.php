@@ -18,6 +18,11 @@ class CreateGroupsTable extends Migration
             $table->string('uuid')->unique()->index();
             $table->string('user_uuid')->index();
             $table->string('photo_uuid')->index();
+            $table->string('color')->nullable();
+            $table->string('background_color')->nullable();
+            $table->string('border_color')->nullable();
+            $table->string('fill_color')->nullable();
+            $table->string('text_color')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->boolean('is_public')->default(true);

@@ -22,7 +22,7 @@ class UserCanAttachPhotoToUserTest extends TestCase
         Storage::fake('public');
         $user = factory(User::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
+
         $photo->user_uuid = $user->uuid;
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/users/' . $user->uuid . '/photos/' . $photo->uuid . '/attach');

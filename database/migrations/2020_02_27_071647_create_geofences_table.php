@@ -18,6 +18,16 @@ class CreateGeofencesTable extends Migration
             $table->string('uuid')->unique()->index();
             $table->string('user_uuid')->index();
             $table->string('photo_uuid')->index()->nullable();
+            $table->string('marker')->nullable();
+            $table->string('color')->nullable();
+            $table->string('border_color')->nullable();
+            $table->string('background_color')->nullable();
+            $table->string('text_color')->nullable();
+            $table->string('fill_color')->nullable();
+            $table->string('tag_color')->nullable();
+            $table->string('flag_color')->nullable();
+            $table->string('administrators_color')->nullable();
+            $table->string('owner_color')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->polygon('shape')->nullable();

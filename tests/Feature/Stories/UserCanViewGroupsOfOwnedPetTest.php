@@ -22,7 +22,7 @@ class UserCanViewGroupsOfOwnedPetTest extends TestCase
         $pet = factory(Pet::class)->create();
         $group = factory(Group::class)->create();
         $photo = factory(Photo::class)->create();
-        $photo->comment_uuid = factory(Comment::class)->create()->uuid;
+
         $photo->user_uuid = $user->uuid;
         $photo->save();
         $group->photo_uuid = $photo->uuid;
