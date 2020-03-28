@@ -89,7 +89,6 @@ class Photo extends Model implements ReactableContract, Resource, UpdateFromRequ
      * Get the indexable data array for the model.
      *
      * @return array
-     * @codeCoverageIgnore
      */
     public function toSearchableArray()
     {
@@ -107,7 +106,6 @@ class Photo extends Model implements ReactableContract, Resource, UpdateFromRequ
      * Get the value used to index the model.
      *
      * @return mixed
-     * @codeCoverageIgnore
      */
     public function getScoutKey()
     {

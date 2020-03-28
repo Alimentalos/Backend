@@ -10,7 +10,6 @@ class RefreshRequest extends AuthorizedRequest
      * Get the validation rules that apply to the request.
      *
      * @return array
-     * @codeCoverageIgnore
      */
     public function rules()
     {

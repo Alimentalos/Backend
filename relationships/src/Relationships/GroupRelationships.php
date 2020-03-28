@@ -12,8 +12,6 @@ trait GroupRelationships
 {
     /**
      * The related Groupable.
-     *
-     * @codeCoverageIgnore
      */
     public function groupable()
     {

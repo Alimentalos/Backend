@@ -45,7 +45,6 @@ class TokenController extends Controller
      *
      * @param TokenRequest $request
      * @return JsonResponse
-     * @codeCoverageIgnore
      */
     public function __invoke(TokenRequest $request)
     {
