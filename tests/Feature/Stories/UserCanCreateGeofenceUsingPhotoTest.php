@@ -30,8 +30,17 @@ class UserCanCreateGeofenceUsingPhotoTest extends TestCase
                 ['latitude' => 5, 'longitude' => 0],
                 ['latitude' => 0, 'longitude' => 0],
             ],
-            'coordinates' => '20.1,25.5'
+            'coordinates' => '20.1,25.5',
+            'color' => '#CCCCCC',
+            'border_color' => '#CCCCCC',
+            'background_color' => '#CCCCCC',
+            'text_color' => '#CCCCCC',
+            'fill_color' => '#CCCCCC',
+            'tag_color' => '#CCCCCC',
+            'flag_color' => '#CCCCCC',
+            'fill_opacity' => '1',
         ]);
+        $response->assertCreated();
         $response->assertJsonStructure([
             'uuid',
             'user_uuid',
@@ -48,7 +57,6 @@ class UserCanCreateGeofenceUsingPhotoTest extends TestCase
             'created_at',
             'updated_at',
         ]);
-        $response->assertCreated();
         $content = $response->getContent();
         Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
     }

@@ -22,6 +22,8 @@ class UserCanCreateDevicesTest extends TestCase
         $response = $this->actingAs($user, 'api')->json('POST', '/api/devices', [
             'name' => $device->name,
             'is_public' => true,
+            'color' => '#CCCCCC',
+            'marker_color' => '#CCCCCC',
         ]);
         $response->assertCreated();
         $response->assertJsonStructure([

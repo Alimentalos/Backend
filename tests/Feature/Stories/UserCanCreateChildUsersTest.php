@@ -30,6 +30,11 @@ class UserCanCreateChildUsersTest extends TestCase
             'password_confirmation' => $userB->password,
             'is_public' => true,
             'coordinates' => $coordinates,
+            'color' => '#CCCCCC',
+            'border_color' => '#CCCCCC',
+            'background_color' => '#CCCCCC',
+            'text_color' => '#CCCCCC',
+            'marker_color' => '#CCCCCC',
         ]);
         $response->assertJsonStructure([
             'user_uuid',
