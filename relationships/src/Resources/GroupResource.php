@@ -67,6 +67,14 @@ trait GroupResource
             'name' => 'required',
             'photo' => 'required',
             'is_public' => 'required|boolean',
+            'color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'background_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'border_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'fill_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'text_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'user_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'administrator_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'owner_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'coordinates' => ['required', new Coordinate()],
         ];
     }

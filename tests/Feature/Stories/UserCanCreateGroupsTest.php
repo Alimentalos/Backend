@@ -24,7 +24,15 @@ class UserCanCreateGroupsTest extends TestCase
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'name' => $group->name,
             'is_public' => 'true',
-            'coordinates' => '10.1,50.5'
+            'coordinates' => '10.1,50.5',
+            'color' => '#CCCCCC',
+            'background_color' => '#CCCCCC',
+            'border_color' => '#CCCCCC',
+            'fill_color' => '#CCCCCC',
+            'text_color' => '#CCCCCC',
+            'user_color' => '#CCCCCC',
+            'administrator_color' => '#CCCCCC',
+            'owner_color' => '#CCCCCC',
         ]);
         $response->assertCreated();
         $content = $response->getContent();
