@@ -37,7 +37,7 @@ class UserCanCreateGeofenceUsingPhotoTest extends TestCase
             'text_color' => '#CCCCCC',
             'fill_color' => '#CCCCCC',
             'tag_color' => '#CCCCCC',
-            'flag_color' => '#CCCCCC',
+            'marker_color' => '#CCCCCC',
             'fill_opacity' => '1',
         ]);
         $response->assertCreated();

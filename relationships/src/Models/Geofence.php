@@ -54,7 +54,7 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
         'background_color',
         'fill_color',
         'tag_color',
-        'flag_color',
+        '#CCCCCC',
     ];
 
     /**

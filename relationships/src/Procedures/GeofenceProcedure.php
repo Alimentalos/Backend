@@ -204,7 +204,7 @@ trait GeofenceProcedure
         $geofence->text_color = fill('text_color', null);
         $geofence->fill_color = fill('fill_color', null);
         $geofence->tag_color = fill('tag_color', null);
-        $geofence->flag_color = fill('flag_color', null);
+        $geofence->marker_color = fill('marker_color', null);
 
         $shape = $this->createPointsFromShape(input('shape'));
         $geofence->shape = new Polygon([new LineString($shape)]);
@@ -236,7 +236,7 @@ trait GeofenceProcedure
         $geofence->text_color = fill('text_color', $geofence->text_color);
         $geofence->fill_color = fill('fill_color', $geofence->fill_color);
         $geofence->tag_color = fill('tag_color', $geofence->tag_color);
-        $geofence->flag_color = fill('flag_color', $geofence->flag_color);
+        $geofence->marker_color = fill('marker_color', $geofence->marker_color);
         $geofence->save();
         return $geofence;
     }

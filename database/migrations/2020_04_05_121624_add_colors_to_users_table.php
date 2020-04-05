@@ -29,7 +29,12 @@ class AddColorsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['color', 'border_color', 'background_color', 'text_color', 'marker_color']);
+            $table->dropColumn([
+                'color',
+                'border_color',
+                'background_color',
+                'text_color'
+            ]);
         });
     }
 }

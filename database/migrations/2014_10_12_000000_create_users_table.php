@@ -18,13 +18,13 @@ class CreateUsersTable extends Migration
             $table->string('uuid')->unique()->index();
             $table->string('user_uuid')->index()->nullable();
             $table->string('photo_uuid')->index()->nullable();
+            $table->string('photo_url')->nullable();
             $table->string('api_token')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('free')->default(true);
-            $table->text('photo_url')->nullable();
             $table->point('location')->nullable(); // Latitude, Longitude
             $table->boolean('is_public')->default(true);
             $table->rememberToken();
