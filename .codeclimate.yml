@@ -1,3 +1,10 @@
 ## other configuration excluded from example...
 exclude_patterns:
-  - "database/migrations/"
+  - "config/"
+  - "tests/"
+  - "vendor/"
+  - "bootstrap/"
+  - "storage/"
+  - "public/"
+  - "routes/"
+  - "database/"
