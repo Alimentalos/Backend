@@ -16,17 +16,16 @@ class CreatePetsTable extends Migration
         Schema::create('pets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->unique()->index();
-            $table->point('location')->nullable(); // Latitude, Longitude
             $table->string('user_uuid')->index();
             $table->string('photo_uuid')->index();
+            $table->string('photo_url')->nullable();
             $table->string('name');
-            foreach (['hair_color', 'left_eye_color', 'right_eye_color', 'size', 'photo_url'] as $item) {
-                $table->string($item)->nullable();
-            }
+            $table->string('size')->nullable();
             $table->longText('description')->nullable();
             $table->timestamp('born_at')->nullable();
-            $table->string('api_token')->unique();
             $table->boolean('is_public')->default(true);
+            $table->point('location')->nullable();
+            $table->string('api_token')->unique();
             $table->timestamps();
         });
     }
