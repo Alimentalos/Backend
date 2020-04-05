@@ -43,6 +43,16 @@ class UsersRepository
     {
         return User::create(array_merge([
             'password' => bcrypt(input('password')),
-        ], only('email', 'name', 'is_public', 'country', 'region', 'city', 'city_name', 'region_name', 'country_name')));
+        ], only('email',
+            'name',
+            'locale',
+            'is_public',
+            'country',
+            'region',
+            'city',
+            'city_name',
+            'region_name',
+            'country_name'
+        )));
     }
 }

@@ -30,7 +30,8 @@ trait UserProcedure
             'background_color',
             'border_color',
             'text_color',
-            'marker_color'
+            'marker_color',
+            'locale'
         ], $user));
         return $user;
     }
@@ -49,7 +50,17 @@ trait UserProcedure
             'photo_url' => config('storage.path') . $photo->photo_url,
             'password' => bcrypt(input('password')),
             'location' => parser()->pointFromCoordinates(input('coordinates')),
-        ], only('name', 'email', 'is_public', 'marker', 'color', 'background_color', 'border_color', 'text_color', 'marker_color')));
+        ], only('name',
+            'email',
+            'is_public',
+            'marker',
+            'color',
+            'background_color',
+            'border_color',
+            'text_color',
+            'marker_color',
+            'locale'
+        )));
         $user->photos()->attach($photo->uuid);
         return $user;
     }
