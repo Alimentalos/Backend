@@ -19,9 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('user_uuid')->index()->nullable();
             $table->string('photo_uuid')->index()->nullable();
             $table->string('api_token')->unique();
-            foreach (['marker', 'color', 'border_color', 'background_color', 'text_color', 'marker_color'] as $item) {
-                $table->string($item)->nullable();
-            }
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
