@@ -14,15 +14,12 @@ class CreatePlacesTable extends Migration
     public function up()
     {
         Schema::create('places', function (Blueprint $table) {
-            $table->string('uuid')->index()->nullable();
             $table->point('location'); // Latitude, Longitude
             $table->string('user_uuid')->index();
             $table->string('marker')->nullable();
             $table->string('marker_color')->nullable();
             $table->string('color')->nullable();
             $table->boolean('is_public')->default(true);
-            $table->string('name');
-            $table->longText('description');
             $table->timestamps();
         });
     }

@@ -15,7 +15,6 @@ class CreateAccessesTable extends Migration
     {
         Schema::create('accesses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uuid')->unique()->index();
             $table->string('geofence_uuid')->index();
             $table->uuidMorphs('accessible');
             $table->tinyInteger('status');

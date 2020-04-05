@@ -18,9 +18,6 @@ class CreateDevicesTable extends Migration
             $table->string('user_uuid')->index();
             $table->point('location')->nullable(); // Latitude, Longitude
             $table->string('color')->nullable();
-            $table->string('uuid')->unique()->index();
-            $table->string('name');
-            $table->longText('description')->nullable();
             $table->string('api_token')->unique();
             $table->boolean('is_public')->default(true);
             $table->timestamps();

@@ -15,7 +15,6 @@ class CreateAlertsTable extends Migration
     {
         Schema::create('alerts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uuid')->index()->nullable();
             $table->string('user_uuid')->index();
             $table->string('color')->nullable();
             $table->uuidMorphs('alert');

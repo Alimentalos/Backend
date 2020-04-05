@@ -14,7 +14,6 @@ class CreateCoinsTable extends Migration
     public function up()
     {
         Schema::create('coins', function (Blueprint $table) {
-            $table->string('uuid')->index();
             $table->string('received_operation_uuid')->nullable();
             $table->string('used_operation_uuid')->nullable();
             $table->uuidMorphs('monetizer');
