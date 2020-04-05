@@ -15,7 +15,6 @@ class CreatePetsTable extends Migration
     {
         Schema::create('pets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_uuid')->index();
             $table->string('size')->nullable();
             $table->timestamp('born_at')->nullable();
             $table->boolean('is_public')->default(true);

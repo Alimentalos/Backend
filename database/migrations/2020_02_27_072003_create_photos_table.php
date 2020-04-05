@@ -15,7 +15,6 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_uuid')->index();
             $table->string('title')->nullable();
             $table->string('body')->nullable();
             $table->string('ext');

@@ -4,8 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMarkerToTables extends Migration
+class AddUserUuidToResourcesTable extends Migration
 {
+    protected $resources = [
+        'geofences',
+        'users',
+        'pets',
+        'groups',
+        'devices',
+        'places',
+        'photos',
+        'comments',
+        'actions',
+        'alerts',
+    ];
+
     /**
      * Run the migrations.
      *
@@ -13,10 +26,9 @@ class AddMarkerToTables extends Migration
      */
     public function up()
     {
-        foreach(['geofences', 'users', 'devices', 'places'] as $tableName) {
+        foreach($this->resources as $tableName) {
             Schema::table($tableName, function (Blueprint $table) {
-                $table->string('marker')->nullable();
-                $table->string('marker_color')->nullable();
+                $table->string('user_uuid')->nullable()->index();
             });
         }
     }
@@ -28,9 +40,9 @@ class AddMarkerToTables extends Migration
      */
     public function down()
     {
-        foreach(['geofences', 'users', 'devices'] as $tableName) {
+        foreach($this->resources as $tableName) {
             Schema::table($tableName, function (Blueprint $table) {
-                $table->dropColumn(['marker', 'marker_color']);
+                $table->dropColumn('user_uuid');
             });
         }
     }

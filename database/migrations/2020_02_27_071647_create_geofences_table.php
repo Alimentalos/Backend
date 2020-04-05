@@ -15,7 +15,6 @@ class CreateGeofencesTable extends Migration
     {
         Schema::create('geofences', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_uuid')->index();
             $table->polygon('shape')->nullable();
             $table->boolean('is_public')->default(true);
             $table->timestamps();

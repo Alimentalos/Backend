@@ -15,9 +15,6 @@ class CreatePlacesTable extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->point('location'); // Latitude, Longitude
-            $table->string('user_uuid')->index();
-            $table->string('marker')->nullable();
-            $table->string('marker_color')->nullable();
             $table->string('color')->nullable();
             $table->boolean('is_public')->default(true);
             $table->timestamps();

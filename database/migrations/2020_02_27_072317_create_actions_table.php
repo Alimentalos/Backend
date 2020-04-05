@@ -15,7 +15,6 @@ class CreateActionsTable extends Migration
     {
         Schema::create('actions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_uuid')->index();
             $table->string('referenced_uuid')->nullable()->index();
             $table->string('type')->index();
             $table->string('resource')->index();
