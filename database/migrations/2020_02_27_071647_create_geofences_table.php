@@ -16,9 +16,7 @@ class CreateGeofencesTable extends Migration
         Schema::create('geofences', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid')->unique()->index();
-            $table->string('photo_url')->nullable();
             $table->string('user_uuid')->index();
-            $table->string('photo_uuid')->index()->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->polygon('shape')->nullable();

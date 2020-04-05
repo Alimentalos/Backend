@@ -17,9 +17,7 @@ class CreateAlertsTable extends Migration
             $table->bigIncrements('id');
             $table->string('uuid')->index()->nullable();
             $table->string('user_uuid')->index();
-            $table->string('photo_uuid')->index();
             $table->string('color')->nullable();
-            $table->text('photo_url')->nullable();
             $table->uuidMorphs('alert');
             $table->tinyInteger('type');
             $table->point('location'); // Latitude, Longitude

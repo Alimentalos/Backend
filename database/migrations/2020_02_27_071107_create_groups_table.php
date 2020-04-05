@@ -17,8 +17,6 @@ class CreateGroupsTable extends Migration
             $table->bigIncrements('id');
             $table->string('uuid')->unique()->index();
             $table->string('user_uuid')->index();
-            $table->string('photo_uuid')->index();
-            $table->string('photo_url')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->boolean('is_public')->default(true);

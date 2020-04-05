@@ -17,8 +17,6 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('uuid')->unique()->index();
             $table->string('user_uuid')->index()->nullable();
-            $table->string('photo_uuid')->index()->nullable();
-            $table->string('photo_url')->nullable();
             $table->string('api_token')->unique();
             $table->string('name');
             $table->string('email')->unique();
