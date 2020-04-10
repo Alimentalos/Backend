@@ -15,6 +15,7 @@ class AddColorsToPetsTable extends Migration
     {
         Schema::table('pets', function (Blueprint $table) {
             $table->string('hair_color')->nullable();
+            $table->string('second_hair_color')->nullable();
             $table->string('left_eye_color')->nullable();
             $table->string('right_eye_color')->nullable();
         });
@@ -30,6 +31,7 @@ class AddColorsToPetsTable extends Migration
         Schema::table('pets', function (Blueprint $table) {
             $table->dropColumn([
                 'hair_color',
+                'second_hair_color',
                 'left_eye_color',
                 'right_eye_color'
             ]);
