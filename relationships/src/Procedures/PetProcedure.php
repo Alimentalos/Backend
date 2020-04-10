@@ -14,24 +14,23 @@ trait PetProcedure
     public function createInstance()
     {
         $photo = photos()->create();
-        $pet = Pet::create(
-            array_merge(
+        $pet = Pet::create(array_merge(
                 [
-                    'photo_url' => config('storage.path') . $photo->photo_url,
+                    'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
                     'user_uuid' => authenticated()->uuid,
                     'photo_uuid' => $photo->uuid,
                     'location' => parser()->pointFromCoordinates(input('coordinates')),
                 ],
-                only(
-                    'name',
-                    'description',
-                    'hair_color',
-                    'second_hair_color',
-                    'born_at',
-                    'left_eye_color',
-                    'right_eye_color',
-                    'size',
-                    'is_public'
+                request()->only(array_merge(
+                        [
+                            'name',
+                            'description',
+                            'born_at',
+                            'size',
+                            'is_public'
+                        ],
+                        Pet::getColors()
+                    )
                 )
             )
         );
@@ -57,9 +56,11 @@ trait PetProcedure
                         'born_at',
                         'size',
                         'is_public'
-                    ], Pet::getColors()
-                )
-                , $pet)
+                    ],
+                    Pet::getColors()
+                ),
+                $pet
+            )
         );
         return $pet;
     }

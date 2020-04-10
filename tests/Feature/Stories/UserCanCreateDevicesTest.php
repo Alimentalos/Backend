@@ -7,6 +7,8 @@ namespace Tests\Feature\Stories;
 use Alimentalos\Relationships\Models\Device;
 use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserCanCreateDevicesTest extends TestCase
@@ -15,6 +17,7 @@ class UserCanCreateDevicesTest extends TestCase
 
     final public function testUserCanCreateDevices()
     {
+        Storage::fake('public');
         $user = factory(User::class)->create();
         $user->free = true;
         $user->save();
@@ -24,6 +27,7 @@ class UserCanCreateDevicesTest extends TestCase
             'is_public' => true,
             'color' => '#CCCCCC',
             'marker_color' => '#CCCCCC',
+            'marker' => UploadedFile::fake()->image('dev.jpg'),
         ]);
         $response->assertCreated();
         $response->assertJsonStructure([
@@ -34,6 +38,7 @@ class UserCanCreateDevicesTest extends TestCase
             'uuid',
             'updated_at',
             'created_at',
+            'marker'
         ]);
         $response->assertJsonFragment([
             'name' => $device->name,

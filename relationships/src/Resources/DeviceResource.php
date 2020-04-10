@@ -32,6 +32,7 @@ trait DeviceResource
      * Get available device reactions.
      *
      * @return string
+     * @codeCoverageIgnore
      */
     public function getAvailableReactions()
     {

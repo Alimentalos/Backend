@@ -64,7 +64,7 @@ class UserCanUpdateOwnedAlertTest extends TestCase
             'user_uuid' => $user->uuid,
         ]);
         $content = json_decode($response->getContent());
-        Storage::disk('public')->assertExists('photos/' . $content->photo->photo_url);
+        Storage::disk('public')->assertExists($content->photo->photo_url);
         $this->assertDatabaseHas('alerts', [
             'uuid' => $content->uuid,
             'title' => $modified->title,

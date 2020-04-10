@@ -14,23 +14,39 @@ trait UserProcedure
      */
     public function updateInstance(User $user)
     {
+        // Check photo uploaded
         upload()->check($user);
+
+        // Marker
+        if (rhas('marker')) {
+            $marker_uuid = uuid();
+            photos()->storePhoto($marker_uuid, uploaded('marker'));
+            $user->update([
+                'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension())
+            ]);
+        }
+
+        // Attributes
         $user->update(
             parameters()->fill(
-                array_merge([
-                    'email',
-                    'name',
-                    'is_public',
-                    'country',
-                    'region',
-                    'city',
-                    'city_name',
-                    'region_name',
-                    'country_name',
-                    'marker',
-                    'locale'
-                ], User::getColors()), $user)
+                array_merge(
+                    [
+                        'email',
+                        'name',
+                        'is_public',
+                        'country',
+                        'region',
+                        'city',
+                        'city_name',
+                        'region_name',
+                        'country_name',
+                        'locale'
+                    ],
+                    User::getColors()
+                ), $user
+            )
         );
+
         return $user;
     }
 
@@ -41,24 +57,37 @@ trait UserProcedure
      */
     public function createInstance()
     {
+        // Check photo uploaded
         $photo = photos()->create();
-        $user = User::create(array_merge([
-            'user_uuid' => authenticated()->uuid,
-            'photo_uuid' => $photo->uuid,
-            'photo_url' => config('storage.path') . $photo->photo_url,
-            'password' => bcrypt(input('password')),
-            'location' => parser()->pointFromCoordinates(input('coordinates')),
-        ], only('name',
-            'email',
-            'is_public',
-            'marker',
-            'color',
-            'background_color',
-            'border_color',
-            'text_color',
-            'marker_color',
-            'locale'
-        )));
+
+        // Marker
+        $marker_uuid = uuid();
+        photos()->storePhoto($marker_uuid, uploaded('marker'));
+
+        // Attributes
+        $user = User::create(
+            array_merge(
+                [
+                    'user_uuid' => authenticated()->uuid,
+                    'photo_uuid' => $photo->uuid,
+                    'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension()),
+                    'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
+                    'password' => bcrypt(input('password')),
+                    'location' => parser()->pointFromCoordinates(input('coordinates')),
+                ],
+                request()->only(
+                    array_merge(
+                        [
+                            'name',
+                            'email',
+                            'is_public',
+                            'locale'
+                        ],
+                        User::getColors()
+                    )
+                )
+            )
+        );
         $user->photos()->attach($photo->uuid);
         return $user;
     }

@@ -2,6 +2,7 @@
 
 namespace Alimentalos\Relationships\Models;
 
+use Alimentalos\Contracts\HasColors;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Commentable;
@@ -14,7 +15,7 @@ use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class Place extends Model implements ReactableContract, Resource
+class Place extends Model implements ReactableContract, Resource, HasColors
 {
     use Searchable;
     use PlaceResource;
@@ -60,6 +61,13 @@ class Place extends Model implements ReactableContract, Resource
         'is_public',
         'description',
         'location',
+        'color',
+        'marker_color'
+    ];
+
+    protected static $colors = [
+        'color',
+        'marker_color'
     ];
 
     /**
@@ -109,6 +117,7 @@ class Place extends Model implements ReactableContract, Resource
      * Get the indexable data array for the model.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function toSearchableArray()
     {
@@ -126,9 +135,20 @@ class Place extends Model implements ReactableContract, Resource
      * Get the value used to index the model.
      *
      * @return mixed
+     * @codeCoverageIgnore
      */
     public function getScoutKey()
     {
         return $this->uuid;
+    }
+
+    /**
+     * Get available colors of the resource.
+     *
+     * @return array
+     */
+    public static function getColors()
+    {
+        return self::$colors;
     }
 }

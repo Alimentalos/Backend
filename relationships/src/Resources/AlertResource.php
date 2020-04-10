@@ -34,6 +34,7 @@ trait AlertResource
      * Get available alert reactions.
      *
      * @return string
+     * @codeCoverageIgnore
      */
     public function getAvailableReactions()
     {

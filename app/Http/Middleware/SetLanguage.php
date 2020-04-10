@@ -14,11 +14,14 @@ class SetLanguage
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
+     * @codeCoverageIgnore
      */
     public function handle($request, Closure $next)
     {
         if (Session::has('lang')) {
+            // @codeCoverageIgnoreStart
             App::setLocale(Session::get('lang'));
+// @codeCoverageIgnoreEnd
         }
         return $next($request);
     }

@@ -79,7 +79,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
             'trackable_id' => $pet->uuid,
         ]);
 
-        Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
+        Storage::disk('public')->assertExists((json_decode($response->getContent()))->photo_url);
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets/' . $pet->uuid . '/photos/', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'title' => 'New title',
@@ -110,7 +110,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
             'trackable_id' => $pet->uuid,
         ]);
 
-        Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
+        Storage::disk('public')->assertExists((json_decode($response->getContent()))->photo_url);
         $response = $this->actingAs($user, 'api')->json('POST', '/api/geofences/' . $geofence->uuid . '/photos/', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'title' => 'New title',
@@ -136,7 +136,7 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid
         ]);
-        Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
+        Storage::disk('public')->assertExists((json_decode($response->getContent()))->photo_url);
         $response = $this->actingAs($user, 'api')->json('POST', '/api/groups/' . $group->uuid . '/photos/', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'title' => 'New title',
@@ -162,6 +162,6 @@ class UserCanCreateResourcePhotosTest extends TestCase
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid
         ]);
-        Storage::disk('public')->assertExists('photos/' . (json_decode($response->getContent()))->photo_url);
+        Storage::disk('public')->assertExists((json_decode($response->getContent()))->photo_url);
     }
 }

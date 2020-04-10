@@ -11,6 +11,7 @@ trait LocationResource
      * Get available location reactions.
      *
      * @return string
+     * @codeCoverageIgnore
      */
     public function getAvailableReactions()
     {
@@ -21,6 +22,7 @@ trait LocationResource
      * Update location validation rules.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function updateRules()
     {
@@ -31,7 +33,7 @@ trait LocationResource
      * Store location validation rules.
      *
      * @return array
-     * @reason Locations are device generated, can't be predefined validation rules.
+     * @codeCoverageIgnore
      */
     public function storeRules()
     {
@@ -52,6 +54,7 @@ trait LocationResource
      * Get location instances.
      *
      * @return LengthAwarePaginator
+     * @codeCoverageIgnore
      */
     public function getInstances()
     {

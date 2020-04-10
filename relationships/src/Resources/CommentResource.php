@@ -63,6 +63,7 @@ trait CommentResource
      * Get comment instances.
      *
      * @return LengthAwarePaginator
+     * @codeCoverageIgnore
      */
     public function getInstances()
     {

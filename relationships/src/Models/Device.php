@@ -3,6 +3,7 @@
 namespace Alimentalos\Relationships\Models;
 
 use Alimentalos\Contracts\CreateFromRequest;
+use Alimentalos\Contracts\HasColors;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Contracts\UpdateFromRequest;
 use Alimentalos\Relationships\BelongsToUser;
@@ -21,7 +22,7 @@ use Laravel\Scout\Searchable;
  * @author Ian Torres
  * @license MIT
  */
-class Device extends Authenticatable implements Resource, CreateFromRequest, UpdateFromRequest
+class Device extends Authenticatable implements Resource, CreateFromRequest, UpdateFromRequest, HasColors
 {
     use Searchable;
     use SpatialTrait;
@@ -47,6 +48,16 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
         'marker_color',
         'color',
         'marker'
+    ];
+
+    /**
+     * The available colors of the resource.
+     *
+     * @var array
+     */
+    protected static $colors = [
+        'color',
+        'marker_color'
     ];
 
     /**
@@ -99,6 +110,7 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
      * Get the indexable data array for the model.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function toSearchableArray()
     {
@@ -116,9 +128,20 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
      * Get the value used to index the model.
      *
      * @return mixed
+     * @codeCoverageIgnore
      */
     public function getScoutKey()
     {
         return $this->uuid;
+    }
+
+    /**
+     * Get available colors of the resource.
+     *
+     * @return array
+     */
+    public static function getColors()
+    {
+        return self::$colors;
     }
 }

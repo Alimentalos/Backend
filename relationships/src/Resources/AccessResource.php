@@ -9,6 +9,7 @@ trait AccessResource
      * Get available accesses reactions.
      *
      * @return string
+     * @codeCoverageIgnore
      */
     public function getAvailableReactions()
     {
@@ -19,6 +20,7 @@ trait AccessResource
      * Update accesses validation rules.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function updateRules()
     {
@@ -29,6 +31,7 @@ trait AccessResource
      * Store accesses validation rules.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function storeRules()
     {
@@ -49,6 +52,7 @@ trait AccessResource
      * Get access instances.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function getInstances()
     {
