@@ -17,7 +17,6 @@ class CreateLocationsTable extends Migration
             $table->bigIncrements('id');
             $table->uuidMorphs('trackable');
             $table->json('device')->nullable();
-            $table->string('uuid')->index()->nullable();
             $table->point('location'); // Latitude, Longitude
             $table->integer('accuracy')->index();
             $table->integer('altitude')->nullable();

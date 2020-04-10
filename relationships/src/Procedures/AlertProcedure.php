@@ -24,7 +24,7 @@ trait AlertProcedure
             'photo_uuid' => $photo->uuid,
             'alert_id' => $alert->uuid,
             'alert_type' => $alert_type,
-            'photo_url' => config('storage.path') . $photo->photo_url,
+            'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
             'location' => parser()->pointFromCoordinates(input('coordinates')),
         ], only('name', 'title', 'body', 'type', 'status'));
     }

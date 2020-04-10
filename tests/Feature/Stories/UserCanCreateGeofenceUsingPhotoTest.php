@@ -21,6 +21,7 @@ class UserCanCreateGeofenceUsingPhotoTest extends TestCase
         $user->save();
         $response = $this->actingAs($user, 'api')->post('/api/geofences', [
             'photo' => UploadedFile::fake()->image('photo5.jpg'),
+            'marker' => UploadedFile::fake()->image('marker.jpg'),
             'name' => 'Awesome geofence!',
             'is_public' => true,
             'shape' => [
@@ -37,7 +38,7 @@ class UserCanCreateGeofenceUsingPhotoTest extends TestCase
             'text_color' => '#CCCCCC',
             'fill_color' => '#CCCCCC',
             'tag_color' => '#CCCCCC',
-            'flag_color' => '#CCCCCC',
+            'marker_color' => '#CCCCCC',
             'fill_opacity' => '1',
         ]);
         $response->assertCreated();
@@ -58,6 +59,6 @@ class UserCanCreateGeofenceUsingPhotoTest extends TestCase
             'updated_at',
         ]);
         $content = $response->getContent();
-        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists((json_decode($content))->photo->photo_url);
     }
 }

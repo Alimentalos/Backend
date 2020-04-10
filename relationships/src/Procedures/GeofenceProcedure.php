@@ -191,25 +191,36 @@ trait GeofenceProcedure
     public function createInstance()
     {
         $photo = photos()->create();
+
+        // Instance & Attributes
         $geofence = new Geofence();
         $geofence->uuid = uuid();
         $geofence->photo_uuid = $photo->uuid;
         $geofence->name = input('name');
         $geofence->user_uuid = authenticated()->uuid;
-        $geofence->photo_url = config('storage.path') . $photo->photo_url;
-        $geofence->marker = fill('marker', null);
-        $geofence->color = fill('color', null);
-        $geofence->border_color = fill('border_color', null);
-        $geofence->background_color = fill('background_color', null);
-        $geofence->text_color = fill('text_color', null);
-        $geofence->fill_color = fill('fill_color', null);
-        $geofence->tag_color = fill('tag_color', null);
-        $geofence->flag_color = fill('flag_color', null);
+        $geofence->photo_url = config('storage.path') . 'photos/' . $photo->photo_url;
 
+        // Marker
+        $marker_uuid = uuid();
+        photos()->storePhoto($marker_uuid, uploaded('marker'));
+        $geofence->marker = config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension());
+
+        // Colors
+        foreach(Geofence::getColors() as $attribute) {
+            $geofence->{$attribute} = fill($attribute, null);
+        }
+
+        // Shape
         $shape = $this->createPointsFromShape(input('shape'));
         $geofence->shape = new Polygon([new LineString($shape)]);
+
+        // Visibility
         $geofence->is_public = input('is_public');
+
+        // Create
         $geofence->save();
+
+        // Attach to photo
         $photo->geofences()->attach($geofence->uuid);
         return $geofence;
     }
@@ -222,21 +233,36 @@ trait GeofenceProcedure
      */
     public function updateInstance(Geofence $geofence)
     {
+        // Check photo uploaded
         upload()->check($geofence);
-        $geofence->name = fill('name', $geofence->name);
-        $shape = array_map(function ($element) {
-            return new Point($element['latitude'], $element['longitude']);
-        }, input('shape'));
-        $geofence->shape = new Polygon([new LineString($shape)]);
-        $geofence->is_public = fill('is_public', $geofence->is_public);
-        $geofence->marker = fill('marker', $geofence->marker);
-        $geofence->color = fill('color', $geofence->color);
-        $geofence->border_color = fill('border_color', $geofence->border_color);
-        $geofence->background_color = fill('background_color', $geofence->background_color);
-        $geofence->text_color = fill('text_color', $geofence->text_color);
-        $geofence->fill_color = fill('fill_color', $geofence->fill_color);
-        $geofence->tag_color = fill('tag_color', $geofence->tag_color);
-        $geofence->flag_color = fill('flag_color', $geofence->flag_color);
+
+        // Attributes
+        foreach (['name', 'is_public'] as $item) {
+            $geofence->{$item} = fill($item, $geofence->{$item});
+        }
+
+        // Shape
+        $geofence->shape = new Polygon(
+            [new LineString(
+                array_map(function ($element) {
+                    return new Point($element['latitude'], $element['longitude']);
+                }, input('shape'))
+            )]
+        );
+
+        // Marker
+        if (rhas('marker')) {
+            $marker_uuid = uuid();
+            photos()->storePhoto($marker_uuid, uploaded('marker'));
+            $geofence->marker = config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension());
+        }
+
+        // Colors
+        foreach(Geofence::getColors() as $attribute) {
+            $geofence->{$attribute} = fill($attribute, $geofence->{$attribute});
+        }
+
+        // Update
         $geofence->save();
         return $geofence;
     }

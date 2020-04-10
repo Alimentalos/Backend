@@ -10,6 +10,7 @@ trait ActionResource
      * Get available action reactions.
      *
      * @return string
+     * @codeCoverageIgnore
      */
     public function getAvailableReactions()
     {
@@ -20,6 +21,7 @@ trait ActionResource
      * Update action validation rules.
      *
      * @return array
+     * @codeCoverageIgnore
      */
     public function updateRules()
     {
@@ -30,7 +32,7 @@ trait ActionResource
      * Store action validation rules.
      *
      * @return array
-     * @reason Actions can't be created by request, are system generated.
+     * @codeCoverageIgnore
      */
     public function storeRules()
     {

@@ -64,6 +64,6 @@ class UserCanUpdateOwnedGeofenceWithPhotoTest extends TestCase
         ]);
         $response->assertOk();
         $this->assertFalse($content->photo->uuid === $old_uuid);
-        Storage::disk('public')->assertExists('photos/' . $content->photo->photo_url);
+        Storage::disk('public')->assertExists($content->photo->photo_url);
     }
 }

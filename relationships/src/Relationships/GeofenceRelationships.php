@@ -13,6 +13,7 @@ trait GeofenceRelationships
 {
     /**
      * The related geofenceable resource.
+     * @codeCoverageIgnore
      */
     public function geofenceable()
     {

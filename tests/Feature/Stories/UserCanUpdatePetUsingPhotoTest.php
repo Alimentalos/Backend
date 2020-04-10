@@ -37,6 +37,6 @@ class UserCanUpdatePetUsingPhotoTest extends TestCase
             'name' => 'New name'
         ]);
         $content = $response->getContent();
-        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists((json_decode($content))->photo->photo_url);
     }
 }

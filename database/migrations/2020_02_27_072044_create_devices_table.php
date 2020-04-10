@@ -15,14 +15,8 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_uuid')->index();
             $table->point('location')->nullable(); // Latitude, Longitude
-            $table->string('marker_color')->nullable();
             $table->string('color')->nullable();
-            $table->string('marker')->nullable();
-            $table->string('uuid')->unique()->index();
-            $table->string('name');
-            $table->longText('description')->nullable();
             $table->string('api_token')->unique();
             $table->boolean('is_public')->default(true);
             $table->timestamps();

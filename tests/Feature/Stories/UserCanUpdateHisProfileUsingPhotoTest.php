@@ -37,6 +37,6 @@ class UserCanUpdateHisProfileUsingPhotoTest extends TestCase
         ]);
         $content = $response->getContent();
         $this->assertTrue((json_decode($content))->photo_url !== $user->photo_url);
-        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists((json_decode($content))->photo->photo_url);
     }
 }

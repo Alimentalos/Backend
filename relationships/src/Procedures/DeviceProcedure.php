@@ -15,15 +15,27 @@ trait DeviceProcedure
      */
     public function createInstance()
     {
-        $device = Device::create([
-            'name' => input('name'),
-            'description' => input('description'),
-            'user_uuid' => authenticated()->uuid,
-            'is_public' => input('is_public'),
-            'marker_color' => fill('marker_color', null),
-            'color' => fill('color', null),
-            'marker' => fill('marker', null),
-        ]);
+        // Marker
+        $marker_uuid = uuid();
+        photos()->storePhoto($marker_uuid, uploaded('marker'));
+
+        $device = Device::create(
+            array_merge(
+                [
+                    'name' => input('name'),
+                    'description' => input('description'),
+                    'user_uuid' => authenticated()->uuid,
+                    'is_public' => input('is_public'),
+                    'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension()),
+                ],
+                array_map(
+                    function($prop) {
+                        return fill($prop, null);
+                    },
+                    Device::getColors()
+                )
+            )
+        );
         return $device;
     }
 
@@ -35,14 +47,28 @@ trait DeviceProcedure
      */
     public function updateInstance(Device $device)
     {
-        $device->update(parameters()->fill([
-            'name',
-            'description',
-            'is_public',
-            'color',
-            'marker'.
-            'marker_color'
-        ], $device));
+        // Marker
+        if (rhas('marker')) {
+            $marker_uuid = uuid();
+            photos()->storePhoto($marker_uuid, uploaded('marker'));
+            $device->update([
+                'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension())
+            ]);
+        }
+
+        $device->update(
+            parameters()->fill(
+                array_merge(
+                    [
+                        'name',
+                        'description',
+                        'is_public',
+                    ],
+                    Device::getColors()
+                ),
+                $device
+            )
+        );
 
         return $device;
     }

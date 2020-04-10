@@ -61,7 +61,7 @@ class ActionsRepository
             [
                 'type' => 'success',
                 'resource' => Route::currentRouteAction(),
-                'parameters' => request()->except('photo', 'password', 'password_confirmation', 'shape'),
+                'parameters' => request()->except('photo', 'marker', 'password', 'password_confirmation', 'shape'),
                 'referenced' => request()->route($parameters[0])->uuid ?? $parameters[0]
             ]
         );

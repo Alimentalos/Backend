@@ -34,7 +34,7 @@ class UserCanCreatePetsTest extends TestCase
         ]);
         $response->assertCreated();
         $content = $response->getContent();
-        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists((json_decode($content))->photo->photo_url);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . (json_decode($content))->uuid . '/photos');
         $response->assertOk();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/pets');

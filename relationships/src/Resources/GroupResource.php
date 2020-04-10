@@ -33,6 +33,7 @@ trait GroupResource
      * Get available group reactions.
      *
      * @return string
+     * @codeCoverageIgnore
      */
     public function getAvailableReactions()
     {

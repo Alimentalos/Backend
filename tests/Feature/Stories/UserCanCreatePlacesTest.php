@@ -23,6 +23,7 @@ class UserCanCreatePlacesTest extends TestCase
         $place = factory(Place::class)->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/places', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
+            'marker' => UploadedFile::fake()->image('marker.jpg'),
             'name' => $place->name,
             'description' => $place->description,
             'coordinates' => '5.5,6.5',
@@ -37,7 +38,7 @@ class UserCanCreatePlacesTest extends TestCase
             'name' => $place->name,
             'description' => $place->description,
         ]);
-        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists((json_decode($content))->photo->photo_url);
         $response->assertJsonStructure([
            'photo_url',
            'user_uuid',

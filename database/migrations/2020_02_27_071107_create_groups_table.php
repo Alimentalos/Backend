@@ -15,14 +15,6 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uuid')->unique()->index();
-            $table->string('user_uuid')->index();
-            $table->string('photo_uuid')->index();
-            foreach (['photo_url', 'color', 'background_color', 'border_color', 'fill_color', 'text_color', 'user_color', 'administrator_color', 'owner_color'] as $item) {
-                $table->string($item)->nullable();
-            }
-            $table->string('name');
-            $table->longText('description')->nullable();
             $table->boolean('is_public')->default(true);
             $table->timestamps();
         });

@@ -19,7 +19,7 @@ class Uploader
             $photo = photos()->create();
             $model->update([
                 'photo_uuid' => $photo->uuid,
-                'photo_url' => config('storage.path') . $photo->photo_url,
+                'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
                 'location' => parser()->pointFromCoordinates(input('coordinates')),
             ]);
             $model->photos()->attach($photo->uuid);

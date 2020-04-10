@@ -3,6 +3,7 @@
 namespace Alimentalos\Relationships\Models;
 
 use Alimentalos\Contracts\CreateFromRequest;
+use Alimentalos\Contracts\HasColors;
 use Alimentalos\Contracts\Monetizer;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Contracts\UpdateFromRequest;
@@ -16,7 +17,7 @@ use Alimentalos\Relationships\Resources\GroupResource;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequest, Monetizer
+class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequest, Monetizer, HasColors
 {
     use Searchable;
     use GroupResource;
@@ -75,6 +76,22 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     ];
 
     /**
+     * The available colors of the resource.
+     *
+     * @var array
+     */
+    protected static $colors = [
+        'color',
+        'background_color',
+        'border_color',
+        'fill_color',
+        'text_color',
+        'user_color',
+        'administrator_color',
+        'owner_color',
+    ];
+
+    /**
      * The properties which are hidden.
      *
      * @var array
@@ -104,9 +121,20 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
      * Get the value used to index the model.
      *
      * @return mixed
+     * @codeCoverageIgnore
      */
     public function getScoutKey()
     {
         return $this->uuid;
+    }
+
+    /**
+     * Get available colors of the resource.
+     *
+     * @return array
+     */
+    public static function getColors()
+    {
+        return self::$colors;
     }
 }

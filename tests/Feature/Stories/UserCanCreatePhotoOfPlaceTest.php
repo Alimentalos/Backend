@@ -42,7 +42,7 @@ class UserCanCreatePhotoOfPlaceTest extends TestCase
             'is_public',
         ]);
         $content = $response->getContent();
-        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo_url);
+        Storage::disk('public')->assertExists((json_decode($content))->photo_url);
 
         $this->assertDatabaseHas('photos', [
             'uuid' => (json_decode($content))->uuid,

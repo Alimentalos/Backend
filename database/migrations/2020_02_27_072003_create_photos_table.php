@@ -15,14 +15,12 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->point('location'); // Latitude, Longitude
-            $table->string('uuid')->index()->unique();
-            $table->string('user_uuid')->index();
             $table->string('title')->nullable();
             $table->string('body')->nullable();
             $table->string('ext');
             $table->string('photo_url')->nullable();
             $table->boolean('is_public')->default(true);
+            $table->point('location'); // Latitude, Longitude
             $table->timestamps();
         });
 

@@ -24,6 +24,7 @@ class UserCanCreateDeviceAlertsTest extends TestCase
         $device = factory(Device::class)->create();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/alerts', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
+            'marker' => UploadedFile::fake()->image('dev.jpg'),
             'alert_type' => 'Alimentalos\\Relationships\\Models\\Device',
             'alert_id' => $device->uuid,
             'title' => $alert->title,
@@ -35,7 +36,7 @@ class UserCanCreateDeviceAlertsTest extends TestCase
         ]);
         $response->assertCreated();
         $content = $response->getContent();
-        Storage::disk('public')->assertExists('photos/' . (json_decode($content))->photo->photo_url);
+        Storage::disk('public')->assertExists((json_decode($content))->photo->photo_url);
         $this->assertDatabaseHas('alerts', [
             'uuid' => (json_decode($content))->uuid,
             'title' => $alert->title,

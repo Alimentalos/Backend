@@ -14,7 +14,6 @@ class CreateOperationsTable extends Migration
     public function up()
     {
         Schema::create('operations', function (Blueprint $table) {
-            $table->string('uuid')->index();
             $table->nullableUuidMorphs('receiver');
             $table->nullableUuidMorphs('emitter');
             $table->decimal('amount', 13, 2);
