@@ -2,6 +2,7 @@
 
 namespace Alimentalos\Relationships\Models;
 
+use Alimentalos\Contracts\HasColors;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Commentable;
@@ -17,7 +18,7 @@ use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
 
-class Pet extends Authenticatable implements ReactableContract, Resource
+class Pet extends Authenticatable implements ReactableContract, Resource, HasColors
 {
     use Searchable;
     use SpatialTrait;
@@ -58,20 +59,34 @@ class Pet extends Authenticatable implements ReactableContract, Resource
      * @var array
      */
     protected $fillable = [
-        'user_uuid',
-        'photo_uuid',
-        'api_token',
-        'photo_url',
-        'uuid',
-        'name',
-        'description',
+        'user_uuid', // Related user
+        'photo_uuid', // Related photo
+        'api_token', // Token to track
+        'photo_url', // Profile photo
+        'uuid', // Universal unique identifier
+        'name', // Name it
+        'description', // Describe the pet
+        'size', // Size (xs, sm, md, lg, xlg)
+        'born_at', // Born date
+        'is_public', // Visibility
+        'location', // Spatial point
+        // Colors
         'hair_color',
+        'second_hair_color',
         'left_eye_color',
         'right_eye_color',
-        'size',
-        'born_at',
-        'is_public',
-        'location',
+    ];
+
+    /**
+     * The available colors of the resource.
+     *
+     * @var array
+     */
+    protected static $colors = [
+        'hair_color',
+        'second_hair_color',
+        'left_eye_color',
+        'right_eye_color',
     ];
 
     /**
@@ -125,5 +140,15 @@ class Pet extends Authenticatable implements ReactableContract, Resource
     public function getScoutKey()
     {
         return $this->uuid;
+    }
+
+    /**
+     * Get available colors of the resource.
+     *
+     * @return array
+     */
+    public static function getColors()
+    {
+        return self::$colors;
     }
 }

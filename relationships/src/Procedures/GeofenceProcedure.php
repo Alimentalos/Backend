@@ -198,13 +198,9 @@ trait GeofenceProcedure
         $geofence->user_uuid = authenticated()->uuid;
         $geofence->photo_url = config('storage.path') . $photo->photo_url;
         $geofence->marker = fill('marker', null);
-        $geofence->color = fill('color', null);
-        $geofence->border_color = fill('border_color', null);
-        $geofence->background_color = fill('background_color', null);
-        $geofence->text_color = fill('text_color', null);
-        $geofence->fill_color = fill('fill_color', null);
-        $geofence->tag_color = fill('tag_color', null);
-        $geofence->marker_color = fill('marker_color', null);
+        foreach(Geofence::getColors() as $attribute) {
+            $geofence->{$attribute} = fill($attribute, null);
+        }
 
         $shape = $this->createPointsFromShape(input('shape'));
         $geofence->shape = new Polygon([new LineString($shape)]);
@@ -230,13 +226,9 @@ trait GeofenceProcedure
         $geofence->shape = new Polygon([new LineString($shape)]);
         $geofence->is_public = fill('is_public', $geofence->is_public);
         $geofence->marker = fill('marker', $geofence->marker);
-        $geofence->color = fill('color', $geofence->color);
-        $geofence->border_color = fill('border_color', $geofence->border_color);
-        $geofence->background_color = fill('background_color', $geofence->background_color);
-        $geofence->text_color = fill('text_color', $geofence->text_color);
-        $geofence->fill_color = fill('fill_color', $geofence->fill_color);
-        $geofence->tag_color = fill('tag_color', $geofence->tag_color);
-        $geofence->marker_color = fill('marker_color', $geofence->marker_color);
+        foreach(Geofence::getColors() as $attribute) {
+            $geofence->{$attribute} = fill($attribute, $geofence->{$attribute});
+        }
         $geofence->save();
         return $geofence;
     }

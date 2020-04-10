@@ -14,12 +14,27 @@ trait PetProcedure
     public function createInstance()
     {
         $photo = photos()->create();
-        $pet = Pet::create(array_merge([
-            'photo_url' => config('storage.path') . $photo->photo_url,
-            'user_uuid' => authenticated()->uuid,
-            'photo_uuid' => $photo->uuid,
-            'location' => parser()->pointFromCoordinates(input('coordinates')),
-        ], only('name', 'description', 'hair_color', 'born_at', 'left_eye_color', 'right_eye_color', 'size', 'is_public')));
+        $pet = Pet::create(
+            array_merge(
+                [
+                    'photo_url' => config('storage.path') . $photo->photo_url,
+                    'user_uuid' => authenticated()->uuid,
+                    'photo_uuid' => $photo->uuid,
+                    'location' => parser()->pointFromCoordinates(input('coordinates')),
+                ],
+                only(
+                    'name',
+                    'description',
+                    'hair_color',
+                    'second_hair_color',
+                    'born_at',
+                    'left_eye_color',
+                    'right_eye_color',
+                    'size',
+                    'is_public'
+                )
+            )
+        );
         $photo->pets()->attach($pet->uuid);
         return $pet;
     }
@@ -33,7 +48,19 @@ trait PetProcedure
     public function updateInstance(Pet $pet)
     {
         upload()->check($pet);
-        $pet->update(parameters()->fill(['name', 'description', 'hair_color', 'born_at', 'left_eye_color', 'right_eye_color', 'size', 'is_public'], $pet));
+        $pet->update(
+            parameters()->fill(
+                array_merge(
+                    [
+                        'name',
+                        'description',
+                        'born_at',
+                        'size',
+                        'is_public'
+                    ], Pet::getColors()
+                )
+                , $pet)
+        );
         return $pet;
     }
 }

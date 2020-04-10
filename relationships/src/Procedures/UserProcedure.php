@@ -15,24 +15,22 @@ trait UserProcedure
     public function updateInstance(User $user)
     {
         upload()->check($user);
-        $user->update(parameters()->fill([
-            'email',
-            'name',
-            'is_public',
-            'country',
-            'region',
-            'city',
-            'city_name',
-            'region_name',
-            'country_name',
-            'marker',
-            'color',
-            'background_color',
-            'border_color',
-            'text_color',
-            'marker_color',
-            'locale'
-        ], $user));
+        $user->update(
+            parameters()->fill(
+                array_merge([
+                    'email',
+                    'name',
+                    'is_public',
+                    'country',
+                    'region',
+                    'city',
+                    'city_name',
+                    'region_name',
+                    'country_name',
+                    'marker',
+                    'locale'
+                ], User::getColors()), $user)
+        );
         return $user;
     }
 

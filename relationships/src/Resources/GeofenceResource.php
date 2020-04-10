@@ -66,6 +66,11 @@ trait GeofenceResource
         return [
             'name' => 'required',
             'photo' => 'required',
+            'fill_opacity' => 'required',
+            'shape.*.latitude' => 'required_with:shape.*.longitude',
+            'is_public' => 'required|boolean',
+            'coordinates' => ['required', new Coordinate()],
+            // Colors
             'color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'border_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'background_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
@@ -73,10 +78,6 @@ trait GeofenceResource
             'fill_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'tag_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'marker_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'fill_opacity' => 'required',
-            'shape.*.latitude' => 'required_with:shape.*.longitude',
-            'is_public' => 'required|boolean',
-            'coordinates' => ['required', new Coordinate()],
         ];
     }
 

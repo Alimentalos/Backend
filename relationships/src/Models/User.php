@@ -3,6 +3,7 @@
 namespace Alimentalos\Relationships\Models;
 
 use Alimentalos\Contracts\CreateFromRequest;
+use Alimentalos\Contracts\HasColors;
 use Alimentalos\Contracts\Monetizer;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Contracts\UpdateFromRequest;
@@ -25,7 +26,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Laravel\Scout\Searchable;
 
-class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource, CreateFromRequest, UpdateFromRequest, Monetizer
+class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource, CreateFromRequest, UpdateFromRequest, Monetizer, HasColors
 {
     use Searchable;
     use SpatialTrait;
@@ -138,6 +139,18 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     ];
 
     /**
+     * Get available colors of the resource.
+     *
+     * @return array
+     */
+    protected static $colors = [
+        'color',
+        'border_color',
+        'background_color',
+        'text_color'
+    ];
+
+    /**
      * This model doesn't uses increments.
      *
      * @var bool
@@ -210,5 +223,15 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public function getScoutKey()
     {
         return $this->uuid;
+    }
+
+    /**
+     * Get available colors of the resource.
+     *
+     * @return array
+     */
+    public static function getColors()
+    {
+        return self::$colors;
     }
 }

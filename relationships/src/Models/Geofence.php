@@ -3,6 +3,7 @@
 namespace Alimentalos\Relationships\Models;
 
 use Alimentalos\Contracts\CreateFromRequest;
+use Alimentalos\Contracts\HasColors;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Contracts\UpdateFromRequest;
 use Alimentalos\Relationships\BelongsToUser;
@@ -17,7 +18,7 @@ use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class Geofence extends Model implements ReactableContract, Resource, CreateFromRequest, UpdateFromRequest
+class Geofence extends Model implements ReactableContract, Resource, CreateFromRequest, UpdateFromRequest, HasColors
 {
     use Searchable;
     use SpatialTrait;
@@ -48,13 +49,29 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
         'photo_url',
         'is_public',
         'marker',
+        'marker_color',
         'text_color',
         'color',
         'border_color',
         'background_color',
         'fill_color',
         'tag_color',
-        '#CCCCCC',
+        'fill_opacity'
+    ];
+
+    /**
+     * The available colors of the resource.
+     *
+     * @var array
+     */
+    protected static $colors = [
+        'color',
+        'border_color',
+        'background_color',
+        'text_color',
+        'fill_color',
+        'tag_color',
+        'marker_color',
     ];
 
     /**
@@ -114,5 +131,15 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
     public function getScoutKey()
     {
         return $this->uuid;
+    }
+
+    /**
+     * Get available colors of the resource.
+     *
+     * @return array
+     */
+    public static function getColors()
+    {
+        return self::$colors;
     }
 }
