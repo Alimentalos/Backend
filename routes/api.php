@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+\Igaster\LaravelCities\Geo::ApiRoutes();
+
 /*
 |--------------------------------------------------------------------------
 | API Routes

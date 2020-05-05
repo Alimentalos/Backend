@@ -39,6 +39,12 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        // This block will be ignored because isn't part of the software
+        // @codeCoverageIgnoreStart
+        if (app()->bound('sentry') && $this->shouldReport($exception)) {
+            app('sentry')->captureException($exception);
+        }
+        // @codeCoverageIgnoreEnd
         parent::report($exception);
     }
 
