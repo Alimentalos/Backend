@@ -95,7 +95,7 @@ class Photo extends Model implements ReactableContract, Resource, UpdateFromRequ
     {
         $array = $this->toArray();
 
-        $array['location'] = !is_null($array['location']) ? [
+        $array['location'] = array_key_exists('location', $array) ? [
             'latitude' => $array['location']->getLat(),
             'longitude' => $array['location']->getLng(),
         ] : 'NO_LOCATION';
