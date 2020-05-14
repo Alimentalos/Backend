@@ -69,17 +69,6 @@ class Finder
     }
 
     /**
-     * Resolve nested resource table.
-     *
-     * @param Resource $resource
-     * @return string
-     */
-    public function findTable(Resource $resource) {
-        $class = explode('\\', get_class($resource));
-        return strtolower(Str::plural(end($class)));
-    }
-
-    /**
      * Bind resource.
      *
      * @param $resource
