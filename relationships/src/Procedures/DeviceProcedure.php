@@ -19,23 +19,22 @@ trait DeviceProcedure
         $marker_uuid = uuid();
         photos()->storePhoto($marker_uuid, uploaded('marker'));
 
-        $device = Device::create(
-            array_merge(
-                [
-                    'name' => input('name'),
-                    'description' => input('description'),
-                    'user_uuid' => authenticated()->uuid,
-                    'is_public' => input('is_public'),
-                    'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension()),
-                ],
-                array_map(
-                    function($prop) {
-                        return fill($prop, null);
-                    },
-                    Device::getColors()
-                )
-            )
+        $properties = [
+            'name' => input('name'),
+            'description' => input('description'),
+            'user_uuid' => authenticated()->uuid,
+            'is_public' => input('is_public'),
+            'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension()),
+        ];
+
+        $fill = array_map(
+            function($prop) {
+                return fill($prop, null);
+            },
+            Device::getColors()
         );
+
+        $device = Device::create(array_merge($properties, $fill));
         return $device;
     }
 

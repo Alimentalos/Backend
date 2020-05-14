@@ -4,6 +4,7 @@
 namespace Alimentalos\Tools;
 
 
+use Alimentalos\Contracts\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request as RequestFacade;
@@ -65,6 +66,17 @@ class Finder
      */
     public function findClass($class) {
         return $this->find('Alimentalos\\Relationships\\Models\\' . Str::camel(Str::singular($class)));
+    }
+
+    /**
+     * Resolve nested resource table.
+     *
+     * @param Resource $resource
+     * @return string
+     */
+    public function findTable(Resource $resource) {
+        $class = explode('\\', get_class($resource));
+        return strtolower(Str::plural(end($class)));
     }
 
     /**

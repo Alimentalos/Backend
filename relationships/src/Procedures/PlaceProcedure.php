@@ -22,27 +22,18 @@ trait PlaceProcedure
         $marker_uuid = uuid();
         photos()->storePhoto($marker_uuid, uploaded('marker'));
 
+        $properties = [
+            'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
+            'user_uuid' => authenticated()->uuid,
+            'photo_uuid' => $photo->uuid,
+            'location' => parser()->pointFromCoordinates(input('coordinates')),
+            'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension()),
+        ];
+
+        $fill = request()->only(array_merge(['name', 'description'], Place::getColors()));
+
         // Attributes
-        $place = Place::create(
-            array_merge(
-                [
-                    'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
-                    'user_uuid' => authenticated()->uuid,
-                    'photo_uuid' => $photo->uuid,
-                    'location' => parser()->pointFromCoordinates(input('coordinates')),
-                    'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension()),
-                ],
-                request()->only(
-                    array_merge(
-                        [
-                            'name',
-                            'description',
-                        ],
-                        Place::getColors()
-                    )
-                )
-            )
-        );
+        $place = Place::create(array_merge($properties, $fill));
 
         $photo->places()->attach($place->uuid);
         return $place;
