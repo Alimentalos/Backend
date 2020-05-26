@@ -95,19 +95,19 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
         ->name('locations.index');
 
     foreach (['geofences', 'groups'] as $resource) {
-        Route::get("/{$resource}/{resource}/users", 'Api\Resource\Users\IndexController')
+        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')
             ->name("{$resource}.users.index");
     }
 
     foreach (['users'] as $resource) {
-        Route::get("/{$resource}/{resource}/places", 'Api\Resource\Places\IndexController')
+        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')
             ->name("{$resource}.places.index");
     }
 
     foreach(['groups', 'users'] as $resource) {
-        Route::get("/{$resource}/{resource}/pets", 'Api\Resource\Pets\IndexController')
+        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')
             ->name("{$resource}.pets.index");
-        Route::get("/{$resource}/{resource}/devices", 'Api\Resource\Devices\IndexController')
+        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')
             ->name("{$resource}.devices.index");
     }
 
@@ -121,7 +121,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     }
 
     foreach (['places', 'pets', 'geofences', 'users', 'groups'] as $resource) {
-        Route::get("/{$resource}/{resource}/photos", 'Api\Resource\Photos\IndexController')
+        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')
             ->name("{$resource}.photos.index");
         Route::post("/{$resource}/{resource}/photos", 'Api\Resource\Photos\StoreController')
             ->name("{$resource}.photos.store");
@@ -134,10 +134,10 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     // Resource Geofences
 
     foreach (['devices', 'users', 'pets'] as $resource) {
-        Route::get("/{$resource}/{resource}/geofences", 'Api\Resource\Geofences\IndexController')->name("{$resource}.geofences.index");
+        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')->name("{$resource}.geofences.index");
+        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')->name("{$resource}.groups.index");
         Route::post("/{$resource}/{resource}/geofences/{geofence}/attach", 'Api\Resource\Geofences\AttachController')->name("{$resource}.geofences.attach");
         Route::post("/{$resource}/{resource}/geofences/{geofence}/detach", 'Api\Resource\Geofences\DetachController')->name("{$resource}.geofences.detach");
-        Route::get("/{$resource}/{resource}/groups", 'Api\Resource\Groups\IndexController')->name("{$resource}.groups.index");
         Route::post("/{$resource}/{resource}/groups/{group}/attach", 'Api\Resource\Groups\AttachController')->name("{$resource}.groups.attach");
         Route::post("/{$resource}/{resource}/groups/{group}/detach", 'Api\Resource\Groups\DetachController')->name("{$resource}.groups.detach");
     }
@@ -148,7 +148,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
         } else {
             $str = 'geofences';
         }
-        Route::get("/{$resource}/{resource}/{$str}", 'Api\Resource\\' . Str::ucfirst($str) . '\IndexController')->name("{$resource}.{$str}.index");
+        Route::get("/{$resource}/{resource}/{$str}", 'Api\Resource\Nested\IndexController')->name("{$resource}.{$str}.index");
         Route::post("/{$resource}/{resource}/{$str}/". '{' . Str::singular($str) . '}' ."/attach", 'Api\Resource\\' . Str::ucfirst($str) . '\AttachController')->name("{$resource}.{$str}.attach");
         Route::post("/{$resource}/{resource}/{$str}/". '{' . Str::singular($str) . '}' ."/detach", 'Api\Resource\\' . Str::ucfirst($str) . '\DetachController')->name("{$resource}.{$str}.detach");
     }

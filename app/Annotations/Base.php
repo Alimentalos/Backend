@@ -2,7 +2,7 @@
 
 /**
  * @OA\Info(
- *      version="v.9.0",
+ *      version="v.9.2",
  *      title="Alimentalos API",
  *      description="Official Alimentalos API Documentation",
  *      @OA\Contact(

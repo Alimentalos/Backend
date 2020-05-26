@@ -47,7 +47,14 @@ class ResourceRepository
      */
     public function values()
     {
-        return [ self::USER, self::DEVICE, self::PET, self::GROUP, self::PHOTO, self::COMMENT ];
+        return [
+            self::USER,
+            self::DEVICE,
+            self::PET,
+            self::GROUP,
+            self::PHOTO,
+            self::COMMENT
+        ];
     }
 
     /**

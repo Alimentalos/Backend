@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Alimentalos\Relationships\Models\Group;
 use Alimentalos\Relationships\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +28,29 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
+     * The current available dynamic path binds for your application.
+     */
+    public const DYNAMIC_RESOURCE_BINDS = ['resource', 'nested'];
+
+    /**
+     * The current available resources for your application.
+     */
+    public const CURRENT_SUPPORTED_RESOURCES = [
+        'places',
+        'users',
+        'devices',
+        'pets',
+        'geofences',
+        'comments',
+        'groups',
+        'alerts',
+        'actions',
+        'photos',
+        'accesses',
+        'locations'
+    ];
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
@@ -36,15 +61,24 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot();
 
-        Route::bind('resource', function ($value) {
-            if (in_array($value, ['places', 'users', 'devices', 'pets', 'geofences', 'comments', 'groups', 'alerts', 'actions', 'photos', 'accesses', 'locations']))
-                return finder()->findClass($value);
-
-            return finder()->findModelInstance(finder()->currentResource(), $value);
-        });
+        Route::bind('resource', function ($value) { return $this->finderCallback($value); });
 
         Route::model('user', User::class);
         Route::model('group', Group::class);
+    }
+
+    /**
+     * Finder router callback.
+     * @param $value
+     * @param $resource
+     * @return Builder|Model|mixed
+     */
+    public function finderCallback($value)
+    {
+        if (in_array($value, self::CURRENT_SUPPORTED_RESOURCES))
+            return finder()->findClass($value);
+
+        return finder()->findModelInstance(finder()->currentResource(), $value);
     }
 
     /**
