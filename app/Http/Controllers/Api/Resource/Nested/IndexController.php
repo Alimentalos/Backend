@@ -34,7 +34,21 @@ class IndexController extends Controller
      *         type="string",
      *           @OA\Items(
      *               type="string",
-     *               enum={"users", "groups"},
+     *               enum={"users", "groups", "alerts", "devices", "geofences", "pets", "actions", "photos"},
+     *               default="users"
+     *           ),
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="nested",
+     *         in="path",
+     *         description="Nested type that need to be considered",
+     *         required=true,
+     *         @OA\Schema(
+     *         type="string",
+     *           @OA\Items(
+     *               type="string",
+     *               enum={"users", "groups", "geofences", "devices", "pets", "photos", "places"},
      *               default="users"
      *           ),
      *         )

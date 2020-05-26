@@ -10,7 +10,7 @@
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "version": "v.9.0"
+        "version": "v.9.2"
     },
     "servers": [
         {
@@ -628,52 +628,6 @@
                 }
             }
         },
-        "/{resource}/{uuid}/devices": {
-            "get": {
-                "tags": [
-                    "Resources"
-                ],
-                "summary": "Get devices of resource.",
-                "description": "Returns the devices paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getResourceDevices",
-                "parameters": [
-                    {
-                        "name": "uuid",
-                        "in": "path",
-                        "description": "Unique identifier of resource",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "description": "Resource type that need to be considered",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "items": {
-                                "type": "string",
-                                "default": "users",
-                                "enum": [
-                                    "users",
-                                    "groups"
-                                ]
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Devices retrieved successfully"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            }
-        },
         "/{resource}/{uuid}/geofences/{geofence}/accesses": {
             "get": {
                 "tags": [
@@ -844,54 +798,6 @@
                 }
             }
         },
-        "/{resource}/{uuid}/geofences": {
-            "get": {
-                "tags": [
-                    "Resources"
-                ],
-                "summary": "Get geofences of resource.",
-                "description": "Returns the geofences paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getResourceGeofences",
-                "parameters": [
-                    {
-                        "name": "uuid",
-                        "in": "path",
-                        "description": "Unique identifier of resource",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "description": "Resource type that need to be considered",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "items": {
-                                "type": "string",
-                                "default": "devices",
-                                "enum": [
-                                    "devices",
-                                    "users",
-                                    "groups",
-                                    "pets"
-                                ]
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Geofences retrieved successfully"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            }
-        },
         "/{resource}/{uuid}/groups/{group}/attach": {
             "post": {
                 "tags": [
@@ -999,54 +905,6 @@
                 "responses": {
                     "200": {
                         "description": "Resource detached to group successfully"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            }
-        },
-        "/{resource}/{uuid}/groups": {
-            "get": {
-                "tags": [
-                    "Resources"
-                ],
-                "summary": "Get groups of resource.",
-                "description": "Returns the groups paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getResourceGroups",
-                "parameters": [
-                    {
-                        "name": "uuid",
-                        "in": "path",
-                        "description": "Unique identifier of resource",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "description": "Resource type that need to be considered",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "items": {
-                                "type": "string",
-                                "default": "devices",
-                                "enum": [
-                                    "geofences",
-                                    "pets",
-                                    "devices",
-                                    "users"
-                                ]
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Groups retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
@@ -1183,14 +1041,15 @@
                 }
             }
         },
-        "/{resource}/{uuid}/pets": {
+        "/{resource}/{uuid}/{nested}": {
             "get": {
                 "tags": [
-                    "Resources"
+                    "Resources",
+                    "Nested Resources"
                 ],
-                "summary": "Get pets of resource.",
-                "description": "Returns the pets paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getResourcePets",
+                "summary": "Get nested resources of resource.",
+                "description": "Returns the nested resources of a resource paginated by a default quantity, payload includes pagination links and stats.",
+                "operationId": "getNestedResourcesOfResource",
                 "parameters": [
                     {
                         "name": "uuid",
@@ -1212,8 +1071,36 @@
                                 "type": "string",
                                 "default": "users",
                                 "enum": [
+                                    "users",
                                     "groups",
-                                    "users"
+                                    "alerts",
+                                    "devices",
+                                    "geofences",
+                                    "pets",
+                                    "actions",
+                                    "photos"
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "nested",
+                        "in": "path",
+                        "description": "Nested type that need to be considered",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "type": "string",
+                                "default": "users",
+                                "enum": [
+                                    "users",
+                                    "groups",
+                                    "geofences",
+                                    "devices",
+                                    "pets",
+                                    "photos",
+                                    "places"
                                 ]
                             }
                         }
@@ -1221,7 +1108,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Pets retrieved successfully"
+                        "description": "Nested resources retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
@@ -1346,53 +1233,6 @@
             }
         },
         "/{resource}/{uuid}/photos": {
-            "get": {
-                "tags": [
-                    "Resources"
-                ],
-                "summary": "Get photos of resource.",
-                "description": "Returns the photos paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getResourcePhotos",
-                "parameters": [
-                    {
-                        "name": "uuid",
-                        "in": "path",
-                        "description": "Unique identifier of resource",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "description": "Resource type that need to be considered",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "items": {
-                                "type": "string",
-                                "default": "pets",
-                                "enum": [
-                                    "pets",
-                                    "users",
-                                    "geofences",
-                                    "groups",
-                                    "places"
-                                ]
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Photos retrieved successfully"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "Resources"
@@ -1434,51 +1274,6 @@
                 "responses": {
                     "200": {
                         "description": "Photo created successfully"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            }
-        },
-        "/{resource}/{uuid}/places": {
-            "get": {
-                "tags": [
-                    "Resources"
-                ],
-                "summary": "Get places of resource.",
-                "description": "Returns the places paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getResourcePlaces",
-                "parameters": [
-                    {
-                        "name": "uuid",
-                        "in": "path",
-                        "description": "Unique identifier of resource",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "description": "Resource type that need to be considered",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "items": {
-                                "type": "string",
-                                "default": "users",
-                                "enum": [
-                                    "users"
-                                ]
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Places retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
@@ -1673,52 +1468,6 @@
                 "responses": {
                     "200": {
                         "description": "Token retrieved successfully"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    }
-                }
-            }
-        },
-        "/{resource}/{uuid}/users": {
-            "get": {
-                "tags": [
-                    "Resources"
-                ],
-                "summary": "Get users of resource.",
-                "description": "Returns the users paginated by a default quantity, payload includes pagination links and stats.",
-                "operationId": "getResourceUsers",
-                "parameters": [
-                    {
-                        "name": "uuid",
-                        "in": "path",
-                        "description": "Unique identifier of resource",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "resource",
-                        "in": "path",
-                        "description": "Resource type that need to be considered",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "items": {
-                                "type": "string",
-                                "default": "users",
-                                "enum": [
-                                    "geofences",
-                                    "groups"
-                                ]
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Users retrieved successfully"
                     },
                     "400": {
                         "description": "Bad request"
