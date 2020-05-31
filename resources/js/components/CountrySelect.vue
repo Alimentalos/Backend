@@ -56,19 +56,19 @@
         mounted() {
             let self = this;
 
-            window.Axios.get('/api/geo/countries').then((response) => {
+            window.Axios.get('/geo/countries').then((response) => {
                 self.countries = response.data;
             });
 
             // Every two seconds
             setInterval(() => {
                 if (self.write.length > 0) {
-                    window.Axios.get('/api/geo/search/' + self.write[self.write.length - 1] +'/' + self.selectedCountry.id).then((response) => {
+                    window.Axios.get('/geo/search/' + self.write[self.write.length - 1] +'/' + self.selectedCountry.id).then((response) => {
                         self.cities = response.data;
                         let elements = [];
                         if (response.data.length <= 5) {
                             response.data.forEach((city) => {
-                                window.Axios.get('/api/geo/item/' + city.parent_id).then((response) => {
+                                window.Axios.get('/geo/item/' + city.parent_id).then((response) => {
                                     city.parent = response.data;
                                     elements.push(city);
                                 });

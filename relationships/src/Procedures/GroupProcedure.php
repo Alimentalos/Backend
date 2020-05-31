@@ -22,9 +22,7 @@ trait GroupProcedure
         ];
 
         $fill = array_map(
-            function($prop) {
-                return fill($prop, null);
-            },
+            fn($prop) => fill($prop, null),
             Group::getColors()
         );
 
