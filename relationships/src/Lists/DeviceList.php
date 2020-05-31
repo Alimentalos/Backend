@@ -17,7 +17,7 @@ trait DeviceList
         $userGroups = authenticated()->groups->pluck('uuid')->toArray();
         return Device::where('user_uuid', authenticated()->uuid)
             ->orWhere('is_public', true)
-            ->orWhereHas('groups', function(Builder $query) use ($userGroups) { return $query->whereIn('uuid', $userGroups); });
+            ->orWhereHas('groups', fn(Builder $query) => $query->whereIn('uuid', $userGroups));
     }
 
     /**

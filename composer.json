@@ -28,6 +28,7 @@
         "alimentalos/contracts": "*",
         "alimentalos/relationships": "*",
         "alimentalos/tools": "*",
+        "beyondcode/laravel-websockets": "^1.4",
         "cybercog/laravel-love": "^8.3",
         "darkaonline/l5-swagger": "^6.0",
         "fideloper/proxy": "^4.0",

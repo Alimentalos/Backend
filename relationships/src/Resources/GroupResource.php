@@ -49,9 +49,7 @@ trait GroupResource
     {
         return [
             'coordinates' => [
-                Rule::requiredIf(function() {
-                    return request()->has('photo');
-                }),
+                Rule::requiredIf(fn() => request()->has('photo')),
                 new Coordinate()
             ],
         ];
