@@ -75,14 +75,9 @@ trait UserProcedure
         // Attributes
         $user = User::create(array_merge($properties, $fill));
 
+        // Check if request has photo
         if (rhas('photo')) {
-            $photo = photos()->create();
-            $user->update([
-                'photo_uuid' => $photo->uuid,
-                'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
-                'location' => parser()->pointFromCoordinates(input('coordinates'))
-            ]);
-            $user->photos()->attach($photo->uuid);
+            upload()->check($user);
         }
         return $user;
     }
