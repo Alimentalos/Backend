@@ -15,17 +15,19 @@ trait DeviceProcedure
      */
     public function createInstance()
     {
-        // Marker
-        $marker_uuid = uuid();
-        photos()->storePhoto($marker_uuid, uploaded('marker'));
-
         $properties = [
             'name' => input('name'),
             'description' => input('description'),
             'user_uuid' => authenticated()->uuid,
             'is_public' => input('is_public'),
-            'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension()),
         ];
+
+        // Marker
+        if (rhas('marker')) {
+            $marker_uuid = uuid();
+            photos()->storePhoto($marker_uuid, uploaded('marker'));
+            $properties['marker'] = config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension());
+        }
 
         $fill = array_map(
             fn($prop) => fill($prop, null),

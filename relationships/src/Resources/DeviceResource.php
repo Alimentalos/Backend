@@ -58,8 +58,8 @@ trait DeviceResource
     {
         return [
             'name' => 'required',
-            'marker_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'marker_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'is_public' => 'required|boolean',
         ];
     }

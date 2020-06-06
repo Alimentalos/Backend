@@ -57,28 +57,28 @@ trait UserProcedure
      */
     public function createInstance()
     {
-        // Check photo uploaded
-        $photo = photos()->create();
-
-        // Marker
-        $marker_uuid = uuid();
-        photos()->storePhoto($marker_uuid, uploaded('marker'));
-
+        // Default properties
         $properties = [
             'user_uuid' => authenticated()->uuid,
-            'photo_uuid' => $photo->uuid,
-            'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension()),
-            'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
             'password' => bcrypt(input('password')),
-            'location' => parser()->pointFromCoordinates(input('coordinates')),
         ];
+
+        // Check if has marker
+        if (rhas('marker')) {
+            $marker_uuid = uuid();
+            photos()->storePhoto($marker_uuid, uploaded('marker'));
+            $properties['marker'] = config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension());
+        }
 
         $fill = request()->only(array_merge(['name', 'email', 'is_public', 'locale'], User::getColors()));
 
         // Attributes
         $user = User::create(array_merge($properties, $fill));
 
-        $user->photos()->attach($photo->uuid);
+        // Check if request has photo
+        if (rhas('photo')) {
+            upload()->check($user);
+        }
         return $user;
     }
 }

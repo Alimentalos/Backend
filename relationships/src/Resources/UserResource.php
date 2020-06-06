@@ -65,17 +65,15 @@ trait UserResource
     {
         return [
             'name' => 'required',
-            'photo' => 'required',
-            'marker' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required|confirmed|min:8',
             'is_public' => 'required|boolean',
-            'coordinates' => ['required', new Coordinate()],
-            'color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'border_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'background_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'text_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'marker_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'coordinates' => [Rule::requiredIf(fn() => rhas('photo')), new Coordinate()],
+            'color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'border_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'background_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'text_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'marker_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
         ];
     }
 
