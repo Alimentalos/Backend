@@ -57,23 +57,13 @@ trait UserProcedure
      */
     public function createInstance()
     {
-        $shouldAttachPhoto = rhas('photo');
-        $photo = null;
-
+        // Default properties
         $properties = [
             'user_uuid' => authenticated()->uuid,
             'password' => bcrypt(input('password')),
         ];
 
-        // Check photo uploaded
-        if ($shouldAttachPhoto) {
-            $photo = photos()->create();
-            $properties['photo_uuid'] = $photo->uuid;
-            $properties['photo_url'] = config('storage.path') . 'photos/' . $photo->photo_url;
-            $properties['location'] = parser()->pointFromCoordinates(input('coordinates'));
-        }
-
-        // Marker
+        // Check if has marker
         if (rhas('marker')) {
             $marker_uuid = uuid();
             photos()->storePhoto($marker_uuid, uploaded('marker'));
@@ -85,7 +75,13 @@ trait UserProcedure
         // Attributes
         $user = User::create(array_merge($properties, $fill));
 
-        if ($shouldAttachPhoto) {
+        if (rhas('photo')) {
+            $photo = photos()->create();
+            $user->update([
+                'photo_uuid' => $photo->uuid,
+                'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
+                'location' => parser()->pointFromCoordinates(input('coordinates'))
+            ]);
             $user->photos()->attach($photo->uuid);
         }
         return $user;
