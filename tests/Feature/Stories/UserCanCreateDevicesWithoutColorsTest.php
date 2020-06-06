@@ -15,7 +15,7 @@ class UserCanCreateDevicesWithoutColorsTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanCreateDevicesWithoutMarker()
+    final public function testUserCanCreateDevicesWithoutColors()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();
