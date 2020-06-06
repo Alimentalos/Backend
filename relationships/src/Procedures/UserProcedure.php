@@ -60,18 +60,20 @@ trait UserProcedure
         // Check photo uploaded
         $photo = photos()->create();
 
-        // Marker
-        $marker_uuid = uuid();
-        photos()->storePhoto($marker_uuid, uploaded('marker'));
-
         $properties = [
             'user_uuid' => authenticated()->uuid,
             'photo_uuid' => $photo->uuid,
-            'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension()),
             'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
             'password' => bcrypt(input('password')),
             'location' => parser()->pointFromCoordinates(input('coordinates')),
         ];
+
+        // Marker
+        if (rhas('marker')) {
+            $marker_uuid = uuid();
+            photos()->storePhoto($marker_uuid, uploaded('marker'));
+            $properties['marker'] = config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension());
+        }
 
         $fill = request()->only(array_merge(['name', 'email', 'is_public', 'locale'], User::getColors()));
 

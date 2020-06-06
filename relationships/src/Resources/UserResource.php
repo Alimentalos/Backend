@@ -66,7 +66,6 @@ trait UserResource
         return [
             'name' => 'required',
             'photo' => 'required',
-            'marker' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required|confirmed|min:8',
             'is_public' => 'required|boolean',
