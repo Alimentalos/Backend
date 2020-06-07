@@ -26,7 +26,6 @@ trait PlaceProcedure
     public function createInstance()
     {
         $properties = [
-            'user_uuid' => authenticated()->uuid,
             'location' => parser()->pointFromCoordinates(input('coordinates')),
         ];
 

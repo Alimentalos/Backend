@@ -16,5 +16,6 @@ class PlaceObserver
     public function creating(Place $place)
     {
         $place->uuid = uuid();
+        $place->user_uuid = authenticated() ? authenticated()->uuid : null;
     }
 }

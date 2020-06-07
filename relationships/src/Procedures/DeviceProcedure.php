@@ -26,16 +26,13 @@ trait DeviceProcedure
      */
     public function createInstance()
     {
-        $properties = [
-            'user_uuid' => authenticated()->uuid,
-        ];
-        $fill = request()->only(
+        $properties = request()->only(
             array_merge(
                 $this->deviceProperties,
                 Device::getColors()
             )
         );
-        $device = Device::create(array_merge($properties, $fill));
+        $device = Device::create($properties);
         upload()->checkMarker($device);
         return $device;
     }

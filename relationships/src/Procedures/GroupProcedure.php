@@ -17,19 +17,13 @@ trait GroupProcedure
      */
     public function createInstance()
     {
-        $properties = [
-            'user_uuid' => authenticated()->uuid,
-        ];
-
-        $fill = request()->only(
+        $properties = request()->only(
             array_merge(
                 $this->groupProperties,
                 Group::getColors()
             )
         );
-
-        $group = Group::create(array_merge($properties, $fill));
-
+        $group = Group::create($properties);
         authenticated()->groups()->attach($group->uuid, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS,

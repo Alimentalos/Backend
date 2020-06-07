@@ -17,7 +17,6 @@ trait PhotoProcedure
     {
         $uuid = uuid();
         $photo = Photo::create([
-            'user_uuid' => authenticated()->uuid,
             'uuid' => $uuid,
             'photo_url' => 'photos/' . $uuid . '.' . uploaded('photo')->extension(),
             'ext' => uploaded('photo')->extension(),

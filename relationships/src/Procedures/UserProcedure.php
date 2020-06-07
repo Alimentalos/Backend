@@ -33,13 +33,13 @@ trait UserProcedure
     {
         // Default properties
         $properties = [
-            'user_uuid' => authenticated()->uuid,
             'password' => bcrypt(input('password')),
         ];
 
         $fill = request()->only(
             array_merge(
-                $this->userProperties, User::getColors()
+                $this->userProperties,
+                User::getColors()
             )
         );
 

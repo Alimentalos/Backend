@@ -15,5 +15,6 @@ class GroupObserver
     public function creating(Group $group)
     {
         $group->uuid = uuid();
+        $group->user_uuid = authenticated() ? authenticated()->uuid : null;
     }
 }

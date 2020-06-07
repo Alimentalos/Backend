@@ -26,19 +26,14 @@ trait PetProcedure
      */
     public function createInstance()
     {
-        $properties = [
-            'user_uuid' => authenticated()->uuid,
-        ];
-
-        $fill = request()->only(
+        $properties = request()->only(
             array_merge(
                 $this->petProperties,
                 Pet::getColors()
             )
         );
 
-        $pet = Pet::create(array_merge($properties, $fill)
-        );
+        $pet = Pet::create($properties);
         upload()->checkPhoto($pet);
         return $pet;
     }
