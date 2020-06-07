@@ -45,9 +45,25 @@ class UserCanCreateGroupsTest extends TestCase
             'photo_url',
             'created_at',
             'updated_at',
+            'color',
+            'background_color',
+            'border_color',
+            'fill_color',
+            'text_color',
+            'user_color',
+            'administrator_color',
+            'owner_color'
         ]);
         $response->assertJsonFragment([
             'photo_uuid' => (json_decode($content))->photo_uuid,
+            'color' => '#CCCCCC',
+            'background_color' => '#CCCCCC',
+            'border_color' => '#CCCCCC',
+            'fill_color' => '#CCCCCC',
+            'text_color' => '#CCCCCC',
+            'user_color' => '#CCCCCC',
+            'administrator_color' => '#CCCCCC',
+            'owner_color' => '#CCCCCC',
         ]);
     }
 }

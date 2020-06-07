@@ -17,10 +17,10 @@ trait GroupProcedure
             'user_uuid' => authenticated()->uuid,
         ];
 
-        $fill = array_map(
-            fn($prop) => fill($prop, null),
-            Group::getColors()
-        );
+        $fill = [];
+        foreach (Group::getColors() as $color) {
+            $fill[$color] = fill($color, null);
+        }
 
         $group = Group::create(array_merge($properties, $fill));
 

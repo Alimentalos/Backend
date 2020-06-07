@@ -22,10 +22,9 @@ trait DeviceProcedure
             'is_public' => input('is_public'),
         ];
 
-        $fill = array_map(
-            fn($prop) => fill($prop, null),
-            Device::getColors()
-        );
+        foreach (Device::getColors() as $color) {
+            $fill[$color] = fill($color, null);
+        }
 
         $device = Device::create(array_merge($properties, $fill));
 
