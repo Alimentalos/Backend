@@ -65,11 +65,10 @@ trait PlaceResource
     {
         return [
             'name' => 'required',
-            'photo' => 'required',
             'is_public' => 'required|boolean',
             'coordinates' => ['required', new Coordinate()],
-            'color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'marker_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'marker_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
         ];
     }
 
