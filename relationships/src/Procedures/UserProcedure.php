@@ -57,7 +57,9 @@ trait UserProcedure
             'password' => bcrypt(input('password')),
         ];
 
-        $fill = request()->only(array_merge(['name', 'email', 'is_public', 'locale'], User::getColors()));
+        $fill = request()->only(
+            array_merge($this->userProperties, User::getColors())
+        );
 
         // Attributes
         $user = User::create(array_merge($properties, $fill));
