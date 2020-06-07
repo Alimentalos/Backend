@@ -65,7 +65,6 @@ trait PetResource
     {
         return [
             'name' => 'required',
-            'photo' => 'required',
             'is_public' => 'required|boolean',
             'hair_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'left_eye_color' => 'required|regex:/#([a-fA-F0-9]{3}){1,2}\b/',
@@ -81,7 +80,7 @@ trait PetResource
                 ])
             ],
             'born_at' => 'required',
-            'coordinates' => ['required', new Coordinate()],
+            'coordinates' => [Rule::requiredIf(fn() => rhas('photo')), new Coordinate()],
         ];
     }
 
