@@ -6,14 +6,27 @@ namespace Alimentalos\Relationships\Resources;
 trait AccessResource
 {
     /**
+     * Current accesses reactions
+     *
+     * @var string[]
+     */
+    protected $currentReactions = [
+        'Love',
+        'Pray',
+        'Like',
+        'Dislike',
+        'Sad',
+        'Hate'
+    ];
+
+    /**
      * Get available accesses reactions.
      *
      * @return string
-     * @codeCoverageIgnore
      */
     public function getAvailableReactions()
     {
-        return 'Love,Pray,Like,Dislike,Sad,Hate';
+        return implode(',', $this->currentReactions);
     }
 
     /**

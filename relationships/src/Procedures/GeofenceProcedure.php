@@ -234,7 +234,7 @@ trait GeofenceProcedure
     public function updateInstance(Geofence $geofence)
     {
         // Check photo uploaded
-        upload()->check($geofence);
+        upload()->checkPhoto($geofence);
 
         // Attributes
         foreach (['name', 'is_public'] as $item) {

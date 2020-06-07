@@ -47,7 +47,7 @@ trait GroupProcedure
      */
     public function updateInstance(Group $group)
     {
-        upload()->check($group);
+        upload()->checkPhoto($group);
         $group->update(
             parameters()->fill(
                 array_merge(

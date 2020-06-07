@@ -15,16 +15,10 @@ trait UserProcedure
     public function updateInstance(User $user)
     {
         // Check photo uploaded
-        upload()->check($user);
+        upload()->checkPhoto($user);
 
         // Marker
-        if (rhas('marker')) {
-            $marker_uuid = uuid();
-            photos()->storePhoto($marker_uuid, uploaded('marker'));
-            $user->update([
-                'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension())
-            ]);
-        }
+        upload()->checkMarker($user);
 
         // Attributes
         $user->update(
@@ -63,22 +57,17 @@ trait UserProcedure
             'password' => bcrypt(input('password')),
         ];
 
-        // Check if has marker
-        if (rhas('marker')) {
-            $marker_uuid = uuid();
-            photos()->storePhoto($marker_uuid, uploaded('marker'));
-            $properties['marker'] = config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension());
-        }
-
         $fill = request()->only(array_merge(['name', 'email', 'is_public', 'locale'], User::getColors()));
 
         // Attributes
         $user = User::create(array_merge($properties, $fill));
 
-        // Check if request has photo
-        if (rhas('photo')) {
-            upload()->check($user);
-        }
+        // Photo
+        upload()->checkPhoto($user);
+
+        // Marker
+        upload()->checkMarker($user);
+
         return $user;
     }
 }

@@ -15,19 +15,9 @@ trait PlaceProcedure
      */
     public function createInstance()
     {
-        // Check photo uploaded
-        $photo = photos()->create();
-
-        // Marker
-        $marker_uuid = uuid();
-        photos()->storePhoto($marker_uuid, uploaded('marker'));
-
         $properties = [
-            'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
             'user_uuid' => authenticated()->uuid,
-            'photo_uuid' => $photo->uuid,
             'location' => parser()->pointFromCoordinates(input('coordinates')),
-            'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension()),
         ];
 
         $fill = request()->only(array_merge(['name', 'description'], Place::getColors()));
@@ -35,7 +25,12 @@ trait PlaceProcedure
         // Attributes
         $place = Place::create(array_merge($properties, $fill));
 
-        $photo->places()->attach($place->uuid);
+        // Photo
+        upload()->checkPhoto($place);
+
+        // Marker
+        upload()->checkMarker($place);
+
         return $place;
     }
 
@@ -48,16 +43,10 @@ trait PlaceProcedure
     public function updateInstance(Place $place)
     {
         // Check photo uploaded
-        upload()->check($place);
+        upload()->checkPhoto($place);
 
         // Marker
-        if (rhas('marker')) {
-            $marker_uuid = uuid();
-            photos()->storePhoto($marker_uuid, uploaded('marker'));
-            $place->update([
-                'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension())
-            ]);
-        }
+        upload()->checkMarker($place);
 
         // Attributes
         $place->update(

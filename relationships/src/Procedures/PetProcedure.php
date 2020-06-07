@@ -46,7 +46,7 @@ trait PetProcedure
      */
     public function updateInstance(Pet $pet)
     {
-        upload()->check($pet);
+        upload()->checkPhoto($pet);
         $pet->update(
             parameters()->fill(
                 array_merge(

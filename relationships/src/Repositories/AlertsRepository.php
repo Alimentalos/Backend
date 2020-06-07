@@ -32,7 +32,7 @@ class AlertsRepository
      */
     public function update(Alert $alert)
     {
-        upload()->check($alert);
+        upload()->checkPhoto($alert);
         $alert->update(parameters()->fill(['type', 'status', 'title', 'body'], $alert));
         return $alert;
     }

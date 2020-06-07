@@ -13,9 +13,9 @@ class Uploader
      *
      * @param Resource $model
      */
-    public function check(Resource $model)
+    public function checkPhoto(Resource $model)
     {
-        if (request()->has('photo')) {
+        if (rhas('photo')) {
             $photo = photos()->create();
             $model->update([
                 'photo_uuid' => $photo->uuid,
@@ -25,5 +25,22 @@ class Uploader
             $model->photos()->attach($photo->uuid);
         }
 
+    }
+
+
+    /**
+     * Check if request has a model marker pending to upload.
+     *
+     * @param Resource $model
+     */
+    public function checkMarker(Resource $model)
+    {
+        if (rhas('marker')) {
+            $uuid = uuid();
+            photos()->storePhoto($uuid, uploaded('marker'));
+            $model->update([
+                'marker' => config('storage.path') . 'markers/' . ($uuid . '.' . uploaded('marker')->extension())
+            ]);
+        }
     }
 }
