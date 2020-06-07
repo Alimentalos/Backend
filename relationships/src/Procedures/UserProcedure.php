@@ -25,26 +25,6 @@ trait UserProcedure
     ];
 
     /**
-     * Update user.
-     *
-     * @param User $user
-     * @return User
-     */
-    public function updateInstance(User $user)
-    {
-        // Check photo uploaded
-        upload()->checkPhoto($user);
-
-        // Marker
-        upload()->checkMarker($user);
-
-        // Attributes
-        fillAndUpdate($user, $this->userProperties, User::getColors());
-
-        return $user;
-    }
-
-    /**
      * Create user.
      *
      * @return User
@@ -58,7 +38,9 @@ trait UserProcedure
         ];
 
         $fill = request()->only(
-            array_merge($this->userProperties, User::getColors())
+            array_merge(
+                $this->userProperties, User::getColors()
+            )
         );
 
         // Attributes
@@ -70,6 +52,21 @@ trait UserProcedure
         // Marker
         upload()->checkMarker($user);
 
+        return $user;
+    }
+
+    /**
+     * Update user.
+     *
+     * @param User $user
+     * @return User
+     */
+    public function updateInstance(User $user)
+    {
+        // Check photo and marker uploaded
+        upload()->checkPhoto($user);
+        upload()->checkMarker($user);
+        fillAndUpdate($user, $this->userProperties, User::getColors());
         return $user;
     }
 }

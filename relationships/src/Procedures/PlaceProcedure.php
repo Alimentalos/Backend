@@ -9,6 +9,16 @@ use Alimentalos\Relationships\Models\Place;
 trait PlaceProcedure
 {
     /**
+     * Current place properties.
+     *
+     * @var string[]
+     */
+    protected $placeProperties = [
+        'name',
+        'description'
+    ];
+
+    /**
      * Create pet instance.
      *
      * @return Place
@@ -20,7 +30,12 @@ trait PlaceProcedure
             'location' => parser()->pointFromCoordinates(input('coordinates')),
         ];
 
-        $fill = request()->only(array_merge(['name', 'description'], Place::getColors()));
+        $fill = request()->only(
+            array_merge(
+                $this->placeProperties,
+                Place::getColors()
+            )
+        );
 
         // Attributes
         $place = Place::create(array_merge($properties, $fill));
@@ -42,14 +57,10 @@ trait PlaceProcedure
      */
     public function updateInstance(Place $place)
     {
-        // Check photo uploaded
+        // Check photo and marker uploaded
         upload()->checkPhoto($place);
-
-        // Marker
         upload()->checkMarker($place);
-
-        // Attributes
-        fillAndUpdate($place, ['name', 'description'], Place::getColors());
+        fillAndUpdate($place, $this->placeProperties, Place::getColors());
         return $place;
     }
 }

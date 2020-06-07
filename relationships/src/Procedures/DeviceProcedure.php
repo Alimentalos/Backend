@@ -9,6 +9,17 @@ use Alimentalos\Relationships\Models\Device;
 trait DeviceProcedure
 {
     /**
+     * Current device properties.
+     *
+     * @var string[]
+     */
+    protected $deviceProperties = [
+        'name',
+        'description',
+        'is_public'
+    ];
+
+    /**
      * Create device instance.
      *
      * @return Device
@@ -16,22 +27,16 @@ trait DeviceProcedure
     public function createInstance()
     {
         $properties = [
-            'name' => input('name'),
-            'description' => input('description'),
             'user_uuid' => authenticated()->uuid,
-            'is_public' => input('is_public'),
         ];
-
-        $fill = [];
-        foreach (Device::getColors() as $color) {
-            $fill[$color] = fill($color, null);
-        }
-
+        $fill = request()->only(
+            array_merge(
+                $this->deviceProperties,
+                Device::getColors()
+            )
+        );
         $device = Device::create(array_merge($properties, $fill));
-
-        // Marker
         upload()->checkMarker($device);
-
         return $device;
     }
 
@@ -44,7 +49,7 @@ trait DeviceProcedure
     public function updateInstance(Device $device)
     {
         upload()->checkMarker($device);
-        fillAndUpdate($device, ['name', 'description', 'is_public'], Device::getColors());
+        fillAndUpdate($device, $this->deviceProperties, Device::getColors());
         return $device;
     }
 }
