@@ -44,21 +44,7 @@ trait DeviceProcedure
     public function updateInstance(Device $device)
     {
         upload()->checkMarker($device);
-
-        $device->update(
-            parameters()->fill(
-                array_merge(
-                    [
-                        'name',
-                        'description',
-                        'is_public',
-                    ],
-                    Device::getColors()
-                ),
-                $device
-            )
-        );
-
+        fillAndUpdate($device, ['name', 'description', 'is_public'], Device::getColors());
         return $device;
     }
 }

@@ -22,6 +22,7 @@ trait AccessResource
     /**
      * Get available accesses reactions.
      *
+     * @codeCoverageIgnore
      * @return string
      */
     public function getAvailableReactions()

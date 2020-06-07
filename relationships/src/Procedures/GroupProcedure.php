@@ -12,13 +12,9 @@ trait GroupProcedure
      */
     public function createInstance()
     {
-        $photo = photos()->create();
-
         $properties = [
             'name' => input('name'),
             'user_uuid' => authenticated()->uuid,
-            'photo_uuid' => $photo->uuid,
-            'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
         ];
 
         $fill = array_map(
@@ -34,7 +30,7 @@ trait GroupProcedure
             'sender_uuid' => authenticated()->uuid,
         ]);
 
-        $group->photos()->attach($photo->uuid);
+        upload()->checkPhoto($group);
 
         return $group;
     }
@@ -48,18 +44,7 @@ trait GroupProcedure
     public function updateInstance(Group $group)
     {
         upload()->checkPhoto($group);
-        $group->update(
-            parameters()->fill(
-                array_merge(
-                    [
-                        'name',
-                        'is_public',
-                    ],
-                    Group::getColors()
-                ),
-                $group
-            )
-        );
+        fillAndUpdate($group, ['name', 'is_public'], Group::getColors());
         return $group;
     }
 }

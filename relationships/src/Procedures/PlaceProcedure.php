@@ -49,18 +49,7 @@ trait PlaceProcedure
         upload()->checkMarker($place);
 
         // Attributes
-        $place->update(
-            parameters()->fill(
-                array_merge(
-                    [
-                        'name',
-                        'description',
-                    ],
-                    Place::getColors()
-                ),
-                $place
-            )
-        );
+        fillAndUpdate($place, ['name', 'description'], Place::getColors());
         return $place;
     }
 }

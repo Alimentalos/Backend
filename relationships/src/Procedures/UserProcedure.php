@@ -7,6 +7,24 @@ use Alimentalos\Relationships\Models\User;
 trait UserProcedure
 {
     /**
+     * Current user properties.
+     *
+     * @var string[]
+     */
+    protected $userProperties = [
+        'email',
+        'name',
+        'is_public',
+        'country',
+        'region',
+        'city',
+        'city_name',
+        'region_name',
+        'country_name',
+        'locale'
+    ];
+
+    /**
      * Update user.
      *
      * @param User $user
@@ -21,25 +39,7 @@ trait UserProcedure
         upload()->checkMarker($user);
 
         // Attributes
-        $user->update(
-            parameters()->fill(
-                array_merge(
-                    [
-                        'email',
-                        'name',
-                        'is_public',
-                        'country',
-                        'region',
-                        'city',
-                        'city_name',
-                        'region_name',
-                        'country_name',
-                        'locale'
-                    ],
-                    User::getColors()
-                ), $user
-            )
-        );
+        fillAndUpdate($user, $this->userProperties, User::getColors());
 
         return $user;
     }

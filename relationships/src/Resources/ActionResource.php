@@ -23,6 +23,7 @@ trait ActionResource
     /**
      * Get available actions reactions.
      *
+     * @codeCoverageIgnore
      * @return string
      */
     public function getAvailableReactions()
