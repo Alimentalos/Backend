@@ -7,14 +7,28 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 trait ActionResource
 {
     /**
-     * Get available action reactions.
+     * Current actions reactions
      *
-     * @return string
+     * @var string[]
+     */
+    protected $currentReactions = [
+        'Love',
+        'Pray',
+        'Like',
+        'Dislike',
+        'Sad',
+        'Hate'
+    ];
+
+    /**
+     * Get available actions reactions.
+     *
      * @codeCoverageIgnore
+     * @return string
      */
     public function getAvailableReactions()
     {
-        return 'Love,Pray,Like,Dislike,Sad,Hate';
+        return implode(',', $this->currentReactions);
     }
 
     /**

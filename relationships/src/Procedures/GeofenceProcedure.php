@@ -190,20 +190,11 @@ trait GeofenceProcedure
      */
     public function createInstance()
     {
-        $photo = photos()->create();
-
         // Instance & Attributes
         $geofence = new Geofence();
         $geofence->uuid = uuid();
-        $geofence->photo_uuid = $photo->uuid;
         $geofence->name = input('name');
         $geofence->user_uuid = authenticated()->uuid;
-        $geofence->photo_url = config('storage.path') . 'photos/' . $photo->photo_url;
-
-        // Marker
-        $marker_uuid = uuid();
-        photos()->storePhoto($marker_uuid, uploaded('marker'));
-        $geofence->marker = config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension());
 
         // Colors
         foreach(Geofence::getColors() as $attribute) {
@@ -220,8 +211,9 @@ trait GeofenceProcedure
         // Create
         $geofence->save();
 
-        // Attach to photo
-        $photo->geofences()->attach($geofence->uuid);
+        upload()->checkPhoto($geofence);
+        upload()->checkMarker($geofence);
+
         return $geofence;
     }
 
@@ -234,7 +226,7 @@ trait GeofenceProcedure
     public function updateInstance(Geofence $geofence)
     {
         // Check photo uploaded
-        upload()->check($geofence);
+        upload()->checkPhoto($geofence);
 
         // Attributes
         foreach (['name', 'is_public'] as $item) {
@@ -251,11 +243,7 @@ trait GeofenceProcedure
         );
 
         // Marker
-        if (rhas('marker')) {
-            $marker_uuid = uuid();
-            photos()->storePhoto($marker_uuid, uploaded('marker'));
-            $geofence->marker = config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension());
-        }
+        upload()->checkMarker($geofence);
 
         // Colors
         foreach(Geofence::getColors() as $attribute) {

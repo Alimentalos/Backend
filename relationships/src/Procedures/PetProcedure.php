@@ -7,34 +7,37 @@ use Alimentalos\Relationships\Models\Pet;
 trait PetProcedure
 {
     /**
+     * Current pet properties
+     *
+     * @var string[]
+     */
+    protected $petProperties = [
+        'name',
+        'description',
+        'born_at',
+        'size',
+        'is_public'
+    ];
+
+    /**
      * Create pet instance.
      *
      * @return Pet
      */
     public function createInstance()
     {
-        $photo = photos()->create();
         $pet = Pet::create(array_merge(
                 [
-                    'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
                     'user_uuid' => authenticated()->uuid,
-                    'photo_uuid' => $photo->uuid,
-                    'location' => parser()->pointFromCoordinates(input('coordinates')),
                 ],
                 request()->only(array_merge(
-                        [
-                            'name',
-                            'description',
-                            'born_at',
-                            'size',
-                            'is_public'
-                        ],
+                        $this->petProperties,
                         Pet::getColors()
                     )
                 )
             )
         );
-        $photo->pets()->attach($pet->uuid);
+        upload()->checkPhoto($pet);
         return $pet;
     }
 
@@ -46,22 +49,8 @@ trait PetProcedure
      */
     public function updateInstance(Pet $pet)
     {
-        upload()->check($pet);
-        $pet->update(
-            parameters()->fill(
-                array_merge(
-                    [
-                        'name',
-                        'description',
-                        'born_at',
-                        'size',
-                        'is_public'
-                    ],
-                    Pet::getColors()
-                ),
-                $pet
-            )
-        );
+        upload()->checkPhoto($pet);
+        fillAndUpdate($pet, $this->petProperties, Pet::getColors());
         return $pet;
     }
 }

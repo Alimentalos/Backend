@@ -1,5 +1,6 @@
 <?php
 
+use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\User;
 use Alimentalos\Tools\{Cataloger,
     Filler,
@@ -30,6 +31,21 @@ if (! function_exists('parameters')) {
     function parameters()
     {
         return new Parameterizer();
+    }
+}
+
+if(! function_exists('fillAndUpdate')) {
+    function fillAndUpdate(Resource $resource, $params = [], $colors = [])
+    {
+        $resource->update(
+            parameters()->fill(
+                array_merge(
+                    $params,
+                    $colors
+                ),
+                $resource
+            )
+        );
     }
 }
 

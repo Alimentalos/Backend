@@ -22,19 +22,16 @@ trait DeviceProcedure
             'is_public' => input('is_public'),
         ];
 
-        // Marker
-        if (rhas('marker')) {
-            $marker_uuid = uuid();
-            photos()->storePhoto($marker_uuid, uploaded('marker'));
-            $properties['marker'] = config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension());
-        }
-
         $fill = array_map(
             fn($prop) => fill($prop, null),
             Device::getColors()
         );
 
         $device = Device::create(array_merge($properties, $fill));
+
+        // Marker
+        upload()->checkMarker($device);
+
         return $device;
     }
 
@@ -46,29 +43,8 @@ trait DeviceProcedure
      */
     public function updateInstance(Device $device)
     {
-        // Marker
-        if (rhas('marker')) {
-            $marker_uuid = uuid();
-            photos()->storePhoto($marker_uuid, uploaded('marker'));
-            $device->update([
-                'marker' => config('storage.path') . 'markers/' . ($marker_uuid . '.' . uploaded('marker')->extension())
-            ]);
-        }
-
-        $device->update(
-            parameters()->fill(
-                array_merge(
-                    [
-                        'name',
-                        'description',
-                        'is_public',
-                    ],
-                    Device::getColors()
-                ),
-                $device
-            )
-        );
-
+        upload()->checkMarker($device);
+        fillAndUpdate($device, ['name', 'description', 'is_public'], Device::getColors());
         return $device;
     }
 }

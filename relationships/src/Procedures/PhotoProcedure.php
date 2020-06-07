@@ -2,6 +2,7 @@
 
 namespace Alimentalos\Relationships\Procedures;
 
+use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Photo;
 use Illuminate\Support\Facades\Storage;
 

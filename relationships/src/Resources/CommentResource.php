@@ -9,6 +9,30 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 trait CommentResource
 {
     /**
+     * Current comments reactions
+     *
+     * @var string[]
+     */
+    protected $currentReactions = [
+        'Love',
+        'Pray',
+        'Like',
+        'Dislike',
+        'Sad',
+        'Hate'
+    ];
+
+    /**
+     * Get available comments reactions.
+     *
+     * @return string
+     */
+    public function getAvailableReactions()
+    {
+        return implode(',', $this->currentReactions);
+    }
+
+    /**
      * Update comment via request.
      *
      * @return Comment
@@ -16,16 +40,6 @@ trait CommentResource
     public function updateViaRequest()
     {
         return comments()->update($this);
-    }
-
-    /**
-     * Get available comment reactions.
-     *
-     * @return string
-     */
-    public function getAvailableReactions()
-    {
-        return 'Love,Pray,Like,Dislike,Sad,Hate';
     }
 
     /**

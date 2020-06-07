@@ -11,6 +11,31 @@ use Illuminate\Validation\Rule;
 trait AlertResource
 {
     /**
+     * Current alerts reactions
+     *
+     * @var string[]
+     */
+    protected $currentReactions = [
+        'Love',
+        'Pray',
+        'Like',
+        'Dislike',
+        'Sad',
+        'Hate'
+    ];
+
+    /**
+     * Get available alerts reactions.
+     *
+     * @codeCoverageIgnore
+     * @return string
+     */
+    public function getAvailableReactions()
+    {
+        return implode(',', $this->currentReactions);
+    }
+
+    /**
      * Update model via request.
      *
      * @return Alert
@@ -28,17 +53,6 @@ trait AlertResource
     public function createViaRequest()
     {
         return alerts()->create();
-    }
-
-    /**
-     * Get available alert reactions.
-     *
-     * @return string
-     * @codeCoverageIgnore
-     */
-    public function getAvailableReactions()
-    {
-        return 'Love,Pray,Like,Dislike,Sad,Hate';
     }
 
     /**
