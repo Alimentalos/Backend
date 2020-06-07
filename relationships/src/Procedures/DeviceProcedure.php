@@ -22,6 +22,7 @@ trait DeviceProcedure
             'is_public' => input('is_public'),
         ];
 
+        $fill = [];
         foreach (Device::getColors() as $color) {
             $fill[$color] = fill($color, null);
         }
