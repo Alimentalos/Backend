@@ -18,5 +18,6 @@ class PetObserver
     {
         $pet->api_token = bin2hex(random_bytes(16));
         $pet->uuid = uuid();
+        $pet->user_uuid = authenticated() ? authenticated()->uuid : null;
     }
 }

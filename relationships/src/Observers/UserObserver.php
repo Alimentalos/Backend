@@ -19,6 +19,7 @@ class UserObserver
     {
         $user->api_token = bin2hex(random_bytes(16));
         $user->uuid = uuid();
+        $user->user_uuid = authenticated() ? authenticated()->uuid : null;
     }
 
     /**

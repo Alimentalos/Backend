@@ -18,5 +18,6 @@ class DeviceObserver
     {
         $device->api_token = bin2hex(random_bytes(16));
         $device->uuid = uuid();
+        $device->user_uuid = authenticated() ? authenticated()->uuid : null;
     }
 }

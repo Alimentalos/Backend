@@ -51,6 +51,21 @@ class UserCanCreateGeofenceUsingPhotoAndStringShapeTest extends TestCase
             'is_public',
             'created_at',
             'updated_at',
+            'border_color',
+            'color',
+            'background_color',
+            'fill_color',
+            'tag_color',
+            'marker_color',
+        ]);
+        $response->assertJsonFragment([
+            'color' => '#CCCCCC',
+            'border_color' => '#CCCCCC',
+            'background_color' => '#CCCCCC',
+            'text_color' => '#CCCCCC',
+            'fill_color' => '#CCCCCC',
+            'tag_color' => '#CCCCCC',
+            'marker_color' => '#CCCCCC',
         ]);
         $content = $response->getContent();
         Storage::disk('public')->assertExists((json_decode($content))->photo->photo_url);

@@ -7,31 +7,29 @@ use Alimentalos\Relationships\Models\Group;
 
 trait GroupProcedure
 {
+    protected $groupProperties = [
+        'name',
+        'is_public'
+    ];
+
     /**
      * Create group instance.
      */
     public function createInstance()
     {
-        $properties = [
-            'name' => input('name'),
-            'user_uuid' => authenticated()->uuid,
-        ];
-
-        $fill = array_map(
-            fn($prop) => fill($prop, null),
-            Group::getColors()
+        $properties = request()->only(
+            array_merge(
+                $this->groupProperties,
+                Group::getColors()
+            )
         );
-
-        $group = Group::create(array_merge($properties, $fill));
-
+        $group = Group::create($properties);
         authenticated()->groups()->attach($group->uuid, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS,
             'sender_uuid' => authenticated()->uuid,
         ]);
-
         upload()->checkPhoto($group);
-
         return $group;
     }
 
@@ -44,7 +42,7 @@ trait GroupProcedure
     public function updateInstance(Group $group)
     {
         upload()->checkPhoto($group);
-        fillAndUpdate($group, ['name', 'is_public'], Group::getColors());
+        fillAndUpdate($group, $this->groupProperties, Group::getColors());
         return $group;
     }
 }

@@ -24,6 +24,7 @@ class UserCanCreateDevicesWithoutMarkerTest extends TestCase
         $device = factory(Device::class)->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/devices', [
             'name' => $device->name,
+            'description' => 'Blah blah blah',
             'is_public' => true,
             'color' => '#CCCCCC',
             'marker_color' => '#CCCCCC',

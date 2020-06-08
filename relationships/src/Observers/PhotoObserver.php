@@ -15,5 +15,6 @@ class PhotoObserver
     public function creating(Photo $photo)
     {
 //        $photo->uuid = uuid();
+        $photo->user_uuid = authenticated() ? authenticated()->uuid : null;
     }
 }
