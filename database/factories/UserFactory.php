@@ -34,5 +34,12 @@ $factory->define(User::class, function (Faker $faker) {
         'created_at' => $now,
         'free' => false,
         'is_public' => true,
+        'menuroles' => 'user'
+    ];
+});
+
+$factory->state(User::class, 'admin', function (Faker $faker) {
+    return [
+        'menuroles' => 'user,admin',
     ];
 });

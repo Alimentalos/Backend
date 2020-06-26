@@ -1,5 +1,9 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Rubik');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+
+
 
 // Variables
 @import 'variables';
@@ -7,16 +11,4 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.card-header {
-    //text-shadow: 0px 1px 0px rgba(0,0,0,0.7);
-}
 
-
-.card.bg-light > .card-header {
-    background-color: #044c59;
-}
-
-.card.bg-light {
-    border: 1px solid #044c59;
-    border-radius: 6px;
-}

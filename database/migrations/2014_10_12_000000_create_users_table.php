@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->boolean('free')->default(true);
             $table->point('location')->nullable(); // Latitude, Longitude
             $table->boolean('is_public')->default(true);
+            $table->string('menuroles');
             $table->rememberToken();
             $table->timestamps();
         });

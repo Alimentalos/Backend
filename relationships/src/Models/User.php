@@ -63,6 +63,10 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
 
+	protected $attributes = [
+		'menuroles' => 'user',
+	];
+
     /**
      * The attributes that are mass assignable.
      *
