@@ -33,6 +33,9 @@ Route::middleware(['auth:pets'])->group(function () {
 Route::middleware(['api'])->group(function () {
     Route::post('/register', 'Api\RegisterController')
         ->middleware('throttle:5');
+    
+    Route::get('/reverse-geocoding', 'Api\ReverseGeocodingController')
+        ->middleware('throttle:5');
 
     Route::post('/password-recovery', 'Api\PasswordRecoveryController')
         ->middleware('throttle:5');
