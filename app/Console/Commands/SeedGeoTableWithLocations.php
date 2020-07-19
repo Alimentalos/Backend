@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Igaster\LaravelCities\Geo;
 use Illuminate\Console\Command;
 
 class SeedGeoTableWithLocations extends Command
@@ -34,9 +36,15 @@ class SeedGeoTableWithLocations extends Command
      * Execute the console command.
      *
      * @return mixed
+     * @codeCoverageIgnore
      */
     public function handle()
     {
-    	//
+	    Geo::query()->orderBy('id')->chunk(100, function ($geos) {
+		    foreach ($geos as $geo) {
+			    $geo->location = new Point($geo->lat, $geo->long);
+			    $geo->save();
+		    }
+	    });
     }
 }
