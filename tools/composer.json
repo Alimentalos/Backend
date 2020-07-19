@@ -16,7 +16,7 @@
     "require": {
         "php": "^7.3",
         "alimentalos/relationships": "*",
-        "grimzy/laravel-mysql-spatial": "^2.2"
+        "grimzy/laravel-mysql-spatial": "^3.0"
     },
     "autoload": {
         "psr-4": {
