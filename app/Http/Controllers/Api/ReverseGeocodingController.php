@@ -15,6 +15,7 @@ class ReverseGeocodingController extends Controller
      *
      * @param Request $request
      * @return JsonResponse
+     * @codeCoverageIgnore 
      */
     public function __invoke(Request $request)
     {
