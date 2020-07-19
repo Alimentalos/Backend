@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17a4e7eb454756da172b834918a7a6ad",
+    "content-hash": "fd85817ee08e3269a29629f1ccad8f62",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -121,15 +121,15 @@
         },
         {
             "name": "alimentalos/relationships",
-            "version": "dev-master",
+            "version": "dev-reverse-geocoding",
             "dist": {
                 "type": "path",
                 "url": "./relationships",
-                "reference": "3ed3eb6ce7408638a50ac880a7016795b84a0453"
+                "reference": "1fb26c5d4fdff0876242c25dfc884700d3b0dcb2"
             },
             "require": {
                 "alimentalos/contracts": "*",
-                "grimzy/laravel-mysql-spatial": "^2.2",
+                "grimzy/laravel-mysql-spatial": "^3.0",
                 "php": "^7.3"
             },
             "type": "library",
@@ -167,15 +167,15 @@
         },
         {
             "name": "alimentalos/tools",
-            "version": "dev-master",
+            "version": "dev-reverse-geocoding",
             "dist": {
                 "type": "path",
                 "url": "./tools",
-                "reference": "021cf5216b98986e48df8ab1bf2ff1a5c7a26507"
+                "reference": "f82b48e13c4344729183f666010aac3abadb90af"
             },
             "require": {
                 "alimentalos/relationships": "*",
-                "grimzy/laravel-mysql-spatial": "^2.2",
+                "grimzy/laravel-mysql-spatial": "^3.0",
                 "php": "^7.3"
             },
             "type": "library",
@@ -808,6 +808,65 @@
                 "symmetric key cryptography"
             ],
             "time": "2018-07-24T23:27:56+00:00"
+        },
+        {
+            "name": "demency/laravel_cities",
+            "version": "v2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/demency/laravel_cities.git",
+                "reference": "8a59e8bf169412b330df5d8ca805bbecd5d2852e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/demency/laravel_cities/zipball/8a59e8bf169412b330df5d8ca805bbecd5d2852e",
+                "reference": "8a59e8bf169412b330df5d8ca805bbecd5d2852e",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*|^6.0|7.*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0|^5.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Igaster\\LaravelCities\\GeoServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Igaster\\LaravelCities\\": "src/",
+                    "Igaster\\LaravelCities\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Giannis Gasteratos",
+                    "email": "igasteratos@gmail.com"
+                }
+            ],
+            "description": "Seed all countries/cities from geonames.org database. Searchable DB tree, ready to use API & a bonus vue.js component!",
+            "homepage": "https://github.com/igaster/laravel_cities.git",
+            "keywords": [
+                "GeoNames.org",
+                "cities",
+                "countries",
+                "geolocation",
+                "laravel"
+            ],
+            "time": "2020-07-19T03:49:35+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1838,16 +1897,16 @@
         },
         {
             "name": "grimzy/laravel-mysql-spatial",
-            "version": "2.2.3",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grimzy/laravel-mysql-spatial.git",
-                "reference": "7f62564f996eefa3631f6e901b63689109c2be07"
+                "reference": "49b0daf1e6fc730eaf82269972f324be7dea7efb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grimzy/laravel-mysql-spatial/zipball/7f62564f996eefa3631f6e901b63689109c2be07",
-                "reference": "7f62564f996eefa3631f6e901b63689109c2be07",
+                "url": "https://api.github.com/repos/grimzy/laravel-mysql-spatial/zipball/49b0daf1e6fc730eaf82269972f324be7dea7efb",
+                "reference": "49b0daf1e6fc730eaf82269972f324be7dea7efb",
                 "shasum": ""
             },
             "require": {
@@ -1869,7 +1928,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "3.0.x-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -1893,7 +1952,7 @@
                 }
             ],
             "description": "MySQL spatial data types extension for Laravel.",
-            "time": "2020-03-09T02:30:58+00:00"
+            "time": "2020-04-14T03:13:36+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2133,65 +2192,6 @@
                 "psr-7"
             ],
             "time": "2018-07-31T19:32:56+00:00"
-        },
-        {
-            "name": "igaster/laravel_cities",
-            "version": "v1.3.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/igaster/laravel_cities.git",
-                "reference": "a95d69569aad8c7983281c2d9982d6b3358997d3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/igaster/laravel_cities/zipball/a95d69569aad8c7983281c2d9982d6b3358997d3",
-                "reference": "a95d69569aad8c7983281c2d9982d6b3358997d3",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "5.*|^6.0|7.*"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^4.0|^5.0",
-                "phpunit/phpunit": "^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Igaster\\LaravelCities\\GeoServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Igaster\\LaravelCities\\": "src/",
-                    "Igaster\\LaravelCities\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Giannis Gasteratos",
-                    "email": "igasteratos@gmail.com"
-                }
-            ],
-            "description": "Seed all countries/cities from geonames.org database. Searchable DB tree, ready to use API & a bonus vue.js component!",
-            "homepage": "https://github.com/igaster/laravel_cities.git",
-            "keywords": [
-                "GeoNames.org",
-                "cities",
-                "countries",
-                "geolocation",
-                "laravel"
-            ],
-            "time": "2020-07-03T06:09:50+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",

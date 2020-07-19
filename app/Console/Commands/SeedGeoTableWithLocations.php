@@ -40,11 +40,25 @@ class SeedGeoTableWithLocations extends Command
      */
     public function handle()
     {
-	    Geo::query()->orderBy('id')->chunk(100, function ($geos) {
+    	$currentChunk = 0;
+    	$chunkNumber = 1000;
+    	$count = Geo::query()->count();
+	    Geo::query()->orderBy('id')->chunk($chunkNumber, function ($geos) use (&$currentChunk, $chunkNumber, $count) {
+	    	$this->info(PHP_EOL.PHP_EOL. "Processing {$currentChunk} of {$count}" . PHP_EOL);
+		
+		    $bar = $this->output->createProgressBar(count($geos));
+		
+		    $bar->start();
+		
 		    foreach ($geos as $geo) {
 			    $geo->location = new Point($geo->lat, $geo->long);
 			    $geo->save();
+			
+			    $bar->advance();
 		    }
+		
+		    $bar->finish();
+		    $currentChunk = $currentChunk + $chunkNumber;
 	    });
     }
 }
