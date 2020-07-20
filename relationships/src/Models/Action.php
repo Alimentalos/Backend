@@ -19,8 +19,6 @@ class Action extends Model implements Resource
      */
     protected $casts = [
         'parameters' => 'array',
-		'created_at' => 'datetime:Y-m-d H:i:s',
-		'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     /**
