@@ -26,7 +26,7 @@ trait PlaceProcedure
     public function createInstance()
     {
         $properties = [
-            'location' => parser()->pointFromCoordinates(input('coordinates')),
+            'location' => rhas('coordinates') ? parser()->pointFromCoordinates(input('coordinates')) : null,
         ];
 
         $fill = request()->only(
