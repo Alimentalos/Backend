@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Near\Resource;
 
+use Alimentalos\Relationships\Models\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Near\Resource\IndexRequest;
 use Alimentalos\Contracts\Resource;
@@ -53,10 +54,8 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, Resource $resource)
     {
-        $resources = finder()
-	        ->findNearResources($resource, input('coordinates'))
-	        ->whereNotNull('location')
-	        ->paginate(20);
-        return response()->json($resources,200);
+        $resources = finder()->findNearResources($resource, input('coordinates'));
+	    $resources->whereNotNull($resource::DEFAULT_LOCATION_FIELD);
+        return response()->json($resources->paginate(20),200);
     }
 }
