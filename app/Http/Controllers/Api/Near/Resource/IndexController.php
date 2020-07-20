@@ -54,9 +54,9 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, Resource $resource)
     {
-		$class = get_class($resource);
-		$resources = finder()->findNearResources($resource, input('coordinates'));
-		$resources->whereNotNull($class::DEFAULT_LOCATION_FIELD);
-		return response()->json($resources->paginate(20),200);
+        $class = get_class($resource);
+        $resources = finder()->findNearResources($resource, input('coordinates'));
+        $resources->whereNotNull($class::DEFAULT_LOCATION_FIELD);
+        return response()->json($resources->paginate(20),200);
     }
 }
