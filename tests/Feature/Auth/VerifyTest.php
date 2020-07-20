@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
-use App\User;
+use Alimentalos\Relationships\Models\User;
 use Tests\TestCase;
 use Livewire\Livewire;
 use Illuminate\Support\Facades\Hash;

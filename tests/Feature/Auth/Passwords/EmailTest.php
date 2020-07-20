@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Auth\Passwords;
 
-use App\User;
+use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
