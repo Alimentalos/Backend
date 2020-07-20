@@ -53,7 +53,10 @@ class IndexController extends Controller
      */
     public function __invoke(IndexRequest $request, Resource $resource)
     {
-        $resources = finder()->findNearResources($resource, input('coordinates'))->paginate(20);
+        $resources = finder()
+	        ->findNearResources($resource, input('coordinates'))
+	        ->whereNotNull('location')
+	        ->paginate(20);
         return response()->json($resources,200);
     }
 }
