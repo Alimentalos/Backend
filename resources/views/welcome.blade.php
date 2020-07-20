@@ -1,122 +1,60 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Alimentalos - {{ __('Bring care and love to abandoned pets.') }}</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/c0a3e57ca3.js" crossorigin="anonymous"></script>
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #000000;
-                font-family: 'Delius', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 20px;
-                top: 10px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 60px;
-            }
-
-            .body {
-                margin-top: 100px;
-            }
-
-            .links > a {
-                color: #000000;
-                padding: 10px 7px 5px 7px;
-                margin: 5px 5px;
-                display: block;
-                float: left;
-                font-size: 13px;
-                font-weight: 200;
-                letter-spacing: .1rem;
-                text-decoration: none;
-            }
-
-            .fal, .fab {
-                font-size: 20px;
-                margin-right: 10px;
-                margin-left: 5px;
-                padding-top: 10px;
-            }
-
-            .m-b-md {
-                margin-bottom: 80px;
-            }
-
-            .body > a {
-                margin: 0px 15px;
-                display: block;
-                float: left;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
+@section('content')
+    <div class="flex flex-col justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8">
+        <div class="absolute top-0 right-0 mt-4 mr-4">
             @if (Route::has('login'))
-                <div class="top-right links">
-                    <a href="https://github.com/alimentalos"><i class="fab fa-github"></i> {{ __('GitHub') }}</a>
-                    <a href="{{ url('/about') }}"><i class="fal fa-book-alt"></i> {{ __('About') }}</a>
+                <div class="space-x-4">
                     @auth
-                        <a href="{{ url('/home') }}"><i class="fal fa-sign-in"></i> {{ __('Dashboard') }}</a>
+                        <a
+                            href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+                        >
+                            Log out
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     @else
-                        <a href="{{ route('login') }}"><i class="fal fa-sign-in"></i> {{ __('Login') }}</a>
+                        <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Log in</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}"><i class="fal fa-user-plus"></i> {{ __('Register') }}</a>
+                            <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Register</a>
                         @endif
                     @endauth
                 </div>
             @endif
+        </div>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Alimentalos
-                </div>
+        <div class="flex items-center justify-center">
+            <div class="flex flex-col justify-around">
+                <div class="space-y-6">
+                    <a href="{{ route('home') }}">
+                        <x-logo class="w-auto h-16 mx-auto text-indigo-600" />
+                    </a>
 
-                <img style="max-width: 300px; max-height: 240px;" src="/svg/{{ config('gallery.welcome')[array_rand(config('gallery.welcome'))] }}" alt="">
+                    <h1 class="text-5xl font-extrabold tracking-wider text-center text-gray-600">
+                        {{ config('app.name') }}
+                    </h1>
 
-                <div class="links body">
-                    @markdown(__('Bring care and love to *abandoned pets*.'))
-
-
-                    <p class="links" style="text-align: center; overflow: hidden">
-                        <a style="float:left;" href="/lang/es">Español</a> <a style="float: right;" href="/lang/en">English</a>
-                    </p>
+                    <ul class="list-reset">
+                        <li class="inline px-4">
+                            <a href="https://tailwindcss.com" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Tailwind CSS</a>
+                        </li>
+                        <li class="inline px-4">
+                            <a href="https://github.com/alpinejs/alpine" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Alpine.js</a>
+                        </li>
+                        <li class="inline px-4">
+                            <a href="https://laravel.com" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Laravel</a>
+                        </li>
+                        <li class="inline px-4">
+                            <a href="https://laravel-livewire.com" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">Livewire</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+@endsection

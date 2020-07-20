@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,25 +13,21 @@
 |
 */
 
-use Illuminate\Http\Request;
+Route::view('/', 'welcome')->name('home');
 
-Route::get('/', 'WelcomeController');
+Route::middleware('guest')->group(function () {
+    Route::view('login', 'auth.login')->name('login');
+    Route::view('register', 'auth.register')->name('register');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::view('password/reset', 'auth.passwords.email')->name('password.request');
+Route::get('password/reset/{token}', 'Auth\PasswordResetController')->name('password.reset');
 
+Route::middleware('auth')->group(function () {
+    Route::view('email/verify', 'auth.verify')->middleware('throttle:6,1')->name('verification.notice');
+    Route::get('email/verify/{id}/{hash}', 'Auth\EmailVerificationController')->middleware('signed')->name('verification.verify');
 
-Route::get('/lang/{lang}', function(Request $request) {
-    if (!in_array($request->route('lang'), ['es', 'en'])) {
-        throw new Exception('Unsupported language');
-    }
-    \Illuminate\Support\Facades\Session::put('lang', $request->route('lang'));
-    return redirect()->back();
-})->name('lang');
+    Route::post('logout', 'Auth\LogoutController')->name('logout');
 
-Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/about', 'AboutController@index')->name('about');
-Route::get('/about/{name}', 'AboutController@show')->name('about.show');
-Route::get('/about/{name}/{page}', 'AboutController@view')->name('about.view');
+    Route::view('password/confirm', 'auth.passwords.confirm')->name('password.confirm');
+});

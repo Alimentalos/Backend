@@ -49,7 +49,7 @@ class UserCanUpdateOwnedGeofenceTest extends TestCase
                 ]
             ],
             'is_public' => true,
-            'created_at' => $geofence->created_at->format('Y-m-d H:i:s')
+            'created_at' => $geofence->created_at
         ]);
         $response->assertJsonStructure([
             'uuid',

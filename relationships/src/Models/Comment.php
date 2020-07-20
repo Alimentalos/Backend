@@ -40,4 +40,12 @@ class Comment extends Model implements ReactableContract, Resource, UpdateFromRe
      * @var array
      */
     protected $hidden = ['id'];
+	
+	/**
+	 * The attributes that should be cast to native types.
+	 *
+	 * @var array
+	 */
+	protected $casts = [
+	];
 }

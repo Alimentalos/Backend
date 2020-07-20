@@ -18,7 +18,7 @@ class Action extends Model implements Resource
      * @var array
      */
     protected $casts = [
-        'parameters' => 'array'
+        'parameters' => 'array',
     ];
 
     /**
@@ -41,4 +41,5 @@ class Action extends Model implements Resource
      * @var array
      */
     protected $hidden = ['id'];
+    
 }

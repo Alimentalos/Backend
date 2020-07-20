@@ -60,7 +60,7 @@ class UserCanUpdateOwnedGeofenceWithPhotoTest extends TestCase
                 ]
             ],
             'is_public' => true,
-            'created_at' => $geofence->created_at->format('Y-m-d H:i:s'),
+            'created_at' => $geofence->created_at,
         ]);
         $response->assertOk();
         $this->assertFalse($content->photo->uuid === $old_uuid);
