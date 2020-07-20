@@ -26,8 +26,10 @@ class Email extends Component
 
             return;
         }
-
+	
+		// @codeCoverageIgnoreStart
         $this->addError('email', trans($response));
+		// @codeCoverageIgnoreEnd
     }
 
     /**

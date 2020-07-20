@@ -61,8 +61,10 @@ class Reset extends Component
 
             return redirect(route('home'));
         }
-
+	
+		// @codeCoverageIgnoreStart
         $this->addError('email', trans($response));
+		// @codeCoverageIgnoreEnd
     }
 
     /**
