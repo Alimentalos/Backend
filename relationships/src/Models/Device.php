@@ -76,6 +76,8 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
      */
     protected $casts = [
         'is_public' => 'boolean',
+		'created_at' => 'datetime:Y-m-d H:i:s',
+		'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     /**
