@@ -18,7 +18,7 @@ class CreateAlertsTable extends Migration
             $table->string('color')->nullable();
             $table->uuidMorphs('alert');
             $table->tinyInteger('type');
-            $table->point('location'); // Latitude, Longitude
+            $table->point('location')->nullable(); // Latitude, Longitude
             $table->string('title');
             $table->longText('body');
             $table->tinyInteger('status');

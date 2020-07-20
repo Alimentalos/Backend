@@ -91,7 +91,7 @@ trait AlertResource
                 Rule::in(cataloger()->types())
             ],
             'photo' => 'required',
-            'coordinates' => ['required', new Coordinate()],
+            'coordinates' => [new Coordinate()],
         ];
     }
 

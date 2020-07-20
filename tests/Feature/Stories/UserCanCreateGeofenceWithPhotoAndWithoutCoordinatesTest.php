@@ -10,11 +10,11 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class UserCanCreateGeofenceUsingPhotoAndStringShapeTest extends TestCase
+class UserCanCreateGeofenceWithPhotoAndWithoutCoordinatesTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCanCreateGeofenceUsingPhoto()
+    public function testUserCanCreateGeofenceWithPhotoAndWithoutCoordinates()
     {
         Storage::fake('public');
         $user = factory(User::class)->create();
@@ -24,8 +24,13 @@ class UserCanCreateGeofenceUsingPhotoAndStringShapeTest extends TestCase
             'marker' => UploadedFile::fake()->image('marker.jpg'),
             'name' => 'Awesome geofence!',
             'is_public' => true,
-            'shape' => '0,0|0,5|5,5|5,0|0,0',
-            'coordinates' => '20.1,25.5',
+            'shape' => [
+                ['latitude' => 0, 'longitude' => 0],
+                ['latitude' => 0, 'longitude' => 5],
+                ['latitude' => 5, 'longitude' => 5],
+                ['latitude' => 5, 'longitude' => 0],
+                ['latitude' => 0, 'longitude' => 0],
+            ],
             'color' => '#CCCCCC',
             'border_color' => '#CCCCCC',
             'background_color' => '#CCCCCC',
@@ -51,21 +56,6 @@ class UserCanCreateGeofenceUsingPhotoAndStringShapeTest extends TestCase
             'is_public',
             'created_at',
             'updated_at',
-            'border_color',
-            'color',
-            'background_color',
-            'fill_color',
-            'tag_color',
-            'marker_color',
-        ]);
-        $response->assertJsonFragment([
-            'color' => '#CCCCCC',
-            'border_color' => '#CCCCCC',
-            'background_color' => '#CCCCCC',
-            'text_color' => '#CCCCCC',
-            'fill_color' => '#CCCCCC',
-            'tag_color' => '#CCCCCC',
-            'marker_color' => '#CCCCCC',
         ]);
         $content = $response->getContent();
         Storage::disk('public')->assertExists((json_decode($content))->photo->photo_url);

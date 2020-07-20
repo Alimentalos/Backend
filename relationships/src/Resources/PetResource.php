@@ -47,12 +47,7 @@ trait PetResource
     public function updateRules()
     {
         return [
-            'coordinates' => [
-                Rule::requiredIf(function () {
-                    return request()->has('photo');
-                }),
-                new Coordinate()
-            ],
+            'coordinates' => [new Coordinate()],
         ];
     }
 
@@ -80,7 +75,7 @@ trait PetResource
                 ])
             ],
             'born_at' => 'required',
-            'coordinates' => [Rule::requiredIf(fn() => rhas('photo')), new Coordinate()],
+            'coordinates' => [new Coordinate()],
         ];
     }
 

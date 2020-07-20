@@ -20,7 +20,7 @@ class CreatePhotosTable extends Migration
             $table->string('ext');
             $table->string('photo_url')->nullable();
             $table->boolean('is_public')->default(true);
-            $table->point('location'); // Latitude, Longitude
+            $table->point('location')->nullable(); // Latitude, Longitude
             $table->timestamps();
         });
 

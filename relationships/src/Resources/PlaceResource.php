@@ -47,12 +47,7 @@ trait PlaceResource
     public function updateRules()
     {
         return [
-            'coordinates' => [
-                Rule::requiredIf(function () {
-                    return request()->has('photo');
-                }),
-                new Coordinate()
-            ],
+            'coordinates' => [new Coordinate()],
         ];
     }
 
@@ -66,7 +61,7 @@ trait PlaceResource
         return [
             'name' => 'required',
             'is_public' => 'required|boolean',
-            'coordinates' => ['required', new Coordinate()],
+            'coordinates' => [new Coordinate()],
             'color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'marker_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
         ];

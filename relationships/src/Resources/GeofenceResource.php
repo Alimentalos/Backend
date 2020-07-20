@@ -48,11 +48,7 @@ trait GeofenceResource
     public function updateRules()
     {
         return [
-            'coordinates' => [
-                Rule::requiredIf(function () {
-                    return request()->has('photo');
-                }), new Coordinate()
-            ],
+            'coordinates' => [new Coordinate()],
         ];
     }
 
@@ -67,8 +63,7 @@ trait GeofenceResource
             'name' => 'required',
             'shape.*.latitude' => 'required_with:shape.*.longitude',
             'is_public' => 'required|boolean',
-            'coordinates' => [Rule::requiredIf(fn() => rhas('photo')), new Coordinate()],
-            // Colors
+            'coordinates' => [new Coordinate()],
             'color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'border_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'background_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',

@@ -14,7 +14,7 @@ class CreatePlacesTable extends Migration
     public function up()
     {
         Schema::create('places', function (Blueprint $table) {
-            $table->point('location'); // Latitude, Longitude
+            $table->point('location')->nullable(); // Latitude, Longitude
             $table->string('color')->nullable();
             $table->boolean('is_public')->default(true);
             $table->timestamps();

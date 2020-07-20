@@ -48,7 +48,7 @@ trait PhotoResource
         return [
             'photo' => 'required',
             'is_public' => 'required|boolean',
-            'coordinates' => ['required', new Coordinate()],
+            'coordinates' => [new Coordinate()],
         ];
     }
 

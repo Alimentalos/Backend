@@ -17,11 +17,13 @@ class Uploader
     {
         if (rhas('photo')) {
             $photo = photos()->create();
-            $model->update([
-                'photo_uuid' => $photo->uuid,
-                'photo_url' => config('storage.path') . 'photos/' . $photo->photo_url,
-                'location' => parser()->pointFromCoordinates(input('coordinates')),
-            ]);
+            $data = [];
+            if (rhas('coordinates')) {
+            	$data['location'] = parser()->pointFromCoordinates(input('coordinates'));
+            }
+            $data['photo_uuid'] = $photo->uuid;
+            $data['photo_url'] = config('storage.path') . 'photos/' . $photo->photo_url;
+            $model->update($data);
             $model->photos()->attach($photo->uuid);
         }
 

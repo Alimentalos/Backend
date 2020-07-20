@@ -23,7 +23,7 @@ trait PhotoProcedure
             'is_public' => fill('is_public', true),
             'title' => fill('title', null),
             'body' => fill('body', null),
-            'location' => parser()->pointFromCoordinates(input('coordinates'))
+            'location' => rhas('coordinates') ? parser()->pointFromCoordinates(input('coordinates')) : null,
         ]);
         return $photo;
     }
