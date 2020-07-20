@@ -48,10 +48,7 @@ trait GroupResource
     public function updateRules()
     {
         return [
-            'coordinates' => [
-                Rule::requiredIf(fn() => request()->has('photo')),
-                new Coordinate()
-            ],
+            'coordinates' => [new Coordinate()],
         ];
     }
 
@@ -73,7 +70,7 @@ trait GroupResource
             'user_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'administrator_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'owner_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'coordinates' => [Rule::requiredIf(fn() => rhas('photo')), new Coordinate()],
+            'coordinates' => [new Coordinate()],
         ];
     }
 
