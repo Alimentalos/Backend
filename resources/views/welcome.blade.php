@@ -58,11 +58,11 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
     </div>
     <section>
-        <div class="container text-center mb-5 py-10">
-            <h1 class="text-4xl">Pets to adopt</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
-        </div>
         <div class="container mx-auto ml-auto mr-auto py-10 px-40">
+            <div class="text-center py-10">
+                <h1 class="text-4xl">Pets to adopt</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
+            </div>
             <form class="">
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
