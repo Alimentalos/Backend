@@ -53,9 +53,11 @@
             </div>
         </nav>
     </header>
-    <div class="bg-gray-800 text-center py-24 px-10">
-        <h1 class="text-white font-bold uppercase text3xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
+    <div class="bg-cover bg-center py-40 px-10 static bg-red-to-bg-blue-90" style="background-image:url(img/background.jpg)">
+        <div class="text-center">
+            <h1 class="text-white font-bold uppercase text-4xl">Lorem ipsum dolor sit amet</h1>
+            <p class="text-white text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
+        </div>
     </div>
     <section>
         <div class="container mx-auto ml-auto mr-auto py-10 px-40">
