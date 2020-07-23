@@ -153,47 +153,32 @@
         </div>
     </section>
     <section>
-        <div class="container text-center mb-5 py-10">
-            <h1 class="text-4xl">Contact us</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
-        </div>
-        <div class="container">
-            <div class="flex justify-between py-10 px-40 ">
-                <div class="mx-3">
-                    <img class="w-64" src="img/contact_form.svg" alt="">
+        <div class="">
+            <div class="block md:flex justify-center py-10">
+                <div class="mx-3 pt-5 mt-5">
+                    <img class="text-center mx-auto" src="img/contact_form.svg" alt="" width="400">
                 </div>
-                <div class="">
-                    <form class="w-full max-w-lg">
-                        <div class="flex flex-wrap -mx-3 mb-6">
-                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                                    First Name
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">
-                            </div>
-                            <div class="w-full md:w-1/2 px-3">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                    Last Name
-                                </label>
-                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Doe">
-                            </div>
+                <div class="ml-4">
+                    <div class="px-4 py-8 text-center">
+                        <h1 class="text-gray-500 text-4xl">Contact us</h1>
+                        <p class="text-gray-600 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    </div>
+                    <div class="md:flex justify-center">
+                        <div class="text-center px-4 mb-3">
+                            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="email" placeholder="Name">
                         </div>
-                        <div class="flex flex-wrap -mx-3 mb-2">
-                            <div class="w-full  px-3 mb-6 md:mb-0">
-                                <label class="block">
-                                    <span class="text-gray-700">Textarea</span>
-                                    <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Enter some long form content."></textarea>
-                                </label>
-                            </div>
+                        <div class="text-center px-4 mb-3">
+                            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="email" placeholder="Email">
                         </div>
-                        <div class="flex flex-wrap -mx-3 mb-2">
-                            <div class="w-full text-right  px-3 mb-6 md:mb-0">
-                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-4">
-                                    Submit message
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="flex w-full px-4 mb-3">
+                        <textarea class="resize border w-full rounded focus:outline-none focus:shadow-outline border border-gray-300 py-2 px-4" placeholder="Message..." rows="4"></textarea>
+                    </div>
+                    <div class="text-center mb-3 text-center pt-4">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                            Submit
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
