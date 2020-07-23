@@ -53,70 +53,52 @@
             </div>
         </nav>
     </header>
-    <div class="bg-cover bg-center py-40 px-10 static bg-red-to-bg-blue-90" style="background-image:url(img/background.jpg)">
+    <div class="bg-cover bg-center py-40 px-10 bg-red-to-bg-blue-90" style="background-image:url(img/background.jpg)">
         <div class="text-center">
             <h1 class="text-white font-bold uppercase text-4xl">Lorem ipsum dolor sit amet</h1>
             <p class="text-white text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
         </div>
     </div>
     <section>
-        <div class="container mx-auto ml-auto mr-auto py-10 px-40">
+        <div class="container mx-auto ml-auto mr-auto">
             <div class="text-center py-10">
                 <h1 class="text-4xl">Pets to adopt</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
             </div>
-            <form class="">
-                <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
-                            City
-                        </label>
-                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="City">
+            <div class="">
+                <div class="md:flex justify-center py-6 px-64">
+                    <div class="text-center px-4 mb-3">
+                        <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="email" placeholder="City">
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                            State
-                        </label>
-                        <div class="relative">
-                            <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="State">
-                                <option>New Mexico</option>
-                                <option>Missouri</option>
-                                <option>Texas</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                            </div>
-                        </div>
+                    <div class="text-center px-4 mb-3">
+                        <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="email" placeholder="State">
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-                            Zip
-                        </label>
-                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" placeholder="Street">
-                    </div>
-                    <div class="container text-center pt-5">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                            Search
-                        </button>
+                    <div class="text-center px-4 mb-3">
+                        <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="email" placeholder="Street">
                     </div>
                 </div>
-            </form>
+                <div class="text-center mb-3 text-center pt-4">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                        Search
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="container mx-auto text-center mt-5 py-24 px-40">
-            <div class="flex justify-between">
-                <div class="flex">
-                    <div class="text-right mx-2">
-                        <img class="w-70 h-40 rounded-lg" src="img/background.jpg" alt="">
+        <div class="container mx-auto ml-auto mr-auto mt-5">
+            <div class="mb-5 pt-5">
+                <div class="md:flex justify-center py-6 px-20">
+                    <div class="mb-3 mr-4">
+                        <img class="w-70 h-40 rounded-lg mx-auto lg:mr-4" src="img/background.jpg" alt="">
                     </div>
                     <article>
-                        <div class="text-left mt-4 mx-2 mr-6">
-                            <h1 class="text-teal-900 font-bold uppercase text3xl">Lorem ipsum dolor sit amet</h1>
+                        <div class="text-left md:text-center w-64 md:w-auto mx-auto">
+                            <h1 class="text-teal-900 font-bold uppercase text3xl mb-3">Lorem ipsum dolor sit amet</h1>
                             <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br>Ad adipisci amet consequatur cum.</p>
                             <p class="text-teal-400 font-bold">2 years 3 mounths</p>
                         </div>
                     </article>
-                    <div class="pt-5">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-4">
+                    <div class="pt-5 mt-5 md:mt-1 text-center">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                             Go to adopt
                         </button>
                     </div>
