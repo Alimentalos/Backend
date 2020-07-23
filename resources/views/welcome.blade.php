@@ -199,24 +199,24 @@
             </div>
         </div>
     </section>
-    <footer>
-        <div class="container">
-            <div class="flex justify-between py-10 px-40">
-                <div class="pt-5">
-                    © 2020 Alimentalos
+    <footer class="">
+        <div class="text-center py-10 px-10">
+            <div class="block md:flex justify-between">
+                <div class="text-gray-500 text-2xl pt-5 ml-4 order-first sm:order-last order-2 md:order-none">
+                    Alimentalos © 2020
                 </div>
-                <div class="">
-                    <i class="fas fa-paw" style="font-size: 3.3em; color:#27496D;"></i>
+                <div class="text-center order-1">
+                    <i class="fas fa-paw" style="font-size: 4.3em; color:#27496D;"></i>
                 </div>
                 <div class="pt-5">
-                    <ul class="flex">
-                        <li class="mr-6">    
+                    <ul class="flex justify-center">
+                        <li class="mr-6">
                             <a class="text-blue-500 hover:text-blue-800" href="">Privacy</a>
                         </li>
-                        <li class="mr-6">    
+                        <li class="mr-6">
                             <a class="text-blue-500 hover:text-blue-800" href="">Terms</a>
                         </li>
-                        <li class="mr-6">    
+                        <li class="mr-6">
                             <a class="text-blue-500 hover:text-blue-800" href="">About</a>
                         </li>
                     </ul>
