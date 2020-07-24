@@ -4,12 +4,11 @@
     <style>
         .bg-wall{
             width: 100%;
+            height: 700px;
             background: #43C6AC;  /* fallback for old browsers */
             background: -webkitlinear-gradient(to right, rgba(25, 22, 84, 0.61), rgba(67, 198, 172, 0.6)), url("img/background.jpg"); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             background: linear-gradient(to right, rgba(25, 22, 84, 0.61), rgba(67, 198, 172, 0.6)), url("img/background.jpg"); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             background-size: cover;
-            background-attachment: fixed;
-            position: relative;
         }
     </style>
     <div class="bg-wall">
@@ -71,6 +70,18 @@
         <div class="text-center py-40">
             <h1 class="text-white font-bold uppercase text-4xl">Lorem ipsum dolor sit amet</h1>
             <p class="text-white text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
+            <div class="flex justify-center py-10 space-x-4">
+                <div class="">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-light py-2 px-4 rounded-full">
+                        Register pet
+                    </button>
+                </div>
+                <div class="">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-light py-2 px-4 rounded-full">
+                        Pet to adopt
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <section>
@@ -79,40 +90,105 @@
                 <h1 class="text-4xl">Pets to adopt</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
             </div>
-            <div class="">
-                <div class="md:flex justify-center py-6 px-64">
+            <div class="ml-4">
+                <div class="md:flex justify-center">
                     <div class="text-center px-4 mb-3">
-                        <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="email" placeholder="City">
+                        <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="text" placeholder="City">
                     </div>
                     <div class="text-center px-4 mb-3">
-                        <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="email" placeholder="State">
+                        <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="text" placeholder="State">
                     </div>
                     <div class="text-center px-4 mb-3">
-                        <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="email" placeholder="Street">
+                        <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" type="text" placeholder="Street">
                     </div>
                 </div>
                 <div class="text-center mb-3 text-center pt-4">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-light py-2 px-4 rounded-full">
                         Search
                     </button>
                 </div>
             </div>
         </div>
-        <div class="container mx-auto ml-auto mr-auto mt-5">
-            <div class="mb-5 pt-5">
-                <div class="md:flex justify-center py-6 px-20">
-                    <div class="mb-3 mr-4">
-                        <img class="w-70 h-40 rounded-lg mx-auto lg:mr-4" src="img/background.jpg" alt="">
+        <div class="mt-5 ml-4 py-10">
+            <div class="">
+                <div class="md:flex justify-center">
+                    <div class="px-6 sm:px-20 mb-3 pt-3">
+                        <img class="w-70 h-40 rounded-lg" src="img/background.jpg" alt="">
                     </div>
-                    <article>
-                        <div class="text-left md:text-center w-64 md:w-auto mx-auto">
-                            <h1 class="text-teal-900 font-bold uppercase text3xl mb-3">Lorem ipsum dolor sit amet</h1>
-                            <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br>Ad adipisci amet consequatur cum.</p>
-                            <p class="text-teal-400 font-bold">2 years 3 mounths</p>
-                        </div>
-                    </article>
-                    <div class="pt-5 mt-5 md:mt-1 text-center">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    <div class="px-6 mb-5">
+                        <article>
+                            <div class="text-left sm:text-left xl:text-left">
+                                <h2 class="text-teal-900 font-bold text-4xl">Firulais</h2>
+                                <p class="text-teal-400 font-bold mb-2">2 years 3 mounths</p>
+                                <p class="text-gray-700">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br>Amet at atque blanditiis consectetur corporis.
+                                </p>
+                                <div class="flex mt-3 block md:hidden xl:hidden">
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#doglovers</span>
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#adopt</span>
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#happy</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="text-left px-6 mb-3 mt-5 pt-5">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-light py-2 px-4 rounded-full">
+                            Go to adopt
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="md:flex justify-center">
+                    <div class="px-6 sm:px-20 mb-3 pt-3">
+                        <img class="w-70 h-40 rounded-lg" src="img/background.jpg" alt="">
+                    </div>
+                    <div class="px-6 mb-5">
+                        <article>
+                            <div class="text-left sm:text-left xl:text-left">
+                                <h2 class="text-teal-900 font-bold text-4xl">Firulais</h2>
+                                <p class="text-teal-400 font-bold mb-2">2 years 3 mounths</p>
+                                <p class="text-gray-700">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br>Amet at atque blanditiis consectetur corporis.
+                                </p>
+                                <div class="flex mt-3 block md:hidden xl:hidden">
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#doglovers</span>
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#adopt</span>
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#happy</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="text-left px-6 mb-3 mt-5 pt-5">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-light py-2 px-4 rounded-full">
+                            Go to adopt
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="md:flex justify-center">
+                    <div class="px-6 sm:px-20 mb-3 pt-3">
+                        <img class="w-70 h-40 rounded-lg" src="img/background.jpg" alt="">
+                    </div>
+                    <div class="px-6 mb-5">
+                        <article>
+                            <div class="text-left sm:text-left xl:text-left">
+                                <h2 class="text-teal-900 font-bold text-4xl">Firulais</h2>
+                                <p class="text-teal-400 font-bold mb-2">2 years 3 mounths</p>
+                                <p class="text-gray-700">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br>Amet at atque blanditiis consectetur corporis.
+                                </p>
+                                <div class="flex mt-3 block md:hidden xl:hidden">
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#doglovers</span>
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#adopt</span>
+                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#happy</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="text-left px-6 mb-3 mt-5 pt-5">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-light py-2 px-4 rounded-full">
                             Go to adopt
                         </button>
                     </div>
@@ -122,61 +198,64 @@
     </section>
     <section>
         <div class="bg-gray-400 text-center py-10 px-10">
-            <div class="container mb-5 py-5">
-                <h1 class="text-white text-4xl">Pets adopted with us</h1>
-                <p class="text-white mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
-
-                <div class="md:flex md:justify-between">
-                    <div class="mx-3 mb-5 py-10">
-                        <img src="img/background.jpg" class="mx-auto" alt="">
-                        <article>
-                            <div class="bg-white py-5 text-left px-10">
-                                <h2 class="text-teal-900 font-bold text-4xl">Firulais</h2>
-                                <p class="text-teal-400 font-bold mb-2">2 years 3 mounths</p>
-                                <p class="text-gray-700 mb-5">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                                </p>
-                                <div class="px-6 py-4">
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#doglovers</span>
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#adopt</span>
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#happy</span>
+            <div class="container mx-auto ml-auto mr-auto">
+                <div class="text-center py-10">
+                    <h1 class="text-white text-4xl">Pets adopted with us</h1>
+                    <p class="text-white text-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet consequatur cum.</p>
+                </div>
+                <div class="">
+                    <div class="md:flex md:justify-between">
+                        <div class="mx-3 mb-2 py-5">
+                            <img src="img/background.jpg" class="mx-auto" alt="">
+                            <article>
+                                <div class="bg-white py-5 text-left px-6">
+                                    <h2 class="text-teal-900 font-bold text-4xl">Firulais</h2>
+                                    <p class="text-teal-400 font-bold mb-2">2 years 3 mounths</p>
+                                    <p class="text-gray-700 mb-5">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                                    </p>
+                                    <div class="py-4">
+                                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#doglovers</span>
+                                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#adopt</span>
+                                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#happy</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="mx-3 mb-5 py-10">
-                        <img src="img/background.jpg" class="mx-auto" alt="">
-                        <article>
-                            <div class="bg-white py-5 text-left px-10">
-                                <h2 class="text-teal-900 font-bold text-4xl">Firulais</h2>
-                                <p class="text-teal-400 font-bold mb-2">2 years 3 mounths</p>
-                                <p class="text-gray-700 mb-5">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                                </p>
-                                <div class="px-6 py-4">
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#doglovers</span>
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#adopt</span>
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#happy</span>
+                            </article>
+                        </div>
+                        <div class="mx-3 mb-2 py-5">
+                            <img src="img/background.jpg" class="mx-auto" alt="">
+                            <article>
+                                <div class="bg-white py-5 text-left px-6">
+                                    <h2 class="text-teal-900 font-bold text-4xl">Firulais</h2>
+                                    <p class="text-teal-400 font-bold mb-2">2 years 3 mounths</p>
+                                    <p class="text-gray-700 mb-5">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                                    </p>
+                                    <div class="py-4">
+                                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#doglovers</span>
+                                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#adopt</span>
+                                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#happy</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="mx-3 mb-5 py-10">
-                        <img src="img/background.jpg" class="mx-auto" alt="">
-                        <article>
-                            <div class="bg-white py-5 text-left px-10">
-                                <h2 class="text-teal-900 font-bold text-4xl">Firulais</h2>
-                                <p class="text-teal-400 font-bold mb-2">2 years 3 mounths</p>
-                                <p class="text-gray-700 mb-5">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                                </p>
-                                <div class="px-6 py-4">
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#doglovers</span>
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#adopt</span>
-                                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#happy</span>
+                            </article>
+                        </div>
+                        <div class="mx-3 mb-2 py-5">
+                            <img src="img/background.jpg" class="mx-auto" alt="">
+                            <article>
+                                <div class="bg-white py-5 text-left px-6">
+                                    <h2 class="text-teal-900 font-bold text-4xl">Firulais</h2>
+                                    <p class="text-teal-400 font-bold mb-2">2 years 3 mounths</p>
+                                    <p class="text-gray-700 mb-5">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                                    </p>
+                                    <div class="py-4">
+                                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#doglovers</span>
+                                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#adopt</span>
+                                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#happy</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
+                            </article>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -204,8 +283,8 @@
                     <div class="flex w-full px-4 mb-3">
                         <textarea class="resize border w-full rounded focus:outline-none focus:shadow-outline border border-gray-300 py-2 px-4" placeholder="Message..." rows="4"></textarea>
                     </div>
-                    <div class="text-center mb-3 text-center pt-4">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    <div class="text-center mb-3 pt-4">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-light py-2 px-4 rounded-full">
                             Submit
                         </button>
                     </div>
@@ -216,10 +295,10 @@
     <footer class="">
         <div class="text-center py-10 px-10">
             <div class="block md:flex justify-between">
-                <div class="text-gray-500 text-2xl pt-5 ml-4 order-first sm:order-last order-2 md:order-none">
+                <div class="text-gray-600 text-light text-2xl pt-5 ml-4 xl:order-first">
                     Alimentalos © 2020
                 </div>
-                <div class="text-center order-1">
+                <div class="text-center order-first sm:order-last md:order-none lg:order-first xl:order-last">
                     <i class="fas fa-paw" style="font-size: 4.3em; color:#27496D;"></i>
                 </div>
                 <div class="pt-5">
