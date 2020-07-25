@@ -3,17 +3,15 @@
 use App\Repositories\AdminRepository;
 use Alimentalos\Relationships\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 if (! function_exists('authenticated')) {
 	/**
-	 * @param string $guard
 	 * @return Authenticatable|User
 	 */
-    function authenticated($guard = 'api')
+    function authenticated()
     {
-    	return request()->acceptsJson() ?
-			auth($guard)->user() :
-			auth()->user();
+    	return Auth::user();
     }
 }
 if (! function_exists('rhas')) {
