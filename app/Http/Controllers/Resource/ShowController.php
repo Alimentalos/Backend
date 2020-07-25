@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Resource\ShowRequest;
 use Alimentalos\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 
 class ShowController extends Controller
 {
@@ -50,11 +51,13 @@ class ShowController extends Controller
      *
      * @param ShowRequest $request
      * @param $resource
-     * @return JsonResponse
+     * @return JsonResponse|View
      */
     public function __invoke(ShowRequest $request, Resource $resource)
     {
         $resource->load($resource->lazy_relationships);
-        return response()->json($resource,200);
+		return $request->wantsJson() ?
+			response()->json($resource, 200) :
+			view(finder()->currentResource() . '.show')->with(['instance' => $resource]);
     }
 }

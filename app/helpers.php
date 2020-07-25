@@ -5,12 +5,13 @@ use Alimentalos\Relationships\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 if (! function_exists('authenticated')) {
-    /**
-     * @return Authenticatable|User
-     */
-    function authenticated()
+	/**
+	 * @param string $guard
+	 * @return Authenticatable|User
+	 */
+    function authenticated($guard = 'api')
     {
-        return auth(request()->wantsJson() ? 'api' : null)->user();
+        return auth(request()->wantsJson() ? $guard : null)->user();
     }
 }
 if (! function_exists('rhas')) {
