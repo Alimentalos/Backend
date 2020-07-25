@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Resource;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 
 class IndexController extends Controller
 {
@@ -38,12 +39,14 @@ class IndexController extends Controller
      * Get resource paginated.
      *
      * @param IndexRequest $request
-     * @return JsonResponse
+     * @return JsonResponse|View
      */
     public function __invoke(IndexRequest $request)
     {
         $instances = resource()->getInstances();
         $instances->load(resource()->getLazyRelationshipsAttribute());
-        return response()->json($instances, 200);
+        return $request->wantsJson() ?
+			response()->json($instances, 200) :
+			view(finder()->currentResource() . '.index')->with(['instances' => $instances]);
     }
 }
