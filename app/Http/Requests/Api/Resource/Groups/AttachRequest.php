@@ -13,6 +13,6 @@ class AttachRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('attachGroup', [$this->route('resource'), $this->route('group')]);
+        return authenticated()->can('attachGroup', [$this->route('resource'), $this->route('group')]);
     }
 }

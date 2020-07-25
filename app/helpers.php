@@ -6,12 +6,11 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 if (! function_exists('authenticated')) {
     /**
-     * @param string $guard
      * @return Authenticatable|User
      */
-    function authenticated($guard = 'api')
+    function authenticated()
     {
-        return auth($guard)->user();
+        return auth(request()->wantsJson() ? 'api' : null)->user();
     }
 }
 if (! function_exists('rhas')) {

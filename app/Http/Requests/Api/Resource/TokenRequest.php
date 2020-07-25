@@ -13,6 +13,6 @@ class TokenRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('update', $this->route('resource'));
+        return authenticated()->can('update', $this->route('resource'));
     }
 }

@@ -13,6 +13,6 @@ class AcceptRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('acceptGroup', [$this->route('user'), $this->route('group')]);
+        return authenticated()->can('acceptGroup', [$this->route('user'), $this->route('group')]);
     }
 }

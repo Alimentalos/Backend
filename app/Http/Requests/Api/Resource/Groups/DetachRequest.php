@@ -13,6 +13,6 @@ class DetachRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('detachGroup', [$this->route('resource'), $this->route('group')]);
+        return authenticated()->can('detachGroup', [$this->route('resource'), $this->route('group')]);
     }
 }

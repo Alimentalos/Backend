@@ -13,6 +13,6 @@ class BlockRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('blockGroup', [$this->route('user'), $this->route('group')]);
+        return authenticated()->can('blockGroup', [$this->route('user'), $this->route('group')]);
     }
 }

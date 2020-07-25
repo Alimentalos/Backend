@@ -13,7 +13,7 @@ class InviteRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('inviteGroup', [$this->route('user'), $this->route('group')]);
+        return authenticated()->can('inviteGroup', [$this->route('user'), $this->route('group')]);
     }
 
     /**

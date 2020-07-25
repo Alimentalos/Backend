@@ -13,6 +13,6 @@ class DetachRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('detachGeofence', [$this->route('resource'), $this->route('geofence')]);
+        return authenticated()->can('detachGeofence', [$this->route('resource'), $this->route('geofence')]);
     }
 }

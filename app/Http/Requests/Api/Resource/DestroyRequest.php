@@ -13,6 +13,6 @@ class DestroyRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('delete', $this->route('resource'));
+        return authenticated()->can('delete', $this->route('resource'));
     }
 }

@@ -14,6 +14,6 @@ class IndexRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('viewAny', finder()->findClass(finder()->currentResource()));
+        return authenticated()->can('viewAny', finder()->findClass(finder()->currentResource()));
     }
 }

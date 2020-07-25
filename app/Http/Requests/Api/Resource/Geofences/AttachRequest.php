@@ -13,6 +13,6 @@ class AttachRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('attachGeofence', [$this->route('resource'), $this->route('geofence')]);
+        return authenticated()->can('attachGeofence', [$this->route('resource'), $this->route('geofence')]);
     }
 }

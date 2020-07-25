@@ -13,6 +13,6 @@ class AccessesRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('geofence'));
+        return authenticated()->can('view', $this->route('geofence'));
     }
 }

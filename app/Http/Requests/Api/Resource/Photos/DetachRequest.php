@@ -13,6 +13,6 @@ class DetachRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('detachPhoto', [$this->route('resource'), $this->route('photo')]);
+        return authenticated()->can('detachPhoto', [$this->route('resource'), $this->route('photo')]);
     }
 }

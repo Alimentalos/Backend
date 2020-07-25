@@ -14,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('view', $this->route('resource')) && $this->user('api')->can('create', Comment::class);
+        return authenticated()->can('view', $this->route('resource')) && authenticated()->can('create', Comment::class);
     }
 
     /**

@@ -13,6 +13,6 @@ class RejectRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-        return $this->user('api')->can('rejectGroup', [$this->route('user'), $this->route('group')]);
+        return authenticated()->can('rejectGroup', [$this->route('user'), $this->route('group')]);
     }
 }
