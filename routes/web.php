@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome')->name('welcome');
 Route::view('/home', 'home')->name('home');
 Route::view('/map', 'map')->name('map');
-Route::view('/profile', 'map')->name('map');
+Route::view('/profile', 'profile')->name('profile');
 
 Route::middleware('guest')->group(function () {
     Route::view('login', 'auth.login')->name('login');
@@ -33,4 +33,16 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', 'Auth\LogoutController')->name('logout');
 
     Route::view('password/confirm', 'auth.passwords.confirm')->name('password.confirm');
+});
+
+/**
+ * Authenticated and verified routes ...
+ */
+Route::middleware(['verified'])->group(function () {
+	foreach ([
+				 'places', 'users', 'groups', 'geofences', 'pets', 'devices', 'photos', 'actions', 'alerts'
+			 ] as $resource) {
+		Route::get("/{$resource}", 'Resource\IndexController')
+			->name("{$resource}.index");
+	}
 });
