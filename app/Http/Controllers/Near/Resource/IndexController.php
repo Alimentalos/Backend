@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Near\Resource;
 
 use Alimentalos\Relationships\Models\Geofence;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Near\Resource\IndexRequest;
+use App\Http\Requests\Near\Resource\IndexRequest;
 use Alimentalos\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 

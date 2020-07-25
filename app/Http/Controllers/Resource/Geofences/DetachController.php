@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource\Geofences;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Geofences\DetachRequest;
+use App\Http\Requests\Resource\Geofences\DetachRequest;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Geofence;
 use Illuminate\Http\JsonResponse;

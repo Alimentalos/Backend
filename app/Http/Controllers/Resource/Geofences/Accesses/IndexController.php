@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource\Geofences\Accesses;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Geofences\Accesses\IndexRequest;
+use App\Http\Requests\Resource\Geofences\Accesses\IndexRequest;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Access;
 use Alimentalos\Relationships\Models\Geofence;

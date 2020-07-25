@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource\Groups;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Groups\AttachRequest;
+use App\Http\Requests\Resource\Groups\AttachRequest;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Group;
 use Illuminate\Http\JsonResponse;

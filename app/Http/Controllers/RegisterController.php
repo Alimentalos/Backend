@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\JsonResponse;
 
 class RegisterController extends Controller

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\DestroyRequest;
+use App\Http\Requests\Resource\DestroyRequest;
 use Alimentalos\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 

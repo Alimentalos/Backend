@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\AccessesRequest;
+use App\Http\Requests\Resource\AccessesRequest;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Access;
 use Illuminate\Http\JsonResponse;

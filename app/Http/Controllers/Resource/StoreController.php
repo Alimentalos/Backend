@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\StoreRequest;
+use App\Http\Requests\Resource\StoreRequest;
 use Alimentalos\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\TokenRequest;
+use App\Http\Requests\Resource\TokenRequest;
 use Alimentalos\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 

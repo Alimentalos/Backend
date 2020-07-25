@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Api\PasswordRecoveryRequest;
+use App\Http\Requests\PasswordRecoveryRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Password;
 

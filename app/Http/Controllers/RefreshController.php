@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Api\RefreshRequest;
+use App\Http\Requests\RefreshRequest;
 use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Locations;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Locations\IndexRequest;
+use App\Http\Requests\Locations\IndexRequest;
 use App\Http\Resources\LocationCollection;
 use Illuminate\Http\JsonResponse;
 

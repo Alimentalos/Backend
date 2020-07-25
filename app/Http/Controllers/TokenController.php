@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Api\TokenRequest;
+use App\Http\Requests\TokenRequest;
 use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 

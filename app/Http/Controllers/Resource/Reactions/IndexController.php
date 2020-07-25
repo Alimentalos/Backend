@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource\Reactions;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Resource\IndexRequest;
+use App\Http\Requests\Resource\Resource\IndexRequest;
 use Alimentalos\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 

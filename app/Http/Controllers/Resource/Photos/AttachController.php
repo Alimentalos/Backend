@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource\Photos;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\Photos\AttachRequest;
+use App\Http\Requests\Resource\Photos\AttachRequest;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Photo;
 use Illuminate\Http\JsonResponse;

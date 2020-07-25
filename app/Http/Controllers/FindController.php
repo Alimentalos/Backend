@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Api\Find\IndexRequest;
+use App\Http\Requests\Find\IndexRequest;
 use Illuminate\Http\JsonResponse;
 
 class FindController extends Controller

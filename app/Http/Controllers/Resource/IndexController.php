@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Resource\IndexRequest;
+use App\Http\Requests\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 

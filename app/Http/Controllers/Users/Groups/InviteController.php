@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Users\Groups;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Users\Groups\InviteRequest;
+use App\Http\Requests\Users\Groups\InviteRequest;
 use Alimentalos\Relationships\Models\Group;
 use Alimentalos\Relationships\Models\User;
 use Illuminate\Http\JsonResponse;
