@@ -11,7 +11,9 @@ if (! function_exists('authenticated')) {
 	 */
     function authenticated($guard = 'api')
     {
-        return auth(request()->wantsJson() ? $guard : null)->user();
+    	return request()->acceptsJson() ?
+			auth($guard)->user() :
+			auth()->user();
     }
 }
 if (! function_exists('rhas')) {

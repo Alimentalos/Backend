@@ -45,7 +45,7 @@ class Finder
      */
     public function currentResource()
     {
-        return explode('.', RequestFacade::route()->getName())[0];
+        return explode('.', RequestFacade::route()->getName())[1];
     }
 
     /**

@@ -45,7 +45,7 @@ class IndexController extends Controller
     {
         $instances = resource()->getInstances();
         $instances->load(resource()->getLazyRelationshipsAttribute());
-        return $request->wantsJson() ?
+        return $request->acceptsJson() ?
 			response()->json($instances, 200) :
 			view(finder()->currentResource() . '.index')->with(['instances' => $instances]);
     }

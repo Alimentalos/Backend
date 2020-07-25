@@ -56,7 +56,7 @@ class ShowController extends Controller
     public function __invoke(ShowRequest $request, Resource $resource)
     {
         $resource->load($resource->lazy_relationships);
-		return $request->wantsJson() ?
+		return $request->acceptsJson() ?
 			response()->json($resource, 200) :
 			view(finder()->currentResource() . '.show')->with(['instance' => $resource]);
     }

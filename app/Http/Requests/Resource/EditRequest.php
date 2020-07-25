@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Resource;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\AuthorizedRequest;
 
-class EditRequest extends FormRequest
+class EditRequest extends AuthorizedRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,15 +14,5 @@ class EditRequest extends FormRequest
     public function authorize()
     {
 		return authenticated()->can('update', $this->route('resource'));
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-		return $this->route('resource')->getModel()->updateRules($this);
     }
 }

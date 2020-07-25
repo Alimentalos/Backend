@@ -38,9 +38,14 @@ Route::middleware('auth')->group(function () {
 /**
  * Authenticated and verified routes ...
  */
-Route::middleware(['verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 	foreach (config('resources.listable') as $resource) {
 		Route::get("/{$resource}", 'Resource\IndexController')
-			->name("{$resource}.index");
+			->name("web.{$resource}.index");
+	}
+	
+	foreach(config('resources.viewable') as $resource) {
+		Route::get("/{$resource}/{resource}", 'Resource\ShowController')
+			->name("web.{$resource}.show");
 	}
 });
