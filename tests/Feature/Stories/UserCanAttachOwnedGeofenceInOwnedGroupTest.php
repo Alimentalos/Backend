@@ -40,7 +40,7 @@ class UserCanAttachOwnedGeofenceInOwnedGroupTest extends TestCase
             []
         );
         $this->assertDatabaseHas('actions', [
-            'resource' => 'App\\Http\\Controllers\\Api\\Resource\\Geofences\\AttachController',
+            'resource' => 'App\\Http\\Controllers\\Resource\\Geofences\\AttachController',
             'referenced_uuid' => $group->uuid,
         ]);
         $response->assertOk();
