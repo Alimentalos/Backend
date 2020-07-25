@@ -48,4 +48,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 		Route::get("/{$resource}/{resource}", 'Resource\ShowController')
 			->name("web.{$resource}.show");
 	}
+	
+	foreach(config('resources.storable') as $resource) {
+		Route::get("/{$resource}/create", 'Resource\CreateController')
+			->name("web.{$resource}.create");
+	}
+	
+	foreach(config('resources.modifiable') as $resource) {
+		Route::get("/{$resource}/{resource}/edit", 'Resource\EditController')
+			->name("web.{$resource}.edit");
+	}
 });
