@@ -39,9 +39,7 @@ Route::middleware('auth')->group(function () {
  * Authenticated and verified routes ...
  */
 Route::middleware(['verified'])->group(function () {
-	foreach ([
-				 'places', 'users', 'groups', 'geofences', 'pets', 'devices', 'photos', 'actions', 'alerts'
-			 ] as $resource) {
+	foreach (config('resources.listable') as $resource) {
 		Route::get("/{$resource}", 'Resource\IndexController')
 			->name("{$resource}.index");
 	}

@@ -54,42 +54,34 @@ Route::middleware(['api'])->group(function () {
  */
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
-    foreach([
-                'places', 'users', 'groups', 'geofences', 'pets', 'devices', 'photos', 'actions', 'alerts'
-            ] as $resource) {
+    foreach(config('resources.listable') as $resource) {
         Route::get("/{$resource}", 'Resource\IndexController')
             ->name("{$resource}.index");
         Route::get("/{resource}/search", 'Resource\SearchController')
             ->name("{$resource}.search");
     }
 
-    foreach(['pets', 'devices'] as $resource) {
+    foreach(config('resources.tokenized') as $resource) {
         Route::get("/{$resource}/{resource}/token", 'Resource\TokenController')
             ->name("{$resource}.token");
     }
 
-    foreach(['places', 'users', 'pets', 'groups', 'geofences', 'devices', 'alerts'] as $resource) {
+    foreach(config('resources.storable') as $resource) {
         Route::post("/{resource}", 'Resource\StoreController')
             ->name("{$resource}.store");
     }
 
-    foreach([
-                'places', 'groups', 'locations', 'actions', 'geofences', 'pets', 'devices', 'users', 'photos', 'comments', 'alerts'
-            ] as $resource) {
+    foreach(config('resources.viewable') as $resource) {
         Route::get("/{$resource}/{resource}", 'Resource\ShowController')
             ->name("{$resource}.show");
     }
 
-    foreach([
-                'places', 'alerts', 'comments', 'photos', 'users', 'devices', 'pets', 'groups', 'geofences'
-            ] as $resource) {
+    foreach(config('resources.modifiable') as $resource) {
         Route::put("/{$resource}/{resource}", 'Resource\UpdateController')
             ->name("{$resource}.update");
     }
 
-    foreach([
-                'places', 'photos', 'users', 'comments', 'actions', 'devices', 'pets', 'geofences', 'groups', 'alerts'
-            ] as $resource) {
+    foreach(config('resources.removable') as $resource) {
         Route::delete("/{$resource}/{resource}", 'Resource\DestroyController')
             ->name("{$resource}.destroy");
     }
