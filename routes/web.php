@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::view('register', 'pets\form\create')->name('register');
 
 Route::view('/', 'welcome')->name('welcome');
 Route::view('/home', 'home')->name('home');
@@ -19,6 +20,7 @@ Route::view('/home', 'home')->name('home');
 Route::middleware('guest')->group(function () {
     Route::view('login', 'auth.login')->name('login');
     Route::view('register', 'auth.register')->name('register');
+    Route::view('pet', 'pets.form.create')->name('pet');
 });
 
 Route::view('password/reset', 'auth.passwords.email')->name('password.request');
