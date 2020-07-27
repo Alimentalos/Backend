@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('register', 'pets\form\create')->name('register');
 
 Route::view('/', 'welcome')->name('welcome');
 Route::view('/home', 'home')->name('home');
