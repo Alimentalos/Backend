@@ -27,10 +27,7 @@ trait DeviceProcedure
     public function createInstance()
     {
         $properties = request()->only(
-            array_merge(
-                $this->deviceProperties,
-                Device::getColors()
-            )
+            array_merge($this->deviceProperties, Device::getColors())
         );
         $device = Device::create($properties);
         upload()->checkMarker($device);

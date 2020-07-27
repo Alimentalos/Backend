@@ -17,33 +17,33 @@ use Illuminate\Support\Str;
 */
 
 Route::middleware(['auth:devices'])->group(function () {
-    Route::post('/device/locations', 'Api\Resource\LocationsController')->name('device.locations');
+    Route::post('/device/locations', 'Resource\LocationsController')->name('api.device.locations');
 });
 
 /**
  * Pet authenticated routes ...
  */
 Route::middleware(['auth:pets'])->group(function () {
-    Route::post('/pet/locations', 'Api\Resource\LocationsController')->name('pet.locations');
+    Route::post('/pet/locations', 'Resource\LocationsController')->name('api.pet.locations');
 });
 
 /**
  * Non authenticated routes ...
  */
 Route::middleware(['api'])->group(function () {
-    Route::post('/register', 'Api\RegisterController')
+    Route::post('/register', 'RegisterController')
         ->middleware('throttle:5');
     
-    Route::get('/reverse-geocoding', 'Api\ReverseGeocodingController')
+    Route::get('/reverse-geocoding', 'ReverseGeocodingController')
         ->middleware('throttle:5');
 
-    Route::post('/password-recovery', 'Api\PasswordRecoveryController')
+    Route::post('/password-recovery', 'PasswordRecoveryController')
         ->middleware('throttle:5');
 
-    Route::post('/token', 'Api\TokenController')
+    Route::post('/token', 'TokenController')
         ->middleware('throttle:10');
 
-    Route::post('/refresh', 'Api\RefreshController')
+    Route::post('/refresh', 'RefreshController')
         ->middleware('throttle:10');
 
 });
@@ -54,95 +54,93 @@ Route::middleware(['api'])->group(function () {
  */
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
-    foreach([
-                'places', 'users', 'groups', 'geofences', 'pets', 'devices', 'photos', 'actions', 'alerts'
-            ] as $resource) {
-        Route::get("/{$resource}", 'Api\Resource\IndexController')
-            ->name("{$resource}.index");
-        Route::get("/{resource}/search", 'Api\Resource\SearchController')
-            ->name("{$resource}.search");
+    foreach(config('resources.listable') as $resource) {
+        Route::get("/{$resource}", 'Resource\IndexController')
+            ->name("api.{$resource}.index");
+        Route::get("/{resource}/search", 'Resource\SearchController')
+            ->name("api.{$resource}.search");
     }
 
-    foreach(['pets', 'devices'] as $resource) {
-        Route::get("/{$resource}/{resource}/token", 'Api\Resource\TokenController')
-            ->name("{$resource}.token");
+    foreach(config('resources.tokenized') as $resource) {
+        Route::get("/{$resource}/{resource}/token", 'Resource\TokenController')
+            ->name("api.{$resource}.token");
     }
 
-    foreach(['places', 'users', 'pets', 'groups', 'geofences', 'devices', 'alerts'] as $resource) {
-        Route::post("/{resource}", 'Api\Resource\StoreController')
-            ->name("{$resource}.store");
+    foreach(config('resources.storable') as $resource) {
+        Route::post("/{resource}", 'Resource\StoreController')
+            ->name("api.{$resource}.store");
     }
 
-    foreach([
-                'places', 'groups', 'locations', 'actions', 'geofences', 'pets', 'devices', 'users', 'photos', 'comments', 'alerts'
-            ] as $resource) {
-        Route::get("/{$resource}/{resource}", 'Api\Resource\ShowController')
-            ->name("{$resource}.show");
+    foreach(config('resources.viewable') as $resource) {
+        Route::get("/{$resource}/{resource}", 'Resource\ShowController')
+            ->name("api.{$resource}.show");
     }
 
-    foreach([
-                'places', 'alerts', 'comments', 'photos', 'users', 'devices', 'pets', 'groups', 'geofences'
-            ] as $resource) {
-        Route::put("/{$resource}/{resource}", 'Api\Resource\UpdateController')
-            ->name("{$resource}.update");
+    foreach(config('resources.modifiable') as $resource) {
+        Route::put("/{$resource}/{resource}", 'Resource\UpdateController')
+            ->name("api.{$resource}.update");
     }
 
-    foreach([
-                'places', 'photos', 'users', 'comments', 'actions', 'devices', 'pets', 'geofences', 'groups', 'alerts'
-            ] as $resource) {
-        Route::delete("/{$resource}/{resource}", 'Api\Resource\DestroyController')
-            ->name("{$resource}.destroy");
+    foreach(config('resources.removable') as $resource) {
+        Route::delete("/{$resource}/{resource}", 'Resource\DestroyController')
+            ->name("api.{$resource}.destroy");
     }
 
-    Route::get('/locations', 'Api\Locations\IndexController')
-        ->name('locations.index');
+    Route::get('/locations', 'Locations\IndexController')
+        ->name('api.locations.index');
 
     foreach (['geofences', 'groups'] as $resource) {
-        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')
-            ->name("{$resource}.users.index");
+        Route::get("/{$resource}/{resource}/{nested}", 'Resource\Nested\IndexController')
+            ->name("api.{$resource}.users.index");
     }
 
     foreach (['users'] as $resource) {
-        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')
-            ->name("{$resource}.places.index");
+        Route::get("/{$resource}/{resource}/{nested}", 'Resource\Nested\IndexController')
+            ->name("api.{$resource}.places.index");
     }
 
     foreach(['groups', 'users'] as $resource) {
-        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')
+        Route::get("/{$resource}/{resource}/{nested}", 'Resource\Nested\IndexController')
             ->name("{$resource}.pets.index");
-        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')
-            ->name("{$resource}.devices.index");
+        Route::get("/{$resource}/{resource}/{nested}", 'Resource\Nested\IndexController')
+            ->name("api.{$resource}.devices.index");
     }
 
     foreach(['devices', 'users', 'pets'] as $resource) {
-        Route::get('/geofences/{geofence}/{resource}/accesses', 'Api\Geofences\Resource\AccessesController')
-            ->name("geofences.{$resource}.accesses");
-        Route::get("/{$resource}/{resource}/accesses", 'Api\Resource\AccessesController')
-            ->name("{$resource}.accesses");
-        Route::get("/{$resource}/{resource}/geofences/{geofence}/accesses", 'Api\Resource\Geofences\Accesses\IndexController')
-            ->name("{$resource}.geofences.accesses.index");
+        Route::get('/geofences/{geofence}/{resource}/accesses', 'Geofences\Resource\AccessesController')
+            ->name("api.geofences.{$resource}.accesses");
+        Route::get("/{$resource}/{resource}/accesses", 'Resource\AccessesController')
+            ->name("api.{$resource}.accesses");
+        Route::get("/{$resource}/{resource}/geofences/{geofence}/accesses", 'Resource\Geofences\Accesses\IndexController')
+            ->name("api.{$resource}.geofences.accesses.index");
     }
 
     foreach (['places', 'pets', 'geofences', 'users', 'groups'] as $resource) {
-        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')
-            ->name("{$resource}.photos.index");
-        Route::post("/{$resource}/{resource}/photos", 'Api\Resource\Photos\StoreController')
-            ->name("{$resource}.photos.store");
-        Route::post("/{$resource}/{resource}/photos/{photo}/attach", 'Api\Resource\Photos\AttachController')
-            ->name("{$resource}.photos.attach");
-        Route::post("/{$resource}/{resource}/photos/{photo}/detach", 'Api\Resource\Photos\DetachController')
-            ->name("{$resource}.photos.detach");
+        Route::get("/{$resource}/{resource}/{nested}", 'Resource\Nested\IndexController')
+            ->name("api.{$resource}.photos.index");
+        Route::post("/{$resource}/{resource}/photos", 'Resource\Photos\StoreController')
+            ->name("api.{$resource}.photos.store");
+        Route::post("/{$resource}/{resource}/photos/{photo}/attach", 'Resource\Photos\AttachController')
+            ->name("api.{$resource}.photos.attach");
+        Route::post("/{$resource}/{resource}/photos/{photo}/detach", 'Resource\Photos\DetachController')
+            ->name("api.{$resource}.photos.detach");
     }
 
     // Resource Geofences
 
     foreach (['devices', 'users', 'pets'] as $resource) {
-        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')->name("{$resource}.geofences.index");
-        Route::get("/{$resource}/{resource}/{nested}", 'Api\Resource\Nested\IndexController')->name("{$resource}.groups.index");
-        Route::post("/{$resource}/{resource}/geofences/{geofence}/attach", 'Api\Resource\Geofences\AttachController')->name("{$resource}.geofences.attach");
-        Route::post("/{$resource}/{resource}/geofences/{geofence}/detach", 'Api\Resource\Geofences\DetachController')->name("{$resource}.geofences.detach");
-        Route::post("/{$resource}/{resource}/groups/{group}/attach", 'Api\Resource\Groups\AttachController')->name("{$resource}.groups.attach");
-        Route::post("/{$resource}/{resource}/groups/{group}/detach", 'Api\Resource\Groups\DetachController')->name("{$resource}.groups.detach");
+        Route::get("/{$resource}/{resource}/{nested}", 'Resource\Nested\IndexController')
+			->name("api.{$resource}.geofences.index");
+        Route::get("/{$resource}/{resource}/{nested}", 'Resource\Nested\IndexController')
+			->name("api.{$resource}.groups.index");
+        Route::post("/{$resource}/{resource}/geofences/{geofence}/attach", 'Resource\Geofences\AttachController')
+			->name("api.{$resource}.geofences.attach");
+        Route::post("/{$resource}/{resource}/geofences/{geofence}/detach", 'Resource\Geofences\DetachController')
+			->name("api.{$resource}.geofences.detach");
+        Route::post("/{$resource}/{resource}/groups/{group}/attach", 'Resource\Groups\AttachController')
+			->name("api.{$resource}.groups.attach");
+        Route::post("/{$resource}/{resource}/groups/{group}/detach", 'Resource\Groups\DetachController')
+			->name("api.{$resource}.groups.detach");
     }
 
     foreach(['groups', 'geofences'] as $resource) {
@@ -151,39 +149,41 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
         } else {
             $str = 'geofences';
         }
-        Route::get("/{$resource}/{resource}/{$str}", 'Api\Resource\Nested\IndexController')->name("{$resource}.{$str}.index");
-        Route::post("/{$resource}/{resource}/{$str}/". '{' . Str::singular($str) . '}' ."/attach", 'Api\Resource\\' . Str::ucfirst($str) . '\AttachController')->name("{$resource}.{$str}.attach");
-        Route::post("/{$resource}/{resource}/{$str}/". '{' . Str::singular($str) . '}' ."/detach", 'Api\Resource\\' . Str::ucfirst($str) . '\DetachController')->name("{$resource}.{$str}.detach");
+        Route::get("/{$resource}/{resource}/{$str}", 'Resource\Nested\IndexController')
+			->name("api.{$resource}.{$str}.index");
+        Route::post("/{$resource}/{resource}/{$str}/". '{' . Str::singular($str) . '}' ."/attach", 'Resource\\' . Str::ucfirst($str) . '\AttachController')->name("api.{$resource}.{$str}.attach");
+        Route::post("/{$resource}/{resource}/{$str}/". '{' . Str::singular($str) . '}' ."/detach", 'Resource\\' . Str::ucfirst($str) . '\DetachController')->name("api.{$resource}.{$str}.detach");
     }
 
     foreach(['places', 'pets', 'photos', 'comments', 'alerts', 'groups'] as $resource) {
-        Route::get("/{$resource}/{resource}/comments", 'Api\Resource\Comments\IndexController')
-            ->name("{$resource}.comments.index");
-        Route::post("/{$resource}/{resource}/comments", 'Api\Resource\Comments\StoreController')
-            ->name("{$resource}.comments.store");
+        Route::get("/{$resource}/{resource}/comments", 'Resource\Comments\IndexController')
+            ->name("api.{$resource}.comments.index");
+        Route::post("/{$resource}/{resource}/comments", 'Resource\Comments\StoreController')
+            ->name("api.{$resource}.comments.store");
     }
 
 
-    Route::get('/user', 'Api\UserController');
+    Route::get('/user', 'UserController');
 
-    Route::post('/user/locations', 'Api\Resource\LocationsController')->name('user.locations');
+    Route::post('/user/locations', 'Resource\LocationsController')
+		->name('api.user.locations');
 
     foreach(['invite', 'accept', 'reject', 'block'] as $method) {
-        Route::post("/users/{user}/groups/{group}/{$method}", "Api\Users\Groups\\" . Str::ucfirst($method) . "Controller");
+        Route::post("/users/{user}/groups/{group}/{$method}", "Users\Groups\\" . Str::ucfirst($method) . "Controller");
     }
 
     foreach (['geofences', 'pets', 'users', 'photos', 'comments', 'places'] as $resource) {
-        Route::get("/{$resource}/{resource}/reactions", 'Api\Resource\Reactions\IndexController')
-            ->name("{$resource}.reactions.index");
-        Route::post("/{$resource}/{resource}/reactions", 'Api\Resource\Reactions\StoreController')
-            ->name("{$resource}.reactions.store");
+        Route::get("/{$resource}/{resource}/reactions", 'Resource\Reactions\IndexController')
+            ->name("api.{$resource}.reactions.index");
+        Route::post("/{$resource}/{resource}/reactions", 'Resource\Reactions\StoreController')
+            ->name("api.{$resource}.reactions.store");
     }
 
-    Route::get('/reports', 'Api\ReportsController');
+    Route::get('/reports', 'ReportsController');
 
-    Route::get('/find', 'Api\FindController');
+    Route::get('/find', 'FindController');
 
-    Route::get('/near/{resource}', 'Api\Near\Resource\IndexController');
+    Route::get('/near/{resource}', 'Near\Resource\IndexController');
 
 });
 

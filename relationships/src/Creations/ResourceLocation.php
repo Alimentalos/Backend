@@ -5,11 +5,11 @@ namespace Alimentalos\Relationships\Creations;
 
 
 use Alimentalos\Contracts\Resource;
-use Alimentalos\Relationships\Models\Device;
 use Alimentalos\Relationships\Events\Location as LocationEvent;
-use App\Http\Resources\Location as LocationResource;
+use Alimentalos\Relationships\Models\Device;
 use Alimentalos\Relationships\Models\Pet;
 use Alimentalos\Relationships\Models\User;
+use App\Http\Resources\Location as LocationResource;
 use Illuminate\Database\Eloquent\Model;
 
 trait ResourceLocation
@@ -48,16 +48,16 @@ trait ResourceLocation
      */
     public function current()
     {
-        $resource = explode('.', request()->route()->getName())[0];
+        $resource = explode('.', request()->route()->getName())[1];
         switch ($resource) {
             case 'device':
-                return Device::where('uuid', authenticated('devices')->uuid)->firstOrFail();
+                return Device::where('uuid', authenticated()->uuid)->firstOrFail();
                 break;
             case 'pet':
-                return Pet::where('uuid', authenticated('pets')->uuid)->firstOrFail();
+                return Pet::where('uuid', authenticated()->uuid)->firstOrFail();
                 break;
             default:
-                return User::where('uuid', authenticated('api')->uuid)->firstOrFail();
+                return User::where('uuid', authenticated()->uuid)->firstOrFail();
                 break;
         }
     }

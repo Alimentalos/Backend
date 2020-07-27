@@ -2,9 +2,9 @@
 
 namespace Alimentalos\Tools\Reports\Types;
 
+use Alimentalos\Tools\Reports\Helpers\RangesHelper;
 use App\Http\Resources\Location;
 use App\Http\Resources\LocationCollection;
-use Alimentalos\Tools\Reports\Helpers\RangesHelper;
 use Carbon\Carbon;
 
 class Activity extends Type

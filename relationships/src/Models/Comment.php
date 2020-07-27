@@ -4,9 +4,9 @@ namespace Alimentalos\Relationships\Models;
 
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Contracts\UpdateFromRequest;
-use Alimentalos\Relationships\Relationships\CommentRelationships;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Commentable;
+use Alimentalos\Relationships\Relationships\CommentRelationships;
 use Alimentalos\Relationships\Resources\CommentResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;

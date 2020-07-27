@@ -27,10 +27,7 @@ trait PetProcedure
     public function createInstance()
     {
         $properties = request()->only(
-            array_merge(
-                $this->petProperties,
-                Pet::getColors()
-            )
+            array_merge($this->petProperties, Pet::getColors())
         );
 
         $pet = Pet::create($properties);

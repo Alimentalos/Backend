@@ -4,7 +4,6 @@
 namespace Alimentalos\Tools;
 
 
-use Alimentalos\Contracts\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request as RequestFacade;
@@ -45,7 +44,7 @@ class Finder
      */
     public function currentResource()
     {
-        return explode('.', RequestFacade::route()->getName())[0];
+        return explode('.', RequestFacade::route()->getName())[1];
     }
 
     /**

@@ -29,8 +29,8 @@
                 <directory>./app/Passport</directory>
                 <directory>./app/Http/Controllers/Auth</directory>
                 <file>./app/Repositories/DocumentationRepository.php</file>
-                <file>./app/Http/Controllers/Api/RefreshController.php</file>
-                <file>./app/Http/Controllers/Api/TokenController.php</file>
+                <file>./app/Http/Controllers/RefreshController.php</file>
+                <file>./app/Http/Controllers/TokenController.php</file>
             </exclude>
         </whitelist>
     </filter>
