@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Resource\Groups;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Resource\Groups\AttachRequest;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Group;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Resource\Groups\AttachRequest;
 use Illuminate\Http\JsonResponse;
 
 class AttachController extends Controller

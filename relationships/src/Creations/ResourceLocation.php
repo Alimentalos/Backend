@@ -5,11 +5,11 @@ namespace Alimentalos\Relationships\Creations;
 
 
 use Alimentalos\Contracts\Resource;
-use Alimentalos\Relationships\Models\Device;
 use Alimentalos\Relationships\Events\Location as LocationEvent;
-use App\Http\Resources\Location as LocationResource;
+use Alimentalos\Relationships\Models\Device;
 use Alimentalos\Relationships\Models\Pet;
 use Alimentalos\Relationships\Models\User;
+use App\Http\Resources\Location as LocationResource;
 use Illuminate\Database\Eloquent\Model;
 
 trait ResourceLocation

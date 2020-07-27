@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Near\Resource;
 
-use App\Http\Requests\RuledRequest;
 use Alimentalos\Relationships\Rules\Coordinate;
+use App\Http\Requests\RuledRequest;
 
 class IndexRequest extends RuledRequest
 {

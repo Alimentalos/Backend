@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Resource;
 
+use Alimentalos\Contracts\Resource;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resource\ShowRequest;
-use Alimentalos\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 

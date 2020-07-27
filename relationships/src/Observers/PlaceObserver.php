@@ -3,7 +3,6 @@
 namespace Alimentalos\Relationships\Observers;
 
 use Alimentalos\Relationships\Models\Place;
-use Exception;
 
 class PlaceObserver
 {

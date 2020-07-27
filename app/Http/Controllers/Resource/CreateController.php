@@ -4,9 +4,6 @@ namespace App\Http\Controllers\Resource;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resource\CreateRequest;
-use App\Http\Requests\Resource\ShowRequest;
-use Alimentalos\Contracts\Resource;
-use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
 class CreateController extends Controller

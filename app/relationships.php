@@ -2,23 +2,23 @@
 
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Repositories\{ActionsRepository,
-    AlertsRepository,
-    CommentsRepository,
-    DevicesRepository,
-    GeofenceAccessesRepository,
-    GeofencesRepository,
-    GroupsRepository,
-    LocationsRepository,
-    PetsRepository,
-    PhotosRepository,
-    PlacesRepository,
-    ReactionsRepository,
-    ResourceCommentsRepository,
-    ResourceLocationsRepository,
-    ResourcePhotosRepository,
-    ResourceRepository,
-    UserGroupsRepository,
-    UsersRepository};
+	AlertsRepository,
+	CommentsRepository,
+	DevicesRepository,
+	GeofenceAccessesRepository,
+	GeofencesRepository,
+	GroupsRepository,
+	LocationsRepository,
+	PetsRepository,
+	PhotosRepository,
+	PlacesRepository,
+	ReactionsRepository,
+	ResourceCommentsRepository,
+	ResourceLocationsRepository,
+	ResourcePhotosRepository,
+	ResourceRepository,
+	UserGroupsRepository,
+	UsersRepository};
 
 if (! function_exists('actions')) {
     /**

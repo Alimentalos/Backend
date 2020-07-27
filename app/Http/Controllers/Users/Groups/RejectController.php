@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Users\Groups;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Users\Groups\RejectRequest;
 use Alimentalos\Relationships\Models\Group;
 use Alimentalos\Relationships\Models\User;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Users\Groups\RejectRequest;
 use Illuminate\Http\JsonResponse;
 
 class RejectController extends Controller

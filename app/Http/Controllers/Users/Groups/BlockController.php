@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Users\Groups;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Users\Groups\BlockRequest;
 use Alimentalos\Relationships\Models\Group;
 use Alimentalos\Relationships\Models\User;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Users\Groups\BlockRequest;
 use Illuminate\Http\JsonResponse;
 
 class BlockController extends Controller

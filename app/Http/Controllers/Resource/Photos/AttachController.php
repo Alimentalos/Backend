@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Resource\Photos;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Resource\Photos\AttachRequest;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Photo;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Resource\Photos\AttachRequest;
 use Illuminate\Http\JsonResponse;
 
 class AttachController extends Controller

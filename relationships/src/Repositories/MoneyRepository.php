@@ -4,8 +4,8 @@
 namespace Alimentalos\Relationships\Repositories;
 
 
-use Alimentalos\Relationships\Models\Coin;
 use Alimentalos\Contracts\Monetizer;
+use Alimentalos\Relationships\Models\Coin;
 use Alimentalos\Relationships\Models\Operation;
 use Exception;
 

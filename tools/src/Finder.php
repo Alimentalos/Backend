@@ -4,7 +4,6 @@
 namespace Alimentalos\Tools;
 
 
-use Alimentalos\Contracts\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request as RequestFacade;

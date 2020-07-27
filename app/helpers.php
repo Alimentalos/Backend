@@ -1,7 +1,7 @@
 <?php
 
-use App\Repositories\AdminRepository;
 use Alimentalos\Relationships\Models\User;
+use App\Repositories\AdminRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 

@@ -2,8 +2,8 @@
 
 namespace Alimentalos\Relationships\Repositories;
 
-use Alimentalos\Relationships\Models\Action;
 use Alimentalos\Relationships\Lists\ActionList;
+use Alimentalos\Relationships\Models\Action;
 use Alimentalos\Relationships\Procedures\ActionProcedure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

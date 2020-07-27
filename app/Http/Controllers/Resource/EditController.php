@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Resource;
 
+use Alimentalos\Contracts\Resource;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resource\EditRequest;
-use Alimentalos\Contracts\Resource;
 use Illuminate\View\View;
 
 class EditController extends Controller

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Resource\Geofences;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Resource\Geofences\AttachRequest;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Geofence;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Resource\Geofences\AttachRequest;
 use Illuminate\Http\JsonResponse;
 
 class AttachController extends Controller

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Resource\Comments;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Resource\Comments\StoreRequest;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Comment;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Resource\Comments\StoreRequest;
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Resource\Reactions;
 
+use Alimentalos\Contracts\Resource;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resource\Reactions\StoreRequest;
-use Alimentalos\Contracts\Resource;
 use Illuminate\Http\JsonResponse;
 
 class StoreController extends Controller

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Resource;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Resource\AccessesRequest;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Models\Access;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Resource\AccessesRequest;
 use Illuminate\Http\JsonResponse;
 
 class AccessesController extends Controller
