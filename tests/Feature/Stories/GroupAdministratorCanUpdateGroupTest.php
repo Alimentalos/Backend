@@ -34,7 +34,7 @@ class GroupAdministratorCanUpdateGroupTest extends TestCase
             'name' => 'New name'
         ]);
         $this->assertDatabaseHas('actions', [
-            'resource' => 'App\\Http\\Controllers\\Api\\Resource\\UpdateController',
+            'resource' => 'App\\Http\\Controllers\\Resource\\UpdateController',
             'referenced_uuid' => $group->uuid,
         ]);
         $response->assertJsonStructure([

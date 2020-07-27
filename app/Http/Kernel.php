@@ -3,22 +3,22 @@
 namespace App\Http;
 
 use App\Http\Middleware\{Authenticate,
-    CheckForMaintenanceMode,
-    ConvertStringBooleans,
-    ConvertStringOpacityToFloat,
-    ConvertStringShape,
-    CreateUserAction,
-    EncryptCookies,
-    RedirectIfAuthenticated,
-    SetLanguage,
-    TrimStrings,
-    TrustProxies,
-    VerifyCsrfToken};
+	CheckForMaintenanceMode,
+	ConvertStringBooleans,
+	ConvertStringOpacityToFloat,
+	ConvertStringShape,
+	CreateUserAction,
+	EncryptCookies,
+	RedirectIfAuthenticated,
+	SetLanguage,
+	TrimStrings,
+	TrustProxies,
+	VerifyCsrfToken};
 use Illuminate\Auth\Middleware\{AuthenticateWithBasicAuth, Authorize, EnsureEmailIsVerified, RequirePassword};
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\{Http\Kernel as HttpKernel,
-    Http\Middleware\ConvertEmptyStringsToNull,
-    Http\Middleware\ValidatePostSize};
+	Http\Middleware\ConvertEmptyStringsToNull,
+	Http\Middleware\ValidatePostSize};
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Routing\{Middleware\SubstituteBindings, Middleware\ThrottleRequests, Middleware\ValidateSignature};
 use Illuminate\Session\{Middleware\AuthenticateSession, Middleware\StartSession};

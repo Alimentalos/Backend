@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Auth\Passwords;
 
-use Livewire\Component;
 use Illuminate\Support\Facades\Password;
+use Livewire\Component;
 
 class Email extends Component
 {
@@ -29,8 +29,8 @@ class Email extends Component
 	
 		// @codeCoverageIgnoreStart
         $this->addError('email', trans($response));
-		// @codeCoverageIgnoreEnd
     }
+	// @codeCoverageIgnoreEnd
 
     /**
      * Get the broker to be used during password reset.

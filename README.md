@@ -6,7 +6,7 @@
 
 ### Brief
 
-The idea lies in the simplicity that we must raise awareness among other people regarding the moral responsibility of caring for the entities that surround us and that by their nature, do not have the capacity to defend themselves in a world surrounded by evil.
+We must raise awareness among other people regarding the moral responsibility of caring for the entities that surround us and that by their nature, do not have the capacity to defend themselves in a world surrounded by evil.
 
 ### About
 
@@ -75,5 +75,8 @@ Our system allows users to create georeferenced alerts. In the event that a user
 ### Planned
 
 The following list are detailed those of software features what are in development:
+
+
+
 
 

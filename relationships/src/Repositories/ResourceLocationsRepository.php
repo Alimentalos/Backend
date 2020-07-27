@@ -4,9 +4,9 @@ namespace Alimentalos\Relationships\Repositories;
 
 use Alimentalos\Relationships\Creations\ResourceLocation as CreatesLocation;
 use Alimentalos\Relationships\Events\Location as LocationEvent;
-use App\Http\Resources\Location as LocationResource;
 use Alimentalos\Relationships\Procedures\ResourceLocationProcedure;
 use Alimentalos\Relationships\Queries\LocationQuery;
+use App\Http\Resources\Location as LocationResource;
 
 class ResourceLocationsRepository
 {

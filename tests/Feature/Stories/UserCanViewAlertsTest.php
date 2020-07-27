@@ -17,7 +17,7 @@ class UserCanViewAlertsTest extends TestCase
     {
         $user = factory(User::class)->create();
         $alert = factory(Alert::class)->create();
-        $response = $this->actingAs($user, 'api')->get('/api/alerts');
+        $response = $this->actingAs($user, 'api')->json('GET', '/api/alerts');
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [

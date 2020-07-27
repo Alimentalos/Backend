@@ -2,13 +2,12 @@
 
 namespace App\Http\Livewire\Auth\Passwords;
 
-use App\Providers\RouteServiceProvider;
-use Livewire\Component;
-use Illuminate\Support\Str;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
+use Livewire\Component;
 
 class Reset extends Component
 {
@@ -64,8 +63,8 @@ class Reset extends Component
 	
 		// @codeCoverageIgnoreStart
         $this->addError('email', trans($response));
-		// @codeCoverageIgnoreEnd
     }
+	// @codeCoverageIgnoreEnd
 
     /**
      * Get the broker to be used during password reset.

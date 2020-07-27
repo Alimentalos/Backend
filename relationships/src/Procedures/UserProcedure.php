@@ -37,10 +37,7 @@ trait UserProcedure
         ];
 
         $fill = request()->only(
-            array_merge(
-                $this->userProperties,
-                User::getColors()
-            )
+            array_merge($this->userProperties, User::getColors())
         );
 
         // Attributes

@@ -31,7 +31,8 @@ class UserCanViewOwnedGeofencesTest extends TestCase
             new Point(0, 0)
         ])]);
         $geofence->save();
-        $response = $this->actingAs($user, 'api')->json('GET', '/api/geofences');
+        $response = $this->actingAs($user, 'api')
+			->json('GET', '/api/geofences');
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [

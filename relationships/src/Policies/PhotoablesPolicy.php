@@ -26,7 +26,7 @@ trait PhotoablesPolicy
             users()->isProperty($photo, $user) &&
             $user->can('view', $model) &&
             $user->can('view', $photo) &&
-            !in_array($model->uuid, $photo->{Str::lower(Str::plural((new \ReflectionClass($model))->getShortName()))}->pluck('uuid')->toArray());
+            !in_array($model->id, $photo->{Str::lower(Str::plural((new \ReflectionClass($model))->getShortName()))}->pluck('uuid')->toArray());
     }
 
     /**

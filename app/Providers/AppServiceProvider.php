@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Passport\Client;
 use Alimentalos\Relationships\Models\Alert;
 use Alimentalos\Relationships\Models\Coin;
 use Alimentalos\Relationships\Models\Comment;
@@ -26,6 +25,7 @@ use Alimentalos\Relationships\Observers\PetObserver;
 use Alimentalos\Relationships\Observers\PhotoObserver;
 use Alimentalos\Relationships\Observers\PlaceObserver;
 use Alimentalos\Relationships\Observers\UserObserver;
+use App\Passport\Client;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 

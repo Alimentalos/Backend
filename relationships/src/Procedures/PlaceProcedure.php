@@ -30,10 +30,7 @@ trait PlaceProcedure
         ];
 
         $fill = request()->only(
-            array_merge(
-                $this->placeProperties,
-                Place::getColors()
-            )
+            array_merge($this->placeProperties, Place::getColors())
         );
 
         // Attributes

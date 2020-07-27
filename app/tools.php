@@ -1,19 +1,17 @@
 <?php
 
 use Alimentalos\Contracts\Resource;
-use Alimentalos\Relationships\Models\User;
 use Alimentalos\Tools\{Cataloger,
-    Filler,
-    Finder,
-    Identifier,
-    Liker,
-    Measurer,
-    Parameterizer,
-    Parser,
-    Reporter,
-    Subscriber,
-    Uploader};
-use Illuminate\Contracts\Auth\Authenticatable;
+	Filler,
+	Finder,
+	Identifier,
+	Liker,
+	Measurer,
+	Parameterizer,
+	Parser,
+	Reporter,
+	Subscriber,
+	Uploader};
 
 if (! function_exists('subscriptions')) {
     /**
