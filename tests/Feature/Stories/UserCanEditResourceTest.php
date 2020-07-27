@@ -13,7 +13,7 @@ class UserCanEditResourceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanEditResource()
+    public function testUserCanEditResource()
     {
         $user = factory(User::class)->create();
         $pet = factory(Pet::class)->create();

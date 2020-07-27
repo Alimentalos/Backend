@@ -19,7 +19,7 @@ class UserCanCreateResourceTest extends TestCase
 {
     use RefreshDatabase;
 
-    final public function testUserCanCreateResource()
+    public function testUserCanCreateResource()
     {
         $user = factory(User::class)->create();
 
