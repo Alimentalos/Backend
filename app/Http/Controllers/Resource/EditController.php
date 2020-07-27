@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Resource;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Resource\CreateRequest;
-use App\Http\Requests\Resource\ShowRequest;
+use App\Http\Requests\Resource\EditRequest;
 use Alimentalos\Contracts\Resource;
-use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
 class EditController extends Controller
@@ -50,11 +48,11 @@ class EditController extends Controller
 	 * )
 	 * Get specific create resource form.
 	 *
-	 * @param CreateRequest $request
+	 * @param EditRequest $request
 	 * @param Resource $resource
 	 * @return View
 	 */
-    public function __invoke(CreateRequest $request, Resource $resource)
+    public function __invoke(EditRequest $request, Resource $resource)
     {
 		$resource->load($resource->lazy_relationships);
 		return view(finder()->currentResource() . '.edit')->with(['instance' => $resource]);

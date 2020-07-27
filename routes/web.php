@@ -38,20 +38,20 @@ Route::middleware('auth')->group(function () {
 /**
  * Authenticated and verified routes ...
  */
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 	foreach (config('resources.listable') as $resource) {
 		Route::get("/{$resource}", 'Resource\IndexController')
 			->name("web.{$resource}.index");
 	}
 	
-	foreach(config('resources.viewable') as $resource) {
-		Route::get("/{$resource}/{resource}", 'Resource\ShowController')
-			->name("web.{$resource}.show");
-	}
-	
 	foreach(config('resources.storable') as $resource) {
 		Route::get("/{$resource}/create", 'Resource\CreateController')
 			->name("web.{$resource}.create");
+	}
+	
+	foreach(config('resources.viewable') as $resource) {
+		Route::get("/{$resource}/{resource}", 'Resource\ShowController')
+			->name("web.{$resource}.show");
 	}
 	
 	foreach(config('resources.modifiable') as $resource) {

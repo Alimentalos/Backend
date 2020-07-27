@@ -13,6 +13,6 @@ class CreateRequest extends AuthorizedRequest
      */
     public function authorize()
     {
-		return authenticated()->can('create', $this->route('resource'));
+		return authenticated()->can('create', finder()->findClass(finder()->currentResource()));
     }
 }
