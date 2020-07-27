@@ -21,7 +21,6 @@ Route::view('/profile', 'profile')->name('profile');
 Route::middleware('guest')->group(function () {
     Route::view('login', 'auth.login')->name('login');
     Route::view('register', 'auth.register')->name('register');
-    Route::view('pet', 'pets.form.create')->name('pet');
 });
 
 Route::view('password/reset', 'auth.passwords.email')->name('password.request');
