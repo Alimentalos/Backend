@@ -64,8 +64,8 @@ class Reset extends Component
 	
 		// @codeCoverageIgnoreStart
         $this->addError('email', trans($response));
-		// @codeCoverageIgnoreEnd
     }
+	// @codeCoverageIgnoreEnd
 
     /**
      * Get the broker to be used during password reset.
