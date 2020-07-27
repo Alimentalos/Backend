@@ -18,10 +18,7 @@ trait GroupProcedure
     public function createInstance()
     {
         $properties = request()->only(
-            array_merge(
-                $this->groupProperties,
-                Group::getColors()
-            )
+            array_merge($this->groupProperties, Group::getColors())
         );
         $group = Group::create($properties);
         authenticated()->groups()->attach($group->uuid, [
