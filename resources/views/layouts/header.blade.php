@@ -19,4 +19,5 @@
             <p class="text-white font-light px-8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid assumenda harum ipsum laudantium minima.</p>
         </div>
     </div>
+    @include('components.footer')
 </div>
