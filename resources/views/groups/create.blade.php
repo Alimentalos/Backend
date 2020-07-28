@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
     <div class="">
         <div class="flex justify-center">
@@ -27,5 +28,3 @@
         </div>
     </div>
 @endsection
-
-	
