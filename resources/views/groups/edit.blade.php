@@ -5,7 +5,7 @@
         <div class="flex justify-center">
             <div class="px-4">
                 <div class="px-4 py-8 text-center">
-                    <h1 class="text-gray-500 text-4xl">Create new group</h1>
+                    <h1 class="text-gray-500 text-4xl">Edit the group</h1>
                     <p class="text-gray-600 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
                 </div>
                 <form action="">
