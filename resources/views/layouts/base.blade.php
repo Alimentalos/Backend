@@ -25,7 +25,9 @@
     </head>
 
     <body>
-        @yield('body')
+        <div id="app">
+            @yield('body')
+        </div>
 
         <script src="{{ mix('js/app.js') }}"></script>
         @livewireScripts
