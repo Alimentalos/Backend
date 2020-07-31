@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="bg-wall">
-        @include('components.navbar')
+        <navbar></navbar>
         @include('components.start')
     </div>
     <section>
