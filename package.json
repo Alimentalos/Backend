@@ -12,7 +12,6 @@
     "devDependencies": {
         "@tailwindcss/custom-forms": "^0.2",
         "@tailwindcss/ui": "^0.1",
-        "alpinejs": "^2.0",
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
         "jquery": "^3.2",
