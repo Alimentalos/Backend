@@ -1,6 +1,10 @@
 ## Alimentalos Backend
 
-[![GitHub release](https://img.shields.io/github/release/alimentalos/backend.svg)](https://github.com/alimentalos/backend/releases/) [![Actions Status](https://github.com/alimentalos/backend/workflows/Testing/badge.svg)](https://github.com/alimentalos/backend/actions) [![codecov](https://codecov.io/gh/alimentalos/backend/branch/master/graph/badge.svg)](https://codecov.io/gh/alimentalos/backend) [![Maintainability](https://api.codeclimate.com/v1/badges/ccd2e2ff7f49a0ee6c6f/maintainability)](https://codeclimate.com/github/Alimentalos/Backend/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ccd2e2ff7f49a0ee6c6f/test_coverage)](https://codeclimate.com/github/Alimentalos/Backend/test_coverage)
+[![GitHub release](https://img.shields.io/github/release/alimentalos/backend.svg)](https://github.com/alimentalos/backend/releases/) 
+[![Actions Status](https://github.com/alimentalos/backend/workflows/Testing/badge.svg)](https://github.com/alimentalos/backend/actions) 
+[![codecov](https://codecov.io/gh/alimentalos/backend/branch/master/graph/badge.svg)](https://codecov.io/gh/alimentalos/backend) 
+[![Maintainability](https://api.codeclimate.com/v1/badges/42141b38846b8812de5a/maintainability)](https://codeclimate.com/github/Alimentalos/Backend/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/42141b38846b8812de5a/test_coverage)](https://codeclimate.com/github/Alimentalos/Backend/test_coverage)
 
 [**Official website**](https://www.alimentalos.cl) — [**About**](https://www.alimentalos.cl/about) — [**Developer handbook**](https://www.alimentalos.cl/about/developer-handbook) — [**OpenApi Specification**](https://www.alimentalos.cl/api/documentation)
 
