@@ -59,3 +59,7 @@ Route::middleware(['auth'])->group(function () {
 			->name("web.{$resource}.edit");
 	}
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

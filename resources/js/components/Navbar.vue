@@ -31,8 +31,12 @@
                             <i class="fas fa-paw text-lg leading-lg text-white opacity-75" /><span class="ml-2 font-light ">Contact us</span>
                         </a>
                     </li>
-                    <li class="ml-5">
-                        <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Register</a>
+                    <li v-if="!this.user" class="ml-5">
+                        <a href="/register" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Register</a>
+                    </li>
+                    <li v-else>
+                        <form action="/logout" id="logoutForm" ref="logoutForm" method="POST"><input type="hidden" name="csrf_token" v-bind:value="this.csrf_token"></form>
+                        <a href="#" v-on:click="doLogout()" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">{{ this.user.name }}</a>
                     </li>
                 </ul>
             </div>
@@ -43,6 +47,7 @@
 <script>
     export default {
         name: "navbar",
+        props: ["user", "csrf_token"],
         data() {
             return {
                 showMenu: false
@@ -51,6 +56,10 @@
         methods: {
             toggleNavbar: function(){
                 this.showMenu = !this.showMenu;
+            },
+            doLogout: () => {
+                console.log("WTF", this.$refs);
+                this.vue$.$refs.logoutForm.submit();
             }
         }
     }
