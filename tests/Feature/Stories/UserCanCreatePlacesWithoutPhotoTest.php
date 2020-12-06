@@ -27,8 +27,8 @@ class UserCanCreatePlacesWithoutPhotoTest extends TestCase
             'description' => $place->description,
             'coordinates' => '5.5,6.5',
             'is_public' => false,
-            'color' => '#CCCCCC',
-            'marker_color' => '#CCCCCC',
+            'color' => '#136480',
+            'marker_color' => '#3AA5C9',
         ]);
         $response->assertCreated();
         $content = $response->getContent();

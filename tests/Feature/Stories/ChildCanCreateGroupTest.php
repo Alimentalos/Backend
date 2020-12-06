@@ -28,14 +28,14 @@ class ChildCanCreateGroupTest extends TestCase
             'name' => $group->name,
             'is_public' => 'false',
             'coordinates' => '10.1,50.5',
-            'color' => '#CCCCCC',
-            'background_color' => '#CCCCCC',
-            'border_color' => '#CCCCCC',
-            'fill_color' => '#CCCCCC',
-            'text_color' => '#CCCCCC',
-            'user_color' => '#CCCCCC',
-            'administrator_color' => '#CCCCCC',
-            'owner_color' => '#CCCCCC',
+            'color' => '#71D91B',
+            'background_color' => '#7FF530',
+            'border_color' => '#5AAB17',
+            'fill_color' => '#1786AB',
+            'text_color' => '#136480',
+            'user_color' => '#3AA5C9',
+            'administrator_color' => '#69BFDB',
+            'owner_color' => '#33CCAD',
         ]);
         $content = $response->getContent();
         $response->assertCreated();

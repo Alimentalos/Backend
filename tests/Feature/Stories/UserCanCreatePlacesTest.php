@@ -28,8 +28,8 @@ class UserCanCreatePlacesTest extends TestCase
             'description' => $place->description,
             'coordinates' => '5.5,6.5',
             'is_public' => false,
-            'color' => '#CCCCCC',
-            'marker_color' => '#CCCCCC',
+            'color' => '#5AAB17',
+            'marker_color' => '#1786AB',
         ]);
         $response->assertCreated();
         $content = $response->getContent();
