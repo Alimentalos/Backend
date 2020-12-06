@@ -26,8 +26,8 @@ class UserCanCreateDevicesTest extends TestCase
             'name' => $device->name,
             'description' => 'Blah blah blah',
             'is_public' => true,
-            'color' => '#CCCCCC',
-            'marker_color' => '#CCCCCC',
+            'color' => '#69BFDB',
+            'marker_color' => '#33CCAD',
             'marker' => UploadedFile::fake()->image('dev.jpg'),
         ]);
         $response->assertCreated();

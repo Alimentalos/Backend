@@ -26,8 +26,8 @@ class UserCanCreateDevicesWithoutMarkerTest extends TestCase
             'name' => $device->name,
             'description' => 'Blah blah blah',
             'is_public' => true,
-            'color' => '#CCCCCC',
-            'marker_color' => '#CCCCCC',
+            'color' => '#71D91B',
+            'marker_color' => '#7FF530',
         ]);
         $response->assertCreated();
         $response->assertJsonStructure([

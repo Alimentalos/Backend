@@ -27,11 +27,11 @@ class UserCanCreateChildUsersWithPhotoAndWithoutCoordinatesTest extends TestCase
             'password' => $userB->password,
             'password_confirmation' => $userB->password,
             'is_public' => true,
-            'color' => '#CCCCCC',
-            'border_color' => '#CCCCCC',
-            'background_color' => '#CCCCCC',
-            'text_color' => '#CCCCCC',
-            'marker_color' => '#CCCCCC',
+            'color' => '#71D91B',
+            'border_color' => '#7FF530',
+            'background_color' => '#5AAB17',
+            'text_color' => '#1786AB',
+            'marker_color' => '#136480',
         ]);
         $response->assertCreated();
         $response->assertJsonStructure([

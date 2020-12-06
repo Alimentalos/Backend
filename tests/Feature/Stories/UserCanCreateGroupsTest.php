@@ -25,14 +25,14 @@ class UserCanCreateGroupsTest extends TestCase
             'name' => $group->name,
             'is_public' => 'true',
             'coordinates' => '10.1,50.5',
-            'color' => '#CCCCCC',
-            'background_color' => '#CCCCCC',
-            'border_color' => '#CCCCCC',
-            'fill_color' => '#CCCCCC',
-            'text_color' => '#CCCCCC',
-            'user_color' => '#CCCCCC',
-            'administrator_color' => '#CCCCCC',
-            'owner_color' => '#CCCCCC',
+            'color' => '#7FF530',
+            'background_color' => '#71D91B',
+            'border_color' => '#5AAB17',
+            'fill_color' => '#1786AB',
+            'text_color' => '#136480',
+            'user_color' => '#3AA5C9',
+            'administrator_color' => '#69BFDB',
+            'owner_color' => '#33CCAD',
         ]);
         $response->assertCreated();
         $content = $response->getContent();
@@ -56,14 +56,14 @@ class UserCanCreateGroupsTest extends TestCase
         ]);
         $response->assertJsonFragment([
             'photo_uuid' => (json_decode($content))->photo_uuid,
-            'color' => '#CCCCCC',
-            'background_color' => '#CCCCCC',
-            'border_color' => '#CCCCCC',
-            'fill_color' => '#CCCCCC',
-            'text_color' => '#CCCCCC',
-            'user_color' => '#CCCCCC',
-            'administrator_color' => '#CCCCCC',
-            'owner_color' => '#CCCCCC',
+            'color' => '#7FF530',
+            'background_color' => '#71D91B',
+            'border_color' => '#5AAB17',
+            'fill_color' => '#1786AB',
+            'text_color' => '#136480',
+            'user_color' => '#3AA5C9',
+            'administrator_color' => '#69BFDB',
+            'owner_color' => '#33CCAD',
         ]);
     }
 }
