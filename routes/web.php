@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'welcome')->name('welcome');
-Route::view('/home', 'home')->name('home');
+Route::view('/home', 'HomeController@index')->name('home');
 Route::view('/map', 'map')->name('map');
 Route::view('/profile', 'profile')->name('profile');
 
@@ -43,17 +43,17 @@ Route::middleware(['auth'])->group(function () {
 		Route::get("/{$resource}", 'Resource\IndexController')
 			->name("web.{$resource}.index");
 	}
-	
+
 	foreach(config('resources.storable') as $resource) {
 		Route::get("/{$resource}/create", 'Resource\CreateController')
 			->name("web.{$resource}.create");
 	}
-	
+
 	foreach(config('resources.viewable') as $resource) {
 		Route::get("/{$resource}/{resource}", 'Resource\ShowController')
 			->name("web.{$resource}.show");
 	}
-	
+
 	foreach(config('resources.modifiable') as $resource) {
 		Route::get("/{$resource}/{resource}/edit", 'Resource\EditController')
 			->name("web.{$resource}.edit");
