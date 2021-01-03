@@ -1,0 +1,16 @@
+name: Quasar
+on: [push]
+jobs:
+  build:
+    name: Quasar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Quasar
+        run: sudo npm install -g @quasar/cli
+      - name: Install Dependencies
+        working-directory: cordova
+        run: npm install
+      - name: Run Quasar build
+        working-directory: cordova
+        run: npm run build
