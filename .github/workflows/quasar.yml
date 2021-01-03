@@ -5,6 +5,7 @@ jobs:
     name: Quasar
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Install Quasar
         run: sudo npm install -g @quasar/cli
       - name: Install Dependencies
