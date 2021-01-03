@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Quasar
-        run: npm install -g @quasar/cli
-      - name: Install Quasar
+        run: sudo npm install -g @quasar/cli
+      - name: Install Dependencies
         run: cd cordova && npm install
       - name: Run Quasar build
         run: cd cordova && npm run build
