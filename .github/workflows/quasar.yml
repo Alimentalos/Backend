@@ -1,8 +1,5 @@
 name: Cordova
 on: [push]
-defaults:
-  run:
-    working-directory: ./cordova
 jobs:
   build:
     name: Cordova
@@ -13,9 +10,11 @@ jobs:
         with:
           cmd: global add @quasar/cli
       - uses: borales/actions-yarn@v2.0.0
+        working-directory: ./cordova
         with:
           cmd: install # will run `yarn install` command
       - uses: borales/actions-yarn@v2.0.0
+        working-directory: ./cordova
         with:
           cmd: build # will run `yarn build` command
       - uses: borales/actions-yarn@v2.0.0
