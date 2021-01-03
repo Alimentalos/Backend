@@ -24,9 +24,8 @@ class UserCanCreatePhotoOfPlaceTest extends TestCase
         $user = User::factory()->create();
         $place = Place::factory()->create();
         $photo = Photo::factory()->create();
-        $photo->user_uuid = $user->uuid;
-        $photo->save();
-        $place->user_uuid = $user->uuid;
+        change_instance_user($photo, $user);
+        change_instance_user($place, $user);
         $place->photo_uuid = $photo->uuid;
         $place->save();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/places/' . $place->uuid . '/photos', [

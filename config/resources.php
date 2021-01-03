@@ -76,16 +76,16 @@ return [
     |
     */
 	'removable' => [
-		'places',
-		'photos',
-		'users',
-		'comments',
-		'actions',
-		'devices',
-		'pets',
-		'geofences',
-		'groups',
-		'alerts'
+		'places' => \Alimentalos\Relationships\Models\Place::class,
+		'photos' => \Alimentalos\Relationships\Models\Photo::class,
+		'users' => \Alimentalos\Relationships\Models\User::class,
+		'comments' => \Alimentalos\Relationships\Models\Comment::class,
+		'actions' => \Alimentalos\Relationships\Models\Action::class,
+		'devices' => \Alimentalos\Relationships\Models\Device::class,
+		'pets' => \Alimentalos\Relationships\Models\Pet::class,
+		'geofences' => \Alimentalos\Relationships\Models\Geofence::class,
+		'groups' => \Alimentalos\Relationships\Models\Group::class,
+		'alerts' => \Alimentalos\Relationships\Models\Alert::class
 	],
 	/*
     |--------------------------------------------------------------------------

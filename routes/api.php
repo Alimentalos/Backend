@@ -33,7 +33,7 @@ Route::middleware(['auth:pets'])->group(function () {
 Route::middleware(['api'])->group(function () {
     Route::post('/register', 'RegisterController')
         ->middleware('throttle:5');
-    
+
     Route::get('/reverse-geocoding', 'ReverseGeocodingController')
         ->middleware('throttle:5');
 
@@ -81,9 +81,9 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("api.{$resource}.update");
     }
 
-    foreach(config('resources.removable') as $resource) {
-        Route::delete("/{$resource}/{resource}", 'Resource\DestroyController')
-            ->name("api.{$resource}.destroy");
+    foreach(config('resources.removable') as $key => $resource) {
+        Route::delete("/{$key}/{resource}", 'Resource\DestroyController')
+            ->name("api.{$key}.destroy");
     }
 
     Route::get('/locations', 'Locations\IndexController')

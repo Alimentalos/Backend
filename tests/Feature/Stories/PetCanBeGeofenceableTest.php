@@ -36,13 +36,7 @@ class PetCanBeGeofenceableTest extends TestCase
         $geofence->uuid = uuid();
         $geofence->name = "Geofence";
         $geofence->user_uuid = $user->uuid;
-        $geofence->shape = new Polygon([new LineString([
-            new Point(0, 0),
-            new Point(0, 5),
-            new Point(5, 5),
-            new Point(5, 0),
-            new Point(0, 0)
-        ])]);
+        $geofence->shape = create_default_polygon();
         $geofence->save();
         $device->geofences()->attach($geofence->uuid);
         $pet->geofences()->attach($geofence->uuid);
@@ -54,133 +48,23 @@ class PetCanBeGeofenceableTest extends TestCase
         $location5 = Location::factory()->make();
         $firstPayload = [
             'device' => '{}',
-            'location' => [
-                'uuid' => $location->uuid,
-                'coords' => [
-                    'latitude' => 20,
-                    'longitude' => 20,
-                    'accuracy' => $location->accuracy,
-                    'altitude' => $location->altitude,
-                    'speed' => $location->speed,
-                    'heading' => $location->heading,
-                ],
-                'odometer' => $location->odometer,
-                'event' => $location->event,
-                'activity' => [
-                    'type' => $location->activity_type,
-                    'confidence' => $location->activity_confidence,
-                ],
-                'battery' => [
-                    'level' => $location->battery_level,
-                    'is_charging' => $location->battery_is_charging,
-                ],
-                'is_moving' => $location->is_moving,
-                'timestamp' => time(),
-            ],
+            'location' => create_location_payload($location, 20, 20)
         ];
         $secondPayload = [
             'device' => '{}',
-            'location' => [
-                'uuid' => $location2->uuid,
-                'coords' => [
-                    'latitude' => 5,
-                    'longitude' => 5,
-                    'accuracy' => $location2->accuracy,
-                    'altitude' => $location2->altitude,
-                    'speed' => $location2->speed,
-                    'heading' => $location2->heading,
-                ],
-                'odometer' => $location2->odometer,
-                'event' => $location2->event,
-                'activity' => [
-                    'type' => $location2->activity_type,
-                    'confidence' => $location2->activity_confidence,
-                ],
-                'battery' => [
-                    'level' => $location2->battery_level,
-                    'is_charging' => $location2->battery_is_charging,
-                ],
-                'is_moving' => $location2->is_moving,
-                'timestamp' => time(),
-            ],
+            'location' => create_location_payload($location2, 5, 5)
         ];
         $thirdPayload = [
             'device' => '{}',
-            'location' => [
-                'uuid' => $location3->uuid,
-                'coords' => [
-                    'latitude' => 10,
-                    'longitude' => 10,
-                    'accuracy' => $location3->accuracy,
-                    'altitude' => $location3->altitude,
-                    'speed' => $location3->speed,
-                    'heading' => $location3->heading,
-                ],
-                'odometer' => $location3->odometer,
-                'event' => $location3->event,
-                'activity' => [
-                    'type' => $location3->activity_type,
-                    'confidence' => $location3->activity_confidence,
-                ],
-                'battery' => [
-                    'level' => $location3->battery_level,
-                    'is_charging' => $location3->battery_is_charging,
-                ],
-                'is_moving' => $location3->is_moving,
-                'timestamp' => time(),
-            ],
+            'location' => create_location_payload($location3, 10, 10)
         ];
         $fourPayload = [
             'device' => '{}',
-            'location' => [
-                'uuid' => $location4->uuid,
-                'coords' => [
-                    'latitude' => 5,
-                    'longitude' => 5,
-                    'accuracy' => $location4->accuracy,
-                    'altitude' => $location4->altitude,
-                    'speed' => $location4->speed,
-                    'heading' => $location4->heading,
-                ],
-                'odometer' => $location4->odometer,
-                'event' => $location4->event,
-                'activity' => [
-                    'type' => $location4->activity_type,
-                    'confidence' => $location4->activity_confidence,
-                ],
-                'battery' => [
-                    'level' => $location4->battery_level,
-                    'is_charging' => $location4->battery_is_charging,
-                ],
-                'is_moving' => $location4->is_moving,
-                'timestamp' => time(),
-            ],
+            'location' => create_location_payload($location4, 5, 5)
         ];
         $fivePayload = [
             'device' => '{}',
-            'location' => [
-                'uuid' => $location5->uuid,
-                'coords' => [
-                    'latitude' => 10,
-                    'longitude' => 10,
-                    'accuracy' => $location5->accuracy,
-                    'altitude' => $location5->altitude,
-                    'speed' => $location5->speed,
-                    'heading' => $location5->heading,
-                ],
-                'odometer' => $location5->odometer,
-                'event' => $location5->event,
-                'activity' => [
-                    'type' => $location5->activity_type,
-                    'confidence' => $location5->activity_confidence,
-                ],
-                'battery' => [
-                    'level' => $location5->battery_level,
-                    'is_charging' => $location5->battery_is_charging,
-                ],
-                'is_moving' => $location5->is_moving,
-                'timestamp' => time(),
-            ],
+            'location' => create_location_payload($location5, 10, 10)
         ];
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $firstPayload);
         $response->assertCreated();

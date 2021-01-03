@@ -18,10 +18,8 @@ class OwnerCanDetachChildUserOfGroupsTest extends TestCase
         $user = User::factory()->create();
         $userB = User::factory()->create();
         $group = Group::factory()->create();
-        $group->user_uuid = $user->uuid;
-        $group->save();
-        $userB->user_uuid = $user->uuid;
-        $userB->save();
+        change_instance_user($group, $user);
+        change_instance_user($userB, $user);
         $group->users()->attach($user, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS,

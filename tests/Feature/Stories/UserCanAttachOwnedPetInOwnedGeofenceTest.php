@@ -19,10 +19,8 @@ class UserCanAttachOwnedPetInOwnedGeofenceTest extends TestCase
         $user = User::factory()->create();
         $pet = Pet::factory()->create();
         $geofence = Geofence::factory()->create();
-        $geofence->user_uuid = $user->uuid;
-        $geofence->save();
-        $pet->user_uuid = $user->uuid;
-        $pet->save();
+        change_instance_user($geofence, $user);
+        change_instance_user($pet, $user);
         $response = $this->actingAs($user, 'api')->json(
             'POST',
             '/api/pets/' . $pet->uuid . '/geofences/' . $geofence->uuid . '/attach',

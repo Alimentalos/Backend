@@ -24,21 +24,14 @@ class UserCanCreateResourcePhotosTest extends TestCase
         Storage::fake('public');
         $user = User::factory()->create();
         $pet = Pet::factory()->create();
-        $pet->user_uuid = $user->uuid;
         $group = Group::factory()->create();
-        $group->user_uuid = $user->uuid;
-        $group->save();
         $geofence = Geofence::factory()->create();
-        $geofence->user_uuid = $user->uuid;
-        $geofence->save();
         $photo = Photo::factory()->create();
-
-        $photo->user_uuid = $user->uuid;
+        change_instances_user(collect([$pet, $group, $geofence, $photo]), $user);
         $user->photo_uuid = $photo->uuid;
         $pet->photo_uuid = $photo->uuid;
         $pet->save();
         $user->save();
-        $photo->save();
         $this->assertDatabaseMissing('locations', [
             'trackable_type' => 'Alimentalos\\Relationships\\Models\\User',
             'trackable_id' => $user->uuid,

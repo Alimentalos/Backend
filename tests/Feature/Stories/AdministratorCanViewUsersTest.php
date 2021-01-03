@@ -14,9 +14,7 @@ class AdministratorCanViewUsersTest extends TestCase
 
     final public function testAdministratorCanViewUsers()
     {
-        $user = User::factory()->create();
-        $user->email = 'iantorres@outlook.com';
-        $user->save();
+        $user = create_admin();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
         $response->assertOk();
         $response -> assertJsonStructure([

@@ -19,10 +19,8 @@ class UserCanAttachOwnedGeofenceInOwnedGroupAlternativeTest extends TestCase
         $user = User::factory()->create();
         $group = Group::factory()->create();
         $geofence = Geofence::factory()->create();
-        $geofence->user_uuid = $user->uuid;
-        $geofence->save();
-        $group->user_uuid = $user->uuid;
-        $group->save();
+        change_instance_user($geofence, $user);
+        change_instance_user($group, $user);
         $response = $this->actingAs($user, 'api')->json(
             'POST',
             '/api/geofences/' . $geofence->uuid . '/groups/' . $group->uuid . '/attach',

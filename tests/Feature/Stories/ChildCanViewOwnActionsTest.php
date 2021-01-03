@@ -16,9 +16,8 @@ class ChildCanViewOwnActionsTest extends TestCase
     {
         $user = User::factory()->create();
         $userB = User::factory()->create();
+        change_instance_user($userB, $user);
         $this->actingAs($user, 'api')->json('GET', '/api/devices');
-        $userB->user_uuid = $user->uuid;
-        $userB->save();
         $response = $this->actingAs($userB, 'api')->json('GET', '/api/actions');
         $response->assertOk();
         $response->assertJsonCount(1, 'data');
