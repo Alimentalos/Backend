@@ -4,10 +4,8 @@ jobs:
   build:
     name: Cordova
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./cordova
     steps:
+      - run: cd cordova
       - uses: actions/checkout@v1
       - uses: borales/actions-yarn@v2.0.0
         with:
