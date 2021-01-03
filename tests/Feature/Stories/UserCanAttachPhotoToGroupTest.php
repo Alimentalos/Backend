@@ -20,9 +20,9 @@ class UserCanAttachPhotoToGroupTest extends TestCase
 
     final public function testUserCanAttachPhotoToGroup()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
+        $photo = Photo::factory()->create();
 
         $group->user_uuid = $user->uuid;
         $photo->user_uuid = $user->uuid;

@@ -17,7 +17,7 @@ class UserCanCreateGeofenceWithoutColorsTest extends TestCase
     public function testUserCanCreateGeofenceWithoutColors()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $user->save();
         $response = $this->actingAs($user, 'api')->post('/api/geofences', [
             'marker' => UploadedFile::fake()->image('marker.jpg'),

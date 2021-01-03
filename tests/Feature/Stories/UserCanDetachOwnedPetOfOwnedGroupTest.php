@@ -16,9 +16,9 @@ class UserCanDetachOwnedPetOfOwnedGroupTest extends TestCase
 
     final public function testUserCanDetachOwnedPetOfOwnedGroup()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
-        $pet = factory(Pet::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
+        $pet = Pet::factory()->create();
         $pet->user_uuid = $user->uuid;
         $pet->save();
         $group->user_uuid = $user->uuid;

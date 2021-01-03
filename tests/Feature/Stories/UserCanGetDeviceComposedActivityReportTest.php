@@ -18,15 +18,15 @@ class UserCanGetDeviceComposedActivityReportTest extends TestCase
 
     public function testUserCanGetDeviceComposedActivityReport()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
         $device->user_uuid = $user->uuid;
         $device->save();
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
         $user->groups()->save($group);
         $group->devices()->save($device);
         $location2 = $device->locations()->create(
-            factory(Location::class)->make()->toArray()
+            Location::factory()->make()->toArray()
         );
         $location2->update([
             'generated_at' => Carbon::now()->format('Y-m-d 13:00:00'),
@@ -34,7 +34,7 @@ class UserCanGetDeviceComposedActivityReportTest extends TestCase
             'is_moving' => 0
         ]);
         $location3 = $device->locations()->create(
-            factory(Location::class)->make()->toArray()
+            Location::factory()->make()->toArray()
         );
         $location3->update([
             'generated_at' => Carbon::now()->format('Y-m-d 15:00:00'),
@@ -42,7 +42,7 @@ class UserCanGetDeviceComposedActivityReportTest extends TestCase
             'is_moving' => 1
         ]);
         $location4 = $device->locations()->create(
-            factory(Location::class)->make()->toArray()
+            Location::factory()->make()->toArray()
         );
         $location4->update([
             'generated_at' => Carbon::now()->format('Y-m-d 16:00:00'),
@@ -50,7 +50,7 @@ class UserCanGetDeviceComposedActivityReportTest extends TestCase
             'is_moving' => 1
         ]);
         $location5 = $device->locations()->create(
-            factory(Location::class)->make()->toArray()
+            Location::factory()->make()->toArray()
         );
         $location5->update([
             'generated_at' => Carbon::now()->format('Y-m-d 18:00:00'),

@@ -14,8 +14,8 @@ class ChildCanViewOwnActionsTest extends TestCase
 
     final public function testChildCanViewOwnActions()
     {
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->create();
+        $user = User::factory()->create();
+        $userB = User::factory()->create();
         $this->actingAs($user, 'api')->json('GET', '/api/devices');
         $userB->user_uuid = $user->uuid;
         $userB->save();

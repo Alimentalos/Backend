@@ -18,8 +18,10 @@ use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
+use Database\Factories\UserFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -28,6 +30,7 @@ use Laravel\Scout\Searchable;
 
 class User extends Authenticatable implements MustVerifyEmail, ReacterableContract, ReactableContract, Resource, CreateFromRequest, UpdateFromRequest, Monetizer, HasColors
 {
+    use HasFactory;
     use Searchable;
     use SpatialTrait;
     use Notifiable;
@@ -236,5 +239,10 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
     public static function getColors()
     {
         return self::$colors;
+    }
+
+    protected static function newFactory()
+    {
+        return UserFactory::new();
     }
 }

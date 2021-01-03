@@ -16,9 +16,9 @@ class UserCanViewPhotosOfGroupTest extends TestCase
 
     final public function testUserCanViewGroupPhotos()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
+        $photo = Photo::factory()->create();
         $photo->groups()->attach($group->uuid);
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/photos');

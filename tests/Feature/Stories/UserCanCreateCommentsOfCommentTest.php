@@ -16,10 +16,10 @@ class UserCanCreateCommentsOfCommentTest extends TestCase
 
     final public function testUserCanCreateCommentsOfComment()
     {
-        $user = factory(User::class)->create();
-        $photo = factory(Photo::class)->create();
-        $parentComment = factory(Comment::class)->make();
-        $childComment = factory(Comment::class)->make();
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
+        $parentComment = Comment::factory()->make();
+        $childComment = Comment::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/photos/' . $photo->uuid . '/comments', [
             'body' => $parentComment->body,
         ]);

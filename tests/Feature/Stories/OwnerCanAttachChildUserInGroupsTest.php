@@ -15,9 +15,9 @@ class OwnerCanAttachChildUserInGroupsTest extends TestCase
 
     public function testOwnerCanAttachChildUserInGroups()
     {
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $userB = User::factory()->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, ['is_admin' => true, 'status' => Group::ATTACHED_STATUS]);

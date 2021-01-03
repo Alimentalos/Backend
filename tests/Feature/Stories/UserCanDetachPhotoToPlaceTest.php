@@ -21,9 +21,9 @@ class UserCanDetachPhotoToPlaceTest extends TestCase
 
     final public function testUserCanAttachPhotoToGroup()
     {
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $place = Place::factory()->create();
+        $photo = Photo::factory()->create();
 
         $place->user_uuid = $user->uuid;
         $photo->user_uuid = $user->uuid;

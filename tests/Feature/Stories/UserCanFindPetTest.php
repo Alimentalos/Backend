@@ -16,10 +16,10 @@ class UserCanFindPetTest extends TestCase
 
     final public function testUserCanFindPet()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
         $pet->locations()->saveMany(
-            factory(Location::class, 10)->make()
+            Location::factory(10)->make()
         );
         $responsePets = $this->actingAs($user, 'api')->json('GET', '/api/find', [
             'api_token' => $user->api_token,

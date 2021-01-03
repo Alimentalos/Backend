@@ -16,9 +16,9 @@ class UserCanViewPhotosOfGeofenceTest extends TestCase
 
     final public function testUserCanViewPhotosOfGeofence()
     {
-        $user = factory(User::class)->create();
-        $geofence = factory(Geofence::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $geofence = Geofence::factory()->create();
+        $photo = Photo::factory()->create();
         $photo->geofences()->attach($geofence->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/geofences/' . $geofence->uuid . '/photos');
         $response->assertOk();

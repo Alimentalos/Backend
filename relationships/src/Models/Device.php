@@ -11,7 +11,9 @@ use Alimentalos\Relationships\Geofenceable;
 use Alimentalos\Relationships\Groupable;
 use Alimentalos\Relationships\Resources\DeviceResource;
 use Alimentalos\Relationships\Trackable;
+use Database\Factories\DeviceFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
 
@@ -24,6 +26,7 @@ use Laravel\Scout\Searchable;
  */
 class Device extends Authenticatable implements Resource, CreateFromRequest, UpdateFromRequest, HasColors
 {
+    use HasFactory;
     use Searchable;
     use SpatialTrait;
     use DeviceResource;
@@ -143,5 +146,10 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
     public static function getColors()
     {
         return self::$colors;
+    }
+
+    protected static function newFactory()
+    {
+        return DeviceFactory::new();
     }
 }

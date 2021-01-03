@@ -17,9 +17,9 @@ class GroupAdministratorCanUpdateGroupTest extends TestCase
 
     final public function testGroupAdministratorCanUpdateGroup()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
+        $photo = Photo::factory()->create();
 
         $photo->user_uuid = $user->uuid;
         $photo->save();

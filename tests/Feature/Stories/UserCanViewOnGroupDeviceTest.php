@@ -17,12 +17,12 @@ class UserCanViewOnGroupDeviceTest extends TestCase
 
     final public function testUserCanViewOnGroupDevice()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
         $device->is_public = false;
         $device->save();
-        $user->photo_uuid = factory(Photo::class)->create()->uuid;
-        $group = factory(Group::class)->create();
+        $user->photo_uuid = Photo::factory()->create()->uuid;
+        $group = Group::factory()->create();
         $group->devices()->attach($device->uuid);
         $group->users()->attach($user->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices/' . $device->uuid);

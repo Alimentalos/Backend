@@ -16,9 +16,9 @@ class UserCanViewPetPhotosTest extends TestCase
 
     final public function testUserCanViewPetPhotos()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
+        $photo = Photo::factory()->create();
         $photo->pets()->attach($pet->uuid);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets/' . $pet->uuid . '/photos');
         $response->assertOk();

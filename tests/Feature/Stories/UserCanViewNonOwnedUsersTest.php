@@ -14,9 +14,9 @@ class UserCanViewNonOwnedUsersTest extends TestCase
 
     final public function testUserCanViewNonOwnedUsers()
     {
-        $user = factory(User::class)->create();
-        $userC = factory(User::class)->create();
-        $userB = factory(User::class)->create();
+        $user = User::factory()->create();
+        $userC = User::factory()->create();
+        $userB = User::factory()->create();
         $userC->is_public = false;
         $userB->user_uuid = $user->uuid;
         $userC->user_uuid = $user->uuid;

@@ -19,8 +19,8 @@ class UserCanCreatePlacesTest extends TestCase
     final public function testUserCanCreatePlaces()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->make();
+        $user = User::factory()->create();
+        $place = Place::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/places', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
             'marker' => UploadedFile::fake()->image('marker.jpg'),

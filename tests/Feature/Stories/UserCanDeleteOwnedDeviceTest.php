@@ -15,8 +15,8 @@ class UserCanDeleteOwnedDeviceTest extends TestCase
 
     final public function testUserCanDeleteOwnedDevice()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
         $device->user_uuid = $user->uuid;
         $device->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/devices/' . $device->uuid);

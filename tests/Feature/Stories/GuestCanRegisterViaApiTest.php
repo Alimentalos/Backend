@@ -14,7 +14,7 @@ class GuestCanRegisterViaApiTest extends TestCase
 
     public function testGuestCanRegisterViaApi()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
         $response = $this->json('POST', '/api/register', [
             'name' => $user->name,
             'email' => $user->email,

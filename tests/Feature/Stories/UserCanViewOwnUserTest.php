@@ -14,7 +14,7 @@ class UserCanViewOwnUserTest extends TestCase
 
     final public function testUserCanViewOwnUser()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/user');
         $response->assertOk();
         $response->assertJsonStructure([

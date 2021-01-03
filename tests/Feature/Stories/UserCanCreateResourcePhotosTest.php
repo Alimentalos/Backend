@@ -22,16 +22,16 @@ class UserCanCreateResourcePhotosTest extends TestCase
     final public function testUserCanCreateResourcePhotos()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
         $pet->user_uuid = $user->uuid;
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
         $group->save();
-        $geofence = factory(Geofence::class)->create();
+        $geofence = Geofence::factory()->create();
         $geofence->user_uuid = $user->uuid;
         $geofence->save();
-        $photo = factory(Photo::class)->create();
+        $photo = Photo::factory()->create();
 
         $photo->user_uuid = $user->uuid;
         $user->photo_uuid = $photo->uuid;

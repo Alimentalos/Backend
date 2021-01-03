@@ -20,16 +20,16 @@ class UserCanCreatePhotoOfPetTest extends TestCase
     final public function testUserCanCreatePhotoOfPet()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
+        $photo = Photo::factory()->create();
 
         $photo->user_uuid = $user->uuid;
         $photo->save();
         $pet->user_uuid = $user->uuid;
         $pet->photo_uuid = $photo->uuid;
         $pet->save();
-        $comment = factory(Comment::class)->make();
+        $comment = Comment::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets/' . $pet->uuid . '/photos', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
             'title' => $comment->title,

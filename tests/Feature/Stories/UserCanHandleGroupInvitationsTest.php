@@ -15,11 +15,11 @@ class UserCanHandleGroupInvitationsTest extends TestCase
 
     public function testUserCanHandleGroupInvitations()
     {
-        $user = factory(User::class)->create();
-        $acceptedUser = factory(User::class)->create();
-        $rejectedUser = factory(User::class)->create();
-        $blockedUser = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $acceptedUser = User::factory()->create();
+        $rejectedUser = User::factory()->create();
+        $blockedUser = User::factory()->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, ['is_admin' => true, 'status' => Group::ACCEPTED_STATUS]);

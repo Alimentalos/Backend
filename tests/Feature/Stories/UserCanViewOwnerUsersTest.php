@@ -15,12 +15,12 @@ class UserCanViewOwnerUsersTest extends TestCase
 
     final public function testUserCanViewOwnerUsers()
     {
-        $owner = factory(User::class)->create();
-        $userB = factory(User::class)->create();
+        $owner = User::factory()->create();
+        $userB = User::factory()->create();
         $userB->user_uuid = $owner->uuid;
         $userB->save();
-        $userC = factory(User::class)->create();
-        $userC->photo_uuid = factory(Photo::class)->create()->uuid;
+        $userC = User::factory()->create();
+        $userC->photo_uuid = Photo::factory()->create()->uuid;
         $userC->user_uuid = $owner->uuid;
         $userC->is_public = false;
         $userC->save();

@@ -15,8 +15,8 @@ class UserCanViewOwnDeviceListTest extends TestCase
 
     final public function testUserCanViewOwnDeviceList()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
         $device->user_uuid = $user->uuid;
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/devices');

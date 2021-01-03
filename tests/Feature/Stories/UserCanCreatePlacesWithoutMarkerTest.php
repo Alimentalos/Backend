@@ -18,8 +18,8 @@ class UserCanCreatePlacesWithoutMarkerTest extends TestCase
 
     final public function testUserCanCreatePlacesWithoutMarker()
     {
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->make();
+        $user = User::factory()->create();
+        $place = Place::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/places', [
             'name' => $place->name,
             'description' => $place->description,

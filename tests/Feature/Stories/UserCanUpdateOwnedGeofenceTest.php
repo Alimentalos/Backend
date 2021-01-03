@@ -15,8 +15,8 @@ class UserCanUpdateOwnedGeofenceTest extends TestCase
 
     final public function testUserCanUpdateOwnedGeofence()
     {
-        $user = factory(User::class)->create();
-        $geofence = factory(Geofence::class)->create();
+        $user = User::factory()->create();
+        $geofence = Geofence::factory()->create();
         $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $response = $this->actingAs($user, 'api')->put('/api/geofences/' . $geofence->uuid, [

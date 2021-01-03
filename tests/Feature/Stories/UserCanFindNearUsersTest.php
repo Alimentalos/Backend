@@ -14,8 +14,8 @@ class UserCanFindNearUsersTest extends TestCase
 
     public function testUserCanFindNearUsers()
     {
-        $user = factory(User::class)->create();
-        $users = factory(User::class, 50)->create();
+        $user = User::factory()->create();
+        $users = User::factory(50)->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/near/users', [
             'coordinates' => '5.1,5.3'
         ]);

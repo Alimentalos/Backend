@@ -5,11 +5,14 @@ namespace Alimentalos\Relationships\Models;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\Relationships\LocationRelationships;
 use Alimentalos\Relationships\Resources\LocationResource;
+use Database\Factories\LocationFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model implements Resource
 {
+    use HasFactory;
     use SpatialTrait;
     use LocationResource;
     use LocationRelationships;
@@ -71,4 +74,9 @@ class Location extends Model implements Resource
      * @var array
      */
     protected $hidden = ['id'];
+
+    protected static function newFactory()
+    {
+        return LocationFactory::new();
+    }
 }

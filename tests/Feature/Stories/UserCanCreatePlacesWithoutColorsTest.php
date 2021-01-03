@@ -19,8 +19,8 @@ class UserCanCreatePlacesWithoutColorsTest extends TestCase
     final public function testUserCanCreatePlacesWithoutColors()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->make();
+        $user = User::factory()->create();
+        $place = Place::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/places', [
             'marker' => UploadedFile::fake()->image('marker.jpg'),
             'name' => $place->name,

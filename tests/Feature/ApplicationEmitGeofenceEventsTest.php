@@ -21,9 +21,9 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
 
     final public function testApplicationEmitGeofenceEvents()
     {
-        $device = factory(Device::class)->create();
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
+        $device = Device::factory()->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
         $pet->user_uuid = $user->uuid;
         $pet->save();
         $device->user_uuid = $user->uuid;
@@ -43,11 +43,11 @@ class ApplicationEmitGeofenceEventsTest extends TestCase
         $device->geofences()->attach($geofence->uuid);
         $pet->geofences()->attach($geofence->uuid);
         $user->geofences()->attach($geofence->uuid);
-        $location = factory(Location::class)->make();
-        $location2 = factory(Location::class)->make();
-        $location3 = factory(Location::class)->make();
-        $location4 = factory(Location::class)->make();
-        $location5 = factory(Location::class)->make();
+        $location = Location::factory()->make();
+        $location2 = Location::factory()->make();
+        $location3 = Location::factory()->make();
+        $location4 = Location::factory()->make();
+        $location5 = Location::factory()->make();
 
         // data
         $firstPayload = [

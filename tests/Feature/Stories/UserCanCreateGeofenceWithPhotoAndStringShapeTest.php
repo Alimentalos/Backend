@@ -17,7 +17,7 @@ class UserCanCreateGeofenceWithPhotoAndStringShapeTest extends TestCase
     public function testUserCanCreateGeofenceWithPhotoAndStringShape()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $user->save();
         $response = $this->actingAs($user, 'api')->post('/api/geofences', [
             'photo' => UploadedFile::fake()->image('photo5.jpg'),

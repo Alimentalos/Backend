@@ -30,8 +30,8 @@ class UserCanReactToPlacesTest extends TestCase
             ->assertExitCode(0);
         $this->artisan('love:reaction-type-add --name=Follow --mass=1')
             ->assertExitCode(0);
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->create();
+        $user = User::factory()->create();
+        $place = Place::factory()->create();
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/places/' . $place->uuid . '/reactions', [
                 'type' => 'Love',

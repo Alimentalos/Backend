@@ -17,9 +17,9 @@ class UserCanCreateCommentOfPhotoTest extends TestCase
 
     final public function testUserCanCreateCommentOfPhoto()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
+        $photo = Photo::factory()->create();
         $photo->user_uuid = $user->uuid;
         $pet->user_uuid = $user->uuid;
         $pet->photo_uuid = $photo->uuid;
@@ -27,7 +27,7 @@ class UserCanCreateCommentOfPhotoTest extends TestCase
         $photo->save();
         $pet->save();
         $pet->photos()->attach($photo);
-        $comment = factory(Comment::class)->make();
+        $comment = Comment::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/photos/' . $photo->uuid . '/comments', [
             'body' => $comment->body,
             'is_public' => true,

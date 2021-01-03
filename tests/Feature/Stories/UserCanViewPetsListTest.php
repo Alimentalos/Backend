@@ -15,8 +15,8 @@ class UserCanViewPetsListTest extends TestCase
 
     final public function testUserCanViewPetsList()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/pets');
         $response->assertOk();
         $response->assertJsonStructure([

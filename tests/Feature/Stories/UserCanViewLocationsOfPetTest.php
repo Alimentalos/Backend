@@ -16,8 +16,8 @@ class UserCanViewLocationsOfPetTest extends TestCase
 
     public function testUserCanViewLocationsOfPet()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/locations', [
             'api_token' => $user->api_token,
             'type' => 'pets',

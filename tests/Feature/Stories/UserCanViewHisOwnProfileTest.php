@@ -14,7 +14,7 @@ class UserCanViewHisOwnProfileTest extends TestCase
 
     final public function testUserCanViewHisOwnProfile()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid);
         $response->assertOk();
         $response->assertJsonStructure([

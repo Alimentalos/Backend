@@ -18,9 +18,9 @@ class UserCanCreateCommentOfPetTest extends TestCase
     final public function testUserCanCreateCommentOfPet()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $comment = factory(Comment::class)->make();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
+        $comment = Comment::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets/' . $pet->uuid . '/comments', [
             'body' => $comment->body
         ]);

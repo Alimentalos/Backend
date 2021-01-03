@@ -20,8 +20,8 @@ class UserCanDetachPhotoToUserTest extends TestCase
     final public function testUserCanDetachPhotoToUser()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
 
         $photo->user_uuid = $user->uuid;
         $photo->save();

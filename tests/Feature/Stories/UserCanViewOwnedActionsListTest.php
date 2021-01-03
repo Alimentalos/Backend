@@ -14,8 +14,8 @@ class UserCanViewOwnedActionsListTest extends TestCase
 
     final public function testUserCanViewOwnedActionsList()
     {
-        $user = factory(User::class)->create();
-        $child = factory(User::class)->create();
+        $user = User::factory()->create();
+        $child = User::factory()->create();
         $user->user_uuid = null;
         $child->user_uuid = $user->uuid;
         $child->save();

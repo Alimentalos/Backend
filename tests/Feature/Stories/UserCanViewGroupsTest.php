@@ -16,10 +16,10 @@ class UserCanViewGroupsTest extends TestCase
 
     final public function testUserCanViewGroups()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
-        $photo = factory(Photo::class)->create();
+        $photo = Photo::factory()->create();
         $group->photo_uuid = $photo->uuid;
         $group->save();
         $user->groups()->attach($group->uuid, [

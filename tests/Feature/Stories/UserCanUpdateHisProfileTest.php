@@ -14,7 +14,7 @@ class UserCanUpdateHisProfileTest extends TestCase
 
     final public function testUserCanUpdateHisProfile()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
             'name' => 'New name',
             'coordinates' => '5.5,6.5',

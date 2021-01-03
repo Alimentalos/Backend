@@ -17,8 +17,8 @@ class UserCanCreateChildUsersTest extends TestCase
     final public function testUserCanCreateChildUsers()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->make();
+        $user = User::factory()->create();
+        $userB = User::factory()->make();
         $latitude = rand(1,5);
         $longitude = rand(4,10);
         $coordinates = $latitude . ',' . $longitude;

@@ -15,9 +15,9 @@ class UserGroupMemberCanViewOtherGroupMembersTest extends TestCase
 
     final public function testUserGroupMemberCanViewOtherGroupMembers()
     {
-        $user = factory(User::class)->create();
-        $member = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $member = User::factory()->create();
+        $group = Group::factory()->create();
         $user->groups()->attach($group, ['is_admin' => true]);
         $member->groups()->attach($group, ['is_admin' => false]);
         $response = $this->actingAs($member, 'api')->json('GET', '/api/groups/' . $group->uuid . '/users');

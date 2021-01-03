@@ -28,8 +28,8 @@ class UserCanReactToUsersTest extends TestCase
             ->assertExitCode(0);
         $this->artisan('love:reaction-type-add --name=Follow --mass=1')
             ->assertExitCode(0);
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->create();
+        $user = User::factory()->create();
+        $userB = User::factory()->create();
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/users/' . $userB->uuid . '/reactions', [
                 'type' => 'Follow',

@@ -14,8 +14,8 @@ class ChildCanViewOwnerUserTest extends TestCase
 
     final public function testChildCanViewOwnerUser()
     {
-        $userA = factory(User::class)->create();
-        $userB = factory(User::class)->create();
+        $userA = User::factory()->create();
+        $userB = User::factory()->create();
         $userB->user_uuid = $userA->uuid;
         $userB->is_public = false;
         $userB->save();

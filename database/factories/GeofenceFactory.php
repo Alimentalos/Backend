@@ -1,27 +1,25 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use Alimentalos\Relationships\Models\Geofence;
-use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+class GeofenceFactory extends Factory {
 
-$factory->define(Geofence::class, function (Faker $faker) {
-    return [
-        'uuid' => (string) $faker->unique()->uuid,
-        'name' => $faker->name,
-        'is_public' => true,
-        'shape' => (new Polygon(geofences()->createSamplePolygon())),
-    ];
-});
+    protected $model = Geofence::class;
+
+    /**
+     * @inheritDoc
+     */
+    public function definition()
+    {
+        return [
+            'uuid' => (string) $this->faker->unique()->uuid,
+            'name' => $this->faker->name,
+            'is_public' => true,
+            'shape' => (new Polygon(geofences()->createSamplePolygon())),
+        ];
+    }
+}

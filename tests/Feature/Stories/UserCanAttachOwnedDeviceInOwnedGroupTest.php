@@ -16,9 +16,9 @@ class UserCanAttachOwnedDeviceInOwnedGroupTest extends TestCase
 
     final public function testUserCanAttachOwnedDeviceInOwnedGroup()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, [

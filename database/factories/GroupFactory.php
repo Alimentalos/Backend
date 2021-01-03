@@ -1,14 +1,23 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use Alimentalos\Relationships\Models\Group;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Group::class, function (Faker $faker) {
-    return [
-        'name' => $faker->text(6),
-        'uuid' => (string) $faker->unique()->uuid,
-        'is_public' => true,
-    ];
-});
+class GroupFactory extends Factory {
+
+    protected $model = Group::class;
+
+    /**
+     * @inheritDoc
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->text(6),
+            'uuid' => (string) $this->faker->unique()->uuid,
+            'is_public' => true,
+        ];
+    }
+}

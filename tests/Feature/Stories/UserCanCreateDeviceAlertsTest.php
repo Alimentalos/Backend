@@ -19,9 +19,9 @@ class UserCanCreateDeviceAlertsTest extends TestCase
     public function testUserCanCreateDeviceAlerts()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $alert = factory(Alert::class)->make();
-        $device = factory(Device::class)->create();
+        $user = User::factory()->create();
+        $alert = Alert::factory()->make();
+        $device = Device::factory()->create();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/alerts', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
             'marker' => UploadedFile::fake()->image('dev.jpg'),

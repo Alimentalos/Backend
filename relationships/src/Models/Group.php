@@ -14,11 +14,14 @@ use Alimentalos\Relationships\HasPhoto;
 use Alimentalos\Relationships\Photoable;
 use Alimentalos\Relationships\Relationships\GroupRelationships;
 use Alimentalos\Relationships\Resources\GroupResource;
+use Database\Factories\GroupFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequest, Monetizer, HasColors
 {
+    use HasFactory;
     use Searchable;
     use GroupResource;
     use GroupRelationships;
@@ -136,5 +139,10 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     public static function getColors()
     {
         return self::$colors;
+    }
+
+    protected static function newFactory()
+    {
+        return GroupFactory::new();
     }
 }

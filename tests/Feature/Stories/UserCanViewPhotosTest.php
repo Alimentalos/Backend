@@ -16,8 +16,8 @@ class UserCanViewPhotosTest extends TestCase
 
     public function testUserCanViewPhotos()
     {
-        $user = factory(User::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
         $photo->user_uuid = $user->uuid;
 
         $user->photo_uuid = $photo->uuid;

@@ -15,7 +15,7 @@ class UserCanViewLocationsOfUserTest extends TestCase
 
     public function testUserCanViewLocationsOfUser()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/locations', [
             'api_token' => $user->api_token,
             'type' => 'users',

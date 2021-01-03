@@ -14,7 +14,7 @@ class UserCanRecoveryPasswordViaApiTest extends TestCase
 
     public function testUserCanRecoveryPasswordViaApi()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->json('POST', '/api/password-recovery', [
             'email' => $user->email,
         ]);

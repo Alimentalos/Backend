@@ -1,20 +1,28 @@
 <?php
 
-/** @var Factory $factory */
+namespace Database\Factories;
 
 use Alimentalos\Relationships\Models\Alert;
-use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Alert::class, function (Faker $faker) {
-    return [
-        'uuid' => (string) $faker->unique()->uuid,
-        'photo_url' => config('storage.path') . 'example.png',
-        'location' => (new Point($faker->latitude(), $faker->longitude())),
-        'title' => $faker->sentence($faker->numberBetween(5, 10)),
-        'body' => $faker->sentence($faker->numberBetween(50, 200)),
-        'status' => $faker->randomElement(cataloger()->types()),
-        'type' => $faker->randomElement(alerts()->types()),
-    ];
-});
+class AlertFactory extends Factory {
+
+    protected $model = Alert::class;
+
+    /**
+     * @inheritDoc
+     */
+    public function definition()
+    {
+        return [
+            'uuid' => (string) $this->faker->unique()->uuid,
+            'photo_url' => config('storage.path') . 'example.png',
+            'location' => (new Point($this->faker->latitude(), $this->faker->longitude())),
+            'title' => $this->faker->sentence($this->faker->numberBetween(5, 10)),
+            'body' => $this->faker->sentence($this->faker->numberBetween(50, 200)),
+            'status' => $this->faker->randomElement(cataloger()->types()),
+            'type' => $this->faker->randomElement(alerts()->types()),
+        ];
+    }
+}

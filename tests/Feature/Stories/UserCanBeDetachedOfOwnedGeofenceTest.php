@@ -15,8 +15,8 @@ class UserCanBeDetachedOfOwnedGeofenceTest extends TestCase
 
     final public function testUserCanBeDetachedOfOwnedGeofence()
     {
-        $user = factory(User::class)->create();
-        $geofence = factory(Geofence::class)->create();
+        $user = User::factory()->create();
+        $geofence = Geofence::factory()->create();
         $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $user->geofences()->attach($geofence);

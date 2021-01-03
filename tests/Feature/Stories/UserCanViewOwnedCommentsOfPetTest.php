@@ -17,10 +17,10 @@ class UserCanViewOwnedCommentsOfPetTest extends TestCase
 
     final public function testUserCanViewOwnedCommentsOfPet()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $photo = factory(Photo::class)->create();
-        $comment = factory(Comment::class)->make();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
+        $photo = Photo::factory()->create();
+        $comment = Comment::factory()->make();
         $pet->comments()->create([
             'user_uuid' => $user->uuid,
             'title' => $comment->title,

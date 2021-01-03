@@ -18,8 +18,8 @@ class UserCanCreateGroupsWithPhotoAndWithoutCoordinatesTest extends TestCase
     final public function testUserCanCreateGroupsWithPhotoAndWithoutCoordinates()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->make();
+        $user = User::factory()->create();
+        $group = Group::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/groups', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'name' => $group->name,

@@ -20,8 +20,8 @@ class UserCanAttachPhotoToUserTest extends TestCase
     final public function testUserCanAttachPhotoToUser()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
 
         $photo->user_uuid = $user->uuid;
         $photo->save();

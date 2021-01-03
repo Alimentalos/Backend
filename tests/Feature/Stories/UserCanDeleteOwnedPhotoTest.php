@@ -15,8 +15,8 @@ class UserCanDeleteOwnedPhotoTest extends TestCase
 
     public function testUserCanDeleteOwnedPhoto()
     {
-        $user = factory(User::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
         $photo->user_uuid = $user->uuid;
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/photos/' . $photo->uuid);

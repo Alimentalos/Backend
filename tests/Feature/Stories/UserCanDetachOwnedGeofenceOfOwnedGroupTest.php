@@ -17,9 +17,9 @@ class UserCanDetachOwnedGeofenceOfOwnedGroupTest extends TestCase
 
     final public function testUserCanDetachOwnedGeofenceOfOwnedGroup()
     {
-        $user = factory(User::class)->create();
-        $geofence = factory(Geofence::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $geofence = Geofence::factory()->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
         $group->save();
         $group->users()->attach($user, [

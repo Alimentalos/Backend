@@ -16,12 +16,12 @@ class UserCanCreateGroupCommentTest extends TestCase
 
     final public function testUserCanCreateGroupComment()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
         $group->is_public = false;
         $user->groups()->attach($group);
         $group->save();
-        $comment = factory(Comment::class)->make();
+        $comment = Comment::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/groups/' . $group->uuid . '/comments', [
             'body' => $comment->body,
             'is_public' => true,

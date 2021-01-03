@@ -17,8 +17,8 @@ class UserCanCreateGroupsWithoutPhotoTest extends TestCase
 
     final public function testUserCanCreateGroupsWithoutPhoto()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->make();
+        $user = User::factory()->create();
+        $group = Group::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/groups', [
             'name' => $group->name,
             'is_public' => 'true',

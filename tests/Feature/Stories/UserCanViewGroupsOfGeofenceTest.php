@@ -18,10 +18,10 @@ class UserCanViewGroupsOfGeofenceTest extends TestCase
 
     final public function testUserCanViewGroupOfDevice()
     {
-        $user = factory(User::class)->create();
-        $geofence = factory(Geofence::class)->create();
-        $group = factory(Group::class)->create();
-        $group->photo_uuid = factory(Photo::class)->create()->uuid;
+        $user = User::factory()->create();
+        $geofence = Geofence::factory()->create();
+        $group = Group::factory()->create();
+        $group->photo_uuid = Photo::factory()->create()->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,

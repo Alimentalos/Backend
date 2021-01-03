@@ -19,9 +19,9 @@ class UserCanCreatePetAlertsWithoutCoordinatesTest extends TestCase
     public function testUserCanCreatePetAlertsWithoutCoordinates()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $alert = factory(Alert::class)->make();
-        $pet = factory(Pet::class)->create();
+        $user = User::factory()->create();
+        $alert = Alert::factory()->make();
+        $pet = Pet::factory()->create();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/alerts', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
             'alert_type' => 'Alimentalos\\Relationships\\Models\\Pet',

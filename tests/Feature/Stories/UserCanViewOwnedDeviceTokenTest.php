@@ -15,8 +15,8 @@ class UserCanViewOwnedDeviceTokenTest extends TestCase
 
     final public function testUserCanViewOwnedDeviceToken()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
         $device->is_public = false;
         $device->user_uuid = $user->uuid;
         $device->save();

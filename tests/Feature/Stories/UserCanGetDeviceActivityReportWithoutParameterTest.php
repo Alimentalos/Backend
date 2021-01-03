@@ -18,18 +18,18 @@ class UserCanGetDeviceActivityReportWithoutParameterTest extends TestCase
 
     public function testUserCanGetDeviceActivityReportWithoutParameter()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
         $device->user_uuid = $user->uuid;
         $device->save();
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
         $device->save();
         $user->groups()->save($group);
         $group->devices()->save($device);
         $location1 = $device->locations()->create(
-            factory(Location::class)->make()->toArray()
+            Location::factory()->make()->toArray()
         );
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
         $user->groups()->save($group);
         $group->devices()->save($device);
         $location1->update([
@@ -38,7 +38,7 @@ class UserCanGetDeviceActivityReportWithoutParameterTest extends TestCase
             'device_uuid' => $device->uuid,
         ]);
         $location2 = $device->locations()->create(
-            factory(Location::class)->make()->toArray()
+            Location::factory()->make()->toArray()
         );
         $location2->update([
             'generated_at' => Carbon::now()->format('Y-m-d 13:00:00'),
@@ -46,7 +46,7 @@ class UserCanGetDeviceActivityReportWithoutParameterTest extends TestCase
             'device_uuid' => $device->uuid,
         ]);
         $location3 = $device->locations()->create(
-            factory(Location::class)->make()->toArray()
+            Location::factory()->make()->toArray()
         );
         $location3->update([
             'generated_at' => Carbon::now()->format('Y-m-d 14:00:00'),
@@ -54,7 +54,7 @@ class UserCanGetDeviceActivityReportWithoutParameterTest extends TestCase
             'device_uuid' => $device->uuid,
         ]);
         $location4 = $device->locations()->create(
-            factory(Location::class)->make()->toArray()
+            Location::factory()->make()->toArray()
         );
         $location4->update([
             'generated_at' => Carbon::now()->format('Y-m-d 14:00:00'),

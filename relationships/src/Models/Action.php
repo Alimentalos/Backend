@@ -5,12 +5,13 @@ namespace Alimentalos\Relationships\Models;
 use Alimentalos\Contracts\Resource;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Resources\ActionResource;
+use Database\Factories\ActionFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Action extends Model implements Resource
 {
-    use ActionResource;
-    use BelongsToUser;
+    use HasFactory, ActionResource, BelongsToUser;
 
     /**
      * The attributes that should be cast to native types.
@@ -41,5 +42,9 @@ class Action extends Model implements Resource
      * @var array
      */
     protected $hidden = ['id'];
-    
+
+    protected static function newFactory()
+    {
+        return ActionFactory::new();
+    }
 }

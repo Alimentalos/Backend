@@ -20,10 +20,10 @@ class UserCanUpdateOwnedAlertTest extends TestCase
     public function testUserCanUpdateOwnedAlert()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $alert = factory(Alert::class)->create();
-        $comment = factory(Comment::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $alert = Alert::factory()->create();
+        $comment = Comment::factory()->create();
+        $photo = Photo::factory()->create();
         $comment->user_uuid = $user->uuid;
         $photo->user_uuid = $user->uuid;
         $comment->save();
@@ -31,7 +31,7 @@ class UserCanUpdateOwnedAlertTest extends TestCase
         $alert->photo_uuid = $photo->uuid;
         $alert->user_uuid = $user->uuid;
         $alert->save();
-        $modified = factory(Alert::class)->make();
+        $modified = Alert::factory()->make();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/alerts/' . $alert->uuid, [
             'photo' => UploadedFile::fake()->image('photo.png'),
             'title' => $modified->title,

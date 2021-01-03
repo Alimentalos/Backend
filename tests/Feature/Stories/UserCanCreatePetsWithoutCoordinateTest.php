@@ -18,8 +18,8 @@ class UserCanCreatePetsWithoutCoordinateTest extends TestCase
     final public function testUserCanCreatePetsWithoutCoordinate()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->make();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
             'name' => $pet->name,
