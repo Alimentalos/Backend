@@ -17,8 +17,8 @@ class UserCanCreateChildUsersWithPhotoAndWithoutCoordinatesTest extends TestCase
     final public function testUserCanCreateChildUsersWithPhotoAndWithoutCoordinates()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->make();
+        $user = User::factory()->create();
+        $userB = User::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/users', [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'marker' => UploadedFile::fake()->image('dev.jpg'),

@@ -15,8 +15,8 @@ class UserCanDeleteOwnedGroupTest extends TestCase
 
     public function testUserCanDeleteOwnedGroup()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
         $group->save();
         $user->groups()->attach($group, [

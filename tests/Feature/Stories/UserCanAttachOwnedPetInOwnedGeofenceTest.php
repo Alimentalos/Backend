@@ -16,9 +16,9 @@ class UserCanAttachOwnedPetInOwnedGeofenceTest extends TestCase
 
     public function testUserCanAttachOwnedPetInOwnedGeofence()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $geofence = factory(Geofence::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
+        $geofence = Geofence::factory()->create();
         $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $pet->user_uuid = $user->uuid;

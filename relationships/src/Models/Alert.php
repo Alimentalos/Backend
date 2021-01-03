@@ -11,12 +11,15 @@ use Alimentalos\Relationships\HasPhoto;
 use Alimentalos\Relationships\Photoable;
 use Alimentalos\Relationships\Relationships\AlertRelationships;
 use Alimentalos\Relationships\Resources\AlertResource;
+use Database\Factories\AlertFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 class Alert extends Model implements Resource, CreateFromRequest, UpdateFromRequest
 {
+    use HasFactory;
     use Searchable;
     use SpatialTrait;
     use AlertResource;
@@ -88,4 +91,9 @@ class Alert extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     protected $spatialFields = [
         'location',
     ];
+
+    protected static function newFactory()
+    {
+        return AlertFactory::new();
+    }
 }

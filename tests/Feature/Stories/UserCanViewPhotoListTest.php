@@ -15,8 +15,8 @@ class UserCanViewPhotoListTest extends TestCase
 
     public function testUserCanViewPhotoList()
     {
-        $user = factory(User::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/');
         $response->assertOk();
 

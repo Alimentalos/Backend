@@ -17,8 +17,8 @@ class UserCanCreatePetsWithoutPhotoTest extends TestCase
 
     final public function testUserCanCreatePetsWithoutPhoto()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->make();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets', [
             'name' => $pet->name,
             'description' => $pet->description,

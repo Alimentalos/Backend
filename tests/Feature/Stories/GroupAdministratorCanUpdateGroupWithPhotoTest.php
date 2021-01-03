@@ -20,12 +20,12 @@ class GroupAdministratorCanUpdateGroupWithPhotoTest extends TestCase
     final public function testGroupAdministratorCanUpdateGroupWithPhoto()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
 
         $photo->user_uuid = $user->uuid;
         $photo->save();
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
         $group->photo_uuid = $photo->uuid;
         $group->save();

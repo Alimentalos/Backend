@@ -1,29 +1,27 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use Alimentalos\Relationships\Models\Device;
-use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+class DeviceFactory extends Factory {
 
-$factory->define(Device::class, function (Faker $faker) {
-    return [
-        'name' => 'Device: #' . $faker->randomNumber(5),
-        'location' => (new Point($faker->latitude(), $faker->longitude())),
-        'description' => $faker->text(200),
-        'uuid' => (string) $faker->unique()->uuid,
-        'is_public' => true,
-        'api_token' => (string) $faker->uuid,
-    ];
-});
+    protected $model = Device::class;
+
+    /**
+     * @inheritDoc
+     */
+    public function definition()
+    {
+        return [
+            'name' => 'Device: #' . $this->faker->randomNumber(5),
+            'location' => (new Point($this->faker->latitude(), $this->faker->longitude())),
+            'description' => $this->faker->text(200),
+            'uuid' => (string) $this->faker->unique()->uuid,
+            'is_public' => true,
+            'api_token' => (string) $this->faker->uuid,
+        ];
+    }
+}

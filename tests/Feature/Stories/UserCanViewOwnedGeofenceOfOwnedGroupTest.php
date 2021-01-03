@@ -16,9 +16,9 @@ class UserCanViewOwnedGeofenceOfOwnedGroupTest extends TestCase
 
     public function testUserCanViewOwnedGeofenceOfOwnedGroup()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
-        $geofence = factory(Geofence::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
+        $geofence = Geofence::factory()->create();
         $group->user_uuid = $user->uuid;
         $group->save();
         $geofence->user_uuid = $user->uuid;

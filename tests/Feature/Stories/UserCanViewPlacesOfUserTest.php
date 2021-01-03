@@ -19,8 +19,8 @@ class UserCanViewPlacesOfUserTest extends TestCase
     final public function testUserCanViewPlacesOfUser()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->create();
+        $user = User::factory()->create();
+        $place = Place::factory()->create();
         $place->user_uuid = $user->uuid;
         $place->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $user->uuid . '/places');

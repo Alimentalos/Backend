@@ -17,8 +17,8 @@ class UserCanDeleteOwnedAlertTest extends TestCase
     public function testUserCanDeleteOwnedAlert()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $alert = factory(Alert::class)->create();
+        $user = User::factory()->create();
+        $alert = Alert::factory()->create();
         $alert->user_uuid = $user->uuid;
         $alert->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/alerts/' . $alert->uuid);

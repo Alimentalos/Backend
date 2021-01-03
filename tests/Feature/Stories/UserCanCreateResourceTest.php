@@ -21,7 +21,7 @@ class UserCanCreateResourceTest extends TestCase
 
     public function testUserCanCreateResource()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         // TODO - Implement a way to test all create resource form
         $response = $this->actingAs($user)->get('/pets/create');

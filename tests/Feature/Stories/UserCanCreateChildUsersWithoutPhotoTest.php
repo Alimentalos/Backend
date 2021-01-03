@@ -16,8 +16,8 @@ class UserCanCreateChildUsersWithoutPhotoTest extends TestCase
 
     final public function testUserCanCreateChildUsersWithoutPhoto()
     {
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->make();
+        $user = User::factory()->create();
+        $userB = User::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/users', [
             'name' => $userB->name,
             'email' => $userB->email,

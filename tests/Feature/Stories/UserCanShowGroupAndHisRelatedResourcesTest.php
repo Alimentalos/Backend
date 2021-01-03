@@ -18,13 +18,13 @@ class UserCanShowGroupAndHisRelatedResourcesTest extends TestCase
 
     final public function testUserCanShowGroupAndHisRelatedResources()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
+        $photo = Photo::factory()->create();
         $photo->user_uuid = $user->uuid;
-        $comment = factory(Comment::class)->create();
-        $pet = factory(Pet::class)->create();
-        $sample = factory(Comment::class)->make();
+        $comment = Comment::factory()->create();
+        $pet = Pet::factory()->create();
+        $sample = Comment::factory()->make();
         $group->is_public = false;
         $user->groups()->attach($group);
         $pet->groups()->attach($group);

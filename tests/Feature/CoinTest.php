@@ -18,9 +18,9 @@ class CoinTest extends TestCase
 
     public function testCoinCreation()
     {
-        $coin = factory(Coin::class)->create();
-        $received_operation = factory(Operation::class)->create();
-        $used_operation = factory(Operation::class)->create();
+        $coin = Coin::factory()->create();
+        $received_operation = Operation::factory()->create();
+        $used_operation = Operation::factory()->create();
         $coin->received_operation()->associate($received_operation);
         $coin->used_operation()->associate($used_operation);
         $this->assertEquals($coin->used_operation->uuid, $used_operation->uuid);
@@ -29,9 +29,9 @@ class CoinTest extends TestCase
 
     public function testUserCanHaveCoins()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $coin = $user->coins()->create([
-            'received_operation_uuid' => factory(Operation::class)->create()->uuid,
+            'received_operation_uuid' => Operation::factory()->create()->uuid,
             'amount' => 100,
             'used' => false,
         ]);
@@ -41,11 +41,11 @@ class CoinTest extends TestCase
 
     public function testTransferAllCoinsOperation()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         MoneyRepository::inbound($user, 100);
         $amount = MoneyRepository::getMonetizerBalance($user);
         $this->assertEquals($amount, 100);
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
         $prof = MoneyRepository::inbound($group, 100, $user);
         $operation = $prof['operation'];
         $this->assertEquals($operation->receiver->uuid, $group->uuid);
@@ -56,11 +56,11 @@ class CoinTest extends TestCase
 
     public function testTransferPartOfCoinsOperation()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         MoneyRepository::inbound($user, 300);
         $amount = MoneyRepository::getMonetizerBalance($user);
         $this->assertEquals($amount, 300);
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
         $prof = MoneyRepository::inbound($group, 100, $user);
         $operation = $prof['operation'];
         $this->assertEquals($operation->receiver->uuid, $group->uuid);
@@ -71,8 +71,8 @@ class CoinTest extends TestCase
 
     public function testGroupTransferPartOfCoinsToUser()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
         MoneyRepository::inbound($group, 300);
         $amount = MoneyRepository::getMonetizerBalance($group);
         $this->assertEquals($amount, 300);
@@ -88,8 +88,8 @@ class CoinTest extends TestCase
     {
         try {
 
-            $user = factory(User::class)->create();
-            $group = factory(Group::class)->create();
+            $user = User::factory()->create();
+            $group = Group::factory()->create();
             $prof = MoneyRepository::inbound($user, 100, $group);
         } catch (\Exception $exception) {
             // Yeah sure, this user doesn't have funds.

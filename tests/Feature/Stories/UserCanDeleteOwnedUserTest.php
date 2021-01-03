@@ -14,8 +14,8 @@ class UserCanDeleteOwnedUserTest extends TestCase
 
     final public function testUserCanDeleteOwnedUser()
     {
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->create();
+        $user = User::factory()->create();
+        $userB = User::factory()->create();
         $userB->user_uuid = $user->uuid;
         $userB->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/users/' . $userB->uuid);

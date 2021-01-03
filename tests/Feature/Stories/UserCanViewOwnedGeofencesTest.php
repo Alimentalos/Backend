@@ -18,7 +18,7 @@ class UserCanViewOwnedGeofencesTest extends TestCase
 
     final public function testUserCanViewGeofences()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $geofence = new Geofence();
         $geofence->name = "Geofence";
         $geofence->user_uuid = $user->uuid;

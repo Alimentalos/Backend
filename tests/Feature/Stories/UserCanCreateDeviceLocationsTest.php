@@ -15,8 +15,8 @@ class UserCanCreateDeviceLocationsTest extends TestCase
 
     final public function testUserCanCreateDeviceLocations()
     {
-        $device = factory(Device::class)->create();
-        $location = factory(Location::class)->make();
+        $device = Device::factory()->create();
+        $location = Location::factory()->make();
         $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', [
             'api_token' => $device->api_token,
             'device' => '{}',

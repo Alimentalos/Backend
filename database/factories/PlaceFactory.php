@@ -1,16 +1,25 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use Alimentalos\Relationships\Models\Place;
-use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Place::class, function (Faker $faker) {
-    return [
-        'name' => $faker->text(6),
-        'uuid' => (string) $faker->unique()->uuid,
-        'location' => (new Point($faker->latitude(), $faker->longitude())),
-        'description' =>  $faker->text(30),
-    ];
-});
+class PlaceFactory extends Factory {
+
+    protected $model = Place::class;
+
+    /**
+     * @inheritDoc
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->text(6),
+            'uuid' => (string) $this->faker->unique()->uuid,
+            'location' => (new Point($this->faker->latitude(), $this->faker->longitude())),
+            'description' =>  $this->faker->text(30),
+        ];
+    }
+}

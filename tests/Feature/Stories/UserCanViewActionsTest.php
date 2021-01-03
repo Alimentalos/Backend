@@ -15,8 +15,8 @@ class UserCanViewActionsTest extends TestCase
 
     final public function testUserCanViewActions()
     {
-        $user = factory(User::class)->create();
-        $action = factory(Action::class)->create();
+        $user = User::factory()->create();
+        $action = Action::factory()->create();
         $action->user_uuid = $user->uuid;
         $action->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/actions/' . $action->uuid);

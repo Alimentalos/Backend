@@ -17,11 +17,11 @@ class UserCanViewGroupsOfOwnedDeviceTest extends TestCase
 
     final public function testUserCanViewGroupOfDevice()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
-        $group->photo_uuid = factory(Photo::class)->create()->uuid;
+        $group->photo_uuid = Photo::factory()->create()->uuid;
         $group->save();
         $group->users()->attach($user, [
             'is_admin' => true,

@@ -2,11 +2,15 @@
 
 namespace Alimentalos\Relationships\Models;
 
+use Database\Factories\OperationFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Operation extends Model
 {
+    use HasFactory;
+
     /**
      * In status
      *
@@ -46,5 +50,10 @@ class Operation extends Model
     public function emitter()
     {
         return $this->morphTo('emitter','emitter_type','emitter_id','uuid');
+    }
+
+    protected static function newFactory()
+    {
+        return OperationFactory::new();
     }
 }

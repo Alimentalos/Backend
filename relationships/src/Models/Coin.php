@@ -2,11 +2,15 @@
 
 namespace Alimentalos\Relationships\Models;
 
+use Database\Factories\CoinFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Coin extends Model
 {
+    use HasFactory;
+
     /**
      * This model doesn't uses increments.
      *
@@ -67,5 +71,10 @@ class Coin extends Model
     public function used_operation()
     {
         return $this->belongsTo(Operation::class, 'received_operation_uuid', 'uuid');
+    }
+
+    protected static function newFactory()
+    {
+        return CoinFactory::new();
     }
 }

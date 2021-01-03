@@ -17,9 +17,9 @@ class UserCanViewPhotoListOfPetTest extends TestCase
 
     final public function testUserCanViewPhotoListOfPet()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
+        $photo = Photo::factory()->create();
         $photo->user_uuid = $user->uuid;
         $pet->user_uuid = $user->uuid;
         $pet->photo_uuid = $photo->uuid;

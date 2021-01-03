@@ -15,10 +15,10 @@ class AdministratorCanDeleteActionTest extends TestCase
 
     final public function testAdministratorCanDeleteAction()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $user->email = 'iantorres@outlook.com';
         $user->save();
-        $action = factory(Action::class)->create();
+        $action = Action::factory()->create();
         $action->user_uuid = $user->uuid;
         $action->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/actions/' . $action->uuid);

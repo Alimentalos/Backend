@@ -3,8 +3,6 @@
 
 namespace Tests\Feature\Stories;
 
-
-use Alimentalos\Relationships\Models\Pet;
 use Alimentalos\Relationships\Models\Place;
 use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,8 +17,8 @@ class UserCanCreatePlacesWithPhotoAndWithoutCoordinatesTest extends TestCase
     final public function testUserCanCreatePlacesWithPhotoAndWithoutCoordinates()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->make();
+        $user = User::factory()->create();
+        $place = Place::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/places', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
             'marker' => UploadedFile::fake()->image('marker.jpg'),

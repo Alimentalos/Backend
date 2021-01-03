@@ -16,8 +16,8 @@ class UserCanFindNearPhotosTest extends TestCase
 
     public function testUserCanFindNearPhotos()
     {
-        $user = factory(User::class)->create();
-        $photos = factory(Photo::class, 50)->create();
+        $user = User::factory()->create();
+        $photos = Photo::factory(50)->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/near/photos', [
             'coordinates' => '5.1,5.3'
         ]);

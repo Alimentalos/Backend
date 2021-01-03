@@ -17,13 +17,13 @@ class UserCanFindDeviceTest extends TestCase
 
     final public function testUserCanFindDevice()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
         $device->is_public = true;
         $device->save();
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
         $device->locations()->saveMany(
-            factory(Location::class, 10)->create()
+           Location::factory(10)->create()
         );
         $group->devices()->attach($device->uuid);
         $group->users()->attach($user->uuid);

@@ -16,9 +16,9 @@ class UserCanViewPhotosOfPlaceTest extends TestCase
 
     final public function testUserCanViewPhotosOfPlace()
     {
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $place = Place::factory()->create();
+        $photo = Photo::factory()->create();
         $photo->places()->attach($place);
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/places/' . $place->uuid . '/photos');

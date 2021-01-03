@@ -21,9 +21,9 @@ class UserCanAttachPhotoToGeofenceTest extends TestCase
 
     final public function testUserCanAttachPhotoToGeofence()
     {
-        $user = factory(User::class)->create();
-        $geofence = factory(Geofence::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $geofence = Geofence::factory()->create();
+        $photo = Photo::factory()->create();
 
         $geofence->user_uuid = $user->uuid;
         $photo->user_uuid = $user->uuid;

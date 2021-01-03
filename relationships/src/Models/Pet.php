@@ -14,12 +14,15 @@ use Alimentalos\Relationships\Resources\PetResource;
 use Alimentalos\Relationships\Trackable;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Database\Factories\PetFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
 
 class Pet extends Authenticatable implements ReactableContract, Resource, HasColors
 {
+    use HasFactory;
     use Searchable;
     use SpatialTrait;
     use Reactable;
@@ -152,5 +155,10 @@ class Pet extends Authenticatable implements ReactableContract, Resource, HasCol
     public static function getColors()
     {
         return self::$colors;
+    }
+
+    protected static function newFactory()
+    {
+        return PetFactory::new();
     }
 }

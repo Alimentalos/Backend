@@ -16,9 +16,9 @@ class UserCanAttachOwnedGeofenceInOwnedGroupTest extends TestCase
 
     public function testUserCanAttachOwnedGeofenceInOwnedGroup()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
-        $geofence = factory(Geofence::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
+        $geofence = Geofence::factory()->create();
         $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $group->user_uuid = $user->uuid;

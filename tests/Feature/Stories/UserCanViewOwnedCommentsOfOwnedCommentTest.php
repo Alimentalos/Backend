@@ -16,8 +16,8 @@ class UserCanViewOwnedCommentsOfOwnedCommentTest extends TestCase
     final public function testUserCanViewOwnedCommentsOfOwnedComment()
     {
         $sampleCommentBody = 'Sample comment';
-        $user = factory(User::class)->create();
-        $comment = factory(Comment::class)->create();
+        $user = User::factory()->create();
+        $comment = Comment::factory()->create();
         $comment->user_uuid = $user->uuid;
         $comment->save();
         $comment->comments()->create([

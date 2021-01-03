@@ -15,8 +15,8 @@ class UserCanViewOwnedPetTokenTest extends TestCase
 
     final public function testUserCanViewOwnedPetToken()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
         $pet->is_public = false;
         $pet->user_uuid = $user->uuid;
         $pet->save();

@@ -15,8 +15,8 @@ class UserCanDeleteOwnedPlaceTest extends TestCase
 
     final public function testUserCanDeleteOwnedPlace()
     {
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->create();
+        $user = User::factory()->create();
+        $place = Place::factory()->create();
         $place->user_uuid = $user->uuid;
         $place->save();
         $response = $this->actingAs($user, 'api')->json('DELETE', '/api/places/' . $place->uuid);

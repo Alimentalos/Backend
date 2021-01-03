@@ -14,7 +14,7 @@ class UserCanViewUsersListTest extends TestCase
 
     final public function testUserCanViewUsersList()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
         $response->assertOk();
         $response->assertJsonStructure([

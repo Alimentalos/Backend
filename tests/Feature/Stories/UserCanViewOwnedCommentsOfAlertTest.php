@@ -16,9 +16,9 @@ class UserCanViewOwnedCommentsOfAlertTest extends TestCase
 
     final public function testUserCanViewOwnedCommentsOfAlert()
     {
-        $user = factory(User::class)->create();
-        $alert = factory(Alert::class)->create();
-        $comment = factory(Comment::class)->make();
+        $user = User::factory()->create();
+        $alert = Alert::factory()->create();
+        $comment = Comment::factory()->make();
         $alert->comments()->create([
             'user_uuid' => $user->uuid,
             'title' => $comment->title,

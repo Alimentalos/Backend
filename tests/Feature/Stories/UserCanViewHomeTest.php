@@ -15,14 +15,14 @@ class UserCanViewHomeTest extends TestCase
 
     public function testUserCanHome()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/home');
         $response->assertOk();
     }
 
     public function testUserRedirectedIfVisitLogin()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/login');
         $response->assertRedirect('home');
     }

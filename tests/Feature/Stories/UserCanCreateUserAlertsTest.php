@@ -19,8 +19,8 @@ class UserCanCreateUserAlertsTest extends TestCase
     public function testUserCanCreateUserAlerts()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $alert = factory(Alert::class)->make();
+        $user = User::factory()->create();
+        $alert = Alert::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/alerts', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
             'alert_type' => 'Alimentalos\\Relationships\\Models\\User',

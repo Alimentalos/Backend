@@ -1,14 +1,23 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use Alimentalos\Relationships\Models\Operation;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Operation::class, function (Faker $faker) {
-    return [
-        'uuid' => (string) $faker->unique()->uuid,
-        'status' => $faker->numberBetween(0, 1),
-        'amount' => $faker->numberBetween(1, 100000),
-    ];
-});
+class OperationFactory extends Factory {
+
+    protected $model = Operation::class;
+
+    /**
+     * @inheritDoc
+     */
+    public function definition()
+    {
+        return [
+            'uuid' => (string) $this->faker->unique()->uuid,
+            'status' => $this->faker->numberBetween(0, 1),
+            'amount' => $this->faker->numberBetween(1, 100000),
+        ];
+    }
+}

@@ -14,7 +14,7 @@ class UserCanSearchUserTest extends TestCase
 
     final public function testUserCanSearchUser()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user, 'api')->get('/users/search?q=' . $user->email);
         $this->assertTrue(true);
     }

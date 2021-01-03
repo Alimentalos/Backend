@@ -15,8 +15,8 @@ class UserCanViewPublicDeviceListTest extends TestCase
 
     final public function testUserCanViewPublicDeviceList()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
         $device->is_public = true;
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/devices');

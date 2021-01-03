@@ -15,9 +15,9 @@ class OwnerCanDetachChildUserOfGroupsTest extends TestCase
 
     public function testOwnerCanDetachChildUserOfGroups()
     {
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $userB = User::factory()->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
         $group->save();
         $userB->user_uuid = $user->uuid;

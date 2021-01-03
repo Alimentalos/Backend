@@ -15,9 +15,9 @@ class UserCanFindUserTest extends TestCase
 
     final public function testUserCanFindUser()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $user->locations()->saveMany(
-            factory(Location::class, 10)->make()
+            Location::factory(10)->make()
         );
         $responseUsers = $this->actingAs($user, 'api')->json('GET', '/api/find', [
             'api_token' => $user->api_token,

@@ -10,12 +10,15 @@ use Alimentalos\Relationships\Relationships\PhotoRelationships;
 use Alimentalos\Relationships\Resources\PhotoResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Database\Factories\PhotoFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 class Photo extends Model implements ReactableContract, Resource, UpdateFromRequest
 {
+    use HasFactory;
     use Searchable;
     use SpatialTrait;
     use Reactable;
@@ -122,6 +125,11 @@ class Photo extends Model implements ReactableContract, Resource, UpdateFromRequ
     public function getRouteKeyName()
     {
         return 'uuid';
+    }
+
+    protected static function newFactory()
+    {
+        return PhotoFactory::new();
     }
 
 }

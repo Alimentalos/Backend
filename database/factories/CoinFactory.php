@@ -1,14 +1,23 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use Alimentalos\Relationships\Models\Coin;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Coin::class, function (Faker $faker) {
-    return [
-        'uuid' => (string) $faker->unique()->uuid,
-        'amount' => $faker->numberBetween(1, 100000),
-        'used' => false,
-    ];
-});
+class CoinFactory extends Factory {
+
+    protected $model = Coin::class;
+
+    /**
+     * @inheritDoc
+     */
+    public function definition()
+    {
+        return [
+            'uuid' => (string) $this->faker->unique()->uuid,
+            'amount' => $this->faker->numberBetween(1, 100000),
+            'used' => false,
+        ];
+    }
+}

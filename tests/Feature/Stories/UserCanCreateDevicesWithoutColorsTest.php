@@ -18,10 +18,10 @@ class UserCanCreateDevicesWithoutColorsTest extends TestCase
     final public function testUserCanCreateDevicesWithoutColors()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $user->free = true;
         $user->save();
-        $device = factory(Device::class)->make();
+        $device = Device::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/devices', [
             'name' => $device->name,
             'description' => 'Blah blah blah',

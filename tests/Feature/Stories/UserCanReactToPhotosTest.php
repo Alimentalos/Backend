@@ -29,8 +29,8 @@ class UserCanReactToPhotosTest extends TestCase
             ->assertExitCode(0);
         $this->artisan('love:reaction-type-add --name=Follow --mass=1')
             ->assertExitCode(0);
-        $user = factory(User::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $photo = Photo::factory()->create();
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/photos/' . $photo->uuid . '/reactions', [
                 'type' => 'Love',

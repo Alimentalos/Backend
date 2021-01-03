@@ -18,8 +18,8 @@ class UserCanViewPlacesTest extends TestCase
 
     final public function testUserCanCreatePlaces()
     {
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->create();
+        $user = User::factory()->create();
+        $place = Place::factory()->create();
         $place->is_public = true;
         $place->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/places/');

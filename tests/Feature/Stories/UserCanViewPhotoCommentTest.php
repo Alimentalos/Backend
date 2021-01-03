@@ -17,12 +17,12 @@ class UserCanViewPhotoCommentTest extends TestCase
 
     final public function testUserCanViewPhotoComment()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
-        $photo = factory(Photo::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
+        $photo = Photo::factory()->create();
         $photo->pets()->attach($pet);
         $photo->save();
-        $comment = factory(Comment::class)->make();
+        $comment = Comment::factory()->make();
         $photo->comments()->create([
             'user_uuid' => $user->uuid,
             'body' => $comment->body,

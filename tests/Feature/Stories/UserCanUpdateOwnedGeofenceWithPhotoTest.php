@@ -19,9 +19,9 @@ class UserCanUpdateOwnedGeofenceWithPhotoTest extends TestCase
     final public function testUserCanUpdateOwnedGeofenceWithPhoto()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $geofence = factory(Geofence::class)->create();
-        $geofence->photo_uuid = factory(Photo::class)->create()->uuid;
+        $user = User::factory()->create();
+        $geofence = Geofence::factory()->create();
+        $geofence->photo_uuid = Photo::factory()->create()->uuid;
         $geofence->save();
         $geofence->user_uuid = $user->uuid;
         $old_uuid = $geofence->photo_uuid;

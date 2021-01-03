@@ -1,10 +1,7 @@
 <?php
 
-
 namespace Tests\Feature\Stories;
 
-
-use Alimentalos\Relationships\Models\Pet;
 use Alimentalos\Relationships\Models\Place;
 use Alimentalos\Relationships\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,8 +16,8 @@ class UserCanCreatePlacesWithoutPhotoTest extends TestCase
     final public function testUserCanCreatePlacesWithoutPhoto()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->make();
+        $user = User::factory()->create();
+        $place = Place::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/places', [
             'marker' => UploadedFile::fake()->image('marker.jpg'),
             'name' => $place->name,

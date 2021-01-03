@@ -16,9 +16,9 @@ class UserCanViewNonPublicDevicesTest extends TestCase
 
     final public function testUserCanViewNonPublicDevices()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
+        $group = Group::factory()->create();
         $device->is_public = false;
         $device->user_uuid = $user->uuid;
         $device->save();

@@ -15,8 +15,8 @@ class UserCanFindAndReceiveNotFoundTest extends TestCase
 
     final public function testUserCanFindAndReceiveNotFound()
     {
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
         $responsePets = $this->actingAs($user, 'api')->json('GET', '/api/find', [
             'api_token' => $user->api_token,
             'type' => 'pets',

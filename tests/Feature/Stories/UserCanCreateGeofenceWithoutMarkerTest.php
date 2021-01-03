@@ -16,7 +16,7 @@ class UserCanCreateGeofenceWithoutMarkerTest extends TestCase
 
     public function testUserCanCreateGeofenceWithoutMarker()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $user->save();
         $response = $this->actingAs($user, 'api')->post('/api/geofences', [
             'name' => 'Awesome geofence!',

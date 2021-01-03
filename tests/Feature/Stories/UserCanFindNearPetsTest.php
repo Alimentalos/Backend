@@ -15,8 +15,8 @@ class UserCanFindNearPetsTest extends TestCase
 
     public function testUserCanFindNearPets()
     {
-        $user = factory(User::class)->create();
-        $pets = factory(Pet::class, 50)->create();
+        $user = User::factory()->create();
+        $pets = Pet::factory(50)->create();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/near/pets', [
             'coordinates' => '5.1,5.3'
         ]);

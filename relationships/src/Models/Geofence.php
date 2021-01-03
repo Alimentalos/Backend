@@ -14,12 +14,15 @@ use Alimentalos\Relationships\Relationships\GeofenceRelationships;
 use Alimentalos\Relationships\Resources\GeofenceResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Database\Factories\GeofenceFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 class Geofence extends Model implements ReactableContract, Resource, CreateFromRequest, UpdateFromRequest, HasColors
 {
+    use HasFactory;
     use Searchable;
     use SpatialTrait;
     use Reactable;
@@ -143,5 +146,9 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
     public static function getColors()
     {
         return self::$colors;
+    }
+    protected static function newFactory()
+    {
+        return GeofenceFactory::new();
     }
 }

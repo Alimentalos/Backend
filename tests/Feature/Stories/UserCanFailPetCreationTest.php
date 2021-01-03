@@ -18,8 +18,8 @@ class UserCanFailPetCreationTest extends TestCase
     final public function testUserCanFailPetCreation()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->make();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->make();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/pets', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
             'description' => $pet->description,

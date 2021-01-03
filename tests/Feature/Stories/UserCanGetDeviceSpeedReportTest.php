@@ -16,8 +16,8 @@ class UserCanGetDeviceSpeedReportTest extends TestCase
 
     public function testUserCanGetDeviceSpeedReport()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
         $device->user_uuid = $user->uuid;
         $device->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/reports', [

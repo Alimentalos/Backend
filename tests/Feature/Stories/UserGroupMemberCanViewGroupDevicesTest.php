@@ -17,13 +17,13 @@ class UserGroupMemberCanViewGroupDevicesTest extends TestCase
 
     final public function testUserGroupMemberCanViewGroupDevices()
     {
-        $user = factory(User::class)->create();
-        $userB = factory(User::class)->create();
-        $userB->photo_uuid = factory(Photo::class)->create()->uuid;
+        $user = User::factory()->create();
+        $userB = User::factory()->create();
+        $userB->photo_uuid = Photo::factory()->create()->uuid;
         $userB->save();
-        $group = factory(Group::class)->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
-        $device = factory(Device::class)->create();
+        $device = Device::factory()->create();
         $device->user_uuid = $userB->uuid;
         $device->save();
         $group->save();

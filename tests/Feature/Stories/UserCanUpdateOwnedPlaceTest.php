@@ -15,8 +15,8 @@ class UserCanUpdateOwnedPlaceTest extends TestCase
 
     final public function testUserCanUpdateOwnedPlace()
     {
-        $user = factory(User::class)->create();
-        $place = factory(Place::class)->create();
+        $user = User::factory()->create();
+        $place = Place::factory()->create();
         $place->user_uuid = $user->uuid;
         $place->save();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/places/' . $place->uuid, [

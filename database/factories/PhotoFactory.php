@@ -1,17 +1,26 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use Alimentalos\Relationships\Models\Photo;
-use Faker\Generator as Faker;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Photo::class, function (Faker $faker) {
-    return [
-        'uuid' => (string) $faker->unique()->uuid,
-        'ext' => '.png',
-        'photo_url' => config('storage.path') . (string) $faker->uuid . '.png',
-        'location' => (new Point($faker->latitude(), $faker->longitude())),
-        'is_public' => true,
-    ];
-});
+class PhotoFactory extends Factory {
+
+    protected $model = Photo::class;
+
+    /**
+     * @inheritDoc
+     */
+    public function definition()
+    {
+        return [
+            'uuid' => (string) $this->faker->unique()->uuid,
+            'ext' => '.png',
+            'photo_url' => config('storage.path') . (string) $this->faker->uuid . '.png',
+            'location' => (new Point($this->faker->latitude(), $this->faker->longitude())),
+            'is_public' => true,
+        ];
+    }
+}

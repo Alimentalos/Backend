@@ -16,11 +16,11 @@ class UserCanViewPhotosOfOwnedGroupTest extends TestCase
 
     final public function testUserCanViewPhotosOfOwnedGroup()
     {
-        $user = factory(User::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $group = Group::factory()->create();
         $group->user_uuid = $user->uuid;
         $group->save();
-        $photo = factory(Photo::class)->create();
+        $photo = Photo::factory()->create();
         $photo->groups()->attach($group->uuid);
         $photo->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups/' . $group->uuid . '/photos');

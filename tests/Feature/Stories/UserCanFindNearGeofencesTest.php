@@ -18,7 +18,7 @@ class UserCanFindNearGeofencesTest extends TestCase
 
     public function testUserCanFindNearGeofences()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $nearGeofence = new Geofence();
         $nearGeofence->uuid = uuid();
         $nearGeofence->name = "Near Geofence";

@@ -17,7 +17,7 @@ class UserCanUpdateHisProfileUsingPhotoTest extends TestCase
     final public function testUserCanUpdateHisProfileUsingPhoto()
     {
         Storage::fake('public');
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $response = $this->actingAs($user, 'api')->json('PUT', '/api/users/' . $user->uuid, [
             'photo' => UploadedFile::fake()->image('photo50.jpg'),
             'name' => 'New name',

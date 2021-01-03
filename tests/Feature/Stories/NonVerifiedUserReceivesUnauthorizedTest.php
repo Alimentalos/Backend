@@ -16,9 +16,9 @@ class NonVerifiedUserReceivesUnauthorizedTest extends TestCase
 
     final public function testNonVerifiedUserReceivesUnauthorized()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $group = factory(Group::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
+        $group = Group::factory()->create();
         $group->devices()->attach($device->uuid);
         $group->users()->attach($user->uuid);
         $user->email_verified_at = null;

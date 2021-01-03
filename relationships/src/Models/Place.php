@@ -11,12 +11,15 @@ use Alimentalos\Relationships\Photoable;
 use Alimentalos\Relationships\Resources\PlaceResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Database\Factories\PlaceFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 class Place extends Model implements ReactableContract, Resource, HasColors
 {
+    use HasFactory;
     use Searchable;
     use PlaceResource;
     use SpatialTrait;
@@ -150,5 +153,10 @@ class Place extends Model implements ReactableContract, Resource, HasColors
     public static function getColors()
     {
         return self::$colors;
+    }
+
+    protected static function newFactory()
+    {
+        return PlaceFactory::new();
     }
 }

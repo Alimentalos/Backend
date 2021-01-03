@@ -16,9 +16,9 @@ class UserCanViewOwnedGeofencesOfOwnedDeviceTest extends TestCase
 
     final public function testUserCanViewOwnedGeofencesOfOwnedDevice()
     {
-        $user = factory(User::class)->create();
-        $device = factory(Device::class)->create();
-        $geofence = factory(Geofence::class)->create();
+        $user = User::factory()->create();
+        $device = Device::factory()->create();
+        $geofence = Geofence::factory()->create();
         $geofence->user_uuid = $user->uuid;
         $geofence->save();
         $device->user_uuid = $user->uuid;

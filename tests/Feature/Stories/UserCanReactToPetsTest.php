@@ -29,8 +29,8 @@ class UserCanReactToPetsTest extends TestCase
             ->assertExitCode(0);
         $this->artisan('love:reaction-type-add --name=Follow --mass=1')
             ->assertExitCode(0);
-        $user = factory(User::class)->create();
-        $pet = factory(Pet::class)->create();
+        $user = User::factory()->create();
+        $pet = Pet::factory()->create();
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/pets/' . $pet->uuid . '/reactions', [
                 'type' => 'Love',
