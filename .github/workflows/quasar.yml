@@ -1,7 +1,8 @@
 name: Cordova
 on: [push]
 defaults:
-  working-directory: cordova
+  run:
+    working-directory: ./cordova
 jobs:
   build:
     name: Cordova
