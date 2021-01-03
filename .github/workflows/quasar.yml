@@ -1,19 +1,13 @@
-name: Cordova
+name: Quasar
 on: [push]
 jobs:
   build:
-    name: Cordova
+    name: Quasar
     runs-on: ubuntu-latest
     steps:
-      - run: cd ./cordova
-      - uses: actions/checkout@v1
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: global add @quasar/cli
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install # will run `yarn install` command
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build # will run `yarn build` command
-      - uses: borales/actions-yarn@v2.0.0
+      - name: Install Quasar
+        run: npm install -g @quasar/cli
+      - name: Install Quasar
+        run: cd cordova && npm install
+      - name: Run Quasar build
+        run: cd cordova && npm run build
