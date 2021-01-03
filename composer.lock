@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aab619377216b6a110eb66400c247c92",
+    "content-hash": "7a12ac88e40f729d14e0c791d45f2698",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -79,140 +79,6 @@
                 "source": "https://github.com/algolia/algoliasearch-client-php/tree/2.7.3"
             },
             "time": "2020-12-22T11:27:03+00:00"
-        },
-        {
-            "name": "alimentalos/contracts",
-            "version": "dev-fix-register",
-            "dist": {
-                "type": "path",
-                "url": "./contracts",
-                "reference": "7b601013e7de19992217fe19e91c91825ea44796"
-            },
-            "require": {
-                "php": "^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Alimentalos\\Contracts\\ContractsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Alimentalos\\Contracts\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ian Torres",
-                    "email": "iantorres@outlook.com"
-                }
-            ],
-            "description": "Laravel collection of contracts.",
-            "keywords": [
-                "contracts",
-                "laravel",
-                "package"
-            ],
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "alimentalos/relationships",
-            "version": "dev-fix-register",
-            "dist": {
-                "type": "path",
-                "url": "./relationships",
-                "reference": "a523ddbbd7a0730f8683febfda65b3b3a00af2a4"
-            },
-            "require": {
-                "alimentalos/contracts": "*",
-                "grimzy/laravel-mysql-spatial": "^4.0",
-                "php": "^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Alimentalos\\Relationships\\RelationshipsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Alimentalos\\Relationships\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ian Torres",
-                    "email": "iantorres@outlook.com"
-                }
-            ],
-            "description": "Laravel package for common relationships.",
-            "keywords": [
-                "common",
-                "laravel",
-                "package",
-                "relationships"
-            ],
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "alimentalos/tools",
-            "version": "dev-fix-register",
-            "dist": {
-                "type": "path",
-                "url": "./tools",
-                "reference": "af200e3b113f792490a6d21139b53ddf12a349db"
-            },
-            "require": {
-                "alimentalos/relationships": "*",
-                "grimzy/laravel-mysql-spatial": "^4.0",
-                "php": "^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Alimentalos\\Tools\\ToolsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Alimentalos\\Tools\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ian Torres",
-                    "email": "iantorres@outlook.com"
-                }
-            ],
-            "description": "Laravel package with tools.",
-            "keywords": [
-                "laravel",
-                "package",
-                "tools"
-            ],
-            "transport-options": {
-                "relative": true
-            }
         },
         {
             "name": "asm89/stack-cors",
