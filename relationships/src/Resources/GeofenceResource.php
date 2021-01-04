@@ -14,7 +14,16 @@ trait GeofenceResource
      */
     public function fields() : array
     {
-        return [];
+        return [
+            'uuid',
+            'user_uuid',
+            'photo_uuid',
+            'name',
+            'description',
+            'is_public',
+            'created_at',
+            'updated_at',
+        ];
     }
 
     /**

@@ -50,6 +50,7 @@ class Comment extends Model implements ReactableContract, Resource, UpdateFromRe
 	 * @var array
 	 */
 	protected $casts = [
+	    'love_reactant_id' => 'integer',
 	];
 
     protected static function newFactory()

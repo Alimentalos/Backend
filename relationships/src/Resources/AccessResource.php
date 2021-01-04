@@ -21,6 +21,7 @@ trait AccessResource
 
     /**
      * @return array
+     * @codeCoverageIgnore
      */
     public function fields() : array
     {

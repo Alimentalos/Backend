@@ -40,17 +40,17 @@ return [
     |
     */
 	'viewable' => [
-		'places',
-		'groups',
-		'locations',
-		'actions',
-		'geofences',
-		'pets',
-		'devices',
-		'users',
-		'photos',
-		'comments',
-		'alerts'
+		'places' => \Alimentalos\Relationships\Models\Place::class,
+		'groups' => \Alimentalos\Relationships\Models\Group::class,
+		'locations' => \Alimentalos\Relationships\Models\Location::class,
+		'actions' => \Alimentalos\Relationships\Models\Action::class,
+		'geofences' => \Alimentalos\Relationships\Models\Geofence::class,
+		'pets' => \Alimentalos\Relationships\Models\Pet::class,
+		'devices' => \Alimentalos\Relationships\Models\Device::class,
+		'users' => \Alimentalos\Relationships\Models\User::class,
+		'photos' => \Alimentalos\Relationships\Models\Photo::class,
+		'comments' => \Alimentalos\Relationships\Models\Comment::class,
+		'alerts' => \Alimentalos\Relationships\Models\Alert::class
 	],
 	/*
     |--------------------------------------------------------------------------

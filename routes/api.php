@@ -72,9 +72,9 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("api.{$resource}.store");
     }
 
-    foreach(config('resources.viewable') as $resource) {
-        Route::get("/{$resource}/{resource}", 'Resource\ShowController')
-            ->name("api.{$resource}.show");
+    foreach(config('resources.viewable') as $key => $resource) {
+        Route::get("/{$key}/{resource}", 'Resource\ShowController')
+            ->name("api.{$key}.show");
     }
 
     foreach(config('resources.modifiable') as $resource) {

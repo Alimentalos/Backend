@@ -9,6 +9,7 @@ trait LocationResource
 {
     /**
      * @return array
+     * @codeCoverageIgnore
      */
     public function fields() : array
     {

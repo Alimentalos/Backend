@@ -22,10 +22,16 @@ trait ActionResource
 
     /**
      * @return array
+     * @codeCoverageIgnore
      */
     public function fields() : array
     {
-        return [];
+        return [
+            'referenced_uuid',
+            'user_uuid',
+            'created_at',
+            'updated_at',
+        ];
     }
 
     /**
