@@ -168,22 +168,6 @@ trait GeofenceProcedure
     }
 
     /**
-     * Create sample polygon.
-     *
-     * @return array
-     */
-    public function createSamplePolygon()
-    {
-        return [new LineString([
-            new Point(0, 0),
-            new Point(0, 5),
-            new Point(5, 5),
-            new Point(5, 0),
-            new Point(0, 0)
-        ])];
-    }
-
-    /**
      * Create geofence instance.
      *
      * @return Geofence
