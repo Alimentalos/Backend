@@ -126,9 +126,12 @@ class User extends Authenticatable implements MustVerifyEmail, ReacterableContra
      */
     protected $casts = [
         'trial_ends_at' => 'datetime',
+        'email_verified_at' => 'datetime',
         'uses_two_factor_auth' => 'boolean',
         'free' => 'boolean',
         'is_public' => 'boolean',
+        'love_reactant_id' => 'integer',
+        'love_reacter_id' => 'integer',
     ];
 
     /**

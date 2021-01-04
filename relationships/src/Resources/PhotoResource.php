@@ -9,6 +9,23 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 trait PhotoResource
 {
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [
+            'uuid',
+            'user_uuid',
+            'ext',
+            'photo_url',
+            'is_public',
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+        ];
+    }
+
+    /**
      * Update photo via request.
      *
      * @return Photo

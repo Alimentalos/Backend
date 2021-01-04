@@ -128,6 +128,26 @@ if (! function_exists('create_default_polygon')) {
         ])]);
     }
 }
+
+if (! function_exists('default_pagination_fields')) {
+    function default_pagination_fields()
+    {
+        return [
+            'current_page',
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+        ];
+    }
+}
+
 if (! function_exists('create_location_payload')) {
     function create_location_payload($location, $latitude, $longitude)
     {

@@ -10,6 +10,27 @@ use Illuminate\Validation\Rule;
 trait PetResource
 {
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [
+            'uuid',
+            'user_uuid',
+            'photo_uuid',
+            'name',
+            'description',
+            'hair_color',
+            'left_eye_color',
+            'size',
+            'born_at',
+            'is_public',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    /**
      * Update pet via request.
      *
      * @return Pet

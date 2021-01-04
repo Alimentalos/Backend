@@ -25,6 +25,20 @@ trait AlertResource
     ];
 
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [
+            'uuid',
+            'location',
+            'user',
+            'photo',
+            'alert'
+        ];
+    }
+
+    /**
      * Get available alerts reactions.
      *
      * @codeCoverageIgnore

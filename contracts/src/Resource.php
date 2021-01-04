@@ -7,6 +7,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface Resource
 {
     /**
+     * @return array
+     */
+    public function fields() : array;
+
+    /**
      * Get resource relationships attribute using lazy loading.
      *
      * @return array

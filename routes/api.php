@@ -54,11 +54,12 @@ Route::middleware(['api'])->group(function () {
  */
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
-    foreach(config('resources.listable') as $resource) {
-        Route::get("/{$resource}", 'Resource\IndexController')
-            ->name("api.{$resource}.index");
+    foreach(config('resources.listable') as $key => $resource) {
+        Route::get("/{$key}", 'Resource\IndexController')
+            ->name("api.{$key}.index");
+
         Route::get("/{resource}/search", 'Resource\SearchController')
-            ->name("api.{$resource}.search");
+            ->name("api.{$key}.search");
     }
 
     foreach(config('resources.tokenized') as $resource) {

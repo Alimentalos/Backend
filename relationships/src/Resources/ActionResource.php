@@ -21,6 +21,14 @@ trait ActionResource
     ];
 
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [];
+    }
+
+    /**
      * Get available actions reactions.
      *
      * @codeCoverageIgnore

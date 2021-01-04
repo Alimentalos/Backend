@@ -9,6 +9,27 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 trait PlaceResource
 {
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [
+            'uuid',
+            'location',
+            'user_uuid',
+            'photo_uuid',
+            'photo_url',
+            'is_public',
+            'name',
+            'description',
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+            'photo',
+        ];
+    }
+
+    /**
      * Update pet via request.
      *
      * @return Place

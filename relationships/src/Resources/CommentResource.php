@@ -23,6 +23,25 @@ trait CommentResource
     ];
 
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [
+            'uuid',
+            'user_uuid',
+            'title',
+            'body',
+            'commentable_type',
+            'commentable_id',
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+            'commentable',
+        ];
+    }
+
+    /**
      * Get available comments reactions.
      *
      * @return string

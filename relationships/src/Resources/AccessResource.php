@@ -20,6 +20,14 @@ trait AccessResource
     ];
 
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [];
+    }
+
+    /**
      * Get available accesses reactions.
      *
      * @codeCoverageIgnore

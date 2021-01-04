@@ -8,15 +8,15 @@ return [
     |
     */
 	'listable' => [
-		'places',
-		'users',
-		'groups',
-		'geofences',
-		'pets',
-		'devices',
-		'photos',
-		'actions',
-		'alerts'
+		'places' => \Alimentalos\Relationships\Models\Place::class,
+		'users' => \Alimentalos\Relationships\Models\User::class,
+		'groups' => \Alimentalos\Relationships\Models\Group::class,
+		'geofences' => \Alimentalos\Relationships\Models\Geofence::class,
+		'pets' => \Alimentalos\Relationships\Models\Pet::class,
+		'devices' => \Alimentalos\Relationships\Models\Device::class,
+		'photos' => \Alimentalos\Relationships\Models\Photo::class,
+		'actions' => \Alimentalos\Relationships\Models\Action::class,
+		'alerts' => \Alimentalos\Relationships\Models\Alert::class
 	],
 	/*
     |--------------------------------------------------------------------------

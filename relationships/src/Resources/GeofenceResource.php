@@ -10,6 +10,14 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 trait GeofenceResource
 {
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [];
+    }
+
+    /**
      * Update model via request.
      *
      * @return Geofence
