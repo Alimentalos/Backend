@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Contracts\Resource;
 use Alimentalos\Relationships\Relationships\AccessRelationships;
-use Alimentalos\Relationships\Resources\AccessResource;
+use App\Resources\AccessResource;
 use Illuminate\Database\Eloquent\Model;
 
 class Access extends Model implements Resource

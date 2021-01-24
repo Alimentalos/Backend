@@ -9,7 +9,7 @@ use App\Contracts\UpdateFromRequest;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Geofenceable;
 use Alimentalos\Relationships\Groupable;
-use Alimentalos\Relationships\Resources\DeviceResource;
+use App\Resources\DeviceResource;
 use Alimentalos\Relationships\Trackable;
 use Database\Factories\DeviceFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;

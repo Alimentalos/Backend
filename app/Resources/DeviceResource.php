@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Resources;
+namespace App\Resources;
 
 use App\Models\Device;
 use Alimentalos\Relationships\Repositories\DevicesRepository;

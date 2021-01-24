@@ -11,7 +11,7 @@ use Alimentalos\Relationships\Groupable;
 use Alimentalos\Relationships\HasPhoto;
 use Alimentalos\Relationships\Photoable;
 use Alimentalos\Relationships\Relationships\GeofenceRelationships;
-use Alimentalos\Relationships\Resources\GeofenceResource;
+use App\Resources\GeofenceResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Database\Factories\GeofenceFactory;

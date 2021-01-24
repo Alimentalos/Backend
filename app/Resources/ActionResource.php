@@ -1,12 +1,13 @@
 <?php
 
+namespace App\Resources;
 
-namespace Alimentalos\Relationships\Resources;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-trait AccessResource
+trait ActionResource
 {
     /**
-     * Current accesses reactions
+     * Current actions reactions
      *
      * @var string[]
      */
@@ -25,11 +26,16 @@ trait AccessResource
      */
     public function fields() : array
     {
-        return [];
+        return [
+            'referenced_uuid',
+            'user_uuid',
+            'created_at',
+            'updated_at',
+        ];
     }
 
     /**
-     * Get available accesses reactions.
+     * Get available actions reactions.
      *
      * @codeCoverageIgnore
      * @return string
@@ -40,7 +46,7 @@ trait AccessResource
     }
 
     /**
-     * Update accesses validation rules.
+     * Update action validation rules.
      *
      * @return array
      * @codeCoverageIgnore
@@ -51,7 +57,7 @@ trait AccessResource
     }
 
     /**
-     * Store accesses validation rules.
+     * Store action validation rules.
      *
      * @return array
      * @codeCoverageIgnore
@@ -62,23 +68,22 @@ trait AccessResource
     }
 
     /**
-     * Get access relationships using lazy loading.
+     * Get action relationships using lazy loading.
      *
      * @return array
      */
     public function getLazyRelationshipsAttribute()
     {
-        return ['accessible', 'first_location', 'last_location', 'geofence'];
+        return ['user'];
     }
 
     /**
-     * Get access instances.
+     * Get action instances.
      *
-     * @return array
-     * @codeCoverageIgnore
+     * @return LengthAwarePaginator
      */
     public function getInstances()
     {
-        return [];
+        return authenticated()->is_child ? actions()->getChildActions() : actions()->getOwnerActions();
     }
 }

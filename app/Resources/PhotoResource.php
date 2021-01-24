@@ -1,12 +1,12 @@
 <?php
 
-namespace Alimentalos\Relationships\Resources;
+namespace App\Resources;
 
-use App\Models\Place;
+use App\Models\Photo;
 use Alimentalos\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-trait PlaceResource
+trait PhotoResource
 {
     /**
      * @return array
@@ -15,42 +15,28 @@ trait PlaceResource
     {
         return [
             'uuid',
-            'location',
             'user_uuid',
-            'photo_uuid',
+            'ext',
             'photo_url',
             'is_public',
-            'name',
-            'description',
             'created_at',
             'updated_at',
             'love_reactant_id',
-            'photo',
         ];
     }
 
     /**
-     * Update pet via request.
+     * Update photo via request.
      *
-     * @return Place
+     * @return Photo
      */
     public function updateViaRequest()
     {
-        return places()->update($this);
+        return photos()->update($this);
     }
 
     /**
-     * Create pet via request.
-     *
-     * @return Place
-     */
-    public static function createViaRequest()
-    {
-        return places()->create();
-    }
-
-    /**
-     * Get available pet reactions.
+     * Get available photo reactions.
      *
      * @return string
      */
@@ -60,50 +46,46 @@ trait PlaceResource
     }
 
     /**
-     * Update pet validation rules.
+     * Update photo validation rules.
      *
      * @return array
      */
     public function updateRules()
     {
-        return [
-            'coordinates' => [new Coordinate()],
-        ];
+        return [];
     }
 
     /**
-     * Store pet validation rules.
+     * Store photo validation rules.
      *
      * @return array
      */
     public function storeRules()
     {
         return [
-            'name' => 'required',
+            'photo' => 'required',
             'is_public' => 'required|boolean',
             'coordinates' => [new Coordinate()],
-            'color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'marker_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
         ];
     }
 
     /**
-     * Get pet relationships using lazy loading.
+     * Get photo relationships using lazy loading.
      *
      * @return array
      */
     public function getLazyRelationshipsAttribute()
     {
-        return ['photo', 'user'];
+        return ['user', 'comment'];
     }
 
     /**
-     * Get pet instances.
+     * Get photo instances.
      *
      * @return LengthAwarePaginator
      */
     public function getInstances()
     {
-        return Place::latest()->paginate(20);
+        return Photo::latest()->paginate(20);
     }
 }

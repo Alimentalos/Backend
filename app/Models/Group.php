@@ -13,7 +13,7 @@ use Alimentalos\Relationships\HasCoin;
 use Alimentalos\Relationships\HasPhoto;
 use Alimentalos\Relationships\Photoable;
 use Alimentalos\Relationships\Relationships\GroupRelationships;
-use Alimentalos\Relationships\Resources\GroupResource;
+use App\Resources\GroupResource;
 use Database\Factories\GroupFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

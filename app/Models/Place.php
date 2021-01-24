@@ -8,7 +8,7 @@ use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Commentable;
 use Alimentalos\Relationships\HasPhoto;
 use Alimentalos\Relationships\Photoable;
-use Alimentalos\Relationships\Resources\PlaceResource;
+use App\Resources\PlaceResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Database\Factories\PlaceFactory;

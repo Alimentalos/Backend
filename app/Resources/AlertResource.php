@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Alimentalos\Relationships\Resources;
+namespace App\Resources;
 
 use App\Models\Alert;
 use Alimentalos\Relationships\Rules\Coordinate;

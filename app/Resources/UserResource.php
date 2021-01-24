@@ -1,12 +1,12 @@
 <?php
 
-namespace Alimentalos\Relationships\Resources;
+namespace App\Resources;
 
-use App\Models\Group;
+use App\Models\User;
 use Alimentalos\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-trait GroupResource
+trait UserResource
 {
     /**
      * @return array
@@ -18,39 +18,47 @@ trait GroupResource
             'user_uuid',
             'photo_uuid',
             'name',
-            'description',
-            'is_public',
+            'email',
+            'email_verified_at',
+            'free',
             'photo_url',
+            'location',
+            'is_public',
             'created_at',
             'updated_at',
+            'love_reactant_id',
+            'love_reacter_id',
+            'is_admin',
+            'is_child',
+            'user',
+            'photo',
         ];
     }
 
     /**
-     * Update group via request.
+     * Update user via request.
      *
-     * @return Group
+     * @return User
      */
     public function updateViaRequest()
     {
-        return groups()->update($this);
+        return users()->update($this);
     }
 
     /**
-     * Create group via request.
+     * Create user via request.
      *
-     * @return Group
+     * @return User
      */
     public function createViaRequest()
     {
-        return groups()->create();
+        return users()->create();
     }
 
     /**
-     * Get available group reactions.
+     * Get available user reactions.
      *
      * @return string
-     * @codeCoverageIgnore
      */
     public function getAvailableReactions()
     {
@@ -58,7 +66,7 @@ trait GroupResource
     }
 
     /**
-     * Update group validation rules.
+     * Update user validation rules.
      *
      * @return array
      */
@@ -70,7 +78,7 @@ trait GroupResource
     }
 
     /**
-     * Store group validation rules.
+     * Store user validation rules.
      *
      * @return array
      */
@@ -78,21 +86,20 @@ trait GroupResource
     {
         return [
             'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|confirmed|min:8',
             'is_public' => 'required|boolean',
-            'color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'background_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'border_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'fill_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'text_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'user_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'administrator_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'owner_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'coordinates' => [new Coordinate()],
+            'color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'border_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'background_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'text_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'marker_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
         ];
     }
 
     /**
-     * Get group relationships using lady loading.
+     * Get user relationships using lazy loading.
      *
      * @return array
      */
@@ -102,12 +109,35 @@ trait GroupResource
     }
 
     /**
-     * Get group instances.
+     * Get user instances.
      *
      * @return LengthAwarePaginator
      */
     public function getInstances()
     {
-        return authenticated()->is_admin ? groups()->all() : groups()->index();
+        if (authenticated()->is_admin)
+            return users()->all();
+
+        return users()->index();
+    }
+
+    /**
+     * Get is_admin custom attribute
+     *
+     * @return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return admin()->isAdmin($this);
+    }
+
+    /**
+     * Get is_child custom attribute.
+     *
+     * @return bool
+     */
+    public function getIsChildAttribute()
+    {
+        return !is_null($this->user_uuid);
     }
 }

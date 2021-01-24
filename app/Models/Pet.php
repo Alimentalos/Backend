@@ -10,7 +10,7 @@ use Alimentalos\Relationships\Geofenceable;
 use Alimentalos\Relationships\Groupable;
 use Alimentalos\Relationships\HasPhoto;
 use Alimentalos\Relationships\Photoable;
-use Alimentalos\Relationships\Resources\PetResource;
+use App\Resources\PetResource;
 use Alimentalos\Relationships\Trackable;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;

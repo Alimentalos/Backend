@@ -7,7 +7,7 @@ use App\Contracts\UpdateFromRequest;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Commentable;
 use Alimentalos\Relationships\Relationships\PhotoRelationships;
-use Alimentalos\Relationships\Resources\PhotoResource;
+use App\Resources\PhotoResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Database\Factories\PhotoFactory;

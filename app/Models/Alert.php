@@ -10,7 +10,7 @@ use Alimentalos\Relationships\Commentable;
 use Alimentalos\Relationships\HasPhoto;
 use Alimentalos\Relationships\Photoable;
 use Alimentalos\Relationships\Relationships\AlertRelationships;
-use Alimentalos\Relationships\Resources\AlertResource;
+use App\Resources\AlertResource;
 use Database\Factories\AlertFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

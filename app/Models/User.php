@@ -12,7 +12,7 @@ use Alimentalos\Relationships\Geofenceable;
 use Alimentalos\Relationships\Groupable;
 use Alimentalos\Relationships\Photoable;
 use Alimentalos\Relationships\Relationships\UserRelationships;
-use Alimentalos\Relationships\Resources\UserResource;
+use App\Resources\UserResource;
 use Alimentalos\Relationships\Trackable;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;

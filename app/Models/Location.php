@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Contracts\Resource;
 use Alimentalos\Relationships\Relationships\LocationRelationships;
-use Alimentalos\Relationships\Resources\LocationResource;
+use App\Resources\LocationResource;
 use Database\Factories\LocationFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

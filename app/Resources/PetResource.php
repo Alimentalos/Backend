@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Resources;
+namespace App\Resources;
 
 use App\Models\Pet;
 use Alimentalos\Relationships\Rules\Coordinate;

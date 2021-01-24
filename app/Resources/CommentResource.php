@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Alimentalos\Relationships\Resources;
+namespace App\Resources;
 
 use App\Models\Comment;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Alimentalos\Relationships\Resources;
+namespace App\Resources;
 
-use App\Models\User;
+use App\Models\Group;
 use Alimentalos\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-trait UserResource
+trait GroupResource
 {
     /**
      * @return array
@@ -18,47 +18,39 @@ trait UserResource
             'user_uuid',
             'photo_uuid',
             'name',
-            'email',
-            'email_verified_at',
-            'free',
-            'photo_url',
-            'location',
+            'description',
             'is_public',
+            'photo_url',
             'created_at',
             'updated_at',
-            'love_reactant_id',
-            'love_reacter_id',
-            'is_admin',
-            'is_child',
-            'user',
-            'photo',
         ];
     }
 
     /**
-     * Update user via request.
+     * Update group via request.
      *
-     * @return User
+     * @return Group
      */
     public function updateViaRequest()
     {
-        return users()->update($this);
+        return groups()->update($this);
     }
 
     /**
-     * Create user via request.
+     * Create group via request.
      *
-     * @return User
+     * @return Group
      */
     public function createViaRequest()
     {
-        return users()->create();
+        return groups()->create();
     }
 
     /**
-     * Get available user reactions.
+     * Get available group reactions.
      *
      * @return string
+     * @codeCoverageIgnore
      */
     public function getAvailableReactions()
     {
@@ -66,7 +58,7 @@ trait UserResource
     }
 
     /**
-     * Update user validation rules.
+     * Update group validation rules.
      *
      * @return array
      */
@@ -78,7 +70,7 @@ trait UserResource
     }
 
     /**
-     * Store user validation rules.
+     * Store group validation rules.
      *
      * @return array
      */
@@ -86,20 +78,21 @@ trait UserResource
     {
         return [
             'name' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|confirmed|min:8',
             'is_public' => 'required|boolean',
-            'coordinates' => [new Coordinate()],
             'color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'border_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'background_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'border_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'fill_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
             'text_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
-            'marker_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'user_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'administrator_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'owner_color' => 'regex:/#([a-fA-F0-9]{3}){1,2}\b/',
+            'coordinates' => [new Coordinate()],
         ];
     }
 
     /**
-     * Get user relationships using lazy loading.
+     * Get group relationships using lady loading.
      *
      * @return array
      */
@@ -109,35 +102,12 @@ trait UserResource
     }
 
     /**
-     * Get user instances.
+     * Get group instances.
      *
      * @return LengthAwarePaginator
      */
     public function getInstances()
     {
-        if (authenticated()->is_admin)
-            return users()->all();
-
-        return users()->index();
-    }
-
-    /**
-     * Get is_admin custom attribute
-     *
-     * @return bool
-     */
-    public function getIsAdminAttribute()
-    {
-        return admin()->isAdmin($this);
-    }
-
-    /**
-     * Get is_child custom attribute.
-     *
-     * @return bool
-     */
-    public function getIsChildAttribute()
-    {
-        return !is_null($this->user_uuid);
+        return authenticated()->is_admin ? groups()->all() : groups()->index();
     }
 }

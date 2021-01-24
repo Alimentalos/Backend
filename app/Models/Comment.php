@@ -7,7 +7,7 @@ use App\Contracts\UpdateFromRequest;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Commentable;
 use Alimentalos\Relationships\Relationships\CommentRelationships;
-use Alimentalos\Relationships\Resources\CommentResource;
+use App\Resources\CommentResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Database\Factories\CommentFactory;

@@ -1,12 +1,24 @@
 <?php
 
-namespace Alimentalos\Relationships\Resources;
 
-use App\Models\Location;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+namespace App\Resources;
 
-trait LocationResource
+trait AccessResource
 {
+    /**
+     * Current accesses reactions
+     *
+     * @var string[]
+     */
+    protected $currentReactions = [
+        'Love',
+        'Pray',
+        'Like',
+        'Dislike',
+        'Sad',
+        'Hate'
+    ];
+
     /**
      * @return array
      * @codeCoverageIgnore
@@ -17,18 +29,18 @@ trait LocationResource
     }
 
     /**
-     * Get available location reactions.
+     * Get available accesses reactions.
      *
-     * @return string
      * @codeCoverageIgnore
+     * @return string
      */
     public function getAvailableReactions()
     {
-        return 'Love,Pray,Like,Dislike,Sad,Hate';
+        return implode(',', $this->currentReactions);
     }
 
     /**
-     * Update location validation rules.
+     * Update accesses validation rules.
      *
      * @return array
      * @codeCoverageIgnore
@@ -39,7 +51,7 @@ trait LocationResource
     }
 
     /**
-     * Store location validation rules.
+     * Store accesses validation rules.
      *
      * @return array
      * @codeCoverageIgnore
@@ -50,23 +62,23 @@ trait LocationResource
     }
 
     /**
-     * Get location relationships using lazy loading.
+     * Get access relationships using lazy loading.
      *
      * @return array
      */
     public function getLazyRelationshipsAttribute()
     {
-        return ['trackable'];
+        return ['accessible', 'first_location', 'last_location', 'geofence'];
     }
 
     /**
-     * Get location instances.
+     * Get access instances.
      *
-     * @return LengthAwarePaginator
+     * @return array
      * @codeCoverageIgnore
      */
     public function getInstances()
     {
-        return Location::query()->paginate(25);
+        return [];
     }
 }

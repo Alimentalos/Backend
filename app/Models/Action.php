@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Contracts\Resource;
 use Alimentalos\Relationships\BelongsToUser;
-use Alimentalos\Relationships\Resources\ActionResource;
+use App\Resources\ActionResource;
 use Database\Factories\ActionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
