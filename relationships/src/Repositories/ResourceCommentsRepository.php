@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Repositories;
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 
 class ResourceCommentsRepository
 {

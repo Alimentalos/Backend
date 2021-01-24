@@ -2,8 +2,8 @@
 
 namespace Alimentalos\Relationships\Models;
 
-use Alimentalos\Contracts\HasColors;
-use Alimentalos\Contracts\Resource;
+use App\Contracts\HasColors;
+use App\Contracts\Resource;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Commentable;
 use Alimentalos\Relationships\HasPhoto;

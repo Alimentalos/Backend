@@ -2,11 +2,11 @@
 
 namespace Alimentalos\Relationships\Models;
 
-use Alimentalos\Contracts\CreateFromRequest;
-use Alimentalos\Contracts\HasColors;
-use Alimentalos\Contracts\Monetizer;
-use Alimentalos\Contracts\Resource;
-use Alimentalos\Contracts\UpdateFromRequest;
+use App\Contracts\CreateFromRequest;
+use App\Contracts\HasColors;
+use App\Contracts\Monetizer;
+use App\Contracts\Resource;
+use App\Contracts\UpdateFromRequest;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Commentable;
 use Alimentalos\Relationships\HasCoin;

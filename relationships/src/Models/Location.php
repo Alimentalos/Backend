@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Models;
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 use Alimentalos\Relationships\Relationships\LocationRelationships;
 use Alimentalos\Relationships\Resources\LocationResource;
 use Database\Factories\LocationFactory;

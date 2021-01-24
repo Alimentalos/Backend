@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Models;
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 use Alimentalos\Relationships\Relationships\AccessRelationships;
 use Alimentalos\Relationships\Resources\AccessResource;
 use Illuminate\Database\Eloquent\Model;

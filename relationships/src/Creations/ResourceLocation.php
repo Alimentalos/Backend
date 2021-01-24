@@ -4,7 +4,7 @@
 namespace Alimentalos\Relationships\Creations;
 
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 use Alimentalos\Relationships\Events\Location as LocationEvent;
 use Alimentalos\Relationships\Models\Device;
 use Alimentalos\Relationships\Models\Pet;

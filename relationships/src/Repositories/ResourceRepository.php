@@ -3,7 +3,7 @@
 
 namespace Alimentalos\Relationships\Repositories;
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 use Alimentalos\Relationships\Asserts\ResourceGroupAssert;
 
 class ResourceRepository

@@ -2,10 +2,10 @@
 
 namespace Alimentalos\Relationships\Models;
 
-use Alimentalos\Contracts\CreateFromRequest;
-use Alimentalos\Contracts\HasColors;
-use Alimentalos\Contracts\Resource;
-use Alimentalos\Contracts\UpdateFromRequest;
+use App\Contracts\CreateFromRequest;
+use App\Contracts\HasColors;
+use App\Contracts\Resource;
+use App\Contracts\UpdateFromRequest;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Groupable;
 use Alimentalos\Relationships\HasPhoto;

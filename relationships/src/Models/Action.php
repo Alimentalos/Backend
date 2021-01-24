@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Models;
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Resources\ActionResource;
 use Database\Factories\ActionFactory;

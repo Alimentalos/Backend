@@ -4,7 +4,7 @@
 namespace Alimentalos\Relationships\Policies;
 
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 use Alimentalos\Relationships\Models\Photo;
 use Alimentalos\Relationships\Models\User;
 use Illuminate\Support\Str;
