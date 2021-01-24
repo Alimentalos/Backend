@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Resource\Geofences\Accesses;
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 use Alimentalos\Relationships\Models\Access;
 use Alimentalos\Relationships\Models\Geofence;
 use App\Http\Controllers\Controller;

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Alimentalos\Contracts;
+namespace App\Contracts;
 
 
 interface HasColors

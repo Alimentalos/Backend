@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Resource\Groups;
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 use Alimentalos\Relationships\Models\Group;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resource\Groups\AttachRequest;

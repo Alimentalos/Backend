@@ -1,13 +1,13 @@
 <?php
 
-namespace Alimentalos\Contracts;
+namespace App\Contracts;
 
-interface CreateFromRequest
+interface UpdateFromRequest
 {
     /**
      * Create resource instance from request.
      *
      * @return mixed
      */
-    public function createViaRequest();
+    public function updateViaRequest();
 }
