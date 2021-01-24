@@ -31,9 +31,8 @@ class AdministratorCanViewGroupTest extends TestCase
         $group->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups');
         $response->assertOk();
-        $response->assertJsonStructure([
-            'current_page',
-            'data' => [
+        $response->assertJsonStructure(
+            array_merge(default_pagination_fields(), ['data' => [
                 [
                     'uuid',
                     'user_uuid',
@@ -45,18 +44,8 @@ class AdministratorCanViewGroupTest extends TestCase
                     'created_at',
                     'updated_at',
                 ],
-            ],
-            'first_page_url',
-            'from',
-            'last_page',
-            'last_page_url',
-            'next_page_url',
-            'path',
-            'per_page',
-            'prev_page_url',
-            'to',
-            'total',
-        ]);
+            ]])
+        );
         $response->assertJsonFragment([
             'uuid' => $group->uuid,
         ]);

@@ -43,26 +43,13 @@ class UserCanBeGeofenceableTest extends TestCase
         $location3 = Location::factory()->make();
         $location4 = Location::factory()->make();
         $location5 = Location::factory()->make();
-        $firstPayload = [
-            'device' => '{}',
-            'location' => create_location_payload($location, 20, 20)
-        ];
-        $secondPayload = [
-            'device' => '{}',
-            'location' => create_location_payload($location2, 5, 5)
-        ];
-        $thirdPayload = [
-            'device' => '{}',
-            'location' => create_location_payload($location3, 10, 10)
-        ];
-        $fourPayload = [
-            'device' => '{}',
-            'location' => create_location_payload($location4, 5, 5)
-        ];
-        $fivePayload = [
-            'device' => '{}',
-            'location' => create_location_payload($location5, 10, 10)
-        ];
+
+        $firstPayload = create_location_payload($location, 20, 20);
+        $secondPayload = create_location_payload($location2, 5, 5);
+        $thirdPayload = create_location_payload($location3, 10, 10);
+        $fourPayload = create_location_payload($location4, 5, 5);
+        $fivePayload = create_location_payload($location5, 10, 10);
+
         $response = $this->actingAs($user, 'api')->json('POST', '/api/user/locations', $firstPayload);
         $response->assertCreated();
         $response->assertJsonStructure([

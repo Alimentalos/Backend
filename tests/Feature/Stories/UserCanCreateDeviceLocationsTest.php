@@ -17,11 +17,11 @@ class UserCanCreateDeviceLocationsTest extends TestCase
     {
         $device = Device::factory()->create();
         $location = Location::factory()->make();
-        $response = $this->actingAs($device, 'devices')->json('POST', '/api/device/locations', [
-            'api_token' => $device->api_token,
-            'device' => '{}',
-            'location' => create_location_payload($location, $location->location->getLat(), $location->location->getLng())
-        ]);
+        $response = $this->actingAs($device, 'devices')
+            ->json('POST', '/api/device/locations', array_merge(
+                create_location_payload($location, $location->location->getLat(), $location->location->getLng()),
+                ['api_token' => $device->api_token]
+            ));
         $response->assertCreated();
         $response->assertJsonFragment([
             'latitude' => $location->location->getLat(),

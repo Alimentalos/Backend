@@ -41,31 +41,19 @@ class PetCanBeGeofenceableTest extends TestCase
         $device->geofences()->attach($geofence->uuid);
         $pet->geofences()->attach($geofence->uuid);
         $user->geofences()->attach($geofence->uuid);
+
         $location = Location::factory()->make();
         $location2 = Location::factory()->make();
         $location3 = Location::factory()->make();
         $location4 = Location::factory()->make();
         $location5 = Location::factory()->make();
-        $firstPayload = [
-            'device' => '{}',
-            'location' => create_location_payload($location, 20, 20)
-        ];
-        $secondPayload = [
-            'device' => '{}',
-            'location' => create_location_payload($location2, 5, 5)
-        ];
-        $thirdPayload = [
-            'device' => '{}',
-            'location' => create_location_payload($location3, 10, 10)
-        ];
-        $fourPayload = [
-            'device' => '{}',
-            'location' => create_location_payload($location4, 5, 5)
-        ];
-        $fivePayload = [
-            'device' => '{}',
-            'location' => create_location_payload($location5, 10, 10)
-        ];
+
+        $firstPayload = create_location_payload($location, 20, 20);
+        $secondPayload = create_location_payload($location2, 5, 5);
+        $thirdPayload = create_location_payload($location3, 10, 10);
+        $fourPayload = create_location_payload($location4, 5, 5);
+        $fivePayload = create_location_payload($location5, 10, 10);
+
         $response = $this->actingAs($pet, 'pets')->json('POST', '/api/pet/locations', $firstPayload);
         $response->assertCreated();
         $response->assertJsonStructure([

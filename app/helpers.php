@@ -11,12 +11,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 if (! function_exists('authenticated')) {
-	/**
-	 * @return Authenticatable|User
-	 */
+    /**
+     * @return Authenticatable|User
+     */
     function authenticated()
     {
-    	return Auth::user();
+        return Auth::user();
     }
 }
 if (! function_exists('rhas')) {
@@ -152,27 +152,30 @@ if (! function_exists('create_location_payload')) {
     function create_location_payload($location, $latitude, $longitude)
     {
         return [
-            'uuid' => $location->uuid,
-            'coords' => [
-                'latitude' => $latitude,
-                'longitude' => $longitude,
-                'accuracy' => $location->accuracy,
-                'altitude' => $location->altitude,
-                'speed' => $location->speed,
-                'heading' => $location->heading,
-            ],
-            'odometer' => $location->odometer,
-            'event' => $location->event,
-            'activity' => [
-                'type' => $location->activity_type,
-                'confidence' => $location->activity_confidence,
-            ],
-            'battery' => [
-                'level' => $location->battery_level,
-                'is_charging' => $location->battery_is_charging,
-            ],
-            'is_moving' => $location->is_moving,
-            'timestamp' => time(),
+            'device' => '{}',
+            'location' => [
+                'uuid' => $location->uuid,
+                'coords' => [
+                    'latitude' => $latitude,
+                    'longitude' => $longitude,
+                    'accuracy' => $location->accuracy,
+                    'altitude' => $location->altitude,
+                    'speed' => $location->speed,
+                    'heading' => $location->heading,
+                ],
+                'odometer' => $location->odometer,
+                'event' => $location->event,
+                'activity' => [
+                    'type' => $location->activity_type,
+                    'confidence' => $location->activity_confidence,
+                ],
+                'battery' => [
+                    'level' => $location->battery_level,
+                    'is_charging' => $location->battery_is_charging,
+                ],
+                'is_moving' => $location->is_moving,
+                'timestamp' => time(),
+            ]
         ];
     }
 }
