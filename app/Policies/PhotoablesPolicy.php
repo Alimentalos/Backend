@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Alimentalos\Relationships\Policies;
+namespace App\Policies;
 
 
 use App\Contracts\Resource;

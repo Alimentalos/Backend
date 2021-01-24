@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Policies;
+namespace App\Policies;
 
 use App\Models\Photo;
 use App\Models\Place;

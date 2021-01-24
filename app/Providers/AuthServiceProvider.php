@@ -17,17 +17,17 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Models\Device' => 'Alimentalos\Relationships\Policies\DevicePolicy',
-        'App\Models\Geofence' => 'Alimentalos\Relationships\Policies\GeofencePolicy',
-        'App\Models\Pet' => 'Alimentalos\Relationships\Policies\PetPolicy',
-        'App\Models\Group' => 'Alimentalos\Relationships\Policies\GroupPolicy',
-        'App\Models\Photo' => 'Alimentalos\Relationships\Policies\PhotoPolicy',
-        'App\Models\Comment' => 'Alimentalos\Relationships\Policies\CommentPolicy',
-        'App\Models\Action' => 'Alimentalos\Relationships\Policies\ActionPolicy',
-        'App\Models\Alert' => 'Alimentalos\Relationships\Policies\AlertPolicy',
-        'App\Models\Location' => 'Alimentalos\Relationships\Policies\LocationPolicy',
-        'App\Models\Place' => 'Alimentalos\Relationships\Policies\PlacePolicy',
-        'App\Models\User' => 'Alimentalos\Relationships\Policies\UserPolicy',
+        'App\Models\Device' => 'App\Policies\DevicePolicy',
+        'App\Models\Geofence' => 'App\Policies\GeofencePolicy',
+        'App\Models\Pet' => 'App\Policies\PetPolicy',
+        'App\Models\Group' => 'App\Policies\GroupPolicy',
+        'App\Models\Photo' => 'App\Policies\PhotoPolicy',
+        'App\Models\Comment' => 'App\Policies\CommentPolicy',
+        'App\Models\Action' => 'App\Policies\ActionPolicy',
+        'App\Models\Alert' => 'App\Policies\AlertPolicy',
+        'App\Models\Location' => 'App\Policies\LocationPolicy',
+        'App\Models\Place' => 'App\Policies\PlacePolicy',
+        'App\Models\User' => 'App\Policies\UserPolicy',
     ];
 
     /**

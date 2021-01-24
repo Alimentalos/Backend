@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Policies;
+namespace App\Policies;
 
 use App\Models\Action;
 use App\Models\User;

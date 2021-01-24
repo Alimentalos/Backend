@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Observers;
+namespace App\Observers;
 
 use App\Models\Comment;
 
