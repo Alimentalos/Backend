@@ -9,6 +9,22 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 trait DeviceResource
 {
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [
+            'user_uuid',
+            'uuid',
+            'name',
+            'description',
+            'is_public',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    /**
      * Update device via request.
      *
      * @return Device

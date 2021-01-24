@@ -23,10 +23,8 @@ class UserCanCreatePhotoOfPetTest extends TestCase
         $user = User::factory()->create();
         $pet = Pet::factory()->create();
         $photo = Photo::factory()->create();
-
-        $photo->user_uuid = $user->uuid;
-        $photo->save();
-        $pet->user_uuid = $user->uuid;
+        change_instance_user($photo, $user);
+        change_instance_user($pet, $user);
         $pet->photo_uuid = $photo->uuid;
         $pet->save();
         $comment = Comment::factory()->make();

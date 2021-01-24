@@ -17,8 +17,7 @@ class OwnerCanViewChildUserTest extends TestCase
         $user = User::factory()->create();
         $userB = User::factory()->create();
         $userB->is_public = false;
-        $userB->user_uuid = $user->uuid;
-        $userB->save();
+        change_instance_user($userB, $user);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users/' . $userB->uuid);
         $response->assertOk();
         $response->assertJsonStructure([

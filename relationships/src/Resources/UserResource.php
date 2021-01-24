@@ -9,6 +9,33 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 trait UserResource
 {
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [
+            'uuid',
+            'user_uuid',
+            'photo_uuid',
+            'name',
+            'email',
+            'email_verified_at',
+            'free',
+            'photo_url',
+            'location',
+            'is_public',
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+            'love_reacter_id',
+            'is_admin',
+            'is_child',
+            'user',
+            'photo',
+        ];
+    }
+
+    /**
      * Update user via request.
      *
      * @return User

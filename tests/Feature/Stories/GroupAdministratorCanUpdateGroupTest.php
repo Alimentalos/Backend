@@ -21,9 +21,8 @@ class GroupAdministratorCanUpdateGroupTest extends TestCase
         $group = Group::factory()->create();
         $photo = Photo::factory()->create();
 
-        $photo->user_uuid = $user->uuid;
-        $photo->save();
-        $group->user_uuid = $user->uuid;
+        change_instance_user($photo, $user);
+        change_instance_user($group, $user);
         $group->photo_uuid = $photo->uuid;
         $group->save();
         $user->groups()->attach($group, [

@@ -21,6 +21,20 @@ trait ActionResource
     ];
 
     /**
+     * @return array
+     * @codeCoverageIgnore
+     */
+    public function fields() : array
+    {
+        return [
+            'referenced_uuid',
+            'user_uuid',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    /**
      * Get available actions reactions.
      *
      * @codeCoverageIgnore

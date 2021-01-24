@@ -9,6 +9,24 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 trait GroupResource
 {
     /**
+     * @return array
+     */
+    public function fields() : array
+    {
+        return [
+            'uuid',
+            'user_uuid',
+            'photo_uuid',
+            'name',
+            'description',
+            'is_public',
+            'photo_url',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    /**
      * Update group via request.
      *
      * @return Group

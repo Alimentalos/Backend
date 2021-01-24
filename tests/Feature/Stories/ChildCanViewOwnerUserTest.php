@@ -16,7 +16,7 @@ class ChildCanViewOwnerUserTest extends TestCase
     {
         $userA = User::factory()->create();
         $userB = User::factory()->create();
-        $userB->user_uuid = $userA->uuid;
+        change_instance_user($userB, $userA);
         $userB->is_public = false;
         $userB->save();
         $response = $this->actingAs($userB, 'api')->json('GET', '/api/users/' . $userA->uuid);

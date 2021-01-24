@@ -134,10 +134,7 @@ class Activity extends Type
         ];
 
         foreach ($locations as $index => $location) {
-            $this->current = [
-                'location' => $location,
-                'index' => $index,
-            ];
+            $this->current = ['location' => $location, 'index' => $index];
 
             $this->perLocation($locations);
         }

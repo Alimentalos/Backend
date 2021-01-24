@@ -14,24 +14,11 @@ class AdministratorCanViewUsersTest extends TestCase
 
     final public function testAdministratorCanViewUsers()
     {
-        $user = User::factory()->create();
-        $user->email = 'iantorres@outlook.com';
-        $user->save();
+        $user = create_admin();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/users');
         $response->assertOk();
-        $response -> assertJsonStructure([
-            'current_page',
-            'first_page_url',
-            'from',
-            'last_page',
-            'last_page_url',
-            'next_page_url',
-            'path',
-            'per_page',
-            'prev_page_url',
-            'to',
-            'total',
-            'data' => [
+        $response->assertJsonStructure(
+            array_merge(default_pagination_fields(), ['data' => [
                 [
                     'uuid',
                     'user_uuid',
@@ -55,8 +42,8 @@ class AdministratorCanViewUsersTest extends TestCase
                     'user',
                     'photo',
                 ]
-            ],
-        ]);
+            ]])
+        );
         $response->assertJsonFragment([
             'uuid' => $user->uuid,
             'name' => $user->name,

@@ -17,10 +17,9 @@ class AdministratorCanViewGroupTest extends TestCase
 
     final public function testAdministratorCanViewGroup()
     {
-        $user = User::factory()->create();
+        $user = create_admin();
         $group = Group::factory()->create();
         $photo = Photo::factory()->create();
-
         $photo->user_uuid = $user->uuid;
         $photo->save();
         $group->photo_uuid = $photo->uuid;
@@ -29,14 +28,11 @@ class AdministratorCanViewGroupTest extends TestCase
             'status' => Group::ATTACHED_STATUS,
             'is_admin' => false,
         ]);
-        $user->email = 'iantorres@outlook.com';
         $group->save();
-        $user->save();
         $response = $this->actingAs($user, 'api')->json('GET', '/api/groups');
         $response->assertOk();
-        $response->assertJsonStructure([
-            'current_page',
-            'data' => [
+        $response->assertJsonStructure(
+            array_merge(default_pagination_fields(), ['data' => [
                 [
                     'uuid',
                     'user_uuid',
@@ -48,18 +44,8 @@ class AdministratorCanViewGroupTest extends TestCase
                     'created_at',
                     'updated_at',
                 ],
-            ],
-            'first_page_url',
-            'from',
-            'last_page',
-            'last_page_url',
-            'next_page_url',
-            'path',
-            'per_page',
-            'prev_page_url',
-            'to',
-            'total',
-        ]);
+            ]])
+        );
         $response->assertJsonFragment([
             'uuid' => $group->uuid,
         ]);

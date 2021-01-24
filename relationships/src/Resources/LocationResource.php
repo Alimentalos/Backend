@@ -8,6 +8,15 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 trait LocationResource
 {
     /**
+     * @return array
+     * @codeCoverageIgnore
+     */
+    public function fields() : array
+    {
+        return [];
+    }
+
+    /**
      * Get available location reactions.
      *
      * @return string

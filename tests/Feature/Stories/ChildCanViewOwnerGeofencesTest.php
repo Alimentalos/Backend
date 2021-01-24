@@ -22,18 +22,11 @@ class ChildCanViewOwnerGeofencesTest extends TestCase
         $owner = User::factory()->create();
         $geofence = new Geofence();
         $geofence->name = "Geofence";
-        $geofence->user_uuid = $owner->uuid;
         $geofence->uuid = uuid();
-        $geofence->shape = new Polygon([new LineString([
-            new Point(0, 0),
-            new Point(0, 5),
-            new Point(5, 5),
-            new Point(5, 0),
-            new Point(0, 0)
-        ])]);
+        $geofence->shape = create_default_polygon();
         $geofence->save();
-        $user->user_uuid = $owner->uuid;
-        $user->save();
+        change_instance_user($geofence, $owner);
+        change_instance_user($user, $owner);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/geofences');
         $response->assertJsonStructure([
             'data' => [

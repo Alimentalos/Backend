@@ -20,8 +20,7 @@ class ChildCanCreateGroupTest extends TestCase
         Storage::fake('public');
         $user = User::factory()->create();
         $userB = User::factory()->create();
-        $userB->user_uuid = $user->uuid;
-        $userB->save();
+        change_instance_user($userB, $user);
         $group = Group::factory()->make();
         $response = $this->actingAs($userB, 'api')->json('POST', '/api/groups', [
             'photo' => UploadedFile::fake()->image('photo2.jpg'),

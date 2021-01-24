@@ -24,11 +24,8 @@ class UserCanAttachPhotoToGeofenceTest extends TestCase
         $user = User::factory()->create();
         $geofence = Geofence::factory()->create();
         $photo = Photo::factory()->create();
-
-        $geofence->user_uuid = $user->uuid;
-        $photo->user_uuid = $user->uuid;
-        $photo->save();
-        $geofence->save();
+        change_instance_user($geofence, $user);
+        change_instance_user($photo, $user);
         $response = $this->actingAs($user, 'api')->json('POST', '/api/geofences/' . $geofence->uuid . '/photos/' . $photo->uuid . '/attach');
         $response->assertOk();
         $this->assertDatabaseHas('photoables', [

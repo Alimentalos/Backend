@@ -80,6 +80,7 @@ class Place extends Model implements ReactableContract, Resource, HasColors
      */
     protected $casts = [
         'is_public' => 'boolean',
+        'love_reactant_id' => 'integer',
     ];
 
     /**

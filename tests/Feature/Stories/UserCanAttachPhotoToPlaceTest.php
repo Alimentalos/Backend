@@ -24,11 +24,8 @@ class UserCanAttachPhotoToPlaceTest extends TestCase
         $user = User::factory()->create();
         $place = Place::factory()->create();
         $photo = Photo::factory()->create();
-
-        $place->user_uuid = $user->uuid;
-        $photo->user_uuid = $user->uuid;
-        $photo->save();
-        $place->save();
+        change_instance_user($place, $user);
+        change_instance_user($photo, $user);
         $response = $this->actingAs($user, 'api')->json('POST', '/api/places/' . $place->uuid . '/photos/' . $photo->uuid . '/attach');
         $response->assertOk();
         $this->assertDatabaseHas('photoables', [

@@ -19,7 +19,7 @@ class GeofenceFactory extends Factory {
             'uuid' => (string) $this->faker->unique()->uuid,
             'name' => $this->faker->name,
             'is_public' => true,
-            'shape' => (new Polygon(geofences()->createSamplePolygon())),
+            'shape' => (create_default_polygon()),
         ];
     }
 }

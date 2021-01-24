@@ -20,6 +20,7 @@ class PlaceFactory extends Factory {
             'uuid' => (string) $this->faker->unique()->uuid,
             'location' => (new Point($this->faker->latitude(), $this->faker->longitude())),
             'description' =>  $this->faker->text(30),
+            'is_public' => true,
         ];
     }
 }

@@ -19,14 +19,12 @@ class UserCanAttachOwnedDeviceInOwnedGroupTest extends TestCase
         $user = User::factory()->create();
         $device = Device::factory()->create();
         $group = Group::factory()->create();
-        $group->user_uuid = $user->uuid;
-        $group->save();
+        change_instance_user($group, $user);
         $group->users()->attach($user, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS
         ]);
-        $device->user_uuid = $user->uuid;
-        $device->save();
+        change_instance_user($device, $user);
         $response = $this->actingAs($user, 'api')->json(
             'POST',
             '/api/devices/' . $device->uuid . '/groups/' . $group->uuid . '/attach',

@@ -19,10 +19,8 @@ class UserCanAttachOwnedPetInOwnedGroupTest extends TestCase
         $user = User::factory()->create();
         $group = Group::factory()->create();
         $pet = Pet::factory()->create();
-        $pet->user_uuid = $user->uuid;
-        $pet->save();
-        $group->user_uuid = $user->uuid;
-        $group->save();
+        change_instance_user($pet, $user);
+        change_instance_user($group, $user);
         $group->users()->attach($user, [
             'is_admin' => true,
             'status' => Group::ACCEPTED_STATUS

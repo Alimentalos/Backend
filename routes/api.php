@@ -33,7 +33,7 @@ Route::middleware(['auth:pets'])->group(function () {
 Route::middleware(['api'])->group(function () {
     Route::post('/register', 'RegisterController')
         ->middleware('throttle:5');
-    
+
     Route::get('/reverse-geocoding', 'ReverseGeocodingController')
         ->middleware('throttle:5');
 
@@ -54,11 +54,12 @@ Route::middleware(['api'])->group(function () {
  */
 Route::middleware(['auth:api', 'verified'])->group(function () {
 
-    foreach(config('resources.listable') as $resource) {
-        Route::get("/{$resource}", 'Resource\IndexController')
-            ->name("api.{$resource}.index");
+    foreach(config('resources.listable') as $key => $resource) {
+        Route::get("/{$key}", 'Resource\IndexController')
+            ->name("api.{$key}.index");
+
         Route::get("/{resource}/search", 'Resource\SearchController')
-            ->name("api.{$resource}.search");
+            ->name("api.{$key}.search");
     }
 
     foreach(config('resources.tokenized') as $resource) {
@@ -71,9 +72,9 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("api.{$resource}.store");
     }
 
-    foreach(config('resources.viewable') as $resource) {
-        Route::get("/{$resource}/{resource}", 'Resource\ShowController')
-            ->name("api.{$resource}.show");
+    foreach(config('resources.viewable') as $key => $resource) {
+        Route::get("/{$key}/{resource}", 'Resource\ShowController')
+            ->name("api.{$key}.show");
     }
 
     foreach(config('resources.modifiable') as $resource) {
@@ -81,9 +82,9 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("api.{$resource}.update");
     }
 
-    foreach(config('resources.removable') as $resource) {
-        Route::delete("/{$resource}/{resource}", 'Resource\DestroyController')
-            ->name("api.{$resource}.destroy");
+    foreach(config('resources.removable') as $key => $resource) {
+        Route::delete("/{$key}/{resource}", 'Resource\DestroyController')
+            ->name("api.{$key}.destroy");
     }
 
     Route::get('/locations', 'Locations\IndexController')

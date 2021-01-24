@@ -18,11 +18,9 @@ class OwnerCanAttachChildUserInGroupsTest extends TestCase
         $user = User::factory()->create();
         $userB = User::factory()->create();
         $group = Group::factory()->create();
-        $group->user_uuid = $user->uuid;
-        $group->save();
+        change_instance_user($group, $user);
         $group->users()->attach($user, ['is_admin' => true, 'status' => Group::ATTACHED_STATUS]);
-        $userB->user_uuid = $user->uuid;
-        $userB->save();
+        change_instance_user($userB, $user);
         $response = $this->actingAs($user, 'api')
             ->json('POST', '/api/users/' . $userB->uuid . '/groups/' . $group->uuid . '/attach', [
                 'is_admin' => false,
