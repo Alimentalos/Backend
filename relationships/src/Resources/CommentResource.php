@@ -3,7 +3,7 @@
 
 namespace Alimentalos\Relationships\Resources;
 
-use Alimentalos\Relationships\Models\Comment;
+use App\Models\Comment;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait CommentResource

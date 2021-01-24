@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Models;
+namespace App\Models;
 
 use App\Contracts\Resource;
 use Alimentalos\Relationships\Relationships\LocationRelationships;

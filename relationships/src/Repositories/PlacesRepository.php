@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Repositories;
 
-use Alimentalos\Relationships\Models\Place;
+use App\Models\Place;
 use Alimentalos\Relationships\Procedures\PlaceProcedure;
 
 class PlacesRepository

@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Resources;
 
-use Alimentalos\Relationships\Models\Group;
+use App\Models\Group;
 use Alimentalos\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

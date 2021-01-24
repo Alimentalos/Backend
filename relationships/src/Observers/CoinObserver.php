@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\Coin;
+use App\Models\Coin;
 
 class CoinObserver
 {

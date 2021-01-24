@@ -5,8 +5,8 @@ namespace Alimentalos\Relationships\Repositories;
 
 
 use App\Contracts\Monetizer;
-use Alimentalos\Relationships\Models\Coin;
-use Alimentalos\Relationships\Models\Operation;
+use App\Models\Coin;
+use App\Models\Operation;
 use Exception;
 
 class MoneyRepository

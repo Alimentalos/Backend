@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\Photo;
+use App\Models\Photo;
 
 class PhotoObserver
 {

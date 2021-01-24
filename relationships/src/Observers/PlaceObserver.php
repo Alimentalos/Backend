@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\Place;
+use App\Models\Place;
 
 class PlaceObserver
 {

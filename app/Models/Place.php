@@ -1,39 +1,33 @@
 <?php
 
-namespace Alimentalos\Relationships\Models;
+namespace App\Models;
 
 use App\Contracts\HasColors;
 use App\Contracts\Resource;
 use Alimentalos\Relationships\BelongsToUser;
 use Alimentalos\Relationships\Commentable;
-use Alimentalos\Relationships\Geofenceable;
-use Alimentalos\Relationships\Groupable;
 use Alimentalos\Relationships\HasPhoto;
 use Alimentalos\Relationships\Photoable;
-use Alimentalos\Relationships\Resources\PetResource;
-use Alimentalos\Relationships\Trackable;
+use Alimentalos\Relationships\Resources\PlaceResource;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
-use Database\Factories\PetFactory;
+use Database\Factories\PlaceFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class Pet extends Authenticatable implements ReactableContract, Resource, HasColors
+class Place extends Model implements ReactableContract, Resource, HasColors
 {
     use HasFactory;
     use Searchable;
+    use PlaceResource;
     use SpatialTrait;
-    use Reactable;
-    use PetResource;
     use BelongsToUser;
+    use Reactable;
     use HasPhoto;
-    use Trackable;
     use Photoable;
     use Commentable;
-    use Geofenceable;
-    use Groupable;
 
     /**
      * The default location field of pet.
@@ -62,34 +56,31 @@ class Pet extends Authenticatable implements ReactableContract, Resource, HasCol
      * @var array
      */
     protected $fillable = [
-        'user_uuid', // Related user
-        'photo_uuid', // Related photo
-        'api_token', // Token to track
-        'photo_url', // Profile photo
-        'uuid', // Universal unique identifier
-        'name', // Name it
-        'description', // Describe the pet
-        'size', // Size (xs, sm, md, lg, xlg)
-        'born_at', // Born date
-        'is_public', // Visibility
-        'location', // Spatial point
-        // Colors
-        'hair_color',
-        'second_hair_color',
-        'left_eye_color',
-        'right_eye_color',
+        'user_uuid',
+        'photo_uuid',
+        'photo_url',
+        'uuid',
+        'name',
+        'is_public',
+        'description',
+        'location',
+        'color',
+        'marker_color'
+    ];
+
+    protected static $colors = [
+        'color',
+        'marker_color'
     ];
 
     /**
-     * The available colors of the resource.
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected static $colors = [
-        'hair_color',
-        'second_hair_color',
-        'left_eye_color',
-        'right_eye_color',
+    protected $casts = [
+        'is_public' => 'boolean',
+        'love_reactant_id' => 'integer',
     ];
 
     /**
@@ -102,21 +93,29 @@ class Pet extends Authenticatable implements ReactableContract, Resource, HasCol
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'is_public' => 'boolean',
-        'born_at' => 'datetime',
-    ];
-
-    /**
      * The properties which are hidden.
      *
      * @var array
      */
-    protected $hidden = ['id', 'api_token'];
+    protected $hidden = ['id'];
+
+
+    /**
+     * This model doesn't uses increments.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * Get key for the model.
+     *
+     * @return string
+     */
+    public function getKeyName()
+    {
+        return 'uuid';
+    }
 
     /**
      * Get the indexable data array for the model.
@@ -159,6 +158,6 @@ class Pet extends Authenticatable implements ReactableContract, Resource, HasCol
 
     protected static function newFactory()
     {
-        return PetFactory::new();
+        return PlaceFactory::new();
     }
 }

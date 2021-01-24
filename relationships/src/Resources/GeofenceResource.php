@@ -3,7 +3,7 @@
 
 namespace Alimentalos\Relationships\Resources;
 
-use Alimentalos\Relationships\Models\Geofence;
+use App\Models\Geofence;
 use Alimentalos\Relationships\Rules\Coordinate;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

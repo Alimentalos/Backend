@@ -4,7 +4,7 @@
 namespace Alimentalos\Relationships\Procedures;
 
 
-use Alimentalos\Relationships\Models\Place;
+use App\Models\Place;
 
 trait PlaceProcedure
 {

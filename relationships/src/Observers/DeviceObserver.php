@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\Device;
+use App\Models\Device;
 use Exception;
 
 class DeviceObserver

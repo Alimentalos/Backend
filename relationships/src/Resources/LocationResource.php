@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Resources;
 
-use Alimentalos\Relationships\Models\Location;
+use App\Models\Location;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait LocationResource

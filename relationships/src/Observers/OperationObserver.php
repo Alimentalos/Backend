@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\Operation;
+use App\Models\Operation;
 
 class OperationObserver
 {

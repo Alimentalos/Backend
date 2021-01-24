@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Models;
+namespace App\Models;
 
 use Database\Factories\OperationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

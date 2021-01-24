@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Repositories;
 
-use Alimentalos\Relationships\Models\Photo;
+use App\Models\Photo;
 use Alimentalos\Relationships\Procedures\PhotoProcedure;
 
 class PhotosRepository

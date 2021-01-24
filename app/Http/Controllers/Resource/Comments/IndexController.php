@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource\Comments;
 
 use App\Contracts\Resource;
-use Alimentalos\Relationships\Models\Comment;
+use App\Models\Comment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resource\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;

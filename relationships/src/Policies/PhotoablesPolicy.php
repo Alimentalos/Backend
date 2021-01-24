@@ -5,8 +5,8 @@ namespace Alimentalos\Relationships\Policies;
 
 
 use App\Contracts\Resource;
-use Alimentalos\Relationships\Models\Photo;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 trait PhotoablesPolicy

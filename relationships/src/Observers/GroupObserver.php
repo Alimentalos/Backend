@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\Group;
+use App\Models\Group;
 
 class GroupObserver
 {

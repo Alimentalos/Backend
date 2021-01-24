@@ -3,7 +3,7 @@
 namespace Alimentalos\Relationships\Repositories;
 
 use App\Contracts\Resource;
-use Alimentalos\Relationships\Models\Photo;
+use App\Models\Photo;
 
 class ResourcePhotosRepository
 {

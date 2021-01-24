@@ -58,7 +58,7 @@ class Activity extends Type
     {
         // Filter the specified device locations
         $device_locations = $locations->where('trackable_id', $device->uuid)
-            ->where('trackable_type', 'Alimentalos\\Relationships\\Models\\Device')->reverse()->values();
+            ->where('trackable_type', 'App\\Models\\Device')->reverse()->values();
 
         if ($this->start_day == $this->end_day) {
             $this->simpleReport($device, $device_locations);

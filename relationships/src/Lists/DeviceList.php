@@ -4,7 +4,7 @@
 namespace Alimentalos\Relationships\Lists;
 
 
-use Alimentalos\Relationships\Models\Device;
+use App\Models\Device;
 use Illuminate\Database\Eloquent\Builder;
 
 trait DeviceList

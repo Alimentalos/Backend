@@ -2,8 +2,8 @@
 
 namespace Alimentalos\Relationships\Policies;
 
-use Alimentalos\Relationships\Models\Photo;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PhotoPolicy

@@ -6,9 +6,9 @@ namespace Alimentalos\Relationships\Creations;
 
 use App\Contracts\Resource;
 use Alimentalos\Relationships\Events\Location as LocationEvent;
-use Alimentalos\Relationships\Models\Device;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Device;
+use App\Models\Pet;
+use App\Models\User;
 use App\Http\Resources\Location as LocationResource;
 use Illuminate\Database\Eloquent\Model;
 

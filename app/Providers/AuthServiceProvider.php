@@ -17,17 +17,17 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Alimentalos\Relationships\Models\Device' => 'Alimentalos\Relationships\Policies\DevicePolicy',
-        'Alimentalos\Relationships\Models\Geofence' => 'Alimentalos\Relationships\Policies\GeofencePolicy',
-        'Alimentalos\Relationships\Models\Pet' => 'Alimentalos\Relationships\Policies\PetPolicy',
-        'Alimentalos\Relationships\Models\Group' => 'Alimentalos\Relationships\Policies\GroupPolicy',
-        'Alimentalos\Relationships\Models\Photo' => 'Alimentalos\Relationships\Policies\PhotoPolicy',
-        'Alimentalos\Relationships\Models\Comment' => 'Alimentalos\Relationships\Policies\CommentPolicy',
-        'Alimentalos\Relationships\Models\Action' => 'Alimentalos\Relationships\Policies\ActionPolicy',
-        'Alimentalos\Relationships\Models\Alert' => 'Alimentalos\Relationships\Policies\AlertPolicy',
-        'Alimentalos\Relationships\Models\Location' => 'Alimentalos\Relationships\Policies\LocationPolicy',
-        'Alimentalos\Relationships\Models\Place' => 'Alimentalos\Relationships\Policies\PlacePolicy',
-        'Alimentalos\Relationships\Models\User' => 'Alimentalos\Relationships\Policies\UserPolicy',
+        'App\Models\Device' => 'Alimentalos\Relationships\Policies\DevicePolicy',
+        'App\Models\Geofence' => 'Alimentalos\Relationships\Policies\GeofencePolicy',
+        'App\Models\Pet' => 'Alimentalos\Relationships\Policies\PetPolicy',
+        'App\Models\Group' => 'Alimentalos\Relationships\Policies\GroupPolicy',
+        'App\Models\Photo' => 'Alimentalos\Relationships\Policies\PhotoPolicy',
+        'App\Models\Comment' => 'Alimentalos\Relationships\Policies\CommentPolicy',
+        'App\Models\Action' => 'Alimentalos\Relationships\Policies\ActionPolicy',
+        'App\Models\Alert' => 'Alimentalos\Relationships\Policies\AlertPolicy',
+        'App\Models\Location' => 'Alimentalos\Relationships\Policies\LocationPolicy',
+        'App\Models\Place' => 'Alimentalos\Relationships\Policies\PlacePolicy',
+        'App\Models\User' => 'Alimentalos\Relationships\Policies\UserPolicy',
     ];
 
     /**

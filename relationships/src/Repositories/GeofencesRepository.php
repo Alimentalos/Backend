@@ -3,7 +3,7 @@
 namespace Alimentalos\Relationships\Repositories;
 
 use Alimentalos\Relationships\Lists\GeofenceList;
-use Alimentalos\Relationships\Models\Geofence;
+use App\Models\Geofence;
 use Alimentalos\Relationships\Procedures\GeofenceProcedure;
 
 class GeofencesRepository

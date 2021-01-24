@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships;
 
-use Alimentalos\Relationships\Models\Geofence;
+use App\Models\Geofence;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait Geofenceable

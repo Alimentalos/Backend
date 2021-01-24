@@ -1,6 +1,6 @@
 <?php
 
-use Alimentalos\Relationships\Models\User;
+use App\Models\User;
 use App\Repositories\AdminRepository;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;

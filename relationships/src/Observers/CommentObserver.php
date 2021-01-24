@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\Comment;
+use App\Models\Comment;
 
 class CommentObserver
 {

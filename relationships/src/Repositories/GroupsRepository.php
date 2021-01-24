@@ -4,7 +4,7 @@ namespace Alimentalos\Relationships\Repositories;
 
 use Alimentalos\Relationships\Asserts\GroupAssert;
 use Alimentalos\Relationships\Lists\GroupList;
-use Alimentalos\Relationships\Models\Group;
+use App\Models\Group;
 use Alimentalos\Relationships\Procedures\GroupProcedure;
 
 class GroupsRepository

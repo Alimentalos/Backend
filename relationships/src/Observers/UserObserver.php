@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\User;
+use App\Models\User;
 use Exception;
 use Illuminate\Auth\Events\Registered;
 

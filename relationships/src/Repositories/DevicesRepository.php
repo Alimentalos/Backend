@@ -3,7 +3,7 @@
 namespace Alimentalos\Relationships\Repositories;
 
 use Alimentalos\Relationships\Lists\DeviceList;
-use Alimentalos\Relationships\Models\Device;
+use App\Models\Device;
 use Alimentalos\Relationships\Procedures\DeviceProcedure;
 
 class DevicesRepository

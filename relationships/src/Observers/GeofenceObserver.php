@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\Geofence;
+use App\Models\Geofence;
 
 class GeofenceObserver
 {

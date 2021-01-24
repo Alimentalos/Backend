@@ -2,8 +2,8 @@
 
 namespace Alimentalos\Relationships\Policies;
 
-use Alimentalos\Relationships\Models\Alert;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Alert;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AlertPolicy

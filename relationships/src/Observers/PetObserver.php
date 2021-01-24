@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\Pet;
+use App\Models\Pet;
 use Exception;
 
 class PetObserver

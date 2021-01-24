@@ -5,7 +5,7 @@ namespace Alimentalos\Relationships\Repositories;
 
 use Alimentalos\Relationships\Attributes\AlertAttribute;
 use Alimentalos\Relationships\Lists\AlertList;
-use Alimentalos\Relationships\Models\Alert;
+use App\Models\Alert;
 use Alimentalos\Relationships\Procedures\AlertProcedure;
 
 class AlertsRepository

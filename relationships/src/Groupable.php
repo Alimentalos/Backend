@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships;
 
-use Alimentalos\Relationships\Models\Group;
+use App\Models\Group;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait Groupable

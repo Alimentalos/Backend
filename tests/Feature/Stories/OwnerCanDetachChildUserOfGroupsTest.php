@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Group;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -32,7 +32,7 @@ class OwnerCanDetachChildUserOfGroupsTest extends TestCase
             ->json('POST', '/api/users/' . $userB->uuid . '/groups/' . $group->uuid . '/detach', []);
         $response->assertOk();
         $this->assertDeleted('groupables', [
-            'groupable_type' => 'Alimentalos\\Relationships\\Models\\User',
+            'groupable_type' => 'App\\Models\\User',
             'groupable_id' => $userB->uuid,
             'group_uuid' => $group->uuid,
             'status' => Group::ATTACHED_STATUS

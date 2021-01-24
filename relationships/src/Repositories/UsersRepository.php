@@ -4,7 +4,7 @@ namespace Alimentalos\Relationships\Repositories;
 
 use Alimentalos\Relationships\Asserts\UserAssert;
 use Alimentalos\Relationships\Lists\UserList;
-use Alimentalos\Relationships\Models\User;
+use App\Models\User;
 use Alimentalos\Relationships\Procedures\UserProcedure;
 
 class UsersRepository

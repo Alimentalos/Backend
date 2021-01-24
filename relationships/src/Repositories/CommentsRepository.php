@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Repositories;
 
-use Alimentalos\Relationships\Models\Comment;
+use App\Models\Comment;
 
 class CommentsRepository
 {

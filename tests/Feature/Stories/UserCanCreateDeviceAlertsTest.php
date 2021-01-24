@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Alert;
-use Alimentalos\Relationships\Models\Device;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Alert;
+use App\Models\Device;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +25,7 @@ class UserCanCreateDeviceAlertsTest extends TestCase
         $response = $this->actingAs($user, 'api')->json('POST', '/api/alerts', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
             'marker' => UploadedFile::fake()->image('dev.jpg'),
-            'alert_type' => 'Alimentalos\\Relationships\\Models\\Device',
+            'alert_type' => 'App\\Models\\Device',
             'alert_id' => $device->uuid,
             'title' => $alert->title,
             'body' => $alert->body,

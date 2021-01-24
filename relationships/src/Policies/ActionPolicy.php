@@ -2,8 +2,8 @@
 
 namespace Alimentalos\Relationships\Policies;
 
-use Alimentalos\Relationships\Models\Action;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Action;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ActionPolicy

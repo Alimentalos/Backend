@@ -4,11 +4,11 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Comment;
-use Alimentalos\Relationships\Models\Group;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\Photo;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Comment;
+use App\Models\Group;
+use App\Models\Pet;
+use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +28,7 @@ class UserCanAttachPhotoToGroupTest extends TestCase
         $response = $this->actingAs($user, 'api')->json('POST', '/api/groups/' . $group->uuid . '/photos/' . $photo->uuid . '/attach');
         $response->assertOk();
         $this->assertDatabaseHas('photoables', [
-            'photoable_type' => 'Alimentalos\\Relationships\\Models\\Group',
+            'photoable_type' => 'App\\Models\\Group',
             'photoable_id' => $group->uuid,
             'photo_uuid' => $photo->uuid,
         ]);

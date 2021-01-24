@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Models;
+namespace App\Models;
 
 use Database\Factories\CoinFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

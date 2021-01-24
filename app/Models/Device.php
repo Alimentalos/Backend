@@ -1,65 +1,56 @@
 <?php
 
-namespace Alimentalos\Relationships\Models;
+namespace App\Models;
 
 use App\Contracts\CreateFromRequest;
 use App\Contracts\HasColors;
 use App\Contracts\Resource;
 use App\Contracts\UpdateFromRequest;
 use Alimentalos\Relationships\BelongsToUser;
+use Alimentalos\Relationships\Geofenceable;
 use Alimentalos\Relationships\Groupable;
-use Alimentalos\Relationships\HasPhoto;
-use Alimentalos\Relationships\Photoable;
-use Alimentalos\Relationships\Relationships\GeofenceRelationships;
-use Alimentalos\Relationships\Resources\GeofenceResource;
-use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
-use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
-use Database\Factories\GeofenceFactory;
+use Alimentalos\Relationships\Resources\DeviceResource;
+use Alimentalos\Relationships\Trackable;
+use Database\Factories\DeviceFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
 
-class Geofence extends Model implements ReactableContract, Resource, CreateFromRequest, UpdateFromRequest, HasColors
+/**
+ * Class Device
+ *
+ * @package App
+ * @author Ian Torres
+ * @license MIT
+ */
+class Device extends Authenticatable implements Resource, CreateFromRequest, UpdateFromRequest, HasColors
 {
     use HasFactory;
     use Searchable;
     use SpatialTrait;
-    use Reactable;
-    use GeofenceResource;
-    use GeofenceRelationships;
-    use BelongsToUser;
-    use Photoable;
+    use DeviceResource;
     use Groupable;
-    use HasPhoto;
+    use Geofenceable;
+    use BelongsToUser;
+    use Trackable;
 
     /**
-     * The default location field of geofence.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_FIELD = 'shape';
-
-    /**
-     * The mass assignment fields of the geofence.
+     * The mass assignment fields of the device
      *
      * @var array
      */
     protected $fillable = [
-        'photo_uuid',
-        'user_uuid',
         'uuid',
-        'photo_url',
+        'user_uuid',
+        'name',
+        'description',
+        'api_token',
         'is_public',
-        'marker',
+        'location',
         'marker_color',
-        'text_color',
         'color',
-        'border_color',
-        'background_color',
-        'fill_color',
-        'tag_color',
-        'fill_opacity'
+        'marker'
     ];
 
     /**
@@ -69,28 +60,16 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
      */
     protected static $colors = [
         'color',
-        'border_color',
-        'background_color',
-        'text_color',
-        'fill_color',
-        'tag_color',
-        'marker_color',
+        'marker_color'
     ];
 
     /**
-     * The properties which are hidden.
-     *
-     * @var array
-     */
-    protected $hidden = ['id'];
-
-    /**
-     * The spatial fields of the geofence.
+     * The attributes that should be cast to spatial types.
      *
      * @var array
      */
     protected $spatialFields = [
-        'shape',
+        'location',
     ];
 
     /**
@@ -103,14 +82,32 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
     ];
 
     /**
-     * Get the route key for the model.
+     * The properties which are hidden.
      *
-     * @return string
+     * @var array
      */
-    public function getRouteKeyName()
-    {
-        return 'uuid';
-    }
+    protected $hidden = ['id', 'api_token'];
+
+    /**
+     * The default location field of device.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_FIELD = 'location';
+
+    /**
+     * The default location date column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_DATE_COLUMN = 'generated_at';
+
+    /**
+     * The default location group by column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
 
     /**
      * Get the indexable data array for the model.
@@ -122,7 +119,10 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
     {
         $array = $this->toArray();
 
-        $array['shape'] = $array['shape']->getLineStrings();
+        $array['location'] = array_key_exists('location', $array) ? [
+            'latitude' => $array['location']->getLat(),
+            'longitude' => $array['location']->getLng(),
+        ] : 'NO_LOCATION';
 
         return $array;
     }
@@ -147,8 +147,9 @@ class Geofence extends Model implements ReactableContract, Resource, CreateFromR
     {
         return self::$colors;
     }
+
     protected static function newFactory()
     {
-        return GeofenceFactory::new();
+        return DeviceFactory::new();
     }
 }

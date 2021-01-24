@@ -1,81 +1,65 @@
 <?php
 
-namespace Alimentalos\Relationships\Models;
+namespace App\Models;
 
 use App\Contracts\CreateFromRequest;
 use App\Contracts\HasColors;
-use App\Contracts\Monetizer;
 use App\Contracts\Resource;
 use App\Contracts\UpdateFromRequest;
 use Alimentalos\Relationships\BelongsToUser;
-use Alimentalos\Relationships\Commentable;
-use Alimentalos\Relationships\HasCoin;
+use Alimentalos\Relationships\Groupable;
 use Alimentalos\Relationships\HasPhoto;
 use Alimentalos\Relationships\Photoable;
-use Alimentalos\Relationships\Relationships\GroupRelationships;
-use Alimentalos\Relationships\Resources\GroupResource;
-use Database\Factories\GroupFactory;
+use Alimentalos\Relationships\Relationships\GeofenceRelationships;
+use Alimentalos\Relationships\Resources\GeofenceResource;
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Database\Factories\GeofenceFactory;
+use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequest, Monetizer, HasColors
+class Geofence extends Model implements ReactableContract, Resource, CreateFromRequest, UpdateFromRequest, HasColors
 {
     use HasFactory;
     use Searchable;
-    use GroupResource;
-    use GroupRelationships;
+    use SpatialTrait;
+    use Reactable;
+    use GeofenceResource;
+    use GeofenceRelationships;
     use BelongsToUser;
     use Photoable;
-    use Commentable;
+    use Groupable;
     use HasPhoto;
-    use HasCoin;
 
     /**
-     * Pending status
+     * The default location field of geofence.
+     *
+     * @var string
      */
-    public const PENDING_STATUS = 1;
+    public const DEFAULT_LOCATION_FIELD = 'shape';
 
     /**
-     * Rejected status
-     */
-    public const REJECTED_STATUS = 2;
-
-    /**
-     * Accepted status
-     */
-    public const ACCEPTED_STATUS = 3;
-
-    /**
-     * Accepted status
-     */
-    public const ATTACHED_STATUS = 4;
-
-    /**
-     * Accepted status
-     */
-    public const BLOCKED_STATUS = 5;
-
-    /**
-     * The mass assignment fields of the device.
+     * The mass assignment fields of the geofence.
      *
      * @var array
      */
     protected $fillable = [
-        'uuid',
-        'user_uuid',
         'photo_uuid',
-        'name',
+        'user_uuid',
+        'uuid',
         'photo_url',
         'is_public',
-        'color',
-        'background_color',
+        'marker',
+        'marker_color',
         'text_color',
+        'color',
         'border_color',
+        'background_color',
         'fill_color',
-        'administrator_color',
-        'user_color',
-        'owner_color',
+        'tag_color',
+        'fill_opacity'
     ];
 
     /**
@@ -85,13 +69,12 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
      */
     protected static $colors = [
         'color',
-        'background_color',
         'border_color',
-        'fill_color',
+        'background_color',
         'text_color',
-        'user_color',
-        'administrator_color',
-        'owner_color',
+        'fill_color',
+        'tag_color',
+        'marker_color',
     ];
 
     /**
@@ -100,6 +83,15 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
      * @var array
      */
     protected $hidden = ['id'];
+
+    /**
+     * The spatial fields of the geofence.
+     *
+     * @var array
+     */
+    protected $spatialFields = [
+        'shape',
+    ];
 
     /**
      * The attributes that should be cast to native types.
@@ -118,6 +110,21 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     public function getRouteKeyName()
     {
         return 'uuid';
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     * @codeCoverageIgnore
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        $array['shape'] = $array['shape']->getLineStrings();
+
+        return $array;
     }
 
     /**
@@ -140,9 +147,8 @@ class Group extends Model implements Resource, CreateFromRequest, UpdateFromRequ
     {
         return self::$colors;
     }
-
     protected static function newFactory()
     {
-        return GroupFactory::new();
+        return GeofenceFactory::new();
     }
 }

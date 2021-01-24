@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Resources;
 
-use Alimentalos\Relationships\Models\Device;
+use App\Models\Device;
 use Alimentalos\Relationships\Repositories\DevicesRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

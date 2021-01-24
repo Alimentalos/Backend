@@ -3,7 +3,7 @@
 namespace Alimentalos\Relationships\Repositories;
 
 use Alimentalos\Relationships\Attributes\PetAttribute;
-use Alimentalos\Relationships\Models\Pet;
+use App\Models\Pet;
 use Alimentalos\Relationships\Procedures\PetProcedure;
 
 class PetsRepository

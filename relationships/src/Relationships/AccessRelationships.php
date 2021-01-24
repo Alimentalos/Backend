@@ -2,8 +2,8 @@
 
 namespace Alimentalos\Relationships\Relationships;
 
-use Alimentalos\Relationships\Models\Geofence;
-use Alimentalos\Relationships\Models\Location;
+use App\Models\Geofence;
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait AccessRelationships

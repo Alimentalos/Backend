@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships;
 
-use Alimentalos\Relationships\Models\Comment;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait Commentable

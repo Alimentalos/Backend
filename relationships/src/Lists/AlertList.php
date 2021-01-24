@@ -3,7 +3,7 @@
 
 namespace Alimentalos\Relationships\Lists;
 
-use Alimentalos\Relationships\Models\Alert;
+use App\Models\Alert;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait AlertList

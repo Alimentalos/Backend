@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Observers;
 
-use Alimentalos\Relationships\Models\Alert;
+use App\Models\Alert;
 
 class AlertObserver
 {

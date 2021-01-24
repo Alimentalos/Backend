@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Device;
-use Alimentalos\Relationships\Models\Group;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Device;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -32,7 +32,7 @@ class UserCanAttachOwnedDeviceInOwnedGroupTest extends TestCase
         );
         $response->assertOk();
         $this->assertDatabaseHas('groupables', [
-            'groupable_type' => 'Alimentalos\\Relationships\\Models\\Device',
+            'groupable_type' => 'App\\Models\\Device',
             'groupable_id' => $device->uuid,
             'group_uuid' => $group->uuid,
         ]);

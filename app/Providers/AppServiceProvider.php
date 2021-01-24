@@ -2,17 +2,17 @@
 
 namespace App\Providers;
 
-use Alimentalos\Relationships\Models\Alert;
-use Alimentalos\Relationships\Models\Coin;
-use Alimentalos\Relationships\Models\Comment;
-use Alimentalos\Relationships\Models\Device;
-use Alimentalos\Relationships\Models\Geofence;
-use Alimentalos\Relationships\Models\Group;
-use Alimentalos\Relationships\Models\Operation;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\Photo;
-use Alimentalos\Relationships\Models\Place;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Alert;
+use App\Models\Coin;
+use App\Models\Comment;
+use App\Models\Device;
+use App\Models\Geofence;
+use App\Models\Group;
+use App\Models\Operation;
+use App\Models\Pet;
+use App\Models\Photo;
+use App\Models\Place;
+use App\Models\User;
 use Alimentalos\Relationships\Observers\AlertObserver;
 use Alimentalos\Relationships\Observers\ClientObserver;
 use Alimentalos\Relationships\Observers\CoinObserver;

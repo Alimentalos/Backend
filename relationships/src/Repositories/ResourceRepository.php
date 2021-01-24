@@ -13,32 +13,32 @@ class ResourceRepository
     /**
      * User resource.
      */
-    public const USER = 'Alimentalos\\Relationships\\Models\\User';
+    public const USER = 'App\\Models\\User';
 
     /**
      * Device resource.
      */
-    public const DEVICE = 'Alimentalos\\Relationships\\Models\\Device';
+    public const DEVICE = 'App\\Models\\Device';
 
     /**
      * Pet resource.
      */
-    public const PET = 'Alimentalos\\Relationships\\Models\\Pet';
+    public const PET = 'App\\Models\\Pet';
 
     /**
      * Group resource.
      */
-    public const GROUP = 'Alimentalos\\Relationships\\Models\\Group';
+    public const GROUP = 'App\\Models\\Group';
 
     /**
      * Photo resource.
      */
-    public const PHOTO = 'Alimentalos\\Relationships\\Models\\Photo';
+    public const PHOTO = 'App\\Models\\Photo';
 
     /**
      * Comment resource.
      */
-    public const COMMENT = 'Alimentalos\\Relationships\\Models\\Comment';
+    public const COMMENT = 'App\\Models\\Comment';
 
     /**
      * Available resources.

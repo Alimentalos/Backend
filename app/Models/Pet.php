@@ -1,56 +1,83 @@
 <?php
 
-namespace Alimentalos\Relationships\Models;
+namespace App\Models;
 
-use App\Contracts\CreateFromRequest;
 use App\Contracts\HasColors;
 use App\Contracts\Resource;
-use App\Contracts\UpdateFromRequest;
 use Alimentalos\Relationships\BelongsToUser;
+use Alimentalos\Relationships\Commentable;
 use Alimentalos\Relationships\Geofenceable;
 use Alimentalos\Relationships\Groupable;
-use Alimentalos\Relationships\Resources\DeviceResource;
+use Alimentalos\Relationships\HasPhoto;
+use Alimentalos\Relationships\Photoable;
+use Alimentalos\Relationships\Resources\PetResource;
 use Alimentalos\Relationships\Trackable;
-use Database\Factories\DeviceFactory;
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Database\Factories\PetFactory;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Scout\Searchable;
 
-/**
- * Class Device
- *
- * @package App
- * @author Ian Torres
- * @license MIT
- */
-class Device extends Authenticatable implements Resource, CreateFromRequest, UpdateFromRequest, HasColors
+class Pet extends Authenticatable implements ReactableContract, Resource, HasColors
 {
     use HasFactory;
     use Searchable;
     use SpatialTrait;
-    use DeviceResource;
-    use Groupable;
-    use Geofenceable;
+    use Reactable;
+    use PetResource;
     use BelongsToUser;
+    use HasPhoto;
     use Trackable;
+    use Photoable;
+    use Commentable;
+    use Geofenceable;
+    use Groupable;
 
     /**
-     * The mass assignment fields of the device
+     * The default location field of pet.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_FIELD = 'location';
+
+    /**
+     * The default location date column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_DATE_COLUMN = 'created_at';
+
+    /**
+     * The default location group by column.
+     *
+     * @var string
+     */
+    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
+
+    /**
+     * Mass-assignable properties.
      *
      * @var array
      */
     protected $fillable = [
-        'uuid',
-        'user_uuid',
-        'name',
-        'description',
-        'api_token',
-        'is_public',
-        'location',
-        'marker_color',
-        'color',
-        'marker'
+        'user_uuid', // Related user
+        'photo_uuid', // Related photo
+        'api_token', // Token to track
+        'photo_url', // Profile photo
+        'uuid', // Universal unique identifier
+        'name', // Name it
+        'description', // Describe the pet
+        'size', // Size (xs, sm, md, lg, xlg)
+        'born_at', // Born date
+        'is_public', // Visibility
+        'location', // Spatial point
+        // Colors
+        'hair_color',
+        'second_hair_color',
+        'left_eye_color',
+        'right_eye_color',
     ];
 
     /**
@@ -59,8 +86,10 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
      * @var array
      */
     protected static $colors = [
-        'color',
-        'marker_color'
+        'hair_color',
+        'second_hair_color',
+        'left_eye_color',
+        'right_eye_color',
     ];
 
     /**
@@ -79,6 +108,7 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
      */
     protected $casts = [
         'is_public' => 'boolean',
+        'born_at' => 'datetime',
     ];
 
     /**
@@ -87,27 +117,6 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
      * @var array
      */
     protected $hidden = ['id', 'api_token'];
-
-    /**
-     * The default location field of device.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_FIELD = 'location';
-
-    /**
-     * The default location date column.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_DATE_COLUMN = 'generated_at';
-
-    /**
-     * The default location group by column.
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCATION_GROUP_BY_COLUMN = 'uuid';
 
     /**
      * Get the indexable data array for the model.
@@ -150,6 +159,6 @@ class Device extends Authenticatable implements Resource, CreateFromRequest, Upd
 
     protected static function newFactory()
     {
-        return DeviceFactory::new();
+        return PetFactory::new();
     }
 }

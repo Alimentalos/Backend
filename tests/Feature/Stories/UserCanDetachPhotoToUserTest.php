@@ -4,10 +4,10 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Comment;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\Photo;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Comment;
+use App\Models\Pet;
+use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +30,7 @@ class UserCanDetachPhotoToUserTest extends TestCase
         $response->assertOk();
         $response->assertExactJson(['message' => 'Resource detached to photo successfully']);
         $this->assertDeleted('photoables', [
-            'photoable_type' => 'Alimentalos\\Relationships\\Models\\User',
+            'photoable_type' => 'App\\Models\\User',
             'photoable_id' => $user->uuid,
             'photo_uuid' => $photo->uuid,
         ]);

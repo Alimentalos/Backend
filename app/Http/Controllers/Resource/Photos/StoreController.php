@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Resource\Photos;
 
 use App\Contracts\Resource;
-use Alimentalos\Relationships\Models\Photo;
+use App\Models\Photo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resource\Photos\StoreRequest;
 use Illuminate\Http\JsonResponse;
