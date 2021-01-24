@@ -155,14 +155,7 @@ if (! function_exists('create_location_payload')) {
             'device' => '{}',
             'location' => [
                 'uuid' => $location->uuid,
-                'coords' => [
-                    'latitude' => $latitude,
-                    'longitude' => $longitude,
-                    'accuracy' => $location->accuracy,
-                    'altitude' => $location->altitude,
-                    'speed' => $location->speed,
-                    'heading' => $location->heading,
-                ],
+                'coords' => create_coords_payload($location, $latitude, $longitude),
                 'odometer' => $location->odometer,
                 'event' => $location->event,
                 'activity' => [
@@ -176,6 +169,20 @@ if (! function_exists('create_location_payload')) {
                 'is_moving' => $location->is_moving,
                 'timestamp' => time(),
             ]
+        ];
+    }
+}
+
+if (! function_exists('create_coords_payload')) {
+    function create_coords_payload($location, $latitude, $longitude)
+    {
+        return [
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'accuracy' => $location->accuracy,
+            'altitude' => $location->altitude,
+            'speed' => $location->speed,
+            'heading' => $location->heading,
         ];
     }
 }
