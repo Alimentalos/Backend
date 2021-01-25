@@ -25,13 +25,13 @@ return [
     |
     */
 	'storable' => [
-		'places',
-		'users',
-		'pets',
-		'groups',
-		'geofences',
-		'devices',
-		'alerts'
+        'places' => \App\Models\Place::class,
+        'users' => \App\Models\User::class,
+        'pets' => \App\Models\Pet::class,
+        'groups' => \App\Models\Group::class,
+        'geofences' => \App\Models\Geofence::class,
+        'devices' => \App\Models\Device::class,
+        'alerts' => \App\Models\Alert::class
 	],
 	/*
     |--------------------------------------------------------------------------
@@ -59,15 +59,15 @@ return [
     |
     */
 	'modifiable' => [
-		'places',
-		'alerts',
-		'comments',
-		'photos',
-		'users',
-		'devices',
-		'pets',
-		'groups',
-		'geofences'
+        'places' => \App\Models\Place::class,
+        'alerts' => \App\Models\Alert::class,
+        'comments' => \App\Models\Comment::class,
+        'photos' => \App\Models\Photo::class,
+        'users' => \App\Models\User::class,
+        'devices' => \App\Models\Device::class,
+        'pets' => \App\Models\Pet::class,
+        'groups' => \App\Models\Group::class,
+        'geofences' => \App\Models\Geofence::class,
 	],
 	/*
     |--------------------------------------------------------------------------
@@ -94,7 +94,7 @@ return [
     |
     */
 	'tokenized' => [
-		'pets',
-		'devices',
+        'pets' => \App\Models\Pet::class,
+        'devices' => \App\Models\Device::class,
 	],
 ];

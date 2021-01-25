@@ -63,14 +63,14 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("api.{$key}.search");
     }
 
-    foreach(config('resources.tokenized') as $resource) {
-        Route::get("/{$resource}/{resource}/token", 'Resource\TokenController')
-            ->name("api.{$resource}.token");
+    foreach(config('resources.tokenized') as $key => $resource) {
+        Route::get("/{$key}/{resource}/token", 'Resource\TokenController')
+            ->name("api.{$key}.token");
     }
 
-    foreach(config('resources.storable') as $resource) {
+    foreach(config('resources.storable') as $key => $resource) {
         Route::post("/{resource}", 'Resource\StoreController')
-            ->name("api.{$resource}.store");
+            ->name("api.{$key}.store");
     }
 
     foreach(config('resources.viewable') as $key => $resource) {
@@ -78,9 +78,9 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             ->name("api.{$key}.show");
     }
 
-    foreach(config('resources.modifiable') as $resource) {
-        Route::put("/{$resource}/{resource}", 'Resource\UpdateController')
-            ->name("api.{$resource}.update");
+    foreach(config('resources.modifiable') as $key => $resource) {
+        Route::put("/{$key}/{resource}", 'Resource\UpdateController')
+            ->name("api.{$key}.update");
     }
 
     foreach(config('resources.removable') as $key => $resource) {
