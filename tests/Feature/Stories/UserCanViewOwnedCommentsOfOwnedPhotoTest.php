@@ -31,30 +31,17 @@ class UserCanViewOwnedCommentsOfOwnedPhotoTest extends TestCase
         ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/photos/' . $photo->uuid . '/comments');
         $response->assertOk();
-        $response->assertJsonStructure([
-            'current_page',
-            'data' => [[
-                'uuid',
-                'user_uuid',
-                'title',
-                'body',
-                'commentable_type',
-                'commentable_id',
-                'created_at',
-                'updated_at',
-                'love_reactant_id',
-            ]],
-            'first_page_url',
-            'from',
-            'last_page',
-            'last_page_url',
-            'next_page_url',
-            'path',
-            'per_page',
-            'prev_page_url',
-            'to',
-            'total'
-        ]);
+        $response->assertJsonStructure(array_merge(default_pagination_fields(), ["data" => [[
+            'uuid',
+            'user_uuid',
+            'title',
+            'body',
+            'commentable_type',
+            'commentable_id',
+            'created_at',
+            'updated_at',
+            'love_reactant_id',
+        ]]]));
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid
         ]);
