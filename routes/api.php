@@ -132,17 +132,17 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
 
     foreach (['devices', 'users', 'pets'] as $resource) {
         Route::get("/{$resource}/{resource}/{nested}", 'Resource\Nested\IndexController')
-			->name("api.{$resource}.geofences.index");
+            ->name("api.{$resource}.geofences.index");
         Route::get("/{$resource}/{resource}/{nested}", 'Resource\Nested\IndexController')
-			->name("api.{$resource}.groups.index");
+            ->name("api.{$resource}.groups.index");
         Route::post("/{$resource}/{resource}/geofences/{geofence}/attach", 'Resource\Geofences\AttachController')
-			->name("api.{$resource}.geofences.attach");
+            ->name("api.{$resource}.geofences.attach");
         Route::post("/{$resource}/{resource}/geofences/{geofence}/detach", 'Resource\Geofences\DetachController')
-			->name("api.{$resource}.geofences.detach");
+            ->name("api.{$resource}.geofences.detach");
         Route::post("/{$resource}/{resource}/groups/{group}/attach", 'Resource\Groups\AttachController')
-			->name("api.{$resource}.groups.attach");
+            ->name("api.{$resource}.groups.attach");
         Route::post("/{$resource}/{resource}/groups/{group}/detach", 'Resource\Groups\DetachController')
-			->name("api.{$resource}.groups.detach");
+            ->name("api.{$resource}.groups.detach");
     }
 
     foreach(['groups', 'geofences'] as $resource) {
@@ -152,7 +152,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
             $str = 'geofences';
         }
         Route::get("/{$resource}/{resource}/{$str}", 'Resource\Nested\IndexController')
-			->name("api.{$resource}.{$str}.index");
+            ->name("api.{$resource}.{$str}.index");
         Route::post("/{$resource}/{resource}/{$str}/". '{' . Str::singular($str) . '}' ."/attach", 'Resource\\' . Str::ucfirst($str) . '\AttachController')->name("api.{$resource}.{$str}.attach");
         Route::post("/{$resource}/{resource}/{$str}/". '{' . Str::singular($str) . '}' ."/detach", 'Resource\\' . Str::ucfirst($str) . '\DetachController')->name("api.{$resource}.{$str}.detach");
     }
@@ -168,7 +168,7 @@ Route::middleware(['auth:api', 'verified'])->group(function () {
     Route::get('/user', 'UserController');
 
     Route::post('/user/locations', 'Resource\LocationsController')
-		->name('api.user.locations');
+        ->name('api.user.locations');
 
     foreach(['invite', 'accept', 'reject', 'block'] as $method) {
         Route::post("/users/{user}/groups/{group}/{$method}", "Users\Groups\\" . Str::ucfirst($method) . "Controller");
