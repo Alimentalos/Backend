@@ -18,7 +18,7 @@ class UserCanViewPhotosOfResourceTest extends TestCase
     final public function test_user_can_view_photos_of_resource()
     {
         $user = User::factory()->create();
-        $resources = ["group", "pet", "geofence", "place"];
+        $resources = ["group", "pet", "geofence", "place", "user"];
 
         foreach ($resources as $resource)
         {
