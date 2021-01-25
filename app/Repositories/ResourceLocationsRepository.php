@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Repositories;
+namespace App\Repositories;
 
 use Alimentalos\Relationships\Creations\ResourceLocation as CreatesLocation;
 use Alimentalos\Relationships\Events\Location as LocationEvent;

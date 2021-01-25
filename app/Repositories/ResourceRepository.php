@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Alimentalos\Relationships\Repositories;
+namespace App\Repositories;
 
 use App\Contracts\Resource;
 use Alimentalos\Relationships\Asserts\ResourceGroupAssert;

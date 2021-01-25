@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Repositories;
+namespace App\Repositories;
 
 use Alimentalos\Relationships\Asserts\GroupAssert;
 use Alimentalos\Relationships\Lists\GroupList;

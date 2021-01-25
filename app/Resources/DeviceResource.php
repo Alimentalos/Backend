@@ -3,7 +3,7 @@
 namespace App\Resources;
 
 use App\Models\Device;
-use Alimentalos\Relationships\Repositories\DevicesRepository;
+use App\Repositories\DevicesRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait DeviceResource

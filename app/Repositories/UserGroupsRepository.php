@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Alimentalos\Relationships\Repositories;
+namespace App\Repositories;
 
 use Alimentalos\Relationships\Asserts\UserGroupAssert;
 use App\Models\Group;

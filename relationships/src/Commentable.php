@@ -14,10 +14,6 @@ trait Commentable
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable',
-            'commentable_type',
-            'commentable_id',
-            'uuid'
-        );
+        return $this->morphMany(Comment::class, 'commentable','commentable_type','commentable_id','uuid');
     }
 }

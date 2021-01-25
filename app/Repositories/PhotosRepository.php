@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Repositories;
+namespace App\Repositories;
 
 use App\Models\Photo;
 use Alimentalos\Relationships\Procedures\PhotoProcedure;

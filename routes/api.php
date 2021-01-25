@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\Resource\IndexController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 \Igaster\LaravelCities\Geo::ApiRoutes();
@@ -46,6 +48,10 @@ Route::middleware(['api'])->group(function () {
     Route::post('/refresh', 'RefreshController')
         ->middleware('throttle:10');
 
+});
+
+Route::middleware(["auth:api", "verified"])->group(function () {
+    Route::get("/v2/{resource}", 'Api\Resource\IndexController');
 });
 
 

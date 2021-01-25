@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Alimentalos\Relationships\Repositories;
+namespace App\Repositories;
 
 use Alimentalos\Relationships\Attributes\AlertAttribute;
 use Alimentalos\Relationships\Lists\AlertList;

@@ -14,6 +14,8 @@ trait Groupable
      */
     public function groups()
     {
-        return $this->morphToMany(Group::class,'groupable','groupables','groupable_id','group_uuid','uuid','uuid')->withPivot(['is_admin','status','sender_uuid',])->withTimestamps();
+        return $this->morphToMany(Group::class,'groupable','groupables','groupable_id','group_uuid','uuid','uuid')
+            ->withPivot(['is_admin','status','sender_uuid'])
+            ->withTimestamps();
     }
 }

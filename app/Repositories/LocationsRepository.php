@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Repositories;
+namespace App\Repositories;
 
 use Alimentalos\Relationships\Lists\LocationList;
 use Alimentalos\Relationships\Procedures\LocationProcedure;

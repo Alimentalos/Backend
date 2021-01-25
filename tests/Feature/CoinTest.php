@@ -7,7 +7,7 @@ namespace Tests\Feature;
 use App\Models\Coin;
 use App\Models\Group;
 use App\Models\Operation;
-use Alimentalos\Relationships\Repositories\MoneyRepository;
+use App\Repositories\MoneyRepository;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

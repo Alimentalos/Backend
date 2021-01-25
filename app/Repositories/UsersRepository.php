@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Repositories;
+namespace App\Repositories;
 
 use Alimentalos\Relationships\Asserts\UserAssert;
 use Alimentalos\Relationships\Lists\UserList;

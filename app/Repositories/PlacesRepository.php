@@ -1,6 +1,6 @@
 <?php
 
-namespace Alimentalos\Relationships\Repositories;
+namespace App\Repositories;
 
 use App\Models\Place;
 use Alimentalos\Relationships\Procedures\PlaceProcedure;
