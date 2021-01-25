@@ -3,11 +3,20 @@
 namespace App\Http\Controllers\Api\Resource;
 
 use App\Http\Controllers\Controller;
-use App\Models\Resource;
+use App\Repositories\ResourceRepository;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\JsonResponse;
 
 class IndexController extends Controller {
-    public function __invoke(Resource $resource)
+    use RefreshDatabase;
+    /**
+     * @param $resource
+     * @return JsonResponse
+     */
+    public function __invoke($resource)
     {
-        // TODO: Implement __invoke() method.
+        $model = ResourceRepository::retrieve($resource);
+        $paginated = $model->getQuery()->with($model->getLazyRelationshipsAttribute())->paginate(20);
+        return response()->json($paginated, 200);
     }
 }

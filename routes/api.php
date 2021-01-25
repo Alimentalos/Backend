@@ -50,11 +50,6 @@ Route::middleware(['api'])->group(function () {
 
 });
 
-Route::middleware(["auth:api", "verified"])->group(function () {
-    Route::get("/v2/{resource}", 'Api\Resource\IndexController');
-});
-
-
 /**
  * Authenticated and verified routes ...
  */

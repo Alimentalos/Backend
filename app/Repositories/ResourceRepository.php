@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 use App\Contracts\Resource;
 use Alimentalos\Relationships\Asserts\ResourceGroupAssert;
+use Illuminate\Support\Str;
 
 class ResourceRepository
 {

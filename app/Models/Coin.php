@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Contracts\Resource;
+use App\Resources\CoinResource;
 use Database\Factories\CoinFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Coin extends Model
+class Coin extends Model implements Resource
 {
     use HasFactory;
+    use CoinResource;
 
     /**
      * This model doesn't uses increments.

@@ -5,10 +5,13 @@ namespace App\Models;
 use App\Contracts\Resource;
 use Alimentalos\Relationships\Relationships\AccessRelationships;
 use App\Resources\AccessResource;
+use Database\Factories\AccessFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Access extends Model implements Resource
 {
+    use HasFactory;
     use AccessRelationships;
     use AccessResource;
 
@@ -40,4 +43,9 @@ class Access extends Model implements Resource
      * @var array
      */
     protected $hidden = ['id'];
+
+    protected static function newFactory()
+    {
+        return AccessFactory::new();
+    }
 }

@@ -70,7 +70,6 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Finder router callback.
      * @param $value
-     * @param $resource
      * @return Builder|Model|mixed
      */
     public function finderCallback($value)
