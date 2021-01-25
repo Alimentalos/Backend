@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Alimentalos\Relationships\Models\Operation;
+use App\Models\Operation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OperationFactory extends Factory {

@@ -4,7 +4,7 @@
 namespace Alimentalos\Relationships\Lists;
 
 
-use Alimentalos\Relationships\Models\Action;
+use App\Models\Action;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait ActionList

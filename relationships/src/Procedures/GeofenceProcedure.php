@@ -6,7 +6,7 @@ namespace Alimentalos\Relationships\Procedures;
 
 use Alimentalos\Relationships\Events\GeofenceIn;
 use Alimentalos\Relationships\Events\GeofenceOut;
-use Alimentalos\Relationships\Models\Geofence;
+use App\Models\Geofence;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Alimentalos\Relationships\Models\Pet;
+use App\Models\Pet;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

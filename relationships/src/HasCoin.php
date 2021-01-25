@@ -3,7 +3,7 @@
 
 namespace Alimentalos\Relationships;
 
-use Alimentalos\Relationships\Models\Coin;
+use App\Models\Coin;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasCoin

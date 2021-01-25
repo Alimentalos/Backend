@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Procedures;
 
-use Alimentalos\Relationships\Models\Pet;
+use App\Models\Pet;
 
 trait PetProcedure
 {

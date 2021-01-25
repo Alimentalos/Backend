@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Alimentalos\Relationships\Models\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Str;

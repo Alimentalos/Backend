@@ -11,10 +11,10 @@
 |
 */
 
-use Alimentalos\Relationships\Models\Device;
-use Alimentalos\Relationships\Models\Geofence;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Device;
+use App\Models\Geofence;
+use App\Models\Pet;
+use App\Models\User;
 
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;

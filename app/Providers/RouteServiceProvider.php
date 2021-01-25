@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Alimentalos\Relationships\Models\Group;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -70,7 +70,6 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Finder router callback.
      * @param $value
-     * @param $resource
      * @return Builder|Model|mixed
      */
     public function finderCallback($value)

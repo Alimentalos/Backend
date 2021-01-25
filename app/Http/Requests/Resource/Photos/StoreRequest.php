@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Resource\Photos;
 
-use Alimentalos\Relationships\Models\Photo;
+use App\Models\Photo;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest

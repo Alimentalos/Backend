@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Geofence;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Geofence;
+use App\Models\User;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;

@@ -4,7 +4,7 @@
 namespace Alimentalos\Tools;
 
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 
 class Uploader
 {

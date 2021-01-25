@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Alimentalos\Relationships\Models\Geofence;
+use App\Models\Geofence;
 use Grimzy\LaravelMysqlSpatial\Types\Polygon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

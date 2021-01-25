@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships;
 
-use Alimentalos\Relationships\Models\Comment;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait Commentable
@@ -14,10 +14,6 @@ trait Commentable
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable',
-            'commentable_type',
-            'commentable_id',
-            'uuid'
-        );
+        return $this->morphMany(Comment::class, 'commentable','commentable_type','commentable_id','uuid');
     }
 }

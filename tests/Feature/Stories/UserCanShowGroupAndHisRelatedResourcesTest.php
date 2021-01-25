@@ -4,11 +4,11 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Comment;
-use Alimentalos\Relationships\Models\Group;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\Photo;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Comment;
+use App\Models\Group;
+use App\Models\Pet;
+use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

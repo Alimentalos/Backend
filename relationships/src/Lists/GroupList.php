@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Lists;
 
-use Alimentalos\Relationships\Models\Group;
+use App\Models\Group;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait GroupList

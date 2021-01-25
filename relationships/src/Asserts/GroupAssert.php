@@ -2,8 +2,8 @@
 
 namespace Alimentalos\Relationships\Asserts;
 
-use Alimentalos\Relationships\Models\Group;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Group;
+use App\Models\User;
 
 trait GroupAssert
 {

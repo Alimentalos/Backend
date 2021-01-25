@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Alimentalos\Relationships\Models\Group;
+use App\Models\Group;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class GroupFactory extends Factory {

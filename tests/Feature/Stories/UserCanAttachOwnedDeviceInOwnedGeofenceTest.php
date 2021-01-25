@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Device;
-use Alimentalos\Relationships\Models\Geofence;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Device;
+use App\Models\Geofence;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -28,7 +28,7 @@ class UserCanAttachOwnedDeviceInOwnedGeofenceTest extends TestCase
         );
         $response->assertOk();
         $this->assertDatabaseHas('geofenceables', [
-            'geofenceable_type' => 'Alimentalos\\Relationships\\Models\\Device',
+            'geofenceable_type' => 'App\\Models\\Device',
             'geofenceable_id' => $device->uuid,
             'geofence_uuid' => $geofence->uuid,
         ]);

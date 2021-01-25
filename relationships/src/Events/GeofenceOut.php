@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Events;
 
-use Alimentalos\Relationships\Models\Geofence;
+use App\Models\Geofence;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;

@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Queries;
 
-use Alimentalos\Relationships\Models\Location;
+use App\Models\Location;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;
 use Illuminate\Support\Collection;

@@ -4,7 +4,7 @@
 namespace Alimentalos\Relationships\Procedures;
 
 
-use Alimentalos\Relationships\Models\Device;
+use App\Models\Device;
 
 trait DeviceProcedure
 {

@@ -4,8 +4,8 @@
 namespace Alimentalos\Relationships\Procedures;
 
 
-use Alimentalos\Relationships\Models\Alert;
-use Alimentalos\Relationships\Models\Photo;
+use App\Models\Alert;
+use App\Models\Photo;
 
 trait AlertProcedure
 {

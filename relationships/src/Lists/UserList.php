@@ -3,7 +3,7 @@
 
 namespace Alimentalos\Relationships\Lists;
 
-use Alimentalos\Relationships\Models\User;
+use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait UserList

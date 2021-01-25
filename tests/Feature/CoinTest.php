@@ -4,11 +4,11 @@
 namespace Tests\Feature;
 
 
-use Alimentalos\Relationships\Models\Coin;
-use Alimentalos\Relationships\Models\Group;
-use Alimentalos\Relationships\Models\Operation;
-use Alimentalos\Relationships\Repositories\MoneyRepository;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Coin;
+use App\Models\Group;
+use App\Models\Operation;
+use App\Repositories\MoneyRepository;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

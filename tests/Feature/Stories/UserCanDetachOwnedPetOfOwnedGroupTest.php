@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Group;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Group;
+use App\Models\Pet;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -37,7 +37,7 @@ class UserCanDetachOwnedPetOfOwnedGroupTest extends TestCase
         );
         $response->assertOk();
         $this->assertDeleted('groupables', [
-            'groupable_type' => 'Alimentalos\\Relationships\\Models\\Pet',
+            'groupable_type' => 'App\\Models\\Pet',
             'groupable_id' => $pet->uuid,
             'group_uuid' => $group->uuid,
         ]);

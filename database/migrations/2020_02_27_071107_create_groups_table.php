@@ -22,7 +22,7 @@ class CreateGroupsTable extends Migration
         Schema::create('groupables', function (Blueprint $table) {
             $table->string('group_uuid')->index();
             $table->string('sender_uuid')->index()->nullable();
-            $table->string('status')->default(Alimentalos\Relationships\Models\Group::PENDING_STATUS)->index();
+            $table->string('status')->default(App\Models\Group::PENDING_STATUS)->index();
             $table->boolean('is_admin')->default(false)->index();
             $table->uuidMorphs('groupable');
             $table->timestamps();

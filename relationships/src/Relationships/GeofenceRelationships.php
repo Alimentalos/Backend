@@ -2,10 +2,10 @@
 
 namespace Alimentalos\Relationships\Relationships;
 
-use Alimentalos\Relationships\Models\Access;
-use Alimentalos\Relationships\Models\Device;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Access;
+use App\Models\Device;
+use App\Models\Pet;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

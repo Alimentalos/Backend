@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Alert;
-use Alimentalos\Relationships\Models\Comment;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Alert;
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -26,32 +26,19 @@ class UserCanViewOwnedCommentsOfAlertTest extends TestCase
         ]);
         $response = $this->actingAs($user, 'api')->json('GET', '/api/alerts/' . $alert->uuid . '/comments');
         $response->assertOk();
-        $response->assertJsonStructure([
-            'current_page',
-            'data' => [
-                [
-                    'uuid',
-                    'user_uuid',
-                    'title',
-                    'body',
-                    'commentable_type',
-                    'commentable_id',
-                    'created_at',
-                    'updated_at',
-                    'love_reactant_id',
-                ],
+        $response->assertJsonStructure(array_merge(default_pagination_fields(), ['data' => [
+            [
+                'uuid',
+                'user_uuid',
+                'title',
+                'body',
+                'commentable_type',
+                'commentable_id',
+                'created_at',
+                'updated_at',
+                'love_reactant_id',
             ],
-            'first_page_url',
-            'from',
-            'last_page',
-            'last_page_url',
-            'next_page_url',
-            'path',
-            'per_page',
-            'prev_page_url',
-            'to',
-            'total',
-        ]);
+        ]]));
         $response->assertJsonFragment([
             'user_uuid' => $user->uuid,
             'body' => $comment->body,
@@ -59,7 +46,7 @@ class UserCanViewOwnedCommentsOfAlertTest extends TestCase
         ]);
         $this->assertDatabaseHas('comments', [
             'user_uuid' => $user->uuid,
-            'commentable_type' => 'Alimentalos\\Relationships\\Models\\Alert',
+            'commentable_type' => 'App\\Models\\Alert',
             'commentable_id' => $alert->uuid,
             'body' => $comment->body,
         ]);

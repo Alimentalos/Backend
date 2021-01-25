@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Alert;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Alert;
+use App\Models\Pet;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +24,7 @@ class UserCanCreatePetAlertsWithoutCoordinatesTest extends TestCase
         $pet = Pet::factory()->create();
         $response = $this->actingAs($user, 'api')->json('POST', '/api/alerts', [
             'photo' => UploadedFile::fake()->image('photo1.jpg'),
-            'alert_type' => 'Alimentalos\\Relationships\\Models\\Pet',
+            'alert_type' => 'App\\Models\\Pet',
             'alert_id' => $pet->uuid,
             'title' => $alert->title,
             'body' => $alert->body,

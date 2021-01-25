@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Geofences\Resource;
 
-use Alimentalos\Contracts\Resource;
-use Alimentalos\Relationships\Models\Access;
-use Alimentalos\Relationships\Models\Geofence;
+use App\Contracts\Resource;
+use App\Models\Access;
+use App\Models\Geofence;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Geofences\Resource\AccessesRequest;
 use Illuminate\Http\JsonResponse;

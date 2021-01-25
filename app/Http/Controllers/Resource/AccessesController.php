@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Resource;
 
-use Alimentalos\Contracts\Resource;
-use Alimentalos\Relationships\Models\Access;
+use App\Contracts\Resource;
+use App\Models\Access;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Resource\AccessesRequest;
 use Illuminate\Http\JsonResponse;

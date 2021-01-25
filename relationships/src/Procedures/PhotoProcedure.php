@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Procedures;
 
-use Alimentalos\Relationships\Models\Photo;
+use App\Models\Photo;
 use Illuminate\Support\Facades\Storage;
 
 trait PhotoProcedure

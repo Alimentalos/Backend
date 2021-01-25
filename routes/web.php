@@ -39,24 +39,24 @@ Route::middleware('auth')->group(function () {
  * Authenticated and verified routes ...
  */
 Route::middleware(['auth'])->group(function () {
-	foreach (config('resources.listable') as $resource) {
-		Route::get("/{$resource}", 'Resource\IndexController')
-			->name("web.{$resource}.index");
+	foreach (config('resources.listable') as $key => $resource) {
+		Route::get("/{$key}", 'Resource\IndexController')
+			->name("web.{$key}.index");
 	}
 
-	foreach(config('resources.storable') as $resource) {
-		Route::get("/{$resource}/create", 'Resource\CreateController')
-			->name("web.{$resource}.create");
+	foreach(config('resources.storable') as $key => $resource) {
+		Route::get("/{$key}/create", 'Resource\CreateController')
+			->name("web.{$key}.create");
 	}
 
-	foreach(config('resources.viewable') as $resource) {
-		Route::get("/{$resource}/{resource}", 'Resource\ShowController')
-			->name("web.{$resource}.show");
+	foreach(config('resources.viewable') as $key => $resource) {
+		Route::get("/{$key}/{resource}", 'Resource\ShowController')
+			->name("web.{$key}.show");
 	}
 
-	foreach(config('resources.modifiable') as $resource) {
-		Route::get("/{$resource}/{resource}/edit", 'Resource\EditController')
-			->name("web.{$resource}.edit");
+	foreach(config('resources.modifiable') as $key => $resource) {
+		Route::get("/{$key}/{resource}/edit", 'Resource\EditController')
+			->name("web.{$key}.edit");
 	}
 });
 

@@ -3,7 +3,7 @@
 
 namespace Alimentalos\Relationships\Procedures;
 
-use Alimentalos\Relationships\Models\Group;
+use App\Models\Group;
 
 trait GroupProcedure
 {

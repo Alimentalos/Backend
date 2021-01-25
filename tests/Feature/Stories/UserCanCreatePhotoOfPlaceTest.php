@@ -4,11 +4,11 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Comment;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\Photo;
-use Alimentalos\Relationships\Models\Place;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Comment;
+use App\Models\Pet;
+use App\Models\Photo;
+use App\Models\Place;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -49,7 +49,7 @@ class UserCanCreatePhotoOfPlaceTest extends TestCase
         ]);
         $this->assertDatabaseHas('photoables', [
             'photo_uuid' => (json_decode($content))->uuid,
-            'photoable_type' => 'Alimentalos\\Relationships\\Models\\Place',
+            'photoable_type' => 'App\\Models\\Place',
             'photoable_id' => $place->uuid
         ]);
     }
