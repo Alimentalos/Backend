@@ -53,7 +53,7 @@ trait GeofenceResource
      */
     public function getAvailableReactions()
     {
-        return 'Follow';
+        return 'Love,Pray,Like,Dislike,Sad,Hate';
     }
 
     /**
