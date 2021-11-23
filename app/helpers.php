@@ -1,6 +1,6 @@
 <?php
 
-use Alimentalos\Relationships\Models\User;
+use App\Models\User;
 use App\Repositories\AdminRepository;
 use Grimzy\LaravelMysqlSpatial\Types\LineString;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
@@ -19,6 +19,7 @@ if (! function_exists('authenticated')) {
         return Auth::user();
     }
 }
+
 if (! function_exists('rhas')) {
     /**
      * Check if request has key.
@@ -31,6 +32,7 @@ if (! function_exists('rhas')) {
         return request()->has($key);
     }
 }
+
 if (! function_exists('einput')) {
     /**
      * Extract exploded input.
@@ -44,6 +46,7 @@ if (! function_exists('einput')) {
         return explode($delimiter, request()->input($key));
     }
 }
+
 if (! function_exists('input')) {
     /**
      * Extract request input.
@@ -56,6 +59,7 @@ if (! function_exists('input')) {
         return request()->input($key);
     }
 }
+
 if (! function_exists('uploaded')) {
     /**
      * Extract request file.
@@ -68,12 +72,14 @@ if (! function_exists('uploaded')) {
         return request()->file($key);
     }
 }
+
 if (! function_exists('only')) {
     function only($keys)
     {
         return request()->only(func_get_args());
     }
 }
+
 if (! function_exists('admin')) {
     /**
      * @return AdminRepository
@@ -82,6 +88,7 @@ if (! function_exists('admin')) {
         return new AdminRepository();
     }
 }
+
 if (! function_exists('create_admin')) {
     /**
      * @return User
@@ -93,6 +100,7 @@ if (! function_exists('create_admin')) {
         return $user;
     }
 }
+
 if (! function_exists('change_instance_user')) {
     /**
      * @param $instance
@@ -104,6 +112,7 @@ if (! function_exists('change_instance_user')) {
         $instance->save();
     }
 }
+
 if (! function_exists('change_instances_user')) {
     /**
      * @param Collection $instances
@@ -116,6 +125,7 @@ if (! function_exists('change_instances_user')) {
         });
     }
 }
+
 if (! function_exists('create_default_polygon')) {
     function create_default_polygon()
     {

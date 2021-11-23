@@ -4,10 +4,10 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Comment;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\Photo;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Comment;
+use App\Models\Pet;
+use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -50,7 +50,7 @@ class UserCanViewOwnedCommentsOfPetTest extends TestCase
         ]);
         $this->assertDatabaseHas('comments', [
             'user_uuid' => $user->uuid,
-            'commentable_type' => 'Alimentalos\\Relationships\\Models\\Pet',
+            'commentable_type' => 'App\\Models\\Pet',
             'commentable_id' => $pet->uuid,
             'body' => $comment->body,
         ]);

@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Device;
-use Alimentalos\Relationships\Models\Location;
+use App\Models\Device;
+use App\Models\Location;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

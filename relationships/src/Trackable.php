@@ -2,8 +2,8 @@
 
 namespace Alimentalos\Relationships;
 
-use Alimentalos\Relationships\Models\Access;
-use Alimentalos\Relationships\Models\Location;
+use App\Models\Access;
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait Trackable

@@ -2,7 +2,7 @@
 
 namespace App\Passport;
 
-use Alimentalos\Relationships\Models\User;
+use App\Models\User;
 use Laravel\Passport\Passport;
 use Laravel\Passport\Token as PassportToken;
 

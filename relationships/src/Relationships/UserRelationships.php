@@ -2,11 +2,11 @@
 
 namespace Alimentalos\Relationships\Relationships;
 
-use Alimentalos\Relationships\Models\Device;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\Photo;
-use Alimentalos\Relationships\Models\Place;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Device;
+use App\Models\Pet;
+use App\Models\Photo;
+use App\Models\Place;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

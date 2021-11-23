@@ -1,7 +1,7 @@
 <?php
 
-use Alimentalos\Contracts\Resource;
-use Alimentalos\Relationships\Repositories\{ActionsRepository,
+use App\Contracts\Resource;
+use App\Repositories\{ActionsRepository,
 	AlertsRepository,
 	CommentsRepository,
 	DevicesRepository,

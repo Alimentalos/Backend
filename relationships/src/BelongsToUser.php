@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships;
 
-use Alimentalos\Relationships\Models\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait BelongsToUser

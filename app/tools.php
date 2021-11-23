@@ -1,6 +1,6 @@
 <?php
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 use Alimentalos\Tools\{Cataloger,
 	Filler,
 	Finder,

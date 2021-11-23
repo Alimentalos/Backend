@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use Alimentalos\Relationships\Models\Coin;
+use App\Models\Coin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CoinFactory extends Factory {

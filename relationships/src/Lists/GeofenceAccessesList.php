@@ -4,8 +4,8 @@
 namespace Alimentalos\Relationships\Lists;
 
 
-use Alimentalos\Contracts\Resource;
-use Alimentalos\Relationships\Models\Geofence;
+use App\Contracts\Resource;
+use App\Models\Geofence;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 trait GeofenceAccessesList

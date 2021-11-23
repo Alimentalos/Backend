@@ -4,7 +4,7 @@
 namespace Alimentalos\Tools;
 
 
-use Alimentalos\Relationships\Models\User;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class Subscriber
@@ -33,7 +33,7 @@ class Subscriber
      */
     public function getUserResourcesQuota($resource, $user)
     {
-        return resolve('Alimentalos\\Relationships\\Models\\' . Str::camel(Str::singular($resource)))->where('user_uuid', $user->uuid)->count();
+        return resolve('App\\Models\\' . Str::camel(Str::singular($resource)))->where('user_uuid', $user->uuid)->count();
     }
 
     /**

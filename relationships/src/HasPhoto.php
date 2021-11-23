@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships;
 
-use Alimentalos\Relationships\Models\Photo;
+use App\Models\Photo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait HasPhoto

@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Tools\Reports\Types;
 
-use Alimentalos\Relationships\Models\Device;
+use App\Models\Device;
 use App\Http\Resources\Location;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Eloquent\Builder;

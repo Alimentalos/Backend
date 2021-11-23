@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Near\Resource;
 
-use Alimentalos\Contracts\Resource;
+use App\Contracts\Resource;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Near\Resource\IndexRequest;
 use Illuminate\Http\JsonResponse;

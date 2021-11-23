@@ -2,13 +2,13 @@
 
 namespace Alimentalos\Relationships\Relationships;
 
-use Alimentalos\Relationships\Models\Alert;
-use Alimentalos\Relationships\Models\Comment;
-use Alimentalos\Relationships\Models\Geofence;
-use Alimentalos\Relationships\Models\Group;
-use Alimentalos\Relationships\Models\Pet;
-use Alimentalos\Relationships\Models\Place;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Alert;
+use App\Models\Comment;
+use App\Models\Geofence;
+use App\Models\Group;
+use App\Models\Pet;
+use App\Models\Place;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 

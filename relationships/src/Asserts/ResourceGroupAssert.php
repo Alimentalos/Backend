@@ -4,7 +4,7 @@
 namespace Alimentalos\Relationships\Asserts;
 
 
-use Alimentalos\Relationships\Models\Group;
+use App\Models\Group;
 use Illuminate\Database\Eloquent\Model;
 
 trait ResourceGroupAssert

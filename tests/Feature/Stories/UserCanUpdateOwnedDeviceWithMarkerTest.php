@@ -4,8 +4,8 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Device;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Device;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;

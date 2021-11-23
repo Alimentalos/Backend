@@ -2,7 +2,7 @@
 
 namespace Alimentalos\Relationships\Procedures;
 
-use Alimentalos\Relationships\Models\User;
+use App\Models\User;
 
 trait UserProcedure
 {

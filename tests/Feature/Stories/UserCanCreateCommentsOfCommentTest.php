@@ -4,9 +4,9 @@
 namespace Tests\Feature\Stories;
 
 
-use Alimentalos\Relationships\Models\Comment;
-use Alimentalos\Relationships\Models\Photo;
-use Alimentalos\Relationships\Models\User;
+use App\Models\Comment;
+use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -41,7 +41,7 @@ class UserCanCreateCommentsOfCommentTest extends TestCase
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($parentContent))->uuid,
             'user_uuid' => $user->uuid,
-            'commentable_type' => 'Alimentalos\\Relationships\\Models\\Photo',
+            'commentable_type' => 'App\\Models\\Photo',
             'commentable_id' => $photo->uuid,
             'body' => $parentComment->body,
         ]);
@@ -67,7 +67,7 @@ class UserCanCreateCommentsOfCommentTest extends TestCase
         $this->assertDatabaseHas('comments', [
             'uuid' => (json_decode($childContent))->uuid,
             'user_uuid' => $user->uuid,
-            'commentable_type' => 'Alimentalos\\Relationships\\Models\\Comment',
+            'commentable_type' => 'App\\Models\\Comment',
             'commentable_id' => (json_decode($parentContent))->uuid,
             'body' => $childComment->body,
         ]);

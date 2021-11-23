@@ -1,100 +1,100 @@
 <?php
 
 return [
-	/*
+    /*
     |--------------------------------------------------------------------------
     | Listable
     |--------------------------------------------------------------------------
     |
     */
-	'listable' => [
-		'places' => \Alimentalos\Relationships\Models\Place::class,
-		'users' => \Alimentalos\Relationships\Models\User::class,
-		'groups' => \Alimentalos\Relationships\Models\Group::class,
-		'geofences' => \Alimentalos\Relationships\Models\Geofence::class,
-		'pets' => \Alimentalos\Relationships\Models\Pet::class,
-		'devices' => \Alimentalos\Relationships\Models\Device::class,
-		'photos' => \Alimentalos\Relationships\Models\Photo::class,
-		'actions' => \Alimentalos\Relationships\Models\Action::class,
-		'alerts' => \Alimentalos\Relationships\Models\Alert::class
-	],
-	/*
+    'listable' => [
+        'places' => \App\Models\Place::class,
+        'users' => \App\Models\User::class,
+        'groups' => \App\Models\Group::class,
+        'geofences' => \App\Models\Geofence::class,
+        'pets' => \App\Models\Pet::class,
+        'devices' => \App\Models\Device::class,
+        'photos' => \App\Models\Photo::class,
+        'actions' => \App\Models\Action::class,
+        'alerts' => \App\Models\Alert::class
+    ],
+    /*
     |--------------------------------------------------------------------------
     | Storable
     |--------------------------------------------------------------------------
     |
     */
-	'storable' => [
-		'places',
-		'users',
-		'pets',
-		'groups',
-		'geofences',
-		'devices',
-		'alerts'
-	],
-	/*
+    'storable' => [
+        'places' => \App\Models\Place::class,
+        'users' => \App\Models\User::class,
+        'pets' => \App\Models\Pet::class,
+        'groups' => \App\Models\Group::class,
+        'geofences' => \App\Models\Geofence::class,
+        'devices' => \App\Models\Device::class,
+        'alerts' => \App\Models\Alert::class
+    ],
+    /*
     |--------------------------------------------------------------------------
     | Viewable
     |--------------------------------------------------------------------------
     |
     */
-	'viewable' => [
-		'places' => \Alimentalos\Relationships\Models\Place::class,
-		'groups' => \Alimentalos\Relationships\Models\Group::class,
-		'locations' => \Alimentalos\Relationships\Models\Location::class,
-		'actions' => \Alimentalos\Relationships\Models\Action::class,
-		'geofences' => \Alimentalos\Relationships\Models\Geofence::class,
-		'pets' => \Alimentalos\Relationships\Models\Pet::class,
-		'devices' => \Alimentalos\Relationships\Models\Device::class,
-		'users' => \Alimentalos\Relationships\Models\User::class,
-		'photos' => \Alimentalos\Relationships\Models\Photo::class,
-		'comments' => \Alimentalos\Relationships\Models\Comment::class,
-		'alerts' => \Alimentalos\Relationships\Models\Alert::class
-	],
-	/*
+    'viewable' => [
+        'places' => \App\Models\Place::class,
+        'groups' => \App\Models\Group::class,
+        'locations' => \App\Models\Location::class,
+        'actions' => \App\Models\Action::class,
+        'geofences' => \App\Models\Geofence::class,
+        'pets' => \App\Models\Pet::class,
+        'devices' => \App\Models\Device::class,
+        'users' => \App\Models\User::class,
+        'photos' => \App\Models\Photo::class,
+        'comments' => \App\Models\Comment::class,
+        'alerts' => \App\Models\Alert::class
+    ],
+    /*
     |--------------------------------------------------------------------------
     | Modifiable
     |--------------------------------------------------------------------------
     |
     */
-	'modifiable' => [
-		'places',
-		'alerts',
-		'comments',
-		'photos',
-		'users',
-		'devices',
-		'pets',
-		'groups',
-		'geofences'
-	],
-	/*
+    'modifiable' => [
+        'places' => \App\Models\Place::class,
+        'alerts' => \App\Models\Alert::class,
+        'comments' => \App\Models\Comment::class,
+        'photos' => \App\Models\Photo::class,
+        'users' => \App\Models\User::class,
+        'devices' => \App\Models\Device::class,
+        'pets' => \App\Models\Pet::class,
+        'groups' => \App\Models\Group::class,
+        'geofences' => \App\Models\Geofence::class,
+    ],
+    /*
     |--------------------------------------------------------------------------
     | Removable
     |--------------------------------------------------------------------------
     |
     */
-	'removable' => [
-		'places' => \Alimentalos\Relationships\Models\Place::class,
-		'photos' => \Alimentalos\Relationships\Models\Photo::class,
-		'users' => \Alimentalos\Relationships\Models\User::class,
-		'comments' => \Alimentalos\Relationships\Models\Comment::class,
-		'actions' => \Alimentalos\Relationships\Models\Action::class,
-		'devices' => \Alimentalos\Relationships\Models\Device::class,
-		'pets' => \Alimentalos\Relationships\Models\Pet::class,
-		'geofences' => \Alimentalos\Relationships\Models\Geofence::class,
-		'groups' => \Alimentalos\Relationships\Models\Group::class,
-		'alerts' => \Alimentalos\Relationships\Models\Alert::class
-	],
-	/*
+    'removable' => [
+        'places' => \App\Models\Place::class,
+        'photos' => \App\Models\Photo::class,
+        'users' => \App\Models\User::class,
+        'comments' => \App\Models\Comment::class,
+        'actions' => \App\Models\Action::class,
+        'devices' => \App\Models\Device::class,
+        'pets' => \App\Models\Pet::class,
+        'geofences' => \App\Models\Geofence::class,
+        'groups' => \App\Models\Group::class,
+        'alerts' => \App\Models\Alert::class
+    ],
+    /*
     |--------------------------------------------------------------------------
     | Tokenized
     |--------------------------------------------------------------------------
     |
     */
-	'tokenized' => [
-		'pets',
-		'devices',
-	],
+    'tokenized' => [
+        'pets' => \App\Models\Pet::class,
+        'devices' => \App\Models\Device::class,
+    ],
 ];

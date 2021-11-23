@@ -10,10 +10,6 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./contracts"
-        },
-        {
-            "type": "path",
             "url": "./relationships"
         },
         {
@@ -28,12 +24,12 @@
         "beyondcode/laravel-websockets": "^2.0",
         "cybercog/laravel-love": "^8.7",
         "darkaonline/l5-swagger": "^8.0",
-        "igaster/laravel_cities": "^1.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "graham-campbell/markdown": "^13.0",
         "grimzy/laravel-mysql-spatial": "^4.0",
         "guzzlehttp/guzzle": "^6.5",
+        "igaster/laravel_cities": "^1.0",
         "laravel-frontend-presets/tall": "^2.0",
         "laravel/framework": "^8.0",
         "laravel/passport": "^10.0",
@@ -43,6 +39,7 @@
         "pusher/pusher-php-server": "~4.0",
         "sentry/sentry-laravel": "^2.0",
         "superbalist/laravel-google-cloud-storage": "^2.2",
+        "symfony/finder": "^5.2",
         "webpatser/laravel-uuid": "^4.0"
     },
     "require-dev": {
