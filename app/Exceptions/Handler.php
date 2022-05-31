@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
-use League\OAuth2\Server\Exception\OAuthServerException;
+use League\OAuth2\Server\Exception\OAuthServerException as OmnipotentServerException;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
@@ -16,7 +16,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        OAuthServerException::class
+        OmnipotentServerException::class
     ];
 
     /**
